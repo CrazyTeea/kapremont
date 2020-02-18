@@ -1,0 +1,50 @@
+<?php
+
+namespace app\models;
+
+use Yii;
+
+/**
+ * This is the model class for table "organizations".
+ *
+ * @property int $id
+ * @property string|null $full_name
+ * @property string|null $name
+ * @property string|null $short_name
+ * @property int|null $system_status
+ */
+class Organizations extends \yii\db\ActiveRecord
+{
+    /**
+     * {@inheritdoc}
+     */
+    public static function tableName()
+    {
+        return 'organizations';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            [['full_name', 'name', 'short_name'], 'string'],
+            [['system_status'], 'integer'],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'full_name' => 'Full Name',
+            'name' => 'Name',
+            'short_name' => 'Short Name',
+            'system_status' => 'System Status',
+        ];
+    }
+}

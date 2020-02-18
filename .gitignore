@@ -17,6 +17,7 @@ Thumbs.db
 /vagrant
 /web/uploads
 /runtime
+/frontend/node_modules
 
 # composer itself is not needed
 composer.phar

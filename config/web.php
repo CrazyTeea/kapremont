@@ -7,14 +7,33 @@ $config = [
     'id' => 'basic',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'defaultRoute'=>'app/program',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
+        '@mdm/admin' => '@app/widgets/yii2-admin'
     ],
+    'modules' => [
+        'admin' => [
+            'class' => 'mdm\admin\Module',
+            'layout' => 'left-menu',
+            'mainLayout' => '@app/views/layouts/main.php',
+            'controllerMap' => [
+                'assignment' => [
+                    'class' => 'mdm\admin\controllers\AssignmentController',
+                ]
+            ],
+
+        ]
+    ],
+
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'KNbbRnlbgg_iYBM3JO7rQV80xzojoned',
+        ],
+        'authManager' => [
+            'class' => 'yii\rbac\PhpManager', // or use 'yii\rbac\DbManager'
         ],
         'cache' => [
             'class' => 'yii\caching\FileCache',
@@ -43,15 +62,33 @@ $config = [
             ],
         ],
         'db' => $db,
-        /*
+
         'urlManager' => [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+                'program'=>'app/program',
+                ''=>'app/program',
+                'login'=>'site/login'
             ],
         ],
-        */
+
     ],
+    'as access' => [
+        'class' => 'mdm\admin\components\AccessControl',
+        'allowActions' => [
+            'site/*',
+            'debug/*',
+            'admin/*'
+            // The actions listed here will be allowed to everyone including guests.
+            // So, 'admin/*' should not appear here in the production, of course.
+            // But in the earlier stages of your development, you may probably want to
+            // add a lot of actions here until you finally completed setting up rbac,
+            // otherwise you may not even take a first step.
+        ],
+
+    ],
+
     'params' => $params,
 ];
 

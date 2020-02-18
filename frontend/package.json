@@ -1,0 +1,58 @@
+{
+  "name": "frontend",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "watch": "webpack --watch --config webpack.watch.js  --inline",
+    "build": "webpack --config webpack.build.js",
+    "lint": "vue-cli-service lint",
+    "serve:bs": "vue-cli-service serve:bs"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.8.3",
+    "axios": "^0.19.2",
+    "core-js": "^3.4.4",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0",
+    "vue": "^2.6.10",
+    "vue-router": "^3.1.5",
+    "vuex": "^3.1.2"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^4.1.0",
+    "@vue/cli-plugin-eslint": "^4.1.0",
+    "@vue/cli-service": "^4.1.0",
+    "babel-eslint": "^10.0.3",
+    "browser-sync": "^2.26.7",
+    "browser-sync-webpack-plugin": "^2.2.2",
+    "eslint": "^5.16.0",
+    "eslint-plugin-vue": "^5.0.0",
+    "extract-text-webpack-plugin": "^4.0.0-beta.0",
+    "vue-loader": "^15.8.3",
+    "vue-template-compiler": "^2.6.11",
+    "webpack-cli": "^3.3.10"
+  },
+  "jshintConfig": {
+    "esversion": 6
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {
+      "no-console": "off"
+    },
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions"
+  ]
+}
