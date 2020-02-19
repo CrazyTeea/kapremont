@@ -8,6 +8,7 @@ use Yii;
  * This is the model class for table "organizations".
  *
  * @property int $id
+ * @property int $id_region
  * @property string|null $full_name
  * @property string|null $name
  * @property string|null $short_name
@@ -46,5 +47,8 @@ class Organizations extends \yii\db\ActiveRecord
             'short_name' => 'Short Name',
             'system_status' => 'System Status',
         ];
+    }
+    public function getRegion(){
+        return $this->hasOne(Regions::className(),['id'=>'id_region']);
     }
 }

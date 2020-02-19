@@ -6,13 +6,19 @@ Vue.use(VueRouter);
 
 const routes = [
     {
+        path:'/',
+        component: ()=>import('./components/pages').then(module=>{return module.mainPage;})
+    },
+    {
         path:'/program',
         component: ()=>import('./components/pages').then(module=>{return module.mainPage;})
     },
     {
-        path:'/',
-        component: ()=>import('./components/pages').then(module=>{return module.mainPage;})
-    },
+        path:'/error/browser',
+        name: 'error',
+        component: ()=>import('./components/pages').then(module=>{return module.errorPage;})
+    }
+
 ];
 
 export default new VueRouter({

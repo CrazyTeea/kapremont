@@ -5,6 +5,7 @@ $db = require __DIR__ . '/db.php';
 
 $config = [
     'id' => 'basic',
+    'name'=>'Модернизация инфраструктуры',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'defaultRoute'=>'app/program',
@@ -69,7 +70,8 @@ $config = [
             'rules' => [
                 'program'=>'app/program',
                 ''=>'app/program',
-                'login'=>'site/login'
+                'login'=>'site/login',
+                'error/browser'=>'app/error/browser'
             ],
         ],
 
