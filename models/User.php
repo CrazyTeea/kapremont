@@ -18,6 +18,8 @@ use yii\web\IdentityInterface;
  * @property string $auth_key
  * @property string $password_hash
  * @property string $password_reset_token
+ * @property string $position
+ * @property string $fio
  */
 
 class User extends ActiveRecord implements IdentityInterface
@@ -173,5 +175,9 @@ class User extends ActiveRecord implements IdentityInterface
     public function removePasswordResetToken()
     {
         $this->password_reset_token = null;
+    }
+
+    public function getOrganization(){
+        return $this->hasOne(Organizations::className(),['id'=>'id_org']);
     }
 }
