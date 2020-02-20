@@ -8,6 +8,7 @@ $config = [
     'name'=>'Модернизация инфраструктуры',
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
+    'language'=>'ru-RU',
     'defaultRoute'=>'app/program',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
