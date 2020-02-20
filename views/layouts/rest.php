@@ -72,7 +72,7 @@ GlyphiconAsset::register($this);
         ]) ?>
         <?= Alert::widget() ?>
         <div id="app"></div>
-        <?php//= $content ?>
+       
     </div>
 </div>
 
