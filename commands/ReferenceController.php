@@ -3,7 +3,9 @@
 
 namespace app\commands;
 
+use app\models\app\students\Students;
 use app\models\Organizations;
+use app\models\Program;
 use app\models\Regions;
 use app\models\User;
 use Lcobucci\JWT\Builder;
@@ -13,6 +15,7 @@ use Lcobucci\JWT\Signer\Key;
 
 use Yii;
 use yii\console\Controller;
+use yii\rbac\PhpManager;
 
 class ReferenceController extends Controller
 {
@@ -129,7 +132,12 @@ class ReferenceController extends Controller
                 $str = ($row_user->isNewRecord) ? 'добавление' : 'обновление';
                 if(!$row_user->save()){
                     $err++;
+
                 }
+                $role = new PhpManager();
+
+                $role->revokeAll($row_user->id);
+                $role->assign($role->getRole('root'),$row_user->id);
 
             }
 
@@ -142,5 +150,56 @@ class ReferenceController extends Controller
             return false;
         }
 
+    }
+    public function actionProgram($file,$org,$fin,$ev,$cost){
+        $csvP = Yii::getAlias( '@webroot' ) . "/parce/$file.csv";
+
+        $csv = fopen( $csvP, 'r' );
+        if ( !$csvP )
+            exit( "Файл не найден" );
+
+        $row = fgetcsv( $csv, 1000, ';' ) ;
+
+        echo "
+            Организация->$row[$org]
+            фин->$row[$fin]
+            евент->$row[$ev]
+            цена->$row[$cost]";
+
+
+        fclose( $csv );
+        $csv = fopen( $csvP, 'r' );
+        echo "Вы уверене? \n ";
+        $key = readline();
+        if ( !( $key === "yes" || $key === "y" || $key === "Y" ) ) {
+            exit( 0 );
+        }
+        echo "fdsfsd";
+
+
+        while (( $row = fgetcsv( $csv, 1000, ';' ) ) != false) {
+
+            $program = Program::findOne(['id_org'=>$row[$org],'finance_volume'=>$row[$fin],'finance_events'=>$row[$ev],'cost'=>$row[$cost]]);
+            if (!$program) {
+                $program = new Program();
+            }
+            $program->id_org=$row[$org];
+            $program->cost = $row[$cost];
+            $program->finance_events = $row[$ev];
+            $program->finance_volume = $row[$fin];
+
+
+            if ( $program->save(false) ) {
+
+                echo "
+            Организация-> $program->id_org
+            фин->$program->finance_volume
+            евент->$program->finance_events
+            цена->$program->cost \n";
+            }
+
+        }
+        fclose( $csv );
+        echo "success!";
     }
 }
