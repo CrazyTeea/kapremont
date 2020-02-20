@@ -72,7 +72,6 @@ GlyphiconAsset::register($this);
         ]) ?>
         <?= Alert::widget() ?>
         <div id="app"></div>
-       
     </div>
 </div>
 

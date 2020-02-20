@@ -12,7 +12,8 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
         '@tests' => '@app/tests',
-        '@mdm/admin' => '@app/widgets/yii2-admin'
+        '@mdm/admin' => '@app/widgets/yii2-admin',
+        '@webroot' => '@app/web'
     ],
     'components' => [
         'cache' => [
