@@ -33,8 +33,7 @@ GlyphiconAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
+        'brandLabel' => '<img src="/img/light-logo.svg"> &nbsp;'.Yii::$app->name,
         'options' => [
             'class' => 'navbar-expand-lg navbar-dark bg-dark',
         ],
@@ -46,15 +45,15 @@ GlyphiconAsset::register($this);
         'options' => ['class' => 'navbar-nav ml-auto'],
         'items' => [
 
-            ['label' => 'About', 'url' => ['/site/about']],
+            ['label' => 'Информация', 'url' => ['/site/about']],
 
             Yii::$app->user->isGuest ? (
-            ['label' => 'Login', 'url' => ['/site/login']]
+            ['label' => 'Ввойти', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
                 . Html::submitButton(
-                    'Logout (' . Yii::$app->user->identity->username . ')',
+                    'Выход (' . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn btn-link']
                 )
                 . Html::endForm()
