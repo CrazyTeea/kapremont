@@ -2,7 +2,7 @@ variables:
   PORT: 5022
   #                USER@SERVER
   DEST_SERVER: "jenkins@10.11.103.27"
-  DEST_PATH: /var/www/html/$CI_PROJECT_NAME
+  DEST_PATH: /var/www/html/program_mi
 
 stages:
   #      - build
