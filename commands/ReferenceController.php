@@ -160,8 +160,9 @@ class ReferenceController extends Controller
 
         $row = fgetcsv( $csv, 1000, ';' ) ;
 
+
         echo "
-            Организация->$row[$org]
+            Организация-> {$row[$org]}
             фин->$row[$fin]
             евент->$row[$ev]
             цена->$row[$cost]";
@@ -183,10 +184,10 @@ class ReferenceController extends Controller
             if (!$program) {
                 $program = new Program();
             }
-            $program->id_org=$row[$org];
-            $program->cost = $row[$cost];
-            $program->finance_events = $row[$ev];
-            $program->finance_volume = $row[$fin];
+            $program->id_org= $row[$org];
+            $program->cost = doubleval(str_replace(',','.',$row[$cost]));
+            $program->finance_events = doubleval(str_replace(',','.',$row[$ev]));
+            $program->finance_volume = doubleval(str_replace(',','.',$row[$fin]));
 
 
             if ( $program->save(false) ) {
