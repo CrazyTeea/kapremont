@@ -24,10 +24,11 @@ class OrganizationsController extends RestController
         if ($data = Yii::$app->getRequest()->getRawBody()){
             $data = (object)Json::decode($data);
             $org = Organizations::findOne($data->id);
-            return [
+            if ($org)
+                return [
                 "org" =>$org,
                 "region"=>$org->region
-            ];
+                ];
         }
     }
 }

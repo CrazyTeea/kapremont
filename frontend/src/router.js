@@ -14,6 +14,10 @@ const routes = [
         component: ()=>import('./components/pages').then(module=>{return module.mainPage;})
     },
     {
+        path:'/program/view',
+        component: ()=>import('./components/pages').then(module=>{return module.devView;})
+    },
+    {
         path:'/error/browser',
         name: 'error',
         component: ()=>import('./components/pages').then(module=>{return module.errorPage;})

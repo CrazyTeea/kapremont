@@ -3,9 +3,16 @@ import App from './App.vue';
 import store from './store';
 import router from './router';
 import platform from 'platform';
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue';
+import '../src/styles';
+// Install BootstrapVue
+Vue.use(BootstrapVue);
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin);
+
 
 const browser = [
- {name:'Chrome','version':80},
+ {name:'Chrome','version':79},
  {name:'Opera','version':66},
  {name:'Microsoft Edge','version':0},
  {name:'Safari','version':12},

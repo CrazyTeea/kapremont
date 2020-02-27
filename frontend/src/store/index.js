@@ -24,11 +24,15 @@ export default new Vuex.Store({
                 ctx.commit('updateOrg',response.data);
             }).catch(error=>{console.error(error);});
         },
-        requestProgram(ctx){
-            Axios.post('/rest/program/get-by-id-org',
-                {id_org:document.getElementById('global_id_org').value}).then(response=>{
-                ctx.commit('updateProgram',response.data);
-            }).catch(error=>{console.error(error);});
+        requestPageData(ctx,{pageName}){
+            Axios.get('/rest/system/get-page',{
+                params:{
+                    pageName,
+                    id_org:document.getElementById('global_id_org').value
+                }
+            }).then(response=>{
+                ctx.commit('updatePageData',response.data);
+            }).catch(err=>{console.error(err);});
         }
     },
     mutations:{
@@ -38,29 +42,33 @@ export default new Vuex.Store({
         updateOrg(state,data){
             state.organization = data;
         },
-        updateProgram(state,data){
-            state.program = data;
-            state.program.program.value = ((state.program.program.finance_volume*1000 - state.program.program.finance_events*1000)/state.program.program.cost).toFixed(1);
-        },
+        updatePageData(state,data){
+            state.pageData = data;
+
+        }
     },
     state:{
+        pageData:{},
         user:{},
         organization:{},
-        program:{}
     },
     getters:{
         getUser(state){
             return state.user;
         },
         getOrg(state){
-            return state.organization.org;
+            if (state.organization && state.organization.org)
+                return state.organization.org;
+            return null;
         },
         getRegion(state){
-            return state.organization.region;
+            if (state.organization && state.organization.region)
+                return state.organization.region;
+            return null;
         },
-        getProgram(state){
-            return state.program.program;
-        },
+        getPageData(state){
+            return state.pageData;
+        }
     },
     modules:{
 

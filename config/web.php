@@ -73,7 +73,8 @@ $config = [
                 'program'=>'app/program',
                 ''=>'app/program',
                 'login'=>'site/login',
-                'error/browser'=>'app/error/browser'
+                'error/browser'=>'app/error/browser',
+                'program/view'=>'app/development-programme'
             ],
         ],
 

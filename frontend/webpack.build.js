@@ -15,14 +15,17 @@ module.exports = {
         maxAssetSize: 512000
     },
     mode: "production",
+  //  devtool: 'source-map',
     module: {
         rules: [
             {
                 test: /\.js/,
                 exclude: /(node_modules|bower_components)/,
-                use: [{
-                    loader: 'babel-loader',
-                }],
+                use: [
+                    // "source-map-loader",
+                    'babel-loader'
+                ],
+                // enforce: "pre"
             },
             {
                 test: /\.vue$/,
@@ -32,33 +35,27 @@ module.exports = {
                 test: /\.css$/,
                 use: [
                     'vue-style-loader',
-                    'css-loader'
+                    'style-loader',
+                    'css-loader',
                 ]
             },
             {
                 test: /\.scss$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                importLoaders: 1,
-                                sourceMap: true,
-                            },
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: false,
                         },
-                        {
-                            loader: 'postcss-loader',
-                            options: {
-                                sourceMap: true,
-                                config: {
-                                    path: 'postcss.config.js',
-                                },
-                            },
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: false,
                         },
-                    ],
-                }),
+                    },
+                ],
             },
         ],
     },
