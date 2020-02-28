@@ -7,19 +7,23 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 module.exports = {
     entry: './src/main.js',
     output: {
+
         path: path.resolve(__dirname, '../web/vue/'),
         filename: 'index.js',
         publicPath: `/vue/`,
     },
     mode: "development",
+    devtool: 'source-map',
     module: {
         rules: [
             {
                 test: /\.js/,
                 exclude: /(node_modules|bower_components)/,
-                use: [{
-                    loader: 'babel-loader',
-                }],
+                use: [
+                   // "source-map-loader",
+                    'babel-loader'
+                ],
+               // enforce: "pre"
             },
             {
                 test: /\.vue$/,
@@ -29,33 +33,27 @@ module.exports = {
                 test: /\.css$/,
                 use: [
                     'vue-style-loader',
-                    'css-loader'
+                    'style-loader',
+                    'css-loader',
                 ]
             },
             {
                 test: /\.scss$/,
-                use: ExtractTextPlugin.extract({
-                    fallback: 'style-loader',
-                    use: [
-
-                        {
-                            loader: 'css-loader',
-                            options: {
-                                importLoaders: 1,
-                                sourceMap: true,
-                            },
+                use: [
+                    'style-loader',
+                    {
+                        loader: 'css-loader',
+                        options: {
+                            sourceMap: true,
                         },
-                        {
-                            loader: 'postcss-loader',
-                            options: {
-                                sourceMap: true,
-                                config: {
-                                    path: 'postcss.config.js',
-                                },
-                            },
+                    },
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            sourceMap: true,
                         },
-                    ],
-                }),
+                    },
+                ],
             },
         ],
     },
@@ -69,11 +67,14 @@ module.exports = {
             port: 3000,
             proxy: 'http://localhost:8080/',
         }),
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
     ],
 
     target: "web",
     resolve: {
+        alias: {
+            'vue$': 'vue/dist/vue.esm.js' // 'vue/dist/vue.common.js' для webpack 1
+        },
         extensions: [
             '.css',
             '.js',

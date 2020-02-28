@@ -1,7 +1,9 @@
 import mainPage from './mainPage.vue';
-//import Month from './Month.vue';
+import devView from './view/index.vue';
+import form from './form/index.vue';
 
 export {
     mainPage,
-    //Month
+    devView,
+    form
 };
