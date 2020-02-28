@@ -33,6 +33,15 @@ export default new Vuex.Store({
             }).then(response=>{
                 ctx.commit('updatePageData',response.data);
             }).catch(err=>{console.error(err);});
+        },
+        requestCity(ctx,{id}){
+            Axios.get('/rest/cities/by-id',{
+                params:{
+                    id,
+                }
+            }).then(response=>{
+                ctx.commit('updateCities',response.data);
+            }).catch(err=>{console.error(err);});
         }
     },
     mutations:{
@@ -45,12 +54,16 @@ export default new Vuex.Store({
         updatePageData(state,data){
             state.pageData = data;
 
+        },
+        updateCities(state,data){
+            state.cities = data;
         }
     },
     state:{
         pageData:{},
         user:{},
         organization:{},
+        cities:[]
     },
     getters:{
         getUser(state){
@@ -68,6 +81,9 @@ export default new Vuex.Store({
         },
         getPageData(state){
             return state.pageData;
+        },
+        getCities(state){
+            return state.cities;
         }
     },
     modules:{

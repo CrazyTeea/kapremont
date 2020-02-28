@@ -18,6 +18,14 @@ const routes = [
         component: ()=>import('./components/pages').then(module=>{return module.devView;})
     },
     {
+        path:'/program/object/create',
+        component: ()=>import('./components/pages').then(module=>{return module.form;})
+    },
+    {
+        path:'/program/object/update/:id',
+        component: ()=>import('./components/pages').then(module=>{return module.form;})
+    },
+    {
         path:'/error/browser',
         name: 'error',
         component: ()=>import('./components/pages').then(module=>{return module.errorPage;})

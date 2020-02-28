@@ -4,6 +4,7 @@
 namespace app\commands;
 
 use app\models\app\students\Students;
+use app\models\Cities;
 use app\models\Organizations;
 use app\models\Program;
 use app\models\Regions;
@@ -197,6 +198,51 @@ class ReferenceController extends Controller
             фин->$program->finance_volume
             евент->$program->finance_events
             цена->$program->cost \n";
+            }
+
+        }
+        fclose( $csv );
+        echo "success!";
+    }
+    public function actionCity($file,$idRegion,$city){
+        $csvP = Yii::getAlias( '@webroot' ) . "/parce/$file.csv";
+
+        $csv = fopen( $csvP, 'r' );
+        if ( !$csvP )
+            exit( "Файл не найден" );
+
+        $row = fgetcsv( $csv, 1000, ';' ) ;
+
+
+        echo "
+            Город-> {$row[$city]}
+            Регион->$row[$idRegion]
+            \n";
+
+
+        fclose( $csv );
+        $csv = fopen( $csvP, 'r' );
+        echo "Вы уверене? \n ";
+        $key = readline();
+        if ( !( $key === "yes" || $key === "y" || $key === "Y" ) ) {
+            exit( 0 );
+        }
+
+        while (( $row = fgetcsv( $csv, 1000, ';' ) ) != false) {
+
+            $citys = Cities::findOne(['id_region'=>$row[$idRegion],'city'=>$row[$city]]);
+            if (!$citys) {
+                $citys = new Cities();
+            }
+            $citys->id_region= $row[$idRegion];
+            $citys->city = $row[$city];
+
+
+            if ( $citys->save(false) ) {
+                echo "
+            Город-> {$citys->city}
+            Регион-> {$citys->id_region}
+             \n";
             }
 
         }

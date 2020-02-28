@@ -1,1 +1,1 @@
-start Powershell.exe /c "bash"
+start conEmu64.exe "bash"

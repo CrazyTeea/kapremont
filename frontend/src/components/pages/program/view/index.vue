@@ -1,5 +1,5 @@
 <template>
-    <div class="container" style="min-width: 80%">
+
         <div id="dev_programme">
             <div class="row">
                 <div class="col-6">
@@ -10,9 +10,11 @@
                         { id:'1',label:'Полное наименование организации',value:getUser && getUser.organization && getUser.organization.name },
                         { id:'2' ,label:'Сокращенное наименование организации',value:getUser && getUser.organization && getUser.organization.short_name},
                         ]"
-                            small
+                            small bordered
                     />
+                    <b-button class="btn btn-sm" style="float: right">Подробнее</b-button>
                 </div>
+
                 <div class="col-4 offset-2">
                     <v-user-panel />
                 </div>
@@ -20,7 +22,7 @@
             <br>
             <div class="row">
                 <div class="col-6">
-                    <b-button>Добавить объект кап. ремонта</b-button>
+                    <b-button href="object/create">Добавить объект кап. ремонта</b-button>
                     <b-button>Добавить мероприятия по АТЗ</b-button>
                 </div>
                 <div class="col-6"></div>
@@ -40,7 +42,7 @@
                                         class="text-center"
                                         :items="objects && objects.items"
                                         :fields="objects && objects.fields"
-                                        small
+                                        small bordered
                                 />
                             </b-card-body>
                         </b-collapse>
@@ -53,7 +55,12 @@
                         </b-card-header>
                         <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
                             <b-card-body>
-                                <b-card-text>{{ text }}</b-card-text>
+                                <b-table
+                                        class="text-center"
+                                        :items="target && target.items"
+                                        :fields="target && target.fields"
+                                        small bordered
+                                />
                             </b-card-body>
                         </b-collapse>
                     </b-card>
@@ -70,22 +77,28 @@
                                         class="text-center"
                                         :items="priorityObjects && priorityObjects.items"
                                         :fields="fieldsObjects && fieldsObjects.fields"
-                                        small
+                                        small bordered
                                 />
                                 <b-card-text>Резервные объекты</b-card-text>
                                 <b-table
                                         class="text-center"
                                         :items="reservedObjects && reservedObjects.items"
                                         :fields="fieldsObjects && fieldsObjects.fields"
-                                        small
+                                        small bordered
                                 />
                             </b-card-body>
                         </b-collapse>
                     </b-card>
                 </div>
             </div>
+            <div class="row">
+                <div class="col-6"></div>
+                <div class="col-6 offset-8">
+                    <b-button class="btn btn-sm">Выгрузить программу</b-button>
+                    <b-button class="btn btn-sm">Отправить на согласование</b-button>
+                </div>
+            </div>
         </div>
-    </div>
 </template>
 
 <script>
@@ -118,6 +131,9 @@
             },
             reservedObjects(){
                 return this.getPageData && this.getPageData.reservedObjects
+            },
+            target(){
+                return this.getPageData && this.getPageData.target
             },
         },
         mounted() {

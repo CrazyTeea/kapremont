@@ -56,7 +56,7 @@ GlyphiconAsset::register($this);
                 . Html::hiddenInput('username',Yii::$app->user->identity->username,['id'=>'global_username'])
                 . Html::submitButton(
                     'Выход (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link']
+                    ['class' => 'btn nav-link']
                 )
                 . Html::endForm()
                 . '</li>'
@@ -66,15 +66,15 @@ GlyphiconAsset::register($this);
     NavBar::end();
     ?>
 
-    <div class="container" >
+    <div class="container">
         <?= Breadcrumbs::widget([
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
-    </div>
+
 
         <div id="app"></div>
-
+    </div>
 </div>
 
 <footer class="footer">

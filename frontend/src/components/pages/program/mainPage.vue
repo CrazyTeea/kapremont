@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+
         <div id="program_mi_body">
             <div class="row">
                 <div class="col-6">
@@ -14,7 +14,7 @@
                              :items="items"
                              :per-page="perPage"
                              :current-page="currentPage"
-                             small
+                             small bordered
                     />
                     <h3 v-else>
                         <span class="text-danger">Данные о вашей организации отсутствуют в системе</span>
@@ -40,7 +40,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </template>
 
 <script>

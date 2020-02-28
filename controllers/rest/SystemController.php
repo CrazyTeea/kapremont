@@ -4,10 +4,13 @@
 namespace app\controllers\rest;
 
 
+use app\models\Cities;
 use app\models\Organizations;
 use app\models\Program;
+use app\models\Regions;
 use app\models\User;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 
 class SystemController extends RestController
@@ -84,6 +87,20 @@ class SystemController extends RestController
                         ['key'=>'note','label'=>"Примечание"],
 
                     ];
+                    $ret['target']['fields'] = [
+                        ['key'=>'id','label'=>'№'],
+                        ['key'=>'target','label'=>'Цели и задачи'],
+                        ['key'=>'indicator','label'=>"Планируемый показатель"],
+                        ['key'=>'unit','label'=>"Единица измерения"],
+                    ];
+                    $ret['target']['items'] = [
+                        ['id'=>1,'target'=>'Проведение капитального ремонта, общая площадь','indicator'=>'','unit'=>'кв.м'],
+                        ['id'=>2,'target'=>'Вовлечение в хоз. деятельность за счет проведенного кп. ремонта, общая площадь','indicator'=>'','unit'=>'кв.м'],
+                        ['id'=>3,'target'=>'Снижение затрат на эксплуатацию, общая площадь','indicator'=>'','unit'=>'да/нет'],
+                        ['id'=>4,'target'=>'Повышение энергоэффективности','indicator'=>'','unit'=>'да/нет'],
+                        ['id'=>5,'target'=>'Восстановление (ремонт, реставрация, за исключением реконструкции) объектов культурного наследия','indicator'=>'','unit'=>'да/нет'],
+                        ['id'=>6,'target'=>'Иное:','indicator'=>'','unit'=>''],
+                    ];
 
                     $ret['priorityObjects']['items'] = [
                         ['id'=>1],
@@ -93,6 +110,12 @@ class SystemController extends RestController
                         ['id'=>1],
                         ['id'=>2],
                     ];
+                    return $ret;
+                    break;
+                }
+                case 'objectForm':{
+                    $ret['regionOptions'] = Regions::find()->asArray()->all();
+                    $ret['cityOptions'] = Cities::find()->asArray()->all();
                     return $ret;
                     break;
                 }
