@@ -115,6 +115,7 @@ class SystemController extends RestController
                     $ret['regionOptions'] = Regions::find()->asArray()->all();
                     $ret['cityOptions'] = Cities::find()->asArray()->all();
                     $ret['_csrf'] = Yii::$app->request->getCsrfToken();
+                    $ret['headers'] = Yii::$app->getRequest()->getHeaders();
                     return $ret;
                     break;
                 }
@@ -217,6 +218,7 @@ class SystemController extends RestController
                             'value'=>   0
                         ],
                     ];
+
 
                     return $ret;
                     break;

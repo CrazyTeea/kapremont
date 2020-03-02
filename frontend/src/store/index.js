@@ -16,10 +16,10 @@ export default new Vuex.Store({
                 ctx.commit('updateOrg',response.data);
             }).catch(error=>{console.error(error);});
         },
-        requestOrg(ctx){
+        requestOrg(ctx,{id}){
             Axios.post('/rest/organizations/by-id',
                 {
-                    id:this.getUser().organization.id
+                    id
                 }).then(response=>{
                 ctx.commit('updateOrg',response.data);
             }).catch(error=>{console.error(error);});

@@ -72,6 +72,11 @@
             }
 
         },
+        watch:{
+          getUser:function () {
+              this.requestOrg({id:this.getUser.organization.id});
+          }
+        },
         methods:{
             ...mapActions(['requestProgram','requestOrg','requestPageData'])
         },
@@ -81,7 +86,7 @@
         mounted() {
             this.requestPageData({pageName:"main"});
             //this.requestProgram();
-            this.requestOrg();
+
 
         }
     }
