@@ -7,20 +7,20 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     actions:{
         requestUser(ctx){
-            Axios.post('/rest/system/get-user',
-                {login:document.getElementById('global_username').value}).then(response=>{
+            Axios.post('/rest/system/get-user').then(response=>{
                     ctx.commit('updateUser',response.data);
             }).catch(error=>{console.error(error);});
         },
         requestCurrentOrg(ctx){
-            Axios.post('/rest/organizations/by-username',
-                {login:document.getElementById('global_username').value}).then(response=>{
+            Axios.post('/rest/organizations/current').then(response=>{
                 ctx.commit('updateOrg',response.data);
             }).catch(error=>{console.error(error);});
         },
         requestOrg(ctx){
             Axios.post('/rest/organizations/by-id',
-                {id:document.getElementById('global_id_org').value}).then(response=>{
+                {
+                    id:this.getUser().organization.id
+                }).then(response=>{
                 ctx.commit('updateOrg',response.data);
             }).catch(error=>{console.error(error);});
         },
@@ -28,7 +28,7 @@ export default new Vuex.Store({
             Axios.get('/rest/system/get-page',{
                 params:{
                     pageName,
-                    id_org:document.getElementById('global_id_org').value
+                    //id_org:document.getElementById('global_id_org').value
                 }
             }).then(response=>{
                 ctx.commit('updatePageData',response.data);

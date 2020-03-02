@@ -15,4 +15,13 @@ return [
             '/*',
         ],
     ],
+    'dev_program' => [
+        'type' => 2,
+        'children' => [
+            '/app/development-programme/index',
+        ],
+    ],
+    '/app/development-programme/index' => [
+        'type' => 2,
+    ],
 ];

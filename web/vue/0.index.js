@@ -582,7 +582,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.toggle_button[data-v-da428c26]{\n    display: block;\n    cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.toggle_button[data-v-da428c26] {\n    display: block;\n    cursor: pointer;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -1469,11 +1469,11 @@ var render = function() {
           ]),
           _vm._v(" "),
           _c("b-button", { attrs: { type: "submit", variant: "primary" } }, [
-            _vm._v("Submit")
+            _vm._v("Сохранить")
           ]),
           _vm._v(" "),
           _c("b-button", { attrs: { type: "reset", variant: "danger" } }, [
-            _vm._v("Reset")
+            _vm._v("Сброс")
           ])
         ],
         1

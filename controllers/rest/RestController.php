@@ -2,6 +2,7 @@
 
 namespace app\controllers\rest;
 
+use app\models\User;
 use Yii;
 use yii\rest\Controller;
 
@@ -17,9 +18,12 @@ abstract class RestController extends Controller
                 Yii::$app->getUser()->can('admin'),
                 Yii::$app->getUser()->can('mon'),
                 Yii::$app->getUser()->can('user'),
-               false,
+               Yii::$app->getUser()->can('root') || Yii::$app->getUser()->can('admin'),
+               Yii::$app->getUser()->can('dev_program')
             ]);
            self::$cans = Yii::$app->getSession()->get('cans');
+           Yii::$app->getSession()->set('user',User::findOne(Yii::$app->user->id));
+          // Yii::$app->getSession()->set('id_org',User::findOne(Yii::$app->user->id)->id_org);
         }
     }
 }

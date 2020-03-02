@@ -106,8 +106,8 @@
                     <v-user-panel/>
                 </div>
             </div>
-            <b-button type="submit" variant="primary">Submit</b-button>
-            <b-button type="reset" variant="danger">Reset</b-button>
+            <b-button type="submit" variant="primary">Сохранить</b-button>
+            <b-button type="reset" variant="danger">Сброс</b-button>
         </b-form>
     </div>
 </template>
@@ -129,13 +129,13 @@
                 return pattern.test(this.formData.kad_number);
             },
             con_year_validator(){
-                return this.formData.construct_object_year.length===4
+                return this.formData.construct_object_year.length === 4
             },
             exp_year_validator(){
-                return this.formData.exploit_object_year.length===4
+                return this.formData.exploit_object_year.length === 4
             },
             wear_validator(){
-                return this.formData.wear>=0 && this.formData.wear<=100
+                return this.formData.wear >= 0 && this.formData.wear <= 100
             },
         },
 
@@ -171,27 +171,27 @@
             ...mapActions(['requestPageData','requestCity']),
             onSubmit(e){
                // e.preventDefault();
-                alert(JSON.stringify(this.formData))
+                alert(JSON.stringify(this.formData))    
             },
             onReset(){
-                this.formData.idRegion=0;
-                this.formData.idCity=0;
-                this.formData.kad_number= '';
-                this.formData.construct_object_year=0;
-                this.formData.exploit_object_year=0;
-                this.formData.wear=0;
-                this.formData.exist_pred_nadz_orgs= '';
-                this.formData.osn_isp_zdan= '';
-                this.formData.assignment= '';
-                this.formData.prav_sob= '';
-                this.formData.note= '';
-                this.formData.square=0;
-                this.formData.square_kap=0;
-                this.formData.isp_v_ust_dey=0;
-                this.formData.n_isp_v_ust_dey=0;
-                this.formData.square_ar=0;
+                this.formData.idRegion = 0;
+                this.formData.idCity = 0;
+                this.formData.kad_number = '';
+                this.formData.construct_object_year = 0;
+                this.formData.exploit_object_year = 0;
+                this.formData.wear = 0;
+                this.formData.exist_pred_nadz_orgs = '';
+                this.formData.osn_isp_zdan = '';
+                this.formData.assignment = '';
+                this.formData.prav_sob = '';
+                this.formData.note = '';
+                this.formData.square = 0;
+                this.formData.square_kap = 0;
+                this.formData.isp_v_ust_dey = 0;
+                this.formData.n_isp_v_ust_dey = 0;
+                this.formData.square_ar = 0;
             },
-            onChangeRegion({id}){
+            onChangeRegion({id}) {
                 this.requestCity({id})
 
             }
@@ -202,7 +202,7 @@
     }
 </script>
 <style scoped>
-    .toggle_button{
+    .toggle_button {
         display: block;
         cursor: pointer;
     }

@@ -62400,18 +62400,14 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   actions: {
     requestUser: function requestUser(ctx) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/rest/system/get-user', {
-        login: document.getElementById('global_username').value
-      }).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/rest/system/get-user').then(function (response) {
         ctx.commit('updateUser', response.data);
       }).catch(function (error) {
         console.error(error);
       });
     },
     requestCurrentOrg: function requestCurrentOrg(ctx) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/rest/organizations/by-username', {
-        login: document.getElementById('global_username').value
-      }).then(function (response) {
+      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/rest/organizations/current').then(function (response) {
         ctx.commit('updateOrg', response.data);
       }).catch(function (error) {
         console.error(error);
@@ -62419,7 +62415,7 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
     },
     requestOrg: function requestOrg(ctx) {
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/rest/organizations/by-id', {
-        id: document.getElementById('global_id_org').value
+        id: this.getUser().organization.id
       }).then(function (response) {
         ctx.commit('updateOrg', response.data);
       }).catch(function (error) {
@@ -62430,8 +62426,8 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
       var pageName = _ref.pageName;
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/rest/system/get-page', {
         params: {
-          pageName: pageName,
-          id_org: document.getElementById('global_id_org').value
+          pageName: pageName //id_org:document.getElementById('global_id_org').value
+
         }
       }).then(function (response) {
         ctx.commit('updatePageData', response.data);
