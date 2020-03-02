@@ -106,8 +106,8 @@
                     <v-user-panel/>
                 </div>
             </div>
-            <b-button type="submit" variant="primary">Submit</b-button>
-            <b-button type="reset" variant="danger">Reset</b-button>
+            <b-button type="submit" variant="primary">Сохранить</b-button>
+            <b-button type="reset" variant="danger">Сброс</b-button>
         </b-form>
     </div>
 </template>

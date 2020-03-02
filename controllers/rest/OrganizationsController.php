@@ -20,6 +20,15 @@ class OrganizationsController extends RestController
             ];
         }
     }
+    public function actionCurrent(){
+
+
+            $user = Yii::$app->getSession()->get('user');
+            return [
+                "org" =>$user->organization,
+            ];
+
+    }
     public function actionById(){
         if ($data = Yii::$app->getRequest()->getRawBody()){
             $data = (object)Json::decode($data);
