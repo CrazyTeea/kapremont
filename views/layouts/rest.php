@@ -79,7 +79,17 @@ GlyphiconAsset::register($this);
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <div class="row">
+            <div class="col-6">
+                Официальный ресурс Министерства науки и высшего образования Российской Федерации
+            </div>
+            <div class="col-6">
+                Служба технической поддержки:
+
+                8-495-989-84-47 доб. 1 (многоканальный)
+                ias@mirea.ru
+            </div>
+        </div>
     </div>
 </footer>
 
