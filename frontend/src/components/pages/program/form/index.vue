@@ -214,7 +214,13 @@
                     _csrf:this.csrf,
                     ProgramObjects:this.formData,
 
-                },{headers:this.getPageData.headers}).then(response=>{console.log(response)}).catch(e=>console.error(e))
+                },{
+                    headers:
+                        {
+                            'X-CSRF-Token':this.csrf,
+                            'Content-Type':'application/x-www-form-urlencoded'
+                        }
+                }).then(response=>{console.log(response)}).catch(e=>console.error(e))
             },
             onReset(){
                 this.formData.idRegion=0;

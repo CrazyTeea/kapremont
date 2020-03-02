@@ -58,9 +58,11 @@ class ProgramObjectsController extends AppController
      */
     public function actionCreate()
     {
-        if (Yii::$app->request->getRawBody()) {
+
+        $model = new ProgramObjects();
+        if (Yii::$app->request->post()) {
             echo "<pre>";
-            var_dump(Yii::$app->request->getHeaders());
+            var_dump($model->load(Yii::$app->request->post()));
             exit();
         }
 
