@@ -1,7 +1,7 @@
 <template>
     <div class="program_object_form">
-        <b-form @submit="onSubmit" @reset="onReset" method="post">
-            <input id="hidden" name="_csrf" v-model="getPageData._csrf" type='hidden' />
+        <b-form id="object_form" @submit="onSubmit" @reset="onReset" method="post">
+            <input id="hidden" name="_csrf" v-model="csrf" type='hidden' />
             <div class="row">
                 <div class="col-6">
                     <b-card no-body class="mb-1">
@@ -152,6 +152,7 @@
     import {userPanel} from "../../../organisms";
     import Multiselect from "vue-select";
     import {mapActions, mapGetters} from "vuex";
+    import Axios from 'axios'
     export default {
         name: "programForm",
         components:{
@@ -177,6 +178,7 @@
 
         data(){
             return {
+                csrf: document.getElementsByName('csrf-token')[0].content,
                 formData: {
                     idRegion: 0,
                     idCity:0,
@@ -206,8 +208,13 @@
         methods:{
             ...mapActions(['requestPageData','requestCity']),
             onSubmit(e){
-               // e.preventDefault();
-                alert(JSON.stringify(this.formData))
+                e.preventDefault();
+                console.log(this.formData);
+                Axios.post('/program/object/create',{
+                    _csrf:this.csrf,
+                    ProgramObjects:this.formData,
+
+                },{headers:this.getPageData.headers}).then(response=>{console.log(response)}).catch(e=>console.error(e))
             },
             onReset(){
                 this.formData.idRegion=0;
