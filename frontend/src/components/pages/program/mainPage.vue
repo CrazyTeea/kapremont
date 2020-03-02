@@ -7,7 +7,6 @@
                     <p v-show="getRegion">Субъект РФ:
                         <span class="text-success">{{getRegion && getRegion.region }}</span>
                     </p>
-                    <p class="mt-3" v-show="rows > perPage" >Current Page: {{ currentPage }}</p>
                     <b-table id="program_table"
                              v-if="getPageData"
                              :fields="fields"

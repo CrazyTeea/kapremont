@@ -58,7 +58,7 @@ class ReferenceController extends Controller
 
     }
     public function actionRegions(){
-        echo "Выполняется синхронизация регионов";
+        echo "Выполняется синхронизация регионов\n";
         $timestart = time();
         $err = 0;
 

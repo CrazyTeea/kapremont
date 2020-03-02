@@ -1,6 +1,7 @@
 <template>
     <div class="program_object_form">
-        <b-form @submit="onSubmit">
+        <b-form @submit="onSubmit" @reset="onReset" method="post">
+            <input id="hidden" name="_csrf" v-model="getPageData._csrf" type='hidden' />
             <div class="row">
                 <div class="col-6">
                     <b-card no-body class="mb-1">
@@ -13,6 +14,18 @@
                         <b-collapse id="accordion-1" visible accordion="my-accordion" role="tabpanel">
                             <b-card-body>
                                 <b-form-group>
+                                    <label for="type">Тип объекта:</label>
+                                    <v-select2 v-model="formData.type"
+                                               :options="[
+                                                   {id:0,type:'Приоритетный'},
+                                                   {id:1,type:'Резервный'}
+                                               ]"
+                                               :reduce="type => type.id"
+                                               label="type"
+                                               id="type"
+                                               name="idRegion"
+                                               @input="onChangeRegion({id:formData.idRegion})"
+                                    />
                                     <label for="idRegion">Субъект РФ:</label>
                                     <v-select2 v-model="formData.idRegion"
                                                :options="getPageData.regionOptions"
@@ -28,14 +41,37 @@
                                                :reduce="city => city.id"
                                                label="city"
                                                id="idCity"
-                                               name="idCity"
-                                    />
+                                               name="idCity"/>
                                     <label for="kad_number">Кадастровый номер:</label>
                                     <b-form-input id="kad_number" name="kud_number" :state="kad_number_validator" v-model="formData.kad_number"/>
                                     <label for="construct_object_year">Год постройки здания:</label>
                                     <b-form-input id="construct_object_year" name="construct_object_year" :state="con_year_validator" type="number" v-model="formData.construct_object_year"/>
                                     <label for="exploit_object_year">Год ввода здания в эксплуатацию:</label>
                                     <b-form-input id="exploit_object_year" name="exploit_object_year" :state="exp_year_validator" type="number" v-model="formData.exploit_object_year"/>
+                                    <label for="exist_pred_nadz_orgs">Наличие предписаний надзорных органов:</label>
+                                    <b-form-input id="exist_pred_nadz_orgs" name="exist_pred_nadz_orgs" v-model="formData.exist_pred_nadz_orgs"/>
+                                    <label for="wear">Износ здания (%):</label>
+                                    <b-form-input id="wear" name="wear" :state="wear_validator" type="number" v-model="formData.wear"/>
+                                    <label for="osn_isp_zdan">Основание для использования здания:</label>
+                                    <b-form-input id="osn_isp_zdan" name="osn_isp_zdan" v-model="formData.osn_isp_zdan"/>
+                                    <label for="prav_oper_upr">Право оперативного управления (рег. запись, номер):</label>
+                                    <b-form-input id="prav_oper_upr" name="prav_oper_upr" v-model="formData.prav_oper_upr"/>
+                                    <label for="assignment">Назначение:</label>
+                                    <b-form-input id="assignment" name="assignment" v-model="formData.assignment"/>
+                                    <label for="prav_sob">Право собственности:</label>
+                                    <b-form-input id="assignment" name="assignment" v-model="formData.prav_sob"/>
+                                    <label for="square">Общая площадь здания - всего, кв.м.:</label>
+                                    <b-form-input id="square" name="square" type="number" v-model="formData.square"/>
+                                    <label for="square_kap">Общая площадь здания (помещений), планируемого к капитальному ремонту, кв. м.:</label>
+                                    <b-form-input id="square_kap" name="square_kap" type="number" v-model="formData.square_kap"/>
+                                    <label for="isp_v_ust_dey">Используется в уставной деятельности, кв.м.:</label>
+                                    <b-form-input id="isp_v_ust_dey" name="isp_v_ust_dey" type="number" v-model="formData.isp_v_ust_dey"/>
+                                    <label for="n_isp_v_ust_dey">Не используется в уставной деятельности, кв.м.:</label>
+                                    <b-form-input id="n_isp_v_ust_dey" name="n_isp_v_ust_dey" type="number" v-model="formData.n_isp_v_ust_dey"/>
+                                    <label for="square_ar">Предоставлено в аренду, кв.м.:</label>
+                                    <b-form-input id="square_ar" name="square_ar" type="number" v-model="formData.square_ar"/>
+                                    <label for="note">Примечание::</label>
+                                    <b-form-input id="note" name="note" v-model="formData.note"/>
                                 </b-form-group>
                             </b-card-body>
                         </b-collapse>
@@ -98,6 +134,9 @@
             exp_year_validator(){
                 return this.formData.exploit_object_year.length===4
             },
+            wear_validator(){
+                return this.formData.wear>=0 && this.formData.wear<=100
+            },
         },
 
         data(){
@@ -107,8 +146,18 @@
                     idCity:0,
                     kad_number: '',
                     construct_object_year:0,
-                    exploit_object_year:0
-
+                    exploit_object_year:0,
+                    wear:0,
+                    exist_pred_nadz_orgs:'',
+                    osn_isp_zdan:'',
+                    assignment:'',
+                    prav_sob:'',
+                    square:0,
+                    square_kap:0,
+                    isp_v_ust_dey:0,
+                    n_isp_v_ust_dey:0,
+                    square_ar:0,
+                    note:'',
                 },
             }
         },
@@ -121,8 +170,26 @@
         methods:{
             ...mapActions(['requestPageData','requestCity']),
             onSubmit(e){
-                e.preventDefault();
+               // e.preventDefault();
                 alert(JSON.stringify(this.formData))
+            },
+            onReset(){
+                this.formData.idRegion=0;
+                this.formData.idCity=0;
+                this.formData.kad_number= '';
+                this.formData.construct_object_year=0;
+                this.formData.exploit_object_year=0;
+                this.formData.wear=0;
+                this.formData.exist_pred_nadz_orgs= '';
+                this.formData.osn_isp_zdan= '';
+                this.formData.assignment= '';
+                this.formData.prav_sob= '';
+                this.formData.note= '';
+                this.formData.square=0;
+                this.formData.square_kap=0;
+                this.formData.isp_v_ust_dey=0;
+                this.formData.n_isp_v_ust_dey=0;
+                this.formData.square_ar=0;
             },
             onChangeRegion({id}){
                 this.requestCity({id})
@@ -130,7 +197,7 @@
             }
         },
         mounted() {
-            this.requestPageData({pageName:"objectForm"});
+            this.requestPageData({pageName:"objectCreate"});
         }
     }
 </script>
