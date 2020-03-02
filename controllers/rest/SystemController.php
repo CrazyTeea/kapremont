@@ -26,7 +26,8 @@ class SystemController extends RestController
                         ['key'=>'label','label'=>'Показатель'],
                         ['key'=>'value','label'=>'Значение']
                     ];
-                    $program = Program::findOne(['id_org'=>$data->id_org]);
+                    $id_org = Yii::$app->session->get('user')->id_org;
+                    $program = Program::findOne(['id_org'=>$id_org]);
                     if (!$program)
                         return null;
                     $ret['items'] = [
@@ -126,15 +127,18 @@ class SystemController extends RestController
         return null;
     }
     public function actionGetUser(){
-        if ($data = Yii::$app->getRequest()->getRawBody()){
-            $data = (object)Json::decode($data);
-            $user = User::find()->where(['username'=>$data->login])->one();
-            return [
-                'organization'=>$user->organization,
-                'fio'=>$user->fio,
-                'position'=>$user->position,
-                'isAdmin'=> self::$cans[4]
-            ];
+        if (!Yii::$app->getUser()->isGuest) {
+
+                //$data = (object)Json::decode($data);
+                //$user = User::find()->where(['username' => $data->login])->one();
+                $user = Yii::$app->getSession()->get('user');
+                return [
+                    'organization' => $user->organization,
+                    'fio' => $user->fio,
+                    'position' => $user->position,
+                    'isAdmin' => self::$cans[4]
+                ];
+
         }
     }
 }
