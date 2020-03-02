@@ -12,9 +12,9 @@ class m200302_184634_add_prog_objs_columns extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn(\app\models\ProgramObjects::tableName(),'kad_number',$this->string());
-        $this->addColumn(\app\models\ProgramObjects::tableName(),'exploit_year',$this->integer());
-       
+        /*$this->addColumn(\app\models\ProgramObjects::tableName(),'kad_number',$this->string());
+        $this->addColumn(\app\models\ProgramObjects::tableName(),'exploit_year',$this->integer());*/
+
 
 
 
