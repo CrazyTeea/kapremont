@@ -10,6 +10,7 @@ use app\models\Program;
 use app\models\Regions;
 use app\models\User;
 use Yii;
+use yii\bootstrap4\Html;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 
@@ -59,7 +60,7 @@ class SystemController extends RestController
                         ['key'=>'city','label'=>"Город"],
                         ['key'=>'address','label'=>"Адрес"],
                         ['key'=>'assignment','label'=>"Назначение"],
-                        ['key'=>'square','label'=>"Площадь кап. ремонта (кв.м)"],
+                        ['key'=>'square_kap','label'=>"Площадь кап. ремонта (кв.м)"],
                         ['key'=>'year','label'=>"Год постройки"],
                         ['key'=>'wear','label'=>"Износ здания (%)"],
                         ['key'=>'regulation','label'=>"Предписание надзорных органов: МЧС, Роспотребнадзор и т.д. (при наличии)"],
@@ -76,7 +77,7 @@ class SystemController extends RestController
                         ['key'=>'region','label'=>"Субъект РФ"],
                         ['key'=>'object_name','label'=>"Наименование объекта, требующего кап. ремонт"],
                         ['key'=>'assignment','label'=>"Назначение"],
-                        ['key'=>'square','label'=>"Площадь кап. ремонта (кв.м)"],
+                        ['key'=>'square_kap','label'=>"Площадь кап. ремонта (кв.м)"],
                         ['key'=>'address','label'=>"Адрес объекта"],
                         ['key'=>'year','label'=>"Год постройки"],
                         ['key'=>'wear','label'=>"Износ здания (%)"],
@@ -113,9 +114,10 @@ class SystemController extends RestController
                     return $ret;
                     break;
                 }
-                case 'objectForm':{
+                case 'objectCreate':{
                     $ret['regionOptions'] = Regions::find()->asArray()->all();
                     $ret['cityOptions'] = Cities::find()->asArray()->all();
+                    $ret['_csrf'] = Yii::$app->request->getCsrfToken();
                     return $ret;
                     break;
                 }
