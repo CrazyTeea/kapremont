@@ -136,7 +136,7 @@ class SystemController extends RestController
                     'organization' => $user->organization,
                     'fio' => $user->fio,
                     'position' => $user->position,
-                    'isAdmin' => self::$cans[4]
+                    'isAdmin' => self::$cans[5]
                 ];
 
         }
