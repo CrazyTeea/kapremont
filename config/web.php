@@ -79,6 +79,9 @@ $config = [
                 'organization/info'=>'app/organization/info'
             ],
         ],
+        'assetManager' => [
+            'appendTimestamp' => true,
+        ],
 
     ],
     'as access' => [
