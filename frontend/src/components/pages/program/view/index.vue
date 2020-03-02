@@ -12,7 +12,7 @@
                         ]"
                         small bordered
                 />
-                <b-button disabled class="btn btn-sm" style="float: right">Подробнее</b-button>
+                <b-button class="btn btn-sm" style="float: right" href="/organization/info">Подробнее</b-button>
             </div>
 
             <div class="col-4 offset-2">
@@ -120,9 +120,9 @@
         </div>
         <div class="row">
             <div class="col-6"></div>
-            <div class="col-6 offset-6">
+            <div class="col-6 offset-7">
                 <b-button disabled class="btn btn-sm">Выгрузить программу</b-button>
-                <b-button disabled class="btn btn-sm">Загрузить программу</b-button>
+                <b-button disabled class="btn btn-sm">Загрузить PDF</b-button>
                 <b-button disabled class="btn btn-sm">Отправить на согласование</b-button>
             </div>
         </div>
