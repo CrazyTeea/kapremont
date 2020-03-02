@@ -33,8 +33,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "userPanel",
@@ -83,6 +81,285 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Svedenia.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var bootstrap_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap-vue */ "./node_modules/bootstrap-vue/esm/index.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_1__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "Svedenia",
+  components: {
+    "v-select": vue_select__WEBPACK_IMPORTED_MODULE_1___default.a
+  },
+  computed: {
+    rc_full: function rc_full() {
+      var sum = 0;
+
+      for (var i = 0; i <= this.sved.realization_cost.length - 1; i++) {
+        sum = sum + parseInt(this.sved.realization_cost[i]);
+      }
+
+      if (isNaN(sum)) {
+        sum = 0;
+      }
+
+      return sum;
+    }
+  },
+  data: function data() {
+    return {
+      options: ['Da', 'Net'],
+      fields: [{
+        key: 'stage',
+        label: 'Этап'
+      }, {
+        key: 'is_nessesary',
+        label: 'Необходимость выполнения'
+      }, {
+        key: 'begin_date',
+        label: 'Дата начала',
+        tdClass: 'date'
+      }, {
+        key: 'final_date',
+        label: 'Дата окончания',
+        tdClass: 'date'
+      }, {
+        key: 'rc',
+        label: 'Стоимость реализации (тыс.руб)'
+      }, {
+        key: 'kap_cost',
+        label: 'Сумма бюджетного финансирования на проведение кап.ремонта (тыс.руб)'
+      }, {
+        key: 'finanse',
+        label: 'Софинансирование из внебюджетных источников (тыс.руб)'
+      }],
+      stages: [{
+        'stage': 'Проведение тендера и заключение договора на выполнение обследования',
+        'rc': false,
+        'kap_cost': false,
+        'finanse': false
+      }, {
+        'stage': 'Вполнение обследования, плжготовка и утверждение дефектного акта',
+        'rc': true,
+        'kap_cost': false,
+        'finanse': true
+      }, {
+        'stage': 'Утверждение задания на проектирование',
+        'rc': false,
+        'kap_cost': false,
+        'finanse': false
+      }, {
+        'stage': 'Проведение тендера и заключение договора на подготовку проектно-сметной документации',
+        'rc': false,
+        'kap_cost': false,
+        'finanse': false
+      }, {
+        'stage': 'Подготовка проектно-сметной документации',
+        'rc': true,
+        'kap_cost': true,
+        'finanse': true
+      }, {
+        'stage': 'Прохождение экспертизы проектно-сметной документации',
+        'rc': true,
+        'kap_cost': true,
+        'finanse': true
+      }, {
+        'stage': 'Проведение тендера и заключение договора на выполнение строительно-монтажных работ',
+        'rc': false,
+        'kap_cost': false,
+        'finanse': false
+      }, {
+        'stage': 'Выполнение строительно-монтажных работ',
+        'rc': true,
+        'kap_cost': true,
+        'finanse': true
+      }],
+      sved: {
+        is_nessesary: [],
+        begin_date: [],
+        final_date: [],
+        realization_cost: [],
+        kap_cost: [],
+        finanse: []
+      },
+      rc_sum: 0,
+      kap_sum: 0,
+      finanse_sum: 0
+    };
+  },
+  methods: {
+    returnResult: function returnResult() {
+      console.log(this.sved.realization_cost);
+    },
+    updateIsNessesary: function updateIsNessesary(id, type) {
+      console.log(id, type);
+    },
+    dfgbv: function dfgbv() {
+      console.log(this.sved);
+    },
+    getRcSum: function getRcSum() {
+      var sum = this.rc_sum;
+
+      for (var key in this.sved.realization_cost) {
+        sum += parseInt(this.sved.realization_cost[key]);
+      }
+
+      if (isNaN(sum)) {
+        this.rc_sum = 0;
+      } else {
+        this.rc_sum = sum;
+      }
+    },
+    getKapSum: function getKapSum() {
+      var sum = 0;
+
+      for (var key in this.sved.kap_cost) {
+        sum += parseInt(this.sved.kap_cost[key]);
+      }
+
+      if (isNaN(sum)) {
+        this.kap_sum = 0;
+      } else {
+        this.kap_sum = sum;
+      }
+    },
+    getFinanseSum: function getFinanseSum() {
+      var sum = 0;
+
+      for (var key in this.sved.finanse) {
+        sum += parseInt(this.sved.finanse[key]);
+      }
+
+      if (isNaN(sum)) {
+        this.finanse_sum = 0;
+      } else {
+        this.finanse_sum = sum;
+      }
+    }
+  },
+  mounted: function mounted() {},
+  watch: {}
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/index.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/index.vue?vue&type=script&lang=js& ***!
@@ -97,6 +374,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _Svedenia_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Svedenia.vue */ "./src/components/pages/program/form/Svedenia.vue");
 
 //
 //
@@ -212,12 +490,55 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "programForm",
   components: {
+    "v-svedenia": _Svedenia_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
     "v-user-panel": _organisms__WEBPACK_IMPORTED_MODULE_1__["userPanel"],
     "v-select2": vue_select__WEBPACK_IMPORTED_MODULE_2___default.a
   },
@@ -564,7 +885,25 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n#user_card_title[data-v-555527b8]{\n    font-size: 85%;\n}\n\n", ""]);
+exports.push([module.i, "\n.cont[data-v-555527b8] {\r\n    border: 1px solid grey;\r\n    border-radius: 1px;\n}\n.squash[data-v-555527b8] {\r\n    max-height: 190px !important;\n}\n#user_card_title[data-v-555527b8]{\r\n        font-size: 85%;\n}\r\n\r\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&soped=true&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&soped=true&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "\n.nameOfTheClass {\r\n   width: 600px !important;\n}\n.date {\r\n    width: 500px !important;\n}\n.table{\r\n    overflow: hidden;\n}\n.hidden {\r\n    overflow: hidden;\r\n    overflow-x: scroll;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -616,6 +955,37 @@ module.exports = exports;
 
 var api = __webpack_require__(/*! ../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
             var content = __webpack_require__(/*! !../../../../node_modules/css-loader/dist/cjs.js!../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../node_modules/vue-loader/lib??vue-loader-options!./userPanel.vue?vue&type=style&index=0&id=555527b8&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/organisms/user_panel/userPanel.vue?vue&type=style&index=0&id=555527b8&scoped=true&lang=css&");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+var exported = content.locals ? content.locals : {};
+
+
+
+module.exports = exported;
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&soped=true&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&soped=true&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svedenia.vue?vue&type=style&index=0&soped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&soped=true&lang=css&");
 
             content = content.__esModule ? content.default : content;
 
@@ -716,7 +1086,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "user_panel" }, [
-    _c("div", { staticClass: "card" }, [
+    _c("div", { staticClass: "card squash" }, [
       _c(
         "h3",
         { staticClass: "card-header", attrs: { id: "user_card_title" } },
@@ -738,13 +1108,9 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _c("hr"),
-        _vm._v(" "),
-        _c("div", { staticClass: "text-center card-text" }, [
+        _c("div", { staticClass: "text-center card-text  font-weight-bold" }, [
           _c("span", [_vm._v(_vm._s(_vm.getUser.fio))])
         ]),
-        _vm._v(" "),
-        _c("hr"),
         _vm._v(" "),
         _c("div", { staticClass: "text-center card-text" }, [
           _c("span", [_vm._v(_vm._s(_vm.getUser.position))])
@@ -813,6 +1179,262 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398& ***!
+  \*********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "hidden" },
+    [
+      _c("b-table", {
+        staticClass: "table",
+        attrs: {
+          bordered: "",
+          "foot-clone": "",
+          hover: "",
+          "caption-top": "",
+          fields: _vm.fields,
+          items: _vm.stages
+        },
+        scopedSlots: _vm._u([
+          {
+            key: "cell(is_nessesary)",
+            fn: function(row) {
+              return [
+                _c("v-select", {
+                  staticClass: "mt-5",
+                  attrs: {
+                    label: "type",
+                    options: [
+                      { id: 0, type: "Да" },
+                      { id: 1, type: "Нет" }
+                    ],
+                    reduce: function(type) {
+                      return type.type
+                    }
+                  },
+                  on: { input: _vm.dfgbv },
+                  model: {
+                    value: _vm.sved.is_nessesary[row.index],
+                    callback: function($$v) {
+                      _vm.$set(_vm.sved.is_nessesary, row.index, $$v)
+                    },
+                    expression: "sved.is_nessesary[row.index]"
+                  }
+                })
+              ]
+            }
+          },
+          {
+            key: "cell(begin_date)",
+            fn: function(row) {
+              return [
+                _c("b-form-datepicker", {
+                  attrs: {
+                    "today-button": "",
+                    "label-today-button": "сегодня",
+                    "reset-button": "",
+                    "label-reset-button": "сбросить",
+                    placeholder: "дата",
+                    size: "sm"
+                  },
+                  model: {
+                    value: _vm.sved.begin_date[row.index],
+                    callback: function($$v) {
+                      _vm.$set(_vm.sved.begin_date, row.index, $$v)
+                    },
+                    expression: "sved.begin_date[row.index]"
+                  }
+                })
+              ]
+            }
+          },
+          {
+            key: "cell(final_date)",
+            fn: function(row) {
+              return [
+                _c("b-form-datepicker", {
+                  attrs: {
+                    "today-button": "",
+                    "label-today-button": "сегодня",
+                    "reset-button": "",
+                    "label-reset-button": "сбросить",
+                    size: "sm",
+                    placeholder: "дата"
+                  },
+                  model: {
+                    value: _vm.sved.final_date[row.index],
+                    callback: function($$v) {
+                      _vm.$set(_vm.sved.final_date, row.index, $$v)
+                    },
+                    expression: "sved.final_date[row.index]"
+                  }
+                })
+              ]
+            }
+          },
+          {
+            key: "cell(rc)",
+            fn: function(row) {
+              return [
+                row.value
+                  ? _c("b-form-input", {
+                      attrs: { placeholder: "Цена", min: "0", type: "number" },
+                      on: {
+                        input: function($event) {
+                          return _vm.returnResult()
+                        }
+                      },
+                      model: {
+                        value: _vm.sved.realization_cost[row.index],
+                        callback: function($$v) {
+                          _vm.$set(_vm.sved.realization_cost, row.index, $$v)
+                        },
+                        expression: "sved.realization_cost[row.index]"
+                      }
+                    })
+                  : _c("label", [_vm._v("-")])
+              ]
+            }
+          },
+          {
+            key: "cell(kap_cost)",
+            fn: function(row) {
+              return [
+                row.value
+                  ? _c("b-form-input", {
+                      attrs: { placeholder: "Цена", min: "0", type: "number" },
+                      on: {
+                        input: function($event) {
+                          return _vm.getKapSum()
+                        }
+                      },
+                      model: {
+                        value: _vm.sved.kap_cost[row.index],
+                        callback: function($$v) {
+                          _vm.$set(_vm.sved.kap_cost, row.index, $$v)
+                        },
+                        expression: "sved.kap_cost[row.index]"
+                      }
+                    })
+                  : _c("label", [_vm._v("-")])
+              ]
+            }
+          },
+          {
+            key: "cell(finanse)",
+            fn: function(row) {
+              return [
+                row.value
+                  ? _c("b-form-input", {
+                      attrs: { placeholder: "Цена", min: "0", type: "number" },
+                      on: {
+                        input: function($event) {
+                          return _vm.getFinanseSum()
+                        }
+                      },
+                      model: {
+                        value: _vm.sved.finanse[row.index],
+                        callback: function($$v) {
+                          _vm.$set(_vm.sved.finanse, row.index, $$v)
+                        },
+                        expression: "sved.finanse[row.index]"
+                      }
+                    })
+                  : _c("label", [_vm._v("-")])
+              ]
+            }
+          },
+          {
+            key: "foot(stage)",
+            fn: function() {
+              return [
+                _c("span", { staticClass: "font-weight-bold" }, [
+                  _vm._v("ИТОГО:")
+                ])
+              ]
+            },
+            proxy: true
+          },
+          {
+            key: "foot(is_nessesary)",
+            fn: function() {
+              return [_c("span", { staticClass: "font-weight-bold" })]
+            },
+            proxy: true
+          },
+          {
+            key: "foot(begin_date)",
+            fn: function() {
+              return [_c("span", { staticClass: "font-weight-bold" })]
+            },
+            proxy: true
+          },
+          {
+            key: "foot(final_date)",
+            fn: function() {
+              return [_c("span", { staticClass: "font-weight-bold" })]
+            },
+            proxy: true
+          },
+          {
+            key: "foot(rc)",
+            fn: function() {
+              return [
+                _c("span", { staticClass: "font-weight-bold" }, [
+                  _vm._v(_vm._s(_vm.rc_full))
+                ])
+              ]
+            },
+            proxy: true
+          },
+          {
+            key: "foot(kap_cost)",
+            fn: function() {
+              return [
+                _c("span", { staticClass: "font-weight-bold" }, [
+                  _vm._v(_vm._s(_vm.kap_sum))
+                ])
+              ]
+            },
+            proxy: true
+          },
+          {
+            key: "foot(finanse)",
+            fn: function() {
+              return [
+                _c("span", { staticClass: "font-weight-bold" }, [
+                  _vm._v(_vm._s(_vm.finanse_sum))
+                ])
+              ]
+            },
+            proxy: true
+          }
+        ])
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/index.vue?vue&type=template&id=da428c26&scoped=true&":
 /*!******************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/index.vue?vue&type=template&id=da428c26&scoped=true& ***!
@@ -861,9 +1483,13 @@ var render = function() {
           }),
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-12" }, [_c("v-user-panel")], 1)
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "row mt-3" }, [
             _c(
               "div",
-              { staticClass: "col-6" },
+              { staticClass: "col-12" },
               [
                 _c(
                   "b-card",
@@ -904,7 +1530,6 @@ var render = function() {
                       {
                         attrs: {
                           id: "accordion-1",
-                          visible: "",
                           accordion: "my-accordion",
                           role: "tabpanel"
                         }
@@ -1383,7 +2008,7 @@ var render = function() {
                           [
                             _c("b-icon-gear-wide-connected"),
                             _vm._v(
-                              "\n                       Цели и задачи реализации программы"
+                              "\n                       Сведения о планируемых мероприятиях"
                             )
                           ],
                           1
@@ -1396,11 +2021,12 @@ var render = function() {
                       {
                         attrs: {
                           id: "accordion-2",
+                          visible: "",
                           accordion: "my-accordion",
                           role: "tabpanel"
                         }
                       },
-                      [_c("b-card-body")],
+                      [_c("b-card-body", [_c("v-svedenia")], 1)],
                       1
                     )
                   ],
@@ -1433,7 +2059,7 @@ var render = function() {
                           [
                             _c("b-icon-gear-wide-connected"),
                             _vm._v(
-                              "\n                       Потребность в бюджетных ассигнованиях на проведение кап. ремонта приоритетных объектов"
+                              "\n                       Обоснование необходимости (целесообразности) планируемых мероприятий"
                             )
                           ],
                           1
@@ -1455,15 +2081,158 @@ var render = function() {
                     )
                   ],
                   1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-card",
+                  { staticClass: "mb-1", attrs: { "no-body": "" } },
+                  [
+                    _c(
+                      "b-card-header",
+                      {
+                        staticClass: "p-1",
+                        attrs: { "header-tag": "header", role: "tab" }
+                      },
+                      [
+                        _c(
+                          "span",
+                          {
+                            directives: [
+                              {
+                                name: "b-toggle",
+                                rawName: "v-b-toggle.accordion-4",
+                                modifiers: { "accordion-4": true }
+                              }
+                            ],
+                            staticClass: "toggle_button"
+                          },
+                          [
+                            _c("b-icon-gear-wide-connected"),
+                            _vm._v(
+                              "\n                       Ожидаемые результаты"
+                            )
+                          ],
+                          1
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-collapse",
+                      {
+                        attrs: {
+                          id: "accordion-4",
+                          accordion: "my-accordion",
+                          role: "tabpanel"
+                        }
+                      },
+                      [_c("b-card-body")],
+                      1
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-card",
+                  { staticClass: "mb-1", attrs: { "no-body": "" } },
+                  [
+                    _c(
+                      "b-card-header",
+                      {
+                        staticClass: "p-1",
+                        attrs: { "header-tag": "header", role: "tab" }
+                      },
+                      [
+                        _c(
+                          "span",
+                          {
+                            directives: [
+                              {
+                                name: "b-toggle",
+                                rawName: "v-b-toggle.accordion-5",
+                                modifiers: { "accordion-5": true }
+                              }
+                            ],
+                            staticClass: "toggle_button"
+                          },
+                          [
+                            _c("b-icon-gear-wide-connected"),
+                            _vm._v(
+                              "\n                       Прогнозируемые риски"
+                            )
+                          ],
+                          1
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-collapse",
+                      {
+                        attrs: {
+                          id: "accordion-5",
+                          accordion: "my-accordion",
+                          role: "tabpanel"
+                        }
+                      },
+                      [_c("b-card-body")],
+                      1
+                    )
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "b-card",
+                  { staticClass: "mb-1", attrs: { "no-body": "" } },
+                  [
+                    _c(
+                      "b-card-header",
+                      {
+                        staticClass: "p-1",
+                        attrs: { "header-tag": "header", role: "tab" }
+                      },
+                      [
+                        _c(
+                          "span",
+                          {
+                            directives: [
+                              {
+                                name: "b-toggle",
+                                rawName: "v-b-toggle.accordion-6",
+                                modifiers: { "accordion-6": true }
+                              }
+                            ],
+                            staticClass: "toggle_button"
+                          },
+                          [
+                            _c("b-icon-gear-wide-connected"),
+                            _vm._v(
+                              "\n                      Опись прилагаемых документов"
+                            )
+                          ],
+                          1
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "b-collapse",
+                      {
+                        attrs: {
+                          id: "accordion-6",
+                          accordion: "my-accordion",
+                          role: "tabpanel"
+                        }
+                      },
+                      [_c("b-card-body")],
+                      1
+                    )
+                  ],
+                  1
                 )
               ],
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "col-4 offset-2" },
-              [_c("v-user-panel")],
               1
             )
           ]),
@@ -1979,6 +2748,27 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&soped=true&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-style-loader!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&soped=true&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(/*! !../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svedenia.vue?vue&type=style&index=0&soped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&soped=true&lang=css&");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(/*! ../../../../../node_modules/vue-style-loader/lib/addStylesClient.js */ "./node_modules/vue-style-loader/lib/addStylesClient.js").default
+var update = add("528ee12e", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/vue-style-loader/index.js!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/index.vue?vue&type=style&index=0&id=da428c26&scoped=true&lang=css&":
 /*!***************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-style-loader!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/index.vue?vue&type=style&index=0&id=da428c26&scoped=true&lang=css& ***!
@@ -2247,6 +3037,93 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _error__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./error */ "./src/components/pages/error/index.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "errorPage", function() { return _error__WEBPACK_IMPORTED_MODULE_1__["errorPage"]; });
 
+
+
+
+/***/ }),
+
+/***/ "./src/components/pages/program/form/Svedenia.vue":
+/*!********************************************************!*\
+  !*** ./src/components/pages/program/form/Svedenia.vue ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Svedenia_vue_vue_type_template_id_37453398___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Svedenia.vue?vue&type=template&id=37453398& */ "./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398&");
+/* harmony import */ var _Svedenia_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Svedenia.vue?vue&type=script&lang=js& */ "./src/components/pages/program/form/Svedenia.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Svedenia_vue_vue_type_style_index_0_soped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Svedenia.vue?vue&type=style&index=0&soped=true&lang=css& */ "./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&soped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Svedenia_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Svedenia_vue_vue_type_template_id_37453398___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Svedenia_vue_vue_type_template_id_37453398___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "src/components/pages/program/form/Svedenia.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./src/components/pages/program/form/Svedenia.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./src/components/pages/program/form/Svedenia.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svedenia.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&soped=true&lang=css&":
+/*!****************************************************************************************************!*\
+  !*** ./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&soped=true&lang=css& ***!
+  \****************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_0_soped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-style-loader!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svedenia.vue?vue&type=style&index=0&soped=true&lang=css& */ "./node_modules/vue-style-loader/index.js!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&soped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_0_soped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_0_soped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_0_soped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_0_soped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_0_soped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398&":
+/*!***************************************************************************************!*\
+  !*** ./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398& ***!
+  \***************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_template_id_37453398___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svedenia.vue?vue&type=template&id=37453398& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_template_id_37453398___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_template_id_37453398___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

@@ -3,7 +3,12 @@
         <b-form @submit="onSubmit" @reset="onReset" method="post">
             <input id="hidden" name="_csrf" v-model="getPageData._csrf" type='hidden' />
             <div class="row">
-                <div class="col-6">
+                  <div class="col-12">
+                    <v-user-panel/>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
                     <b-card no-body class="mb-1">
                         <b-card-header header-tag="header" class="p-1" role="tab">
                        <span class="toggle_button" v-b-toggle.accordion-1>
@@ -11,7 +16,7 @@
                            Характеристика объекта
                        </span>
                         </b-card-header>
-                        <b-collapse id="accordion-1" visible accordion="my-accordion" role="tabpanel">
+                        <b-collapse id="accordion-1"  accordion="my-accordion" role="tabpanel">
                             <b-card-body>
                                 <b-form-group>
                                     <label for="type">Тип объекта:</label>
@@ -80,11 +85,11 @@
                         <b-card-header header-tag="header" class="p-1" role="tab">
                        <span class="toggle_button" v-b-toggle.accordion-2>
                            <b-icon-gear-wide-connected />
-                           Цели и задачи реализации программы</span>
+                           Сведения о планируемых мероприятиях</span>
                         </b-card-header>
-                        <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
+                        <b-collapse id="accordion-2" visible accordion="my-accordion" role="tabpanel">
                             <b-card-body>
-
+                                <v-svedenia />
                             </b-card-body>
                         </b-collapse>
                     </b-card>
@@ -92,7 +97,7 @@
                         <b-card-header header-tag="header" class="p-1" role="tab">
                        <span  class="toggle_button" v-b-toggle.accordion-3 >
                            <b-icon-gear-wide-connected />
-                           Потребность в бюджетных ассигнованиях на проведение кап. ремонта приоритетных объектов</span>
+                           Обоснование необходимости (целесообразности) планируемых мероприятий</span>
                         </b-card-header>
                         <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
                             <b-card-body>
@@ -100,11 +105,47 @@
                             </b-card-body>
                         </b-collapse>
                     </b-card>
-                </div>
+                    <b-card no-body class="mb-1">
+                        <b-card-header header-tag="header" class="p-1" role="tab">
+                       <span  class="toggle_button" v-b-toggle.accordion-4 >
+                           <b-icon-gear-wide-connected />
+                           Ожидаемые результаты</span>
+                        </b-card-header>
+                        <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
+                            <b-card-body>
 
-                <div class="col-4 offset-2">
+                            </b-card-body>
+                        </b-collapse>
+                    </b-card>
+                    <b-card no-body class="mb-1">
+                        <b-card-header header-tag="header" class="p-1" role="tab">
+                       <span  class="toggle_button" v-b-toggle.accordion-5  >
+                           <b-icon-gear-wide-connected />
+                           Прогнозируемые риски</span>
+                        </b-card-header>
+                        <b-collapse id="accordion-5" accordion="my-accordion" role="tabpanel">
+                            <b-card-body>
+
+                            </b-card-body>
+                        </b-collapse>
+                    </b-card>
+                    <b-card no-body class="mb-1">
+                        <b-card-header header-tag="header" class="p-1" role="tab">
+                       <span  class="toggle_button" v-b-toggle.accordion-6 >
+                           <b-icon-gear-wide-connected />
+                          Опись прилагаемых документов</span>
+                        </b-card-header>
+                        <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel">
+                            <b-card-body>
+
+                            </b-card-body>
+                        </b-collapse>
+                    </b-card>
+            </div>
+
+                <!-- <div class="col-4 offset-2">
                     <v-user-panel/>
-                </div>
+                </div> -->
             </div>
             <b-button type="submit" variant="primary">Сохранить</b-button>
             <b-button type="reset" variant="danger">Сброс</b-button>
@@ -116,9 +157,12 @@
     import {userPanel} from "../../../organisms";
     import Multiselect from "vue-select";
     import {mapActions, mapGetters} from "vuex";
+    import Svedenia from './Svedenia.vue';
+
     export default {
         name: "programForm",
         components:{
+            "v-svedenia": Svedenia,
             "v-user-panel":userPanel,
             "v-select2": Multiselect
         },
@@ -143,21 +187,21 @@
             return {
                 formData: {
                     idRegion: 0,
-                    idCity:0,
+                    idCity: 0,
                     kad_number: '',
-                    construct_object_year:0,
-                    exploit_object_year:0,
-                    wear:0,
-                    exist_pred_nadz_orgs:'',
-                    osn_isp_zdan:'',
-                    assignment:'',
-                    prav_sob:'',
-                    square:0,
-                    square_kap:0,
-                    isp_v_ust_dey:0,
-                    n_isp_v_ust_dey:0,
-                    square_ar:0,
-                    note:'',
+                    construct_object_year: 0,
+                    exploit_object_year: 0,
+                    wear: 0,
+                    exist_pred_nadz_orgs: '',
+                    osn_isp_zdan: '',
+                    assignment: '',
+                    prav_sob: '',
+                    square: 0,
+                    square_kap: 0,
+                    isp_v_ust_dey: 0,
+                    n_isp_v_ust_dey: 0,
+                    square_ar: 0,
+                    note: '',
                 },
             }
         },

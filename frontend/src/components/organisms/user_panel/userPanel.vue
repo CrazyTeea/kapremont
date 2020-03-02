@@ -1,6 +1,6 @@
 <template>
     <div class="user_panel">
-        <div class="card">
+        <div class="card squash">
             <h3 class="card-header" id="user_card_title">
                 Информация по учетной записи пользователя
             </h3>
@@ -8,11 +8,9 @@
                 <div class="text-center card-text">
                     <span>{{getUser.organization ? getUser.organization.name : ''}}</span>
                 </div>
-                <hr>
-                <div class="text-center card-text">
+                <div class="text-center card-text  font-weight-bold">
                     <span>{{getUser.fio}}</span>
                 </div>
-                <hr>
                 <div class="text-center card-text">
                     <span>{{getUser.position}}</span>
                 </div>
@@ -44,7 +42,13 @@
 </script>
 
 <style scoped>
-
+.cont {
+    border: 1px solid grey;
+    border-radius: 1px;
+}
+.squash {
+    max-height: 190px !important;
+}
     #user_card_title{
         font-size: 85%;
 
