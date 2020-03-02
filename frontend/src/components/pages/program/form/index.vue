@@ -23,31 +23,31 @@
                                                :reduce="type => type.id"
                                                label="type"
                                                id="type"
-                                               name="idRegion"
-                                               @input="onChangeRegion({id:formData.idRegion})"
+                                               name="id_region"
+                                               @input="onChangeRegion({id:formData.id_region})"
                                     />
-                                    <label for="idRegion">Субъект РФ:</label>
-                                    <v-select2 v-model="formData.idRegion"
+                                    <label for="id_region">Субъект РФ:</label>
+                                    <v-select2 v-model="formData.id_region"
                                                :options="getPageData.regionOptions"
                                                :reduce="region => region.id"
                                                label="region"
-                                               id="idRegion"
-                                               name="idRegion"
-                                               @input="onChangeRegion({id:formData.idRegion})"
+                                               id="id_region"
+                                               name="id_region"
+                                               @input="onChangeRegion({id:formData.id_region})"
                                     />
-                                    <label for="idCity">Город:</label>
-                                    <v-select2 v-model="formData.idCity"
+                                    <label for="id_city">Город:</label>
+                                    <v-select2 v-model="formData.id_city"
                                                :options="getCities"
                                                :reduce="city => city.id"
                                                label="city"
-                                               id="idCity"
-                                               name="idCity"/>
+                                               id="id_city"
+                                               name="id_city"/>
                                     <label for="kad_number">Кадастровый номер:</label>
                                     <b-form-input id="kad_number" name="kud_number" :state="kad_number_validator" v-model="formData.kad_number"/>
-                                    <label for="construct_object_year">Год постройки здания:</label>
-                                    <b-form-input id="construct_object_year" name="construct_object_year" :state="con_year_validator" type="number" v-model="formData.construct_object_year"/>
-                                    <label for="exploit_object_year">Год ввода здания в эксплуатацию:</label>
-                                    <b-form-input id="exploit_object_year" name="exploit_object_year" :state="exp_year_validator" type="number" v-model="formData.exploit_object_year"/>
+                                    <label for="year">Год постройки здания:</label>
+                                    <b-form-input id="year" name="year" :state="con_year_validator" type="number" v-model="formData.year"/>
+                                    <label for="exploit_year">Год ввода здания в эксплуатацию:</label>
+                                    <b-form-input id="exploit_year" name="exploit_year" :state="exp_year_validator" type="number" v-model="formData.exploit_year"/>
                                     <label for="exist_pred_nadz_orgs">Наличие предписаний надзорных органов:</label>
                                     <b-form-input id="exist_pred_nadz_orgs" name="exist_pred_nadz_orgs" v-model="formData.exist_pred_nadz_orgs"/>
                                     <label for="wear">Износ здания (%):</label>
@@ -166,10 +166,10 @@
                 return pattern.test(this.formData.kad_number);
             },
             con_year_validator(){
-                return this.formData.construct_object_year.length===4
+                return this.formData.year.length===4
             },
             exp_year_validator(){
-                return this.formData.exploit_object_year.length===4
+                return this.formData.exploit_year.length===4
             },
             wear_validator(){
                 return this.formData.wear>=0 && this.formData.wear<=100
@@ -180,11 +180,11 @@
             return {
                 csrf: document.getElementsByName('csrf-token')[0].content,
                 formData: {
-                    idRegion: 0,
-                    idCity:0,
+                    id_region: 0,
+                    id_city:0,
                     kad_number: '',
-                    construct_object_year:0,
-                    exploit_object_year:0,
+                    year:0,
+                    exploit_year:0,
                     wear:0,
                     exist_pred_nadz_orgs:'',
                     osn_isp_zdan:'',
@@ -202,32 +202,33 @@
         watch:{
           getCities:function () {
 
-                this.formData.idCity = ''
+                this.formData.id_city = ''
           }
         },
         methods:{
             ...mapActions(['requestPageData','requestCity']),
             onSubmit(e){
                 e.preventDefault();
-                console.log(this.formData);
-                Axios.post('/program/object/create',{
-                    _csrf:this.csrf,
-                    ProgramObjects:this.formData,
+                let formData = new FormData();
+                formData.append('_csrf',this.csrf);
+                Object.keys(this.formData).forEach(item=>{
+                    formData.append(`ProgramObjects[${item}]`,this.formData[item]);
+                });
 
-                },{
+                Axios.post('/program/object/create',formData,{
                     headers:
                         {
                             'X-CSRF-Token':this.csrf,
                             'Content-Type':'application/x-www-form-urlencoded'
-                        }
-                }).then(response=>{console.log(response)}).catch(e=>console.error(e))
+                        },
+                }).then(response=>{if (response.data == 'ok') window.location.href = '/program/view';}).catch(e=>console.error(e))
             },
             onReset(){
-                this.formData.idRegion=0;
-                this.formData.idCity=0;
+                this.formData.id_region=0;
+                this.formData.id_city=0;
                 this.formData.kad_number= '';
-                this.formData.construct_object_year=0;
-                this.formData.exploit_object_year=0;
+                this.formData.year=0;
+                this.formData.exploit_year=0;
                 this.formData.wear=0;
                 this.formData.exist_pred_nadz_orgs= '';
                 this.formData.osn_isp_zdan= '';

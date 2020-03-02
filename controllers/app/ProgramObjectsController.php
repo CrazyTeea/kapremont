@@ -60,10 +60,10 @@ class ProgramObjectsController extends AppController
     {
 
         $model = new ProgramObjects();
-        if (Yii::$app->request->post()) {
-            echo "<pre>";
-            var_dump($model->load(Yii::$app->request->post()));
-            exit();
+        $model->id_org = Yii::$app->session->get('user')->id_org;
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->id_org and $model->save())
+                return 'ok';
         }
 
         return $this->render('create');
