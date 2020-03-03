@@ -11,8 +11,6 @@
             </div>
             <div class="row mt-3">
                 <div class="col-12">
-
-
                     <label for="name">Название объекта:</label>
                     <b-form-input id="name" name="name" v-model="formData.name"/>
                     <br>
@@ -185,7 +183,10 @@
                 return pattern.test(this.formData.kad_number);
             },
             con_year_validator(){
-                return this.formData.year.length===4
+                console.log(this.formData.year)
+                let pattern = /^[1-2][0-9]{1}\d{2}/;
+                return pattern.test(this.formData.year)
+                // return this.formData.year.length===4 && this.formData.year[0]===1
             },
             exp_year_validator(){
                 return this.formData.exploit_year.length===4
