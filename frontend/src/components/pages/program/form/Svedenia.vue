@@ -117,18 +117,16 @@ import Multiselect from 'vue-select';
         },
         computed: {
             rc_full() {
-                var sum = 0
-                for(var i=0; i <= this.sved.realization_cost.length-1; i++){
-                    sum = sum + parseInt(this.sved.realization_cost[i]);
+                this.tempSum = 0;
+                for(let key in this.sved.realization_cost){
+                    this.tempSum+= parseInt(this.sved.realization_cost[key]);
                 }
-                if(isNaN(sum)) {
-                    sum = 0
-                }
-                return sum
+                return this.tempSum
             }
         },
         data() {
             return {
+                tempSum:0,
                 options: ['Da', 'Net'],
                 fields: [
                     {key: 'stage', label: 'Этап'},

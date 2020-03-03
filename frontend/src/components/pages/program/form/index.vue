@@ -87,7 +87,7 @@
                            <b-icon-gear-wide-connected />
                            Сведения о планируемых мероприятиях</span>
                         </b-card-header>
-                        <b-collapse id="accordion-2" visible accordion="my-accordion" role="tabpanel">
+                        <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
                             <b-card-body>
                                 <v-svedenia />
                             </b-card-body>
@@ -99,9 +99,9 @@
                            <b-icon-gear-wide-connected />
                            Обоснование необходимости (целесообразности) планируемых мероприятий</span>
                         </b-card-header>
-                        <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
+                        <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel" visible>
                             <b-card-body>
-
+                                <v-necessary />
                             </b-card-body>
                         </b-collapse>
                     </b-card>
@@ -158,13 +158,15 @@
     import Multiselect from "vue-select";
     import {mapActions, mapGetters} from "vuex";
     import Svedenia from './Svedenia.vue';
+    import Necessary from './Necessary.vue';
 
     export default {
         name: "programForm",
         components:{
             "v-svedenia": Svedenia,
             "v-user-panel":userPanel,
-            "v-select2": Multiselect
+            "v-select2": Multiselect,
+            "v-necessary": Necessary
         },
         computed:{
             ...mapGetters(['getPageData','getCities']),

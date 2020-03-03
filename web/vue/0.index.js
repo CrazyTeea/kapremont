@@ -81,6 +81,164 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Necessary.vue?vue&type=script&lang=js&":
+/*!********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Necessary.vue?vue&type=script&lang=js& ***!
+  \********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var bootstrap_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap-vue */ "./node_modules/bootstrap-vue/esm/index.js");
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      dataSend: [],
+      nalichie: [],
+      material: [],
+      srok_eks: [],
+      kap_remont: [],
+      obosnovanie: [],
+      fields: [{
+        key: 'stroi_konstr',
+        label: 'Строительные конструкции замена и (или) восстановление которых планируются при капитальном ремонте'
+      }, {
+        key: 'nalichie',
+        label: 'Наличие на объекте'
+      }, {
+        key: 'material',
+        label: 'Материал конструкции'
+      }, {
+        key: 'srok_eks',
+        label: 'Срок эксплуатации с момента строительства или предыдущего капитального ремонта'
+      }, {
+        key: 'kap_remont',
+        label: 'Требуется капитальный ремонт'
+      }, {
+        key: 'obosnovanie',
+        label: 'Обоснование необходим'
+      }],
+      items: [{
+        stroi_konstr: 'Фундаменты',
+        label: 'Фундаменты'
+      }, {
+        stroi_konstr: 'Отмостка',
+        label: 'Необходимость выполнения'
+      }, {
+        stroi_konstr: 'Стены',
+        label: 'Дата начала',
+        tdClass: 'date'
+      }, {
+        stroi_konstr: 'Колонны',
+        label: 'Дата окончания',
+        tdClass: 'date'
+      }, {
+        stroi_konstr: 'Перегородки',
+        label: 'Стоимость реализации (тыс.руб)'
+      }, {
+        stroi_konstr: 'Крыша',
+        label: 'Сумма бюджетного финансирования на проведение кап.ремонта (тыс.руб)'
+      }, {
+        stroi_konstr: 'Кровля',
+        label: 'Софинансирование из внебюджетных источников (тыс.руб)'
+      }, {
+        stroi_konstr: 'Перекрытия',
+        label: 'Софинансирование из внебюджетных источников (тыс.руб)'
+      }, {
+        stroi_konstr: 'Полы',
+        label: 'Софинансирование из внебюджетных источников (тыс.руб)'
+      }, {
+        stroi_konstr: 'Окна',
+        label: 'Софинансирование из внебюджетных источников (тыс.руб)'
+      }, {
+        stroi_konstr: 'Двери',
+        label: 'Софинансирование из внебюджетных источников (тыс.руб)'
+      }, {
+        stroi_konstr: 'Ворота',
+        label: 'Софинансирование из внебюджетных источников (тыс.руб)'
+      }, {
+        stroi_konstr: 'Лестницы',
+        label: 'Софинансирование из внебюджетных источников (тыс.руб)'
+      }, {
+        stroi_konstr: 'Крыльца',
+        label: 'Софинансирование из внебюджетных источников (тыс.руб)'
+      }, {
+        stroi_konstr: 'Балконы/Лоджии',
+        label: 'Софинансирование из внебюджетных источников (тыс.руб)'
+      }, {
+        stroi_konstr: 'Внутренняя отделка',
+        label: 'Софинансирование из внебюджетных источников (тыс.руб)'
+      }, {
+        stroi_konstr: 'Наружняя отделка',
+        label: 'Софинансирование из внебюджетных источников (тыс.руб)'
+      }]
+    };
+  },
+  watch: {
+    nalichie: function nalichie() {
+      this.nalichie.forEach(function (element, index) {
+        console.log(element, index);
+      });
+    }
+  },
+  methods: {
+    returnData: function returnData(data) {
+      console.log(data);
+      console.log(this.material);
+    }
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=script&lang=js&":
 /*!*******************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Svedenia.vue?vue&type=script&lang=js& ***!
@@ -210,21 +368,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     rc_full: function rc_full() {
-      var sum = 0;
+      this.tempSum = 0;
 
-      for (var i = 0; i <= this.sved.realization_cost.length - 1; i++) {
-        sum = sum + parseInt(this.sved.realization_cost[i]);
+      for (var key in this.sved.realization_cost) {
+        this.tempSum += parseInt(this.sved.realization_cost[key]);
       }
 
-      if (isNaN(sum)) {
-        sum = 0;
-      }
-
-      return sum;
+      return this.tempSum;
     }
   },
   data: function data() {
     return {
+      tempSum: 0,
       options: ['Da', 'Net'],
       fields: [{
         key: 'stage',
@@ -375,6 +530,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _Svedenia_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Svedenia.vue */ "./src/components/pages/program/form/Svedenia.vue");
+/* harmony import */ var _Necessary_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Necessary.vue */ "./src/components/pages/program/form/Necessary.vue");
 
 //
 //
@@ -531,6 +687,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 
 
@@ -540,7 +697,8 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     "v-svedenia": _Svedenia_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
     "v-user-panel": _organisms__WEBPACK_IMPORTED_MODULE_1__["userPanel"],
-    "v-select2": vue_select__WEBPACK_IMPORTED_MODULE_2___default.a
+    "v-select2": vue_select__WEBPACK_IMPORTED_MODULE_2___default.a,
+    "v-necessary": _Necessary_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(['getPageData', 'getCities']), {
     kad_number_validator: function kad_number_validator() {
@@ -1173,6 +1331,202 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Necessary.vue?vue&type=template&id=250a4f6c&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Necessary.vue?vue&type=template&id=250a4f6c& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    [
+      _c("b-table", {
+        attrs: { bordered: "", fields: _vm.fields, items: _vm.items },
+        scopedSlots: _vm._u([
+          {
+            key: "cell(nalichie)",
+            fn: function(row) {
+              return [
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.nalichie[row.index],
+                      expression: "nalichie[row.index]"
+                    }
+                  ],
+                  attrs: { type: "checkbox" },
+                  domProps: {
+                    value: "check" + row.index,
+                    checked: Array.isArray(_vm.nalichie[row.index])
+                      ? _vm._i(_vm.nalichie[row.index], "check" + row.index) >
+                        -1
+                      : _vm.nalichie[row.index]
+                  },
+                  on: {
+                    change: function($event) {
+                      var $$a = _vm.nalichie[row.index],
+                        $$el = $event.target,
+                        $$c = $$el.checked ? true : false
+                      if (Array.isArray($$a)) {
+                        var $$v = "check" + row.index,
+                          $$i = _vm._i($$a, $$v)
+                        if ($$el.checked) {
+                          $$i < 0 &&
+                            _vm.$set(_vm.nalichie, row.index, $$a.concat([$$v]))
+                        } else {
+                          $$i > -1 &&
+                            _vm.$set(
+                              _vm.nalichie,
+                              row.index,
+                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                            )
+                        }
+                      } else {
+                        _vm.$set(_vm.nalichie, row.index, $$c)
+                      }
+                    }
+                  }
+                }),
+                _vm._v(" "),
+                _c(
+                  "label",
+                  {
+                    attrs: { for: "check" + row.index },
+                    on: {
+                      click: function($event) {
+                        return _vm.returnData(row)
+                      }
+                    }
+                  },
+                  [_vm._v(_vm._s(row.index))]
+                )
+              ]
+            }
+          },
+          {
+            key: "cell(material)",
+            fn: function(row) {
+              return [
+                _vm.nalichie[row.index]
+                  ? _c("b-form-input", {
+                      attrs: { placeholder: "Материалы", type: "text" },
+                      model: {
+                        value: _vm.material[row.index],
+                        callback: function($$v) {
+                          _vm.$set(_vm.material, row.index, $$v)
+                        },
+                        expression: "material[row.index]"
+                      }
+                    })
+                  : _vm._e()
+              ]
+            }
+          },
+          {
+            key: "cell(srok_eks)",
+            fn: function(row) {
+              return [
+                _vm.nalichie[row.index]
+                  ? _c("b-form-datepicker", {
+                      attrs: {
+                        "reset-button": "",
+                        "label-reset-button": "сбросить",
+                        size: "sm",
+                        placeholder: "дата"
+                      },
+                      model: {
+                        value: _vm.srok_eks[row.index],
+                        callback: function($$v) {
+                          _vm.$set(_vm.srok_eks, row.index, $$v)
+                        },
+                        expression: "srok_eks[row.index]"
+                      }
+                    })
+                  : _vm._e()
+              ]
+            }
+          },
+          {
+            key: "cell(kap_remont)",
+            fn: function(row) {
+              return [
+                _vm.nalichie[row.index]
+                  ? _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.kap_remont[row.index],
+                          expression: "kap_remont[row.index]"
+                        }
+                      ],
+                      attrs: { type: "checkbox" },
+                      domProps: {
+                        value: "rem" + row.index,
+                        checked: Array.isArray(_vm.kap_remont[row.index])
+                          ? _vm._i(
+                              _vm.kap_remont[row.index],
+                              "rem" + row.index
+                            ) > -1
+                          : _vm.kap_remont[row.index]
+                      },
+                      on: {
+                        change: function($event) {
+                          var $$a = _vm.kap_remont[row.index],
+                            $$el = $event.target,
+                            $$c = $$el.checked ? true : false
+                          if (Array.isArray($$a)) {
+                            var $$v = "rem" + row.index,
+                              $$i = _vm._i($$a, $$v)
+                            if ($$el.checked) {
+                              $$i < 0 &&
+                                _vm.$set(
+                                  _vm.kap_remont,
+                                  row.index,
+                                  $$a.concat([$$v])
+                                )
+                            } else {
+                              $$i > -1 &&
+                                _vm.$set(
+                                  _vm.kap_remont,
+                                  row.index,
+                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
+                                )
+                            }
+                          } else {
+                            _vm.$set(_vm.kap_remont, row.index, $$c)
+                          }
+                        }
+                      }
+                    })
+                  : _vm._e()
+              ]
+            }
+          }
+        ])
+      })
+    ],
+    1
+  )
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -2021,7 +2375,6 @@ var render = function() {
                       {
                         attrs: {
                           id: "accordion-2",
-                          visible: "",
                           accordion: "my-accordion",
                           role: "tabpanel"
                         }
@@ -2073,10 +2426,11 @@ var render = function() {
                         attrs: {
                           id: "accordion-3",
                           accordion: "my-accordion",
-                          role: "tabpanel"
+                          role: "tabpanel",
+                          visible: ""
                         }
                       },
-                      [_c("b-card-body")],
+                      [_c("b-card-body", [_c("v-necessary")], 1)],
                       1
                     )
                   ],
@@ -3037,6 +3391,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _error__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./error */ "./src/components/pages/error/index.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "errorPage", function() { return _error__WEBPACK_IMPORTED_MODULE_1__["errorPage"]; });
 
+
+
+
+/***/ }),
+
+/***/ "./src/components/pages/program/form/Necessary.vue":
+/*!*********************************************************!*\
+  !*** ./src/components/pages/program/form/Necessary.vue ***!
+  \*********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Necessary_vue_vue_type_template_id_250a4f6c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Necessary.vue?vue&type=template&id=250a4f6c& */ "./src/components/pages/program/form/Necessary.vue?vue&type=template&id=250a4f6c&");
+/* harmony import */ var _Necessary_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Necessary.vue?vue&type=script&lang=js& */ "./src/components/pages/program/form/Necessary.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _Necessary_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Necessary_vue_vue_type_template_id_250a4f6c___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Necessary_vue_vue_type_template_id_250a4f6c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "src/components/pages/program/form/Necessary.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./src/components/pages/program/form/Necessary.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************!*\
+  !*** ./src/components/pages/program/form/Necessary.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Necessary_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Necessary.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Necessary.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Necessary_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./src/components/pages/program/form/Necessary.vue?vue&type=template&id=250a4f6c&":
+/*!****************************************************************************************!*\
+  !*** ./src/components/pages/program/form/Necessary.vue?vue&type=template&id=250a4f6c& ***!
+  \****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Necessary_vue_vue_type_template_id_250a4f6c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Necessary.vue?vue&type=template&id=250a4f6c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Necessary.vue?vue&type=template&id=250a4f6c&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Necessary_vue_vue_type_template_id_250a4f6c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Necessary_vue_vue_type_template_id_250a4f6c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
