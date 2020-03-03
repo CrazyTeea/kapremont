@@ -55,7 +55,6 @@
                 </template>
                 <template v-slot:cell(kap_cost)="row">
                     <b-form-input
-                        @input="getKapSum()"
                         v-if="row.value" 
                         v-model="sved.kap_cost[row.index]" 
                         placeholder="Цена"
@@ -66,9 +65,8 @@
                 </template>
                 <template v-slot:cell(finanse)="row">
                     <b-form-input
-                        @input="getFinanseSum()"
                         v-if="row.value" 
-                        v-model="sved.finanse[row.index]" 
+                        :v-model="test(row.index)" 
                         placeholder="Цена"
                         min="0"
                         type="number"
@@ -112,7 +110,15 @@ import Multiselect from 'vue-select';
         components: {
             "v-select": Multiselect,    
         },
+        watch: {
+            masObj: function () {
+                console.log(this.masObj)
+            }
+        },
         computed: {
+            test(){
+                return index => this.masObj[index]?.finance // ? this.masObj[index].finanse : this.masObj[index]
+            },
             rc_full() {
                 var sum = 0;
                 for(let key in this.sved.realization_cost){
@@ -204,7 +210,7 @@ import Multiselect from 'vue-select';
                     realization_cost: [],
                     kap_cost: [],
                     finanse:[]
-                },
+                }, 
                 masObj: [
                     {
                         is_nessesary: true,

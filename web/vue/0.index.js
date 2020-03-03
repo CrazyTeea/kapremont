@@ -428,8 +428,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -437,7 +435,21 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     "v-select": vue_select__WEBPACK_IMPORTED_MODULE_1___default.a
   },
+  watch: {
+    masObj: function masObj() {
+      console.log(this.masObj);
+    }
+  },
   computed: {
+    test: function test() {
+      var _this = this;
+
+      return function (index) {
+        var _this$masObj$index;
+
+        return (_this$masObj$index = _this.masObj[index]) === null || _this$masObj$index === void 0 ? void 0 : _this$masObj$index.finance;
+      }; // ? this.masObj[index].finanse : this.masObj[index]
+    },
     rc_full: function rc_full() {
       var sum = 0;
 
@@ -1902,11 +1914,6 @@ var render = function() {
                 row.value
                   ? _c("b-form-input", {
                       attrs: { placeholder: "Цена", min: "0", type: "number" },
-                      on: {
-                        input: function($event) {
-                          return _vm.getKapSum()
-                        }
-                      },
                       model: {
                         value: _vm.sved.kap_cost[row.index],
                         callback: function($$v) {
@@ -1925,18 +1932,11 @@ var render = function() {
               return [
                 row.value
                   ? _c("b-form-input", {
-                      attrs: { placeholder: "Цена", min: "0", type: "number" },
-                      on: {
-                        input: function($event) {
-                          return _vm.getFinanseSum()
-                        }
-                      },
-                      model: {
-                        value: _vm.sved.finanse[row.index],
-                        callback: function($$v) {
-                          _vm.$set(_vm.sved.finanse, row.index, $$v)
-                        },
-                        expression: "sved.finanse[row.index]"
+                      attrs: {
+                        "v-model": _vm.test(row.index),
+                        placeholder: "Цена",
+                        min: "0",
+                        type: "number"
                       }
                     })
                   : _c("label", [_vm._v("-")])
