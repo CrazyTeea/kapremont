@@ -70,7 +70,7 @@ class ProgramObjectsController extends AppController
         $model->id_program = $program->id;
         $save = true;
         if ($model->load(Yii::$app->request->post())) {
-            $transaction = new Transaction();
+            $transaction = Yii::$app->getDb()->beginTransaction();
             $save &= $model->save();
             if ($save){
                 $transaction->commit();
