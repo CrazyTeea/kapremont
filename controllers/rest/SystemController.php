@@ -39,6 +39,7 @@ class SystemController extends RestController
                     ];
                     $id_org = Yii::$app->session->get('user')->id_org;
                     $program = Program::findOne(['id_org'=>$id_org]);
+                    Yii::$app->getSession()->set('program',$program);
                     if (!$program)
                         return null;
                     $ret['items'] = [
