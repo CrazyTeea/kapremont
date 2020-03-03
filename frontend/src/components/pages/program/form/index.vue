@@ -1,3 +1,4 @@
+<!--suppress ALL -->
 <template>
     <div class="program_object_form">
         <b-form id="object_form" @submit="onSubmit" @reset="onReset" method="post">
@@ -41,7 +42,8 @@
                                                :reduce="city => city.id"
                                                label="city"
                                                id="id_city"
-                                               name="id_city"/>
+                                               name="id_city"
+                                    />
                                     <label for="kad_number">Кадастровый номер:</label>
                                     <b-form-input id="kad_number" name="kud_number" :state="kad_number_validator" v-model="formData.kad_number"/>
                                     <label for="year">Год постройки здания:</label>
