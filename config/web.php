@@ -70,13 +70,17 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
-                '/program'=>'app/program',
-                '/'=>'app/program',
-                '/login'=>'site/login',
-                '/error/browser'=>'app/error/browser',
-                '/program/view'=>'app/development-programme',
-                '/program/object/create'=>'app/program-objects/create'
+                'program'=>'app/program',
+                ''=>'app/program',
+                'login'=>'site/login',
+                'error/browser'=>'app/error/browser',
+                'program/view'=>'app/development-programme',
+                'program/object/create'=>'app/program-objects/create',
+                'organization/info'=>'app/organization/info'
             ],
+        ],
+        'assetManager' => [
+            'appendTimestamp' => true,
         ],
 
     ],

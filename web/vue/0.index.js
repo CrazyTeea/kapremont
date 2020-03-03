@@ -81,6 +81,53 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/organization/info/index.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/organization/info/index.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _organisms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../organisms */ "./src/components/organisms/index.js");
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "OrgInfo",
+  components: {
+    userPanel: _organisms__WEBPACK_IMPORTED_MODULE_2__["userPanel"]
+  },
+  computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['getPageData'])),
+  methods: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['requestPageData'])),
+  mounted: function mounted() {
+    this.requestPageData({
+      pageName: "orgInfo"
+    });
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Necessary.vue?vue&type=script&lang=js&":
 /*!********************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Necessary.vue?vue&type=script&lang=js& ***!
@@ -524,13 +571,24 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
-/* harmony import */ var _organisms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../organisms */ "./src/components/organisms/index.js");
-/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
-/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _Svedenia_vue__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./Svedenia.vue */ "./src/components/pages/program/form/Svedenia.vue");
-/* harmony import */ var _Necessary_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Necessary.vue */ "./src/components/pages/program/form/Necessary.vue");
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
+/* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
+/* harmony import */ var _organisms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../organisms */ "./src/components/organisms/index.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _Svedenia_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Svedenia.vue */ "./src/components/pages/program/form/Svedenia.vue");
+/* harmony import */ var _Necessary_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Necessary.vue */ "./src/components/pages/program/form/Necessary.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_9__);
+
+
+
 
 //
 //
@@ -687,6 +745,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 
@@ -695,21 +762,21 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "programForm",
   components: {
-    "v-svedenia": _Svedenia_vue__WEBPACK_IMPORTED_MODULE_4__["default"],
-    "v-user-panel": _organisms__WEBPACK_IMPORTED_MODULE_1__["userPanel"],
-    "v-select2": vue_select__WEBPACK_IMPORTED_MODULE_2___default.a,
-    "v-necessary": _Necessary_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+    "v-svedenia": _Svedenia_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+    "v-user-panel": _organisms__WEBPACK_IMPORTED_MODULE_4__["userPanel"],
+    "v-select2": vue_select__WEBPACK_IMPORTED_MODULE_5___default.a,
+    "v-necessary": _Necessary_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
   },
-  computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapGetters"])(['getPageData', 'getCities']), {
+  computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_6__["mapGetters"])(['getPageData', 'getCities']), {
     kad_number_validator: function kad_number_validator() {
       var pattern = /\d+:\d+:\d+:\d+/;
       return pattern.test(this.formData.kad_number);
     },
     con_year_validator: function con_year_validator() {
-      return this.formData.construct_object_year.length === 4;
+      return this.formData.year.length === 4;
     },
     exp_year_validator: function exp_year_validator() {
-      return this.formData.exploit_object_year.length === 4;
+      return this.formData.exploit_year.length === 4;
     },
     wear_validator: function wear_validator() {
       return this.formData.wear >= 0 && this.formData.wear <= 100;
@@ -717,12 +784,14 @@ __webpack_require__.r(__webpack_exports__);
   }),
   data: function data() {
     return {
+      csrf: document.getElementsByName('csrf-token')[0].content,
       formData: {
-        idRegion: 0,
-        idCity: 0,
+        name: '',
+        id_region: 0,
+        id_city: 0,
         kad_number: '',
-        construct_object_year: 0,
-        exploit_object_year: 0,
+        year: 0,
+        exploit_year: 0,
         wear: 0,
         exist_pred_nadz_orgs: '',
         osn_isp_zdan: '',
@@ -739,20 +808,36 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     getCities: function getCities() {
-      this.formData.idCity = '';
+      this.formData.id_city = '';
     }
   },
-  methods: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_3__["mapActions"])(['requestPageData', 'requestCity']), {
+  methods: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_6__["mapActions"])(['requestPageData', 'requestCity']), {
     onSubmit: function onSubmit(e) {
-      // e.preventDefault();
-      alert(JSON.stringify(this.formData));
+      var _this = this;
+
+      e.preventDefault();
+      var formData = new FormData();
+      formData.append('_csrf', this.csrf);
+      Object.keys(this.formData).forEach(function (item) {
+        formData.append("ProgramObjects[".concat(item, "]"), _this.formData[item]);
+      });
+      axios__WEBPACK_IMPORTED_MODULE_9___default.a.post('/program/object/create', formData, {
+        headers: {
+          'X-CSRF-Token': this.csrf,
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }).then(function (response) {
+        if (response.data == 'ok') window.location.href = '/program/view';
+      }).catch(function (e) {
+        return console.error(e);
+      });
     },
     onReset: function onReset() {
-      this.formData.idRegion = 0;
-      this.formData.idCity = 0;
+      this.formData.id_region = 0;
+      this.formData.id_city = 0;
       this.formData.kad_number = '';
-      this.formData.construct_object_year = 0;
-      this.formData.exploit_object_year = 0;
+      this.formData.year = 0;
+      this.formData.exploit_year = 0;
       this.formData.wear = 0;
       this.formData.exist_pred_nadz_orgs = '';
       this.formData.osn_isp_zdan = '';
@@ -862,6 +947,13 @@ __webpack_require__.r(__webpack_exports__);
       return [];
     }
   }),
+  watch: {
+    getUser: function getUser() {
+      this.requestOrg({
+        id: this.getUser.organization.id
+      });
+    }
+  },
   methods: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])(['requestProgram', 'requestOrg', 'requestPageData'])),
   components: {
     "v-userPanel": _organisms__WEBPACK_IMPORTED_MODULE_1__["userPanel"]
@@ -870,8 +962,6 @@ __webpack_require__.r(__webpack_exports__);
     this.requestPageData({
       pageName: "main"
     }); //this.requestProgram();
-
-    this.requestOrg();
   }
 });
 
@@ -890,6 +980,43 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _organisms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../organisms */ "./src/components/organisms/index.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -1027,6 +1154,7 @@ __webpack_require__.r(__webpack_exports__);
     this.requestPageData({
       pageName: "programView"
     });
+    this.$bvModal.show('modal-1');
   }
 });
 
@@ -1331,6 +1459,53 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/pages/organization/info/index.vue?vue&type=template&id=9c789f3c&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/organization/info/index.vue?vue&type=template&id=9c789f3c&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { attrs: { id: "org_info" } }, [
+    _c("div", { staticClass: "container" }, [
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col-6" },
+          [
+            _c("b-table", {
+              staticClass: "text-center",
+              attrs: {
+                small: "",
+                bordered: "",
+                fields: _vm.getPageData.fields,
+                items: _vm.getPageData.items
+              }
+            })
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-3 offset-3" }, [_c("user-panel")], 1)
+      ])
+    ])
+  ])
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -1811,7 +1986,7 @@ var render = function() {
       _c(
         "b-form",
         {
-          attrs: { method: "post" },
+          attrs: { id: "object_form", method: "post" },
           on: { submit: _vm.onSubmit, reset: _vm.onReset }
         },
         [
@@ -1820,18 +1995,18 @@ var render = function() {
               {
                 name: "model",
                 rawName: "v-model",
-                value: _vm.getPageData._csrf,
-                expression: "getPageData._csrf"
+                value: _vm.csrf,
+                expression: "csrf"
               }
             ],
             attrs: { id: "hidden", name: "_csrf", type: "hidden" },
-            domProps: { value: _vm.getPageData._csrf },
+            domProps: { value: _vm.csrf },
             on: {
               input: function($event) {
                 if ($event.target.composing) {
                   return
                 }
-                _vm.$set(_vm.getPageData, "_csrf", $event.target.value)
+                _vm.csrf = $event.target.value
               }
             }
           }),
@@ -1845,6 +2020,23 @@ var render = function() {
               "div",
               { staticClass: "col-12" },
               [
+                _c("label", { attrs: { for: "name" } }, [
+                  _vm._v("Название объекта:")
+                ]),
+                _vm._v(" "),
+                _c("b-form-input", {
+                  attrs: { id: "name", name: "name" },
+                  model: {
+                    value: _vm.formData.name,
+                    callback: function($$v) {
+                      _vm.$set(_vm.formData, "name", $$v)
+                    },
+                    expression: "formData.name"
+                  }
+                }),
+                _vm._v(" "),
+                _c("br"),
+                _vm._v(" "),
                 _c(
                   "b-card",
                   { staticClass: "mb-1", attrs: { "no-body": "" } },
@@ -1910,12 +2102,12 @@ var render = function() {
                                     },
                                     label: "type",
                                     id: "type",
-                                    name: "idRegion"
+                                    name: "id_region"
                                   },
                                   on: {
                                     input: function($event) {
                                       return _vm.onChangeRegion({
-                                        id: _vm.formData.idRegion
+                                        id: _vm.formData.id_region
                                       })
                                     }
                                   },
@@ -1928,7 +2120,7 @@ var render = function() {
                                   }
                                 }),
                                 _vm._v(" "),
-                                _c("label", { attrs: { for: "idRegion" } }, [
+                                _c("label", { attrs: { for: "id_region" } }, [
                                   _vm._v("Субъект РФ:")
                                 ]),
                                 _vm._v(" "),
@@ -1939,26 +2131,26 @@ var render = function() {
                                       return region.id
                                     },
                                     label: "region",
-                                    id: "idRegion",
-                                    name: "idRegion"
+                                    id: "id_region",
+                                    name: "id_region"
                                   },
                                   on: {
                                     input: function($event) {
                                       return _vm.onChangeRegion({
-                                        id: _vm.formData.idRegion
+                                        id: _vm.formData.id_region
                                       })
                                     }
                                   },
                                   model: {
-                                    value: _vm.formData.idRegion,
+                                    value: _vm.formData.id_region,
                                     callback: function($$v) {
-                                      _vm.$set(_vm.formData, "idRegion", $$v)
+                                      _vm.$set(_vm.formData, "id_region", $$v)
                                     },
-                                    expression: "formData.idRegion"
+                                    expression: "formData.id_region"
                                   }
                                 }),
                                 _vm._v(" "),
-                                _c("label", { attrs: { for: "idCity" } }, [
+                                _c("label", { attrs: { for: "id_city" } }, [
                                   _vm._v("Город:")
                                 ]),
                                 _vm._v(" "),
@@ -1969,15 +2161,15 @@ var render = function() {
                                       return city.id
                                     },
                                     label: "city",
-                                    id: "idCity",
-                                    name: "idCity"
+                                    id: "id_city",
+                                    name: "id_city"
                                   },
                                   model: {
-                                    value: _vm.formData.idCity,
+                                    value: _vm.formData.id_city,
                                     callback: function($$v) {
-                                      _vm.$set(_vm.formData, "idCity", $$v)
+                                      _vm.$set(_vm.formData, "id_city", $$v)
                                     },
-                                    expression: "formData.idCity"
+                                    expression: "formData.id_city"
                                   }
                                 }),
                                 _vm._v(" "),
@@ -2000,55 +2192,49 @@ var render = function() {
                                   }
                                 }),
                                 _vm._v(" "),
-                                _c(
-                                  "label",
-                                  { attrs: { for: "construct_object_year" } },
-                                  [_vm._v("Год постройки здания:")]
-                                ),
+                                _c("label", { attrs: { for: "year" } }, [
+                                  _vm._v("Год постройки здания:")
+                                ]),
                                 _vm._v(" "),
                                 _c("b-form-input", {
                                   attrs: {
-                                    id: "construct_object_year",
-                                    name: "construct_object_year",
+                                    id: "year",
+                                    name: "year",
                                     state: _vm.con_year_validator,
                                     type: "number"
                                   },
                                   model: {
-                                    value: _vm.formData.construct_object_year,
+                                    value: _vm.formData.year,
                                     callback: function($$v) {
-                                      _vm.$set(
-                                        _vm.formData,
-                                        "construct_object_year",
-                                        $$v
-                                      )
+                                      _vm.$set(_vm.formData, "year", $$v)
                                     },
-                                    expression: "formData.construct_object_year"
+                                    expression: "formData.year"
                                   }
                                 }),
                                 _vm._v(" "),
                                 _c(
                                   "label",
-                                  { attrs: { for: "exploit_object_year" } },
+                                  { attrs: { for: "exploit_year" } },
                                   [_vm._v("Год ввода здания в эксплуатацию:")]
                                 ),
                                 _vm._v(" "),
                                 _c("b-form-input", {
                                   attrs: {
-                                    id: "exploit_object_year",
-                                    name: "exploit_object_year",
+                                    id: "exploit_year",
+                                    name: "exploit_year",
                                     state: _vm.exp_year_validator,
                                     type: "number"
                                   },
                                   model: {
-                                    value: _vm.formData.exploit_object_year,
+                                    value: _vm.formData.exploit_year,
                                     callback: function($$v) {
                                       _vm.$set(
                                         _vm.formData,
-                                        "exploit_object_year",
+                                        "exploit_year",
                                         $$v
                                       )
                                     },
-                                    expression: "formData.exploit_object_year"
+                                    expression: "formData.exploit_year"
                                   }
                                 }),
                                 _vm._v(" "),
@@ -2725,15 +2911,15 @@ var render = function() {
             {
               name: "show",
               rawName: "v-show",
-              value: _vm.getUser.isAdmin,
-              expression: "getUser.isAdmin"
+              value: _vm.getUser.isAdmin && _vm.getPageData,
+              expression: "getUser.isAdmin && getPageData"
             }
           ],
-          staticClass: "col-6 offset-4"
+          staticClass: "col-6 offset-3"
         },
         [
           _c("b-button", { attrs: { href: "program/view" } }, [
-            _vm._v("Программа развития")
+            _vm._v("Заполнить программу развития")
           ])
         ],
         1
@@ -2763,316 +2949,193 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { attrs: { id: "dev_programme" } }, [
-    _c("div", { staticClass: "row" }, [
+  return _c(
+    "div",
+    { attrs: { id: "dev_programme" } },
+    [
       _c(
-        "div",
-        { staticClass: "col-6" },
+        "b-modal",
+        { attrs: { centered: "", id: "modal-1", title: "Внимание" } },
         [
-          _c("b-table", {
-            attrs: {
-              fields: [
-                { key: "id", label: "№" },
-                { key: "label", label: "Показатель" },
-                { key: "value", label: "Значение" }
-              ],
-              items: [
-                {
-                  id: "1",
-                  label: "Полное наименование организации",
-                  value:
-                    _vm.getUser &&
-                    _vm.getUser.organization &&
-                    _vm.getUser.organization.name
-                },
-                {
-                  id: "2",
-                  label: "Сокращенное наименование организации",
-                  value:
-                    _vm.getUser &&
-                    _vm.getUser.organization &&
-                    _vm.getUser.organization.short_name
-                }
-              ],
-              small: "",
-              bordered: ""
-            }
-          }),
-          _vm._v(" "),
-          _c(
-            "b-button",
-            { staticClass: "btn btn-sm", staticStyle: { float: "right" } },
-            [_vm._v("Подробнее")]
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-4 offset-2" }, [_c("v-user-panel")], 1)
-    ]),
-    _vm._v(" "),
-    _c("br"),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c(
-        "div",
-        { staticClass: "col-6" },
-        [
-          _c("b-button", { attrs: { href: "object/create" } }, [
-            _vm._v("Добавить объект кап. ремонта")
-          ]),
-          _vm._v(" "),
-          _c("b-button", [_vm._v("Добавить мероприятия по АТЗ")])
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-6" })
-    ]),
-    _vm._v(" "),
-    _c("br"),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c(
-        "div",
-        { staticClass: "col-12" },
-        [
-          _c(
-            "b-card",
-            { staticClass: "mb-1", attrs: { "no-body": "" } },
-            [
-              _c(
-                "b-card-header",
-                {
-                  staticClass: "p-1",
-                  attrs: { "header-tag": "header", role: "tab" }
-                },
-                [
-                  _c(
-                    "span",
-                    {
-                      directives: [
-                        {
-                          name: "b-toggle",
-                          rawName: "v-b-toggle.accordion-1",
-                          modifiers: { "accordion-1": true }
-                        }
-                      ],
-                      staticClass: "toggle_button"
-                    },
-                    [
-                      _c("b-icon-gear-wide-connected"),
-                      _vm._v("\n                   Объекты")
-                    ],
-                    1
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "b-collapse",
-                {
-                  attrs: {
-                    id: "accordion-1",
-                    visible: "",
-                    accordion: "my-accordion",
-                    role: "tabpanel"
-                  }
-                },
-                [
-                  _c(
-                    "b-card-body",
-                    [
-                      _c("b-table", {
-                        staticClass: "text-center",
-                        attrs: {
-                          items: _vm.objects && _vm.objects.items,
-                          fields: _vm.objects && _vm.objects.fields,
-                          small: "",
-                          bordered: ""
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "b-card",
-            { staticClass: "mb-1", attrs: { "no-body": "" } },
-            [
-              _c(
-                "b-card-header",
-                {
-                  staticClass: "p-1",
-                  attrs: { "header-tag": "header", role: "tab" }
-                },
-                [
-                  _c(
-                    "span",
-                    {
-                      directives: [
-                        {
-                          name: "b-toggle",
-                          rawName: "v-b-toggle.accordion-2",
-                          modifiers: { "accordion-2": true }
-                        }
-                      ],
-                      staticClass: "toggle_button"
-                    },
-                    [
-                      _c("b-icon-gear-wide-connected"),
-                      _vm._v(
-                        "\n                   Цели и задачи реализации программы"
-                      )
-                    ],
-                    1
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "b-collapse",
-                {
-                  attrs: {
-                    id: "accordion-2",
-                    accordion: "my-accordion",
-                    role: "tabpanel"
-                  }
-                },
-                [
-                  _c(
-                    "b-card-body",
-                    [
-                      _c("b-table", {
-                        staticClass: "text-center",
-                        attrs: {
-                          items: _vm.target && _vm.target.items,
-                          fields: _vm.target && _vm.target.fields,
-                          small: "",
-                          bordered: ""
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "b-card",
-            { staticClass: "mb-1", attrs: { "no-body": "" } },
-            [
-              _c(
-                "b-card-header",
-                {
-                  staticClass: "p-1",
-                  attrs: { "header-tag": "header", role: "tab" }
-                },
-                [
-                  _c(
-                    "span",
-                    {
-                      directives: [
-                        {
-                          name: "b-toggle",
-                          rawName: "v-b-toggle.accordion-3",
-                          modifiers: { "accordion-3": true }
-                        }
-                      ],
-                      staticClass: "toggle_button"
-                    },
-                    [
-                      _c("b-icon-gear-wide-connected"),
-                      _vm._v(
-                        "\n                   Потребность в бюджетных ассигнованиях на проведение кап. ремонта приоритетных объектов"
-                      )
-                    ],
-                    1
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "b-collapse",
-                {
-                  attrs: {
-                    id: "accordion-3",
-                    accordion: "my-accordion",
-                    role: "tabpanel"
-                  }
-                },
-                [
-                  _c(
-                    "b-card-body",
-                    [
-                      _c("b-card-text", [_vm._v("Приоритетные объекты")]),
-                      _vm._v(" "),
-                      _c("b-table", {
-                        staticClass: "text-center",
-                        attrs: {
-                          items:
-                            _vm.priorityObjects && _vm.priorityObjects.items,
-                          fields: _vm.fieldsObjects && _vm.fieldsObjects.fields,
-                          small: "",
-                          bordered: ""
-                        }
-                      }),
-                      _vm._v(" "),
-                      _c("b-card-text", [_vm._v("Резервные объекты")]),
-                      _vm._v(" "),
-                      _c("b-table", {
-                        staticClass: "text-center",
-                        attrs: {
-                          items:
-                            _vm.reservedObjects && _vm.reservedObjects.items,
-                          fields: _vm.fieldsObjects && _vm.fieldsObjects.fields,
-                          small: "",
-                          bordered: ""
-                        }
-                      })
-                    ],
-                    1
-                  )
-                ],
-                1
-              )
-            ],
-            1
-          )
-        ],
-        1
-      )
-    ]),
-    _vm._v(" "),
-    _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-6" }),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "col-6 offset-8" },
-        [
-          _c("b-button", { staticClass: "btn btn-sm" }, [
-            _vm._v("Выгрузить программу")
-          ]),
-          _vm._v(" "),
-          _c("b-button", { staticClass: "btn btn-sm" }, [
-            _vm._v("Отправить на согласование")
+          _c("p", { staticClass: "my-4" }, [
+            _vm._v(
+              "\n            Уважаемые пользователи!\n            В модуле «Модернизация инфраструктуры» Вы можете ознакомиться с информацией об объёме средств субсидии и начать заполнение программы модернизации инфраструктуры.\n            На данный момент в модуле реализована возможность создания карточки объекта капитального строительства и заполнения вкладки «характеристика объекта».\n            Остальные вкладки будут доступны с 4 марта 2020 года.\n            Возможность загрузки документов в систему будет предоставлена с 5 марта 2020 года.\n            Выгрузка данных из системы в печатную форму «Программы развития» для согласования с председателем совета обучающихся и утверждения руководителем образовательной организации будет доступна с 10 марта 2020 года."
+            )
           ])
+        ]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col-6" },
+          [
+            _c("b-table", {
+              attrs: {
+                fields: [
+                  { key: "id", label: "№" },
+                  { key: "label", label: "Показатель" },
+                  { key: "value", label: "Значение" }
+                ],
+                items: [
+                  {
+                    id: "1",
+                    label: "Полное наименование организации",
+                    value:
+                      _vm.getUser &&
+                      _vm.getUser.organization &&
+                      _vm.getUser.organization.name
+                  },
+                  {
+                    id: "2",
+                    label: "Сокращенное наименование организации",
+                    value:
+                      _vm.getUser &&
+                      _vm.getUser.organization &&
+                      _vm.getUser.organization.short_name
+                  }
+                ],
+                small: "",
+                bordered: ""
+              }
+            }),
+            _vm._v(" "),
+            _c(
+              "b-button",
+              {
+                staticClass: "btn btn-sm",
+                staticStyle: { float: "right" },
+                attrs: { href: "/organization/info" }
+              },
+              [_vm._v("Подробнее")]
+            )
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-4 offset-2" }, [_c("v-user-panel")], 1)
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c(
+          "div",
+          { staticClass: "col-6" },
+          [
+            _c(
+              "b-button",
+              { attrs: { variant: "info", href: "object/create" } },
+              [_vm._v("Добавить объект кап. ремонта")]
+            ),
+            _vm._v(" "),
+            _c("b-button", { attrs: { disabled: "" } }, [
+              _vm._v("Добавить мероприятия по АТЗ")
+            ])
+          ],
+          1
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-6" })
+      ]),
+      _vm._v(" "),
+      _c("br"),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "row" },
+        [
+          _c(
+            "b-card",
+            { attrs: { "no-body": "" } },
+            [
+              _c(
+                "b-card-header",
+                {
+                  staticClass: "p-1",
+                  attrs: { "header-tag": "header", role: "tab" }
+                },
+                [
+                  _c(
+                    "span",
+                    [
+                      _c("b-icon-gear-wide-connected"),
+                      _vm._v(
+                        "\n                       Объекты требующие капитального ремонта"
+                      )
+                    ],
+                    1
+                  )
+                ]
+              ),
+              _vm._v(" "),
+              _c(
+                "b-card-body",
+                [
+                  _c("b-card-text", [_vm._v("Приоритетные объекты")]),
+                  _vm._v(" "),
+                  _c("b-table", {
+                    staticClass: "text-center",
+                    attrs: {
+                      items: _vm.priorityObjects && _vm.priorityObjects.items,
+                      fields: _vm.fieldsObjects && _vm.fieldsObjects.fields,
+                      small: "",
+                      bordered: ""
+                    }
+                  }),
+                  _vm._v(" "),
+                  _c("b-card-text", [_vm._v("Резервные объекты")]),
+                  _vm._v(" "),
+                  _c("b-table", {
+                    staticClass: "text-center",
+                    attrs: {
+                      items: _vm.reservedObjects && _vm.reservedObjects.items,
+                      fields: _vm.fieldsObjects && _vm.fieldsObjects.fields,
+                      small: "",
+                      bordered: ""
+                    }
+                  })
+                ],
+                1
+              )
+            ],
+            1
+          )
         ],
         1
-      )
-    ])
-  ])
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-6" }),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "col-6 offset-7" },
+          [
+            _c(
+              "b-button",
+              { staticClass: "btn btn-sm", attrs: { disabled: "" } },
+              [_vm._v("Выгрузить программу")]
+            ),
+            _vm._v(" "),
+            _c(
+              "b-button",
+              { staticClass: "btn btn-sm", attrs: { disabled: "" } },
+              [_vm._v("Загрузить PDF")]
+            ),
+            _vm._v(" "),
+            _c(
+              "b-button",
+              { staticClass: "btn btn-sm", attrs: { disabled: "" } },
+              [_vm._v("Отправить на согласование")]
+            )
+          ],
+          1
+        )
+      ])
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -3376,7 +3439,7 @@ __webpack_require__.r(__webpack_exports__);
 /*!***************************************!*\
   !*** ./src/components/pages/index.js ***!
   \***************************************/
-/*! exports provided: mainPage, devView, form, errorPage */
+/*! exports provided: mainPage, devView, form, errorPage, orgInfo */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -3391,6 +3454,96 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _error__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./error */ "./src/components/pages/error/index.js");
 /* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "errorPage", function() { return _error__WEBPACK_IMPORTED_MODULE_1__["errorPage"]; });
 
+/* harmony import */ var _organization__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./organization */ "./src/components/pages/organization/index.js");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "orgInfo", function() { return _organization__WEBPACK_IMPORTED_MODULE_2__["orgInfo"]; });
+
+
+
+
+
+/***/ }),
+
+/***/ "./src/components/pages/organization/index.js":
+/*!****************************************************!*\
+  !*** ./src/components/pages/organization/index.js ***!
+  \****************************************************/
+/*! exports provided: orgInfo */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _info_index_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./info/index.vue */ "./src/components/pages/organization/info/index.vue");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "orgInfo", function() { return _info_index_vue__WEBPACK_IMPORTED_MODULE_0__["default"]; });
+
+
+
+
+/***/ }),
+
+/***/ "./src/components/pages/organization/info/index.vue":
+/*!**********************************************************!*\
+  !*** ./src/components/pages/organization/info/index.vue ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _index_vue_vue_type_template_id_9c789f3c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./index.vue?vue&type=template&id=9c789f3c&scoped=true& */ "./src/components/pages/organization/info/index.vue?vue&type=template&id=9c789f3c&scoped=true&");
+/* harmony import */ var _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./index.vue?vue&type=script&lang=js& */ "./src/components/pages/organization/info/index.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _index_vue_vue_type_template_id_9c789f3c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _index_vue_vue_type_template_id_9c789f3c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "9c789f3c",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "src/components/pages/organization/info/index.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./src/components/pages/organization/info/index.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./src/components/pages/organization/info/index.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib!../../../../../node_modules/vue-loader/lib??vue-loader-options!./index.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/organization/info/index.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./src/components/pages/organization/info/index.vue?vue&type=template&id=9c789f3c&scoped=true&":
+/*!*****************************************************************************************************!*\
+  !*** ./src/components/pages/organization/info/index.vue?vue&type=template&id=9c789f3c&scoped=true& ***!
+  \*****************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_9c789f3c_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./index.vue?vue&type=template&id=9c789f3c&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/pages/organization/info/index.vue?vue&type=template&id=9c789f3c&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_9c789f3c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_index_vue_vue_type_template_id_9c789f3c_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

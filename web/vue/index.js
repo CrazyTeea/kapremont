@@ -62330,6 +62330,7 @@ __webpack_require__.r(__webpack_exports__);
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var routes = [{
   path: '/',
+  number: 0,
   component: function component() {
     return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(0)]).then(__webpack_require__.bind(null, /*! ./components/pages */ "./src/components/pages/index.js")).then(function (module) {
       return module.mainPage;
@@ -62337,6 +62338,7 @@ var routes = [{
   }
 }, {
   path: '/program',
+  number: 1,
   component: function component() {
     return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(0)]).then(__webpack_require__.bind(null, /*! ./components/pages */ "./src/components/pages/index.js")).then(function (module) {
       return module.mainPage;
@@ -62344,6 +62346,7 @@ var routes = [{
   }
 }, {
   path: '/program/view',
+  number: 2,
   component: function component() {
     return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(0)]).then(__webpack_require__.bind(null, /*! ./components/pages */ "./src/components/pages/index.js")).then(function (module) {
       return module.devView;
@@ -62351,6 +62354,7 @@ var routes = [{
   }
 }, {
   path: '/program/object/create',
+  number: 3,
   component: function component() {
     return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(0)]).then(__webpack_require__.bind(null, /*! ./components/pages */ "./src/components/pages/index.js")).then(function (module) {
       return module.form;
@@ -62358,14 +62362,25 @@ var routes = [{
   }
 }, {
   path: '/program/object/update/:id',
+  number: 4,
   component: function component() {
     return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(0)]).then(__webpack_require__.bind(null, /*! ./components/pages */ "./src/components/pages/index.js")).then(function (module) {
       return module.form;
     });
   }
 }, {
+  path: '/organization/info',
+  name: 'orgInfo',
+  number: 5,
+  component: function component() {
+    return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(0)]).then(__webpack_require__.bind(null, /*! ./components/pages */ "./src/components/pages/index.js")).then(function (module) {
+      return module.orgInfo;
+    });
+  }
+}, {
   path: '/error/browser',
   name: 'error',
+  number: 6,
   component: function component() {
     return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(0)]).then(__webpack_require__.bind(null, /*! ./components/pages */ "./src/components/pages/index.js")).then(function (module) {
       return module.errorPage;
@@ -62413,17 +62428,18 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
         console.error(error);
       });
     },
-    requestOrg: function requestOrg(ctx) {
+    requestOrg: function requestOrg(ctx, _ref) {
+      var id = _ref.id;
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/rest/organizations/by-id', {
-        id: this.getUser().organization.id
+        id: id
       }).then(function (response) {
         ctx.commit('updateOrg', response.data);
       }).catch(function (error) {
         console.error(error);
       });
     },
-    requestPageData: function requestPageData(ctx, _ref) {
-      var pageName = _ref.pageName;
+    requestPageData: function requestPageData(ctx, _ref2) {
+      var pageName = _ref2.pageName;
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/rest/system/get-page', {
         params: {
           pageName: pageName //id_org:document.getElementById('global_id_org').value
@@ -62435,8 +62451,8 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
         console.error(err);
       });
     },
-    requestCity: function requestCity(ctx, _ref2) {
-      var id = _ref2.id;
+    requestCity: function requestCity(ctx, _ref3) {
+      var id = _ref3.id;
       axios__WEBPACK_IMPORTED_MODULE_2___default.a.get('/rest/cities/by-id', {
         params: {
           id: id

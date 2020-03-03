@@ -34,8 +34,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6 offset-4" v-show="getUser.isAdmin">
-                    <b-button href="program/view">Программа развития</b-button>
+                <div class="col-6 offset-3" v-show="getUser.isAdmin && getPageData">
+                    <b-button href="program/view">Заполнить программу развития</b-button>
                 </div>
             </div>
         </div>
@@ -72,6 +72,11 @@
             }
 
         },
+        watch:{
+          getUser:function () {
+              this.requestOrg({id:this.getUser.organization.id});
+          }
+        },
         methods:{
             ...mapActions(['requestProgram','requestOrg','requestPageData'])
         },
@@ -81,7 +86,7 @@
         mounted() {
             this.requestPageData({pageName:"main"});
             //this.requestProgram();
-            this.requestOrg();
+
 
         }
     }
