@@ -5,6 +5,9 @@
             <input id="hidden" name="_csrf" v-model="csrf" type='hidden' />
             <div class="row">
                 <div class="col-6">
+                    <label for="name">Название объекта:</label>
+                    <b-form-input id="name" name="name" v-model="formData.name"/>
+                    <br>
                     <b-card no-body class="mb-1">
                         <b-card-header header-tag="header" class="p-1" role="tab">
                        <span class="toggle_button" v-b-toggle.accordion-1>
@@ -182,6 +185,7 @@
             return {
                 csrf: document.getElementsByName('csrf-token')[0].content,
                 formData: {
+                    name:'',
                     id_region: 0,
                     id_city:0,
                     kad_number: '',
@@ -223,7 +227,11 @@
                             'X-CSRF-Token':this.csrf,
                             'Content-Type':'application/x-www-form-urlencoded'
                         },
-                }).then(response=>{if (response.data == 'ok') window.location.href = '/program/view';}).catch(e=>console.error(e))
+                }).then(response=>
+                {
+                    if (response.data == 'ok')
+                        window.location.href = '/program/view';
+                }).catch(e=>console.error(e))
             },
             onReset(){
                 this.formData.id_region=0;

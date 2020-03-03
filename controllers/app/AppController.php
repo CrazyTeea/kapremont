@@ -9,7 +9,6 @@ class AppController extends \yii\web\Controller
         public function __construct($id, $module, $config = [])
         {
             parent::__construct($id, $module, $config);
-            $this->layout = 'rest';
             if (!Yii::$app->getUser()->getIsGuest()){
                 Yii::$app->getSession()->set('cans',[
                     Yii::$app->getUser()->can('root'),

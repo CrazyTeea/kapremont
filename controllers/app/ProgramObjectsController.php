@@ -6,6 +6,8 @@ use Yii;
 use app\models\ProgramObjects;
 use app\models\ProgramObjectsSearch;
 use app\controllers\app\AppController;
+use yii\db\Transaction;
+use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -55,15 +57,29 @@ class ProgramObjectsController extends AppController
      * Creates a new ProgramObjects model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
+     * @throws \yii\db\Exception
      */
     public function actionCreate()
     {
 
         $model = new ProgramObjects();
         $model->id_org = Yii::$app->session->get('user')->id_org;
+        $program = Yii::$app->session->get('program');
+        if (!$program)
+            $this->redirect(['/']);
+        $model->id_program = $program->id;
+        $save = false;
         if ($model->load(Yii::$app->request->post())) {
-            if ($model->id_org and $model->save())
+            $transaction = new Transaction();
+            $save &= $model->save();
+            if ($save){
+                $transaction->commit();
                 return 'ok';
+            }
+            else {
+                $transaction->rollBack();
+                return Json::encode($model->getErrors());
+            }
         }
 
         return $this->render('create');
