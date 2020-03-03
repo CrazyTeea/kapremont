@@ -18,7 +18,7 @@
                             {id:0,type:'Да'},
                             {id:1,type:'Нет'}
                         ]"
-                        :reduce = "type => type.type"
+                        :reduce = "type => type.id"
                     />
                 </template>
 
@@ -205,6 +205,16 @@ import Multiselect from 'vue-select';
                     kap_cost: [],
                     finanse:[]
                 },
+                masObj: [
+                    {
+                        is_nessesary: true,
+                        begin_date: undefined,
+                        final_date: undefined,
+                        realization_cost: undefined,
+                        kap_cost: undefined,
+                        finanse: undefined
+                    }
+                ]
             }
         },
     }

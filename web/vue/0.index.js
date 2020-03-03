@@ -540,7 +540,15 @@ __webpack_require__.r(__webpack_exports__);
         realization_cost: [],
         kap_cost: [],
         finanse: []
-      }
+      },
+      masObj: [{
+        is_nessesary: true,
+        begin_date: undefined,
+        final_date: undefined,
+        realization_cost: undefined,
+        kap_cost: undefined,
+        finanse: undefined
+      }]
     };
   }
 });
@@ -1806,7 +1814,7 @@ var render = function() {
                       { id: 1, type: "Нет" }
                     ],
                     reduce: function(type) {
-                      return type.type
+                      return type.id
                     }
                   },
                   model: {
@@ -2611,7 +2619,8 @@ var render = function() {
                         attrs: {
                           id: "accordion-2",
                           accordion: "my-accordion",
-                          role: "tabpanel"
+                          role: "tabpanel",
+                          visible: ""
                         }
                       },
                       [_c("b-card-body", [_c("v-svedenia")], 1)],
@@ -2661,8 +2670,7 @@ var render = function() {
                         attrs: {
                           id: "accordion-3",
                           accordion: "my-accordion",
-                          role: "tabpanel",
-                          visible: ""
+                          role: "tabpanel"
                         }
                       },
                       [_c("b-card-body", [_c("v-necessary")], 1)],

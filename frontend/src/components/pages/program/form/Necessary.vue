@@ -58,7 +58,7 @@ export default {
                 material: [],
                 srok_eks: [],
                 kap_remont: [],
-                obosnovanie: [],    
+                obosnovanie: [],
             },
             nalichie: [],
             material: [],

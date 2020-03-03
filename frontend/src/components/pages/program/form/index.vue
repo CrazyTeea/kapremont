@@ -93,7 +93,7 @@
                            <b-icon-gear-wide-connected />
                            Сведения о планируемых мероприятиях</span>
                         </b-card-header>
-                        <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
+                        <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel" visible>
                             <b-card-body>
                                 <v-svedenia />
                             </b-card-body>
@@ -105,7 +105,7 @@
                            <b-icon-gear-wide-connected />
                            Обоснование необходимости (целесообразности) планируемых мероприятий</span>
                         </b-card-header>
-                        <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel" visible>
+                        <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel" >
                             <b-card-body>
                                 <v-necessary />
                             </b-card-body>
