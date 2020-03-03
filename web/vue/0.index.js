@@ -33,6 +33,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "userPanel",
@@ -141,7 +143,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var bootstrap_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap-vue */ "./node_modules/bootstrap-vue/esm/index.js");
 
 
 //
@@ -192,7 +193,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -322,9 +322,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var bootstrap_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap-vue */ "./node_modules/bootstrap-vue/esm/index.js");
-/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
-/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -428,12 +427,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Svedenia",
   components: {
-    "v-select": vue_select__WEBPACK_IMPORTED_MODULE_1___default.a
+    "v-select": vue_select__WEBPACK_IMPORTED_MODULE_0___default.a
   },
   watch: {
     masObj: function masObj() {
@@ -580,17 +580,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
 /* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
-/* harmony import */ var _organisms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../organisms */ "./src/components/organisms/index.js");
-/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
-/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _Svedenia_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Svedenia.vue */ "./src/components/pages/program/form/Svedenia.vue");
-/* harmony import */ var _Necessary_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Necessary.vue */ "./src/components/pages/program/form/Necessary.vue");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
+/* harmony import */ var _organisms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../organisms */ "./src/components/organisms/index.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _Svedenia_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Svedenia.vue */ "./src/components/pages/program/form/Svedenia.vue");
+/* harmony import */ var _Necessary_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Necessary.vue */ "./src/components/pages/program/form/Necessary.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_10__);
+
 
 
 
@@ -765,12 +768,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "programForm",
   components: {
-    "v-svedenia": _Svedenia_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
-    "v-user-panel": _organisms__WEBPACK_IMPORTED_MODULE_4__["userPanel"],
-    "v-select2": vue_select__WEBPACK_IMPORTED_MODULE_5___default.a,
-    "v-necessary": _Necessary_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
+    "v-svedenia": _Svedenia_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
+    "v-user-panel": _organisms__WEBPACK_IMPORTED_MODULE_5__["userPanel"],
+    "v-select2": vue_select__WEBPACK_IMPORTED_MODULE_6___default.a,
+    "v-necessary": _Necessary_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
   },
-  computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_6__["mapGetters"])(['getPageData', 'getCities']), {
+  computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_4__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_7__["mapGetters"])(['getPageData', 'getCities']), {
     kad_number_validator: function kad_number_validator() {
       var pattern = /\d+:\d+:\d+:\d+/;
       return pattern.test(this.formData.kad_number);
@@ -816,7 +819,7 @@ __webpack_require__.r(__webpack_exports__);
       this.formData.id_city = '';
     }
   },
-  methods: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_6__["mapActions"])(['requestPageData', 'requestCity']), {
+  methods: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_4__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_7__["mapActions"])(['requestPageData', 'requestCity']), {
     onSubmit: function onSubmit(e) {
       var _this = this;
 
@@ -826,7 +829,10 @@ __webpack_require__.r(__webpack_exports__);
       Object.keys(this.formData).forEach(function (item) {
         formData.append("ProgramObjects[".concat(item, "]"), _this.formData[item]);
       });
-      axios__WEBPACK_IMPORTED_MODULE_9___default.a.post('/program/object/create', formData, {
+      Object.keys(this.$refs.svedenia.getSved()).forEach(function (item) {
+        formData.append("ProgObjectsEvents[".concat(item, "]"), _this.$refs.svedenia.getSved()[item]);
+      });
+      axios__WEBPACK_IMPORTED_MODULE_10___default.a.post('/program/object/create', formData, {
         headers: {
           'X-CSRF-Token': this.csrf,
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -835,7 +841,7 @@ __webpack_require__.r(__webpack_exports__);
         if (response.data == 'ok') window.location.href = '/program/view';
       }).catch(function (e) {
         return console.error(e);
-      });
+      }).finally();
     },
     onReset: function onReset() {
       this.formData.id_region = 0;
@@ -1176,7 +1182,7 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.cont[data-v-555527b8] {\r\n    border: 1px solid grey;\r\n    border-radius: 1px;\n}\n.squash[data-v-555527b8] {\r\n    max-height: 190px !important;\n}\n#user_card_title[data-v-555527b8]{\r\n        font-size: 85%;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n#user_card_title[data-v-555527b8]{\n    font-size: 85%;\n}\n\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -1448,9 +1454,13 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
         _c("div", { staticClass: "text-center card-text  font-weight-bold" }, [
           _c("span", [_vm._v(_vm._s(_vm.getUser.fio))])
         ]),
+        _vm._v(" "),
+        _c("hr"),
         _vm._v(" "),
         _c("div", { staticClass: "text-center card-text" }, [
           _c("span", [_vm._v(_vm._s(_vm.getUser.position))])
@@ -2047,6 +2057,10 @@ var render = function() {
           on: { submit: _vm.onSubmit, reset: _vm.onReset }
         },
         [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-12" }, [_c("v-user-panel")], 1)
+          ]),
+          _vm._v(" "),
           _c("input", {
             directives: [
               {
@@ -2067,10 +2081,6 @@ var render = function() {
               }
             }
           }),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-12" }, [_c("v-user-panel")], 1)
-          ]),
           _vm._v(" "),
           _c("div", { staticClass: "row mt-3" }, [
             _c(
@@ -2623,7 +2633,13 @@ var render = function() {
                           visible: ""
                         }
                       },
-                      [_c("b-card-body", [_c("v-svedenia")], 1)],
+                      [
+                        _c(
+                          "b-card-body",
+                          [_c("v-svedenia", { ref: "svedenia" })],
+                          1
+                        )
+                      ],
                       1
                     )
                   ],

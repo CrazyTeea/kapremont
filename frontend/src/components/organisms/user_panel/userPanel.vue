@@ -8,9 +8,11 @@
                 <div class="text-center card-text">
                     <span>{{getUser.organization ? getUser.organization.name : ''}}</span>
                 </div>
+                <hr>
                 <div class="text-center card-text  font-weight-bold">
                     <span>{{getUser.fio}}</span>
                 </div>
+                <hr>
                 <div class="text-center card-text">
                     <span>{{getUser.position}}</span>
                 </div>
@@ -42,13 +44,8 @@
 </script>
 
 <style scoped>
-.cont {
-    border: 1px solid grey;
-    border-radius: 1px;
-}
-.squash {
-    max-height: 190px !important;
-}
+
+
     #user_card_title{
         font-size: 85%;
 

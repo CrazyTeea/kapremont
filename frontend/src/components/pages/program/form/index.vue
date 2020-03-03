@@ -2,13 +2,15 @@
 <template>
     <div class="program_object_form">
         <b-form id="object_form" @submit="onSubmit" @reset="onReset" method="post">
-            <input id="hidden" name="_csrf" v-model="csrf" type='hidden' />
+
             <div class="row">
 
-                  <div class="col-12">
+                <div class="col-12">
                     <v-user-panel/>
                 </div>
             </div>
+            <input id="hidden" name="_csrf" v-model="csrf" type='hidden' />
+
             <div class="row mt-3">
                 <div class="col-12">
                     <label for="name">Название объекта:</label>
@@ -95,7 +97,7 @@
                         </b-card-header>
                         <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel" visible>
                             <b-card-body>
-                                <v-svedenia />
+                                <v-svedenia ref="svedenia"/>
                             </b-card-body>
                         </b-collapse>
                     </b-card>
@@ -105,7 +107,7 @@
                            <b-icon-gear-wide-connected />
                            Обоснование необходимости (целесообразности) планируемых мероприятий</span>
                         </b-card-header>
-                        <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel" >
+                        <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
                             <b-card-body>
                                 <v-necessary />
                             </b-card-body>
@@ -149,9 +151,7 @@
                     </b-card>
             </div>
 
-                <!-- <div class="col-4 offset-2">
-                    <v-user-panel/>
-                </div> -->
+
             </div>
             <b-button type="submit" variant="primary">Сохранить</b-button>
             <b-button type="reset" variant="danger">Сброс</b-button>
@@ -232,11 +232,15 @@
             ...mapActions(['requestPageData','requestCity']),
             onSubmit(e){
                 e.preventDefault();
+
                 let formData = new FormData();
                 formData.append('_csrf',this.csrf);
                 Object.keys(this.formData).forEach(item=>{
                     formData.append(`ProgramObjects[${item}]`,this.formData[item]);
                 });
+                Object.keys(this.$refs.svedenia.getSved()).forEach(item=>{
+                    formData.append(`ProgObjectsEvents[${item}]`,this.$refs.svedenia.getSved()[item]);
+                })
 
                 Axios.post('/program/object/create',formData,{
                     headers:
@@ -248,7 +252,7 @@
                 {
                     if (response.data == 'ok')
                         window.location.href = '/program/view';
-                }).catch(e=>console.error(e))
+                }).catch(e=>console.error(e)).finally()
             },
             onReset(){
                 this.formData.id_region=0;

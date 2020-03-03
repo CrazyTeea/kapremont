@@ -1,5 +1,5 @@
 <template>
-    <div class="hidden">
+    <div class="hidden" >
 
         <b-table
             bordered
@@ -30,7 +30,9 @@
                         label-reset-button="сбросить"
                         placeholder="дата"
                         size="sm"
-                        v-model="sved.begin_date[row.index]"></b-form-datepicker>
+                        v-model="sved.begin_date[row.index]">
+
+                    </b-form-datepicker>
                 </template>
 
                 <template v-slot:cell(final_date)="row">
@@ -102,7 +104,6 @@
 </template>
 
 <script>
-import BootstrapVue from 'bootstrap-vue';
 import Multiselect from 'vue-select';
 
     export default {
@@ -139,10 +140,12 @@ import Multiselect from 'vue-select';
                     sum += parseInt(this.sved.finanse[key]) || 0;
                 }
                 return sum
+
             }
         },
         data() {
             return {
+
                 fields: [
                     {key: 'stage', label: 'Этап'},
                     {key: 'is_nessesary', label: 'Необходимость выполнения'},

@@ -10,6 +10,7 @@ use yii\db\Transaction;
 use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use const Grpc\STATUS_CANCELLED;
 
 /**
  * ProgramObjectsController implements the CRUD actions for ProgramObjects model.
@@ -63,14 +64,14 @@ class ProgramObjectsController extends AppController
     {
 
         $model = new ProgramObjects();
-        $model->id_org = Yii::$app->session->get('user')->id_org;
+       // $model->id_org = Yii::$app->session->get('user')->id_org;
         $program = Yii::$app->session->get('program');
         if (!$program)
-            $this->redirect(['/']);
+            return $this->redirect(['/']);
         $model->id_program = $program->id;
-        $save = false;
+        $save = true;
         if ($model->load(Yii::$app->request->post())) {
-            $transaction = new Transaction();
+            $transaction = Yii::$app->getDb()->beginTransaction();
             $save &= $model->save();
             if ($save){
                 $transaction->commit();
@@ -78,6 +79,7 @@ class ProgramObjectsController extends AppController
             }
             else {
                 $transaction->rollBack();
+                Yii::$app->response->statusCode = 500;
                 return Json::encode($model->getErrors());
             }
         }
