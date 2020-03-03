@@ -1,5 +1,5 @@
 <template>
-    <div class="hidden">
+    <div class="hidden" >
 
         <b-table
             bordered
@@ -19,7 +19,7 @@
                             {id:0,type:'Да'},
                             {id:1,type:'Нет'}
                         ]"
-                        :reduce = "type => type.type"
+                        :reduce = "type => type.id"
                         @input="dfgbv"
                     />
                 </template>
@@ -32,7 +32,9 @@
                         label-reset-button="сбросить"
                         placeholder="дата"
                         size="sm"
-                        v-model="sved.begin_date[row.index]"></b-form-datepicker>
+                        v-model="sved.begin_date[row.index]">
+
+                    </b-form-datepicker>
                 </template>
 
                 <template v-slot:cell(final_date)="row">
@@ -107,7 +109,6 @@
 </template>
 
 <script>
-import BootstrapVue from 'bootstrap-vue';
 import Multiselect from 'vue-select';
 
     export default {
@@ -117,22 +118,22 @@ import Multiselect from 'vue-select';
         },
         computed: {
             rc_full() {
-                this.tempSum = 0;
+                let tempSum = 0;
                 for(let key in this.sved.realization_cost){
-                    this.tempSum+= parseInt(this.sved.realization_cost[key]);
+                    tempSum+= parseInt(this.sved.realization_cost[key]) || 0;
                 }
-                return this.tempSum
+                return tempSum;
             }
         },
         data() {
             return {
-                tempSum:0,
+
                 options: ['Da', 'Net'],
                 fields: [
                     {key: 'stage', label: 'Этап'},
                     {key: 'is_nessesary', label: 'Необходимость выполнения'},
-                    {key: 'begin_date', label: 'Дата начала', tdClass: 'date'},
-                    {key: 'final_date', label: 'Дата окончания', tdClass: 'date'},
+                    {key: 'begin_date', label: 'Дата начала', tdClass: 'date2'},
+                    {key: 'final_date', label: 'Дата окончания', tdClass: 'date2'},
                     {key: 'rc', label: 'Стоимость реализации (тыс.руб)'},
                     {key: 'kap_cost', label: 'Сумма бюджетного финансирования на проведение кап.ремонта (тыс.руб)'},
                     {key: 'finanse', label: 'Софинансирование из внебюджетных источников (тыс.руб)'},
@@ -208,13 +209,16 @@ import Multiselect from 'vue-select';
             updateIsNessesary(id, type) {
                 console.log(id, type)
             },
+            getSved(){
+              return this.sved;
+            },
             dfgbv() {
                 console.log(this.sved)
             },
             getRcSum(){
                 var sum = this.rc_sum
                 for(let key in this.sved.realization_cost) {
-                    sum += parseInt(this.sved.realization_cost[key]);
+                    sum += parseInt(this.sved.realization_cost[key]) || 0;
                 }
                 if(isNaN(sum)) {
                     this.rc_sum = 0
@@ -225,7 +229,7 @@ import Multiselect from 'vue-select';
             getKapSum(){
                 var sum = 0;
                 for(let key in this.sved.kap_cost) {
-                    sum += parseInt(this.sved.kap_cost[key]);
+                    sum += parseInt(this.sved.kap_cost[key]) || 0;
                 }
                 if(isNaN(sum)) {
                     this.kap_sum = 0
@@ -236,7 +240,7 @@ import Multiselect from 'vue-select';
             getFinanseSum(){
                 var sum = 0;
                 for(let key in this.sved.finanse) {
-                    sum += parseInt(this.sved.finanse[key]);
+                    sum += parseInt(this.sved.finanse[key]) || 0;
                 }
                 if(isNaN(sum)) {
                     this.finanse_sum = 0
@@ -253,14 +257,16 @@ import Multiselect from 'vue-select';
         }
     }
 </script>
-
-<style soped>
+<style>
+    .date2 {
+        min-width: 111px !important;
+    }
+</style>
+<style scoped>
 .nameOfTheClass {
    width: 600px !important;
 }
-.date {
-    width: 500px !important;
-}
+
 .table{
     overflow: hidden;
 }

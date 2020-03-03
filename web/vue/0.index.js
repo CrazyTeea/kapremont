@@ -9,9 +9,11 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
+/* harmony import */ var _mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
+//
+//
 //
 //
 //
@@ -41,8 +43,8 @@ __webpack_require__.r(__webpack_exports__);
       user: {}
     };
   },
-  computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['getUser'])),
-  methods: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['requestUser'])),
+  computed: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['getUser'])),
+  methods: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['requestUser'])),
   mounted: function mounted() {
     this.requestUser(); // this.user = this.getUser;
   }
@@ -90,7 +92,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
+/* harmony import */ var _mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _organisms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../organisms */ "./src/components/organisms/index.js");
 
@@ -117,8 +119,8 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     userPanel: _organisms__WEBPACK_IMPORTED_MODULE_2__["userPanel"]
   },
-  computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['getPageData'])),
-  methods: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['requestPageData'])),
+  computed: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['getPageData'])),
+  methods: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['requestPageData'])),
   mounted: function mounted() {
     this.requestPageData({
       pageName: "orgInfo"
@@ -141,7 +143,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
 /* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var bootstrap_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap-vue */ "./node_modules/bootstrap-vue/esm/index.js");
 
 
 //
@@ -184,7 +185,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -295,9 +295,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var bootstrap_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap-vue */ "./node_modules/bootstrap-vue/esm/index.js");
-/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
-/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -406,27 +405,27 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Svedenia",
   components: {
-    "v-select": vue_select__WEBPACK_IMPORTED_MODULE_1___default.a
+    "v-select": vue_select__WEBPACK_IMPORTED_MODULE_0___default.a
   },
   computed: {
     rc_full: function rc_full() {
-      this.tempSum = 0;
+      var tempSum = 0;
 
       for (var key in this.sved.realization_cost) {
-        this.tempSum += parseInt(this.sved.realization_cost[key]);
+        tempSum += parseInt(this.sved.realization_cost[key]) || 0;
       }
 
-      return this.tempSum;
+      return tempSum;
     }
   },
   data: function data() {
     return {
-      tempSum: 0,
       options: ['Da', 'Net'],
       fields: [{
         key: 'stage',
@@ -437,11 +436,11 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         key: 'begin_date',
         label: 'Дата начала',
-        tdClass: 'date'
+        tdClass: 'date2'
       }, {
         key: 'final_date',
         label: 'Дата окончания',
-        tdClass: 'date'
+        tdClass: 'date2'
       }, {
         key: 'rc',
         label: 'Стоимость реализации (тыс.руб)'
@@ -513,6 +512,9 @@ __webpack_require__.r(__webpack_exports__);
     updateIsNessesary: function updateIsNessesary(id, type) {
       console.log(id, type);
     },
+    getSved: function getSved() {
+      return this.sved;
+    },
     dfgbv: function dfgbv() {
       console.log(this.sved);
     },
@@ -520,7 +522,7 @@ __webpack_require__.r(__webpack_exports__);
       var sum = this.rc_sum;
 
       for (var key in this.sved.realization_cost) {
-        sum += parseInt(this.sved.realization_cost[key]);
+        sum += parseInt(this.sved.realization_cost[key]) || 0;
       }
 
       if (isNaN(sum)) {
@@ -533,7 +535,7 @@ __webpack_require__.r(__webpack_exports__);
       var sum = 0;
 
       for (var key in this.sved.kap_cost) {
-        sum += parseInt(this.sved.kap_cost[key]);
+        sum += parseInt(this.sved.kap_cost[key]) || 0;
       }
 
       if (isNaN(sum)) {
@@ -546,7 +548,7 @@ __webpack_require__.r(__webpack_exports__);
       var sum = 0;
 
       for (var key in this.sved.finanse) {
-        sum += parseInt(this.sved.finanse[key]);
+        sum += parseInt(this.sved.finanse[key]) || 0;
       }
 
       if (isNaN(sum)) {
@@ -575,17 +577,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.object.keys */ "./node_modules/core-js/modules/es.object.keys.js");
 /* harmony import */ var core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_keys__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
-/* harmony import */ var _organisms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../organisms */ "./src/components/organisms/index.js");
-/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
-/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _Svedenia_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Svedenia.vue */ "./src/components/pages/program/form/Svedenia.vue");
-/* harmony import */ var _Necessary_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Necessary.vue */ "./src/components/pages/program/form/Necessary.vue");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
+/* harmony import */ var _organisms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../organisms */ "./src/components/organisms/index.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _Svedenia_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Svedenia.vue */ "./src/components/pages/program/form/Svedenia.vue");
+/* harmony import */ var _Necessary_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Necessary.vue */ "./src/components/pages/program/form/Necessary.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_10__);
+
 
 
 
@@ -762,12 +767,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "programForm",
   components: {
-    "v-svedenia": _Svedenia_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
-    "v-user-panel": _organisms__WEBPACK_IMPORTED_MODULE_4__["userPanel"],
-    "v-select2": vue_select__WEBPACK_IMPORTED_MODULE_5___default.a,
-    "v-necessary": _Necessary_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
+    "v-svedenia": _Svedenia_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
+    "v-user-panel": _organisms__WEBPACK_IMPORTED_MODULE_5__["userPanel"],
+    "v-select2": vue_select__WEBPACK_IMPORTED_MODULE_6___default.a,
+    "v-necessary": _Necessary_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
   },
-  computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_6__["mapGetters"])(['getPageData', 'getCities']), {
+  computed: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_4__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_7__["mapGetters"])(['getPageData', 'getCities']), {
     kad_number_validator: function kad_number_validator() {
       var pattern = /\d+:\d+:\d+:\d+/;
       return pattern.test(this.formData.kad_number);
@@ -811,7 +816,7 @@ __webpack_require__.r(__webpack_exports__);
       this.formData.id_city = '';
     }
   },
-  methods: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_6__["mapActions"])(['requestPageData', 'requestCity']), {
+  methods: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_4__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_7__["mapActions"])(['requestPageData', 'requestCity']), {
     onSubmit: function onSubmit(e) {
       var _this = this;
 
@@ -821,7 +826,10 @@ __webpack_require__.r(__webpack_exports__);
       Object.keys(this.formData).forEach(function (item) {
         formData.append("ProgramObjects[".concat(item, "]"), _this.formData[item]);
       });
-      axios__WEBPACK_IMPORTED_MODULE_9___default.a.post('/program/object/create', formData, {
+      Object.keys(this.$refs.svedenia.getSved()).forEach(function (item) {
+        formData.append("ProgObjectsEvents[".concat(item, "]"), _this.$refs.svedenia.getSved()[item]);
+      });
+      axios__WEBPACK_IMPORTED_MODULE_10___default.a.post('/program/object/create', formData, {
         headers: {
           'X-CSRF-Token': this.csrf,
           'Content-Type': 'application/x-www-form-urlencoded'
@@ -830,7 +838,7 @@ __webpack_require__.r(__webpack_exports__);
         if (response.data == 'ok') window.location.href = '/program/view';
       }).catch(function (e) {
         return console.error(e);
-      });
+      }).finally();
     },
     onReset: function onReset() {
       this.formData.id_region = 0;
@@ -875,7 +883,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
+/* harmony import */ var _mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
 /* harmony import */ var _organisms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../organisms */ "./src/components/organisms/index.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
@@ -933,7 +941,7 @@ __webpack_require__.r(__webpack_exports__);
       currentPage: 1
     };
   },
-  computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(['getUser', 'getOrg', 'getRegion', 'getPageData']), {
+  computed: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(['getUser', 'getOrg', 'getRegion', 'getPageData']), {
     rows: function rows() {
       if (this.getPageData && this.getPageData.items) return this.getPageData.items.length;
       return 0;
@@ -954,7 +962,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  methods: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])(['requestProgram', 'requestOrg', 'requestPageData'])),
+  methods: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])(['requestProgram', 'requestOrg', 'requestPageData'])),
   components: {
     "v-userPanel": _organisms__WEBPACK_IMPORTED_MODULE_1__["userPanel"]
   },
@@ -976,7 +984,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
+/* harmony import */ var _mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
 /* harmony import */ var _organisms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../organisms */ "./src/components/organisms/index.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
@@ -1132,8 +1140,8 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     "v-user-panel": _organisms__WEBPACK_IMPORTED_MODULE_1__["userPanel"]
   },
-  methods: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])(['requestPageData'])),
-  computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(['getUser', 'getPageData']), {
+  methods: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])(['requestPageData'])),
+  computed: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(['getUser', 'getPageData']), {
     objects: function objects() {
       return this.getPageData && this.getPageData.objects;
     },
@@ -1171,17 +1179,17 @@ __webpack_require__.r(__webpack_exports__);
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.cont[data-v-555527b8] {\r\n    border: 1px solid grey;\r\n    border-radius: 1px;\n}\n.squash[data-v-555527b8] {\r\n    max-height: 190px !important;\n}\n#user_card_title[data-v-555527b8]{\r\n        font-size: 85%;\n}\r\n\r\n", ""]);
+exports.push([module.i, "\n#user_card_title[data-v-555527b8]{\n    font-size: 85%;\n}\n\n", ""]);
 // Exports
 module.exports = exports;
 
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&soped=true&lang=css&":
-/*!*****************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&soped=true&lang=css& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -1189,7 +1197,25 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.nameOfTheClass {\r\n   width: 600px !important;\n}\n.date {\r\n    width: 500px !important;\n}\n.table{\r\n    overflow: hidden;\n}\n.hidden {\r\n    overflow: hidden;\r\n    overflow-x: scroll;\n}\r\n", ""]);
+exports.push([module.i, "\n.date2 {\n    min-width: 111px !important;\n}\n", ""]);
+// Exports
+module.exports = exports;
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// Imports
+var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
+exports = ___CSS_LOADER_API_IMPORT___(false);
+// Module
+exports.push([module.i, "\n.nameOfTheClass[data-v-37453398] {\n   width: 600px !important;\n}\n.table[data-v-37453398]{\n    overflow: hidden;\n}\n.hidden[data-v-37453398] {\n    overflow: hidden;\n    overflow-x: scroll;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -1263,15 +1289,46 @@ module.exports = exported;
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&soped=true&lang=css&":
-/*!*********************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&soped=true&lang=css& ***!
-  \*********************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 var api = __webpack_require__(/*! ../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-            var content = __webpack_require__(/*! !../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svedenia.vue?vue&type=style&index=0&soped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&soped=true&lang=css&");
+            var content = __webpack_require__(/*! !../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svedenia.vue?vue&type=style&index=0&lang=css& */ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&lang=css&");
+
+            content = content.__esModule ? content.default : content;
+
+            if (typeof content === 'string') {
+              content = [[module.i, content, '']];
+            }
+
+var options = {};
+
+options.insert = "head";
+options.singleton = false;
+
+var update = api(content, options);
+
+var exported = content.locals ? content.locals : {};
+
+
+
+module.exports = exported;
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var api = __webpack_require__(/*! ../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
+            var content = __webpack_require__(/*! !../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css&");
 
             content = content.__esModule ? content.default : content;
 
@@ -1394,9 +1451,13 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
+        _c("hr"),
+        _vm._v(" "),
         _c("div", { staticClass: "text-center card-text  font-weight-bold" }, [
           _c("span", [_vm._v(_vm._s(_vm.getUser.fio))])
         ]),
+        _vm._v(" "),
+        _c("hr"),
         _vm._v(" "),
         _c("div", { staticClass: "text-center card-text" }, [
           _c("span", [_vm._v(_vm._s(_vm.getUser.position))])
@@ -1708,10 +1769,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398&":
-/*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398& ***!
-  \*********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398&scoped=true&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398&scoped=true& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -1751,7 +1812,7 @@ var render = function() {
                       { id: 1, type: "Нет" }
                     ],
                     reduce: function(type) {
-                      return type.type
+                      return type.id
                     }
                   },
                   on: { input: _vm.dfgbv },
@@ -1990,6 +2051,10 @@ var render = function() {
           on: { submit: _vm.onSubmit, reset: _vm.onReset }
         },
         [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-12" }, [_c("v-user-panel")], 1)
+          ]),
+          _vm._v(" "),
           _c("input", {
             directives: [
               {
@@ -2010,10 +2075,6 @@ var render = function() {
               }
             }
           }),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-12" }, [_c("v-user-panel")], 1)
-          ]),
           _vm._v(" "),
           _c("div", { staticClass: "row mt-3" }, [
             _c(
@@ -2565,7 +2626,13 @@ var render = function() {
                           role: "tabpanel"
                         }
                       },
-                      [_c("b-card-body", [_c("v-svedenia")], 1)],
+                      [
+                        _c(
+                          "b-card-body",
+                          [_c("v-svedenia", { ref: "svedenia" })],
+                          1
+                        )
+                      ],
                       1
                     )
                   ],
@@ -2612,8 +2679,7 @@ var render = function() {
                         attrs: {
                           id: "accordion-3",
                           accordion: "my-accordion",
-                          role: "tabpanel",
-                          visible: ""
+                          role: "tabpanel"
                         }
                       },
                       [_c("b-card-body", [_c("v-necessary")], 1)],
@@ -3165,22 +3231,43 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/vue-style-loader/index.js!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&soped=true&lang=css&":
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-style-loader!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&soped=true&lang=css& ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-style-loader!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(/*! !../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svedenia.vue?vue&type=style&index=0&soped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&soped=true&lang=css&");
+var content = __webpack_require__(/*! !../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svedenia.vue?vue&type=style&index=0&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&lang=css&");
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__(/*! ../../../../../node_modules/vue-style-loader/lib/addStylesClient.js */ "./node_modules/vue-style-loader/lib/addStylesClient.js").default
-var update = add("528ee12e", content, false, {});
+var update = add("4eee0338", content, false, {});
+// Hot Module Replacement
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-style-loader!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+// style-loader: Adds some css to the DOM by adding a <style> tag
+
+// load the styles
+var content = __webpack_require__(/*! !../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css&");
+if(typeof content === 'string') content = [[module.i, content, '']];
+if(content.locals) module.exports = content.locals;
+// add the styles to the DOM
+var add = __webpack_require__(/*! ../../../../../node_modules/vue-style-loader/lib/addStylesClient.js */ "./node_modules/vue-style-loader/lib/addStylesClient.js").default
+var update = add("6be7f24e", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
@@ -3627,10 +3714,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Svedenia_vue_vue_type_template_id_37453398___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Svedenia.vue?vue&type=template&id=37453398& */ "./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398&");
+/* harmony import */ var _Svedenia_vue_vue_type_template_id_37453398_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Svedenia.vue?vue&type=template&id=37453398&scoped=true& */ "./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398&scoped=true&");
 /* harmony import */ var _Svedenia_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Svedenia.vue?vue&type=script&lang=js& */ "./src/components/pages/program/form/Svedenia.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _Svedenia_vue_vue_type_style_index_0_soped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Svedenia.vue?vue&type=style&index=0&soped=true&lang=css& */ "./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&soped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* empty/unused harmony star reexport *//* harmony import */ var _Svedenia_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Svedenia.vue?vue&type=style&index=0&lang=css& */ "./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _Svedenia_vue_vue_type_style_index_1_id_37453398_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css& */ "./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
 
 
 
@@ -3639,13 +3728,13 @@ __webpack_require__.r(__webpack_exports__);
 
 /* normalize component */
 
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__["default"])(
   _Svedenia_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Svedenia_vue_vue_type_template_id_37453398___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Svedenia_vue_vue_type_template_id_37453398___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Svedenia_vue_vue_type_template_id_37453398_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Svedenia_vue_vue_type_template_id_37453398_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  null,
+  "37453398",
   null
   
 )
@@ -3671,35 +3760,51 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&soped=true&lang=css&":
-/*!****************************************************************************************************!*\
-  !*** ./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&soped=true&lang=css& ***!
-  \****************************************************************************************************/
+/***/ "./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&lang=css&":
+/*!*****************************************************************************************!*\
+  !*** ./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&lang=css& ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_0_soped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-style-loader!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svedenia.vue?vue&type=style&index=0&soped=true&lang=css& */ "./node_modules/vue-style-loader/index.js!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&soped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_0_soped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_0_soped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_0_soped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_0_soped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_0_soped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-style-loader!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svedenia.vue?vue&type=style&index=0&lang=css& */ "./node_modules/vue-style-loader/index.js!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&lang=css&");
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398&":
-/*!***************************************************************************************!*\
-  !*** ./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398& ***!
-  \***************************************************************************************/
+/***/ "./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css&":
+/*!*****************************************************************************************************************!*\
+  !*** ./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css& ***!
+  \*****************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_1_id_37453398_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-style-loader!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css& */ "./node_modules/vue-style-loader/index.js!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_1_id_37453398_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_1_id_37453398_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_1_id_37453398_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_1_id_37453398_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_1_id_37453398_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398&scoped=true&":
+/*!***************************************************************************************************!*\
+  !*** ./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398&scoped=true& ***!
+  \***************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_template_id_37453398___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svedenia.vue?vue&type=template&id=37453398& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_template_id_37453398___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_template_id_37453398_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svedenia.vue?vue&type=template&id=37453398&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_template_id_37453398_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_template_id_37453398___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_template_id_37453398_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
