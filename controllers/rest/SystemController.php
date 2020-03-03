@@ -7,6 +7,7 @@ namespace app\controllers\rest;
 use app\models\Cities;
 use app\models\Organizations;
 use app\models\Program;
+use app\models\ProgramObjects;
 use app\models\Regions;
 use Yii;
 
@@ -104,10 +105,7 @@ class SystemController extends RestController
                         ['id'=>1],
                         ['id'=>2],
                     ];
-                    $ret['reservedObjects']['items'] = [
-                        ['id'=>1],
-                        ['id'=>2],
-                    ];
+                    $ret['reservedObjects']['items'] = ProgramObjects::find()->all();
                     return $ret;
                     break;
                 }
