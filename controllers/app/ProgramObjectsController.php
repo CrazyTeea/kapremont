@@ -68,7 +68,7 @@ class ProgramObjectsController extends AppController
         if (!$program)
             $this->redirect(['/']);
         $model->id_program = $program->id;
-        $save = false;
+        $save = true;
         if ($model->load(Yii::$app->request->post())) {
             $transaction = new Transaction();
             $save &= $model->save();
