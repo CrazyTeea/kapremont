@@ -34,7 +34,7 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-6 offset-3" v-show="getUser.isAdmin & getPageData">
+                <div class="col-6 offset-3" v-show="getUser.isAdmin && getPageData">
                     <b-button href="program/view">Заполнить программу развития</b-button>
                 </div>
             </div>
