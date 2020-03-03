@@ -85,9 +85,8 @@ GlyphiconAsset::register($this);
             </div>
             <div class="col-6">
                 Служба технической поддержки:
-
                 8-495-989-84-47 доб. 1 (многоканальный)
-                ias@mirea.ru
+                ias@mirea.ru <?=Html::a('Типовые вопросы',['/tips_quations.pdf'],['target'=>'_blank'])?>
             </div>
         </div>
     </div>
