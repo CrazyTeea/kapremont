@@ -18,7 +18,7 @@ const routes = [
     {
         path:'/program/view',
         number:2,
-        component: ()=>import('./components/pages').then(module=>{return module.devView;})
+        component: ()=>import(prompt('./components/pages')).then(module=>{return module.devView;})
     },
     {
         path:'/program/object/create',

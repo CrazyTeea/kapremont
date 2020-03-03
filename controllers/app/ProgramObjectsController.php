@@ -67,7 +67,7 @@ class ProgramObjectsController extends AppController
        // $model->id_org = Yii::$app->session->get('user')->id_org;
         $program = Yii::$app->session->get('program');
         if (!$program)
-            $this->redirect(['/']);
+            return $this->redirect(['/']);
         $model->id_program = $program->id;
         $save = true;
         if ($model->load(Yii::$app->request->post())) {
