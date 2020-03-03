@@ -4,7 +4,15 @@
         <b-form id="object_form" @submit="onSubmit" @reset="onReset" method="post">
             <input id="hidden" name="_csrf" v-model="csrf" type='hidden' />
             <div class="row">
-                <div class="col-6">
+
+                  <div class="col-12">
+                    <v-user-panel/>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col-12">
+
+
                     <label for="name">Название объекта:</label>
                     <b-form-input id="name" name="name" v-model="formData.name"/>
                     <br>
@@ -15,7 +23,7 @@
                            Характеристика объекта
                        </span>
                         </b-card-header>
-                        <b-collapse id="accordion-1" visible accordion="my-accordion" role="tabpanel">
+                        <b-collapse id="accordion-1"  accordion="my-accordion" role="tabpanel">
                             <b-card-body>
                                 <b-form-group>
                                     <label for="type">Тип объекта:</label>
@@ -89,7 +97,7 @@
                         </b-card-header>
                         <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
                             <b-card-body>
-
+                                <v-svedenia />
                             </b-card-body>
                         </b-collapse>
                     </b-card>
@@ -99,9 +107,9 @@
                            <b-icon-gear-wide-connected />
                            Обоснование необходимости (целесообразности) планируемых мероприятий</span>
                         </b-card-header>
-                        <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
+                        <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel" visible>
                             <b-card-body>
-
+                                <v-necessary />
                             </b-card-body>
                         </b-collapse>
                     </b-card>
@@ -141,11 +149,11 @@
                             </b-card-body>
                         </b-collapse>
                     </b-card>
-                </div>
+            </div>
 
-                <div class="col-4 offset-2">
+                <!-- <div class="col-4 offset-2">
                     <v-user-panel/>
-                </div>
+                </div> -->
             </div>
             <b-button type="submit" variant="primary">Сохранить</b-button>
             <b-button type="reset" variant="danger">Сброс</b-button>
@@ -157,12 +165,18 @@
     import {userPanel} from "../../../organisms";
     import Multiselect from "vue-select";
     import {mapActions, mapGetters} from "vuex";
+
+    import Svedenia from './Svedenia.vue';
+    import Necessary from './Necessary.vue';
     import Axios from 'axios'
+
     export default {
         name: "programForm",
         components:{
+            "v-svedenia": Svedenia,
             "v-user-panel":userPanel,
-            "v-select2": Multiselect
+            "v-select2": Multiselect,
+            "v-necessary": Necessary
         },
         computed:{
             ...mapGetters(['getPageData','getCities']),
@@ -175,9 +189,10 @@
             },
             exp_year_validator(){
                 return this.formData.exploit_year.length===4
+
             },
             wear_validator(){
-                return this.formData.wear>=0 && this.formData.wear<=100
+                return this.formData.wear >= 0 && this.formData.wear <= 100
             },
         },
 
@@ -185,6 +200,7 @@
             return {
                 csrf: document.getElementsByName('csrf-token')[0].content,
                 formData: {
+
                     name:'',
                     id_region: 0,
                     id_city:0,
@@ -250,8 +266,9 @@
                 this.formData.isp_v_ust_dey=0;
                 this.formData.n_isp_v_ust_dey=0;
                 this.formData.square_ar=0;
+
             },
-            onChangeRegion({id}){
+            onChangeRegion({id}) {
                 this.requestCity({id})
 
             }
@@ -262,7 +279,7 @@
     }
 </script>
 <style scoped>
-    .toggle_button{
+    .toggle_button {
         display: block;
         cursor: pointer;
     }
