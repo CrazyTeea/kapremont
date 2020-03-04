@@ -101,7 +101,7 @@
                             </b-card-body>
                         </b-collapse>
                     </b-card>
-                    <!--<b-card no-body class="mb-1">
+                    <b-card no-body class="mb-1">
                          <b-card-header header-tag="header" class="p-1" role="tab">
                         <span  class="toggle_button" v-b-toggle.accordion-3 >
                             <b-icon-gear-wide-connected />
@@ -113,7 +113,7 @@
                              </b-card-body>
                          </b-collapse>
                      </b-card>
-                      <b-card no-body class="mb-1">
+                    <!--  <b-card no-body class="mb-1">
                          <b-card-header header-tag="header" class="p-1" role="tab">
                         <span  class="toggle_button" v-b-toggle.accordion-4 >
                             <b-icon-gear-wide-connected />
@@ -245,7 +245,7 @@
                     formData.append(`ProgObjectsEvents[${item}]`,this.$refs.svedenia.getSved()[item]);
                 })
                 Object.keys(this.$refs.necessary.getData()).forEach(item=>{
-                    formData.append(`ProgObjectsEvents[${item}]`,this.$refs.necessary.getSved()[item]);
+                    formData.append(`ProObjectsNecessary[${item}]`,this.$refs.necessary.getData()[item]);
                 })
 
 
