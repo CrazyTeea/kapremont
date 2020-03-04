@@ -101,54 +101,54 @@
                             </b-card-body>
                         </b-collapse>
                     </b-card>
-                    <!--  <b-card no-body class="mb-1">
-                          <b-card-header header-tag="header" class="p-1" role="tab">
-                         <span  class="toggle_button" v-b-toggle.accordion-3 >
-                             <b-icon-gear-wide-connected />
-                             Обоснование необходимости (целесообразности) планируемых мероприятий</span>
-                          </b-card-header>
-                          <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
-                              <b-card-body>
-                                  <v-necessary />
-                              </b-card-body>
-                          </b-collapse>
-                      </b-card>
-                      <b-card no-body class="mb-1">
-                          <b-card-header header-tag="header" class="p-1" role="tab">
-                         <span  class="toggle_button" v-b-toggle.accordion-4 >
-                             <b-icon-gear-wide-connected />
-                             Ожидаемые результаты</span>
-                          </b-card-header>
-                          <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
-                              <b-card-body>
+                   <!-- <b-card no-body class="mb-1">
+                        <b-card-header header-tag="header" class="p-1" role="tab">
+                       <span  class="toggle_button" v-b-toggle.accordion-3 >
+                           <b-icon-gear-wide-connected />
+                           Обоснование необходимости (целесообразности) планируемых мероприятий</span>
+                        </b-card-header>
+                        <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
+                            <b-card-body>
+                                <v-necessary />
+                            </b-card-body>
+                        </b-collapse>
+                    </b-card>
+                    <b-card no-body class="mb-1">
+                        <b-card-header header-tag="header" class="p-1" role="tab">
+                       <span  class="toggle_button" v-b-toggle.accordion-4 >
+                           <b-icon-gear-wide-connected />
+                           Ожидаемые результаты</span>
+                        </b-card-header>
+                        <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
+                            <b-card-body>
+                                <v-waited />
+                            </b-card-body>
+                        </b-collapse>
+                    </b-card>
+                    <b-card no-body class="mb-1">
+                        <b-card-header header-tag="header" class="p-1" role="tab">
+                       <span  class="toggle_button" v-b-toggle.accordion-5  >
+                           <b-icon-gear-wide-connected />
+                           Прогнозируемые риски</span>
+                        </b-card-header>
+                        <b-collapse id="accordion-5" accordion="my-accordion" role="tabpanel">
+                            <b-card-body>
+                                <v-riscs />
+                            </b-card-body>
+                        </b-collapse>
+                    </b-card>
+                    <b-card no-body class="mb-1">
+                        <b-card-header header-tag="header" class="p-1" role="tab">
+                       <span  class="toggle_button" v-b-toggle.accordion-6 >
+                           <b-icon-gear-wide-connected />
+                          Опись прилагаемых документов</span>
+                        </b-card-header>
+                        <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel">
+                            <b-card-body>
 
-                              </b-card-body>
-                          </b-collapse>
-                      </b-card>
-                      <b-card no-body class="mb-1">
-                          <b-card-header header-tag="header" class="p-1" role="tab">
-                         <span  class="toggle_button" v-b-toggle.accordion-5  >
-                             <b-icon-gear-wide-connected />
-                             Прогнозируемые риски</span>
-                          </b-card-header>
-                          <b-collapse id="accordion-5" accordion="my-accordion" role="tabpanel">
-                              <b-card-body>
-
-                              </b-card-body>
-                          </b-collapse>
-                      </b-card>
-                      <b-card no-body class="mb-1">
-                          <b-card-header header-tag="header" class="p-1" role="tab">
-                         <span  class="toggle_button" v-b-toggle.accordion-6 >
-                             <b-icon-gear-wide-connected />
-                            Опись прилагаемых документов</span>
-                          </b-card-header>
-                          <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel">
-                              <b-card-body>
-
-                              </b-card-body>
-                          </b-collapse>
-                      </b-card>-->
+                            </b-card-body>
+                        </b-collapse>
+                    </b-card>-->
             </div>
 
 
@@ -166,6 +166,8 @@
 
     import Svedenia from './Svedenia.vue';
     import Necessary from './Necessary.vue';
+    import Riscs from './Riscs.vue';
+    import Waited from './Waited.vue';
     import Axios from 'axios'
 
     export default {
@@ -174,7 +176,9 @@
             "v-svedenia": Svedenia,
             "v-user-panel":userPanel,
             "v-select2": Multiselect,
-            "v-necessary": Necessary
+            "v-necessary": Necessary,
+            "v-waited": Waited,
+            "v-riscs": Riscs
         },
         computed:{
             ...mapGetters(['getPageData','getCities']),
@@ -183,7 +187,6 @@
                 return pattern.test(this.formData.kad_number);
             },
             con_year_validator(){
-                console.log(this.formData.year)
                 let pattern = /^[1-2][0-9]{1}\d{2}/;
                 return pattern.test(this.formData.year)
                 // return this.formData.year.length===4 && this.formData.year[0]===1
@@ -239,7 +242,6 @@
                     formData.append(`ProgramObjects[${item}]`,this.formData[item]);
                 });
                 Object.keys(this.$refs.svedenia.getSved()).forEach(item=>{
-                    //console.log(this.$refs.svedenia.getSved()[item]);
                     formData.append(`ProgObjectsEvents[${item}]`,this.$refs.svedenia.getSved()[item]);
                 })
 

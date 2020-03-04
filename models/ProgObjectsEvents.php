@@ -15,6 +15,7 @@ use Yii;
  * @property float|null $cost_real
  * @property float|null $sum_bud_fin
  * @property float|null $fin_vnebud_ist
+ * @property boolean $is_nessesary
  */
 class ProgObjectsEvents extends \yii\db\ActiveRecord
 {
