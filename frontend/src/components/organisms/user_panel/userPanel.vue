@@ -8,11 +8,9 @@
                 <div class="text-center card-text">
                     <span>{{getUser.organization ? getUser.organization.name : ''}}</span>
                 </div>
-                <hr>
                 <div class="text-center card-text  font-weight-bold">
                     <span>{{getUser.fio}}</span>
                 </div>
-                <hr>
                 <div class="text-center card-text">
                     <span>{{getUser.position}}</span>
                 </div>

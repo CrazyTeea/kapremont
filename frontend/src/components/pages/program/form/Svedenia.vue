@@ -113,7 +113,7 @@ import Multiselect from 'vue-select';
         },
         watch: {
             masObj: function () {
-                console.log(this.masObj)
+                // console.log(this.masObj)
             }
         },
         computed: {
@@ -151,9 +151,9 @@ import Multiselect from 'vue-select';
                     {key: 'is_nessesary', label: 'Необходимость выполнения'},
                     {key: 'begin_date', label: 'Дата начала', tdClass: 'date vertical-align-extra-table'},
                     {key: 'final_date', label: 'Дата окончания', tdClass: 'date vertical-align-extra-table'},
-                    {key: 'rc', label: 'Стоимость реализации (тыс.руб)'},
-                    {key: 'kap_cost', label: 'Сумма бюджетного финансирования на проведение кап.ремонта (тыс.руб)'},
-                    {key: 'finanse', label: 'Софинансирование из внебюджетных источников (тыс.руб)'},
+                    {key: 'rc', label: 'Стоимость реализации (тыс.руб)', tdClass: 'vertical-align-extra-table'},
+                    {key: 'kap_cost', label: 'Сумма бюджетного финансирования на проведение кап.ремонта (тыс.руб)', tdClass: 'vertical-align-extra-table'},
+                    {key: 'finanse', label: 'Софинансирование из внебюджетных источников (тыс.руб)', tdClass: 'vertical-align-extra-table'},
                 ],
                 stages: [
                     {
@@ -163,7 +163,7 @@ import Multiselect from 'vue-select';
                         'finanse':  false
                     },
                     {
-                        'stage': 'Вполнение обследования, плжготовка и утверждение дефектного акта', 
+                        'stage': 'Выполнение обследования, подготовка и утверждение дефектного акта', 
                         'rc': true,
                         'kap_cost': false,
                         'finanse':  true
@@ -238,6 +238,6 @@ import Multiselect from 'vue-select';
     overflow-x: scroll;
 }
 .vertical-align-extra-table {
-    vertical-align: middle;
+    vertical-align: middle !important;
 }
 </style>

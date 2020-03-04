@@ -121,7 +121,7 @@
                         </b-card-header>
                         <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
                             <b-card-body>
-
+                                <v-waited />
                             </b-card-body>
                         </b-collapse>
                     </b-card>
@@ -133,7 +133,7 @@
                         </b-card-header>
                         <b-collapse id="accordion-5" accordion="my-accordion" role="tabpanel">
                             <b-card-body>
-
+                                <v-riscs />
                             </b-card-body>
                         </b-collapse>
                     </b-card>
@@ -166,6 +166,8 @@
 
     import Svedenia from './Svedenia.vue';
     import Necessary from './Necessary.vue';
+    import Riscs from './Riscs.vue';
+    import Waited from './Waited.vue';
     import Axios from 'axios'
 
     export default {
@@ -174,7 +176,9 @@
             "v-svedenia": Svedenia,
             "v-user-panel":userPanel,
             "v-select2": Multiselect,
-            "v-necessary": Necessary
+            "v-necessary": Necessary,
+            "v-waited": Waited,
+            "v-riscs": Riscs
         },
         computed:{
             ...mapGetters(['getPageData','getCities']),
