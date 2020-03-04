@@ -3,6 +3,7 @@
 namespace app\controllers\app;
 
 use app\models\ProgObjectsEvents;
+use app\models\ProObjectsNecessary;
 use Yii;
 use app\models\ProgramObjects;
 use app\models\ProgramObjectsSearch;
@@ -103,8 +104,19 @@ class ProgramObjectsController extends AppController
                 $save &= $progObjEv->save();
                 $errors['ProgObjectsEvents'][] = $progObjEv->getErrors();
             }
+            $_progObjNe = explode(',',Yii::$app->request->post()['ProObjectsNecessary']['nalichie']);
+            $_progObjNe_m = explode(',',Yii::$app->request->post()['ProObjectsNecessary']['material']);
+            $_progObjNe_srok = explode(',',Yii::$app->request->post()['ProObjectsNecessary']['srok_eks']);
+            $_progObjNe_rem = explode(',',Yii::$app->request->post()['ProObjectsNecessary']['kap_remont']);
+            $_progObjNe_obo = explode(',',Yii::$app->request->post()['ProObjectsNecessary']['obosnovanie']);
 
-            //foreach ()
+            foreach ($_progObjNe as $index => $item){
+                if ($item){
+                    $progObjNe = new ProObjectsNecessary();
+                    $progObjNe->id_object = $model->id;
+
+                }
+            }
 
 
             if ($save){
