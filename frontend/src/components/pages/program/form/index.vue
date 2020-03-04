@@ -14,7 +14,7 @@
             <div class="row mt-3">
                 <div class="col-12">
                     <label for="name">Название объекта:</label>
-                    <b-form-input id="name" name="name" v-model="formData.name"/>
+                    <b-form-input placeholder="Название..." id="name" name="name" v-model="formData.name" />
                     <br>
                     <b-card no-body class="mb-1">
                         <b-card-header header-tag="header" class="p-1" role="tab">
@@ -95,7 +95,7 @@
                            <b-icon-gear-wide-connected />
                            Сведения о планируемых мероприятиях</span>
                         </b-card-header>
-                        <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel" visible>
+                        <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
                             <b-card-body>
                                 <v-svedenia ref="svedenia"/>
                             </b-card-body>
@@ -107,7 +107,7 @@
                            <b-icon-gear-wide-connected />
                            Обоснование необходимости (целесообразности) планируемых мероприятий</span>
                         </b-card-header>
-                        <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
+                        <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel" visible>
                             <b-card-body>
                                 <v-necessary />
                             </b-card-body>
@@ -153,7 +153,7 @@
 
 
             </div>
-            <b-button type="submit" variant="primary">Сохранить</b-button>
+            <b-button type="submit" variant="info">Сохранить</b-button>
             <b-button type="reset" variant="danger">Сброс</b-button>
         </b-form>
     </div>

@@ -137,13 +137,75 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
-/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var bootstrap_vue__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! bootstrap-vue */ "./node_modules/bootstrap-vue/esm/index.js");
-
-
+/* harmony import */ var bootstrap_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap-vue */ "./node_modules/bootstrap-vue/esm/index.js");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -194,117 +256,182 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      dataSend: [],
-      dataToSend: {
-        nalichie: [],
-        material: [],
-        srok_eks: [],
-        kap_remont: [],
-        obosnovanie: []
-      },
-      nalichie: [],
-      material: [],
-      srok_eks: [],
-      kap_remont: [],
-      obosnovanie: [],
-      fields: [{
-        key: 'stroi_konstr',
-        label: 'Строительные конструкции замена и (или) восстановление которых планируются при капитальном ремонте'
-      }, {
-        key: 'nalichie',
-        label: 'Наличие на объекте',
-        tdClass: 'extra-table-class'
-      }, {
-        key: 'material',
-        label: 'Материал конструкции',
-        tdClass: 'vertical-align-centre-extra-table'
-      }, {
-        key: 'srok_eks',
-        label: 'Срок эксплуатации с момента строительства или предыдущего капитального ремонта',
-        tdClass: 'vertical-align-centre-extra-table'
-      }, {
-        key: 'kap_remont',
-        label: 'Требуется капитальный ремонт',
-        tdClass: 'extra-table-class'
-      }, {
-        key: 'obosnovanie',
-        label: 'Обоснование необходимости',
-        tdClass: 'vertical-align-centre-extra-table'
-      }],
       items: [{
-        stroi_konstr: 'Фундаменты',
-        label: 'Фундаменты'
+        label: 'Фундаменты',
+        nalichie: null,
+        material: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
       }, {
-        stroi_konstr: 'Отмостка',
-        label: 'Необходимость выполнения'
+        label: 'Отмостка',
+        nalichie: null,
+        material: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
       }, {
-        stroi_konstr: 'Стены',
-        label: 'Дата начала'
+        label: 'Стены',
+        nalichie: null,
+        material: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
       }, {
-        stroi_konstr: 'Колонны',
-        label: 'Дата окончания'
+        label: 'Колонны',
+        nalichie: null,
+        material: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
       }, {
-        stroi_konstr: 'Перегородки',
-        label: 'Стоимость реализации (тыс.руб)'
+        label: 'Перегородки',
+        nalichie: null,
+        material: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
       }, {
-        stroi_konstr: 'Крыша',
-        label: 'Сумма бюджетного финансирования на проведение кап.ремонта (тыс.руб)'
+        label: 'Крыша',
+        nalichie: null,
+        material: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
       }, {
-        stroi_konstr: 'Кровля',
-        label: 'Софинансирование из внебюджетных источников (тыс.руб)'
+        label: 'Кровля',
+        nalichie: null,
+        material: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
       }, {
-        stroi_konstr: 'Перекрытия',
-        label: 'Софинансирование из внебюджетных источников (тыс.руб)'
+        label: 'Перекрытия',
+        nalichie: null,
+        material: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
       }, {
-        stroi_konstr: 'Полы',
-        label: 'Софинансирование из внебюджетных источников (тыс.руб)'
+        label: 'Полы',
+        nalichie: null,
+        material: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
       }, {
-        stroi_konstr: 'Окна',
-        label: 'Софинансирование из внебюджетных источников (тыс.руб)'
+        label: 'Окна',
+        nalichie: null,
+        material: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
       }, {
-        stroi_konstr: 'Двери',
-        label: 'Софинансирование из внебюджетных источников (тыс.руб)'
+        label: 'Двери',
+        nalichie: null,
+        material: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
       }, {
-        stroi_konstr: 'Ворота',
-        label: 'Софинансирование из внебюджетных источников (тыс.руб)'
+        label: 'Ворота',
+        nalichie: null,
+        material: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
       }, {
-        stroi_konstr: 'Лестницы',
-        label: 'Софинансирование из внебюджетных источников (тыс.руб)'
+        label: 'Лестницы',
+        nalichie: null,
+        material: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
       }, {
-        stroi_konstr: 'Крыльца',
-        label: 'Софинансирование из внебюджетных источников (тыс.руб)'
+        label: 'Крыльца',
+        nalichie: null,
+        material: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
       }, {
-        stroi_konstr: 'Балконы/Лоджии',
-        label: 'Софинансирование из внебюджетных источников (тыс.руб)'
+        label: 'Балконы/Лоджии',
+        nalichie: null,
+        material: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
       }, {
-        stroi_konstr: 'Внутренняя отделка',
-        label: 'Софинансирование из внебюджетных источников (тыс.руб)'
+        label: 'Внутренняя отделка',
+        nalichie: null,
+        material: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
       }, {
-        stroi_konstr: 'Наружняя отделка',
-        label: 'Софинансирование из внебюджетных источников (тыс.руб)'
+        label: 'Наружняя отделка',
+        nalichie: null,
+        material: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
+      }],
+      itemsTwo: [{
+        label: 'Система электроснабжения',
+        nalichie: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
+      }, {
+        label: 'Система водоснабжения',
+        nalichie: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
+      }, {
+        label: 'Система водоотведения',
+        nalichie: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
+      }, {
+        label: 'Система газоснабжения',
+        nalichie: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
+      }, {
+        label: 'Система кондиционирования воздуха',
+        nalichie: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
+      }, {
+        label: 'Система вентиляции',
+        nalichie: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
+      }, {
+        label: 'Система отопления',
+        nalichie: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
+      }, {
+        label: 'Система диспетчеризации',
+        nalichie: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
+      }, {
+        label: 'Радиофикация',
+        nalichie: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
       }]
     };
-  },
-  watch: {
-    dataToSend: function dataToSend() {// console.log('датаТуСенд')
-      // console.log(this.dataToSend)
-    },
-    nalichie: function nalichie() {
-      var _this = this;
-
-      this.nalichie.forEach(function (element, index) {
-        // console.log(this.nalichie)
-        if (_this.nalichie[index] && _this.nalichie[index].length) {
-          _this.dataSend[index].push(_this.material[index], _this.srok_eks[index], _this.kap_remont[index], _this.obosnovanie[index]);
-        } // console.log(this.dataSend)
-
-      });
-    }
-  },
-  methods: {
-    returnData: function returnData(data) {// console.log(data)
-      // console.log(this.material)
-    }
   }
 });
 
@@ -383,24 +510,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      items: [],
-      dataItems: {
-        types: [],
-        poison: [],
-        protect: []
-      }
+      items: [{
+        types: null,
+        poison: null,
+        protect: null
+      }]
     };
   },
   methods: {
     addNewRow: function addNewRow() {
-      var returd = this.items.length;
-      this.items.push(returd);
+      console.log(this.items);
+      this.items.push({
+        types: null,
+        poison: null,
+        protect: null
+      });
     },
     deleteLastRow: function deleteLastRow() {
       this.items.pop();
-      this.dataItems.types.pop();
-      this.dataItems.poison.pop();
-      this.dataItems.protect.pop();
     }
   }
 });
@@ -672,7 +799,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var bootstrap_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! bootstrap-vue */ "./node_modules/bootstrap-vue/esm/index.js");
 //
 //
 //
@@ -736,66 +862,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      items: [{
-        label: 'Проведение капитального ремонта, общая площадь',
-        izm: 'кв.м'
+      dataFirst: [{
+        aim: 'Проведение капитального ремонта, общая площадь',
+        plan: null,
+        changes: 'кв.м'
       }, {
-        label: 'Вовлечение в хозяйственную деятельность за счет проведенного капитального ремонта, общая площадь',
-        izm: 'кв.м'
+        aim: 'Вовлечение в хозяйственную деятельность за счет проведенного капитального ремонта, общая площадь',
+        plan: null,
+        changes: 'кв.м'
       }, {
-        label: 'Снижение затрат на эксплуатацию',
-        izm: 'да/нет'
+        aim: 'Снижение затрат на эксплуатацию',
+        plan: null,
+        changes: 'да/нет'
       }, {
-        label: 'Повышение энергоэффективности',
-        izm: 'да/нет'
+        aim: 'Повышение энергоэффективности',
+        plan: null,
+        changes: 'да/нет'
       }, {
-        label: 'Восстановление (ремонт, реставрация, за исключением реконструкции) объектов культурного наследия ',
-        izm: 'да/нет'
-      }],
-      newElems: [],
-      dataItems: {
-        aims: [],
-        plan: [],
-        izm: []
-      },
-      lastIndex: 5
+        aim: 'Восстановление (ремонт, реставрация, за исключением реконструкции) объектов культурного наследия ',
+        plan: null,
+        changes: 'да/нет'
+      }, {
+        aim: null,
+        plan: null,
+        changes: null
+      }]
     };
-  },
-  computed: {
-    second_index: function second_index() {
-      var _this = this;
-
-      return function (index) {
-        return index + 5 && _this.setLastIndex(index);
-      };
-    }
   },
   methods: {
     addNewRow: function addNewRow() {
-      var returd = this.newElems.length;
-      this.newElems.push(returd); // console.log(this.newElems)
+      this.dataFirst.push({
+        aim: null,
+        plan: null,
+        changes: null
+      });
     },
     deleteLastRow: function deleteLastRow() {
-      this.newElems.pop();
-      this.dataItems.aims.pop();
-      this.dataItems.plan.pop();
-      this.dataItems.izm.pop();
-    },
-    setLastIndex: function setLastIndex(index) {
-      this.lastIndex = index;
+      this.dataFirst.pop();
     }
   }
 });
@@ -1441,7 +1547,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.extra-table-class {\r\n    vertical-align: middle !important;\r\n    text-align: center;\n}\n.vertical-align-centre-extra-table {\r\n    vertical-align: middle !important;\n}\n.overflow {\r\n    overflow: hidden;\n}\r\n", ""]);
+exports.push([module.i, "\n.extra-table-class {\r\n    vertical-align: middle !important;\r\n    text-align: center;\n}\n.vertical-align-centre-extra-table {\r\n    vertical-align: middle !important;\n}\n.overflow {\r\n    overflow: hidden;\n}\n.normal-font-weight-for-table {\r\n    font-weight: normal !important;\n}\n.cell-center-for-table {\r\n    vertical-align: middle !important;\r\n    text-align: center !important;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -1881,176 +1987,301 @@ var render = function() {
     "div",
     { staticClass: "overflow" },
     [
-      _c("b-table", {
-        attrs: { bordered: "", fields: _vm.fields, items: _vm.items },
-        scopedSlots: _vm._u([
-          {
-            key: "cell(nalichie)",
-            fn: function(row) {
-              return [
-                _c("input", {
-                  directives: [
+      _c(
+        "b-table-simple",
+        { attrs: { bordered: "", hover: "", responsive: "" } },
+        [
+          _c(
+            "b-thead",
+            [
+              _c(
+                "b-tr",
+                [
+                  _c("b-th", [
+                    _vm._v(
+                      "Строительные конструкции замена и (или) восстановление которых планируются при капитальном ремонте"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("b-th", [_vm._v("Наличие на объекте")]),
+                  _vm._v(" "),
+                  _c("b-th", [_vm._v("Материал конструкции")]),
+                  _vm._v(" "),
+                  _c("b-th", [
+                    _vm._v(
+                      "Срок эксплуатации с момента строительства или предыдущего капитального ремонта"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("b-th", [_vm._v("Требуется капитальный ремонт")]),
+                  _vm._v(" "),
+                  _c("b-th", [_vm._v("Обоснование необходимости")])
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-tbody",
+            _vm._l(_vm.items, function(item, index) {
+              return _c(
+                "b-tr",
+                { key: index },
+                [
+                  _c(
+                    "b-th",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.nalichie[row.index],
-                      expression: "nalichie[row.index]"
-                    }
-                  ],
-                  attrs: { type: "checkbox" },
-                  domProps: {
-                    value: "check" + row.index,
-                    checked: Array.isArray(_vm.nalichie[row.index])
-                      ? _vm._i(_vm.nalichie[row.index], "check" + row.index) >
-                        -1
-                      : _vm.nalichie[row.index]
-                  },
-                  on: {
-                    change: function($event) {
-                      var $$a = _vm.nalichie[row.index],
-                        $$el = $event.target,
-                        $$c = $$el.checked ? true : false
-                      if (Array.isArray($$a)) {
-                        var $$v = "check" + row.index,
-                          $$i = _vm._i($$a, $$v)
-                        if ($$el.checked) {
-                          $$i < 0 &&
-                            _vm.$set(_vm.nalichie, row.index, $$a.concat([$$v]))
-                        } else {
-                          $$i > -1 &&
-                            _vm.$set(
-                              _vm.nalichie,
-                              row.index,
-                              $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                            )
+                      staticClass:
+                        "normal-font-weight-for-table cell-center-for-table"
+                    },
+                    [_c("label", [_vm._v(_vm._s(item.label))])]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-th",
+                    { staticClass: "cell-center-for-table" },
+                    [
+                      _c("b-form-checkbox", {
+                        attrs: { type: "checkbox", value: "check" + index },
+                        model: {
+                          value: item.nalichie,
+                          callback: function($$v) {
+                            _vm.$set(item, "nalichie", $$v)
+                          },
+                          expression: "item.nalichie"
                         }
-                      } else {
-                        _vm.$set(_vm.nalichie, row.index, $$c)
-                      }
-                    }
-                  }
-                })
-              ]
-            }
-          },
-          {
-            key: "cell(material)",
-            fn: function(row) {
-              return [
-                _vm.nalichie[row.index]
-                  ? _c("b-form-input", {
-                      attrs: { placeholder: "Материалы", type: "text" },
-                      model: {
-                        value: _vm.dataToSend.material[row.index],
-                        callback: function($$v) {
-                          _vm.$set(_vm.dataToSend.material, row.index, $$v)
-                        },
-                        expression: "dataToSend.material[row.index]"
-                      }
-                    })
-                  : _vm._e()
-              ]
-            }
-          },
-          {
-            key: "cell(srok_eks)",
-            fn: function(row) {
-              return [
-                _vm.nalichie[row.index]
-                  ? _c("b-form-input", {
-                      attrs: { type: "text" },
-                      model: {
-                        value: _vm.dataToSend.srok_eks[row.index],
-                        callback: function($$v) {
-                          _vm.$set(_vm.dataToSend.srok_eks, row.index, $$v)
-                        },
-                        expression: "dataToSend.srok_eks[row.index]"
-                      }
-                    })
-                  : _vm._e()
-              ]
-            }
-          },
-          {
-            key: "cell(kap_remont)",
-            fn: function(row) {
-              return [
-                _vm.nalichie[row.index]
-                  ? _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.dataToSend.kap_remont[row.index],
-                          expression: "dataToSend.kap_remont[row.index]"
-                        }
-                      ],
-                      attrs: { type: "checkbox" },
-                      domProps: {
-                        value: "rem" + row.index,
-                        checked: Array.isArray(
-                          _vm.dataToSend.kap_remont[row.index]
-                        )
-                          ? _vm._i(
-                              _vm.dataToSend.kap_remont[row.index],
-                              "rem" + row.index
-                            ) > -1
-                          : _vm.dataToSend.kap_remont[row.index]
-                      },
-                      on: {
-                        change: function($event) {
-                          var $$a = _vm.dataToSend.kap_remont[row.index],
-                            $$el = $event.target,
-                            $$c = $$el.checked ? true : false
-                          if (Array.isArray($$a)) {
-                            var $$v = "rem" + row.index,
-                              $$i = _vm._i($$a, $$v)
-                            if ($$el.checked) {
-                              $$i < 0 &&
-                                _vm.$set(
-                                  _vm.dataToSend.kap_remont,
-                                  row.index,
-                                  $$a.concat([$$v])
-                                )
-                            } else {
-                              $$i > -1 &&
-                                _vm.$set(
-                                  _vm.dataToSend.kap_remont,
-                                  row.index,
-                                  $$a.slice(0, $$i).concat($$a.slice($$i + 1))
-                                )
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-th",
+                    { staticClass: "cell-center-for-table" },
+                    [
+                      item.nalichie
+                        ? _c("b-form-input", {
+                            attrs: { placeholder: "Материалы", type: "text" },
+                            model: {
+                              value: item.material,
+                              callback: function($$v) {
+                                _vm.$set(item, "material", $$v)
+                              },
+                              expression: "item.material"
                             }
-                          } else {
-                            _vm.$set(_vm.dataToSend.kap_remont, row.index, $$c)
-                          }
+                          })
+                        : _vm._e()
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-th",
+                    { staticClass: "cell-center-for-table" },
+                    [
+                      item.nalichie
+                        ? _c("b-form-input", {
+                            attrs: { type: "text", placeholder: "Срок" },
+                            model: {
+                              value: item.srok_eks,
+                              callback: function($$v) {
+                                _vm.$set(item, "srok_eks", $$v)
+                              },
+                              expression: "item.srok_eks"
+                            }
+                          })
+                        : _vm._e()
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-th",
+                    { staticClass: "cell-center-for-table" },
+                    [
+                      item.nalichie
+                        ? _c("b-form-checkbox", {
+                            attrs: { type: "checkbox", value: "rem" + index },
+                            model: {
+                              value: item.kap_remont,
+                              callback: function($$v) {
+                                _vm.$set(item, "kap_remont", $$v)
+                              },
+                              expression: "item.kap_remont"
+                            }
+                          })
+                        : _vm._e()
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-th",
+                    { staticClass: "cell-center-for-table" },
+                    [
+                      item.nalichie
+                        ? _c("b-form-input", {
+                            attrs: { type: "text", placeholder: "Обоснование" },
+                            model: {
+                              value: item.obosnovanie,
+                              callback: function($$v) {
+                                _vm.$set(item, "obosnovanie", $$v)
+                              },
+                              expression: "item.obosnovanie"
+                            }
+                          })
+                        : _vm._e()
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            }),
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "b-table-simple",
+        { attrs: { bordered: "", hover: "", responsive: "" } },
+        [
+          _c(
+            "b-thead",
+            [
+              _c(
+                "b-tr",
+                [
+                  _c("b-th", [
+                    _vm._v(
+                      "Системы инженерно-технического обеспечения замена и (или) восстановление которых планируются при капитальном ремонте"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("b-th", [_vm._v("Наличие на объекте")]),
+                  _vm._v(" "),
+                  _c("b-th", [
+                    _vm._v(
+                      "Срок эксплуатации с момента строительства или предыдущего капитального ремонта"
+                    )
+                  ]),
+                  _vm._v(" "),
+                  _c("b-th", [_vm._v("Требуется капитальный ремонт")]),
+                  _vm._v(" "),
+                  _c("b-th", [_vm._v("Обоснование необходимости")])
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-tbody",
+            _vm._l(_vm.itemsTwo, function(item, index) {
+              return _c(
+                "b-tr",
+                { key: index },
+                [
+                  _c(
+                    "b-th",
+                    {
+                      staticClass:
+                        "normal-font-weight-for-table cell-center-for-table"
+                    },
+                    [_c("label", [_vm._v(_vm._s(item.label))])]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-th",
+                    { staticClass: "cell-center-for-table" },
+                    [
+                      _c("b-form-checkbox", {
+                        attrs: { type: "checkbox", value: "check2" + index },
+                        model: {
+                          value: item.nalichie,
+                          callback: function($$v) {
+                            _vm.$set(item, "nalichie", $$v)
+                          },
+                          expression: "item.nalichie"
                         }
-                      }
-                    })
-                  : _vm._e()
-              ]
-            }
-          },
-          {
-            key: "cell(obosnovanie)",
-            fn: function(row) {
-              return [
-                _vm.nalichie[row.index]
-                  ? _c("b-form-input", {
-                      attrs: { placeholder: "Обоснование", type: "text" },
-                      model: {
-                        value: _vm.dataToSend.obosnovanie[row.index],
-                        callback: function($$v) {
-                          _vm.$set(_vm.dataToSend.obosnovanie, row.index, $$v)
-                        },
-                        expression: "dataToSend.obosnovanie[row.index]"
-                      }
-                    })
-                  : _vm._e()
-              ]
-            }
-          }
-        ])
-      })
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-th",
+                    { staticClass: "cell-center-for-table" },
+                    [
+                      item.nalichie
+                        ? _c("b-form-input", {
+                            attrs: { type: "text", placeholder: "Срок" },
+                            model: {
+                              value: item.srok_eks,
+                              callback: function($$v) {
+                                _vm.$set(item, "srok_eks", $$v)
+                              },
+                              expression: "item.srok_eks"
+                            }
+                          })
+                        : _vm._e()
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-th",
+                    { staticClass: "cell-center-for-table" },
+                    [
+                      item.nalichie
+                        ? _c("b-form-checkbox", {
+                            attrs: { type: "checkbox", value: "rem2" + index },
+                            model: {
+                              value: item.kap_remont,
+                              callback: function($$v) {
+                                _vm.$set(item, "kap_remont", $$v)
+                              },
+                              expression: "item.kap_remont"
+                            }
+                          })
+                        : _vm._e()
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-th",
+                    { staticClass: "cell-center-for-table" },
+                    [
+                      item.nalichie
+                        ? _c("b-form-input", {
+                            attrs: { type: "text", placeholder: "Обоснование" },
+                            model: {
+                              value: item.obosnovanie,
+                              callback: function($$v) {
+                                _vm.$set(item, "obosnovanie", $$v)
+                              },
+                              expression: "item.obosnovanie"
+                            }
+                          })
+                        : _vm._e()
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            }),
+            1
+          )
+        ],
+        1
+      )
     ],
     1
   )
@@ -2115,11 +2346,11 @@ var render = function() {
                       _c("b-form-input", {
                         attrs: { type: "text" },
                         model: {
-                          value: _vm.dataItems.types[index],
+                          value: item.types,
                           callback: function($$v) {
-                            _vm.$set(_vm.dataItems.types, index, $$v)
+                            _vm.$set(item, "types", $$v)
                           },
-                          expression: "dataItems.types[index]"
+                          expression: "item.types"
                         }
                       })
                     ],
@@ -2132,11 +2363,11 @@ var render = function() {
                       _c("b-form-input", {
                         attrs: { type: "text" },
                         model: {
-                          value: _vm.dataItems.poison[index],
+                          value: item.poison,
                           callback: function($$v) {
-                            _vm.$set(_vm.dataItems.poison, index, $$v)
+                            _vm.$set(item, "poison", $$v)
                           },
-                          expression: "dataItems.poison[index]"
+                          expression: "item.poison"
                         }
                       })
                     ],
@@ -2149,11 +2380,11 @@ var render = function() {
                       _c("b-form-input", {
                         attrs: { type: "text" },
                         model: {
-                          value: _vm.dataItems.protect[index],
+                          value: item.protect,
                           callback: function($$v) {
-                            _vm.$set(_vm.dataItems.protect, index, $$v)
+                            _vm.$set(item, "protect", $$v)
                           },
-                          expression: "dataItems.protect[index]"
+                          expression: "item.protect"
                         }
                       })
                     ],
@@ -2172,7 +2403,7 @@ var render = function() {
               _c(
                 "b-tr",
                 [
-                  _vm.items.length
+                  _vm.items.length > 1
                     ? _c(
                         "b-td",
                         {
@@ -2195,7 +2426,7 @@ var render = function() {
                   _c(
                     "b-td",
                     {
-                      staticClass: "text-right",
+                      staticClass: "text-right text-info",
                       attrs: { colspan: "3", variant: "secondary" },
                       on: {
                         click: function($event) {
@@ -2508,114 +2739,72 @@ var render = function() {
           _vm._v(" "),
           _c(
             "b-tbody",
-            [
-              _vm._l(_vm.items, function(item, index) {
-                return _c(
-                  "b-tr",
-                  { key: index },
-                  [
-                    _c("b-th", { staticClass: "font-normal-first-colomn" }, [
-                      _c("label", [_vm._v(_vm._s(item.label))])
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "b-th",
-                      [
-                        _c("b-form-input", {
-                          attrs: { type: "text" },
-                          model: {
-                            value: _vm.dataItems.plan[index],
-                            callback: function($$v) {
-                              _vm.$set(_vm.dataItems.plan, index, $$v)
-                            },
-                            expression: "dataItems.plan[index]"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c("b-th", { staticClass: "font-normal-first-colomn" }, [
-                      _c("label", [_vm._v(_vm._s(item.izm))])
-                    ])
-                  ],
-                  1
-                )
-              }),
-              _vm._v(" "),
-              _vm._l(_vm.newElems, function(item, index) {
-                return _c(
-                  "b-tr",
-                  { key: index + 5 },
-                  [
-                    _c(
-                      "b-th",
-                      [
-                        _c("b-form-input", {
-                          attrs: { type: "text" },
-                          model: {
-                            value: _vm.dataItems.aims[_vm.second_index(index)],
-                            callback: function($$v) {
-                              _vm.$set(
-                                _vm.dataItems.aims,
-                                _vm.second_index(index),
-                                $$v
-                              )
-                            },
-                            expression: "dataItems.aims[second_index(index)]"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "b-th",
-                      [
-                        _c("b-form-input", {
-                          attrs: { type: "text" },
-                          model: {
-                            value: _vm.dataItems.plan[_vm.second_index(index)],
-                            callback: function($$v) {
-                              _vm.$set(
-                                _vm.dataItems.plan,
-                                _vm.second_index(index),
-                                $$v
-                              )
-                            },
-                            expression: "dataItems.plan[second_index(index)]"
-                          }
-                        })
-                      ],
-                      1
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "b-th",
-                      [
-                        _c("b-form-input", {
-                          attrs: { type: "text" },
-                          model: {
-                            value: _vm.dataItems.izm[_vm.second_index(index)],
-                            callback: function($$v) {
-                              _vm.$set(
-                                _vm.dataItems.izm,
-                                _vm.second_index(index),
-                                $$v
-                              )
-                            },
-                            expression: "dataItems.izm[second_index(index)]"
-                          }
-                        })
-                      ],
-                      1
-                    )
-                  ],
-                  1
-                )
-              })
-            ],
-            2
+            _vm._l(_vm.dataFirst, function(item, index) {
+              return _c(
+                "b-tr",
+                { key: index },
+                [
+                  _c(
+                    "b-th",
+                    { staticClass: "font-normal-first-colomn" },
+                    [
+                      index < 5
+                        ? _c("label", [_vm._v(_vm._s(item.aim))])
+                        : _c("b-form-input", {
+                            attrs: { type: "text" },
+                            model: {
+                              value: item.aim,
+                              callback: function($$v) {
+                                _vm.$set(item, "aim", $$v)
+                              },
+                              expression: "item.aim"
+                            }
+                          })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-th",
+                    [
+                      _c("b-form-input", {
+                        attrs: { type: "text" },
+                        model: {
+                          value: item.plan,
+                          callback: function($$v) {
+                            _vm.$set(item, "plan", $$v)
+                          },
+                          expression: "item.plan"
+                        }
+                      })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-th",
+                    { staticClass: "font-normal-first-colomn" },
+                    [
+                      index < 5
+                        ? _c("label", [_vm._v(_vm._s(item.changes))])
+                        : _c("b-form-input", {
+                            attrs: { type: "text" },
+                            model: {
+                              value: item.changes,
+                              callback: function($$v) {
+                                _vm.$set(item, "changes", $$v)
+                              },
+                              expression: "item.changes"
+                            }
+                          })
+                    ],
+                    1
+                  )
+                ],
+                1
+              )
+            }),
+            1
           ),
           _vm._v(" "),
           _c(
@@ -2624,15 +2813,40 @@ var render = function() {
               _c(
                 "b-tr",
                 [
+                  _vm.dataFirst.length > 6
+                    ? _c(
+                        "b-td",
+                        {
+                          staticClass: "text-right text-danger",
+                          attrs: { colspan: "2", variant: "secondary" },
+                          on: {
+                            click: function($event) {
+                              return _vm.deleteLastRow()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                    Удалить строку\n                "
+                          )
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
                   _c(
                     "b-td",
                     {
-                      staticClass: "text-right",
-                      attrs: { colspan: "3", variant: "secondary" }
+                      staticClass: "text-right text-info",
+                      attrs: { colspan: "3", variant: "secondary" },
+                      on: {
+                        click: function($event) {
+                          return _vm.addNewRow()
+                        }
+                      }
                     },
                     [
                       _vm._v(
-                        "\n                    Скоро здесь можно будет добавить строку\n                "
+                        "\n                    Добавить строку\n                "
                       )
                     ]
                   )
@@ -2717,7 +2931,11 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("b-form-input", {
-                  attrs: { id: "name", name: "name" },
+                  attrs: {
+                    placeholder: "Название...",
+                    id: "name",
+                    name: "name"
+                  },
                   model: {
                     value: _vm.formData.name,
                     callback: function($$v) {
@@ -3254,8 +3472,7 @@ var render = function() {
                         attrs: {
                           id: "accordion-2",
                           accordion: "my-accordion",
-                          role: "tabpanel",
-                          visible: ""
+                          role: "tabpanel"
                         }
                       },
                       [
@@ -3311,7 +3528,8 @@ var render = function() {
                         attrs: {
                           id: "accordion-3",
                           accordion: "my-accordion",
-                          role: "tabpanel"
+                          role: "tabpanel",
+                          visible: ""
                         }
                       },
                       [_c("b-card-body", [_c("v-necessary")], 1)],
@@ -3475,7 +3693,7 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("b-button", { attrs: { type: "submit", variant: "primary" } }, [
+          _c("b-button", { attrs: { type: "submit", variant: "info" } }, [
             _vm._v("Сохранить")
           ]),
           _vm._v(" "),
