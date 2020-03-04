@@ -35,7 +35,7 @@ deploy_files:
   script:
     - EXCLUDE={'.git*','rsync.log','vendor/',
     - EXCLUDE+='rbac/assignments.php','runtime/',
-    - EXCLUDE+='web/assets/','web/uploads/','web/index.php'
+    - EXCLUDE+='web/assets/','web/uploads/'
     - EXCLUDE+='commands/private/'}
     - '[ -f rsync.log ]&& rm rsync.log'
     - echo $EXCLUDE
