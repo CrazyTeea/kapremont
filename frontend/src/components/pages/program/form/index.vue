@@ -14,7 +14,7 @@
             <div class="row mt-3">
                 <div class="col-12">
                     <label for="name">Название объекта:</label>
-                    <b-form-input id="name" name="name" v-model="formData.name"/>
+                    <b-form-input placeholder="Название..." id="name" name="name" v-model="formData.name" />
                     <br>
                     <b-card no-body class="mb-1">
                         <b-card-header header-tag="header" class="p-1" role="tab">
@@ -145,6 +145,49 @@
                          </b-card-header>
                          <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel">
                              <b-card-body>
+                        <b-card-header header-tag="header" class="p-1" role="tab">
+                       <span  class="toggle_button" v-b-toggle.accordion-3 >
+                           <b-icon-gear-wide-connected />
+                           Обоснование необходимости (целесообразности) планируемых мероприятий</span>
+                        </b-card-header>
+                        <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel" visible>
+                            <b-card-body>
+                                <v-necessary />
+                            </b-card-body>
+                        </b-collapse>
+                    </b-card>
+                    <b-card no-body class="mb-1">
+                        <b-card-header header-tag="header" class="p-1" role="tab">
+                       <span  class="toggle_button" v-b-toggle.accordion-4 >
+                           <b-icon-gear-wide-connected />
+                           Ожидаемые результаты</span>
+                        </b-card-header>
+                        <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
+                            <b-card-body>
+                                <v-waited />
+                            </b-card-body>
+                        </b-collapse>
+                    </b-card>
+                    <b-card no-body class="mb-1">
+                        <b-card-header header-tag="header" class="p-1" role="tab">
+                       <span  class="toggle_button" v-b-toggle.accordion-5  >
+                           <b-icon-gear-wide-connected />
+                           Прогнозируемые риски</span>
+                        </b-card-header>
+                        <b-collapse id="accordion-5" accordion="my-accordion" role="tabpanel">
+                            <b-card-body>
+                                <v-riscs />
+                            </b-card-body>
+                        </b-collapse>
+                    </b-card>
+                    <b-card no-body class="mb-1">
+                        <b-card-header header-tag="header" class="p-1" role="tab">
+                       <span  class="toggle_button" v-b-toggle.accordion-6 >
+                           <b-icon-gear-wide-connected />
+                          Опись прилагаемых документов</span>
+                        </b-card-header>
+                        <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel">
+                            <b-card-body>
 
                              </b-card-body>
                          </b-collapse>
@@ -153,7 +196,7 @@
 
 
             </div>
-            <b-button type="submit" variant="primary">Сохранить</b-button>
+            <b-button type="submit" variant="info">Сохранить</b-button>
             <b-button type="reset" variant="danger">Сброс</b-button>
         </b-form>
     </div>
