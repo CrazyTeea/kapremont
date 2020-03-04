@@ -6,12 +6,12 @@
             :items="items"
         >
             <template v-slot:cell(nalichie)="row">
-                <input type="checkbox" :value="'check' + row.index" v-model="nalichie[row.index]">
+                <input type="checkbox" :value="'check' + row.index" v-model="dataToSend.nalichie[row.index]">
                 <!-- <label @click="returnData(row)" :for="'check' + row.index">{{ row.index }}</label> -->
             </template>
             <template v-slot:cell(material)="row">
                 <b-form-input
-                    v-if="nalichie[row.index]"
+                    v-if="dataToSend.nalichie[row.index]"
                     v-model="dataToSend.material[row.index]" 
                     placeholder="Материалы"
                     type="text"
@@ -20,14 +20,14 @@
             <template v-slot:cell(srok_eks)="row">
                 <b-form-input 
                     type="text"
-                    v-if="nalichie[row.index]"
+                    v-if="dataToSend.nalichie[row.index]"
                     v-model="dataToSend.srok_eks[row.index]" 
                 ></b-form-input>
             </template>
             <template v-slot:cell(kap_remont)="row">
                 <input 
                 type="checkbox"
-                v-if="nalichie[row.index]"
+                v-if="dataToSend.nalichie[row.index]"
                 :value="'rem' + row.index"
                 v-model="dataToSend.kap_remont[row.index]" 
                 >
@@ -36,7 +36,7 @@
                 <b-form-input 
                 placeholder="Обоснование"
                 type="text"
-                v-if="nalichie[row.index]"
+                v-if="dataToSend.nalichie[row.index]"
                 v-model="dataToSend.obosnovanie[row.index]" 
                 ></b-form-input>
             </template>
@@ -109,6 +109,9 @@ export default {
         }
     },
     methods: {
+        getData(){
+          return this.dataToSend;
+        },
         returnData(data) {
             // console.log(data)
             // console.log(this.material)
