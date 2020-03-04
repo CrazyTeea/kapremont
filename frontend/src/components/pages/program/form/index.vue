@@ -113,7 +113,7 @@
                              </b-card-body>
                          </b-collapse>
                      </b-card>
-                    <!--  <b-card no-body class="mb-1">
+                     <b-card no-body class="mb-1">
                          <b-card-header header-tag="header" class="p-1" role="tab">
                         <span  class="toggle_button" v-b-toggle.accordion-4 >
                             <b-icon-gear-wide-connected />
@@ -121,7 +121,7 @@
                          </b-card-header>
                          <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
                              <b-card-body>
-                                 <v-waited />
+                                 <v-waited ref="waited"/>
                              </b-card-body>
                          </b-collapse>
                      </b-card>
@@ -137,61 +137,19 @@
                              </b-card-body>
                          </b-collapse>
                      </b-card>
-                     <b-card no-body class="mb-1">
-                         <b-card-header header-tag="header" class="p-1" role="tab">
-                        <span  class="toggle_button" v-b-toggle.accordion-6 >
-                            <b-icon-gear-wide-connected />
-                           Опись прилагаемых документов</span>
-                         </b-card-header>
-                         <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel">
-                             <b-card-body>
-                        <b-card-header header-tag="header" class="p-1" role="tab">
-                       <span  class="toggle_button" v-b-toggle.accordion-3 >
-                           <b-icon-gear-wide-connected />
-                           Обоснование необходимости (целесообразности) планируемых мероприятий</span>
-                        </b-card-header>
-                        <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel" visible>
-                            <b-card-body>
-                                <v-necessary />
-                            </b-card-body>
-                        </b-collapse>
-                    </b-card>
-                    <b-card no-body class="mb-1">
-                        <b-card-header header-tag="header" class="p-1" role="tab">
-                       <span  class="toggle_button" v-b-toggle.accordion-4 >
-                           <b-icon-gear-wide-connected />
-                           Ожидаемые результаты</span>
-                        </b-card-header>
-                        <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
-                            <b-card-body>
-                                <v-waited />
-                            </b-card-body>
-                        </b-collapse>
-                    </b-card>
-                    <b-card no-body class="mb-1">
-                        <b-card-header header-tag="header" class="p-1" role="tab">
-                       <span  class="toggle_button" v-b-toggle.accordion-5  >
-                           <b-icon-gear-wide-connected />
-                           Прогнозируемые риски</span>
-                        </b-card-header>
-                        <b-collapse id="accordion-5" accordion="my-accordion" role="tabpanel">
-                            <b-card-body>
-                                <v-riscs />
-                            </b-card-body>
-                        </b-collapse>
-                    </b-card>
-                    <b-card no-body class="mb-1">
-                        <b-card-header header-tag="header" class="p-1" role="tab">
-                       <span  class="toggle_button" v-b-toggle.accordion-6 >
-                           <b-icon-gear-wide-connected />
-                          Опись прилагаемых документов</span>
-                        </b-card-header>
-                        <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel">
-                            <b-card-body>
+                    <!--
+                   <b-card no-body class="mb-1">
+                       <b-card-header header-tag="header" class="p-1" role="tab">
+                      <span  class="toggle_button" v-b-toggle.accordion-6 >
+                          <b-icon-gear-wide-connected />
+                         Опись прилагаемых документов</span>
+                       </b-card-header>
+                       <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel">
+                           <b-card-body>
 
-                             </b-card-body>
-                         </b-collapse>
-                     </b-card>-->
+                            </b-card-body>
+                        </b-collapse>
+                    </b-card>-->
             </div>
 
 
@@ -289,6 +247,12 @@
                 })
                 Object.keys(this.$refs.necessary.getData()).forEach(item=>{
                     formData.append(`ProObjectsNecessary[${item}]`,this.$refs.necessary.getData()[item]);
+                })
+                Object.keys(this.$refs.necessary.getData()).forEach(item=>{
+                    formData.append(`ProObjectsNecessary[${item}]`,this.$refs.necessary.getData()[item]);
+                })
+                Object.keys(this.$refs.waited.getData()).forEach(item=>{
+                    formData.append(`ProgObjectsWaites[${item}]`,this.$refs.waited.getData()[item]);
                 })
 
 

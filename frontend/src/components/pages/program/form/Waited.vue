@@ -62,6 +62,8 @@
 </template>
 
 <script>
+import {orgInfo} from "../../organization";
+
 export default {
     data(){
         return {
@@ -88,6 +90,19 @@ export default {
         deleteLastRow: function() {
             this.dataFirst.pop()
         },
+        getData(){
+            let kek = [];
+            kek['aim'] = [];
+            kek['plan'] = [];
+            kek['changes'] = [];
+            this.dataFirst.forEach((item)=>{
+                //kek['aim'].push(item.aim);
+                kek['plan'].push(item.plan);
+                //kek['changes'].push(item.changes);
+            });
+
+            return kek;
+        }
     }
 }
 </script>
