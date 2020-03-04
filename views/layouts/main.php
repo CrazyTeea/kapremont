@@ -72,7 +72,7 @@ GlyphiconAsset::register($this);
         ]) ?>
         <?= Alert::widget() ?>
 
-
+        <?= (Yii::$app->requestedRoute) == 'site/login' ? $content : '' ?>
         <div id="app"></div>
     </div>
 </div>
