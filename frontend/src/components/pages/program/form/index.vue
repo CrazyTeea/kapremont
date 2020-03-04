@@ -13,8 +13,6 @@
 
             <div class="row mt-3">
                 <div class="col-12">
-
-
                     <label for="name">Название объекта:</label>
                     <b-form-input id="name" name="name" v-model="formData.name"/>
                     <br>
@@ -91,19 +89,19 @@
                             </b-card-body>
                         </b-collapse>
                     </b-card>
-                    <!--<b-card no-body class="mb-1">
+                    <b-card no-body class="mb-1">
                         <b-card-header header-tag="header" class="p-1" role="tab">
                        <span class="toggle_button" v-b-toggle.accordion-2>
                            <b-icon-gear-wide-connected />
                            Сведения о планируемых мероприятиях</span>
                         </b-card-header>
-                        <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
+                        <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel" visible>
                             <b-card-body>
                                 <v-svedenia ref="svedenia"/>
                             </b-card-body>
                         </b-collapse>
                     </b-card>
-                    <b-card no-body class="mb-1">
+                   <!-- <b-card no-body class="mb-1">
                         <b-card-header header-tag="header" class="p-1" role="tab">
                        <span  class="toggle_button" v-b-toggle.accordion-3 >
                            <b-icon-gear-wide-connected />
@@ -123,7 +121,7 @@
                         </b-card-header>
                         <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
                             <b-card-body>
-
+                                <v-waited />
                             </b-card-body>
                         </b-collapse>
                     </b-card>
@@ -135,7 +133,7 @@
                         </b-card-header>
                         <b-collapse id="accordion-5" accordion="my-accordion" role="tabpanel">
                             <b-card-body>
-
+                                <v-riscs />
                             </b-card-body>
                         </b-collapse>
                     </b-card>
@@ -168,6 +166,8 @@
 
     import Svedenia from './Svedenia.vue';
     import Necessary from './Necessary.vue';
+    import Riscs from './Riscs.vue';
+    import Waited from './Waited.vue';
     import Axios from 'axios'
 
     export default {
@@ -176,7 +176,9 @@
             "v-svedenia": Svedenia,
             "v-user-panel":userPanel,
             "v-select2": Multiselect,
-            "v-necessary": Necessary
+            "v-necessary": Necessary,
+            "v-waited": Waited,
+            "v-riscs": Riscs
         },
         computed:{
             ...mapGetters(['getPageData','getCities']),
@@ -185,7 +187,9 @@
                 return pattern.test(this.formData.kad_number);
             },
             con_year_validator(){
-                return this.formData.year.length===4
+                let pattern = /^[1-2][0-9]{1}\d{2}/;
+                return pattern.test(this.formData.year)
+                // return this.formData.year.length===4 && this.formData.year[0]===1
             },
             exp_year_validator(){
                 return this.formData.exploit_year.length===4

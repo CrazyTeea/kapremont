@@ -2,10 +2,12 @@
 
 namespace app\controllers\app;
 
+use app\models\ProgObjectsEvents;
 use Yii;
 use app\models\ProgramObjects;
 use app\models\ProgramObjectsSearch;
 use app\controllers\app\AppController;
+use yii\base\Model;
 use yii\db\Transaction;
 use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
@@ -64,15 +66,47 @@ class ProgramObjectsController extends AppController
     {
 
         $model = new ProgramObjects();
-       // $model->id_org = Yii::$app->session->get('user')->id_org;
+        $model->id_org = Yii::$app->session->get('user')->id_org;
         $program = Yii::$app->session->get('program');
         if (!$program)
             return $this->redirect(['/']);
+
         $model->id_program = $program->id;
         $save = true;
         if ($model->load(Yii::$app->request->post())) {
             $transaction = Yii::$app->getDb()->beginTransaction();
             $save &= $model->save();
+            $errors['ProgramObjects'] = $model->getErrors();
+
+            $_progObjEv = explode(',',Yii::$app->request->post()['ProgObjectsEvents']['is_nessesary']);
+            $_progObjEv_bd = explode(',',Yii::$app->request->post()['ProgObjectsEvents']['begin_date']);
+            $_progObjEv_fd = explode(',',Yii::$app->request->post()['ProgObjectsEvents']['final_date']);
+            $_progObjEv_cost = explode(',',Yii::$app->request->post()['ProgObjectsEvents']['realization_cost']);
+            $_progObjEv_sbf = explode(',',Yii::$app->request->post()['ProgObjectsEvents']['kap_cost']);
+            $_progObjEv_fvi = explode(',',Yii::$app->request->post()['ProgObjectsEvents']['finanse']);
+
+            foreach ($_progObjEv as $index => $item){
+                $progObjEv = new ProgObjectsEvents();
+                $progObjEv->id_object = $model->id ? : null;
+                $progObjEv->step = $index;
+                $progObjEv->is_nessesary = $item;
+                if (is_array($_progObjEv_bd) and isset($_progObjEv_bd[$index]))
+                    $progObjEv->date_event_start = $_progObjEv_bd[$index];
+                if (is_array($_progObjEv_bd) and isset($_progObjEv_bd[$index]))
+                    $progObjEv->date_event_end = $_progObjEv_fd[$index];
+                if (is_array($_progObjEv_cost) and isset($_progObjEv_cost[$index]))
+                    $progObjEv->cost_real = $_progObjEv_cost[$index];
+                if (is_array($_progObjEv_sbf) and isset($_progObjEv_sbf[$index]))
+                    $progObjEv->sum_bud_fin = $_progObjEv_sbf[$index];
+                if (is_array($_progObjEv_fvi) and isset($_progObjEv_fvi[$index]))
+                    $progObjEv->fin_vnebud_ist = $_progObjEv_fvi[$index];
+                $save &= $progObjEv->save();
+                $errors['ProgObjectsEvents'][] = $progObjEv->getErrors();
+            }
+
+            //foreach ()
+
+
             if ($save){
                 $transaction->commit();
                 return 'ok';
@@ -80,7 +114,7 @@ class ProgramObjectsController extends AppController
             else {
                 $transaction->rollBack();
                 Yii::$app->response->statusCode = 500;
-                return Json::encode($model->getErrors());
+                return Json::encode($errors);
             }
         }
 
