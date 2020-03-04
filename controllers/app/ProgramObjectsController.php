@@ -64,15 +64,26 @@ class ProgramObjectsController extends AppController
     {
 
         $model = new ProgramObjects();
-       // $model->id_org = Yii::$app->session->get('user')->id_org;
+        $model->id_org = Yii::$app->session->get('user')->id_org;
         $program = Yii::$app->session->get('program');
         if (!$program)
             return $this->redirect(['/']);
+
         $model->id_program = $program->id;
         $save = true;
         if ($model->load(Yii::$app->request->post())) {
             $transaction = Yii::$app->getDb()->beginTransaction();
             $save &= $model->save();
+
+
+
+            $progObjEv = Yii::$app->request->post()['ProgObjectsEvents']['is_nessesary'];
+
+            foreach ($progObjEv as $index => $item){
+
+            }
+
+
             if ($save){
                 $transaction->commit();
                 return 'ok';

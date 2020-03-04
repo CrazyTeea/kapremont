@@ -13,8 +13,6 @@
 
             <div class="row mt-3">
                 <div class="col-12">
-
-
                     <label for="name">Название объекта:</label>
                     <b-form-input id="name" name="name" v-model="formData.name"/>
                     <br>
@@ -91,66 +89,66 @@
                             </b-card-body>
                         </b-collapse>
                     </b-card>
-                    <!--<b-card no-body class="mb-1">
+                    <b-card no-body class="mb-1">
                         <b-card-header header-tag="header" class="p-1" role="tab">
                        <span class="toggle_button" v-b-toggle.accordion-2>
                            <b-icon-gear-wide-connected />
                            Сведения о планируемых мероприятиях</span>
                         </b-card-header>
-                        <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
+                        <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel" visible>
                             <b-card-body>
                                 <v-svedenia ref="svedenia"/>
                             </b-card-body>
                         </b-collapse>
                     </b-card>
-                    <b-card no-body class="mb-1">
-                        <b-card-header header-tag="header" class="p-1" role="tab">
-                       <span  class="toggle_button" v-b-toggle.accordion-3 >
-                           <b-icon-gear-wide-connected />
-                           Обоснование необходимости (целесообразности) планируемых мероприятий</span>
-                        </b-card-header>
-                        <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
-                            <b-card-body>
-                                <v-necessary />
-                            </b-card-body>
-                        </b-collapse>
-                    </b-card>
-                    <b-card no-body class="mb-1">
-                        <b-card-header header-tag="header" class="p-1" role="tab">
-                       <span  class="toggle_button" v-b-toggle.accordion-4 >
-                           <b-icon-gear-wide-connected />
-                           Ожидаемые результаты</span>
-                        </b-card-header>
-                        <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
-                            <b-card-body>
+                    <!--  <b-card no-body class="mb-1">
+                          <b-card-header header-tag="header" class="p-1" role="tab">
+                         <span  class="toggle_button" v-b-toggle.accordion-3 >
+                             <b-icon-gear-wide-connected />
+                             Обоснование необходимости (целесообразности) планируемых мероприятий</span>
+                          </b-card-header>
+                          <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
+                              <b-card-body>
+                                  <v-necessary />
+                              </b-card-body>
+                          </b-collapse>
+                      </b-card>
+                      <b-card no-body class="mb-1">
+                          <b-card-header header-tag="header" class="p-1" role="tab">
+                         <span  class="toggle_button" v-b-toggle.accordion-4 >
+                             <b-icon-gear-wide-connected />
+                             Ожидаемые результаты</span>
+                          </b-card-header>
+                          <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
+                              <b-card-body>
 
-                            </b-card-body>
-                        </b-collapse>
-                    </b-card>
-                    <b-card no-body class="mb-1">
-                        <b-card-header header-tag="header" class="p-1" role="tab">
-                       <span  class="toggle_button" v-b-toggle.accordion-5  >
-                           <b-icon-gear-wide-connected />
-                           Прогнозируемые риски</span>
-                        </b-card-header>
-                        <b-collapse id="accordion-5" accordion="my-accordion" role="tabpanel">
-                            <b-card-body>
+                              </b-card-body>
+                          </b-collapse>
+                      </b-card>
+                      <b-card no-body class="mb-1">
+                          <b-card-header header-tag="header" class="p-1" role="tab">
+                         <span  class="toggle_button" v-b-toggle.accordion-5  >
+                             <b-icon-gear-wide-connected />
+                             Прогнозируемые риски</span>
+                          </b-card-header>
+                          <b-collapse id="accordion-5" accordion="my-accordion" role="tabpanel">
+                              <b-card-body>
 
-                            </b-card-body>
-                        </b-collapse>
-                    </b-card>
-                    <b-card no-body class="mb-1">
-                        <b-card-header header-tag="header" class="p-1" role="tab">
-                       <span  class="toggle_button" v-b-toggle.accordion-6 >
-                           <b-icon-gear-wide-connected />
-                          Опись прилагаемых документов</span>
-                        </b-card-header>
-                        <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel">
-                            <b-card-body>
+                              </b-card-body>
+                          </b-collapse>
+                      </b-card>
+                      <b-card no-body class="mb-1">
+                          <b-card-header header-tag="header" class="p-1" role="tab">
+                         <span  class="toggle_button" v-b-toggle.accordion-6 >
+                             <b-icon-gear-wide-connected />
+                            Опись прилагаемых документов</span>
+                          </b-card-header>
+                          <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel">
+                              <b-card-body>
 
-                            </b-card-body>
-                        </b-collapse>
-                    </b-card>-->
+                              </b-card-body>
+                          </b-collapse>
+                      </b-card>-->
             </div>
 
 
@@ -185,7 +183,10 @@
                 return pattern.test(this.formData.kad_number);
             },
             con_year_validator(){
-                return this.formData.year.length===4
+                console.log(this.formData.year)
+                let pattern = /^[1-2][0-9]{1}\d{2}/;
+                return pattern.test(this.formData.year)
+                // return this.formData.year.length===4 && this.formData.year[0]===1
             },
             exp_year_validator(){
                 return this.formData.exploit_year.length===4
@@ -238,6 +239,7 @@
                     formData.append(`ProgramObjects[${item}]`,this.formData[item]);
                 });
                 Object.keys(this.$refs.svedenia.getSved()).forEach(item=>{
+                    //console.log(this.$refs.svedenia.getSved()[item]);
                     formData.append(`ProgObjectsEvents[${item}]`,this.$refs.svedenia.getSved()[item]);
                 })
 
