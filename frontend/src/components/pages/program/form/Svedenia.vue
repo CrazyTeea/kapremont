@@ -15,8 +15,8 @@
                         v-model="sved.is_nessesary[row.index]"
                         label="type"
                         :options="[
-                            {id:0,type:'Да'},
-                            {id:1,type:'Нет'}
+                            {id:1,type:'Да'},
+                            {id:0,type:'Нет'}
                         ]"
                         :reduce = "type => type.id"
                     />
@@ -234,10 +234,14 @@ import Multiselect from 'vue-select';
     }
 </script>
 
-<style soped>
-.date {
-    min-width: 111px !important;
-}
+<style>
+    .date {
+        min-width: 111px !important;
+    }
+</style>
+
+<style scoped>
+
 .hidden {
     overflow: hidden;
     overflow-x: scroll;

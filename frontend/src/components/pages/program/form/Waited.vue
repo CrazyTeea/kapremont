@@ -13,56 +13,47 @@
                 </b-tr>
                 </b-thead>
                 <b-tbody>
-                <b-tr v-for="(item, index) in items" :key="index">
+                <b-tr v-for="(item, index) in dataFirst" :key="index">
                     <b-th class="font-normal-first-colomn">
-                        <label>{{ item.label }}</label>
+                        <label v-if="index < 5">{{ item.aim }}</label>
+                        <b-form-input
+                            v-else
+                            type="text"
+                            v-model="item.aim" 
+                        ></b-form-input>
                     </b-th>
                     <b-th>
-                        <b-form-input 
+                        <b-form-input
                             type="text"
-                            v-model="dataItems.plan[index]" 
+                            v-model="item.plan"
                         ></b-form-input>
                     </b-th>
                     <b-th class="font-normal-first-colomn">
-                        <label>{{ item.izm }}</label>
-                    </b-th>
-                </b-tr>
-                <b-tr v-for="(item, index) in newElems" :key="index + 5">
-                    <b-th>
-                        <b-form-input 
+                        <label v-if="index < 5">{{ item.changes }}</label>
+                        <b-form-input
+                            v-else
                             type="text"
-                            v-model="dataItems.aims[second_index(index)]" 
-                        ></b-form-input>
-                    </b-th>
-                    <b-th>
-                        <b-form-input 
-                            type="text"
-                            v-model="dataItems.plan[second_index(index)]" 
-                        ></b-form-input>
-                    </b-th>
-                    <b-th>
-                        <b-form-input 
-                            type="text"
-                            v-model="dataItems.izm[second_index(index)]" 
+                            v-model="item.changes" 
                         ></b-form-input>
                     </b-th>
                 </b-tr>
                 </b-tbody>
                 <b-tfoot>
                 <b-tr>
-                    <!-- <b-td
+                    <b-td
                         @click="deleteLastRow()"
-                        v-if="this.lastIndex!=5"
+                        v-if="dataFirst.length > 6"
                         colspan="2"
                         variant="secondary"
                         class="text-right text-danger">
                         Удалить строку
-                    </b-td> -->
+                    </b-td>
                     <b-td
+                        @click="addNewRow()"
                         colspan="3"
                         variant="secondary"
-                        class="text-right">
-                        Скоро здесь можно будет добавить строку
+                        class="text-right text-info">
+                        Добавить строку
                     </b-td>
                 </b-tr>
                 </b-tfoot>
@@ -71,50 +62,33 @@
 </template>
 
 <script>
-import BootstrapVue from 'bootstrap-vue';
-
 export default {
     data(){
         return {
-            items: [
-                {label: 'Проведение капитального ремонта, общая площадь', izm: 'кв.м'},
-                {label: 'Вовлечение в хозяйственную деятельность за счет проведенного капитального ремонта, общая площадь', izm: 'кв.м'},
-                {label: 'Снижение затрат на эксплуатацию', izm: 'да/нет'},
-                {label: 'Повышение энергоэффективности', izm: 'да/нет'},
-                {label: 'Восстановление (ремонт, реставрация, за исключением реконструкции) объектов культурного наследия ', izm: 'да/нет'}
+            dataFirst: [
+                {aim: 'Проведение капитального ремонта, общая площадь', plan: null, changes: 'кв.м'},
+                {aim: 'Вовлечение в хозяйственную деятельность за счет проведенного капитального ремонта, общая площадь', plan: null, changes: 'кв.м'},
+                {aim: 'Снижение затрат на эксплуатацию', plan: null, changes: 'да/нет'},
+                {aim: 'Повышение энергоэффективности', plan: null, changes: 'да/нет'},
+                {aim: 'Восстановление (ремонт, реставрация, за исключением реконструкции) объектов культурного наследия ', plan: null, changes: 'да/нет'},
+                {aim: null, plan: null, changes: null}
             ],
-            newElems: [],
-            dataItems: {
-                aims: [],
-                plan: [],
-                izm: []
-            },
-            lastIndex: 5
-        }
-    },
-    computed: {
-        second_index() {
-            return index => index + 5 && this.setLastIndex(index)
         }
     },
     methods: {
         addNewRow: function() {
-            let returd = this.newElems.length
-            this.newElems.push(returd)
-            // console.log(this.newElems)
+            this.dataFirst.push(
+                {
+                    aim: null,
+                    plan: null,
+                    changes: null
+                }
+            )
         },
         deleteLastRow: function() {
-            this.newElems.pop()
-            this.dataItems.aims.pop()
-            this.dataItems.plan.pop()
-            this.dataItems.izm.pop()
+            this.dataFirst.pop()
         },
-        setLastIndex: function(index) {
-            
-            this.lastIndex = index
-        }
     }
-
 }
 </script>
 
