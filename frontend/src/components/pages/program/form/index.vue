@@ -91,7 +91,7 @@
                             </b-card-body>
                         </b-collapse>
                     </b-card>
-                    <b-card no-body class="mb-1">
+                    <!--<b-card no-body class="mb-1">
                         <b-card-header header-tag="header" class="p-1" role="tab">
                        <span class="toggle_button" v-b-toggle.accordion-2>
                            <b-icon-gear-wide-connected />
@@ -150,7 +150,7 @@
 
                             </b-card-body>
                         </b-collapse>
-                    </b-card>
+                    </b-card>-->
             </div>
 
 
