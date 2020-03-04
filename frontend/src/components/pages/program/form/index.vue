@@ -187,7 +187,7 @@
                 return pattern.test(this.formData.kad_number);
             },
             con_year_validator(){
-                let pattern = /^[1-2][0-9]{1}\d{2}/;
+                let pattern = /^[1-2][0-9]\d{2}/;
                 return pattern.test(this.formData.year)
                 // return this.formData.year.length===4 && this.formData.year[0]===1
             },
