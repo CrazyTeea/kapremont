@@ -114,7 +114,13 @@ class ProgramObjectsController extends AppController
                 if ($item){
                     $progObjNe = new ProObjectsNecessary();
                     $progObjNe->id_object = $model->id;
-
+                    $progObjNe->nalichie = 1;
+                    $progObjNe->material = $_progObjNe_m[$index];
+                    $progObjNe->srok_eks = $_progObjNe_srok[$index];
+                    $progObjNe->kap_remont = $_progObjNe_rem[$index];
+                    $progObjNe->obosnovanie = $_progObjNe_obo[$index];
+                    $save &= $progObjNe->save();
+                    $errors['ProObjectsNecessary'][]=$progObjNe->getErrors();
                 }
             }
 
