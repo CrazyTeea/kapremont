@@ -2,7 +2,6 @@
 <template>
     <div class="program_object_form">
         <b-form id="object_form" @submit="onSubmit" @reset="onReset" method="post">
-
             <div class="row">
 
                 <div class="col-12">
@@ -239,7 +238,7 @@
                 e.preventDefault();
 
                 let form = document.getElementById('object_form');
-
+                console.log(form);
                 let formData = new FormData(form);
 
 

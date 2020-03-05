@@ -137,15 +137,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.concat */ "./node_modules/core-js/modules/es.array.concat.js");
-/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
-/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_2__);
-
-
-
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -435,27 +434,6 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null
       }]
     };
-  },
-  methods: {
-    getData2: function getData2() {
-      return this.items.concat(this.itemsTwo);
-    },
-    getData: function getData() {
-      var kek = [];
-      kek['nalichie'] = [];
-      kek['material'] = [];
-      kek['srok_eks'] = [];
-      kek['kap_remont'] = [];
-      kek['obosnovanie'] = [];
-      this.items.concat(this.itemsTwo).forEach(function (item) {
-        kek['nalichie'].push(item.nalichie);
-        kek['material'].push(item.material);
-        kek['srok_eks'].push(item.srok_eks);
-        kek['kap_remont'].push(item.kap_remont);
-        kek['obosnovanie'].push(item.obosnovanie);
-      });
-      return kek;
-    }
   }
 });
 
@@ -1144,7 +1122,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 
 
 
@@ -1213,6 +1190,7 @@ __webpack_require__.r(__webpack_exports__);
     onSubmit: function onSubmit(e) {
       e.preventDefault();
       var form = document.getElementById('object_form');
+      console.log(form);
       var formData = new FormData(form);
       axios__WEBPACK_IMPORTED_MODULE_9___default.a.post('/program/object/create', formData, {
         headers: {
@@ -2128,7 +2106,11 @@ var render = function() {
                     { staticClass: "cell-center-for-table" },
                     [
                       _c("b-form-checkbox", {
-                        attrs: { type: "checkbox" },
+                        attrs: {
+                          type: "checkbox",
+                          value: "check" + index,
+                          name: "waited[check1_nalichie_" + index + "]"
+                        },
                         model: {
                           value: item.nalichie,
                           callback: function($$v) {
@@ -2147,7 +2129,11 @@ var render = function() {
                     [
                       item.nalichie
                         ? _c("b-form-input", {
-                            attrs: { placeholder: "Материалы", type: "text" },
+                            attrs: {
+                              name: "waited[input1_material_" + index + "]",
+                              placeholder: "Материалы",
+                              type: "text"
+                            },
                             model: {
                               value: item.material,
                               callback: function($$v) {
@@ -2167,7 +2153,11 @@ var render = function() {
                     [
                       item.nalichie
                         ? _c("b-form-input", {
-                            attrs: { type: "text", placeholder: "Срок" },
+                            attrs: {
+                              name: "waited[input1_srok_eks_" + index + "]",
+                              type: "text",
+                              placeholder: "Срок"
+                            },
                             model: {
                               value: item.srok_eks,
                               callback: function($$v) {
@@ -2187,7 +2177,11 @@ var render = function() {
                     [
                       item.nalichie
                         ? _c("b-form-checkbox", {
-                            attrs: { type: "checkbox" },
+                            attrs: {
+                              name: "waited[input1_kap_remont_" + index + "]",
+                              type: "checkbox",
+                              value: "rem" + index
+                            },
                             model: {
                               value: item.kap_remont,
                               callback: function($$v) {
@@ -2207,7 +2201,11 @@ var render = function() {
                     [
                       item.nalichie
                         ? _c("b-form-input", {
-                            attrs: { type: "text", placeholder: "Обоснование" },
+                            attrs: {
+                              name: "waited[input1_obosnovanie_" + index + "]",
+                              type: "text",
+                              placeholder: "Обоснование"
+                            },
                             model: {
                               value: item.obosnovanie,
                               callback: function($$v) {
@@ -2285,7 +2283,11 @@ var render = function() {
                     { staticClass: "cell-center-for-table" },
                     [
                       _c("b-form-checkbox", {
-                        attrs: { type: "checkbox" },
+                        attrs: {
+                          type: "checkbox",
+                          value: "check2" + index,
+                          name: "waited[check2_nalichie_" + index + "]"
+                        },
                         model: {
                           value: item.nalichie,
                           callback: function($$v) {
@@ -2304,7 +2306,11 @@ var render = function() {
                     [
                       item.nalichie
                         ? _c("b-form-input", {
-                            attrs: { type: "text", placeholder: "Срок" },
+                            attrs: {
+                              name: "waited[input2_srok_eks" + index + "]",
+                              type: "text",
+                              placeholder: "Срок"
+                            },
                             model: {
                               value: item.srok_eks,
                               callback: function($$v) {
@@ -2324,7 +2330,11 @@ var render = function() {
                     [
                       item.nalichie
                         ? _c("b-form-checkbox", {
-                            attrs: { type: "checkbox" },
+                            attrs: {
+                              name: "waited[input2_kap_remont" + index + "]",
+                              type: "checkbox",
+                              value: "rem2" + index
+                            },
                             model: {
                               value: item.kap_remont,
                               callback: function($$v) {
@@ -2344,7 +2354,11 @@ var render = function() {
                     [
                       item.nalichie
                         ? _c("b-form-input", {
-                            attrs: { type: "text", placeholder: "Обоснование" },
+                            attrs: {
+                              name: "waited[input2_obosnovanie" + index + "]",
+                              type: "text",
+                              placeholder: "Обоснование"
+                            },
                             model: {
                               value: item.obosnovanie,
                               callback: function($$v) {
@@ -3880,7 +3894,7 @@ var render = function() {
         },
         [
           _c("b-button", { attrs: { href: "program/view" } }, [
-            _vm._v("Заполнить программу развития")
+            _vm._v("Заполнить программу модернизации")
           ])
         ],
         1
@@ -3920,7 +3934,7 @@ var render = function() {
         [
           _c("p", { staticClass: "my-4" }, [
             _vm._v(
-              "\n            Уважаемые пользователи!\n            В модуле «Модернизация инфраструктуры» Вы можете ознакомиться с информацией об объёме средств субсидии и начать заполнение программы модернизации инфраструктуры.\n            На данный момент в модуле реализована возможность создания карточки объекта капитального строительства и заполнения вкладки «характеристика объекта».\n            Остальные вкладки будут доступны с 4 марта 2020 года.\n            Возможность загрузки документов в систему будет предоставлена с 5 марта 2020 года.\n            Выгрузка данных из системы в печатную форму «Программы развития» для согласования с председателем совета обучающихся и утверждения руководителем образовательной организации будет доступна с 10 марта 2020 года."
+              "\n            Уважаемые пользователи!\n            В модуле «Модернизация инфраструктуры» Вы можете ознакомиться с информацией об объёме средств субсидии и начать заполнение программы модернизации инфраструктуры.\n            На данный момент в модуле реализована возможность создания карточки объекта капитального строительства и заполнения вкладки «характеристика объекта».\n            Остальные вкладки будут доступны с 4 марта 2020 года.\n            Возможность загрузки документов в систему будет предоставлена с 5 марта 2020 года.\n            Выгрузка данных из системы в печатную форму «Программы модернизации» для согласования с председателем совета обучающихся и утверждения руководителем образовательной организации будет доступна с 10 марта 2020 года."
             )
           ])
         ]

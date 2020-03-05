@@ -6,6 +6,6 @@ use yii\helpers\Html;
 /* @var $model app\models\ProgramObjects */
 
 $this->title = 'Создание объекта';
-$this->params['breadcrumbs'][] = ['label' => 'Программа развития', 'url' => ['program/view']];
+$this->params['breadcrumbs'][] = ['label' => 'Программа модернизации', 'url' => ['program/view']];
 $this->params['breadcrumbs'][] = $this->title;
 
