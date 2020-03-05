@@ -18,12 +18,14 @@
                         <b-form-input
                             v-else
                             type="text"
+                            :name="`${modelName}[${index}][aim]`"
                             v-model="item.aim" 
                         ></b-form-input>
                     </b-th>
                     <b-th>
                         <b-form-input
                             type="text"
+                            :name="`${modelName}[${index}][plan]`"
                             v-model="item.plan"
                         ></b-form-input>
                     </b-th>
@@ -32,6 +34,7 @@
                         <b-form-input
                             v-else
                             type="text"
+                            :name="`${modelName}[${index}][changes]`"
                             v-model="item.changes" 
                         ></b-form-input>
                     </b-th>
@@ -61,9 +64,10 @@
 </template>
 
 <script>
-import {orgInfo} from "../../organization";
-
 export default {
+    props:{
+        modelName:String
+    },
     data(){
         return {
             dataFirst: [
@@ -89,22 +93,6 @@ export default {
         deleteLastRow: function() {
             this.dataFirst.pop()
         },
-        getData2(){
-            return this.dataFirst;
-        },
-        getData(){
-            let kek = [];
-            kek['aim'] = [];
-            kek['plan'] = [];
-            kek['changes'] = [];
-            this.dataFirst.forEach((item)=>{
-                //kek['aim'].push(item.aim);
-                kek['plan'].push(item.plan);
-                //kek['changes'].push(item.changes);
-            });
-
-            return kek;
-        }
     }
 }
 </script>

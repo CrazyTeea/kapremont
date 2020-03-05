@@ -1,6 +1,5 @@
 <template>
     <div class="hidden" >
-
         <b-table
             bordered
             foot-clone
@@ -10,6 +9,7 @@
             :items="stages"
             >
                 <template v-slot:cell(is_nessesary)="row">
+                    <input type="hidden" v-model="sved.is_nessesary[row.index]" :name="`${modelName}[${row.index}][is_nessesary]`">
                     <v-select
                         class="mt-5"
                         v-model="sved.is_nessesary[row.index]"
@@ -21,7 +21,6 @@
                         :reduce = "type => type.id"
                     />
                 </template>
-
                 <template v-slot:cell(begin_date)="row">
                     <b-form-datepicker 
                         today-button
@@ -30,11 +29,10 @@
                         label-reset-button="сбросить"
                         placeholder="дата"
                         size="sm"
+                        :name="`${modelName}[${row.index}][date_event_start]`"
                         v-model="sved.begin_date[row.index]">
-
                     </b-form-datepicker>
                 </template>
-
                 <template v-slot:cell(final_date)="row">
                     <b-form-datepicker
                         today-button
@@ -43,6 +41,7 @@
                         label-reset-button="сбросить"
                         size="sm"
                         placeholder="дата"
+                        :name="`${modelName}[${row.index}][date_event_end]`"
                         v-model="sved.final_date[row.index]"></b-form-datepicker>
                 </template>
                 <template v-slot:cell(rc)="row">
@@ -52,6 +51,7 @@
                         placeholder="Цена"
                         min="0"
                         type="number"
+                        :name="`${modelName}[${row.index}][cost_real]`"
                         ></b-form-input>
                         <label v-else>-</label>
                 </template>
@@ -62,6 +62,7 @@
                         placeholder="Цена"
                         min="0"
                         type="number"
+                        :name="`${modelName}[${row.index}][sum_bud_fin]`"
                         ></b-form-input>
                         <label v-else>-</label>
                 </template>
@@ -72,11 +73,10 @@
                         placeholder="Цена"
                         min="0"
                         type="number"
+                        :name="`${modelName}[${row.index}][fin_vnebud_ist]`"
                         ></b-form-input>
                         <label v-else>-</label>
                 </template>
-
-                
                 <template v-slot:foot(stage)>
                     <span class="font-weight-bold">ИТОГО:</span>
                 </template>
@@ -98,7 +98,6 @@
                 <template v-slot:foot(finanse)>
                     <span class="font-weight-bold">{{ finanse_sum }}</span>
                 </template>
-
         </b-table>
     </div>
 </template>
@@ -120,6 +119,9 @@ import Multiselect from 'vue-select';
             getSved(){
                 return this.sved;
             }
+        },
+        props:{
+          modelName:String
         },
         computed: {
             test(){

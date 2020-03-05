@@ -95,7 +95,7 @@
                         </b-card-header>
                         <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
                             <b-card-body>
-                                <v-svedenia ref="svedenia"/>
+                                <v-svedenia model-name="ProgObjectsEvents" ref="svedenia"/>
                             </b-card-body>
                         </b-collapse>
                     </b-card>
@@ -107,7 +107,7 @@
                          </b-card-header>
                          <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
                              <b-card-body>
-                                 <v-necessary ref="necessary"/>
+                                 <v-necessary model-name="ProObjectsNecessary" ref="necessary"/>
                              </b-card-body>
                          </b-collapse>
                      </b-card>
@@ -119,7 +119,7 @@
                          </b-card-header>
                          <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
                              <b-card-body>
-                                 <v-waited ref="waited"/>
+                                 <v-waited model-name="ProgObjectsWaites" ref="waited"/>
                              </b-card-body>
                          </b-collapse>
                      </b-card>
@@ -131,7 +131,7 @@
                          </b-card-header>
                          <b-collapse id="accordion-5" accordion="my-accordion" role="tabpanel">
                              <b-card-body>
-                                 <v-riscs />
+                                 <v-riscs model-name="ProgObjectsRiscs"/>
                              </b-card-body>
                          </b-collapse>
                      </b-card>
