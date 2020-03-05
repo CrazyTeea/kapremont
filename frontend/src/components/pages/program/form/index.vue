@@ -14,7 +14,7 @@
             <div class="row mt-3">
                 <div class="col-12">
                     <label for="name">Название объекта:</label>
-                    <b-form-input id="name" name="name" v-model="formData.name"/>
+                    <b-form-input placeholder="Название..." id="name" name="name" v-model="formData.name" />
                     <br>
                     <b-card no-body class="mb-1">
                         <b-card-header header-tag="header" class="p-1" role="tab">
@@ -113,7 +113,7 @@
                              </b-card-body>
                          </b-collapse>
                      </b-card>
-                    <!--  <b-card no-body class="mb-1">
+                     <b-card no-body class="mb-1">
                          <b-card-header header-tag="header" class="p-1" role="tab">
                         <span  class="toggle_button" v-b-toggle.accordion-4 >
                             <b-icon-gear-wide-connected />
@@ -121,7 +121,7 @@
                          </b-card-header>
                          <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
                              <b-card-body>
-                                 <v-waited />
+                                 <v-waited ref="waited"/>
                              </b-card-body>
                          </b-collapse>
                      </b-card>
@@ -137,23 +137,24 @@
                              </b-card-body>
                          </b-collapse>
                      </b-card>
-                     <b-card no-body class="mb-1">
-                         <b-card-header header-tag="header" class="p-1" role="tab">
-                        <span  class="toggle_button" v-b-toggle.accordion-6 >
-                            <b-icon-gear-wide-connected />
-                           Опись прилагаемых документов</span>
-                         </b-card-header>
-                         <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel">
-                             <b-card-body>
+                    <!--
+                   <b-card no-body class="mb-1">
+                       <b-card-header header-tag="header" class="p-1" role="tab">
+                      <span  class="toggle_button" v-b-toggle.accordion-6 >
+                          <b-icon-gear-wide-connected />
+                         Опись прилагаемых документов</span>
+                       </b-card-header>
+                       <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel">
+                           <b-card-body>
 
-                             </b-card-body>
-                         </b-collapse>
-                     </b-card>-->
+                            </b-card-body>
+                        </b-collapse>
+                    </b-card>-->
             </div>
 
 
             </div>
-            <b-button type="submit" variant="primary">Сохранить</b-button>
+            <b-button type="submit" variant="info">Сохранить</b-button>
             <b-button type="reset" variant="danger">Сброс</b-button>
         </b-form>
     </div>
@@ -187,7 +188,7 @@
                 return pattern.test(this.formData.kad_number);
             },
             con_year_validator(){
-                let pattern = /^[1-2][0-9]{1}\d{2}/;
+                let pattern = /^[1-2][0-9]\d{2}/;
                 return pattern.test(this.formData.year)
                 // return this.formData.year.length===4 && this.formData.year[0]===1
             },
@@ -246,6 +247,12 @@
                 })
                 Object.keys(this.$refs.necessary.getData()).forEach(item=>{
                     formData.append(`ProObjectsNecessary[${item}]`,this.$refs.necessary.getData()[item]);
+                })
+                Object.keys(this.$refs.necessary.getData()).forEach(item=>{
+                    formData.append(`ProObjectsNecessary[${item}]`,this.$refs.necessary.getData()[item]);
+                })
+                Object.keys(this.$refs.waited.getData()).forEach(item=>{
+                    formData.append(`ProgObjectsWaites[${item}]`,this.$refs.waited.getData()[item]);
                 })
 
 

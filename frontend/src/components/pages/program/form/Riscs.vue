@@ -17,19 +17,19 @@
                     <b-th>
                         <b-form-input 
                             type="text"
-                            v-model="dataItems.types[index]" 
+                            v-model="item.types" 
                         ></b-form-input>
                     </b-th>
                     <b-th>
                         <b-form-input 
                             type="text"
-                            v-model="dataItems.poison[index]" 
+                            v-model="item.poison" 
                         ></b-form-input>
                     </b-th>
                     <b-th>
-                        <b-form-input 
+                        <b-form-input
                             type="text"
-                            v-model="dataItems.protect[index]" 
+                            v-model="item.protect"
                         ></b-form-input>
                     </b-th>
                 </b-tr>
@@ -38,7 +38,7 @@
                 <b-tr>
                     <b-td
                         @click="deleteLastRow()"
-                        v-if="items.length"
+                        v-if="items.length > 1"
                         colspan="2"
                         variant="secondary"
                         class="text-right text-danger">
@@ -48,7 +48,7 @@
                         colspan="3"
                         @click="addNewRow()"
                         variant="secondary"
-                        class="text-right">
+                        class="text-right text-info">
                         Добавить строку
                     </b-td>
                 </b-tr>
@@ -63,26 +63,28 @@ import BootstrapVue from 'bootstrap-vue';
 export default {
     data(){
         return {
-            items: [],
-            dataItems: {
-                types: [],
-                poison: [],
-                protect: []
-            },
+            items: [
+                {
+                    types: null,
+                    poison: null,
+                    protect: null
+                }
+            ]
         }
     },
     methods: {
         addNewRow: function() {
-            let returd = this.items.length
-            this.items.push(returd)
+            console.log(this.items)
+
+            this.items.push({
+                    types: null,
+                    poison: null,
+                    protect: null
+                })
         },
         deleteLastRow: function() {
             this.items.pop()
-            this.dataItems.types.pop()
-            this.dataItems.poison.pop()
-            this.dataItems.protect.pop()
         }
     }
-
 }
 </script>
