@@ -1,0 +1,50 @@
+<?php
+
+namespace app\models;
+
+use Yii;
+
+/**
+ * This is the model class for table "prog_objects_riscs".
+ *
+ * @property int $id
+ * @property string|null $types
+ * @property string|null $poison
+ * @property string|null $protect
+ * @property int|null $id_object
+ */
+class ProgObjectsRiscs extends \yii\db\ActiveRecord
+{
+    /**
+     * {@inheritdoc}
+     */
+    public static function tableName()
+    {
+        return 'prog_objects_riscs';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            [['types', 'poison', 'protect'], 'string'],
+            [['id_object'], 'integer'],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'types' => 'Types',
+            'poison' => 'Poison',
+            'protect' => 'Protect',
+            'id_object' => 'Id Object',
+        ];
+    }
+}

@@ -3,7 +3,6 @@
         <b-table-simple
             bordered
             hover
-            responsive
             >
                 <b-thead>
                 <b-tr>
@@ -17,20 +16,23 @@
                     <b-th>
                         <b-form-input 
                             type="text"
+                            :name="`${modelName}[${index}][types]`"
                             v-model="item.types" 
-                        ></b-form-input>
+                        />
                     </b-th>
                     <b-th>
                         <b-form-input 
                             type="text"
-                            v-model="item.poison" 
-                        ></b-form-input>
+                            :name="`${modelName}[${index}][poison]`"
+                            v-model="item.poison"
+                        />
                     </b-th>
                     <b-th>
                         <b-form-input
                             type="text"
+                            :name="`${modelName}[${index}][protect]`"
                             v-model="item.protect"
-                        ></b-form-input>
+                        />
                     </b-th>
                 </b-tr>
                 </b-tbody>
@@ -58,9 +60,10 @@
 </template>
 
 <script>
-import BootstrapVue from 'bootstrap-vue';
-
 export default {
+    props:{
+      modelName:String
+    },
     data(){
         return {
             items: [
@@ -74,8 +77,6 @@ export default {
     },
     methods: {
         addNewRow: function() {
-            console.log(this.items)
-
             this.items.push({
                     types: null,
                     poison: null,
