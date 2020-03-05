@@ -20,11 +20,11 @@
                         <label>{{ item.label}}</label>
                     </b-th>
                     <b-th class="cell-center-for-table">
-                        <b-form-checkbox type="checkbox" :value="'check' + index" v-model="item.nalichie" :name="'waited[check1_nalichie_' + index + ']'"></b-form-checkbox>
+                        <b-form-checkbox type="checkbox" v-model="item.nalichie" :name="`${modelName}[${index}][nalichie]`"></b-form-checkbox>
                     </b-th>
                     <b-th class="cell-center-for-table">
                         <b-form-input
-                            :name="'waited[input1_material_' + index + ']'"
+                            :name="`${modelName}[${index}][material]`"
                             v-if="item.nalichie"
                             v-model="item.material" 
                             placeholder="Материалы"
@@ -33,7 +33,7 @@
                     </b-th>
                     <b-th class="cell-center-for-table">
                         <b-form-input
-                            :name="'waited[input1_srok_eks_' + index + ']'"
+                            :name="`${modelName}[${index}][srok_eks]`"
                             type="text"
                             v-if="item.nalichie"
                             v-model="item.srok_eks" 
@@ -42,16 +42,15 @@
                     </b-th>
                     <b-th class="cell-center-for-table">
                         <b-form-checkbox 
-                            :name="'waited[input1_kap_remont_' + index + ']'"
+                            :name="`${modelName}[${index}][kap_remont]`"
                             type="checkbox"
                             v-if="item.nalichie"
-                            :value="'rem' + index"
                             v-model="item.kap_remont" 
                         ></b-form-checkbox>
                     </b-th>
                     <b-th class="cell-center-for-table">
                         <b-form-input
-                            :name="'waited[input1_obosnovanie_' + index + ']'"
+                            :name="`${modelName}[${index}][obosnovanie]`"
                             type="text"
                             v-if="item.nalichie"
                             v-model="item.obosnovanie" 
@@ -81,7 +80,7 @@
                         <label>{{ item.label}}</label>
                     </b-th>
                     <b-th class="cell-center-for-table">
-                        <b-form-checkbox type="checkbox" :value="'check2' + index" v-model="item.nalichie" :name="'waited[check2_nalichie_' + index + ']'"></b-form-checkbox>
+                        <b-form-checkbox type="checkbox" v-model="item.nalichie" :name="'waited[check2_nalichie_' + index + ']'"></b-form-checkbox>
                     </b-th>
                     <b-th class="cell-center-for-table">
                         <b-form-input
@@ -118,6 +117,9 @@
 
 <script>
 export default {
+    props:{
+        modelName:String
+    },
     data() {
         return{
             items: [

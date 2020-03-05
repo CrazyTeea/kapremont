@@ -2,8 +2,10 @@
 
 namespace app\controllers;
 
+use app\models\ChangePasswordForm;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -52,6 +54,17 @@ class SiteController extends Controller
                 'fixedVerifyCode' => YII_ENV_TEST ? 'testme' : null,
             ],
         ];
+    }
+    public function actionChangePassword()
+    {
+        $model = new ChangePasswordForm();
+        $success = -1;
+        if ( $model->load(Yii::$app->request->post()))
+        {
+            $success = $model->change_password();
+        }
+        echo Json::encode($success);
+        return $this->render('change_password',compact('model','success'));
     }
 
     /**
