@@ -72,15 +72,15 @@
                                     <label for="prav_sob">Право собственности:</label>
                                     <b-form-input id="prav_sob" name="ProgramObjects[prav_sob]" v-model="formData.prav_sob"/>
                                     <label for="square">Общая площадь здания - всего, кв.м.:</label>
-                                    <b-form-input id="square" name="ProgramObjects[square]" type="number" v-model="formData.square"/>
+                                    <b-form-input id="square" name="ProgramObjects[square]" type="number" step="0.02" v-model="formData.square"/>
                                     <label for="square_kap">Общая площадь здания (помещений), планируемого к капитальному ремонту, кв. м.:</label>
-                                    <b-form-input id="square_kap" name="ProgramObjects[square_kap]" type="number" v-model="formData.square_kap"/>
+                                    <b-form-input id="square_kap" name="ProgramObjects[square_kap]" type="number"  step="0.02" v-model="formData.square_kap"/>
                                     <label for="isp_v_ust_dey">Используется в уставной деятельности, кв.м.:</label>
-                                    <b-form-input id="isp_v_ust_dey" name="ProgramObjects[isp_v_ust_dey]" type="number" v-model="formData.isp_v_ust_dey"/>
+                                    <b-form-input id="isp_v_ust_dey" name="ProgramObjects[isp_v_ust_dey]" type="number"  step="0.02" v-model="formData.isp_v_ust_dey"/>
                                     <label for="n_isp_v_ust_dey">Не используется в уставной деятельности, кв.м.:</label>
-                                    <b-form-input id="n_isp_v_ust_dey" name="ProgramObjects[n_isp_v_ust_dey]" type="number" v-model="formData.n_isp_v_ust_dey"/>
+                                    <b-form-input id="n_isp_v_ust_dey" name="ProgramObjects[n_isp_v_ust_dey]" type="number" step="0.02" v-model="formData.n_isp_v_ust_dey"/>
                                     <label for="square_ar">Предоставлено в аренду, кв.м.:</label>
-                                    <b-form-input id="square_ar" name="ProgramObjects[square_ar]" type="number" v-model="formData.square_ar"/>
+                                    <b-form-input id="square_ar" name="ProgramObjects[square_ar]" type="number"  step="0.02" v-model="formData.square_ar"/>
                                     <label for="note">Примечание::</label>
                                     <b-form-input id="note" name="ProgramObjects[note]" v-model="formData.note"/>
                                 </b-form-group>
