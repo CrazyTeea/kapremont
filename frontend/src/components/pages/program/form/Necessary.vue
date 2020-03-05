@@ -21,10 +21,11 @@
                         <label>{{ item.label}}</label>
                     </b-th>
                     <b-th class="cell-center-for-table">
-                        <b-form-checkbox type="checkbox" :value="'check' + index" v-model="item.nalichie"></b-form-checkbox>
+                        <b-form-checkbox type="checkbox" :value="'check' + index" v-model="item.nalichie" :name="'waited[check1_nalichie_' + index + ']'"></b-form-checkbox>
                     </b-th>
                     <b-th class="cell-center-for-table">
                         <b-form-input
+                            :name="'waited[input1_material_' + index + ']'"
                             v-if="item.nalichie"
                             v-model="item.material" 
                             placeholder="Материалы"
@@ -32,7 +33,8 @@
                         ></b-form-input>
                     </b-th>
                     <b-th class="cell-center-for-table">
-                        <b-form-input 
+                        <b-form-input
+                            :name="'waited[input1_srok_eks_' + index + ']'"
                             type="text"
                             v-if="item.nalichie"
                             v-model="item.srok_eks" 
@@ -41,6 +43,7 @@
                     </b-th>
                     <b-th class="cell-center-for-table">
                         <b-form-checkbox 
+                            :name="'waited[input1_kap_remont_' + index + ']'"
                             type="checkbox"
                             v-if="item.nalichie"
                             :value="'rem' + index"
@@ -48,7 +51,8 @@
                         ></b-form-checkbox>
                     </b-th>
                     <b-th class="cell-center-for-table">
-                        <b-form-input 
+                        <b-form-input
+                            :name="'waited[input1_obosnovanie_' + index + ']'"
                             type="text"
                             v-if="item.nalichie"
                             v-model="item.obosnovanie" 
@@ -58,7 +62,6 @@
                 </b-tr>
                 </b-tbody>
         </b-table-simple>
-
 
         <b-table-simple
             bordered
@@ -80,10 +83,11 @@
                         <label>{{ item.label}}</label>
                     </b-th>
                     <b-th class="cell-center-for-table">
-                        <b-form-checkbox type="checkbox" :value="'check2' + index" v-model="item.nalichie"></b-form-checkbox>
+                        <b-form-checkbox type="checkbox" :value="'check2' + index" v-model="item.nalichie" :name="'waited[check2_nalichie_' + index + ']'"></b-form-checkbox>
                     </b-th>
                     <b-th class="cell-center-for-table">
-                        <b-form-input 
+                        <b-form-input
+                            :name="'waited[input2_srok_eks' + index + ']'"
                             type="text"
                             v-if="item.nalichie"
                             v-model="item.srok_eks" 
@@ -91,7 +95,8 @@
                         ></b-form-input>
                     </b-th>
                     <b-th class="cell-center-for-table">
-                        <b-form-checkbox 
+                        <b-form-checkbox
+                            :name="'waited[input2_kap_remont' + index + ']'"
                             type="checkbox"
                             v-if="item.nalichie"
                             :value="'rem2' + index"
@@ -99,7 +104,8 @@
                         ></b-form-checkbox>
                     </b-th>
                     <b-th class="cell-center-for-table">
-                        <b-form-input 
+                        <b-form-input
+                            :name="'waited[input2_obosnovanie' + index + ']'"
                             type="text"
                             v-if="item.nalichie"
                             v-model="item.obosnovanie" 
