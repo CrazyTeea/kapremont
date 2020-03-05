@@ -107,7 +107,7 @@
                            <b-icon-gear-wide-connected />
                            Обоснование необходимости (целесообразности) планируемых мероприятий</span>
                         </b-card-header>
-                        <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel" visible>
+                        <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
                             <b-card-body>
                                 <v-necessary />
                             </b-card-body>
@@ -143,14 +143,13 @@
                            <b-icon-gear-wide-connected />
                           Опись прилагаемых документов</span>
                         </b-card-header>
-                        <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel">
+                        <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel" visible>
                             <b-card-body>
-
+                                <v-uploads />
                             </b-card-body>
                         </b-collapse>
                     </b-card>
             </div>
-
 
             </div>
             <b-button type="submit" variant="info">Сохранить</b-button>
@@ -168,6 +167,7 @@
     import Necessary from './Necessary.vue';
     import Riscs from './Riscs.vue';
     import Waited from './Waited.vue';
+    import Uploads from './Uploads.vue'
     import Axios from 'axios'
 
     export default {
@@ -178,7 +178,8 @@
             "v-select2": Multiselect,
             "v-necessary": Necessary,
             "v-waited": Waited,
-            "v-riscs": Riscs
+            "v-riscs": Riscs,
+            "v-uploads": Uploads
         },
         computed:{
             ...mapGetters(['getPageData','getCities']),
