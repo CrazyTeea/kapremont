@@ -123,6 +123,7 @@ class ProgramObjectsController extends AppController
                     $errors['ProObjectsNecessary'][]=$progObjNe->getErrors();
                 }
             }
+
             if ($save){
                 $transaction->commit();
                 return 'ok';

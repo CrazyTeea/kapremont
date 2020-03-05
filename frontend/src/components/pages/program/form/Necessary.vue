@@ -146,6 +146,9 @@ export default {
         }
     },
     methods:{
+        getData2(){
+            return this.items.concat(this.itemsTwo);
+        },
         getData(){
             let kek = [];
             kek['nalichie'] = [];

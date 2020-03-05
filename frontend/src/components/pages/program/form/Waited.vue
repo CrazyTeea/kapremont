@@ -3,7 +3,6 @@
         <b-table-simple
             bordered
             hover
-            responsive
             >
                 <b-thead>
                 <b-tr>
@@ -89,6 +88,9 @@ export default {
         },
         deleteLastRow: function() {
             this.dataFirst.pop()
+        },
+        getData2(){
+            return this.dataFirst;
         },
         getData(){
             let kek = [];

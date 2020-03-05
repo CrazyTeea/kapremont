@@ -169,7 +169,8 @@
     import Necessary from './Necessary.vue';
     import Riscs from './Riscs.vue';
     import Waited from './Waited.vue';
-    import Axios from 'axios'
+    import Axios from 'axios';
+    import {objectToFormData} from 'object-to-formdata';
 
     export default {
         name: "programForm",
@@ -237,23 +238,9 @@
             onSubmit(e){
                 e.preventDefault();
 
-                let formData = new FormData();
-                formData.append('_csrf',this.csrf);
-                Object.keys(this.formData).forEach(item=>{
-                    formData.append(`ProgramObjects[${item}]`,this.formData[item]);
-                });
-                Object.keys(this.$refs.svedenia.getSved()).forEach(item=>{
-                    formData.append(`ProgObjectsEvents[${item}]`,this.$refs.svedenia.getSved()[item]);
-                })
-                Object.keys(this.$refs.necessary.getData()).forEach(item=>{
-                    formData.append(`ProObjectsNecessary[${item}]`,this.$refs.necessary.getData()[item]);
-                })
-                Object.keys(this.$refs.necessary.getData()).forEach(item=>{
-                    formData.append(`ProObjectsNecessary[${item}]`,this.$refs.necessary.getData()[item]);
-                })
-                Object.keys(this.$refs.waited.getData()).forEach(item=>{
-                    formData.append(`ProgObjectsWaites[${item}]`,this.$refs.waited.getData()[item]);
-                })
+                let form = document.getElementById('object_form');
+
+                let formData = new FormData(form);
 
 
                 Axios.post('/program/object/create',formData,{
