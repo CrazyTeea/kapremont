@@ -13,7 +13,7 @@
             <div class="row mt-3">
                 <div class="col-12">
                     <label for="name">Название объекта:</label>
-                    <b-form-input placeholder="Название..." id="name" name="name" v-model="formData.name" />
+                    <b-form-input placeholder="Название..." id="name" name="ProgramObjects[name]" v-model="formData.name" />
                     <br>
                     <b-card no-body class="mb-1">
                         <b-card-header header-tag="header" class="p-1" role="tab">
@@ -26,6 +26,7 @@
                             <b-card-body>
                                 <b-form-group>
                                     <label for="type">Тип объекта:</label>
+                                    <input type="hidden" v-model="formData.type" name="ProgramObjects[type]">
                                     <v-select2 v-model="formData.type"
                                                :options="[
                                                    {id:0,type:'Приоритетный'},
@@ -34,56 +35,54 @@
                                                :reduce="type => type.id"
                                                label="type"
                                                id="type"
-                                               name="id_region"
-                                               @input="onChangeRegion({id:formData.id_region})"
                                     />
                                     <label for="id_region">Субъект РФ:</label>
+                                    <input type="hidden" v-model="formData.type" name="ProgramObjects[id_region]">
                                     <v-select2 v-model="formData.id_region"
                                                :options="getPageData.regionOptions"
                                                :reduce="region => region.id"
                                                label="region"
                                                id="id_region"
-                                               name="id_region"
                                                @input="onChangeRegion({id:formData.id_region})"
                                     />
                                     <label for="id_city">Город:</label>
+                                    <input type="hidden" v-model="formData.type" name="ProgramObjects[id_city]">
                                     <v-select2 v-model="formData.id_city"
                                                :options="getCities"
                                                :reduce="city => city.id"
                                                label="city"
                                                id="id_city"
-                                               name="id_city"
                                     />
                                     <label for="kad_number">Кадастровый номер:</label>
-                                    <b-form-input id="kad_number" name="kud_number" :state="kad_number_validator" v-model="formData.kad_number"/>
+                                    <b-form-input id="kad_number" name="ProgramObjects[kad_number]" :state="kad_number_validator" v-model="formData.kad_number"/>
                                     <label for="year">Год постройки здания:</label>
-                                    <b-form-input id="year" name="year" :state="con_year_validator" type="number" v-model="formData.year"/>
+                                    <b-form-input id="year" name="ProgramObjects[year]" :state="con_year_validator" type="number" v-model="formData.year"/>
                                     <label for="exploit_year">Год ввода здания в эксплуатацию:</label>
-                                    <b-form-input id="exploit_year" name="exploit_year" :state="exp_year_validator" type="number" v-model="formData.exploit_year"/>
+                                    <b-form-input id="exploit_year" name="ProgramObjects[exploit_year]" :state="exp_year_validator" type="number" v-model="formData.exploit_year"/>
                                     <label for="exist_pred_nadz_orgs">Наличие предписаний надзорных органов:</label>
-                                    <b-form-input id="exist_pred_nadz_orgs" name="exist_pred_nadz_orgs" v-model="formData.exist_pred_nadz_orgs"/>
+                                    <b-form-input id="exist_pred_nadz_orgs" name="ProgramObjects[exist_pred_nadz_orgs]" v-model="formData.exist_pred_nadz_orgs"/>
                                     <label for="wear">Износ здания (%):</label>
-                                    <b-form-input id="wear" name="wear" :state="wear_validator" type="number" v-model="formData.wear"/>
+                                    <b-form-input id="wear" name="ProgramObjects[wear]" :state="wear_validator" type="number" v-model="formData.wear"/>
                                     <label for="osn_isp_zdan">Основание для использования здания:</label>
-                                    <b-form-input id="osn_isp_zdan" name="osn_isp_zdan" v-model="formData.osn_isp_zdan"/>
+                                    <b-form-input id="osn_isp_zdan" name="ProgramObjects[osn_isp_zdan]" v-model="formData.osn_isp_zdan"/>
                                     <label for="prav_oper_upr">Право оперативного управления (рег. запись, номер):</label>
-                                    <b-form-input id="prav_oper_upr" name="prav_oper_upr" v-model="formData.prav_oper_upr"/>
+                                    <b-form-input id="prav_oper_upr" name="ProgramObjects[prav_oper_upr]" v-model="formData.prav_oper_upr"/>
                                     <label for="assignment">Назначение:</label>
-                                    <b-form-input id="assignment" name="assignment" v-model="formData.assignment"/>
+                                    <b-form-input id="assignment" name="ProgramObjects[assignment]" v-model="formData.assignment"/>
                                     <label for="prav_sob">Право собственности:</label>
-                                    <b-form-input id="assignment" name="assignment" v-model="formData.prav_sob"/>
+                                    <b-form-input id="prav_sob" name="ProgramObjects[prav_sob]" v-model="formData.prav_sob"/>
                                     <label for="square">Общая площадь здания - всего, кв.м.:</label>
-                                    <b-form-input id="square" name="square" type="number" v-model="formData.square"/>
+                                    <b-form-input id="square" name="ProgramObjects[square]" type="number" v-model="formData.square"/>
                                     <label for="square_kap">Общая площадь здания (помещений), планируемого к капитальному ремонту, кв. м.:</label>
-                                    <b-form-input id="square_kap" name="square_kap" type="number" v-model="formData.square_kap"/>
+                                    <b-form-input id="square_kap" name="ProgramObjects[square_kap]" type="number" v-model="formData.square_kap"/>
                                     <label for="isp_v_ust_dey">Используется в уставной деятельности, кв.м.:</label>
-                                    <b-form-input id="isp_v_ust_dey" name="isp_v_ust_dey" type="number" v-model="formData.isp_v_ust_dey"/>
+                                    <b-form-input id="isp_v_ust_dey" name="ProgramObjects[isp_v_ust_dey]" type="number" v-model="formData.isp_v_ust_dey"/>
                                     <label for="n_isp_v_ust_dey">Не используется в уставной деятельности, кв.м.:</label>
-                                    <b-form-input id="n_isp_v_ust_dey" name="n_isp_v_ust_dey" type="number" v-model="formData.n_isp_v_ust_dey"/>
+                                    <b-form-input id="n_isp_v_ust_dey" name="ProgramObjects[n_isp_v_ust_dey]" type="number" v-model="formData.n_isp_v_ust_dey"/>
                                     <label for="square_ar">Предоставлено в аренду, кв.м.:</label>
-                                    <b-form-input id="square_ar" name="square_ar" type="number" v-model="formData.square_ar"/>
+                                    <b-form-input id="square_ar" name="ProgramObjects[square_ar]" type="number" v-model="formData.square_ar"/>
                                     <label for="note">Примечание::</label>
-                                    <b-form-input id="note" name="note" v-model="formData.note"/>
+                                    <b-form-input id="note" name="ProgramObjects[note]" v-model="formData.note"/>
                                 </b-form-group>
                             </b-card-body>
                         </b-collapse>
