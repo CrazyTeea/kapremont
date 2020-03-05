@@ -122,8 +122,8 @@ class SystemController extends RestController
                     break;
                 }
                 case 'objectCreate':{
-                    $ret['regionOptions'] = Regions::find()->asArray()->all();
-                    $ret['cityOptions'] = Cities::find()->asArray()->all();
+                    $ret['regionOptions'] = Regions::find()->all();
+                    $ret['cityOptions'] = Cities::find()->all();
                     $ret['_csrf'] = Yii::$app->request->getCsrfToken();
                     $ret['headers'] = Yii::$app->getRequest()->getHeaders();
                     return $ret;

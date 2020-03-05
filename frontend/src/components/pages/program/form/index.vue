@@ -12,9 +12,20 @@
 
             <div class="row mt-3">
                 <div class="col-12">
-                    <label for="name">Название объекта:</label>
-                    <b-form-input placeholder="Название..." id="name" name="ProgramObjects[name]" v-model="formData.name" />
-                    <br>
+                    <b-form-group
+                            id="fieldset-1"
+                            label="Название объекта"
+                            label-for="input-1"
+                            :invalid-feedback="(feedback('ProgramObjects','name','Название объекта должно быть заполнено'))"
+                            :valid-feedback="(feedback('ProgramObjects','name',' '))"
+                            :state="(feedback('ProgramObjects','name') && formData.name!='')"
+                    >
+                        <b-form-input placeholder="Название..."
+                                      id="name" name="ProgramObjects[name]"
+                                      v-model="formData.name"
+                                      :state="feedback('ProgramObjects','name') && formData.name!=''"
+                        />
+                    </b-form-group>
                     <b-card no-body class="mb-1">
                         <b-card-header header-tag="header" class="p-1" role="tab">
                        <span class="toggle_button" v-b-toggle.accordion-1>
@@ -25,36 +36,73 @@
                         <b-collapse id="accordion-1"  accordion="my-accordion" role="tabpanel">
                             <b-card-body>
                                 <b-form-group>
-                                    <label for="type">Тип объекта:</label>
-                                    <input type="hidden" v-model="formData.type" name="ProgramObjects[type]">
-                                    <v-select2 v-model="formData.type"
-                                               :options="[
+
+
+
+
+                                        <label for="type">Тип объекта:</label>
+
+                                        <b-form-input style="display: none" aria-describedby="type-feedback" v-model="formData.type" name="ProgramObjects[type]" />
+                                        <v-select2 v-model="formData.type"
+                                                   :options="[
                                                    {id:0,type:'Приоритетный'},
                                                    {id:1,type:'Резервный'}
                                                ]"
-                                               :reduce="type => type.id"
-                                               label="type"
-                                               id="type"
-                                    />
+                                                   :reduce="type => type.id"
+                                                   label="type"
+                                                   id="type"
+                                        />
+
+
+
                                     <label for="id_region">Субъект РФ:</label>
-                                    <input type="hidden" v-model="formData.type" name="ProgramObjects[id_region]">
+                                    <b-form-input style="display: none"
+                                                  id="id_region"
+                                                  aria-describedby="id_region-feedback"
+                                                  v-model="formData.id_region"
+                                                  :state="feedback('ProgramObjects','id_region') && formData.id_region!=undefined "
+                                                  name="ProgramObjects[id_region]" />
                                     <v-select2 v-model="formData.id_region"
-                                               :options="getPageData.regionOptions"
+                                               :options="getRegions"
                                                :reduce="region => region.id"
                                                label="region"
                                                id="id_region"
                                                @input="onChangeRegion({id:formData.id_region})"
                                     />
+                                    <b-form-invalid-feedback id="id_region-feedback">
+                                        Регион должен быть заполнен
+                                    </b-form-invalid-feedback>
+
+
+
+
+
                                     <label for="id_city">Город:</label>
-                                    <input type="hidden" v-model="formData.type" name="ProgramObjects[id_city]">
+                                    <b-form-input style="display: none" id="id_city" aria-describedby="id_city-feedback" v-model="formData.id_city" :state="feedback('ProgramObjects','id_city') && formData.id_city!=undefined " name="ProgramObjects[id_city]" />
                                     <v-select2 v-model="formData.id_city"
-                                               :options="getCities"
+                                               :options="getCities || [{city:'Выберите регион',id:null}]"
                                                :reduce="city => city.id"
                                                label="city"
                                                id="id_city"
                                     />
+                                    <b-form-invalid-feedback id="id_city-feedback">
+                                        Город должен быть заполнен
+                                    </b-form-invalid-feedback>
+
                                     <label for="kad_number">Кадастровый номер:</label>
-                                    <b-form-input id="kad_number" name="ProgramObjects[kad_number]" :state="kad_number_validator" v-model="formData.kad_number"/>
+                                    <b-form-input
+                                            id="kad_number"
+                                            aria-describedby="kad_number-feedback"
+                                            name="ProgramObjects[kad_number]"
+                                            :state="kad_number_validator"
+                                            v-model="formData.kad_number"
+                                            trim
+                                    />
+                                    <b-form-invalid-feedback id="kad_number-feedback">
+                                        Кадастровый номер обязателен для заполнения и должен содержать цифры и :
+                                    </b-form-invalid-feedback>
+
+
                                     <label for="year">Год постройки здания:</label>
                                     <b-form-input id="year" name="ProgramObjects[year]" :state="con_year_validator" type="number" v-model="formData.year"/>
                                     <label for="exploit_year">Год ввода здания в эксплуатацию:</label>
@@ -135,19 +183,6 @@
                              </b-card-body>
                          </b-collapse>
                      </b-card>
-                    <!--
-                   <b-card no-body class="mb-1">
-                       <b-card-header header-tag="header" class="p-1" role="tab">
-                      <span  class="toggle_button" v-b-toggle.accordion-6 >
-                          <b-icon-gear-wide-connected />
-                         Опись прилагаемых документов</span>
-                       </b-card-header>
-                       <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel">
-                           <b-card-body>
-
-                            </b-card-body>
-                        </b-collapse>
-                    </b-card>-->
             </div>
 
 
@@ -181,21 +216,21 @@
             "v-riscs": Riscs
         },
         computed:{
-            ...mapGetters(['getPageData','getCities']),
-            kad_number_validator(){
+            ...mapGetters(['getPageData','getCities',"getRegions"]),
+            kad_number_validator: function () {
                 let pattern = /\d+:\d+:\d+:\d+/;
                 return pattern.test(this.formData.kad_number);
             },
-            con_year_validator(){
+            con_year_validator: function () {
                 let pattern = /^[1-2][0-9]\d{2}/;
                 return pattern.test(this.formData.year)
                 // return this.formData.year.length===4 && this.formData.year[0]===1
             },
-            exp_year_validator(){
-                return this.formData.exploit_year.length===4
+            exp_year_validator: function () {
+                return this.formData.exploit_year.length === 4
 
             },
-            wear_validator(){
+            wear_validator: function () {
                 return this.formData.wear >= 0 && this.formData.wear <= 100
             },
         },
@@ -223,24 +258,26 @@
                     square_ar:0,
                     note:'',
                 },
+                errors:{}
             }
         },
         watch:{
           getCities:function () {
 
                 this.formData.id_city = ''
-          }
+          },
         },
         methods:{
             ...mapActions(['requestPageData','requestCity']),
+            feedback(model,value,errorMessage){
+                if (errorMessage)
+                    return errorMessage
+                return !(this.errors.hasOwnProperty(model) && this.errors[model].hasOwnProperty(value))
+            },
             onSubmit(e){
                 e.preventDefault();
-
                 let form = document.getElementById('object_form');
-                console.log(form);
                 let formData = new FormData(form);
-
-
                 Axios.post('/program/object/create',formData,{
                     headers:
                         {
@@ -251,7 +288,8 @@
                 {
                     if (response.data == 'ok')
                         window.location.href = '/program/view';
-                }).catch(e=>console.error(e)).finally()
+                    this.errors = response.data;
+                })
             },
             onReset(){
                 this.formData.id_region=0;

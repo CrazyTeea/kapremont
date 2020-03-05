@@ -63,7 +63,7 @@ export default new Vuex.Store({
         pageData:{},
         user:{},
         organization:{},
-        cities:[]
+        cities:[],
     },
     getters:{
         getUser(state){
@@ -78,6 +78,9 @@ export default new Vuex.Store({
             if (state.organization && state.organization.region)
                 return state.organization.region;
             return null;
+        },
+        getRegions(state){
+            return state.pageData.regionOptions;
         },
         getPageData(state){
             return state.pageData;

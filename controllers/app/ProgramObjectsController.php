@@ -79,7 +79,6 @@ class ProgramObjectsController extends AppController
                     return 'ok';
                 } else {
                     $transaction->rollBack();
-                    Yii::$app->response->statusCode = 500;
                     return Json::encode($errors);
                 }
             }
