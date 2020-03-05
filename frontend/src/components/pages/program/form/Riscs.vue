@@ -14,14 +14,14 @@
                 <b-tbody>
                 <b-tr v-for="(item, index) in items" :key="index">
                     <b-th>
-                        <b-form-input 
+                        <b-form-input
                             type="text"
                             :name="`${modelName}[${index}][types]`"
                             v-model="item.types" 
                         />
                     </b-th>
                     <b-th>
-                        <b-form-input 
+                        <b-form-input
                             type="text"
                             :name="`${modelName}[${index}][poison]`"
                             v-model="item.poison"

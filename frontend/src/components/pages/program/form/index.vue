@@ -9,7 +9,6 @@
                 </div>
             </div>
             <input id="hidden" name="_csrf" v-model="csrf" type='hidden' />
-
             <div class="row mt-3">
                 <div class="col-12">
                     <b-form-group
@@ -25,9 +24,6 @@
                                       v-model="formData.name"
                         />
                     </b-form-group>
-
-
-
                     <b-card no-body class="mb-1">
                         <b-card-header header-tag="header" class="p-1" role="tab">
                        <span class="toggle_button" v-b-toggle.accordion-1>
@@ -150,7 +146,6 @@
                                     >
                                         <b-form-input id="osn_isp_zdan" name="ProgramObjects[osn_isp_zdan]" v-model="formData.osn_isp_zdan"/>
                                     </b-form-group>
-
                                     <b-form-group
                                             label="Право оперативного управления (рег. запись, номер):"
                                             label-for="prav_oper_upr"
@@ -160,7 +155,6 @@
                                     >
                                         <b-form-input id="prav_oper_upr" name="ProgramObjects[prav_oper_upr]" v-model="formData.prav_oper_upr"/>
                                     </b-form-group>
-
                                     <b-form-group
                                             label="Назначение:"
                                             label-for="assignment"
@@ -170,7 +164,6 @@
                                     >
                                         <b-form-input id="assignment" name="ProgramObjects[assignment]" v-model="formData.assignment"/>
                                     </b-form-group>
-
                                     <b-form-group
                                             label="Право собственности:"
                                             label-for="prav_sob"
@@ -180,7 +173,6 @@
                                     >
                                         <b-form-input id="prav_sob" name="ProgramObjects[prav_sob]" v-model="formData.prav_sob"/>
                                     </b-form-group>
-
                                     <b-form-group
                                             label="Общая площадь здания - всего, кв.м.:"
                                             label-for="square"
@@ -287,9 +279,19 @@
                             </b-card-body>
                         </b-collapse>
                     </b-card>
-                </div>
-
-
+                    <b-card no-body class="mb-1">
+                        <b-card-header header-tag="header" class="p-1" role="tab">
+                       <span  class="toggle_button" v-b-toggle.accordion-6 >
+                           <b-icon-gear-wide-connected />
+                          Опись прилагаемых документов</span>
+                        </b-card-header>
+                        <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel" visible>
+                            <b-card-body>
+                                <v-uploads />
+                            </b-card-body>
+                        </b-collapse>
+                    </b-card>
+            </div>
             </div>
             <b-button type="submit" variant="info">Сохранить</b-button>
             <b-button type="reset" variant="danger">Сброс</b-button>
@@ -301,14 +303,12 @@
     import {userPanel} from "../../../organisms";
     import Multiselect from "vue-select";
     import {mapActions, mapGetters} from "vuex";
-
     import Svedenia from './Svedenia.vue';
     import Necessary from './Necessary.vue';
     import Riscs from './Riscs.vue';
     import Waited from './Waited.vue';
-    import Axios from 'axios';
-    import {objectToFormData} from 'object-to-formdata';
-
+    import Uploads from './Uploads.vue'
+    import Axios from 'axios'
     export default {
         name: "programForm",
         components:{
@@ -317,7 +317,8 @@
             "v-select2": Multiselect,
             "v-necessary": Necessary,
             "v-waited": Waited,
-            "v-riscs": Riscs
+            "v-riscs": Riscs,
+            "v-uploads": Uploads
         },
         computed:{
             ...mapGetters(['getPageData','getCities',"getRegions"]),
@@ -331,7 +332,8 @@
                 // return this.formData.year.length===4 && this.formData.year[0]===1
             },
             exp_year_validator: function () {
-                return this.formData.exploit_year.length === 4
+                let pattern = /^[1-2][0-9]\d{2}/;
+                return pattern.test(this.formData.exploit_year)
 
             },
             wear_validator: function () {
