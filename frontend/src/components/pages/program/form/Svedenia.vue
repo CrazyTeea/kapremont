@@ -11,6 +11,7 @@
             >
                 <template v-slot:cell(is_nessesary)="row">
                     <v-select
+                        :name="'svedenia[select_is_nessesary_' + row.index + ']'"
                         class="mt-5"
                         v-model="sved.is_nessesary[row.index]"
                         label="type"
@@ -23,7 +24,8 @@
                 </template>
 
                 <template v-slot:cell(begin_date)="row">
-                    <b-form-datepicker 
+                    <b-form-datepicker
+                        :name="'svedenia[datapicker_begin_date_' + row.index + ']'"
                         today-button
                         label-today-button="сегодня"
                         reset-button
@@ -31,12 +33,12 @@
                         placeholder="дата"
                         size="sm"
                         v-model="sved.begin_date[row.index]">
-
                     </b-form-datepicker>
                 </template>
 
                 <template v-slot:cell(final_date)="row">
                     <b-form-datepicker
+                        :name="'svedenia[datapicker_final_date' + row.index + ']'"
                         today-button
                         label-today-button="сегодня"
                         reset-button
@@ -47,6 +49,7 @@
                 </template>
                 <template v-slot:cell(rc)="row">
                     <b-form-input
+                        :name="'svedenia[input_realization_cost_' + row.index + ']'"
                         v-if="row.value" 
                         v-model="sved.realization_cost[row.index]" 
                         placeholder="Цена"
@@ -57,6 +60,7 @@
                 </template>
                 <template v-slot:cell(kap_cost)="row">
                     <b-form-input
+                        :name="'svedenia[input_kap_cost_' + row.index + ']'"
                         v-if="row.value" 
                         v-model="sved.kap_cost[row.index]" 
                         placeholder="Цена"
@@ -67,15 +71,15 @@
                 </template>
                 <template v-slot:cell(finanse)="row">
                     <b-form-input
+                        :name="'svedenia[input_finanse_' + row.index + ']'"
                         v-if="row.value" 
-                        :v-model="test(row.index)" 
+                        :v-model="sved.finanse[row.index]" 
                         placeholder="Цена"
                         min="0"
                         type="number"
                         ></b-form-input>
                         <label v-else>-</label>
                 </template>
-
                 
                 <template v-slot:foot(stage)>
                     <span class="font-weight-bold">ИТОГО:</span>
@@ -98,7 +102,6 @@
                 <template v-slot:foot(finanse)>
                     <span class="font-weight-bold">{{ finanse_sum }}</span>
                 </template>
-
         </b-table>
     </div>
 </template>
@@ -111,20 +114,13 @@ import Multiselect from 'vue-select';
         components: {
             "v-select": Multiselect,    
         },
-        watch: {
-            masObj: function () {
-                // console.log(this.masObj)
-            }
-        },
         computed: {
-            test(){
-                return index => this.masObj[index]?.finance // ? this.masObj[index].finanse : this.masObj[index]
-            },
             rc_full() {
                 var sum = 0;
                 for(let key in this.sved.realization_cost){
                     sum += parseInt(this.sved.realization_cost[key]) || 0;
                 }
+
                 return sum
             },
             kap_full() {
@@ -132,6 +128,7 @@ import Multiselect from 'vue-select';
                 for(let key in this.sved.kap_cost){
                     sum += parseInt(this.sved.kap_cost[key]) || 0;
                 }
+
                 return sum
             },
             finanse_sum() {
@@ -139,13 +136,12 @@ import Multiselect from 'vue-select';
                 for(let key in this.sved.finanse){
                     sum += parseInt(this.sved.finanse[key]) || 0;
                 }
-                return sum
 
+                return sum
             }
         },
         data() {
             return {
-
                 fields: [
                     {key: 'stage', label: 'Этап'},
                     {key: 'is_nessesary', label: 'Необходимость выполнения'},
@@ -213,17 +209,7 @@ import Multiselect from 'vue-select';
                     realization_cost: [],
                     kap_cost: [],
                     finanse:[]
-                }, 
-                masObj: [
-                    {
-                        is_nessesary: true,
-                        begin_date: undefined,
-                        final_date: undefined,
-                        realization_cost: undefined,
-                        kap_cost: undefined,
-                        finanse: undefined
-                    }
-                ]
+                },
             }
         },
     }
