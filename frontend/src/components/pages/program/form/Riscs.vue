@@ -15,19 +15,22 @@
                 <b-tbody>
                 <b-tr v-for="(item, index) in items" :key="index">
                     <b-th>
-                        <b-form-input 
+                        <b-form-input
+                            :name="'riscs[input_types_' + index + ']'"
                             type="text"
                             v-model="item.types" 
                         ></b-form-input>
                     </b-th>
                     <b-th>
-                        <b-form-input 
+                        <b-form-input
+                            :name="'riscs[input_poison_' + index + ']'"
                             type="text"
                             v-model="item.poison" 
                         ></b-form-input>
                     </b-th>
                     <b-th>
                         <b-form-input
+                            :name="'riscs[input_protect' + index + ']'"
                             type="text"
                             v-model="item.protect"
                         ></b-form-input>
@@ -58,8 +61,6 @@
 </template>
 
 <script>
-import BootstrapVue from 'bootstrap-vue';
-
 export default {
     data(){
         return {
