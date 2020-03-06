@@ -11,6 +11,7 @@ use app\models\ProgramObjects;
 use app\models\Regions;
 use app\models\User;
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /***
  * Class SystemController
@@ -87,7 +88,7 @@ class SystemController extends RestController
                     $ret['fieldsObjects']['fields']=[
                         ['key'=>'id','label'=>'№'],
                         ['key'=>'priority','label'=>'Приоритет'],
-                        ['key'=>'id_region','label'=>"Субъект РФ"],
+                        ['key'=>'region','label'=>"Субъект РФ"],
                         ['key'=>'name','label'=>"Наименование объекта, требующего кап. ремонт"],
                         ['key'=>'assignment','label'=>"Назначение"],
                         ['key'=>'square_kap','label'=>"Площадь кап. ремонта (кв.м)"],
@@ -116,10 +117,16 @@ class SystemController extends RestController
                         ['id'=>6,'target'=>'Иное:','indicator'=>'','unit'=>''],
                     ];
 
-                    $ret['priorityObjects']['items'] = ProgramObjects::findAll(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>0]);
-                    $ret['reservedObjects']['items'] = ProgramObjects::findAll(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>1]);
+                    $progObj = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>0])->joinWith(['region'])->all();
+                    $flag = false;
+                    foreach ($progObj as $index=>$item) {
+                            $ret['priorityObjects']['items'][$index] = ArrayHelper::merge(['region' => $item->region->region],$item);
+                    }
+                    $progObj = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>1])->joinWith(['region'])->all();
+                    foreach ($progObj as $index=>$item) {
+                        $ret['reservedObjects']['items'][$index] = ArrayHelper::merge(['region' => $item->region->region],$item);
+                    }
                     return $ret;
-                    break;
                 }
                 case 'objectCreate':{
                     $ret['regionOptions'] = Regions::find()->all();

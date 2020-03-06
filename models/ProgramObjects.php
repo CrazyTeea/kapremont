@@ -40,6 +40,7 @@ use Yii;
  */
 class ProgramObjects extends \yii\db\ActiveRecord
 {
+
     /**
      * {@inheritdoc}
      */
@@ -104,5 +105,8 @@ class ProgramObjects extends \yii\db\ActiveRecord
             'exploit_year' => 'Exploit Year',
             'osn_isp_zdan' => 'Osn Isp Zdan',
         ];
+    }
+    public function getRegion(){
+        return $this->hasOne(Regions::className(),['id'=>'id_region']);
     }
 }
