@@ -788,30 +788,20 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.symbol */ "./node_modules/core-js/modules/es.symbol.js");
-/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.symbol.description */ "./node_modules/core-js/modules/es.symbol.description.js");
-/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator */ "./node_modules/core-js/modules/es.symbol.iterator.js");
-/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
-/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_array_from__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.from */ "./node_modules/core-js/modules/es.array.from.js");
-/* harmony import */ var core_js_modules_es_array_from__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_from__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.splice */ "./node_modules/core-js/modules/es.array.splice.js");
-/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
-/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_9__);
-
-
-
-
+/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.filter */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_array_from__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.from */ "./node_modules/core-js/modules/es.array.from.js");
+/* harmony import */ var core_js_modules_es_array_from__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_from__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.map */ "./node_modules/core-js/modules/es.array.map.js");
+/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.splice */ "./node_modules/core-js/modules/es.array.splice.js");
+/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
 
 
 
@@ -867,41 +857,52 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       items: [{
-        name: null,
+        fileName: null,
         label: 'Инвентарные карточки учета основных средств на объект недвижимого имущества и на земельный участок под указанным объектом'
       }, {
-        name: null,
+        fileName: null,
         label: 'Выписка из реестра федерального имущества на объект федерального имущества и на земельный участок под указанным объектом'
       }, {
-        name: null,
+        fileName: null,
         label: 'Правоустанавливающие и (или) правоудостоверяющие документы на объект недвижимого имущества и на земельный участок под указанным объектом'
       }, {
-        name: null,
+        fileName: null,
         label: 'Документы технического и кадастрового учета на объект недвижимого имущества'
       }, {
-        name: null,
+        fileName: null,
         label: 'Ситуационный план с указанием границ земельного участка, объекта недвижимого имущества и иных объектов (включая незавершенные строительные объекты), принадлежащих третьим лицам, расположенных на указанном земельном участке'
       }, {
-        name: null,
+        fileName: null,
         label: 'Акт технического осмотра объекта капитального строительства (документ, содержащий сведения о результатах обследования объекта капитального строительства, техническом состоянии строительных конструкций и инженерного оборудования такого объекта и количественной оценке фактических показателей качества строительных конструкций и инженерного оборудования по состоянию на дату обследования, для определения состава, объёмов и сроков работ по капитальному ремонту объекта капитального строительства)'
       }, {
-        name: null,
+        fileName: null,
         label: 'Дефектная ведомость (первичный учётный документ, подготовленный в соответствии с требованиями законодательства Российской Федерации о бухгалтерском учёте по результатам обследования технического состояния объекта капитального строительства и содержащий перечень дефектов строительных конструкций и инженерного оборудования объекта капитального строительства с указанием качественных и количественных характеристик таких дефектов)'
       }, {
-        name: null,
+        fileName: null,
         label: 'Фотографии объекта, предполагаемого к проведению капитального ремонта (подписанные по 2 шт. на листе А4, но не более 10 шт. на объект недвижимости)'
       }, {
-        name: null,
+        fileName: null,
         label: 'Предписания надзорных органов (при наличии)'
       }, {
-        name: null,
+        fileName: null,
         label: 'Задание на проектирование (корректировку проектной документации), составленное в соответствии с рекомендациями Минстроя РФ (в случае разработки/корректировки проектной документации и/или направления данной документации на экспертизу)'
       }, {
-        name: null,
+        fileName: null,
         label: 'Иные документы'
       }],
       loadProgress: null,
@@ -915,7 +916,7 @@ __webpack_require__.r(__webpack_exports__);
       if (file.type !== 'application/pdf') {
         document.querySelector('#file_form_' + index).reset();
         document.querySelector('#file_input_' + index).value = null;
-        return this.wrongDocumentTypeError();
+        return this.errorMessage('Файл не является документом pdf!');
       }
 
       this.selectedFiles.push({
@@ -923,50 +924,30 @@ __webpack_require__.r(__webpack_exports__);
         name: this.items[index].label,
         file: file
       });
-      console.log(this.selectedFiles);
+      this.items[index].fileName = file.name;
     },
     fileRemove: function fileRemove(index) {
-      var _this = this;
-
-      this.selectedFiles.forEach(function (element, key) {
-        if (element.id = index) {
-          _this.selectedFiles.splice(index, 1);
-        }
-      });
-    },
-    isInputDisabled: function isInputDisabled(index) {
+      var key = this.getSelectedFileKey(index);
+      this.selectedFiles.splice(key, 1);
+      this.items[index].fileName = null;
       console.log(this.selectedFiles);
-
+    },
+    getSelectedFileKey: function getSelectedFileKey(index) {
       if (this.selectedFiles.length) {
-        var _iteratorNormalCompletion = true;
-        var _didIteratorError = false;
-        var _iteratorError = undefined;
-
-        try {
-          for (var _iterator = this.selectedFiles[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var item = _step.value;
-
-            if (item.id = index) {
-              return true;
-            }
+        return this.selectedFiles.map(function (elem, id) {
+          if (elem.id === index) {
+            return id;
+          } else {
+            return null;
           }
-        } catch (err) {
-          _didIteratorError = true;
-          _iteratorError = err;
-        } finally {
-          try {
-            if (!_iteratorNormalCompletion && _iterator.return != null) {
-              _iterator.return();
-            }
-          } finally {
-            if (_didIteratorError) {
-              throw _iteratorError;
-            }
-          }
-        }
-
-        return false;
+        }).filter(function (elem) {
+          return elem !== null;
+        })[0];
+      } else {
+        return this.errorMessage('Файл еше не добавлен!');
       }
+    },
+    getSavedDocuments: function getSavedDocuments() {//
     },
     // async uploadFile(file) {
     //     let form = new FormData()
@@ -977,8 +958,7 @@ __webpack_require__.r(__webpack_exports__);
     //         }
     //     })
     // },
-    wrongDocumentTypeError: function wrongDocumentTypeError() {
-      var message = 'Файл не является документом pdf!';
+    errorMessage: function errorMessage(message) {
       this.$bvModal.msgBoxOk(message, {
         title: 'Ошибка!',
         size: 'lg',
@@ -1789,7 +1769,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.extra-table-class {\r\n    vertical-align: middle !important;\r\n    text-align: center;\n}\n.vertical-align-centre-extra-table {\r\n    vertical-align: middle !important;\n}\n.overflow {\r\n    overflow: hidden;\n}\n.normal-font-weight-for-table {\r\n    font-weight: normal !important;\n}\n.cell-center-for-table {\r\n    vertical-align: middle !important;\r\n    text-align: center !important;\n}\n.cell-center-for-items {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n.scope-to-animate {\r\n    z-index: 999;\r\n    height: 2px;\r\n    width: 8px;\r\n    background: grey;\r\n    transition: 0.4s ease;\n}\n.scope-to-animate:first-child {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 25%;\r\n    bottom: 35%;\n}\n.scope-to-animate:nth-child(2) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 45%;\r\n    bottom: 35%;\n}\n.scope-to-animate:nth-child(3) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 25%;\r\n    bottom: 54%;\n}\n.scope-to-animate:nth-child(4) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 45%;\r\n    bottom: 54%;\n}\n.label:hover .scope-to-animate:nth-child(1) {\r\n    transform: rotate(-135deg);\r\n    background: black;\n}\n.label:hover .scope-to-animate:nth-child(2) {\r\n    transform: rotate(135deg);\r\n    background: black;\n}\n.label:hover .scope-to-animate:nth-child(3) {\r\n    transform: rotate(225deg);\r\n    background: black;\n}\n.label:hover .scope-to-animate:nth-child(4) {\r\n    transform: rotate(-225deg);\r\n    background: black;\n}\n.hidden-file-input {\r\n    display: none;\n}\n.label {\r\n    position: relative;\r\n    width: 28px;\n}\n.example-1 {\r\n    display: flex;\r\n    align-items: center;\n}\n.example-1 input[type=file] {\r\n    outline:0;\r\n    opacity:0;\r\n    pointer-events:none;\r\n    user-select:none\n}\n.example-1 .label  {\r\n    height: 28px;\r\n    border:2px dashed grey;\r\n    border-radius:5px;\r\n    display:block;\r\n    transition:border 300ms ease;\r\n    cursor:pointer;\r\n    text-align:center\n}\n.example-1 .label i {\r\n    display:block;\r\n    font-size:42px;\n}\n.example-1 .label i,.example-1 .label .title {\r\n    color:grey;\r\n    transition:200ms color\n}\n.example-1 .label:hover {\r\n    border:2px solid #000\n}\n.example-1 .label:hover i,.example-1 .label:hover .title {\r\n    color:#000\n}\r\n", ""]);
+exports.push([module.i, "\n.extra-table-class {\r\n    vertical-align: middle !important;\r\n    text-align: center;\n}\n.vertical-align-centre-extra-table {\r\n    vertical-align: middle !important;\n}\n.overflow {\r\n    overflow: hidden;\n}\n.normal-font-weight-for-table {\r\n    font-weight: normal !important;\n}\n.cell-center-for-table {\r\n    vertical-align: middle !important;\r\n    text-align: center !important;\n}\n.cell-center-for-items {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n.scope-to-animate {\r\n    z-index: 999;\r\n    height: 2px;\r\n    width: 8px;\r\n    background: grey;\r\n    transition: 0.4s ease;\n}\n.scope-to-animate:first-child {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 25%;\r\n    bottom: 35%;\n}\n.scope-to-animate:nth-child(2) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 45%;\r\n    bottom: 35%;\n}\n.scope-to-animate:nth-child(3) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 25%;\r\n    bottom: 54%;\n}\n.scope-to-animate:nth-child(4) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 45%;\r\n    bottom: 54%;\n}\n.label:hover .scope-to-animate:nth-child(1) {\r\n    transform: rotate(-135deg);\r\n    background: black;\n}\n.label:hover .scope-to-animate:nth-child(2) {\r\n    transform: rotate(135deg);\r\n    background: black;\n}\n.label:hover .scope-to-animate:nth-child(3) {\r\n    transform: rotate(225deg);\r\n    background: black;\n}\n.label:hover .scope-to-animate:nth-child(4) {\r\n    transform: rotate(-225deg);\r\n    background: black;\n}\n.hidden-file-input {\r\n    display: none;\n}\n.label {\r\n    position: relative;\r\n    width: 28px;\n}\n.example-1 {\r\n    display: flex;\r\n    align-items: center;\n}\n.example-1 input[type=file] {\r\n    outline:0;\r\n    opacity:0;\r\n    pointer-events:none;\r\n    user-select:none\n}\n.example-1 .label  {\r\n    height: 28px;\r\n    border:2px dashed grey;\r\n    border-radius:5px;\r\n    display:block;\r\n    transition:border 300ms ease;\r\n    cursor:pointer;\r\n    text-align:center\n}\n.example-1 .label i {\r\n    display:block;\r\n    font-size:42px;\n}\n.example-1 .label i,.example-1 .label .title {\r\n    color:grey;\r\n    transition:200ms color\n}\n.example-1 .label:hover {\r\n    border:2px solid #000\n}\n.example-1 .label:hover i,.example-1 .label:hover .title {\r\n    color:#000\n}\r\n\r\n\r\n\r\n\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -3041,6 +3021,8 @@ var render = function() {
               _c(
                 "b-tr",
                 [
+                  _c("b-th", [_vm._v("Чисто номерок посмотреть")]),
+                  _vm._v(" "),
                   _c("b-th", [_vm._v("Документы")]),
                   _vm._v(" "),
                   _c("b-th", [_vm._v("Загрузка")]),
@@ -3066,45 +3048,81 @@ var render = function() {
                       staticClass:
                         "cell-center-for-table normal-font-weight-for-table"
                     },
+                    [_c("label", [_vm._v(_vm._s(index))])]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-th",
+                    {
+                      staticClass:
+                        "cell-center-for-table normal-font-weight-for-table"
+                    },
                     [_c("label", [_vm._v(_vm._s(item.label))])]
                   ),
                   _vm._v(" "),
-                  _c("b-th", { staticClass: "no-cell-border" }, [
-                    _c("div", { staticClass: "cell-center-for-items" }, [
-                      _c("div", { staticClass: "example-1" }, [
-                        _c("label", { staticClass: "label" }, [
-                          _c("span", { staticClass: "title" }, [
-                            _c("div", { staticClass: "round-to-animate" }, [
-                              _c("span", { staticClass: "scope-to-animate" }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "scope-to-animate" }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "scope-to-animate" }),
-                              _vm._v(" "),
-                              _c("span", { staticClass: "scope-to-animate" })
+                  _c(
+                    "b-th",
+                    {
+                      staticClass:
+                        "no-cell-border vertical-align-centre-extra-table"
+                    },
+                    [
+                      !item.fileName
+                        ? _c("div", { staticClass: "cell-center-for-items" }, [
+                            _c("div", { staticClass: "example-1" }, [
+                              _c("label", { staticClass: "label" }, [
+                                _c("span", { staticClass: "title" }, [
+                                  _c(
+                                    "div",
+                                    { staticClass: "round-to-animate" },
+                                    [
+                                      _c("span", {
+                                        staticClass: "scope-to-animate"
+                                      }),
+                                      _vm._v(" "),
+                                      _c("span", {
+                                        staticClass: "scope-to-animate"
+                                      }),
+                                      _vm._v(" "),
+                                      _c("span", {
+                                        staticClass: "scope-to-animate"
+                                      }),
+                                      _vm._v(" "),
+                                      _c("span", {
+                                        staticClass: "scope-to-animate"
+                                      })
+                                    ]
+                                  )
+                                ]),
+                                _vm._v(" "),
+                                _c(
+                                  "form",
+                                  { attrs: { id: "file_form_" + index } },
+                                  [
+                                    _c("input", {
+                                      staticClass: "hidden-file-input",
+                                      attrs: {
+                                        type: "file",
+                                        id: "file_input_" + index
+                                      },
+                                      on: {
+                                        input: function($event) {
+                                          return _vm.fileInput(index)
+                                        }
+                                      }
+                                    })
+                                  ]
+                                )
+                              ])
                             ])
-                          ]),
-                          _vm._v(" "),
-                          _c("form", { attrs: { id: "file_form_" + index } }, [
-                            _c("input", {
-                              staticClass: "hidden-file-input",
-                              attrs: {
-                                type: "file",
-                                id: "file_input_" + index
-                              },
-                              on: {
-                                input: function($event) {
-                                  return _vm.fileInput(index)
-                                }
-                              }
-                            })
                           ])
-                        ])
-                      ])
-                    ])
-                  ]),
+                        : _c("label", { staticClass: "lol" }, [
+                            _vm._v(_vm._s(item.fileName))
+                          ])
+                    ]
+                  ),
                   _vm._v(" "),
-                  _c("b-th", [
+                  _c("b-th", { staticClass: "extra-table-class" }, [
                     _c(
                       "label",
                       [
