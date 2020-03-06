@@ -48,17 +48,23 @@
                     <b-card-text>Приоритетные объекты</b-card-text>
                     <b-table
                             class="text-center"
+                            :per-page="prevTable.perPage"
+                            :current-page="prevTable.curPage"
                             :items="priorityObjects && priorityObjects.items"
                             :fields="fieldsObjects && fieldsObjects.fields"
                             small bordered
                     />
+                    <b-pagination :per-page="prevTable.perPage" v-model="prevTable.curPage" :total-rows="rowsPrev"/>
                     <b-card-text>Резервные объекты</b-card-text>
                     <b-table
                             class="text-center"
+                            :per-page="resTable.perPage"
+                            :current-page="resTable.curPage"
                             :items="reservedObjects && reservedObjects.items"
                             :fields="fieldsObjects && fieldsObjects.fields"
                             small bordered
                     />
+                    <b-pagination :per-page="resTable.perPage" v-model="resTable.curPage" :total-rows="resPrev"/>
                 </b-card-body>
             </b-card>
 
@@ -146,7 +152,14 @@
         data(){
             return{
                 text:'dfs',
-
+                prevTable:{
+                    curPage:1,
+                    perPage:5,
+                },
+                resTable:{
+                    curPage:1,
+                    perPage:5,
+                }
             }
         },
         components:{
@@ -172,6 +185,12 @@
             target(){
                 return this.getPageData && this.getPageData.target
             },
+            rowsPrev(){
+                return this.getPageData.priorityObjects && this.getPageData.priorityObjects.items.length;
+            },
+            resPrev(){
+                return this.getPageData.reservedObjects && this.getPageData.reservedObjects.items.length;
+            }
         },
         mounted() {
             this.requestPageData({pageName:"programView"});
