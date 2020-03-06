@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\ProgramObjects */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Program Objects', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Программа модернизации', 'url' => ['/program/view']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>

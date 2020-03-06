@@ -2,8 +2,6 @@
 
 namespace app\controllers\app;
 
-use app\models\ProgObjectsEvents;
-use app\models\ProObjectsNecessary;
 use Yii;
 use app\models\ProgramObjects;
 use yii\helpers\Json;
@@ -47,6 +45,7 @@ class ProgramObjectsController extends AppController
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -92,10 +91,16 @@ class ProgramObjectsController extends AppController
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException
      */
     public function actionUpdate($id)
     {
-        return $this->render('update');
+        $model = $this->findModel($id);
+
+        if ($model->load(Yii::$app->request->post()) and $model->save())
+            return $this->redirect(['view','id'=>$model->id]);
+
+        return $this->render('update',compact('model'));
     }
 
     /**

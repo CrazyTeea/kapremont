@@ -345,25 +345,25 @@
             return {
                 csrf: document.getElementsByName('csrf-token')[0].content,
                 formData: {
-
-                    name:null,
-                    id_region:null,
-                    id_city:null,
-                    kad_number:null,
-                    year:0,
-                    exploit_year:0,
-                    wear:null,
-                    exist_pred_nadz_orgs:null,
-                    osn_isp_zdan:null,
-                    assignment:null,
-                    prav_sob:null,
-                    square:null,
-                    square_kap:null,
-                    isp_v_ust_dey:null,
-                    n_isp_v_ust_dey:null,
-                    square_ar:null,
-                    note:null,
-                    prav_oper_upr:null
+                    type:window.MODEL?.type || 0,
+                    name:window.MODEL?.name || null,
+                    id_region:window.MODEL?.id_region || null,
+                    id_city:window.MODEL?.id_city || null,
+                    kad_number:window.MODEL?.kad_number || null,
+                    year:window.MODEL?.year || 0,
+                    exploit_year:window.MODEL?.exploit_year || 0,
+                    wear:window.MODEL?.wear || null,
+                    exist_pred_nadz_orgs:window.MODEL?.exist_pred_nadz_orgs || null,
+                    osn_isp_zdan:window.MODEL?.osn_isp_zdan || null,
+                    assignment:window.MODEL?.assignment || null,
+                    prav_sob:window.MODEL?.prav_sob || null,
+                    square:window.MODEL?.square || null,
+                    square_kap:window.MODEL?.square_kap || null,
+                    isp_v_ust_dey:window.MODEL?.isp_v_ust_dey || null,
+                    n_isp_v_ust_dey:window.MODEL?.n_isp_v_ust_dey || null,
+                    square_ar:window.MODEL?.square_ar || null,
+                    note:window.MODEL?.note || null,
+                    prav_oper_upr:window.MODEL?.prav_oper_upr || null
                 },
                 errors:{}
             }
@@ -423,10 +423,12 @@
             onChangeRegion({id}) {
                 this.requestCity({id})
 
-            }
+            },
         },
         mounted() {
             this.requestPageData({pageName:"objectCreate"});
+            if (!!this.formData.id_region)
+                this.requestCity({id:this.formData.id_region});
         }
     }
 </script>
