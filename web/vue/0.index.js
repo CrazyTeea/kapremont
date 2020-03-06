@@ -905,7 +905,6 @@ __webpack_require__.r(__webpack_exports__);
         fileName: null,
         label: 'Иные документы'
       }],
-      loadProgress: null,
       selectedFiles: []
     };
   },
@@ -1769,7 +1768,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.extra-table-class {\r\n    vertical-align: middle !important;\r\n    text-align: center;\n}\n.vertical-align-centre-extra-table {\r\n    vertical-align: middle !important;\n}\n.overflow {\r\n    overflow: hidden;\n}\n.normal-font-weight-for-table {\r\n    font-weight: normal !important;\n}\n.cell-center-for-table {\r\n    vertical-align: middle !important;\r\n    text-align: center !important;\n}\n.cell-center-for-items {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n.scope-to-animate {\r\n    z-index: 999;\r\n    height: 2px;\r\n    width: 8px;\r\n    background: grey;\r\n    transition: 0.4s ease;\n}\n.scope-to-animate:first-child {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 25%;\r\n    bottom: 35%;\n}\n.scope-to-animate:nth-child(2) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 45%;\r\n    bottom: 35%;\n}\n.scope-to-animate:nth-child(3) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 25%;\r\n    bottom: 54%;\n}\n.scope-to-animate:nth-child(4) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 45%;\r\n    bottom: 54%;\n}\n.label:hover .scope-to-animate:nth-child(1) {\r\n    transform: rotate(-135deg);\r\n    background: black;\n}\n.label:hover .scope-to-animate:nth-child(2) {\r\n    transform: rotate(135deg);\r\n    background: black;\n}\n.label:hover .scope-to-animate:nth-child(3) {\r\n    transform: rotate(225deg);\r\n    background: black;\n}\n.label:hover .scope-to-animate:nth-child(4) {\r\n    transform: rotate(-225deg);\r\n    background: black;\n}\n.hidden-file-input {\r\n    display: none;\n}\n.label {\r\n    position: relative;\r\n    width: 28px;\n}\n.example-1 {\r\n    display: flex;\r\n    align-items: center;\n}\n.example-1 input[type=file] {\r\n    outline:0;\r\n    opacity:0;\r\n    pointer-events:none;\r\n    user-select:none\n}\n.example-1 .label  {\r\n    height: 28px;\r\n    border:2px dashed grey;\r\n    border-radius:5px;\r\n    display:block;\r\n    transition:border 300ms ease;\r\n    cursor:pointer;\r\n    text-align:center\n}\n.example-1 .label i {\r\n    display:block;\r\n    font-size:42px;\n}\n.example-1 .label i,.example-1 .label .title {\r\n    color:grey;\r\n    transition:200ms color\n}\n.example-1 .label:hover {\r\n    border:2px solid #000\n}\n.example-1 .label:hover i,.example-1 .label:hover .title {\r\n    color:#000\n}\r\n\r\n\r\n\r\n\r\n", ""]);
+exports.push([module.i, "\n.extra-table-class {\r\n    vertical-align: middle !important;\r\n    text-align: center;\n}\n.vertical-align-centre-extra-table {\r\n    vertical-align: middle !important;\n}\n.overflow {\r\n    overflow: hidden;\n}\n.normal-font-weight-for-table {\r\n    font-weight: normal !important;\n}\n.cell-center-for-table {\r\n    vertical-align: middle !important;\r\n    text-align: center !important;\n}\n.cell-center-for-items {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n.scope-to-animate {\r\n    z-index: 999;\r\n    height: 2px;\r\n    width: 8px;\r\n    background: grey;\r\n    transition: 0.4s ease;\n}\n.scope-to-animate:first-child {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 25%;\r\n    bottom: 35%;\n}\n.scope-to-animate:nth-child(2) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 45%;\r\n    bottom: 35%;\n}\n.scope-to-animate:nth-child(3) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 25%;\r\n    bottom: 54%;\n}\n.scope-to-animate:nth-child(4) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 45%;\r\n    bottom: 54%;\n}\n.label:hover .scope-to-animate:nth-child(1) {\r\n    transform: rotate(-135deg);\r\n    background: #5bc0de;\n}\n.label:hover .scope-to-animate:nth-child(2) {\r\n    transform: rotate(135deg);\r\n    background: #5bc0de;\n}\n.label:hover .scope-to-animate:nth-child(3) {\r\n    transform: rotate(225deg);\r\n    background: #5bc0de;\n}\n.label:hover .scope-to-animate:nth-child(4) {\r\n    transform: rotate(-225deg);\r\n    background: #5bc0de;\n}\n.hidden-file-input {\r\n    display: none;\n}\n.label {\r\n    position: relative;\r\n    width: 28px;\n}\n.arrow {\r\n    display: flex;\r\n    align-items: center;\n}\n.arrow input[type=file] {\r\n    outline:0;\r\n    opacity:0;\r\n    pointer-events:none;\r\n    user-select:none\n}\n.arrow .label  {\r\n    height: 28px;\r\n    border:2px dashed grey;\r\n    border-radius:5px;\r\n    display:block;\r\n    transition:border 300ms ease;\r\n    cursor:pointer;\r\n    text-align:center\n}\n.arrow .label i {\r\n    display:block;\r\n    font-size:42px;\n}\n.arrow .label i,.example-1 .label .title {\r\n    color:grey;\r\n    transition:200ms color\n}\n.arrow .label:hover {\r\n    border:2px solid #5bc0de\n}\n.arrow .label:hover i,.example-1 .label:hover .title {\r\n    color:#5bc0de\n}\n.cross-to-animate {\r\n    z-index: 999;\r\n    height: 2px;\r\n    width: 20px;\r\n    background: #d9534f;\r\n    transition: 0.4s ease;\n}\n.cross-to-animate:first-child {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 10%;\r\n    bottom: 45%;\n}\n.cross-to-animate:nth-child(2) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 12%;\r\n    bottom: 45%;\n}\n.label:hover .cross-to-animate:nth-child(1) {\r\n    transform: rotate(-135deg);\n}\n.label:hover .cross-to-animate:nth-child(2) {\r\n    transform: rotate(135deg);\n}\n.cross {\r\n    display: flex;\r\n    align-items: center;\n}\n.cross .label  {\r\n    height: 28px;\r\n    border:2px dashed grey;\r\n    border-radius:5px;\r\n    display:block;\r\n    transition:border 300ms ease;\r\n    cursor:pointer;\r\n    text-align:center\n}\n.cross .label i {\r\n    display:block;\r\n    font-size:42px;\n}\n.cross .label i,.cross .label .title {\r\n    color:grey;\r\n    transition:200ms color\n}\n.cross .label:hover {\r\n    border:2px solid #d9534f\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -3069,30 +3068,24 @@ var render = function() {
                     [
                       !item.fileName
                         ? _c("div", { staticClass: "cell-center-for-items" }, [
-                            _c("div", { staticClass: "example-1" }, [
+                            _c("div", { staticClass: "arrow" }, [
                               _c("label", { staticClass: "label" }, [
                                 _c("span", { staticClass: "title" }, [
-                                  _c(
-                                    "div",
-                                    { staticClass: "round-to-animate" },
-                                    [
-                                      _c("span", {
-                                        staticClass: "scope-to-animate"
-                                      }),
-                                      _vm._v(" "),
-                                      _c("span", {
-                                        staticClass: "scope-to-animate"
-                                      }),
-                                      _vm._v(" "),
-                                      _c("span", {
-                                        staticClass: "scope-to-animate"
-                                      }),
-                                      _vm._v(" "),
-                                      _c("span", {
-                                        staticClass: "scope-to-animate"
-                                      })
-                                    ]
-                                  )
+                                  _c("span", {
+                                    staticClass: "scope-to-animate"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", {
+                                    staticClass: "scope-to-animate"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", {
+                                    staticClass: "scope-to-animate"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", {
+                                    staticClass: "scope-to-animate"
+                                  })
                                 ]),
                                 _vm._v(" "),
                                 _c(
@@ -3122,25 +3115,37 @@ var render = function() {
                     ]
                   ),
                   _vm._v(" "),
-                  _c("b-th", { staticClass: "extra-table-class" }, [
-                    _c(
-                      "label",
-                      [
-                        _c(
-                          "b-button",
-                          {
-                            on: {
-                              click: function($event) {
-                                return _vm.fileRemove(index)
+                  _c(
+                    "b-th",
+                    {
+                      staticClass:
+                        "no-cell-border vertical-align-centre-extra-table"
+                    },
+                    [
+                      _c("div", { staticClass: "cell-center-for-items" }, [
+                        _c("div", { staticClass: "cross" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "label",
+                              on: {
+                                click: function($event) {
+                                  return _vm.fileRemove(index)
+                                }
                               }
-                            }
-                          },
-                          [_vm._v("X")]
-                        )
-                      ],
-                      1
-                    )
-                  ])
+                            },
+                            [
+                              _c("span", { staticClass: "title" }, [
+                                _c("span", { staticClass: "cross-to-animate" }),
+                                _vm._v(" "),
+                                _c("span", { staticClass: "cross-to-animate" })
+                              ])
+                            ]
+                          )
+                        ])
+                      ])
+                    ]
+                  )
                 ],
                 1
               )

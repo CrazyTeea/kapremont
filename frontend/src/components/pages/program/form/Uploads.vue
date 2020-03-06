@@ -15,42 +15,42 @@
                 </b-thead>
                 <b-tbody>
                 <b-tr v-for="(item, index) in items" :key="index">
-
                     <b-th class="cell-center-for-table normal-font-weight-for-table">
                         <label>{{ index }}</label>
                     </b-th>
-
                     <b-th class="cell-center-for-table normal-font-weight-for-table">
                         <label>{{ item.label }}</label>
                     </b-th>
-
                     <b-th class="no-cell-border vertical-align-centre-extra-table">
                         <div class="cell-center-for-items" v-if="!item.fileName">
-                        <div class="example-1">
-                            <label class="label">
-                                <span class="title">
-                                    <div class="round-to-animate">
+                            <div class="arrow">
+                                <label class="label">
+                                    <span class="title">
                                         <span class="scope-to-animate"></span>
                                         <span class="scope-to-animate"></span>
                                         <span class="scope-to-animate"></span>
                                         <span class="scope-to-animate"></span>
-                                    </div>
-                                </span>
-                                <form :id="'file_form_' + index">
-                                    <input type="file" :id="'file_input_' + index" class="hidden-file-input" @input="fileInput(index)">
-                                </form>
-                            </label>
-                        </div>
+                                    </span>
+                                    <form :id="'file_form_' + index">
+                                        <input type="file" :id="'file_input_' + index" class="hidden-file-input" @input="fileInput(index)">
+                                    </form>
+                                </label>
+                            </div>
                         </div>
                         <label v-else class="lol">{{ item.fileName }}</label>
                     </b-th>
-
-                    <b-th class="extra-table-class">
-                        <label>
-                            <b-button @click="fileRemove(index)">X</b-button>
-                        </label>
+                    <b-th class="no-cell-border vertical-align-centre-extra-table">
+                        <div class="cell-center-for-items">
+                            <div class="cross">
+                                <label class="label" @click="fileRemove(index)">
+                                    <span class="title">
+                                        <span class="cross-to-animate"></span>
+                                        <span class="cross-to-animate"></span>
+                                    </span>
+                                </label>
+                            </div>
+                        </div>
                     </b-th>
-
                 </b-tr>
                 </b-tbody>
         </b-table-simple>
@@ -76,7 +76,6 @@ export default {
                 {fileName: null, label: 'Задание на проектирование (корректировку проектной документации), составленное в соответствии с рекомендациями Минстроя РФ (в случае разработки/корректировки проектной документации и/или направления данной документации на экспертизу)'},
                 {fileName: null, label: 'Иные документы'},
             ],
-            loadProgress: null,
             selectedFiles: [],
         }
     },
@@ -206,19 +205,19 @@ export default {
 }
 .label:hover .scope-to-animate:nth-child(1) {
     transform: rotate(-135deg);
-    background: black;
+    background: #5bc0de;
 }
 .label:hover .scope-to-animate:nth-child(2) {
     transform: rotate(135deg);
-    background: black;
+    background: #5bc0de;
 }
 .label:hover .scope-to-animate:nth-child(3) {
     transform: rotate(225deg);
-    background: black;
+    background: #5bc0de;
 }
 .label:hover .scope-to-animate:nth-child(4) {
     transform: rotate(-225deg);
-    background: black;
+    background: #5bc0de;
 }
 .hidden-file-input {
     display: none;
@@ -227,17 +226,17 @@ export default {
     position: relative;
     width: 28px;
 }
-.example-1 {
+.arrow {
     display: flex;
     align-items: center;
 }
-.example-1 input[type=file] {
+.arrow input[type=file] {
     outline:0;
     opacity:0;
     pointer-events:none;
     user-select:none
 }
-.example-1 .label  {
+.arrow .label  {
     height: 28px;
     border:2px dashed grey;
     border-radius:5px;
@@ -246,22 +245,69 @@ export default {
     cursor:pointer;
     text-align:center
 }
-.example-1 .label i {
+.arrow .label i {
     display:block;
     font-size:42px;
 }
-.example-1 .label i,.example-1 .label .title {
+.arrow .label i,.example-1 .label .title {
     color:grey;
     transition:200ms color
 }
-.example-1 .label:hover {
-    border:2px solid #000
+.arrow .label:hover {
+    border:2px solid #5bc0de
 }
-.example-1 .label:hover i,.example-1 .label:hover .title {
-    color:#000
+.arrow .label:hover i,.example-1 .label:hover .title {
+    color:#5bc0de
 }
-
-
-
-
+.cross-to-animate {
+    z-index: 999;
+    height: 2px;
+    width: 20px;
+    background: #d9534f;
+    transition: 0.4s ease;
+}
+.cross-to-animate:first-child {
+    display: block;
+    position: absolute;
+    transform: rotate(45deg);
+    left: 10%;
+    bottom: 45%;
+}
+.cross-to-animate:nth-child(2) {
+    display: block;
+    position: absolute;
+    transform: rotate(-45deg);
+    left: 12%;
+    bottom: 45%;
+}
+.label:hover .cross-to-animate:nth-child(1) {
+    transform: rotate(-135deg);
+}
+.label:hover .cross-to-animate:nth-child(2) {
+    transform: rotate(135deg);
+}
+.cross {
+    display: flex;
+    align-items: center;
+}
+.cross .label  {
+    height: 28px;
+    border:2px dashed grey;
+    border-radius:5px;
+    display:block;
+    transition:border 300ms ease;
+    cursor:pointer;
+    text-align:center
+}
+.cross .label i {
+    display:block;
+    font-size:42px;
+}
+.cross .label i,.cross .label .title {
+    color:grey;
+    transition:200ms color
+}
+.cross .label:hover {
+    border:2px solid #d9534f
+}
 </style>
