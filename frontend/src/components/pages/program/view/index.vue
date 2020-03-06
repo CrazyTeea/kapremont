@@ -34,7 +34,7 @@
                 <b-button variant="info" href="object/create">Добавить объект кап. ремонта</b-button>
                 <b-button disabled>Добавить мероприятия по АТЗ</b-button>
             </div>
-            <div class="col-6"></div>
+            <div class="col-6"></div> 
         </div>
         <br>
         <div class="row" >

@@ -208,7 +208,8 @@ import Multiselect from 'vue-select';
                     final_date: [],
                     realization_cost: [],
                     kap_cost: [],
-                    finanse:[]
+                    finanse:[],
+                    step: [],
                 },
             }
         },

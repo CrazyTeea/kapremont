@@ -771,7 +771,8 @@ __webpack_require__.r(__webpack_exports__);
         final_date: [],
         realization_cost: [],
         kap_cost: [],
-        finanse: []
+        finanse: [],
+        step: []
       }
     };
   }
@@ -808,6 +809,8 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+//
+//
 //
 //
 //
@@ -908,10 +911,9 @@ __webpack_require__.r(__webpack_exports__);
     fileInput: function fileInput(index) {
       var file = Array.from(event.target.files)[0];
 
-      if (file.type !== 'application/pdf') {
-        document.querySelector('#file_form_' + index).reset();
-        document.querySelector('#file_input_' + index).value = null;
-        return this.errorMessage('Файл не является документом pdf!');
+      if (!this.checkFileExt(file.type) || !this.checkFileSize(file.size)) {
+        file.value = null;
+        return;
       }
 
       this.selectedFiles.push({
@@ -925,7 +927,22 @@ __webpack_require__.r(__webpack_exports__);
       var key = this.getSelectedFileKey(index);
       this.selectedFiles.splice(key, 1);
       this.items[index].fileName = null;
-      console.log(this.selectedFiles);
+    },
+    checkFileExt: function checkFileExt(type) {
+      if (type !== 'application/pdf') {
+        this.errorMessage('Файл не является документом pdf!');
+        return false;
+      }
+
+      return true;
+    },
+    checkFileSize: function checkFileSize(size) {
+      if (parseInt(size) > 5242880) {
+        this.errorMessage('Файл больше 20МБ!');
+        return false;
+      }
+
+      return true;
     },
     getSelectedFileKey: function getSelectedFileKey(index) {
       if (this.selectedFiles.length) {
@@ -958,7 +975,7 @@ __webpack_require__.r(__webpack_exports__);
         title: 'Ошибка!',
         size: 'sm',
         buttonSize: 'sm',
-        okVariant: 'success',
+        okVariant: 'outline-success',
         headerClass: 'p-2 border-bottom-0',
         footerClass: 'p-2 border-top-0',
         centered: true
@@ -3140,7 +3157,9 @@ var render = function() {
               )
             }),
             1
-          )
+          ),
+          _vm._v(" "),
+          _c("b-tfoot")
         ],
         1
       )
