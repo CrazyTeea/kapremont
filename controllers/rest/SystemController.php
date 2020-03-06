@@ -120,11 +120,11 @@ class SystemController extends RestController
                     $progObj = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>0])->joinWith(['region'])->all();
                     $flag = false;
                     foreach ($progObj as $index=>$item) {
-                            $ret['priorityObjects']['items'][$index] = ArrayHelper::merge(['region' => $item->region->region],$item);
+                            $ret['priorityObjects']['items'][$index] = ArrayHelper::merge(['region' => $item->region ? $item->region->region : ''],$item);
                     }
                     $progObj = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>1])->joinWith(['region'])->all();
                     foreach ($progObj as $index=>$item) {
-                        $ret['reservedObjects']['items'][$index] = ArrayHelper::merge(['region' => $item->region->region],$item);
+                        $ret['reservedObjects']['items'][$index] = ArrayHelper::merge(['region' =>$item->region ? $item->region->region : ''],$item);
                     }
                     return $ret;
                 }
