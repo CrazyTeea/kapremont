@@ -863,10 +863,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -943,7 +939,7 @@ __webpack_require__.r(__webpack_exports__);
           return elem !== null;
         })[0];
       } else {
-        return this.errorMessage('Файл еше не добавлен!');
+        return this.errorMessage('Сначала добавте файл!');
       }
     },
     getSavedDocuments: function getSavedDocuments() {//
@@ -960,7 +956,7 @@ __webpack_require__.r(__webpack_exports__);
     errorMessage: function errorMessage(message) {
       this.$bvModal.msgBoxOk(message, {
         title: 'Ошибка!',
-        size: 'lg',
+        size: 'sm',
         buttonSize: 'sm',
         okVariant: 'success',
         headerClass: 'p-2 border-bottom-0',
@@ -1768,7 +1764,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.extra-table-class {\r\n    vertical-align: middle !important;\r\n    text-align: center;\n}\n.vertical-align-centre-extra-table {\r\n    vertical-align: middle !important;\n}\n.overflow {\r\n    overflow: hidden;\n}\n.normal-font-weight-for-table {\r\n    font-weight: normal !important;\n}\n.cell-center-for-table {\r\n    vertical-align: middle !important;\r\n    text-align: center !important;\n}\n.cell-center-for-items {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n.scope-to-animate {\r\n    z-index: 999;\r\n    height: 2px;\r\n    width: 8px;\r\n    background: grey;\r\n    transition: 0.4s ease;\n}\n.scope-to-animate:first-child {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 25%;\r\n    bottom: 35%;\n}\n.scope-to-animate:nth-child(2) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 45%;\r\n    bottom: 35%;\n}\n.scope-to-animate:nth-child(3) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 25%;\r\n    bottom: 54%;\n}\n.scope-to-animate:nth-child(4) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 45%;\r\n    bottom: 54%;\n}\n.label:hover .scope-to-animate:nth-child(1) {\r\n    transform: rotate(-135deg);\r\n    background: #5bc0de;\n}\n.label:hover .scope-to-animate:nth-child(2) {\r\n    transform: rotate(135deg);\r\n    background: #5bc0de;\n}\n.label:hover .scope-to-animate:nth-child(3) {\r\n    transform: rotate(225deg);\r\n    background: #5bc0de;\n}\n.label:hover .scope-to-animate:nth-child(4) {\r\n    transform: rotate(-225deg);\r\n    background: #5bc0de;\n}\n.hidden-file-input {\r\n    display: none;\n}\n.label {\r\n    position: relative;\r\n    width: 28px;\n}\n.arrow {\r\n    display: flex;\r\n    align-items: center;\n}\n.arrow input[type=file] {\r\n    outline:0;\r\n    opacity:0;\r\n    pointer-events:none;\r\n    user-select:none\n}\n.arrow .label  {\r\n    height: 28px;\r\n    border:2px dashed grey;\r\n    border-radius:5px;\r\n    display:block;\r\n    transition:border 300ms ease;\r\n    cursor:pointer;\r\n    text-align:center\n}\n.arrow .label i {\r\n    display:block;\r\n    font-size:42px;\n}\n.arrow .label i,.example-1 .label .title {\r\n    color:grey;\r\n    transition:200ms color\n}\n.arrow .label:hover {\r\n    border:2px solid #5bc0de\n}\n.arrow .label:hover i,.example-1 .label:hover .title {\r\n    color:#5bc0de\n}\n.cross-to-animate {\r\n    z-index: 999;\r\n    height: 2px;\r\n    width: 20px;\r\n    background: #d9534f;\r\n    transition: 0.4s ease;\n}\n.cross-to-animate:first-child {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 10%;\r\n    bottom: 45%;\n}\n.cross-to-animate:nth-child(2) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 12%;\r\n    bottom: 45%;\n}\n.label:hover .cross-to-animate:nth-child(1) {\r\n    transform: rotate(-135deg);\n}\n.label:hover .cross-to-animate:nth-child(2) {\r\n    transform: rotate(135deg);\n}\n.cross {\r\n    display: flex;\r\n    align-items: center;\n}\n.cross .label  {\r\n    height: 28px;\r\n    border:2px dashed grey;\r\n    border-radius:5px;\r\n    display:block;\r\n    transition:border 300ms ease;\r\n    cursor:pointer;\r\n    text-align:center\n}\n.cross .label i {\r\n    display:block;\r\n    font-size:42px;\n}\n.cross .label i,.cross .label .title {\r\n    color:grey;\r\n    transition:200ms color\n}\n.cross .label:hover {\r\n    border:2px solid #d9534f\n}\r\n", ""]);
+exports.push([module.i, "\n.extra-table-class {\r\n    vertical-align: middle !important;\r\n    text-align: center;\n}\n.vertical-align-centre-extra-table {\r\n    vertical-align: middle !important;\n}\n.overflow {\r\n    overflow: hidden;\n}\n.normal-font-weight-for-table {\r\n    font-weight: normal !important;\n}\n.normal-font-size-for-cell-file-name {\r\n    font-size: 13px !important;\n}\n.cell-center-for-table {\r\n    vertical-align: middle !important;\r\n    text-align: center !important;\n}\n.cell-center-for-items {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n.scope-to-animate {\r\n    z-index: 999;\r\n    height: 2px;\r\n    width: 8px;\r\n    background: grey;\r\n    transition: 0.4s ease;\n}\n.scope-to-animate:first-child {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 25%;\r\n    bottom: 35%;\n}\n.scope-to-animate:nth-child(2) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 45%;\r\n    bottom: 35%;\n}\n.scope-to-animate:nth-child(3) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 25%;\r\n    bottom: 54%;\n}\n.scope-to-animate:nth-child(4) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 45%;\r\n    bottom: 54%;\n}\n.label:hover .scope-to-animate:nth-child(1) {\r\n    transform: rotate(-135deg);\r\n    background: #5bc0de;\n}\n.label:hover .scope-to-animate:nth-child(2) {\r\n    transform: rotate(135deg);\r\n    background: #5bc0de;\n}\n.label:hover .scope-to-animate:nth-child(3) {\r\n    transform: rotate(225deg);\r\n    background: #5bc0de;\n}\n.label:hover .scope-to-animate:nth-child(4) {\r\n    transform: rotate(-225deg);\r\n    background: #5bc0de;\n}\n.hidden-file-input {\r\n    display: none;\n}\n.label {\r\n    position: relative;\r\n    width: 28px;\n}\n.arrow {\r\n    display: flex;\r\n    align-items: center;\n}\n.arrow input[type=file] {\r\n    outline:0;\r\n    opacity:0;\r\n    pointer-events:none;\r\n    user-select:none\n}\n.arrow .label  {\r\n    height: 28px;\r\n    border:1px solid grey;\r\n    border-radius:5px;\r\n    display:block;\r\n    transition:border 300ms ease;\r\n    cursor:pointer;\r\n    text-align:center\n}\n.arrow .label i {\r\n    display:block;\r\n    font-size:42px;\n}\n.arrow .label i,.example-1 .label .title {\r\n    color:grey;\r\n    transition:200ms color\n}\n.arrow .label:hover {\r\n    border:2px solid #5bc0de\n}\n.arrow .label:hover i,.example-1 .label:hover .title {\r\n    color:#5bc0de\n}\n.cross-to-animate {\r\n    z-index: 999;\r\n    height: 2px;\r\n    width: 15px;\r\n    background: #d9534f;\r\n    transition: 0.4s ease;\n}\n.cross-to-animate:first-child {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 20%;\r\n    bottom: 45%;\n}\n.cross-to-animate:nth-child(2) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 22%;\r\n    bottom: 45%;\n}\n.label:hover .cross-to-animate:nth-child(1) {\r\n    transform: rotate(-135deg);\n}\n.label:hover .cross-to-animate:nth-child(2) {\r\n    transform: rotate(135deg);\n}\n.cross {\r\n    display: flex;\r\n    align-items: center;\n}\n.cross .label  {\r\n    height: 28px;\r\n    border:1px solid grey;\r\n    border-radius:5px;\r\n    display:block;\r\n    transition:border 300ms ease;\r\n    cursor:pointer;\r\n    text-align:center\n}\n.cross .label i {\r\n    display:block;\r\n    font-size:42px;\n}\n.cross .label i,.cross .label .title {\r\n    color:grey;\r\n    transition:200ms color\n}\n.cross .label:hover {\r\n    border:2px solid #d9534f\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -3020,8 +3016,6 @@ var render = function() {
               _c(
                 "b-tr",
                 [
-                  _c("b-th", [_vm._v("Чисто номерок посмотреть")]),
-                  _vm._v(" "),
                   _c("b-th", [_vm._v("Документы")]),
                   _vm._v(" "),
                   _c("b-th", [_vm._v("Загрузка")]),
@@ -3047,15 +3041,6 @@ var render = function() {
                       staticClass:
                         "cell-center-for-table normal-font-weight-for-table"
                     },
-                    [_c("label", [_vm._v(_vm._s(index))])]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-th",
-                    {
-                      staticClass:
-                        "cell-center-for-table normal-font-weight-for-table"
-                    },
                     [_c("label", [_vm._v(_vm._s(item.label))])]
                   ),
                   _vm._v(" "),
@@ -3063,7 +3048,7 @@ var render = function() {
                     "b-th",
                     {
                       staticClass:
-                        "no-cell-border vertical-align-centre-extra-table"
+                        "no-cell-border vertical-align-centre-extra-table normal-font-weight-for-table"
                     },
                     [
                       !item.fileName
@@ -3109,9 +3094,13 @@ var render = function() {
                               ])
                             ])
                           ])
-                        : _c("label", { staticClass: "lol" }, [
-                            _vm._v(_vm._s(item.fileName))
-                          ])
+                        : _c(
+                            "label",
+                            {
+                              staticClass: "normal-font-size-for-cell-file-name"
+                            },
+                            [_vm._v(_vm._s(item.fileName))]
+                          )
                     ]
                   ),
                   _vm._v(" "),

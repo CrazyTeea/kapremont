@@ -7,7 +7,6 @@
             >
                 <b-thead>
                 <b-tr>
-                    <b-th>Чисто номерок посмотреть</b-th>
                     <b-th>Документы</b-th>
                     <b-th>Загрузка</b-th>
                     <b-th>Удалить</b-th>
@@ -16,12 +15,9 @@
                 <b-tbody>
                 <b-tr v-for="(item, index) in items" :key="index">
                     <b-th class="cell-center-for-table normal-font-weight-for-table">
-                        <label>{{ index }}</label>
-                    </b-th>
-                    <b-th class="cell-center-for-table normal-font-weight-for-table">
                         <label>{{ item.label }}</label>
                     </b-th>
-                    <b-th class="no-cell-border vertical-align-centre-extra-table">
+                    <b-th class="no-cell-border vertical-align-centre-extra-table normal-font-weight-for-table">
                         <div class="cell-center-for-items" v-if="!item.fileName">
                             <div class="arrow">
                                 <label class="label">
@@ -37,7 +33,7 @@
                                 </label>
                             </div>
                         </div>
-                        <label v-else class="lol">{{ item.fileName }}</label>
+                        <label v-else class="normal-font-size-for-cell-file-name">{{ item.fileName }}</label>
                     </b-th>
                     <b-th class="no-cell-border vertical-align-centre-extra-table">
                         <div class="cell-center-for-items">
@@ -114,7 +110,7 @@ export default {
                     return elem !== null
                 })[0]
             } else {
-                return this.errorMessage('Файл еше не добавлен!')
+                return this.errorMessage('Сначала добавте файл!')
             }
         },
         getSavedDocuments() {
@@ -133,7 +129,7 @@ export default {
         errorMessage: function(message) {
             this.$bvModal.msgBoxOk(message, {
                 title: 'Ошибка!',
-                size: 'lg',
+                size: 'sm',
                 buttonSize: 'sm',
                 okVariant: 'success',
                 headerClass: 'p-2 border-bottom-0',
@@ -158,6 +154,9 @@ export default {
 }
 .normal-font-weight-for-table {
     font-weight: normal !important;
+}
+.normal-font-size-for-cell-file-name {
+    font-size: 13px !important;
 }
 .cell-center-for-table {
     vertical-align: middle !important;
@@ -238,7 +237,7 @@ export default {
 }
 .arrow .label  {
     height: 28px;
-    border:2px dashed grey;
+    border:1px solid grey;
     border-radius:5px;
     display:block;
     transition:border 300ms ease;
@@ -262,7 +261,7 @@ export default {
 .cross-to-animate {
     z-index: 999;
     height: 2px;
-    width: 20px;
+    width: 15px;
     background: #d9534f;
     transition: 0.4s ease;
 }
@@ -270,14 +269,14 @@ export default {
     display: block;
     position: absolute;
     transform: rotate(45deg);
-    left: 10%;
+    left: 20%;
     bottom: 45%;
 }
 .cross-to-animate:nth-child(2) {
     display: block;
     position: absolute;
     transform: rotate(-45deg);
-    left: 12%;
+    left: 22%;
     bottom: 45%;
 }
 .label:hover .cross-to-animate:nth-child(1) {
@@ -292,7 +291,7 @@ export default {
 }
 .cross .label  {
     height: 28px;
-    border:2px dashed grey;
+    border:1px solid grey;
     border-radius:5px;
     display:block;
     transition:border 300ms ease;
