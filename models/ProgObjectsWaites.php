@@ -12,8 +12,9 @@ use Yii;
  * @property string|null $aim
  * @property string|null $plan
  * @property string|null $changes
+ * @property string $element
  */
-class ProgObjectsWaites extends \yii\db\ActiveRecord
+class ProgObjectsWaites extends BaseMultiModel
 {
     /**
      * {@inheritdoc}
@@ -30,8 +31,9 @@ class ProgObjectsWaites extends \yii\db\ActiveRecord
     {
         return [
             [['id_object'], 'required'],
-            [['id_object'], 'integer'],
-            [['aim', 'plan', 'changes'], 'string', 'max' => 255],
+            [['element','id_object'], 'integer'],
+            [['plan', 'changes'], 'string', 'max' => 255],
+            ['aim','safe']
         ];
     }
 

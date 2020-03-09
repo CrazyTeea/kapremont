@@ -50,9 +50,11 @@
                             class="text-center"
                             :per-page="prevTable.perPage"
                             :current-page="prevTable.curPage"
+                            @row-clicked="onRowClick"
+                            tbody-tr-class="hover"
                             :items="priorityObjects && priorityObjects.items"
                             :fields="fieldsObjects && fieldsObjects.fields"
-                            small bordered
+                            small bordered hover
                     />
                     <b-pagination :per-page="prevTable.perPage" v-model="prevTable.curPage" :total-rows="rowsPrev"/>
                     <b-card-text>Резервные объекты</b-card-text>
@@ -60,6 +62,8 @@
                             class="text-center"
                             :per-page="resTable.perPage"
                             :current-page="resTable.curPage"
+                            @row-clicked="onRowClick"
+                            tbody-tr-class="hover"
                             :items="reservedObjects && reservedObjects.items"
                             :fields="fieldsObjects && fieldsObjects.fields"
                             small bordered
@@ -166,7 +170,10 @@
             "v-user-panel":userPanel
         },
         methods:{
-            ...mapActions(['requestPageData'])
+            ...mapActions(['requestPageData']),
+            onRowClick(item,index,event){
+                window.location.href = `/program/object/view/${item.id}`;
+            }
         },
         computed:{
             ...mapGetters(['getUser','getPageData']),
@@ -198,8 +205,13 @@
         }
     }
 </script>
-
+<style>
+    .hover{
+        cursor: pointer;
+    }
+</style>
 <style scoped>
+
     .toggle_button{
         display: block;
         cursor: pointer;

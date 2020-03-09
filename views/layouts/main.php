@@ -73,6 +73,7 @@ GlyphiconAsset::register($this);
         <?= Alert::widget() ?>
 
         <?= ((Yii::$app->requestedRoute) == 'site/login' || (Yii::$app->requestedRoute) == 'site/change-password') ? $content : '' ?>
+        <?=$content ?>
         <div id="app"></div>
     </div>
 </div>
