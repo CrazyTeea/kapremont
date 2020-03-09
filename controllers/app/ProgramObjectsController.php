@@ -9,6 +9,7 @@ use app\models\ProObjectsNecessary;
 use Yii;
 use app\models\ProgramObjects;
 use yii\base\Model;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -162,9 +163,14 @@ class ProgramObjectsController extends AppController
                         $save &= $pr->save();
                         $errors['ProObjectsNecessary'][] = $pr->getErrors();
                     }
-
+                    $deletedIDs = null;
+                    $oldIds = ArrayHelper::map($progObjectsWaites,'id','id');
                     $progObjectsWaites = ProgObjectsWaites::createMultiple(ProgObjectsWaites::className(), $progObjectsWaites);
                     ProgObjectsWaites::loadMultiple($progObjectsWaites, Yii::$app->request->post());
+                    $deletedIDs = array_diff($oldIds, array_filter(ArrayHelper::map($progObjectsWaites, 'id', 'id')));
+                    if (! empty($deletedIDs))
+                        ProgObjectsWaites::deleteAll(['id' => $deletedIDs]);
+                    $deletedIDs = null;
                     foreach ($progObjectsWaites as $index => $item) {
                         $pr = ProgObjectsWaites::findOne(['id_object' => $model->id, 'element' => $index]);
                         if (!$pr){
@@ -178,9 +184,12 @@ class ProgramObjectsController extends AppController
                         $save &= $pr->save();
                         $errors['ProgObjectsWaites'][] = [$pr->getErrors()];
                     }
-
+                    $oldIds = ArrayHelper::map($progObjectsRiscs,'id','id');
                     $progObjectsRiscs = ProgObjectsRiscs::createMultiple(ProgObjectsRiscs::className(), $progObjectsRiscs);
                     ProgObjectsRiscs::loadMultiple($progObjectsRiscs, Yii::$app->request->post());
+                    $deletedIDs = array_diff($oldIds, array_filter(ArrayHelper::map($progObjectsWaites, 'id', 'id')));
+                    if (! empty($deletedIDs))
+                        ProgObjectsRiscs::deleteAll(['id' => $deletedIDs]);
                     foreach ($progObjectsRiscs as $index => $item) {
                         $pr = ProgObjectsRiscs::findOne(['id_object' => $model->id, 'element' => $index]);
                         if (!$pr){
