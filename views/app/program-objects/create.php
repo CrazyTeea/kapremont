@@ -10,3 +10,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Программа модерни�
 $this->params['breadcrumbs'][] = $this->title;
 
 ?>
+<?= $this->render('_form', [
+    'model' => $model,
+]) ?>

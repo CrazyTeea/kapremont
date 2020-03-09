@@ -2,8 +2,13 @@
 
 namespace app\controllers\app;
 
+use app\models\ProgObjectsEvents;
+use app\models\ProgObjectsRiscs;
+use app\models\ProgObjectsWaites;
+use app\models\ProObjectsNecessary;
 use Yii;
 use app\models\ProgramObjects;
+use yii\base\Model;
 use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -61,21 +66,29 @@ class ProgramObjectsController extends AppController
     {
 
         $model = new ProgramObjects();
+        $progObjectsEvents = [new ProgObjectsEvents()];
+        $proObjectsNecessary = [new ProObjectsNecessary()];
+        $progObjectsWaites = [new ProgObjectsWaites()];
+        $progObjectsRiscs = [new ProgObjectsRiscs()];
+
         $model->id_org = Yii::$app->session->get('user')->id_org;
         $program = Yii::$app->session->get('program');
         if (!$program)
             return $this->redirect(['/']);
+
         $model->id_program = $program->id;
         $save = true;
         if ($post = Yii::$app->request->post()) {
             if ($model->load($post)) {
                 $transaction = Yii::$app->getDb()->beginTransaction();
                 $save &= $model->save();
+
+
                 $errors['ProgramObjects'] = $model->getErrors();
 
                 if ($save) {
                     $transaction->commit();
-                    return 'ok';
+                    return Json::encode($model);
                 } else {
                     $transaction->rollBack();
                     return Json::encode($errors);
@@ -83,7 +96,7 @@ class ProgramObjectsController extends AppController
             }
             return Json::encode($post);
         }
-        return $this->render('create');
+        return $this->render('create',compact('model'));
     }
 
     /**
@@ -92,13 +105,43 @@ class ProgramObjectsController extends AppController
      * @param integer $id
      * @return mixed
      * @throws NotFoundHttpException
+     * @throws \yii\db\Exception
      */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $progObjectsEvents = ProgObjectsEvents::findAll(['id_object'=>$id]) ? : [new ProgObjectsEvents()];
+        $proObjectsNecessary = ProObjectsNecessary::findAll(['id_object'=>$id]) ? : [new ProObjectsNecessary()];
+        $progObjectsWaites = ProgObjectsWaites::findAll(['id_object'=>$id]) ? : [new ProgObjectsWaites()];
+        $progObjectsRiscs = ProgObjectsRiscs::findAll(['id_object'=>$id]) ? : [new ProgObjectsRiscs()];
+        $save = true;
+        $arr=[null];
+        echo '<pre>';
+        if ($post = Yii::$app->request->post()) {
+            if ($model->load($post)) {
+                $transaction = Yii::$app->getDb()->beginTransaction();
+                $save &= $model->save();
+                $errors['ProgramObjects'] = $model->getErrors();
+                if ($save and Model::loadMultiple($progObjectsEvents,Yii::$app->request->post())) {
+                    var_dump($progObjectsEvents);
+                    foreach ($progObjectsEvents as $index=>$item){
+                        $item->id_object = $model->id;
+                        $item->step = $index;
+                    }
+                }
+               // var_dump($arr);
+                exit();
 
-        if ($model->load(Yii::$app->request->post()) and $model->save())
-            return $this->redirect(['view','id'=>$model->id]);
+                if ($save) {
+                    $transaction->commit();
+                    return Json::encode($model);
+                } else {
+                    $transaction->rollBack();
+                    return Json::encode($errors);
+                }
+            }
+            return Json::encode($post);
+        }
 
         return $this->render('update',compact('model'));
     }
@@ -114,7 +157,9 @@ class ProgramObjectsController extends AppController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $model->system_status = 0;
+        $model->save(false);
 
         return $this->redirect(['index']);
     }

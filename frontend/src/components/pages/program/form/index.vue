@@ -388,7 +388,7 @@
                 e.preventDefault();
                 let form = document.getElementById('object_form');
                 let formData = new FormData(form);
-                Axios.post('/program/object/create',formData,{
+                Axios.post(this.$route.path,formData,{
                     headers:
                         {
                             'X-CSRF-Token':this.csrf,
@@ -396,9 +396,10 @@
                         },
                 }).then(response=>
                 {
-                    if (response.data == 'ok')
-                        window.location.href = '/program/view';
-                    this.errors = response.data;
+                    console.log(response);
+                    //if (!!response.data?.id)
+                    //    window.location.href = `/program/object/view/${response.data.id}`;
+                   // this.errors = response.data;
                 })
             },
             onReset(){
