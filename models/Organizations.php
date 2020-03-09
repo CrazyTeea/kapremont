@@ -44,7 +44,7 @@ class Organizations extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'full_name' => 'Full Name',
-            'name' => 'Name',
+            'name' => 'Наименование организации ',
             'short_name' => 'Short Name',
             'system_status' => 'System Status',
         ];

@@ -1,7 +1,7 @@
 <!--suppress ALL -->
 <template>
     <div class="program_object_form">
-        <b-form id="object_form" @submit="onSubmit" @reset="onReset" method="post">
+        <b-form id="object_form" @submit="onSubmit" @reset="onReset" method="post" enctype="multipart/form-data">
             <div class="row">
 
                 <div class="col-12">
@@ -287,7 +287,7 @@
                         </b-card-header>
                         <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel" visible>
                             <b-card-body>
-                                <v-uploads />
+                                <v-uploads model-name="Files" />
                             </b-card-body>
                         </b-collapse>
                     </b-card>
@@ -388,18 +388,18 @@
                 e.preventDefault();
                 let form = document.getElementById('object_form');
                 let formData = new FormData(form);
+               // formData.append('dsfsd',document.querySelector('#file_input_0'))
                 Axios.post(this.$route.path,formData,{
                     headers:
                         {
                             'X-CSRF-Token':this.csrf,
-                            'Content-Type':'application/x-www-form-urlencoded'
+                            'Content-Type':`multipart/form-data; boundary=${formData._boundary}`
                         },
                 }).then(response=>
                 {
-                    console.log(response);
-                    //if (!!response.data?.id)
-                    //    window.location.href = `/program/object/view/${response.data.id}`;
-                   // this.errors = response.data;
+                    if (!!response.data?.id)
+                        window.location.href = `/program/object/view/${response.data.id}`;
+                    this.errors = response.data;
                 })
             },
             onReset(){

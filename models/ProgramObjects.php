@@ -79,16 +79,16 @@ class ProgramObjects extends \yii\db\ActiveRecord
             'id_org' => 'Id Org',
             'id_priority' => 'Id Priority',
             'id_program' => 'Id Program',
-            'name' => 'Name',
-            'assignment' => 'Assignment',
-            'square' => 'Square',
-            'year' => 'Year',
-            'wear' => 'Wear',
+            'name' => 'Наименование',
+            'assignment' => 'Назначение',
+            'square' => 'Площадь',
+            'year' => 'Год постройки',
+            'wear' => 'Износ',
             'regulation' => 'Regulation',
             'event_type' => 'Event Type',
             'finance_sum' => 'Finance Sum',
             'coFinancing' => 'Co Financing',
-            'note' => 'Note',
+            'note' => 'Примечание',
             'system_status' => 'System Status',
             'created_at' => 'Created At',
             'updated_at' => 'Updated At',
@@ -109,5 +109,8 @@ class ProgramObjects extends \yii\db\ActiveRecord
     }
     public function getRegion(){
         return $this->hasOne(Regions::className(),['id'=>'id_region']);
+    }
+    public function getOrg(){
+        return $this->hasOne(Organizations::className(),['id'=>'id_org']);
     }
 }
