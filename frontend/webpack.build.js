@@ -1,6 +1,8 @@
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
+const webpack = require('webpack');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 //console.log(path.resolve(__dirname, '../web/build/'), '11111111');
 module.exports = {
@@ -10,11 +12,15 @@ module.exports = {
         filename: 'index.js',
         publicPath: `/vue/`,
     },
-    performance: {
-        maxEntrypointSize: 512000,
-        maxAssetSize: 512000
-    },
     mode: "production",
+
+    optimization: {
+        splitChunks: {
+            chunks: 'async'
+        },
+        minimizer: [new UglifyJsPlugin()],
+    },
+
     //devtool: 'source-map',
     module: {
         rules: [
@@ -62,7 +68,8 @@ module.exports = {
 
     plugins: [
         new ExtractTextPlugin('styles.css'),
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
+        new webpack.NoEmitOnErrorsPlugin(),
     ],
 
     target: "web",

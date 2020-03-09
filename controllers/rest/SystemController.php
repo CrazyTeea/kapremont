@@ -11,7 +11,9 @@ use app\models\ProgramObjects;
 use app\models\Regions;
 use app\models\User;
 use Yii;
+use yii\bootstrap4\Html;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 
 /***
  * Class SystemController
@@ -100,6 +102,7 @@ class SystemController extends RestController
                         ['key'=>'finance_sum','label'=>"Сумма бюджетного финансирования на проведение кап.ремонта (тыс. руб)"],
                         ['key'=>'coFinancing','label'=>"Софинансирование из внебюджетных источников (тыс. руб)"],
                         ['key'=>'note','label'=>"Примечание"],
+                        ['key'=>'button','label'=>'']
 
                     ];
                     $ret['target']['fields'] = [
@@ -120,7 +123,7 @@ class SystemController extends RestController
                     $progObj = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>0])->joinWith(['region'])->all();
                     $flag = false;
                     foreach ($progObj as $index=>$item) {
-                            $ret['priorityObjects']['items'][$index] = ArrayHelper::merge(['region' => $item->region ? $item->region->region : ''],$item);
+                            $ret['priorityObjects']['items'][$index] = ArrayHelper::merge(['region' => $item->region ? $item->region->region : '','button'=>Url::to(['program/object/view','id'=>$item->id])],$item);
                     }
                     $progObj = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>1])->joinWith(['region'])->all();
                     foreach ($progObj as $index=>$item) {

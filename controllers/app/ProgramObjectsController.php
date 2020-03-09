@@ -3,9 +3,12 @@
 namespace app\controllers\app;
 
 use app\models\ProgObjectsEvents;
+use app\models\ProgObjectsRiscs;
+use app\models\ProgObjectsWaites;
 use app\models\ProObjectsNecessary;
 use Yii;
 use app\models\ProgramObjects;
+use yii\base\Model;
 use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -47,6 +50,7 @@ class ProgramObjectsController extends AppController
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
         return $this->render('view', [
             'model' => $this->findModel($id),
         ]);
@@ -62,21 +66,29 @@ class ProgramObjectsController extends AppController
     {
 
         $model = new ProgramObjects();
+        $progObjectsEvents = [new ProgObjectsEvents()];
+        $proObjectsNecessary = [new ProObjectsNecessary()];
+        $progObjectsWaites = [new ProgObjectsWaites()];
+        $progObjectsRiscs = [new ProgObjectsRiscs()];
+
         $model->id_org = Yii::$app->session->get('user')->id_org;
         $program = Yii::$app->session->get('program');
         if (!$program)
             return $this->redirect(['/']);
+
         $model->id_program = $program->id;
         $save = true;
         if ($post = Yii::$app->request->post()) {
             if ($model->load($post)) {
                 $transaction = Yii::$app->getDb()->beginTransaction();
                 $save &= $model->save();
+
+
                 $errors['ProgramObjects'] = $model->getErrors();
 
                 if ($save) {
                     $transaction->commit();
-                    return 'ok';
+                    return Json::encode($model);
                 } else {
                     $transaction->rollBack();
                     return Json::encode($errors);
@@ -84,7 +96,7 @@ class ProgramObjectsController extends AppController
             }
             return Json::encode($post);
         }
-        return $this->render('create');
+        return $this->render('create',compact('model'));
     }
 
     /**
@@ -92,10 +104,110 @@ class ProgramObjectsController extends AppController
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
+     * @throws NotFoundHttpException
+     * @throws \yii\db\Exception
      */
     public function actionUpdate($id)
     {
-        return $this->render('update');
+        $model = $this->findModel($id);
+        $progObjectsEvents = [new ProgObjectsEvents()];
+        $proObjectsNecessary = [new ProObjectsNecessary()];
+        $progObjectsWaites =  [new ProgObjectsWaites()];
+        $progObjectsRiscs =  [new ProgObjectsRiscs()];
+        $save = true;
+        $arr=[null];
+        //
+        if ($post = Yii::$app->request->post()) {
+
+
+            if ($model->load($post)) {
+
+                $transaction = Yii::$app->getDb()->beginTransaction();
+                $save &= $model->save();
+                $errors['ProgramObjects'] = $model->getErrors();
+                if ($save) {
+                    $progObjectsEvents = ProgObjectsEvents::createMultiple(ProgObjectsEvents::className(), $progObjectsEvents);
+                    ProgObjectsEvents::loadMultiple($progObjectsEvents, Yii::$app->request->post());
+                    foreach ($progObjectsEvents as $index => $item) {
+                        $pr = ProgObjectsEvents::findOne(['id_object' => $model->id, 'step' => $index]);
+                        if (!$pr) {
+                            $pr = new ProgObjectsEvents();
+                            $pr->id_object = $id;
+                            $pr->step = $index;
+                        }
+                        $pr->date_event_end = $item->date_event_end;
+                        $pr->date_event_start = $item->date_event_start;
+                        $pr->is_nessesary = $item->is_nessesary;
+                        $pr->cost_real = $item->cost_real;
+                        $pr->sum_bud_fin = $item->sum_bud_fin;
+                        $pr->fin_vnebud_ist = $item->fin_vnebud_ist;
+                        $save &= $pr->save();
+                        $errors['ProgObjectsEvents'][] = $pr->getErrors();
+                    }
+
+                    $proObjectsNecessary = ProObjectsNecessary::createMultiple(ProObjectsNecessary::className(), $proObjectsNecessary);
+                    ProObjectsNecessary::loadMultiple($proObjectsNecessary, Yii::$app->request->post());
+                    foreach ($proObjectsNecessary as $index => $item) {
+                        $pr = ProObjectsNecessary::findOne(['id_object' => $model->id, 'element' => $index]);
+                        if (!$pr){
+                            $pr = new ProObjectsNecessary();
+                            $pr->id_object = $id;
+                            $pr->element = $index;
+                        }
+                        $pr->nalichie = (int)$item->nalichie;
+                        $pr->material = $item->material;
+                        $pr->srok_eks = $item->srok_eks;
+                        $pr->kap_remont = (int)$item->kap_remont;
+                        $pr->obosnovanie = $item->obosnovanie;
+                        $save &= $pr->save();
+                        $errors['ProObjectsNecessary'][] = $pr->getErrors();
+                    }
+
+                    $progObjectsWaites = ProgObjectsWaites::createMultiple(ProgObjectsWaites::className(), $progObjectsWaites);
+                    ProgObjectsWaites::loadMultiple($progObjectsWaites, Yii::$app->request->post());
+                    foreach ($progObjectsWaites as $index => $item) {
+                        $pr = ProgObjectsWaites::findOne(['id_object' => $model->id, 'element' => $index]);
+                        if (!$pr){
+                            $pr = new ProgObjectsWaites();
+                            $pr->id_object = $id;
+                            $pr->element = $index;
+                        }
+                        $pr->aim = $item->aim ? : $index;
+                        $pr->plan = $item->plan;
+                        $pr->changes = $item->changes ? : '';
+                        $save &= $pr->save();
+                        $errors['ProgObjectsWaites'][] = [$pr->getErrors()];
+                    }
+
+                    $progObjectsRiscs = ProgObjectsRiscs::createMultiple(ProgObjectsRiscs::className(), $progObjectsRiscs);
+                    ProgObjectsRiscs::loadMultiple($progObjectsRiscs, Yii::$app->request->post());
+                    foreach ($progObjectsRiscs as $index => $item) {
+                        $pr = ProgObjectsRiscs::findOne(['id_object' => $model->id, 'element' => $index]);
+                        if (!$pr){
+                            $pr = new ProgObjectsRiscs();
+                            $pr->id_object = $id;
+                            $pr->element = $index;
+                        }
+                        $pr->types = $item->types;
+                        $pr->poison = $item->poison;
+                        $pr->protect = $item->protect ;
+                        $save &= $pr->save();
+                        $errors['ProgObjectsWaites'][] = [$pr->getErrors()];
+                    }
+
+                }
+
+                if ($save) {
+                    $transaction->commit();
+                    return Json::encode($model);
+                } else {
+                    $transaction->rollBack();
+                    return Json::encode($errors);
+                }
+            }
+        }
+
+        return $this->render('update',compact('model'));
     }
 
     /**
@@ -109,7 +221,9 @@ class ProgramObjectsController extends AppController
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
+        $model = $this->findModel($id);
+        $model->system_status = 0;
+        $model->save(false);
 
         return $this->redirect(['index']);
     }

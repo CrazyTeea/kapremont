@@ -17,7 +17,7 @@ use Yii;
  * @property float|null $fin_vnebud_ist
  * @property boolean $is_nessesary
  */
-class ProgObjectsEvents extends \yii\db\ActiveRecord
+class ProgObjectsEvents extends BaseMultiModel
 {
     /**
      * {@inheritdoc}
@@ -34,7 +34,7 @@ class ProgObjectsEvents extends \yii\db\ActiveRecord
     {
         return [
             [['step', 'id_object'], 'required'],
-            [['step', 'id_object'], 'integer'],
+            [['step', 'id_object','is_nessesary'], 'integer'],
             [['date_event_start', 'date_event_end'], 'safe'],
             [['cost_real', 'sum_bud_fin', 'fin_vnebud_ist'], 'number'],
         ];

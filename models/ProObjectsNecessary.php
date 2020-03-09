@@ -15,8 +15,9 @@ use Yii;
  * @property int|null $kap_remont
  * @property string|null $obosnovanie
  * @property int|null $system_status
+ * @property int $element
  */
-class ProObjectsNecessary extends \yii\db\ActiveRecord
+class ProObjectsNecessary extends BaseMultiModel
 {
     /**
      * {@inheritdoc}
@@ -33,7 +34,7 @@ class ProObjectsNecessary extends \yii\db\ActiveRecord
     {
         return [
             [['id_object'], 'required'],
-            [['id_object', 'nalichie', 'kap_remont', 'system_status'], 'integer'],
+            [['id_object', 'nalichie', 'kap_remont', 'system_status','element'], 'integer'],
             [['material', 'srok_eks', 'obosnovanie'], 'string', 'max' => 255],
         ];
     }

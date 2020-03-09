@@ -11,9 +11,10 @@ use Yii;
  * @property string|null $types
  * @property string|null $poison
  * @property string|null $protect
+ * @property string $element
  * @property int|null $id_object
  */
-class ProgObjectsRiscs extends \yii\db\ActiveRecord
+class ProgObjectsRiscs extends BaseMultiModel
 {
     /**
      * {@inheritdoc}
@@ -30,7 +31,7 @@ class ProgObjectsRiscs extends \yii\db\ActiveRecord
     {
         return [
             [['types', 'poison', 'protect'], 'string'],
-            [['id_object'], 'integer'],
+            [['id_object','element'], 'integer'],
         ];
     }
 

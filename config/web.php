@@ -76,6 +76,8 @@ $config = [
                 'error/browser'=>'app/error/browser',
                 'program/view'=>'app/development-programme',
                 'program/object/create'=>'app/program-objects/create',
+                'program/object/view/<id:\d+>'=>'app/program-objects/view',
+                'program/object/update/<id:\d+>'=>'app/program-objects/update',
                 'organization/info'=>'app/organization/info'
             ],
         ],

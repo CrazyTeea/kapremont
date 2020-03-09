@@ -27,6 +27,7 @@ use Yii;
  * @property int|null $id_region
  * @property int|null $id_city
  * @property string|null $address
+ * @property string $prav_oper_upr
  * @property string|null $exist_pred_nadz_orgs
  * @property int|null $type
  * @property string|null $prav_sob
@@ -56,7 +57,7 @@ class ProgramObjects extends \yii\db\ActiveRecord
     {
         return [
             [['id_org', 'id_priority', 'id_program', 'year', 'system_status', 'id_region', 'id_city', 'type', 'exploit_year'], 'integer'],
-            [['name', 'assignment', 'regulation', 'event_type', 'note', 'address'], 'string'],
+            [['name', 'assignment', 'regulation', 'event_type', 'note', 'address','prav_oper_upr'], 'string'],
             [['square', 'wear', 'finance_sum', 'coFinancing', 'square_kap', 'isp_v_ust_dey', 'n_isp_v_ust_dey', 'square_ar'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
             [['exist_pred_nadz_orgs', 'prav_sob', 'kad_number', 'osn_isp_zdan'], 'string', 'max' => 255],
