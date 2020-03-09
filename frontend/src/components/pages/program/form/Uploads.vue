@@ -6,7 +6,6 @@
             >
                 <b-thead>
                 <b-tr>
-                    <b-th>Чисто номерок посмотреть</b-th>
                     <b-th>Документы</b-th>
                     <b-th>Загрузка</b-th>
                     <b-th>Удалить</b-th>
@@ -15,28 +14,23 @@
                 <b-tbody>
                 <b-tr v-for="(item, index) in items" :key="index">
                     <b-th class="cell-center-for-table normal-font-weight-for-table">
-                        <label>{{ index }}</label>
-                    </b-th>
-                    <b-th class="cell-center-for-table normal-font-weight-for-table">
                         <label>{{ item.label }}</label>
                     </b-th>
-                    <b-th class="no-cell-border vertical-align-centre-extra-table">
+                    <b-th class="no-cell-border vertical-align-centre-extra-table normal-font-weight-for-table">
+                        <input type="file" :name="`${modelName}[${item.descriptor}]file`" :id="'file_input_' + index" class="hidden-file-input" @input="fileInput(index)">
                         <div class="cell-center-for-items" v-if="!item.fileName">
                             <div class="arrow">
-                                <label class="label">
+                                <label :for="`file_input_${index}`" class="label">
                                     <span class="title">
                                         <span class="scope-to-animate"></span>
                                         <span class="scope-to-animate"></span>
                                         <span class="scope-to-animate"></span>
                                         <span class="scope-to-animate"></span>
                                     </span>
-                                    <form :id="'file_form_' + index">
-                                        <input type="file" :id="'file_input_' + index" class="hidden-file-input" @input="fileInput(index)">
-                                    </form>
                                 </label>
                             </div>
                         </div>
-                        <label v-else class="lol">{{ item.fileName }}</label>
+                        <label v-else class="normal-font-size-for-cell-file-name">{{ item.fileName }}</label>
                     </b-th>
                     <b-th class="no-cell-border vertical-align-centre-extra-table">
                         <div class="cell-center-for-items">
@@ -52,6 +46,8 @@
                     </b-th>
                 </b-tr>
                 </b-tbody>
+                <b-tfoot>
+                </b-tfoot>
         </b-table-simple>
     </div>
 </template>
@@ -62,17 +58,17 @@ export default {
     data() {
         return {
             items: [
-                {fileName: null, label: 'Инвентарные карточки учета основных средств на объект недвижимого имущества и на земельный участок под указанным объектом'},
-                {fileName: null, label: 'Выписка из реестра федерального имущества на объект федерального имущества и на земельный участок под указанным объектом'},
-                {fileName: null, label: 'Правоустанавливающие и (или) правоудостоверяющие документы на объект недвижимого имущества и на земельный участок под указанным объектом'},
-                {fileName: null, label: 'Документы технического и кадастрового учета на объект недвижимого имущества'},
-                {fileName: null, label: 'Ситуационный план с указанием границ земельного участка, объекта недвижимого имущества и иных объектов (включая незавершенные строительные объекты), принадлежащих третьим лицам, расположенных на указанном земельном участке'},
-                {fileName: null, label: 'Акт технического осмотра объекта капитального строительства (документ, содержащий сведения о результатах обследования объекта капитального строительства, техническом состоянии строительных конструкций и инженерного оборудования такого объекта и количественной оценке фактических показателей качества строительных конструкций и инженерного оборудования по состоянию на дату обследования, для определения состава, объёмов и сроков работ по капитальному ремонту объекта капитального строительства)'},
-                {fileName: null, label: 'Дефектная ведомость (первичный учётный документ, подготовленный в соответствии с требованиями законодательства Российской Федерации о бухгалтерском учёте по результатам обследования технического состояния объекта капитального строительства и содержащий перечень дефектов строительных конструкций и инженерного оборудования объекта капитального строительства с указанием качественных и количественных характеристик таких дефектов)'},
-                {fileName: null, label: 'Фотографии объекта, предполагаемого к проведению капитального ремонта (подписанные по 2 шт. на листе А4, но не более 10 шт. на объект недвижимости)'},
-                {fileName: null, label: 'Предписания надзорных органов (при наличии)'},
-                {fileName: null, label: 'Задание на проектирование (корректировку проектной документации), составленное в соответствии с рекомендациями Минстроя РФ (в случае разработки/корректировки проектной документации и/или направления данной документации на экспертизу)'},
-                {fileName: null, label: 'Иные документы'},
+                {descriptor:'inv_card', fileName: null, label: 'Инвентарные карточки учета основных средств на объект недвижимого имущества и на земельный участок под указанным объектом'},
+                {descriptor:'reestr_vip', fileName: null, label: 'Выписка из реестра федерального имущества на объект федерального имущества и на земельный участок под указанным объектом'},
+                {descriptor:'pravust', fileName: null, label: 'Правоустанавливающие и (или) правоудостоверяющие документы на объект недвижимого имущества и на земельный участок под указанным объектом'},
+                {descriptor:'tex_kad_docs', fileName: null, label: 'Документы технического и кадастрового учета на объект недвижимого имущества'},
+                {descriptor:'sit_plan', fileName: null, label: 'Ситуационный план с указанием границ земельного участка, объекта недвижимого имущества и иных объектов (включая незавершенные строительные объекты), принадлежащих третьим лицам, расположенных на указанном земельном участке'},
+                {descriptor:'tex_acts', fileName: null, label: 'Акт технического осмотра объекта капитального строительства (документ, содержащий сведения о результатах обследования объекта капитального строительства, техническом состоянии строительных конструкций и инженерного оборудования такого объекта и количественной оценке фактических показателей качества строительных конструкций и инженерного оборудования по состоянию на дату обследования, для определения состава, объёмов и сроков работ по капитальному ремонту объекта капитального строительства)'},
+                {descriptor:'def_ved', fileName: null, label: 'Дефектная ведомость (первичный учётный документ, подготовленный в соответствии с требованиями законодательства Российской Федерации о бухгалтерском учёте по результатам обследования технического состояния объекта капитального строительства и содержащий перечень дефектов строительных конструкций и инженерного оборудования объекта капитального строительства с указанием качественных и количественных характеристик таких дефектов)'},
+                {descriptor:'obj_photos', fileName: null, label: 'Фотографии объекта, предполагаемого к проведению капитального ремонта (подписанные по 2 шт. на листе А4, но не более 10 шт. на объект недвижимости)'},
+                {descriptor:'predpis', fileName: null, label: 'Предписания надзорных органов (при наличии)'},
+                {descriptor:'proekti', fileName: null, label: 'Задание на проектирование (корректировку проектной документации), составленное в соответствии с рекомендациями Минстроя РФ (в случае разработки/корректировки проектной документации и/или направления данной документации на экспертизу)'},
+                {descriptor:'other', fileName: null, label: 'Иные документы'},
             ],
             selectedFiles: [],
         }
@@ -80,11 +76,9 @@ export default {
     methods: {
         fileInput(index) {
             let file = Array.from(event.target.files)[0];
-            if(file.type !== 'application/pdf' ) {
-                document.querySelector('#file_form_' + index).reset();
-                document.querySelector('#file_input_' + index).value = null;
-
-                return this.errorMessage('Файл не является документом pdf!')
+            if(!this.checkFileExt(file.type) || !this.checkFileSize(file.size)) {
+                file.value = null;
+                return
             }
             this.selectedFiles.push({
                 id: index,
@@ -92,12 +86,25 @@ export default {
                 file: file
             });
             this.items[index].fileName = file.name
-        },
+         },
         fileRemove(index) {
             let key = this.getSelectedFileKey(index);
             this.selectedFiles.splice(key, 1);
-            this.items[index].fileName = null;
-            console.log(this.selectedFiles);
+            this.items[index].fileName = null
+        },
+        checkFileExt(type) {
+            if(type !== 'application/pdf') {
+                this.errorMessage('Файл не является документом pdf!');
+                return false
+            }
+            return true
+        },
+        checkFileSize(size) {
+            if(parseInt(size) > 5242880) {
+                this.errorMessage('Файл больше 20МБ!');
+                return false
+            }
+            return true
         },
         getSelectedFileKey(index) {
             if(this.selectedFiles.length)
@@ -112,7 +119,7 @@ export default {
                     return elem !== null
                 })[0]
             } else {
-                return this.errorMessage('Файл еше не добавлен!')
+                return this.errorMessage('Сначала добавте файл!')
             }
         },
         getSavedDocuments() {
@@ -131,15 +138,18 @@ export default {
         errorMessage: function(message) {
             this.$bvModal.msgBoxOk(message, {
                 title: 'Ошибка!',
-                size: 'lg',
+                size: 'sm',
                 buttonSize: 'sm',
-                okVariant: 'success',
+                okVariant: 'outline-success',
                 headerClass: 'p-2 border-bottom-0',
                 footerClass: 'p-2 border-top-0',
                 centered: true
             })
         }
     },
+    props: {
+        modelName:String
+    }
 }
 </script>
 
@@ -156,6 +166,9 @@ export default {
 }
 .normal-font-weight-for-table {
     font-weight: normal !important;
+}
+.normal-font-size-for-cell-file-name {
+    font-size: 13px !important;
 }
 .cell-center-for-table {
     vertical-align: middle !important;
@@ -236,7 +249,7 @@ export default {
 }
 .arrow .label  {
     height: 28px;
-    border:2px dashed grey;
+    border:1px solid grey;
     border-radius:5px;
     display:block;
     transition:border 300ms ease;
@@ -260,7 +273,7 @@ export default {
 .cross-to-animate {
     z-index: 999;
     height: 2px;
-    width: 20px;
+    width: 15px;
     background: #d9534f;
     transition: 0.4s ease;
 }
@@ -268,14 +281,14 @@ export default {
     display: block;
     position: absolute;
     transform: rotate(45deg);
-    left: 10%;
+    left: 20%;
     bottom: 45%;
 }
 .cross-to-animate:nth-child(2) {
     display: block;
     position: absolute;
     transform: rotate(-45deg);
-    left: 12%;
+    left: 22%;
     bottom: 45%;
 }
 .label:hover .cross-to-animate:nth-child(1) {
@@ -290,7 +303,7 @@ export default {
 }
 .cross .label  {
     height: 28px;
-    border:2px dashed grey;
+    border:1px solid grey;
     border-radius:5px;
     display:block;
     transition:border 300ms ease;
