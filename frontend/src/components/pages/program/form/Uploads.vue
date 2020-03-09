@@ -87,7 +87,7 @@ export default {
         },
         fileRemove(index) {
             this.selectedFiles.forEach((element, key) => {
-                if(element.id = index) {
+                if(element.id == index) {
                     this.selectedFiles.splice(index, 1)
                 }
             })
@@ -97,7 +97,7 @@ export default {
             console.log(this.selectedFiles);
             if(this.selectedFiles.length) {
                 for(let item of this.selectedFiles) {
-                    if(item.id = index) {
+                    if(item.id == index) {
                         return true
                     }
                 }
