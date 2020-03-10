@@ -81,6 +81,7 @@ $config = [
                 'program/object/create'=>'app/program-objects/create',
                 'program/object/view/<id:\d+>'=>'app/program-objects/view',
                 'program/object/update/<id:\d+>'=>'app/program-objects/update',
+                'program/export'=>'app/development-programme/export',
                 'organization/info'=>'app/organization/info',
                 'program/atz' => 'app/atz/index',
                 'api/fileUpload' => '/rest/upload/upload',

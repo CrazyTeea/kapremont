@@ -22,7 +22,10 @@
         "xtetis/yii2-bootstrap4-glyphicons": "dev-master",
         "kartik-v/yii2-widget-select2": "^2.1",
         "lcobucci/jwt": "^3.3",
-        "vlucas/phpdotenv": "^4.1"
+        "vlucas/phpdotenv": "^4.1",
+        "phpoffice/phpword": "^0.17.0",
+        "dompdf/dompdf": "^0.8.5",
+        "mpdf/mpdf": "^8.0"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",
