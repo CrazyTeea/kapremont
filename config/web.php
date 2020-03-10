@@ -34,6 +34,9 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'KNbbRnlbgg_iYBM3JO7rQV80xzojoned',
+            'parsers' => [
+                'multipart/form-data' => 'yii\web\MultipartFormDataParser'
+            ],
         ],
         'authManager' => [
             'class' => 'yii\rbac\PhpManager', // or use 'yii\rbac\DbManager'
