@@ -45,7 +45,7 @@ class DevelopmentProgrammeController extends AppController
         $file->setValue('org_short',$org ? $org->short_name : '');
         foreach (OrgInfo::getTableSchema()->getColumnNames() as $column){
             if ($column == 'id_org') continue;
-            $file->setValue($column,$org ? $org->orgInfo->{$column} : 0);
+            $file->setValue($column,$org ? $org->orgInfo ? $org->orgInfo->{$column} : 0 : 0);
         }
         $pr_ob = ProgramObjects::findAll(['id_org'=>$user->id_org,'type'=>0]);
         $pr_cols = ProgramObjects::getTableSchema()->getColumnNames();
