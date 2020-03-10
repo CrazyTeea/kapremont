@@ -13,6 +13,7 @@ use app\models\DevelopmentProgramme;
 use app\models\DevelopmentProgrammeSearch;
 use app\controllers\app\AppController;
 use yii\db\Exception;
+use yii\helpers\FileHelper;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
@@ -92,7 +93,7 @@ class DevelopmentProgrammeController extends AppController
         }
 
 
-
+        FileHelper::createDirectory('uploads');
         $file->saveAs('uploads/temp.docx');
         // Make sure you have `dompdf/dompdf` in your composer dependencies.
         Settings::setPdfRendererName(Settings::PDF_RENDERER_MPDF);
