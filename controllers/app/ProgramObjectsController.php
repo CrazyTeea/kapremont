@@ -303,6 +303,26 @@ class ProgramObjectsController extends AppController
         }
         return $this->render('update',compact('model'));
     }
+    public function actionAddDocs($id){
+        $model = $this->findModel($id);
+        if (!$model)
+            return 0;
+        $docs = ObjectDocumentsTypes::find()->all();
+        $done = false;
+        foreach ($docs as $doc){
+
+            $file = UploadedFile::getInstanceByName("$doc->descriptor");
+            if (!$file)
+                continue;
+            $objDoc = new ObjectDocumentsList();
+            if (!$objDoc->add($file,$id,$doc->id)) {
+                $done = false;
+                break;
+            }else $done = true;
+        }
+        if ($done) return 1;
+        return 0;
+    }
 
     /**
      * Deletes an existing ProgramObjects model.

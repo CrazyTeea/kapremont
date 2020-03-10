@@ -52,7 +52,7 @@
                         <b-form-input
                                 :name="`${modelName}[${index}][obosnovanie]`"
                                 type="text"
-                                v-if="item.nalichie"
+                                v-if="item.nalichie && item.kap_remont"
                                 v-model="item.obosnovanie"
                                 placeholder="Обоснование"
                         ></b-form-input>

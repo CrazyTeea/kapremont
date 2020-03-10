@@ -52,7 +52,8 @@
                 </b-tfoot>
         </b-table-simple>
 
-            <b-button size="sm" variant="info" @click="sendFile()">Отправить</b-button>
+
+            <label v-if="loadProgress">Файл {{ loadingFileName }} загружен на {{ loadProgress }}%</label>
 
     </div>
 </template>
@@ -78,14 +79,16 @@ export default {
                 {descriptor:'other', fileName: null, label: 'Иные документы'},
             ],
             loadProgress: null,
+            loadingFileName: null,
             selectedFiles: [],
+            uploadSuccess: true
         }
     },
     methods: {
         fileInput(index) {
             // let file = Array.from(event.target.files)[0];
             let file = document.querySelector('#file_input_' + index).files[0];
-            console.log(file)
+            console.log(file);
             if(!this.checkFileExt(file.type) || !this.checkFileSize(file.size)) {
                 file.value = null;
                 return
@@ -136,19 +139,22 @@ export default {
         getSavedDocuments() {
             return this.selectedFiles;
         },
-        async sendFile() {
-            for(let file of this.selectedFiles) {
-                await this.uploadFile(file)
+        async sendFile({id}) {
+            if(!this.selectedFiles.length) {
+                this.errorMessage('Сначала выберите файлы!')
+            } else {
+                for(let file of this.selectedFiles) {
+                    await this.uploadFile(file,id)
+                }
             }
+            if (this.uploadSuccess)
+                window.location.href = `/program/object/view/${id}`;
         },
-        async uploadFile(file) {
-
-            let form = new FormData()
-            form.append('pdfFile', file.file)
-            
-            // console.log(file)
-        
-            await Axios.post('/api/fileUpload', form, {
+        async removeFileFromYii(file) {
+            let form = new FormData();
+            form.append('pdfFile', file.file);
+            this.loadingFileName = file.file.name;
+            await Axios.post('/api/fileRemove', form, {
                 headers:
                     {
                         'X-CSRF-Token':this.csrf,
@@ -159,8 +165,38 @@ export default {
                 }
             }).then((res) => {
                 console.log(res.data)
-            })
+            }).catch(error => console.log(error))
         },
+        async uploadFile(file,id) {
+            let form = new FormData();
+            form.append(`${file.descriptor}`, file.file);
+            this.loadingFileName = file.file.name;
+            await Axios.post(`/program/object/add-docs/${id}`, form, {
+                headers:
+                    {
+                        'X-CSRF-Token':this.csrf,
+                        'Content-Type':'multipart/form-data;'
+                    },
+                onUploadProgress: (itemUpload) => {
+                    this.loadProgress = Math.round( (itemUpload.loaded / itemUpload.total) * 100 )
+                }
+            }).then((res) => {
+                 if (res.data) this.uploadSuccess &= true;
+                 else this.uploadSuccess &= false;
+            }).catch(error => console.log(error))
+        },
+        // loadMessage: function(file) {
+        //     message = `Файл ${this.loadingFileName} загружен на ${this.loadProgress}%`
+        //     this.$bvModal.msgBoxOk(message, {
+        //         title: 'Загрузка!',
+        //         size: 'sm',
+        //         buttonSize: 'sm',
+        //         okVariant: 'outline-success',
+        //         headerClass: 'p-2 border-bottom-0',
+        //         footerClass: 'p-2 border-top-0',
+        //         centered: true
+        //     })
+        // },
         errorMessage: function(message) {
             this.$bvModal.msgBoxOk(message, {
                 title: 'Ошибка!',
