@@ -17,7 +17,7 @@
                         <label>{{ item.label }}</label>
                     </b-th>
                     <b-th class="no-cell-border vertical-align-centre-extra-table normal-font-weight-for-table">
-                        <input type="file" :name="`${modelName}[${item.descriptor}]file`" :id="'file_input_' + index" class="hidden-file-input" @input="fileInput(index)">
+                        <input type="file" :name="`${modelName}[${item.descriptor}]file`" :ref="'file' + index" :id="'file_input_' + index" class="hidden-file-input" @input="fileInput(index)">
                         <div class="cell-center-for-items" v-if="!item.fileName">
                             <div class="arrow">
                                 <label :for="`file_input_${index}`" class="label">
@@ -75,6 +75,7 @@ export default {
     },
     methods: {
         fileInput(index) {
+            console.log(this.$refs)
             let file = Array.from(event.target.files)[0];
             if(!this.checkFileExt(file.type) || !this.checkFileSize(file.size)) {
                 file.value = null;
