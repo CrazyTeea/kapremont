@@ -1561,7 +1561,7 @@ __webpack_require__.r(__webpack_exports__);
       var request = new XMLHttpRequest();
       request.open("POST", this.$route.path, true);
       request.setRequestHeader('X-CSRF-Token', this.csrf);
-      request.setRequestHeader('content-type', "multipart/form-data; boundary=".concat(formData._boundary));
+      request.setRequestHeader('Content-Type', "multipart/form-data; boundary=".concat(formData._boundary));
       request.send(formData);
       /*  // formData.append('dsfsd',document.querySelector('#file_input_0'))
          Axios.post(this.$route.path,formData,{
@@ -3736,7 +3736,11 @@ var render = function() {
       _c(
         "b-form",
         {
-          attrs: { id: "object_form", method: "post" },
+          attrs: {
+            enctype: "multipart/form-data",
+            id: "object_form",
+            method: "post"
+          },
           on: { submit: _vm.onSubmit, reset: _vm.onReset }
         },
         [

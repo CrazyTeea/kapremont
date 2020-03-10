@@ -1,7 +1,7 @@
 <!--suppress ALL -->
 <template>
     <div class="program_object_form">
-        <b-form id="object_form" @submit="onSubmit" @reset="onReset" method="post">
+        <b-form enctype="multipart/form-data" id="object_form" @submit="onSubmit" @reset="onReset" method="post">
             <div class="row">
 
                 <div class="col-12">
@@ -393,8 +393,8 @@
                 })
                 var request = new XMLHttpRequest();
                 request.open("POST", this.$route.path,true);
-                request.setRequestHeader('X-CSRF-Token',this.csrf)
-                request.setRequestHeader('content-type',`multipart/form-data; boundary=${formData._boundary}`)
+                request.setRequestHeader('X-CSRF-Token',this.csrf);
+                request.setRequestHeader( 'Content-Type',`multipart/form-data; boundary=${formData._boundary}`);
                 request.send(formData)
              /*  // formData.append('dsfsd',document.querySelector('#file_input_0'))
                 Axios.post(this.$route.path,formData,{

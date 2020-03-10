@@ -62356,23 +62356,18 @@ var routes = [{
       return module.devView;
     });
   }
-}, {
-  path: '/program/object/create',
-  number: 3,
-  component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(0)]).then(__webpack_require__.bind(null, /*! ./components/pages */ "./src/components/pages/index.js")).then(function (module) {
-      return module.form;
-    });
-  }
-}, {
-  path: '/program/object/update/:id',
-  number: 4,
-  component: function component() {
-    return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(0)]).then(__webpack_require__.bind(null, /*! ./components/pages */ "./src/components/pages/index.js")).then(function (module) {
-      return module.form;
-    });
-  }
-}, {
+},
+/* {
+     path:'/program/object/create',
+     number:3,
+     component: ()=>import('./components/pages').then(module=>{return module.form;})
+ },
+ {
+     path:'/program/object/update/:id',
+     number:4,
+     component: ()=>import('./components/pages').then(module=>{return module.form;})
+ },*/
+{
   path: '/organization/info',
   name: 'orgInfo',
   number: 5,
