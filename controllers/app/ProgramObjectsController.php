@@ -56,7 +56,7 @@ class ProgramObjectsController extends AppController
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        return $this->render('view', [
+        return $this->render('view', [  
             'model' => $this->findModel($id),
         ]);
     }
@@ -77,17 +77,14 @@ class ProgramObjectsController extends AppController
         $progObjectsRiscs =  [new ProgObjectsRiscs()];
         $objectDocsTypes = ObjectDocumentsTypes::find()->all();
         $save = true;
-
         $model->id_org = Yii::$app->session->get('user')->id_org;
         $program = Yii::$app->session->get('program');
         if (!$program)
             return $this->redirect(['/']);
-
         $model->id_program = $program->id;
         $save = true;
         if ($post = Yii::$app->request->post()) {
             if ($model->load($post)) {
-
                 $transaction = Yii::$app->getDb()->beginTransaction();
                 $save &= $model->save();
                 $errors['ProgramObjects'] = $model->getErrors();
@@ -110,12 +107,11 @@ class ProgramObjectsController extends AppController
                         $save &= $pr->save();
                         $errors['ProgObjectsEvents'][] = $pr->getErrors();
                     }
-
                     $proObjectsNecessary = ProObjectsNecessary::createMultiple(ProObjectsNecessary::className(), $proObjectsNecessary);
                     ProObjectsNecessary::loadMultiple($proObjectsNecessary, Yii::$app->request->post());
                     foreach ($proObjectsNecessary as $index => $item) {
                         $pr = ProObjectsNecessary::findOne(['id_object' => $model->id, 'element' => $index]);
-                        if (!$pr){
+                        if (!$pr) {
                             $pr = new ProObjectsNecessary();
                             $pr->id_object = $model->id;
                             $pr->element = $index;
@@ -169,7 +165,7 @@ class ProgramObjectsController extends AppController
                         $errors['ProgObjectsWaites'][] = [$pr->getErrors()];
                     }
                     $files = new Files();
-                    foreach ($objectDocsTypes as $index=>$docsType){
+                    foreach ($objectDocsTypes as $index=>$docsType) {
                         $file = UploadedFile::getInstance($files,"[$docsType->descriptor]file");
                         if (!$file)
                             continue;
@@ -178,10 +174,7 @@ class ProgramObjectsController extends AppController
                         $objDoc->add($file,$model->id,$docsType->id);
                         $errors['ObjectDocumentsList'][$docsType->descriptor][]=$objDoc->getErrors();
                     }
-
-
                 }
-
                 if ($save) {
                     $transaction->commit();
                     return Json::encode($model);
@@ -237,7 +230,6 @@ class ProgramObjectsController extends AppController
                         $save &= $pr->save();
                         $errors['ProgObjectsEvents'][] = $pr->getErrors();
                     }
-
                     $proObjectsNecessary = ProObjectsNecessary::createMultiple(ProObjectsNecessary::className(), $proObjectsNecessary);
                     ProObjectsNecessary::loadMultiple($proObjectsNecessary, Yii::$app->request->getBodyParams());
                     foreach ($proObjectsNecessary as $index => $item) {
@@ -255,13 +247,12 @@ class ProgramObjectsController extends AppController
                         $save &= $pr->save();
                         $errors['ProObjectsNecessary'][] = $pr->getErrors();
                     }
-
                     $progObjectsWaites = ProgObjectsWaites::createMultiple(ProgObjectsWaites::className(), $progObjectsWaites);
                     ProgObjectsWaites::loadMultiple($progObjectsWaites, Yii::$app->request->getBodyParams());
 
                     foreach ($progObjectsWaites as $index => $item) {
                         $pr = ProgObjectsWaites::findOne(['id_object' => $model->id, 'element' => $index]);
-                        if (!$pr){
+                        if (!$pr) {
                             $pr = new ProgObjectsWaites();
                             $pr->id_object = $id;
                             $pr->element = $index;
@@ -272,7 +263,6 @@ class ProgramObjectsController extends AppController
                         $save &= $pr->save();
                         $errors['ProgObjectsWaites'][] = [$pr->getErrors()];
                     }
-
                     $progObjectsRiscs = ProgObjectsRiscs::createMultiple(ProgObjectsRiscs::className(), $progObjectsRiscs);
                     ProgObjectsRiscs::loadMultiple($progObjectsRiscs, Yii::$app->request->getBodyParams());
 
@@ -291,7 +281,7 @@ class ProgramObjectsController extends AppController
                     }
                     $files = new Files();
 
-                    foreach ($objectDocsTypes as $index=>$docsType){
+                    foreach ($objectDocsTypes as $index=>$docsType) {
 
                         $file = UploadedFile::getInstance($files,"[$docsType->descriptor]file");
                         if (!$file)
@@ -302,9 +292,7 @@ class ProgramObjectsController extends AppController
                         $errors['ObjectDocumentsList'][$docsType->descriptor][]=$objDoc->getErrors();
                     }
                 }
-
                 exit();
-
                 if ($save) {
                     $transaction->commit();
                     return Json::encode($model);
@@ -350,5 +338,10 @@ class ProgramObjectsController extends AppController
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionFileUpload()
+    {
+        return 'lol';
     }
 }

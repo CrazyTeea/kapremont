@@ -32,7 +32,7 @@
         <div class="row">
             <div class="col-6">
                 <b-button variant="info" href="object/create">Добавить объект кап. ремонта</b-button>
-                <b-button disabled>Добавить мероприятия по АТЗ</b-button>
+                <b-button  href="atz">Добавить мероприятия по АТЗ</b-button>
             </div>
             <div class="col-6"></div> 
         </div>

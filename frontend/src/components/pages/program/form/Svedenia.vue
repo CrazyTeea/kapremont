@@ -240,10 +240,10 @@ import Multiselect from 'vue-select';
     }
 </style>
 
-<style scoped>
+<style>
 .hidden-val-for-table {
-    overflow: hidden;
-    overflow-x: scroll;
+    overflow: hidden !important;
+    overflow-x: scroll !important;
 }
 .vertical-align-extra-table {
     vertical-align: middle !important;

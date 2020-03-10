@@ -433,6 +433,54 @@ __webpack_require__.r(__webpack_exports__);
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null
+      }, {
+        label: 'Телевидение эфирное',
+        nalichie: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
+      }, {
+        label: 'Система видеонаблюдения',
+        nalichie: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
+      }, {
+        label: 'Система интернет и телефонии',
+        nalichie: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
+      }, {
+        label: 'Система контроля управления доступом',
+        nalichie: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
+      }, {
+        label: 'Пожарная сигнализация',
+        nalichie: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
+      }, {
+        label: 'Охранная сигнализация',
+        nalichie: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
+      }, {
+        label: 'Мусоропроводы',
+        nalichie: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
+      }, {
+        label: 'Лифты',
+        nalichie: null,
+        srok_eks: null,
+        kap_remont: null,
+        obosnovanie: null
       }]
     };
   }
@@ -811,18 +859,37 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.filter */ "./node_modules/core-js/modules/es.array.filter.js");
-/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var core_js_modules_es_array_from__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.array.from */ "./node_modules/core-js/modules/es.array.from.js");
-/* harmony import */ var core_js_modules_es_array_from__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_from__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.array.map */ "./node_modules/core-js/modules/es.array.map.js");
-/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.splice */ "./node_modules/core-js/modules/es.array.splice.js");
-/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.symbol */ "./node_modules/core-js/modules/es.symbol.js");
+/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.symbol.description */ "./node_modules/core-js/modules/es.symbol.description.js");
+/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator */ "./node_modules/core-js/modules/es.symbol.iterator.js");
+/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.filter */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.map */ "./node_modules/core-js/modules/es.array.map.js");
+/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.splice */ "./node_modules/core-js/modules/es.array.splice.js");
+/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_12__);
+
+
+
+
+
+
 
 
 
@@ -885,9 +952,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      csrf: document.getElementsByName('csrf-token')[0].content,
       items: [{
         descriptor: 'inv_card',
         fileName: null,
@@ -933,13 +1005,15 @@ __webpack_require__.r(__webpack_exports__);
         fileName: null,
         label: 'Иные документы'
       }],
+      loadProgress: null,
       selectedFiles: []
     };
   },
   methods: {
     fileInput: function fileInput(index) {
-      console.log(this.$refs);
-      var file = Array.from(event.target.files)[0];
+      // let file = Array.from(event.target.files)[0];
+      var file = document.querySelector('#file_input_' + index).files[0];
+      console.log(file);
 
       if (!this.checkFileExt(file.type) || !this.checkFileSize(file.size)) {
         file.value = null;
@@ -993,15 +1067,116 @@ __webpack_require__.r(__webpack_exports__);
     getSavedDocuments: function getSavedDocuments() {
       return this.selectedFiles;
     },
-    // async uploadFile(file) {
-    //     let form = new FormData()
-    //     form.append('pdf', file, file.name)
-    //     await Axios.post('', form, {
-    //         onUploadProgress: (itemUpload) => {
-    //             this.loadProgress = Math.round( (itemUpload.loaded / itemUpload.total) * 100 )
-    //         }
-    //     })
-    // },
+    sendFile: function sendFile() {
+      var _this = this;
+
+      return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_11__["default"])(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee() {
+        var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, file;
+
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _iteratorNormalCompletion = true;
+                _didIteratorError = false;
+                _iteratorError = undefined;
+                _context.prev = 3;
+                _iterator = _this.selectedFiles[Symbol.iterator]();
+
+              case 5:
+                if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
+                  _context.next = 12;
+                  break;
+                }
+
+                file = _step.value;
+                _context.next = 9;
+                return _this.uploadFile(file);
+
+              case 9:
+                _iteratorNormalCompletion = true;
+                _context.next = 5;
+                break;
+
+              case 12:
+                _context.next = 18;
+                break;
+
+              case 14:
+                _context.prev = 14;
+                _context.t0 = _context["catch"](3);
+                _didIteratorError = true;
+                _iteratorError = _context.t0;
+
+              case 18:
+                _context.prev = 18;
+                _context.prev = 19;
+
+                if (!_iteratorNormalCompletion && _iterator.return != null) {
+                  _iterator.return();
+                }
+
+              case 21:
+                _context.prev = 21;
+
+                if (!_didIteratorError) {
+                  _context.next = 24;
+                  break;
+                }
+
+                throw _iteratorError;
+
+              case 24:
+                return _context.finish(21);
+
+              case 25:
+                return _context.finish(18);
+
+              case 26:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[3, 14, 18, 26], [19,, 21, 25]]);
+      }))();
+    },
+    uploadFile: function uploadFile(file) {
+      var _this2 = this;
+
+      return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_11__["default"])(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee2() {
+        var form;
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                form = new FormData();
+                form.append('pdfFile', file.file); // console.log(file)
+
+                _context2.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_12___default.a.post('/api/fileUpload', form, {
+                  headers: {
+                    'X-CSRF-Token': _this2.csrf,
+                    'Content-Type': 'multipart/form-data;'
+                  },
+                  onUploadProgress: function onUploadProgress(itemUpload) {
+                    _this2.loadProgress = Math.round(itemUpload.loaded / itemUpload.total * 100);
+                  }
+                }).then(function (res) {
+                  console.log(res.data);
+                });
+
+              case 4:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2);
+      }))();
+    },
     errorMessage: function errorMessage(message) {
       this.$bvModal.msgBoxOk(message, {
         title: 'Ошибка!',
@@ -1476,6 +1651,44 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -1514,7 +1727,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   }),
   data: function data() {
-    var _window$MODEL, _window$MODEL2, _window$MODEL3, _window$MODEL4, _window$MODEL5, _window$MODEL6, _window$MODEL7, _window$MODEL8, _window$MODEL9, _window$MODEL10, _window$MODEL11, _window$MODEL12, _window$MODEL13, _window$MODEL14, _window$MODEL15, _window$MODEL16, _window$MODEL17, _window$MODEL18, _window$MODEL19;
+    var _window$MODEL, _window$MODEL2, _window$MODEL3, _window$MODEL4, _window$MODEL5, _window$MODEL6, _window$MODEL7, _window$MODEL8, _window$MODEL9, _window$MODEL10, _window$MODEL11, _window$MODEL12, _window$MODEL13, _window$MODEL14, _window$MODEL15, _window$MODEL16, _window$MODEL17, _window$MODEL18, _window$MODEL19, _window$MODEL20;
 
     return {
       csrf: document.getElementsByName('csrf-token')[0].content,
@@ -1529,15 +1742,16 @@ __webpack_require__.r(__webpack_exports__);
         wear: ((_window$MODEL8 = window.MODEL) === null || _window$MODEL8 === void 0 ? void 0 : _window$MODEL8.wear) || null,
         exist_pred_nadz_orgs: ((_window$MODEL9 = window.MODEL) === null || _window$MODEL9 === void 0 ? void 0 : _window$MODEL9.exist_pred_nadz_orgs) || null,
         osn_isp_zdan: ((_window$MODEL10 = window.MODEL) === null || _window$MODEL10 === void 0 ? void 0 : _window$MODEL10.osn_isp_zdan) || null,
-        assignment: ((_window$MODEL11 = window.MODEL) === null || _window$MODEL11 === void 0 ? void 0 : _window$MODEL11.assignment) || null,
-        prav_sob: ((_window$MODEL12 = window.MODEL) === null || _window$MODEL12 === void 0 ? void 0 : _window$MODEL12.prav_sob) || null,
-        square: ((_window$MODEL13 = window.MODEL) === null || _window$MODEL13 === void 0 ? void 0 : _window$MODEL13.square) || null,
-        square_kap: ((_window$MODEL14 = window.MODEL) === null || _window$MODEL14 === void 0 ? void 0 : _window$MODEL14.square_kap) || null,
-        isp_v_ust_dey: ((_window$MODEL15 = window.MODEL) === null || _window$MODEL15 === void 0 ? void 0 : _window$MODEL15.isp_v_ust_dey) || null,
-        n_isp_v_ust_dey: ((_window$MODEL16 = window.MODEL) === null || _window$MODEL16 === void 0 ? void 0 : _window$MODEL16.n_isp_v_ust_dey) || null,
-        square_ar: ((_window$MODEL17 = window.MODEL) === null || _window$MODEL17 === void 0 ? void 0 : _window$MODEL17.square_ar) || null,
-        note: ((_window$MODEL18 = window.MODEL) === null || _window$MODEL18 === void 0 ? void 0 : _window$MODEL18.note) || null,
-        prav_oper_upr: ((_window$MODEL19 = window.MODEL) === null || _window$MODEL19 === void 0 ? void 0 : _window$MODEL19.prav_oper_upr) || null
+        podrobnosti: ((_window$MODEL11 = window.MODEL) === null || _window$MODEL11 === void 0 ? void 0 : _window$MODEL11.podrobnosti) || null,
+        assignment: ((_window$MODEL12 = window.MODEL) === null || _window$MODEL12 === void 0 ? void 0 : _window$MODEL12.assignment) || null,
+        prav_sob: ((_window$MODEL13 = window.MODEL) === null || _window$MODEL13 === void 0 ? void 0 : _window$MODEL13.prav_sob) || null,
+        square: ((_window$MODEL14 = window.MODEL) === null || _window$MODEL14 === void 0 ? void 0 : _window$MODEL14.square) || null,
+        square_kap: ((_window$MODEL15 = window.MODEL) === null || _window$MODEL15 === void 0 ? void 0 : _window$MODEL15.square_kap) || null,
+        isp_v_ust_dey: ((_window$MODEL16 = window.MODEL) === null || _window$MODEL16 === void 0 ? void 0 : _window$MODEL16.isp_v_ust_dey) || null,
+        n_isp_v_ust_dey: ((_window$MODEL17 = window.MODEL) === null || _window$MODEL17 === void 0 ? void 0 : _window$MODEL17.n_isp_v_ust_dey) || null,
+        square_ar: ((_window$MODEL18 = window.MODEL) === null || _window$MODEL18 === void 0 ? void 0 : _window$MODEL18.square_ar) || null,
+        note: ((_window$MODEL19 = window.MODEL) === null || _window$MODEL19 === void 0 ? void 0 : _window$MODEL19.note) || null,
+        prav_oper_upr: ((_window$MODEL20 = window.MODEL) === null || _window$MODEL20 === void 0 ? void 0 : _window$MODEL20.prav_oper_upr) || null
       },
       errors: {}
     };
@@ -1993,10 +2207,10 @@ module.exports = exports;
 
 /***/ }),
 
-/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css&":
-/*!******************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css& ***!
-  \******************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -2004,7 +2218,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.hidden-val-for-table[data-v-37453398] {\r\n    overflow: hidden;\r\n    overflow-x: scroll;\n}\n.vertical-align-extra-table[data-v-37453398] {\r\n    vertical-align: middle !important;\n}\r\n", ""]);
+exports.push([module.i, "\n.hidden-val-for-table {\r\n    overflow: hidden !important;\r\n    overflow-x: scroll !important;\n}\n.vertical-align-extra-table {\r\n    vertical-align: middle !important;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -2194,15 +2408,15 @@ module.exports = exported;
 
 /***/ }),
 
-/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css&":
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css& ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&lang=css&":
+/*!**********************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&lang=css& ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 var api = __webpack_require__(/*! ../../../../../node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js */ "./node_modules/style-loader/dist/runtime/injectStylesIntoStyleTag.js");
-            var content = __webpack_require__(/*! !../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css& */ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css&");
+            var content = __webpack_require__(/*! !../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svedenia.vue?vue&type=style&index=1&lang=css& */ "./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&lang=css&");
 
             content = content.__esModule ? content.default : content;
 
@@ -3087,10 +3301,10 @@ render._withStripped = true
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398&scoped=true&":
-/*!*********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398&scoped=true& ***!
-  \*********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398& ***!
+  \*********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -3529,6 +3743,19 @@ var render = function() {
           _c("b-tfoot")
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "b-button",
+        {
+          attrs: { size: "sm", variant: "info" },
+          on: {
+            click: function($event) {
+              return _vm.sendFile()
+            }
+          }
+        },
+        [_vm._v("Отправить")]
       )
     ],
     1
@@ -3872,7 +4099,7 @@ var render = function() {
                                   "b-form-group",
                                   {
                                     attrs: {
-                                      label: "Тип объекта:",
+                                      label: "Приоритет",
                                       "label-for": "type",
                                       "invalid-feedback": _vm.feedback(
                                         "ProgramObjects",
@@ -3909,8 +4136,10 @@ var render = function() {
                                     _c("v-select2", {
                                       attrs: {
                                         options: [
-                                          { id: 0, type: "Приоритетный" },
-                                          { id: 1, type: "Резервный" }
+                                          { id: 0, type: "1" },
+                                          { id: 1, type: "2" },
+                                          { id: 2, type: "3" },
+                                          { id: 3, type: "резерв" }
                                         ],
                                         reduce: function(type) {
                                           return type.id
@@ -4224,10 +4453,38 @@ var render = function() {
                                   },
                                   [
                                     _c("b-form-input", {
+                                      staticStyle: { display: "none" },
                                       attrs: {
                                         id: "exist_pred_nadz_orgs",
                                         name:
                                           "ProgramObjects[exist_pred_nadz_orgs]"
+                                      },
+                                      model: {
+                                        value:
+                                          _vm.formData.exist_pred_nadz_orgs,
+                                        callback: function($$v) {
+                                          _vm.$set(
+                                            _vm.formData,
+                                            "exist_pred_nadz_orgs",
+                                            $$v
+                                          )
+                                        },
+                                        expression:
+                                          "formData.exist_pred_nadz_orgs"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("v-select2", {
+                                      attrs: {
+                                        options: [
+                                          { id: 0, type: "Нет" },
+                                          { id: 1, type: "Да" }
+                                        ],
+                                        reduce: function(type) {
+                                          return type.id
+                                        },
+                                        label: "type",
+                                        id: "exist_pred_nadz_orgs"
                                       },
                                       model: {
                                         value:
@@ -4247,6 +4504,52 @@ var render = function() {
                                   1
                                 ),
                                 _vm._v(" "),
+                                _vm.formData.exist_pred_nadz_orgs
+                                  ? _c(
+                                      "b-form-group",
+                                      {
+                                        attrs: {
+                                          label: "Подробности:",
+                                          "label-for": "podrobnosti",
+                                          "invalid-feedback": _vm.feedback(
+                                            "ProgramObjects",
+                                            "osn_isp_zdan",
+                                            "Введите подробности"
+                                          ),
+                                          "valid-feedback": _vm.feedback(
+                                            "ProgramObjects",
+                                            "osn_isp_zdan",
+                                            " "
+                                          ),
+                                          state: _vm.feedback(
+                                            "ProgramObjects",
+                                            "osn_isp_zdan"
+                                          )
+                                        }
+                                      },
+                                      [
+                                        _c("b-form-input", {
+                                          attrs: {
+                                            id: "podrobnosti",
+                                            name: "ProgramObjects[podriobnosti]"
+                                          },
+                                          model: {
+                                            value: _vm.formData.podrobnosti,
+                                            callback: function($$v) {
+                                              _vm.$set(
+                                                _vm.formData,
+                                                "podrobnosti",
+                                                $$v
+                                              )
+                                            },
+                                            expression: "formData.podrobnosti"
+                                          }
+                                        })
+                                      ],
+                                      1
+                                    )
+                                  : _vm._e(),
+                                _vm._v(" "),
                                 _c(
                                   "b-form-group",
                                   {
@@ -4256,7 +4559,7 @@ var render = function() {
                                       "invalid-feedback": _vm.feedback(
                                         "ProgramObjects",
                                         "wear",
-                                        "Износ здания должен быть меньше 100 (%)"
+                                        "Износ здания должен быть меньше 0 и больше 100 (%)"
                                       ),
                                       "valid-feedback": _vm.feedback(
                                         "ProgramObjects",
@@ -4272,11 +4575,37 @@ var render = function() {
                                   },
                                   [
                                     _c("b-form-input", {
+                                      staticStyle: { display: "none" },
                                       attrs: {
                                         id: "wear",
+                                        min: "0",
                                         name: "ProgramObjects[wear]",
                                         state: _vm.wear_validator,
                                         type: "number"
+                                      },
+                                      model: {
+                                        value: _vm.formData.wear,
+                                        callback: function($$v) {
+                                          _vm.$set(_vm.formData, "wear", $$v)
+                                        },
+                                        expression: "formData.wear"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("v-select2", {
+                                      attrs: {
+                                        options: [
+                                          { id: 0, type: "Менее 20%" },
+                                          { id: 1, type: "От 20% до 50%" },
+                                          { id: 2, type: "От 50% до 70%" },
+                                          { id: 3, type: "От 70% до 90%" },
+                                          { id: 4, type: "Более 90%" }
+                                        ],
+                                        reduce: function(type) {
+                                          return type.id
+                                        },
+                                        label: "type",
+                                        id: "wear"
                                       },
                                       model: {
                                         value: _vm.formData.wear,
@@ -5311,7 +5640,7 @@ var render = function() {
               [_vm._v("Добавить объект кап. ремонта")]
             ),
             _vm._v(" "),
-            _c("b-button", { attrs: { disabled: "" } }, [
+            _c("b-button", { attrs: { href: "atz" } }, [
               _vm._v("Добавить мероприятия по АТЗ")
             ])
           ],
@@ -5529,22 +5858,22 @@ if(false) {}
 
 /***/ }),
 
-/***/ "./node_modules/vue-style-loader/index.js!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css&":
-/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-style-loader!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css& ***!
-  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-style-loader/index.js!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&lang=css&":
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-style-loader!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&lang=css& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
 // style-loader: Adds some css to the DOM by adding a <style> tag
 
 // load the styles
-var content = __webpack_require__(/*! !../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css&");
+var content = __webpack_require__(/*! !../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svedenia.vue?vue&type=style&index=1&lang=css& */ "./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&lang=css&");
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
 var add = __webpack_require__(/*! ../../../../../node_modules/vue-style-loader/lib/addStylesClient.js */ "./node_modules/vue-style-loader/lib/addStylesClient.js").default
-var update = add("6be7f24e", content, false, {});
+var update = add("56ea0243", content, false, {});
 // Hot Module Replacement
 if(false) {}
 
@@ -6141,10 +6470,10 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Svedenia_vue_vue_type_template_id_37453398_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Svedenia.vue?vue&type=template&id=37453398&scoped=true& */ "./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398&scoped=true&");
+/* harmony import */ var _Svedenia_vue_vue_type_template_id_37453398___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Svedenia.vue?vue&type=template&id=37453398& */ "./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398&");
 /* harmony import */ var _Svedenia_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Svedenia.vue?vue&type=script&lang=js& */ "./src/components/pages/program/form/Svedenia.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _Svedenia_vue_vue_type_style_index_0_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Svedenia.vue?vue&type=style&index=0&lang=css& */ "./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=0&lang=css&");
-/* harmony import */ var _Svedenia_vue_vue_type_style_index_1_id_37453398_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css& */ "./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css&");
+/* harmony import */ var _Svedenia_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Svedenia.vue?vue&type=style&index=1&lang=css& */ "./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -6157,11 +6486,11 @@ __webpack_require__.r(__webpack_exports__);
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_4__["default"])(
   _Svedenia_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _Svedenia_vue_vue_type_template_id_37453398_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _Svedenia_vue_vue_type_template_id_37453398_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _Svedenia_vue_vue_type_template_id_37453398___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Svedenia_vue_vue_type_template_id_37453398___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
-  "37453398",
+  null,
   null
   
 )
@@ -6203,35 +6532,35 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css&":
-/*!*****************************************************************************************************************!*\
-  !*** ./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css& ***!
-  \*****************************************************************************************************************/
+/***/ "./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&lang=css&":
+/*!*****************************************************************************************!*\
+  !*** ./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&lang=css& ***!
+  \*****************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_1_id_37453398_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-style-loader!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css& */ "./node_modules/vue-style-loader/index.js!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&id=37453398&scoped=true&lang=css&");
-/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_1_id_37453398_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_1_id_37453398_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
-/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_1_id_37453398_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_1_id_37453398_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
- /* harmony default export */ __webpack_exports__["default"] = (_node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_1_id_37453398_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-style-loader!../../../../../node_modules/style-loader/dist/cjs.js!../../../../../node_modules/css-loader/dist/cjs.js!../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svedenia.vue?vue&type=style&index=1&lang=css& */ "./node_modules/vue-style-loader/index.js!./node_modules/style-loader/dist/cjs.js!./node_modules/css-loader/dist/cjs.js!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=style&index=1&lang=css&");
+/* harmony import */ var _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_vue_style_loader_index_js_node_modules_style_loader_dist_cjs_js_node_modules_css_loader_dist_cjs_js_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_style_index_1_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
 
 /***/ }),
 
-/***/ "./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398&scoped=true&":
-/*!***************************************************************************************************!*\
-  !*** ./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398&scoped=true& ***!
-  \***************************************************************************************************/
+/***/ "./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398&":
+/*!***************************************************************************************!*\
+  !*** ./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398& ***!
+  \***************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_template_id_37453398_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svedenia.vue?vue&type=template&id=37453398&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398&scoped=true&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_template_id_37453398_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_template_id_37453398___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./Svedenia.vue?vue&type=template&id=37453398& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./src/components/pages/program/form/Svedenia.vue?vue&type=template&id=37453398&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_template_id_37453398___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_template_id_37453398_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Svedenia_vue_vue_type_template_id_37453398___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
