@@ -35,7 +35,7 @@
                             <b-card-body>
                                 <b-form-group>
                                     <b-form-group
-                                            label="Приоритет"
+                                            label="Тип объекта"
                                             label-for="type"
                                             :invalid-feedback="(feedback('ProgramObjects','type','Тип объекта должен быть заполнен'))"
                                             :valid-feedback="(feedback('ProgramObjects','type',' '))"
@@ -44,14 +44,32 @@
                                         <b-form-input style="display: none" id="type" v-model="formData.type" name="ProgramObjects[type]" />
                                         <v-select2 v-model="formData.type"
                                                    :options="[
-                                                   {id:0,type:'1'},
-                                                   {id:1,type:'2'},
-                                                   {id:2,type:'3'},
-                                                   {id:3,type:'резерв'}
+                                                   {id:0,type:'Приоритетный'},
+                                                   {id:1,type:'Резервный'},
                                                ]"
                                                    :reduce="type => type.id"
                                                    label="type"
                                                    id="type"
+                                        />
+                                    </b-form-group>
+                                    <b-form-group
+                                            label="Приоритет"
+                                            label-for="id_priority"
+                                            :invalid-feedback="(feedback('ProgramObjects','id_priority','Приоритет объекта должен быть заполнен'))"
+                                            :valid-feedback="(feedback('ProgramObjects','id_priority',' '))"
+                                            :state="feedback('ProgramObjects','id_priority')"
+                                    >
+                                        <b-form-input style="display: none" id="type" v-model="formData.id_priority" name="ProgramObjects[id_priority]" />
+                                        <v-select2 v-model="formData.id_priority"
+                                                   :options="[
+                                                   {id:0,id_priority:'1'},
+                                                   {id:1,id_priority:'2'},
+                                                   {id:2,id_priority:'3'},
+                                                   {id:3,id_priority:'резерв'}
+                                               ]"
+                                                   :reduce="id_priority => id_priority.id"
+                                                   label="id_priority"
+                                                   id="id_priority"
                                         />
                                     </b-form-group>
                                     <b-form-group
@@ -386,6 +404,7 @@
                     type:window.MODEL?.type || 0,
                     name:window.MODEL?.name || null,
                     id_region:window.MODEL?.id_region || null,
+                    id_priority:window.MODEL?.id_priority || null,
                     id_city:window.MODEL?.id_city || null,
                     kad_number:window.MODEL?.kad_number || null,
                     year:window.MODEL?.year || 0,
@@ -461,6 +480,7 @@
             },
         },
         mounted() {
+            console.log(window.MODEL);
             this.requestPageData({pageName:"objectCreate"});
             if (!!this.formData.id_region)
                 this.requestCity({id:this.formData.id_region});

@@ -288,7 +288,7 @@ class ProgramObjectsController extends AppController
                             continue;
                         $objDoc = new ObjectDocumentsList();
                         $save &= true;
-                         $objDoc->add($file,$id,$docsType->id);
+                        $objDoc->add($file,$id,$docsType->id);
                         $errors['ObjectDocumentsList'][$docsType->descriptor][]=$objDoc->getErrors();
                     }
                 }
