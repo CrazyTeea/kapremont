@@ -34,6 +34,9 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'KNbbRnlbgg_iYBM3JO7rQV80xzojoned',
+            'parsers' => [
+                'multipart/form-data' => 'yii\web\MultipartFormDataParser'
+            ],
         ],
         'authManager' => [
             'class' => 'yii\rbac\PhpManager', // or use 'yii\rbac\DbManager'
@@ -78,7 +81,9 @@ $config = [
                 'program/object/create'=>'app/program-objects/create',
                 'program/object/view/<id:\d+>'=>'app/program-objects/view',
                 'program/object/update/<id:\d+>'=>'app/program-objects/update',
-                'organization/info'=>'app/organization/info'
+                'organization/info'=>'app/organization/info',
+                'program/atz' => 'app/atz/index',
+                'api/fileUpload' => '/rest/upload/upload',
             ],
         ],
         'assetManager' => [

@@ -1,7 +1,7 @@
 <!--suppress ALL -->
 <template>
     <div class="program_object_form">
-        <b-form id="object_form" @submit="onSubmit" @reset="onReset" method="post" enctype="multipart/form-data">
+        <b-form enctype="multipart/form-data" id="object_form" @submit="onSubmit" @reset="onReset" method="post">
             <div class="row">
 
                 <div class="col-12">
@@ -35,7 +35,7 @@
                             <b-card-body>
                                 <b-form-group>
                                     <b-form-group
-                                            label="Тип объекта:"
+                                            label="Приоритет"
                                             label-for="type"
                                             :invalid-feedback="(feedback('ProgramObjects','type','Тип объекта должен быть заполнен'))"
                                             :valid-feedback="(feedback('ProgramObjects','type',' '))"
@@ -44,8 +44,10 @@
                                         <b-form-input style="display: none" id="type" v-model="formData.type" name="ProgramObjects[type]" />
                                         <v-select2 v-model="formData.type"
                                                    :options="[
-                                                   {id:0,type:'Приоритетный'},
-                                                   {id:1,type:'Резервный'}
+                                                   {id:0,type:'1'},
+                                                   {id:1,type:'2'},
+                                                   {id:2,type:'3'},
+                                                   {id:3,type:'резерв'}
                                                ]"
                                                    :reduce="type => type.id"
                                                    label="type"
@@ -126,16 +128,52 @@
                                             :valid-feedback="(feedback('ProgramObjects','exist_pred_nadz_orgs',' '))"
                                             :state="feedback('ProgramObjects','exist_pred_nadz_orgs')"
                                     >
-                                        <b-form-input id="exist_pred_nadz_orgs" name="ProgramObjects[exist_pred_nadz_orgs]" v-model="formData.exist_pred_nadz_orgs"/>
+                                        <b-form-input style="display: none;" id="exist_pred_nadz_orgs" name="ProgramObjects[exist_pred_nadz_orgs]" v-model="formData.exist_pred_nadz_orgs"/>
+                                        <v-select2 v-model="formData.exist_pred_nadz_orgs"
+                                                   :options="[
+                                                   {id:0,type:'Нет'},
+                                                   {id:1,type:'Да'}
+                                               ]"
+                                                   :reduce="type => type.id"
+                                                   label="type"
+                                                   id="exist_pred_nadz_orgs"
+                                        />
                                     </b-form-group>
+
+
+                                    <b-form-group
+                                            v-if="formData.exist_pred_nadz_orgs"
+                                            label="Подробности:"
+                                            label-for="podrobnosti"
+                                            :invalid-feedback="(feedback('ProgramObjects','podrobnosti','Введите подробности'))"
+                                            :valid-feedback="(feedback('ProgramObjects','podrobnosti',' '))"
+                                            :state="feedback('ProgramObjects','podrobnosti')"
+                                    >
+                                        <b-form-input id="podrobnosti" name="ProgramObjects[podrobnosti]" v-model="formData.podrobnosti"/>
+                                    </b-form-group>
+
+
                                     <b-form-group
                                             label="Износ здания (%):"
                                             label-for="wear"
-                                            :invalid-feedback="(feedback('ProgramObjects','wear','Износ здания должен быть меньше 100 (%)'))"
+                                            :invalid-feedback="(feedback('ProgramObjects','wear','Износ здания должен быть меньше 0 и больше 100 (%)'))"
                                             :valid-feedback="(feedback('ProgramObjects','wear',' '))"
                                             :state="(feedback('ProgramObjects','wear') && wear_validator)"
                                     >
-                                        <b-form-input id="wear" name="ProgramObjects[wear]" :state="wear_validator" type="number" v-model="formData.wear"/>
+                                        <!-- <b-form-input style="display: none" id="type_wear" v-model="formData" name="ProgramObjects[type]" / -->
+                                        <b-form-input style="display: none;" id="wear" min="0" name="ProgramObjects[wear]" :state="wear_validator" type="number" v-model="formData.wear"/>
+                                        <v-select2 v-model="formData.wear"
+                                                   :options="[
+                                                   {id:0,type:'Менее 20%'},
+                                                   {id:1,type:'От 20% до 50%'},
+                                                   {id:2,type:'От 50% до 70%'},
+                                                   {id:3,type:'От 70% до 90%'},
+                                                   {id:4,type:'Более 90%'}
+                                               ]"
+                                                   :reduce="type => type.id"
+                                                   label="type"
+                                                   id="wear"
+                                        />
                                     </b-form-group>
                                     <b-form-group
                                             label="Основание для использования здания:"
@@ -287,7 +325,7 @@
                         </b-card-header>
                         <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel" visible>
                             <b-card-body>
-                                <v-uploads model-name="Files" />
+                                <v-uploads model-name="Files" ref="files" />
                             </b-card-body>
                         </b-collapse>
                     </b-card>
@@ -355,6 +393,7 @@
                     wear:window.MODEL?.wear || null,
                     exist_pred_nadz_orgs:window.MODEL?.exist_pred_nadz_orgs || null,
                     osn_isp_zdan:window.MODEL?.osn_isp_zdan || null,
+                    podrobnosti: window.MODEL?.podrobnosti || null,
                     assignment:window.MODEL?.assignment || null,
                     prav_sob:window.MODEL?.prav_sob || null,
                     square:window.MODEL?.square || null,
@@ -368,12 +407,7 @@
                 errors:{}
             }
         },
-        watch:{
-            getCities:function () {
 
-                this.formData.id_city = ''
-            },
-        },
         methods:{
             ...mapActions(['requestPageData','requestCity']),
             feedback(model,value,errorMessage){
@@ -388,12 +422,12 @@
                 e.preventDefault();
                 let form = document.getElementById('object_form');
                 let formData = new FormData(form);
-               // formData.append('dsfsd',document.querySelector('#file_input_0'))
+
+              // formData.append('dsfsd',document.querySelector('#file_input_0'))
                 Axios.post(this.$route.path,formData,{
                     headers:
                         {
                             'X-CSRF-Token':this.csrf,
-                            'Content-Type':`multipart/form-data; boundary=${formData._boundary}`
                         },
                 }).then(response=>
                 {
