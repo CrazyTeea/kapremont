@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\ProgramObjects */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Program Objects', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => 'Программа модернизации', 'url' => ['/program/view']];
 $this->params['breadcrumbs'][] = $this->title;
 \yii\web\YiiAsset::register($this);
 ?>
@@ -16,36 +16,24 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
     </p>
 
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
-            'id_org',
-            'id_priority',
-            'id_program',
+            'org.name',
             'name:ntext',
             'assignment:ntext',
             'square',
             'year',
             'wear',
-            'regulation:ntext',
+/*            'regulation:ntext',
             'event_type:ntext',
             'finance_sum',
-            'coFinancing',
+            'coFinancing',*/
             'note:ntext',
-            'system_status',
-            'created_at',
-            'updated_at',
         ],
     ]) ?>
 

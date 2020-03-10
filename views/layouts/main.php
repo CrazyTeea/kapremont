@@ -48,13 +48,15 @@ GlyphiconAsset::register($this);
             ['label' => 'Информация', 'url' => ['/site/about']],
 
             Yii::$app->user->isGuest ? (
-            ['label' => 'Ввойти', 'url' => ['/site/login']]
+            ['label' => 'Вход', 'url' => ['/site/login']]
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
+                //. Html::hiddenInput('id_org',\app\models\User::findOne(Yii::$app->user->id)->id_org,['id'=>'global_id_org'])
+                //. Html::hiddenInput('username',Yii::$app->user->identity->username,['id'=>'global_username'])
                 . Html::submitButton(
                     'Выход (' . Yii::$app->user->identity->username . ')',
-                    ['class' => 'btn btn-link']
+                    ['class' => 'btn nav-link']
                 )
                 . Html::endForm()
                 . '</li>'
@@ -69,13 +71,25 @@ GlyphiconAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
-        <?= $content ?>
+
+        <?= ((Yii::$app->requestedRoute) == 'site/login' || (Yii::$app->requestedRoute) == 'site/change-password') ? $content : '' ?>
+        <div id="app"></div>
     </div>
 </div>
 
 <footer class="footer">
     <div class="container">
-        <p class="pull-left">&copy; My Company <?= date('Y') ?></p>
+        <div class="row">
+            <div class="col-6">
+                Официальный ресурс Министерства науки и высшего образования Российской Федерации
+            </div>
+            <div class="col-6">
+                Служба технической поддержки: 8-495-989-84-47 доб. 1 (многоканальный)
+                По техническим вопросам: ias@mirea.ru,
+                по методическим вопросам (в части капитального ремонта): support_monitoring@mirea.ru
+                <?=Html::a('Типовые вопросы',['/tips_quations.pdf'],['target'=>'_blank','class'=>'btn btn-warning btn-sm'])?>
+            </div>
+        </div>
     </div>
 </footer>
 

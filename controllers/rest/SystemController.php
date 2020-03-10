@@ -7,15 +7,29 @@ namespace app\controllers\rest;
 use app\models\Cities;
 use app\models\Organizations;
 use app\models\Program;
+use app\models\ProgramObjects;
 use app\models\Regions;
 use app\models\User;
 use Yii;
 use yii\bootstrap4\Html;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Json;
+use yii\helpers\Url;
+
+/***
+ * Class SystemController
+ * @package app\controllers\rest
+ * @property User $user
+ */
 
 class SystemController extends RestController
 {
+    protected $user;
+    public function beforeAction($action)
+    {
+        $this->user = Yii::$app->getSession()->get('user');
+        return parent::beforeAction($action);
+    }
+
     public function actionGetPage(){
         if ($data = Yii::$app->getRequest()->getQueryParams()){
             $data = (object)$data;
@@ -26,7 +40,9 @@ class SystemController extends RestController
                         ['key'=>'label','label'=>'Показатель'],
                         ['key'=>'value','label'=>'Значение']
                     ];
-                    $program = Program::findOne(['id_org'=>$data->id_org]);
+                    $id_org = Yii::$app->session->get('user')->id_org;
+                    $program = Program::findOne(['id_org'=>$id_org]);
+                    Yii::$app->getSession()->set('program',$program);
                     if (!$program)
                         return null;
                     $ret['items'] = [
@@ -55,9 +71,9 @@ class SystemController extends RestController
                         ['key'=>'id','label'=>'№'],
                         ['key'=>'org_short_name','label'=>"Сокращенное наименование органихации"],
                         ['key'=>'priority','label'=>'Приоритет'],
-                        ['key'=>'object_name','label'=>"Наименование объекта, требующего кап. ремонт"],
-                        ['key'=>'region','label'=>"Регион"],
-                        ['key'=>'city','label'=>"Город"],
+                        ['key'=>'name','label'=>"Наименование объекта, требующего кап. ремонт"],
+                        ['key'=>'id_region','label'=>"Регион"],
+                        ['key'=>'id_city','label'=>"Город"],
                         ['key'=>'address','label'=>"Адрес"],
                         ['key'=>'assignment','label'=>"Назначение"],
                         ['key'=>'square_kap','label'=>"Площадь кап. ремонта (кв.м)"],
@@ -75,7 +91,7 @@ class SystemController extends RestController
                         ['key'=>'id','label'=>'№'],
                         ['key'=>'priority','label'=>'Приоритет'],
                         ['key'=>'region','label'=>"Субъект РФ"],
-                        ['key'=>'object_name','label'=>"Наименование объекта, требующего кап. ремонт"],
+                        ['key'=>'name','label'=>"Наименование объекта, требующего кап. ремонт"],
                         ['key'=>'assignment','label'=>"Назначение"],
                         ['key'=>'square_kap','label'=>"Площадь кап. ремонта (кв.м)"],
                         ['key'=>'address','label'=>"Адрес объекта"],
@@ -86,6 +102,7 @@ class SystemController extends RestController
                         ['key'=>'finance_sum','label'=>"Сумма бюджетного финансирования на проведение кап.ремонта (тыс. руб)"],
                         ['key'=>'coFinancing','label'=>"Софинансирование из внебюджетных источников (тыс. руб)"],
                         ['key'=>'note','label'=>"Примечание"],
+                        ['key'=>'button','label'=>'']
 
                     ];
                     $ret['target']['fields'] = [
@@ -103,21 +120,126 @@ class SystemController extends RestController
                         ['id'=>6,'target'=>'Иное:','indicator'=>'','unit'=>''],
                     ];
 
-                    $ret['priorityObjects']['items'] = [
-                        ['id'=>1],
-                        ['id'=>2],
-                    ];
-                    $ret['reservedObjects']['items'] = [
-                        ['id'=>1],
-                        ['id'=>2],
-                    ];
+                    $progObj = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>0])->joinWith(['region'])->all();
+                    $flag = false;
+                    foreach ($progObj as $index=>$item) {
+                            $ret['priorityObjects']['items'][$index] = ArrayHelper::merge(['region' => $item->region ? $item->region->region : '','button'=>Url::to(['program/object/view','id'=>$item->id])],$item);
+                    }
+                    $progObj = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>1])->joinWith(['region'])->all();
+                    foreach ($progObj as $index=>$item) {
+                        $ret['reservedObjects']['items'][$index] = ArrayHelper::merge(['region' =>$item->region ? $item->region->region : ''],$item);
+                    }
+                    return $ret;
+                }
+                case 'objectCreate':{
+                    $ret['regionOptions'] = Regions::find()->all();
+                    $ret['cityOptions'] = Cities::find()->all();
+                    $ret['_csrf'] = Yii::$app->request->getCsrfToken();
+                    $ret['headers'] = Yii::$app->getRequest()->getHeaders();
                     return $ret;
                     break;
                 }
-                case 'objectCreate':{
-                    $ret['regionOptions'] = Regions::find()->asArray()->all();
-                    $ret['cityOptions'] = Cities::find()->asArray()->all();
-                    $ret['_csrf'] = Yii::$app->request->getCsrfToken();
+                case 'orgInfo':{
+                    $ret['fields'] = [
+                        ['key'=>'id','label'=>'#'],
+                        ['key'=>'label','label'=>'Показатель'],
+                        ['key'=>'value','label'=>'Значение']
+                    ];
+
+                    $org = Organizations::findOne(Yii::$app->session->get('user')->id_org);
+
+                    $ret['items'] = [
+                        ['id' => 1, 'label' =>
+                            "Полное наименование организации",
+                            'value' => $org->full_name
+                        ],
+                        ['id' => 2, 'label' =>
+                            "Сокращенное наименование организации",
+                            'value' => $org->short_name
+                        ],
+                        ['id' => 3, 'label' =>
+                            "Общая численность обучающихся по программам среднего профессионального образования, бакалавриата, специалитета, магистратуры, аспирантуры, включая очную и заочную формы обучения, из них:",
+                            'value' => $org->orgInfo?$org->orgInfo->st_sr_count: 0
+                        ],
+                        ['id' => 3.1, 'label' =>
+                            "Численность обучающихся за счет средств федерального бюджета",
+                            'value'=>  $org->orgInfo?$org->orgInfo->st_fed_count: 0
+                        ],
+                        ['id' => 3.2, 'label' =>
+                            "Численность обучающихся по договору с полным возмещением затрат",
+                            'value' => $org->orgInfo?$org->orgInfo->st_dog_count: 0
+                        ],
+                        ['id' => 3.3, 'label' =>
+                            "Общая численность обучающихся иностранных граждан и лиц без гражданства",
+                            'value' => $org->orgInfo?$org->orgInfo->st_in_count: 0
+                        ],
+                        ['id' => 4, 'label' =>
+                            "Численность профессорско-преподавательского состава",
+                            'value'=>  $org->orgInfo?$org->orgInfo->prof_count: 0
+                        ],
+                        ['id' => 5, 'label' =>
+                            "Студенты всего, из них:",
+                            'value' => $org->orgInfo?$org->orgInfo->st_all: 0
+                        ],
+                        ['id' => 5.1, 'label' =>
+                            "Среднего профессионального образования",
+                            'value' => $org->orgInfo?$org->orgInfo->st_sr_pr_count: 0
+                        ],
+                        ['id' => 5.2, 'label' =>
+                            "Бакалавриата",
+                            'value'=>  $org->orgInfo?$org->orgInfo->st_bak_count: 0
+                        ],
+                        ['id' => 5.3, 'label' =>
+                            "Специалитета",
+                            'value' => $org->orgInfo?$org->orgInfo->st_spec_count: 0
+                        ],
+                        ['id' => 5.4, 'label' =>
+                            "Магистратуры",
+                            'value' => $org->orgInfo?$org->orgInfo->st_mag_count: 0
+                        ],
+                        ['id' => 5.5, 'label' =>
+                            "Аспирантуры",
+                            'value'=>  $org->orgInfo?$org->orgInfo->st_asp_count: 0
+                        ],
+                        ['id' => 6, 'label' =>
+                            "Работники, из них:",
+                            'value' => $org->orgInfo?$org->orgInfo->rab_count: 0
+                        ],
+                        ['id' => 6.1, 'label' =>
+                            "Научные сотрудники",
+                            'value' => $org->orgInfo?$org->orgInfo->nauch_rab: 0
+                        ],
+                        ['id' => 6.2, 'label' =>
+                            "Профессорско-преподавательский состав",
+                            'value'=>  $org->orgInfo?$org->orgInfo->prof_prep_count: 0
+                        ],
+                        ['id' => 6.3, 'label' =>
+                            "Иные категории работников",
+                            'value'=>  $org->orgInfo?$org->orgInfo->in_kat_rab: 0
+                        ],
+                        ['id' => 7, 'label' =>
+                            "Численность инвалидов и лиц с ограниченными возможностями здоровья",
+                            'value'=>  $org->orgInfo?$org->orgInfo->invalid_count: 0
+                        ],
+                        ['id' => 8, 'label' =>
+                            "Общая площадь всех зданий и сооружений",
+                            'value'=> $org->orgInfo?$org->orgInfo->zdan_count: 0
+                        ],
+                        ['id' => 9, 'label' =>
+                            "Общая площадь всех зданий и сооружений, требующих капитального ремонта (на основании акта обследования или предписаний надзорных органов)",
+                            'value'=>  0
+                        ],
+                        ['id' => 10, 'label' =>
+                            "Общая площадь всех зданий и сооружений, находящихся в аварийном состоянии (на основании акта обследования или предписаний надзорных органов)",
+                            'value'=>  0
+                        ],
+                        ['id' => 11, 'label' =>
+                            "Общая площадь всех зданий и сооружений, требующих мероприятий по АТЗ",
+                            'value'=>   0
+                        ],
+                    ];
+
+
                     return $ret;
                     break;
                 }
@@ -126,15 +248,18 @@ class SystemController extends RestController
         return null;
     }
     public function actionGetUser(){
-        if ($data = Yii::$app->getRequest()->getRawBody()){
-            $data = (object)Json::decode($data);
-            $user = User::find()->where(['username'=>$data->login])->one();
-            return [
-                'organization'=>$user->organization,
-                'fio'=>$user->fio,
-                'position'=>$user->position,
-                'isAdmin'=> self::$cans[4]
-            ];
+        if (!Yii::$app->getUser()->isGuest) {
+
+                //$data = (object)Json::decode($data);
+                //$user = User::find()->where(['username' => $data->login])->one();
+                $user = Yii::$app->getSession()->get('user');
+                return [
+                    'organization' => $user->organization,
+                    'fio' => $user->fio,
+                    'position' => $user->position,
+                    'isAdmin' => self::$cans[5]
+                ];
+
         }
     }
 }

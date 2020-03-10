@@ -2,8 +2,10 @@
 
 namespace app\controllers;
 
+use app\models\ChangePasswordForm;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\Json;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -53,6 +55,17 @@ class SiteController extends Controller
             ],
         ];
     }
+    public function actionChangePassword()
+    {
+        $model = new ChangePasswordForm();
+        $success = -1;
+        if ( $model->load(Yii::$app->request->post()))
+        {
+            $success = $model->change_password();
+        }
+        echo Json::encode($success);
+        return $this->render('change_password',compact('model','success'));
+    }
 
     /**
      * Displays homepage.
@@ -77,6 +90,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+
             return $this->goBack();
         }
 
@@ -110,6 +124,7 @@ class SiteController extends Controller
 
             return $this->refresh();
         }
+        
         return $this->render('contact', [
             'model' => $model,
         ]);

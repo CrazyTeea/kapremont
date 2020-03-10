@@ -13,6 +13,7 @@ use Yii;
  * @property string|null $name
  * @property string|null $short_name
  * @property int|null $system_status
+ * @property  OrgInfo $orgInfo
  */
 class Organizations extends \yii\db\ActiveRecord
 {
@@ -43,12 +44,15 @@ class Organizations extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'full_name' => 'Full Name',
-            'name' => 'Name',
+            'name' => 'Наименование организации ',
             'short_name' => 'Short Name',
             'system_status' => 'System Status',
         ];
     }
     public function getRegion(){
         return $this->hasOne(Regions::className(),['id'=>'id_region']);
+    }
+    public function getOrgInfo(){
+        return $this->hasOne(OrgInfo::className(),['id_org'=>'id']);
     }
 }
