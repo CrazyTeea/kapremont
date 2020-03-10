@@ -171,7 +171,7 @@
         },
         methods:{
             ...mapActions(['requestPageData']),
-            onRowClick(item,index,event){
+            onRowClick(item){
                 window.location.href = `/program/object/view/${item.id}`;
             }
         },
