@@ -11,7 +11,7 @@ use yii\widgets\ActiveForm;
 <div class="program-objects-form">
 
     <script>
-        window['MODEL'] = <?=\yii\helpers\Json::encode($model)?>
+        window.MODEL =<?=\yii\helpers\Json::encode($model)?>
     </script>
 
 </div>
