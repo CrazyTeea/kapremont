@@ -140,7 +140,7 @@
         <div class="row">
             <div class="col-6"></div>
             <div class="col-6 offset-7">
-                <b-button onclick="window.location.href = '/123.docx';" class="btn btn-sm">Выгрузить программу</b-button>
+                <a href="/program/export" class="btn btn-secondary btn-sm">Выгрузить программу</a>
                 <b-button disabled class="btn btn-sm">Загрузить PDF</b-button>
                 <b-button disabled class="btn btn-sm">Отправить на согласование</b-button>
             </div>
