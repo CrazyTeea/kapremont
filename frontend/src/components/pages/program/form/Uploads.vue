@@ -17,7 +17,9 @@
                         <label>{{ item.label }}</label>
                     </b-th>
                     <b-th class="no-cell-border vertical-align-centre-extra-table normal-font-weight-for-table">
+
                         <input type="file" :name="`${modelName}[${item.descriptor}]file`" :ref="'file' + index" :id="'file_input_' + index" class="hidden-file-input" @input="fileInput(index)">
+
                         <div class="cell-center-for-items" v-if="!item.fileName">
                             <div class="arrow">
                                 <label :for="`file_input_${index}`" class="label">
@@ -83,6 +85,7 @@ export default {
             }
             this.selectedFiles.push({
                 id: index,
+                descriptor: this.items[index].descriptor,
                 name: this.items[index].label,
                 file: file
             });
@@ -124,7 +127,7 @@ export default {
             }
         },
         getSavedDocuments() {
-            //
+            return this.selectedFiles;
         },
         // async uploadFile(file) {
         //     let form = new FormData()

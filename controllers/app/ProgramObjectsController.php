@@ -212,7 +212,7 @@ class ProgramObjectsController extends AppController
         $objectDocsTypes = ObjectDocumentsTypes::find()->all();
         $save = true;
         //
-        if ($post = Yii::$app->request->post()) {
+        if ($post = Yii::$app->request->getBodyParams()) {
             if ($model->load($post)) {
 
                 $transaction = Yii::$app->getDb()->beginTransaction();
@@ -220,7 +220,7 @@ class ProgramObjectsController extends AppController
                 $errors['ProgramObjects'] = $model->getErrors();
                 if ($save) {
                     $progObjectsEvents = ProgObjectsEvents::createMultiple(ProgObjectsEvents::className(), $progObjectsEvents);
-                    ProgObjectsEvents::loadMultiple($progObjectsEvents, Yii::$app->request->post());
+                    ProgObjectsEvents::loadMultiple($progObjectsEvents, Yii::$app->request->getBodyParams());
                     foreach ($progObjectsEvents as $index => $item) {
                         $pr = ProgObjectsEvents::findOne(['id_object' => $model->id, 'step' => $index]);
                         if (!$pr) {
@@ -239,7 +239,7 @@ class ProgramObjectsController extends AppController
                     }
 
                     $proObjectsNecessary = ProObjectsNecessary::createMultiple(ProObjectsNecessary::className(), $proObjectsNecessary);
-                    ProObjectsNecessary::loadMultiple($proObjectsNecessary, Yii::$app->request->post());
+                    ProObjectsNecessary::loadMultiple($proObjectsNecessary, Yii::$app->request->getBodyParams());
                     foreach ($proObjectsNecessary as $index => $item) {
                         $pr = ProObjectsNecessary::findOne(['id_object' => $model->id, 'element' => $index]);
                         if (!$pr){
@@ -257,7 +257,7 @@ class ProgramObjectsController extends AppController
                     }
 
                     $progObjectsWaites = ProgObjectsWaites::createMultiple(ProgObjectsWaites::className(), $progObjectsWaites);
-                    ProgObjectsWaites::loadMultiple($progObjectsWaites, Yii::$app->request->post());
+                    ProgObjectsWaites::loadMultiple($progObjectsWaites, Yii::$app->request->getBodyParams());
 
                     foreach ($progObjectsWaites as $index => $item) {
                         $pr = ProgObjectsWaites::findOne(['id_object' => $model->id, 'element' => $index]);
@@ -274,7 +274,7 @@ class ProgramObjectsController extends AppController
                     }
 
                     $progObjectsRiscs = ProgObjectsRiscs::createMultiple(ProgObjectsRiscs::className(), $progObjectsRiscs);
-                    ProgObjectsRiscs::loadMultiple($progObjectsRiscs, Yii::$app->request->post());
+                    ProgObjectsRiscs::loadMultiple($progObjectsRiscs, Yii::$app->request->getBodyParams());
 
                     foreach ($progObjectsRiscs as $index => $item) {
                         $pr = ProgObjectsRiscs::findOne(['id_object' => $model->id, 'element' => $index]);
@@ -290,7 +290,9 @@ class ProgramObjectsController extends AppController
                         $errors['ProgObjectsWaites'][] = [$pr->getErrors()];
                     }
                     $files = new Files();
+
                     foreach ($objectDocsTypes as $index=>$docsType){
+
                         $file = UploadedFile::getInstance($files,"[$docsType->descriptor]file");
                         if (!$file)
                             continue;
@@ -301,6 +303,8 @@ class ProgramObjectsController extends AppController
                     }
                 }
 
+                exit();
+
                 if ($save) {
                     $transaction->commit();
                     return Json::encode($model);
@@ -310,7 +314,7 @@ class ProgramObjectsController extends AppController
                 }
             }
         }
-
+        var_dump($_FILES);
         return $this->render('update',compact('model'));
     }
 

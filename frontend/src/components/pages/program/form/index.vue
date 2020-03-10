@@ -1,7 +1,7 @@
 <!--suppress ALL -->
 <template>
     <div class="program_object_form">
-        <b-form id="object_form" @submit="onSubmit" @reset="onReset" method="post" enctype="multipart/form-data">
+        <b-form id="object_form" @submit="onSubmit" @reset="onReset" method="post">
             <div class="row">
 
                 <div class="col-12">
@@ -287,7 +287,7 @@
                         </b-card-header>
                         <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel" visible>
                             <b-card-body>
-                                <v-uploads model-name="Files" />
+                                <v-uploads model-name="Files" ref="files" />
                             </b-card-body>
                         </b-collapse>
                     </b-card>
@@ -388,7 +388,15 @@
                 e.preventDefault();
                 let form = document.getElementById('object_form');
                 let formData = new FormData(form);
-               // formData.append('dsfsd',document.querySelector('#file_input_0'))
+                this.$refs.files.getSavedDocuments().forEach(item=>{
+                    formData.append(`Files[${item.descriptor}]file`,item.file)
+                })
+                var request = new XMLHttpRequest();
+                request.open("POST", this.$route.path,true);
+                request.setRequestHeader('X-CSRF-Token',this.csrf)
+                request.setRequestHeader('content-type',`multipart/form-data; boundary=${formData._boundary}`)
+                request.send(formData)
+             /*  // formData.append('dsfsd',document.querySelector('#file_input_0'))
                 Axios.post(this.$route.path,formData,{
                     headers:
                         {
@@ -400,7 +408,7 @@
                     if (!!response.data?.id)
                         window.location.href = `/program/object/view/${response.data.id}`;
                     this.errors = response.data;
-                })
+                })*/
             },
             onReset(){
                 this.formData.id_region=0;

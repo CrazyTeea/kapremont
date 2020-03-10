@@ -883,6 +883,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -946,6 +948,7 @@ __webpack_require__.r(__webpack_exports__);
 
       this.selectedFiles.push({
         id: index,
+        descriptor: this.items[index].descriptor,
         name: this.items[index].label,
         file: file
       });
@@ -987,7 +990,8 @@ __webpack_require__.r(__webpack_exports__);
         return this.errorMessage('Сначала добавте файл!');
       }
     },
-    getSavedDocuments: function getSavedDocuments() {//
+    getSavedDocuments: function getSavedDocuments() {
+      return this.selectedFiles;
     },
     // async uploadFile(file) {
     //     let form = new FormData()
@@ -1149,20 +1153,26 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
-/* harmony import */ var _organisms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../organisms */ "./src/components/organisms/index.js");
-/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
-/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _Svedenia_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./Svedenia.vue */ "./src/components/pages/program/form/Svedenia.vue");
-/* harmony import */ var _Necessary_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./Necessary.vue */ "./src/components/pages/program/form/Necessary.vue");
-/* harmony import */ var _Riscs_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Riscs.vue */ "./src/components/pages/program/form/Riscs.vue");
-/* harmony import */ var _Waited_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Waited.vue */ "./src/components/pages/program/form/Waited.vue");
-/* harmony import */ var _Uploads_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Uploads.vue */ "./src/components/pages/program/form/Uploads.vue");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
+/* harmony import */ var _organisms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../organisms */ "./src/components/organisms/index.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _Svedenia_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./Svedenia.vue */ "./src/components/pages/program/form/Svedenia.vue");
+/* harmony import */ var _Necessary_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./Necessary.vue */ "./src/components/pages/program/form/Necessary.vue");
+/* harmony import */ var _Riscs_vue__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./Riscs.vue */ "./src/components/pages/program/form/Riscs.vue");
+/* harmony import */ var _Waited_vue__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./Waited.vue */ "./src/components/pages/program/form/Waited.vue");
+/* harmony import */ var _Uploads_vue__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./Uploads.vue */ "./src/components/pages/program/form/Uploads.vue");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_12__);
+
+
 
 
 //
@@ -1478,15 +1488,15 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "programForm",
   components: {
-    "v-svedenia": _Svedenia_vue__WEBPACK_IMPORTED_MODULE_5__["default"],
-    "v-user-panel": _organisms__WEBPACK_IMPORTED_MODULE_2__["userPanel"],
-    "v-select2": vue_select__WEBPACK_IMPORTED_MODULE_3___default.a,
-    "v-necessary": _Necessary_vue__WEBPACK_IMPORTED_MODULE_6__["default"],
-    "v-waited": _Waited_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
-    "v-riscs": _Riscs_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
-    "v-uploads": _Uploads_vue__WEBPACK_IMPORTED_MODULE_9__["default"]
+    "v-svedenia": _Svedenia_vue__WEBPACK_IMPORTED_MODULE_7__["default"],
+    "v-user-panel": _organisms__WEBPACK_IMPORTED_MODULE_4__["userPanel"],
+    "v-select2": vue_select__WEBPACK_IMPORTED_MODULE_5___default.a,
+    "v-necessary": _Necessary_vue__WEBPACK_IMPORTED_MODULE_8__["default"],
+    "v-waited": _Waited_vue__WEBPACK_IMPORTED_MODULE_10__["default"],
+    "v-riscs": _Riscs_vue__WEBPACK_IMPORTED_MODULE_9__["default"],
+    "v-uploads": _Uploads_vue__WEBPACK_IMPORTED_MODULE_11__["default"]
   },
-  computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_1__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_4__["mapGetters"])(['getPageData', 'getCities', "getRegions"]), {
+  computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_6__["mapGetters"])(['getPageData', 'getCities', "getRegions"]), {
     kad_number_validator: function kad_number_validator() {
       var pattern = /\d+:\d+:\d+:\d+/;
       return pattern.test(this.formData.kad_number);
@@ -1537,7 +1547,7 @@ __webpack_require__.r(__webpack_exports__);
       this.formData.id_city = '';
     }
   },
-  methods: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_1__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_4__["mapActions"])(['requestPageData', 'requestCity']), {
+  methods: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_6__["mapActions"])(['requestPageData', 'requestCity']), {
     feedback: function feedback(model, value, errorMessage) {
       var val = this.formData[value];
       if (errorMessage) return errorMessage;
@@ -1545,23 +1555,30 @@ __webpack_require__.r(__webpack_exports__);
       return !(this.errors.hasOwnProperty(model) && this.errors[model].hasOwnProperty(value));
     },
     onSubmit: function onSubmit(e) {
-      var _this = this;
-
       e.preventDefault();
       var form = document.getElementById('object_form');
-      var formData = new FormData(form); // formData.append('dsfsd',document.querySelector('#file_input_0'))
-
-      axios__WEBPACK_IMPORTED_MODULE_10___default.a.post(this.$route.path, formData, {
-        headers: {
-          'X-CSRF-Token': this.csrf,
-          'Content-Type': "multipart/form-data; boundary=".concat(formData._boundary)
-        }
-      }).then(function (response) {
-        var _response$data;
-
-        if (!!((_response$data = response.data) === null || _response$data === void 0 ? void 0 : _response$data.id)) window.location.href = "/program/object/view/".concat(response.data.id);
-        _this.errors = response.data;
+      var formData = new FormData(form);
+      this.$refs.files.getSavedDocuments().forEach(function (item) {
+        formData.append("Files[".concat(item.descriptor, "]file"), item.file);
       });
+      var request = new XMLHttpRequest();
+      request.open("POST", this.$route.path, true);
+      request.setRequestHeader('X-CSRF-Token', this.csrf);
+      request.setRequestHeader('content-type', "multipart/form-data; boundary=".concat(formData._boundary));
+      request.send(formData);
+      /*  // formData.append('dsfsd',document.querySelector('#file_input_0'))
+         Axios.post(this.$route.path,formData,{
+             headers:
+                 {
+                     'X-CSRF-Token':this.csrf,
+                     'Content-Type':`multipart/form-data; boundary=${formData._boundary}`
+                 },
+         }).then(response=>
+         {
+             if (!!response.data?.id)
+                 window.location.href = `/program/object/view/${response.data.id}`;
+             this.errors = response.data;
+         })*/
     },
     onReset: function onReset() {
       this.formData.id_region = 0;
@@ -3728,11 +3745,7 @@ var render = function() {
       _c(
         "b-form",
         {
-          attrs: {
-            id: "object_form",
-            method: "post",
-            enctype: "multipart/form-data"
-          },
+          attrs: { id: "object_form", method: "post" },
           on: { submit: _vm.onSubmit, reset: _vm.onReset }
         },
         [
@@ -5029,6 +5042,7 @@ var render = function() {
                           "b-card-body",
                           [
                             _c("v-uploads", {
+                              ref: "files",
                               attrs: { "model-name": "Files" }
                             })
                           ],
