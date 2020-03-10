@@ -20,7 +20,7 @@ const routes = [
         number:2,
         component: ()=>import('./components/pages').then(module=>{return module.devView;})
     },
-   /* {
+    {
         path:'/program/object/create',
         number:3,
         component: ()=>import('./components/pages').then(module=>{return module.form;})
@@ -29,7 +29,7 @@ const routes = [
         path:'/program/object/update/:id',
         number:4,
         component: ()=>import('./components/pages').then(module=>{return module.form;})
-    },*/
+    },
     {
         path:'/organization/info',
         name:'orgInfo',
