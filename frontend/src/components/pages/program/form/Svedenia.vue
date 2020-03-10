@@ -1,5 +1,5 @@
 <template>
-    <div class="hidden" >
+    <div class="hidden-val-for-table">
         <b-table
             bordered
             foot-clone
@@ -152,7 +152,6 @@ import Multiselect from 'vue-select';
         },
         data() {
             return {
-
                 fields: [
                     {key: 'stage', label: 'Этап'},
                     {key: 'is_nessesary', label: 'Необходимость выполнения'},
@@ -211,7 +210,6 @@ import Multiselect from 'vue-select';
                         'kap_cost': true,
                         'finanse':  true
                     },
- 
                 ],
                 sved: {
                     is_nessesary: [],
@@ -242,11 +240,10 @@ import Multiselect from 'vue-select';
     }
 </style>
 
-<style scoped>
-
-.hidden {
-    overflow: hidden;
-    overflow-x: scroll;
+<style>
+.hidden-val-for-table {
+    overflow: hidden !important;
+    overflow-x: scroll !important;
 }
 .vertical-align-extra-table {
     vertical-align: middle !important;

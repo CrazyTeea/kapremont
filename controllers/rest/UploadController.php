@@ -2,20 +2,25 @@
 
 namespace app\controllers\rest;
 
-use yii\rest\ActiveController;
+use yii\web\Controller;
 use app\models\UploadForm;
+use Yii;
 use yii\web\UploadedFile;
 
-class UploadController extends ActiveController
+class UploadController extends Controller
 {
-    public $modelClass = UploadForm::class;
 
     public function actionUpload()
     {
         $upload = new UploadForm();
+
+        // echo "<pre>";
+        // var_export($_FILES['pdfFile']);
+        $upload->load($_FILES['pdfFile']);
         $upload->pdfFile = UploadedFile::getInstance($upload, 'pdfFile');
+        $upload->save();
         if($upload->upload()) {
-            return;
+            return json_encode('vseOk');
         }
     }
 }
