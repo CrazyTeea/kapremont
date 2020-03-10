@@ -52,8 +52,6 @@ GlyphiconAsset::register($this);
             ) : (
                 '<li>'
                 . Html::beginForm(['/site/logout'], 'post')
-                //. Html::hiddenInput('id_org',\app\models\User::findOne(Yii::$app->user->id)->id_org,['id'=>'global_id_org'])
-                //. Html::hiddenInput('username',Yii::$app->user->identity->username,['id'=>'global_username'])
                 . Html::submitButton(
                     'Выход (' . Yii::$app->user->identity->username . ')',
                     ['class' => 'btn nav-link']
