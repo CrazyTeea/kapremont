@@ -92,18 +92,19 @@ class DevelopmentProgrammeController extends AppController
             }
         }
 
-        if (!file_exists('uploads'))
-            FileHelper::createDirectory('uploads');
-        $file->saveAs('uploads/temp.docx');
+        $path = Yii::getAlias( '@webroot' ) . '/uploads/'.$user->id_org ? : $user->id;
+        if ( !file_exists( $path ) )
+            FileHelper::createDirectory( $path );
+        $file->saveAs("$path/temp.docx");
         // Make sure you have `dompdf/dompdf` in your composer dependencies.
         Settings::setPdfRendererName(Settings::PDF_RENDERER_MPDF);
         // Any writable directory here. It will be ignored.
         Settings::setPdfRendererPath('.');
-        $phpWord = IOFactory::load('uploads/temp.docx', 'Word2007');
+        $phpWord = IOFactory::load("$path/temp.docx", 'Word2007');
 
-        $phpWord->save('uploads/document.pdf', 'PDF');
+        $phpWord->save("$path/document.pdf", 'PDF');
 
-        return Yii::$app->response->sendFile('uploads/document.pdf')->send();
+        return Yii::$app->response->sendFile("$path/document.pdf")->send();
 
     }
 
