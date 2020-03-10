@@ -92,8 +92,8 @@ class DevelopmentProgrammeController extends AppController
             }
         }
 
-
-        FileHelper::createDirectory('uploads');
+        if (!file_exists('uploads'))
+            FileHelper::createDirectory('uploads');
         $file->saveAs('uploads/temp.docx');
         // Make sure you have `dompdf/dompdf` in your composer dependencies.
         Settings::setPdfRendererName(Settings::PDF_RENDERER_MPDF);
