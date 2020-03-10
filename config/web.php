@@ -84,6 +84,7 @@ $config = [
                 'organization/info'=>'app/organization/info',
                 'program/atz' => 'app/atz/index',
                 'api/fileUpload' => '/rest/upload/upload',
+                'api/fileRemove' => '/rest/upload/delete'
             ],
         ],
         'assetManager' => [

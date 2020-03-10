@@ -955,6 +955,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -1006,6 +1007,7 @@ __webpack_require__.r(__webpack_exports__);
         label: 'Иные документы'
       }],
       loadProgress: null,
+      loadingFileName: null,
       selectedFiles: []
     };
   },
@@ -1079,70 +1081,81 @@ __webpack_require__.r(__webpack_exports__);
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                if (_this.selectedFiles.length) {
+                  _context.next = 4;
+                  break;
+                }
+
+                _this.errorMessage('Сначала выберите файлы!');
+
+                _context.next = 30;
+                break;
+
+              case 4:
                 _iteratorNormalCompletion = true;
                 _didIteratorError = false;
                 _iteratorError = undefined;
-                _context.prev = 3;
+                _context.prev = 7;
                 _iterator = _this.selectedFiles[Symbol.iterator]();
 
-              case 5:
+              case 9:
                 if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-                  _context.next = 12;
+                  _context.next = 16;
                   break;
                 }
 
                 file = _step.value;
-                _context.next = 9;
+                _context.next = 13;
                 return _this.uploadFile(file);
 
-              case 9:
+              case 13:
                 _iteratorNormalCompletion = true;
-                _context.next = 5;
+                _context.next = 9;
                 break;
 
-              case 12:
-                _context.next = 18;
+              case 16:
+                _context.next = 22;
                 break;
-
-              case 14:
-                _context.prev = 14;
-                _context.t0 = _context["catch"](3);
-                _didIteratorError = true;
-                _iteratorError = _context.t0;
 
               case 18:
                 _context.prev = 18;
-                _context.prev = 19;
+                _context.t0 = _context["catch"](7);
+                _didIteratorError = true;
+                _iteratorError = _context.t0;
+
+              case 22:
+                _context.prev = 22;
+                _context.prev = 23;
 
                 if (!_iteratorNormalCompletion && _iterator.return != null) {
                   _iterator.return();
                 }
 
-              case 21:
-                _context.prev = 21;
+              case 25:
+                _context.prev = 25;
 
                 if (!_didIteratorError) {
-                  _context.next = 24;
+                  _context.next = 28;
                   break;
                 }
 
                 throw _iteratorError;
 
-              case 24:
-                return _context.finish(21);
+              case 28:
+                return _context.finish(25);
 
-              case 25:
-                return _context.finish(18);
+              case 29:
+                return _context.finish(22);
 
-              case 26:
+              case 30:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[3, 14, 18, 26], [19,, 21, 25]]);
+        }, _callee, null, [[7, 18, 22, 30], [23,, 25, 29]]);
       }))();
     },
-    uploadFile: function uploadFile(file) {
+    removeFileFromYii: function removeFileFromYii(file) {
       var _this2 = this;
 
       return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_11__["default"])(
@@ -1154,10 +1167,10 @@ __webpack_require__.r(__webpack_exports__);
             switch (_context2.prev = _context2.next) {
               case 0:
                 form = new FormData();
-                form.append('pdfFile', file.file); // console.log(file)
-
-                _context2.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_12___default.a.post('/api/fileUpload', form, {
+                form.append('pdfFile', file.file);
+                _this2.loadingFileName = file.file.name;
+                _context2.next = 5;
+                return axios__WEBPACK_IMPORTED_MODULE_12___default.a.post('/api/fileRemove', form, {
                   headers: {
                     'X-CSRF-Token': _this2.csrf,
                     'Content-Type': 'multipart/form-data;'
@@ -1167,9 +1180,11 @@ __webpack_require__.r(__webpack_exports__);
                   }
                 }).then(function (res) {
                   console.log(res.data);
+                }).catch(function (error) {
+                  return console.log(error);
                 });
 
-              case 4:
+              case 5:
               case "end":
                 return _context2.stop();
             }
@@ -1177,6 +1192,55 @@ __webpack_require__.r(__webpack_exports__);
         }, _callee2);
       }))();
     },
+    uploadFile: function uploadFile(file) {
+      var _this3 = this;
+
+      return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_11__["default"])(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee3() {
+        var form;
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                form = new FormData();
+                form.append('pdfFile', file.file);
+                _this3.loadingFileName = file.file.name;
+                _context3.next = 5;
+                return axios__WEBPACK_IMPORTED_MODULE_12___default.a.post('/api/fileUpload', form, {
+                  headers: {
+                    'X-CSRF-Token': _this3.csrf,
+                    'Content-Type': 'multipart/form-data;'
+                  },
+                  onUploadProgress: function onUploadProgress(itemUpload) {
+                    _this3.loadProgress = Math.round(itemUpload.loaded / itemUpload.total * 100);
+                  }
+                }).then(function (res) {
+                  console.log(res.data);
+                }).catch(function (error) {
+                  return console.log(error);
+                });
+
+              case 5:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    // loadMessage: function(file) {
+    //     message = `Файл ${this.loadingFileName} загружен на ${this.loadProgress}%`
+    //     this.$bvModal.msgBoxOk(message, {
+    //         title: 'Загрузка!',
+    //         size: 'sm',
+    //         buttonSize: 'sm',
+    //         okVariant: 'outline-success',
+    //         headerClass: 'p-2 border-bottom-0',
+    //         footerClass: 'p-2 border-top-0',
+    //         centered: true
+    //     })
+    // },
     errorMessage: function errorMessage(message) {
       this.$bvModal.msgBoxOk(message, {
         title: 'Ошибка!',
@@ -1350,6 +1414,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2918,7 +2995,7 @@ var render = function() {
                     "b-th",
                     { staticClass: "cell-center-for-table" },
                     [
-                      item.nalichie
+                      item.nalichie && item.kap_remont
                         ? _c("b-form-input", {
                             attrs: {
                               name:
@@ -3756,7 +3833,19 @@ var render = function() {
           }
         },
         [_vm._v("Отправить")]
-      )
+      ),
+      _vm._v(" "),
+      _vm.loadProgress
+        ? _c("label", [
+            _vm._v(
+              "Файл " +
+                _vm._s(_vm.loadingFileName) +
+                " загружен на " +
+                _vm._s(_vm.loadProgress) +
+                "%"
+            )
+          ])
+        : _vm._e()
     ],
     1
   )
@@ -4777,9 +4866,38 @@ var render = function() {
                                   },
                                   [
                                     _c("b-form-input", {
+                                      staticStyle: { display: "none" },
                                       attrs: {
                                         id: "prav_sob",
                                         name: "ProgramObjects[prav_sob]"
+                                      },
+                                      model: {
+                                        value: _vm.formData.prav_sob,
+                                        callback: function($$v) {
+                                          _vm.$set(
+                                            _vm.formData,
+                                            "prav_sob",
+                                            $$v
+                                          )
+                                        },
+                                        expression: "formData.prav_sob"
+                                      }
+                                    }),
+                                    _vm._v(" "),
+                                    _c("v-select2", {
+                                      attrs: {
+                                        options: [
+                                          {
+                                            val: "fast",
+                                            label: "Оперативное управление"
+                                          },
+                                          { val: "others", label: "Другое" }
+                                        ],
+                                        reduce: function(type) {
+                                          return type.val
+                                        },
+                                        label: "label",
+                                        id: "prav_sob"
                                       },
                                       model: {
                                         value: _vm.formData.prav_sob,

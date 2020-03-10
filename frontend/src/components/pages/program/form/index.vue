@@ -202,6 +202,8 @@
                                     >
                                         <b-form-input id="assignment" name="ProgramObjects[assignment]" v-model="formData.assignment"/>
                                     </b-form-group>
+
+
                                     <b-form-group
                                             label="Право собственности:"
                                             label-for="prav_sob"
@@ -209,8 +211,19 @@
                                             :valid-feedback="(feedback('ProgramObjects','prav_sob',' '))"
                                             :state="feedback('ProgramObjects','prav_sob')"
                                     >
-                                        <b-form-input id="prav_sob" name="ProgramObjects[prav_sob]" v-model="formData.prav_sob"/>
+                                        <b-form-input style="display: none;" id="prav_sob" name="ProgramObjects[prav_sob]" v-model="formData.prav_sob"/>
+                                        <v-select2 v-model="formData.prav_sob"
+                                                   :options="[
+                                                   {val:'fast', label:'Оперативное управление'},
+                                                   {val: 'others', label:'Другое'},
+                                               ]"
+                                                   :reduce="type => type.val"
+                                                   label="label"
+                                                   id="prav_sob"
+                                        />
                                     </b-form-group>
+
+
                                     <b-form-group
                                             label="Общая площадь здания - всего, кв.м.:"
                                             label-for="square"

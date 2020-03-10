@@ -53,6 +53,7 @@
         </b-table-simple>
 
             <b-button size="sm" variant="info" @click="sendFile()">Отправить</b-button>
+            <label v-if="loadProgress">Файл {{ loadingFileName }} загружен на {{ loadProgress }}%</label>
 
     </div>
 </template>
@@ -78,6 +79,7 @@ export default {
                 {descriptor:'other', fileName: null, label: 'Иные документы'},
             ],
             loadProgress: null,
+            loadingFileName: null,
             selectedFiles: [],
         }
     },
@@ -137,17 +139,35 @@ export default {
             return this.selectedFiles;
         },
         async sendFile() {
-            for(let file of this.selectedFiles) {
-                await this.uploadFile(file)
+            if(!this.selectedFiles.length) {
+                this.errorMessage('Сначала выберите файлы!')
+            } else {
+                for(let file of this.selectedFiles) {
+                    await this.uploadFile(file)
+                }
             }
         },
-        async uploadFile(file) {
-
+        async removeFileFromYii(file) {
             let form = new FormData()
             form.append('pdfFile', file.file)
-            
-            // console.log(file)
-        
+            this.loadingFileName = file.file.name
+            await Axios.post('/api/fileRemove', form, {
+                headers:
+                    {
+                        'X-CSRF-Token':this.csrf,
+                        'Content-Type':'multipart/form-data;'
+                    },
+                onUploadProgress: (itemUpload) => {
+                    this.loadProgress = Math.round( (itemUpload.loaded / itemUpload.total) * 100 )
+                }
+            }).then((res) => {
+                console.log(res.data)
+            }).catch(error => console.log(error))
+        },
+        async uploadFile(file) {
+            let form = new FormData()
+            form.append('pdfFile', file.file)
+            this.loadingFileName = file.file.name
             await Axios.post('/api/fileUpload', form, {
                 headers:
                     {
@@ -159,8 +179,20 @@ export default {
                 }
             }).then((res) => {
                 console.log(res.data)
-            })
+            }).catch(error => console.log(error))
         },
+        // loadMessage: function(file) {
+        //     message = `Файл ${this.loadingFileName} загружен на ${this.loadProgress}%`
+        //     this.$bvModal.msgBoxOk(message, {
+        //         title: 'Загрузка!',
+        //         size: 'sm',
+        //         buttonSize: 'sm',
+        //         okVariant: 'outline-success',
+        //         headerClass: 'p-2 border-bottom-0',
+        //         footerClass: 'p-2 border-top-0',
+        //         centered: true
+        //     })
+        // },
         errorMessage: function(message) {
             this.$bvModal.msgBoxOk(message, {
                 title: 'Ошибка!',
