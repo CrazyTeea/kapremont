@@ -80,10 +80,20 @@ export default {
             ],
         }
     },
+    mounted() {
+        window.MODEL.waited.forEach((item,index)=>{
+            if (index < 5)
+                this.dataFirst[item.element].plan = item.plan;
+            else this.dataFirst[item.element] = {
+                aim: item.aim,
+                plan: item.plan,
+                changes: item.changes
+            }
+        })
+    },
     methods: {
         addNewRow: function() {
-            this.dataFirst.push(
-                {
+            this.dataFirst.push({
                     aim: null,
                     plan: null,
                     changes: null
