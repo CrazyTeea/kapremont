@@ -199,6 +199,7 @@ class ProgramObjectsController extends AppController
                 if ($save) {
                     $progObjectsEvents = ProgObjectsEvents::createMultiple(ProgObjectsEvents::className(), $progObjectsEvents);
                     ProgObjectsEvents::loadMultiple($progObjectsEvents, Yii::$app->request->post());
+
                     foreach ($progObjectsEvents as $index => $item) {
                         $pr = ProgObjectsEvents::findOne(['id_object' => $model->id, 'step' => $index]);
                         if (!$pr) {
@@ -206,6 +207,7 @@ class ProgramObjectsController extends AppController
                             $pr->id_object = $id;
                             $pr->step = $index;
                         }
+
                         $pr->date_event_end = $item->date_event_end;
                         $pr->date_event_start = $item->date_event_start;
                         $pr->is_nessesary = $item->is_nessesary;
@@ -234,6 +236,7 @@ class ProgramObjectsController extends AppController
                         $pr->srok_eks = $item->srok_eks;
                         $pr->kap_remont = (int)$item->kap_remont;
                         $pr->obosnovanie = $item->obosnovanie;
+
                         $save &= $pr->save();
                         $errors['ProObjectsNecessary'][] = $pr->getErrors();
                     }

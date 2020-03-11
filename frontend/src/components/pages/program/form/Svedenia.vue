@@ -109,13 +109,13 @@ import Multiselect from 'vue-select';
         name: "Svedenia",
         mounted() {
             if (Array.isArray(window.MODEL.svedenia)){
-                window.MODEL.svedenia.forEach(item=>{
-                    this.sved.is_nessesary[item.step]=item.is_nessesary;
-                    this.sved.begin_date[item.step]=item.date_event_start;
-                    this.sved.final_date[item.step]=item.date_event_end;
-                    this.sved.realization_cost[item.step]=item.cost_real;
-                    this.sved.kap_cost[item.step]=item.sum_bud_fin;
-                    this.sved.finanse[item.step]=item.fin_vnebud_ist;
+                window.MODEL.svedenia.forEach((item,index)=>{
+                    this.sved.is_nessesary[index]=item.is_nessesary;
+                    this.sved.begin_date[index]=item.date_event_start;
+                    this.sved.final_date[index]=item.date_event_end;
+                    this.sved.realization_cost[index]=item.cost_real;
+                    this.sved.kap_cost[index]=item.sum_bud_fin;
+                    this.sved.finanse[index]=item.fin_vnebud_ist;
                 });
             }
         },
