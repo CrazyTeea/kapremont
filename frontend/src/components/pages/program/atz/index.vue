@@ -61,8 +61,8 @@
                 </b-tfoot>
         </b-table-simple>
         <div class="align-element-right">
-            <b-button size="sm" variant="info" @click="sendInfo()">Добавить</b-button>
-            <b-button size="sm" variant="danger" @click="clearInputs()">Сбросить</b-button>
+            <b-button size="sm" variant="info" @click="sendInfo()">Сохранить</b-button>
+            <b-button size="sm" variant="danger" @click="clearInputs()">Сброс</b-button>
         </div>
     </div>
 </template>
