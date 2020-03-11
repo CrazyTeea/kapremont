@@ -1,70 +1,75 @@
 <template>
     <div class="overflow">
-        <b-table-simple
-            bordered
-            hover
+        <b-form id="atz_form" method="post">
+            <input id="hidden" name="_csrf" v-model="csrf" type='hidden' />
+            <b-table-simple
+                    bordered
+                    hover
             >
                 <b-thead>
-                <b-tr>
-                    <b-th class="vertical-align-for-table-cell">Направление расходов</b-th>
-                    <b-th class="vertical-align-for-table-cell">Сумма бюджетного финансирования (руб)</b-th>
-                    <b-th class="vertical-align-for-table-cell">Сумма внебюджетного финансирования (руб)</b-th>
-                    <b-th class="vertical-align-for-table-cell">Сумма общий объем финансирования (руб)</b-th>
-                </b-tr>
+                    <b-tr>
+                        <b-th class="vertical-align-for-table-cell">Направление расходов</b-th>
+                        <b-th class="vertical-align-for-table-cell">Сумма бюджетного финансирования (руб)</b-th>
+                        <b-th class="vertical-align-for-table-cell">Сумма внебюджетного финансирования (руб)</b-th>
+                        <b-th class="vertical-align-for-table-cell">Сумма общий объем финансирования (руб)</b-th>
+                    </b-tr>
                 </b-thead>
                 <b-tbody>
-                <b-tr v-for="(item, index) in items" :key="index">
-                    <b-th class="vertical-align-for-table-cell normal-font-weight-for-cell">
-                        <label>{{ item.label }}</label>
-                    </b-th>
-                    <b-th class="vertical-align-for-table-cell normal-font-weight-for-cell">
-                        <b-form-input
-                            v-model="item.cost_b" 
-                            placeholder="Цена"
-                            min="0"
-                            type="number"
-                        ></b-form-input>
-                    </b-th>
-                    <b-th class="vertical-align-for-table-cell normal-font-weight-for-cell">
-                        <b-form-input
-                            v-model="item.cost_v" 
-                            placeholder="Цена"
-                            min="0"
-                            type="number"
-                        ></b-form-input>
-                    </b-th>
-                    <b-th class="vertical-align-for-table-cell normal-font-weight-for-cell">
-                        <label>{{ cost_o(index) }}</label>
-                        <!-- <b-form-input
-                            v-model="item.cost_o" 
-                            placeholder="Цена"
-                            min="0"
-                            type="number"
-                        ></b-form-input> -->
-                    </b-th>
-                </b-tr>
+                    <b-tr v-for="(item, index) in items" :key="index">
+                        <b-th class="vertical-align-for-table-cell normal-font-weight-for-cell">
+                            <label>{{ item.label }}</label>
+                        </b-th>
+                        <b-th class="vertical-align-for-table-cell normal-font-weight-for-cell">
+                            <b-form-input
+                                    :name="`${modelName}[${index}][cost_b]`"
+                                    v-model="item.cost_b"
+                                    placeholder="Цена"
+                                    min="0"
+                                    type="number"
+                            ></b-form-input>
+                        </b-th>
+                        <b-th class="vertical-align-for-table-cell normal-font-weight-for-cell">
+                            <b-form-input
+                                    :name="`${modelName}[${index}][cost_v]`"
+                                    v-model="item.cost_v"
+                                    placeholder="Цена"
+                                    min="0"
+                                    type="number"
+                            ></b-form-input>
+                        </b-th>
+                        <b-th class="vertical-align-for-table-cell normal-font-weight-for-cell">
+                            <label>{{ cost_o(index) }}</label>
+                            <!-- <b-form-input
+                                v-model="item.cost_o"
+                                placeholder="Цена"
+                                min="0"
+                                type="number"
+                            ></b-form-input> -->
+                        </b-th>
+                    </b-tr>
                 </b-tbody>
                 <b-tfoot>
                     <b-tr>
-                     <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
-                        <label>ИТОГО:</label>
-                    </b-th>
-                    <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
-                        <label>{{ cost_b_full }}</label>
-                    </b-th>
-                    <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
-                        <label>{{ cost_v_full }}</label>
-                    </b-th>
-                    <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
-                        <label>{{ cost_o_full }}</label>
-                    </b-th>
+                        <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+                            <label>ИТОГО:</label>
+                        </b-th>
+                        <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+                            <label>{{ cost_b_full }}</label>
+                        </b-th>
+                        <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+                            <label>{{ cost_v_full }}</label>
+                        </b-th>
+                        <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+                            <label>{{ cost_o_full }}</label>
+                        </b-th>
                     </b-tr>
                 </b-tfoot>
-        </b-table-simple>
-        <div class="align-element-right">
-            <b-button size="sm" variant="info" @click="sendInfo()">Сохранить</b-button>
-            <b-button size="sm" variant="danger" @click="clearInputs()">Сброс</b-button>
-        </div>
+            </b-table-simple>
+            <div class="align-element-right">
+                <b-button size="sm" variant="info" @click="sendInfo()">Сохранить</b-button>
+                <b-button size="sm" variant="danger" @click="clearInputs()">Сброс</b-button>
+            </div>
+        </b-form>
     </div>
 </template>
 
@@ -74,11 +79,25 @@ import Axios from 'axios'
 export default {
 
     mounted() {
-        Axios.post()
+        Axios.get('/rest/system/get-page',{
+            params:{
+                pageName:'atz',
+                //id_org:document.getElementById('global_id_org').value
+            }
+        }).then(response=>{
+            console.log(response.data);
+            response.data.forEach(item=>{
+                this.items[item.elem].cost_b= item.cost_b;
+                this.items[item.elem].cost_v= item.cost_v;
+
+            })
+        }).catch(err=>{console.error(err);});
     },
 
     data() {
         return {
+            csrf: document.getElementsByName('csrf-token')[0].content,
+            modelName:'Atz',
             items: [
                 {cost_b: null, cost_v: null, cost_o: null, label: 'Система видеонаблюдения'},
                 {cost_b: null, cost_v: null, cost_o: null, label: 'Система оповещения и управления эвакуацией'},
@@ -135,10 +154,18 @@ export default {
             }
         },
         sendInfo() {
-            console.log(this.items)
-            // Axios.post('/куда-то там').then((res) => {
-                
-            // })
+            console.log(this.items);
+            let formData = new FormData(document.getElementById('atz_form'));
+             Axios.post(this.$route.path,formData,{
+                 headers:
+                     {
+                         'X-CSRF-Token':this.csrf,
+                         'Content-Type': 'application/x-www-form-urlencoded'
+                     },
+             }).then((res) => {
+                 if (!!res.data)
+                     location.reload();
+             })
         }
 
     },
