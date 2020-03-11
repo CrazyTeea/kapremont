@@ -319,8 +319,7 @@ class ProgramObjectsController extends AppController
         $model = $this->findModel($id);
         $model->system_status = 0;
         $model->save(false);
-
-        return $this->redirect(['index']);
+        return $this->redirect(['program/view']);
     }
 
     /**
