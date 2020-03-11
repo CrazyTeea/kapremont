@@ -259,7 +259,6 @@ class ProgramObjectsController extends AppController
                     }
                     $oldIds = ArrayHelper::map($progObjectsRiscs,'id','id');
                     $progObjectsRiscs = ProgObjectsRiscs::createMultiple(ProgObjectsRiscs::className(), $progObjectsRiscs);
-                    $progObjectsRiscs = ProgObjectsRiscs::createMultiple(ProgObjectsRiscs::className(), $progObjectsRiscs);
                     ProgObjectsRiscs::loadMultiple($progObjectsRiscs, Yii::$app->request->post());
                     $deletedIDs = array_diff($oldIds, array_filter(ArrayHelper::map($progObjectsWaites, 'id', 'id')));
                     if (! empty($deletedIDs))
@@ -345,6 +344,7 @@ class ProgramObjectsController extends AppController
 
     public function actionFileUpload()
     {
-        return 'lol';
+        $files = Files::find()->where(['files.id'=>1])->select(['name'])->joinWith(['docList'])->one();
+        var_dump($files);
     }
 }

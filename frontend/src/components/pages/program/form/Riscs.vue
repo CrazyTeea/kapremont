@@ -64,6 +64,21 @@ export default {
     props:{
       modelName:String
     },
+    mounted() {
+        window.MODEL.riscs.forEach((item,index)=> {
+            if (!index)
+                this.items[0] = {
+                    types: item.types,
+                    poison: item.poison,
+                    protect: item.protect
+                };
+            else this.items.push({
+                types: item.types,
+                poison: item.poison,
+                protect: item.protect
+            });
+        });
+    },
     data(){
         return {
             items: [
@@ -75,6 +90,7 @@ export default {
             ]
         }
     },
+
     methods: {
         addNewRow: function() {
             this.items.push({
