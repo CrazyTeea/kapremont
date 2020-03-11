@@ -14,7 +14,13 @@
                 <b-tbody>
                 <b-tr v-for="(item, index) in items" :key="index">
                     <b-th class="cell-center-for-table normal-font-weight-for-table">
-                        <label>{{ item.label }}</label>
+                        <label v-if="!item.other">{{ item.label }}</label>
+                        <b-form-input
+                            v-else
+                            v-model="item.label" 
+                            placeholder="Название документа..."
+                            type="text"
+                        ></b-form-input>
                     </b-th>
                     <b-th class="no-cell-border vertical-align-centre-extra-table normal-font-weight-for-table">
 
@@ -49,6 +55,23 @@
                 </b-tr>
                 </b-tbody>
                 <b-tfoot>
+                <b-tr>
+                    <b-td
+                        @click="deleteLastRow()"
+                        v-if="items.length > 10"
+                        colspan="1"
+                        variant="secondary"
+                        class="text-right text-danger">
+                        Удалить документ
+                    </b-td>
+                    <b-td
+                        colspan="3"
+                        @click="addNewRow()"
+                        variant="secondary"
+                        class="text-right text-info">
+                        Добавить документ
+                    </b-td>
+                </b-tr>
                 </b-tfoot>
         </b-table-simple>
 
@@ -76,7 +99,6 @@ export default {
                 {descriptor:'obj_photos', fileName: null, label: 'Фотографии объекта, предполагаемого к проведению капитального ремонта (подписанные по 2 шт. на листе А4, но не более 10 шт. на объект недвижимости)'},
                 {descriptor:'predpis', fileName: null, label: 'Предписания надзорных органов (при наличии)'},
                 {descriptor:'proekti', fileName: null, label: 'Задание на проектирование (корректировку проектной документации), составленное в соответствии с рекомендациями Минстроя РФ (в случае разработки/корректировки проектной документации и/или направления данной документации на экспертизу)'},
-                {descriptor:'other', fileName: null, label: 'Иные документы'},
             ],
             loadProgress: null,
             loadingFileName: null,
@@ -85,8 +107,22 @@ export default {
         }
     },
     methods: {
+        addNewRow() {
+            this.items.push({
+                descriptor:  null,
+                fileName: null,
+                label: null,
+                other: true
+            })
+        },
+        deleteLastRow() {
+            this.items.pop()
+            let index = this.items.length - 1
+            if(this.selectedFiles.length)
+                this.fileRemove(index) 
+        },
         fileInput(index) {
-            // let file = Array.from(event.target.files)[0];
+            // let file = Array.from(event.target.files)[0]; Это тоже рабочая версия
             let file = document.querySelector('#file_input_' + index).files[0];
             console.log(file);
             if(!this.checkFileExt(file.type) || !this.checkFileSize(file.size)) {
@@ -114,7 +150,8 @@ export default {
             return true
         },
         checkFileSize(size) {
-            if(parseInt(size) > 5242880) {
+            let _size = 20971520 //20 Мб
+            if(parseInt(size) > _size) {
                 this.errorMessage('Файл больше 20МБ!');
                 return false
             }
