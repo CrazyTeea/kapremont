@@ -2,20 +2,28 @@
 
 namespace app\controllers\rest;
 
-use yii\rest\ActiveController;
+use yii\web\Controller;
 use app\models\UploadForm;
+use Codeception\Command\Console;
+use Yii;
+use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
 
-class UploadController extends ActiveController
+class UploadController extends Controller
 {
-    public $modelClass = UploadForm::class;
+    private $path = 'uploads/';
 
     public function actionUpload()
     {
         $upload = new UploadForm();
-        $upload->pdfFile = UploadedFile::getInstance($upload, 'pdfFile');
-        if($upload->upload()) {
-            return;
-        }
+        $upload->pdfFile = UploadedFile::getInstanceByName('pdfFile');
+        $upload->pdfFile->saveAs($this->path . $upload->pdfFile->baseName . '.pdf');
+    }
+
+    public function actionDelete()
+    {
+        $upload = new UploadForm();
+        $path = $this->path .  $upload->pdfFile->baseName . '.pdf';
+        FileHelper::removeDirectory($path);
     }
 }

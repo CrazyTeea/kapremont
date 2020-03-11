@@ -15,14 +15,4 @@ class UploadForm extends Model
             [['pdfFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'pdf'],
         ];
     }
-
-    public function upload()
-    {
-        if($this->validate()) {
-            $this->pdfFile->saveAs('uploads/', $this->pdfFile->baseName . '.' . $this->pdfFile->extension);
-            return true;
-        } else {
-            return false;
-        }
-    }
 }

@@ -1,5 +1,5 @@
 <template>
-    <div class="hidden" >
+    <div class="hidden-val-for-table">
         <b-table
             bordered
             foot-clone
@@ -107,6 +107,18 @@ import Multiselect from 'vue-select';
 
     export default {
         name: "Svedenia",
+        mounted() {
+            if (Array.isArray(window.MODEL.svedenia)){
+                window.MODEL.svedenia.forEach(item=>{
+                    this.sved.is_nessesary[item.step]=item.is_nessesary;
+                    this.sved.begin_date[item.step]=item.date_event_start;
+                    this.sved.final_date[item.step]=item.date_event_end;
+                    this.sved.realization_cost[item.step]=item.cost_real;
+                    this.sved.kap_cost[item.step]=item.sum_bud_fin;
+                    this.sved.finanse[item.step]=item.fin_vnebud_ist;
+                });
+            }
+        },
         components: {
             "v-select": Multiselect,    
         },
@@ -152,7 +164,6 @@ import Multiselect from 'vue-select';
         },
         data() {
             return {
-
                 fields: [
                     {key: 'stage', label: 'Этап'},
                     {key: 'is_nessesary', label: 'Необходимость выполнения'},
@@ -211,7 +222,6 @@ import Multiselect from 'vue-select';
                         'kap_cost': true,
                         'finanse':  true
                     },
- 
                 ],
                 sved: {
                     is_nessesary: [],
@@ -242,11 +252,10 @@ import Multiselect from 'vue-select';
     }
 </style>
 
-<style scoped>
-
-.hidden {
-    overflow: hidden;
-    overflow-x: scroll;
+<style>
+.hidden-val-for-table {
+    overflow: hidden !important;
+    overflow-x: scroll !important;
 }
 .vertical-align-extra-table {
     vertical-align: middle !important;

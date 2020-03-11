@@ -56,7 +56,7 @@ class ProgramObjectsController extends AppController
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        return $this->render('view', [
+        return $this->render('view', [  
             'model' => $this->findModel($id),
         ]);
     }
@@ -69,7 +69,6 @@ class ProgramObjectsController extends AppController
      */
     public function actionCreate()
     {
-
         $model = new ProgramObjects();
         $progObjectsEvents = [new ProgObjectsEvents()];
         $proObjectsNecessary = [new ProObjectsNecessary()];
@@ -77,17 +76,13 @@ class ProgramObjectsController extends AppController
         $progObjectsRiscs =  [new ProgObjectsRiscs()];
         $objectDocsTypes = ObjectDocumentsTypes::find()->all();
         $save = true;
-
         $model->id_org = Yii::$app->session->get('user')->id_org;
         $program = Yii::$app->session->get('program');
         if (!$program)
             return $this->redirect(['/']);
-
         $model->id_program = $program->id;
-        $save = true;
         if ($post = Yii::$app->request->post()) {
             if ($model->load($post)) {
-
                 $transaction = Yii::$app->getDb()->beginTransaction();
                 $save &= $model->save();
                 $errors['ProgramObjects'] = $model->getErrors();
@@ -110,7 +105,6 @@ class ProgramObjectsController extends AppController
                         $save &= $pr->save();
                         $errors['ProgObjectsEvents'][] = $pr->getErrors();
                     }
-
                     $proObjectsNecessary = ProObjectsNecessary::createMultiple(ProObjectsNecessary::className(), $proObjectsNecessary);
                     ProObjectsNecessary::loadMultiple($proObjectsNecessary, Yii::$app->request->post());
                     foreach ($proObjectsNecessary as $index => $item) {
@@ -135,10 +129,9 @@ class ProgramObjectsController extends AppController
                     $deletedIDs = array_diff($oldIds, array_filter(ArrayHelper::map($progObjectsWaites, 'id', 'id')));
                     if (! empty($deletedIDs))
                         ProgObjectsWaites::deleteAll(['id' => $deletedIDs]);
-                    $deletedIDs = null;
                     foreach ($progObjectsWaites as $index => $item) {
                         $pr = ProgObjectsWaites::findOne(['id_object' => $model->id, 'element' => $index]);
-                        if (!$pr){
+                        if (!$pr) {
                             $pr = new ProgObjectsWaites();
                             $pr->id_object = $model->id;
                             $pr->element = $index;
@@ -168,20 +161,7 @@ class ProgramObjectsController extends AppController
                         $save &= $pr->save();
                         $errors['ProgObjectsWaites'][] = [$pr->getErrors()];
                     }
-                    $files = new Files();
-                    foreach ($objectDocsTypes as $index=>$docsType){
-                        $file = UploadedFile::getInstance($files,"[$docsType->descriptor]file");
-                        if (!$file)
-                            continue;
-                        $objDoc = new ObjectDocumentsList();
-                        $save &= false;
-                        $objDoc->add($file,$model->id,$docsType->id);
-                        $errors['ObjectDocumentsList'][$docsType->descriptor][]=$objDoc->getErrors();
-                    }
-
-
                 }
-
                 if ($save) {
                     $transaction->commit();
                     return Json::encode($model);
@@ -205,16 +185,14 @@ class ProgramObjectsController extends AppController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $progObjectsEvents = [new ProgObjectsEvents()];
-        $proObjectsNecessary = [new ProObjectsNecessary()];
-        $progObjectsWaites =  [new ProgObjectsWaites()];
-        $progObjectsRiscs =  [new ProgObjectsRiscs()];
-        $objectDocsTypes = ObjectDocumentsTypes::find()->all();
+        $progObjectsEvents = ProgObjectsEvents::findAll(['id_object'=>$id])? : [new ProgObjectsEvents()];
+        $proObjectsNecessary = ProObjectsNecessary::findAll(['id_object'=>$id])? : [new ProObjectsNecessary()];
+        $progObjectsWaites = ProgObjectsWaites::findAll(['id_object'=>$id])? : [new ProgObjectsWaites()];
+        $progObjectsRiscs = ProgObjectsRiscs::findAll(['id_object'=>$id])? : [new ProgObjectsRiscs()];
         $save = true;
         //
         if ($post = Yii::$app->request->post()) {
             if ($model->load($post)) {
-
                 $transaction = Yii::$app->getDb()->beginTransaction();
                 $save &= $model->save();
                 $errors['ProgramObjects'] = $model->getErrors();
@@ -237,7 +215,6 @@ class ProgramObjectsController extends AppController
                         $save &= $pr->save();
                         $errors['ProgObjectsEvents'][] = $pr->getErrors();
                     }
-
                     $proObjectsNecessary = ProObjectsNecessary::createMultiple(ProObjectsNecessary::className(), $proObjectsNecessary);
                     ProObjectsNecessary::loadMultiple($proObjectsNecessary, Yii::$app->request->post());
                     foreach ($proObjectsNecessary as $index => $item) {
@@ -255,13 +232,16 @@ class ProgramObjectsController extends AppController
                         $save &= $pr->save();
                         $errors['ProObjectsNecessary'][] = $pr->getErrors();
                     }
-
+                    $deletedIDs = null;
+                    $oldIds = ArrayHelper::map($progObjectsWaites,'id','id');
                     $progObjectsWaites = ProgObjectsWaites::createMultiple(ProgObjectsWaites::className(), $progObjectsWaites);
                     ProgObjectsWaites::loadMultiple($progObjectsWaites, Yii::$app->request->post());
-
+                    $deletedIDs = array_diff($oldIds, array_filter(ArrayHelper::map($progObjectsWaites, 'id', 'id')));
+                    if (! empty($deletedIDs))
+                        ProgObjectsWaites::deleteAll(['id' => $deletedIDs]);
                     foreach ($progObjectsWaites as $index => $item) {
                         $pr = ProgObjectsWaites::findOne(['id_object' => $model->id, 'element' => $index]);
-                        if (!$pr){
+                        if (!$pr) {
                             $pr = new ProgObjectsWaites();
                             $pr->id_object = $id;
                             $pr->element = $index;
@@ -272,10 +252,12 @@ class ProgramObjectsController extends AppController
                         $save &= $pr->save();
                         $errors['ProgObjectsWaites'][] = [$pr->getErrors()];
                     }
-
+                    $oldIds = ArrayHelper::map($progObjectsRiscs,'id','id');
                     $progObjectsRiscs = ProgObjectsRiscs::createMultiple(ProgObjectsRiscs::className(), $progObjectsRiscs);
                     ProgObjectsRiscs::loadMultiple($progObjectsRiscs, Yii::$app->request->post());
-
+                    $deletedIDs = array_diff($oldIds, array_filter(ArrayHelper::map($progObjectsWaites, 'id', 'id')));
+                    if (! empty($deletedIDs))
+                        ProgObjectsRiscs::deleteAll(['id' => $deletedIDs]);
                     foreach ($progObjectsRiscs as $index => $item) {
                         $pr = ProgObjectsRiscs::findOne(['id_object' => $model->id, 'element' => $index]);
                         if (!$pr){
@@ -289,18 +271,7 @@ class ProgramObjectsController extends AppController
                         $save &= $pr->save();
                         $errors['ProgObjectsWaites'][] = [$pr->getErrors()];
                     }
-                    $files = new Files();
-                    foreach ($objectDocsTypes as $index=>$docsType){
-                        $file = UploadedFile::getInstance($files,"[$docsType->descriptor]file");
-                        if (!$file)
-                            continue;
-                        $objDoc = new ObjectDocumentsList();
-                        $save &= true;
-                         $objDoc->add($file,$id,$docsType->id);
-                        $errors['ObjectDocumentsList'][$docsType->descriptor][]=$objDoc->getErrors();
-                    }
                 }
-
                 if ($save) {
                     $transaction->commit();
                     return Json::encode($model);
@@ -310,8 +281,27 @@ class ProgramObjectsController extends AppController
                 }
             }
         }
+        return $this->render('update',compact('model','progObjectsEvents','progObjectsWaites','progObjectsRiscs','proObjectsNecessary'));
+    }
+    public function actionAddDocs($id){
+        $model = $this->findModel($id);
+        if (!$model)
+            return 0;
+        $docs = ObjectDocumentsTypes::find()->all();
+        $done = false;
+        foreach ($docs as $doc){
 
-        return $this->render('update',compact('model'));
+            $file = UploadedFile::getInstanceByName("$doc->descriptor");
+            if (!$file)
+                continue;
+            $objDoc = new ObjectDocumentsList();
+            if (!$objDoc->add($file,$id,$doc->id)) {
+                $done = false;
+                break;
+            }else $done = true;
+        }
+        if ($done) return 1;
+        return 0;
     }
 
     /**
@@ -346,5 +336,10 @@ class ProgramObjectsController extends AppController
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    public function actionFileUpload()
+    {
+        return 'lol';
     }
 }

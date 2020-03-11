@@ -17,7 +17,9 @@
                         <label>{{ item.label }}</label>
                     </b-th>
                     <b-th class="no-cell-border vertical-align-centre-extra-table normal-font-weight-for-table">
-                        <input type="file" :name="`${modelName}[${item.descriptor}]file`" :id="'file_input_' + index" class="hidden-file-input" @input="fileInput(index)">
+
+                        <input type="file" :name="`${modelName}[${item.descriptor}]file`" :ref="'file' + index" :id="'file_input_' + index" class="hidden-file-input" @input="fileInput(index)">
+
                         <div class="cell-center-for-items" v-if="!item.fileName">
                             <div class="arrow">
                                 <label :for="`file_input_${index}`" class="label">
@@ -49,14 +51,20 @@
                 <b-tfoot>
                 </b-tfoot>
         </b-table-simple>
+
+
+            <label v-if="loadProgress">Файл {{ loadingFileName }} загружен на {{ loadProgress }}%</label>
+
     </div>
 </template>
 
 <script>
+import Axios from 'axios';
 
 export default {
     data() {
         return {
+            csrf: document.getElementsByName('csrf-token')[0].content,
             items: [
                 {descriptor:'inv_card', fileName: null, label: 'Инвентарные карточки учета основных средств на объект недвижимого имущества и на земельный участок под указанным объектом'},
                 {descriptor:'reestr_vip', fileName: null, label: 'Выписка из реестра федерального имущества на объект федерального имущества и на земельный участок под указанным объектом'},
@@ -70,18 +78,24 @@ export default {
                 {descriptor:'proekti', fileName: null, label: 'Задание на проектирование (корректировку проектной документации), составленное в соответствии с рекомендациями Минстроя РФ (в случае разработки/корректировки проектной документации и/или направления данной документации на экспертизу)'},
                 {descriptor:'other', fileName: null, label: 'Иные документы'},
             ],
+            loadProgress: null,
+            loadingFileName: null,
             selectedFiles: [],
+            uploadSuccess: true
         }
     },
     methods: {
         fileInput(index) {
-            let file = Array.from(event.target.files)[0];
+            // let file = Array.from(event.target.files)[0];
+            let file = document.querySelector('#file_input_' + index).files[0];
+            console.log(file);
             if(!this.checkFileExt(file.type) || !this.checkFileSize(file.size)) {
                 file.value = null;
                 return
             }
             this.selectedFiles.push({
                 id: index,
+                descriptor: this.items[index].descriptor,
                 name: this.items[index].label,
                 file: file
             });
@@ -123,16 +137,63 @@ export default {
             }
         },
         getSavedDocuments() {
-            //
+            return this.selectedFiles;
         },
-        // async uploadFile(file) {
-        //     let form = new FormData()
-        //     form.append('pdf', file, file.name)
-
-        //     await Axios.post('', form, {
-        //         onUploadProgress: (itemUpload) => {
-        //             this.loadProgress = Math.round( (itemUpload.loaded / itemUpload.total) * 100 )
-        //         }
+        async sendFile({id}) {
+            if(!this.selectedFiles.length) {
+                this.errorMessage('Сначала выберите файлы!')
+            } else {
+                for(let file of this.selectedFiles) {
+                    await this.uploadFile(file,id)
+                }
+            }
+            if (this.uploadSuccess)
+                window.location.href = `/program/object/view/${id}`;
+        },
+        async removeFileFromYii(file) {
+            let form = new FormData();
+            form.append('pdfFile', file.file);
+            this.loadingFileName = file.file.name;
+            await Axios.post('/api/fileRemove', form, {
+                headers:
+                    {
+                        'X-CSRF-Token':this.csrf,
+                        'Content-Type':'multipart/form-data;'
+                    },
+                onUploadProgress: (itemUpload) => {
+                    this.loadProgress = Math.round( (itemUpload.loaded / itemUpload.total) * 100 )
+                }
+            }).then((res) => {
+                console.log(res.data)
+            }).catch(error => console.log(error))
+        },
+        async uploadFile(file,id) {
+            let form = new FormData();
+            form.append(`${file.descriptor}`, file.file);
+            this.loadingFileName = file.file.name;
+            await Axios.post(`/program/object/add-docs/${id}`, form, {
+                headers:
+                    {
+                        'X-CSRF-Token':this.csrf,
+                        'Content-Type':'multipart/form-data;'
+                    },
+                onUploadProgress: (itemUpload) => {
+                    this.loadProgress = Math.round( (itemUpload.loaded / itemUpload.total) * 100 )
+                }
+            }).then((res) => {
+                 this.uploadSuccess &= !!res.data;
+            }).catch(error => console.log(error))
+        },
+        // loadMessage: function(file) {
+        //     message = `Файл ${this.loadingFileName} загружен на ${this.loadProgress}%`
+        //     this.$bvModal.msgBoxOk(message, {
+        //         title: 'Загрузка!',
+        //         size: 'sm',
+        //         buttonSize: 'sm',
+        //         okVariant: 'outline-success',
+        //         headerClass: 'p-2 border-bottom-0',
+        //         footerClass: 'p-2 border-top-0',
+        //         centered: true
         //     })
         // },
         errorMessage: function(message) {

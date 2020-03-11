@@ -32,7 +32,7 @@
         <div class="row">
             <div class="col-6">
                 <b-button variant="info" href="object/create">Добавить объект кап. ремонта</b-button>
-                <b-button disabled>Добавить мероприятия по АТЗ</b-button>
+                <b-button variant="info" href="atz">Добавить мероприятия по АТЗ</b-button>
             </div>
             <div class="col-6"></div> 
         </div>
@@ -140,7 +140,7 @@
         <div class="row">
             <div class="col-6"></div>
             <div class="col-6 offset-7">
-                <b-button onclick="window.location.href = '/123.docx';" class="btn btn-sm">Выгрузить программу</b-button>
+                <a href="/program/export" class="btn btn-secondary btn-sm">Выгрузить программу</a>
                 <b-button disabled class="btn btn-sm">Загрузить PDF</b-button>
                 <b-button disabled class="btn btn-sm">Отправить на согласование</b-button>
             </div>
@@ -171,7 +171,7 @@
         },
         methods:{
             ...mapActions(['requestPageData']),
-            onRowClick(item,index,event){
+            onRowClick(item){
                 window.location.href = `/program/object/view/${item.id}`;
             }
         },
@@ -201,7 +201,7 @@
         },
         mounted() {
             this.requestPageData({pageName:"programView"});
-            this.$bvModal.show('modal-1')
+            //this.$bvModal.show('modal-1')
         }
     }
 </script>

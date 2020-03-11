@@ -69,7 +69,7 @@ GlyphiconAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
-        <?= ((Yii::$app->requestedRoute) == 'site/login' || (Yii::$app->requestedRoute) == 'site/change-password' || (Yii::$app->requestedRoute) == 'app/program-objects/view') ? $content : '' ?>
+        <?=  $content ?>
         <div id="app"></div>
     </div>
 </div>

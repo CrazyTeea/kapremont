@@ -52,7 +52,7 @@
                         <b-form-input
                                 :name="`${modelName}[${index}][obosnovanie]`"
                                 type="text"
-                                v-if="item.nalichie"
+                                v-if="item.nalichie && item.kap_remont"
                                 v-model="item.obosnovanie"
                                 placeholder="Обоснование"
                         ></b-form-input>
@@ -150,6 +150,14 @@
                     {label: 'Система отопления', nalichie: null, srok_eks: null, kap_remont: null, obosnovanie: null},
                     {label: 'Система диспетчеризации', nalichie: null, srok_eks: null, kap_remont: null, obosnovanie: null},
                     {label: 'Радиофикация', nalichie: null, srok_eks: null, kap_remont: null, obosnovanie: null},
+                    {label: 'Телевидение эфирное', nalichie: null, srok_eks: null, kap_remont: null, obosnovanie: null},
+                    {label: 'Система видеонаблюдения', nalichie: null, srok_eks: null, kap_remont: null, obosnovanie: null},
+                    {label: 'Система интернет и телефонии', nalichie: null, srok_eks: null, kap_remont: null, obosnovanie: null},
+                    {label: 'Система контроля управления доступом', nalichie: null, srok_eks: null, kap_remont: null, obosnovanie: null},
+                    {label: 'Пожарная сигнализация', nalichie: null, srok_eks: null, kap_remont: null, obosnovanie: null},
+                    {label: 'Охранная сигнализация', nalichie: null, srok_eks: null, kap_remont: null, obosnovanie: null},
+                    {label: 'Мусоропроводы', nalichie: null, srok_eks: null, kap_remont: null, obosnovanie: null},
+                    {label: 'Лифты', nalichie: null, srok_eks: null, kap_remont: null, obosnovanie: null},
                 ],
             }
         },

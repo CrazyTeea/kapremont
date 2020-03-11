@@ -1,7 +1,7 @@
 <!--suppress ALL -->
 <template>
     <div class="program_object_form">
-        <b-form id="object_form" @submit="onSubmit" @reset="onReset" method="post" enctype="multipart/form-data">
+        <b-form enctype="multipart/form-data" id="object_form" @submit="onSubmit" @reset="onReset" method="post">
             <div class="row">
 
                 <div class="col-12">
@@ -35,7 +35,7 @@
                             <b-card-body>
                                 <b-form-group>
                                     <b-form-group
-                                            label="Тип объекта:"
+                                            label="Тип объекта"
                                             label-for="type"
                                             :invalid-feedback="(feedback('ProgramObjects','type','Тип объекта должен быть заполнен'))"
                                             :valid-feedback="(feedback('ProgramObjects','type',' '))"
@@ -45,11 +45,31 @@
                                         <v-select2 v-model="formData.type"
                                                    :options="[
                                                    {id:0,type:'Приоритетный'},
-                                                   {id:1,type:'Резервный'}
+                                                   {id:1,type:'Резервный'},
                                                ]"
                                                    :reduce="type => type.id"
                                                    label="type"
                                                    id="type"
+                                        />
+                                    </b-form-group>
+                                    <b-form-group
+                                            label="Приоритет"
+                                            label-for="id_priority"
+                                            :invalid-feedback="(feedback('ProgramObjects','id_priority','Приоритет объекта должен быть заполнен'))"
+                                            :valid-feedback="(feedback('ProgramObjects','id_priority',' '))"
+                                            :state="feedback('ProgramObjects','id_priority')"
+                                    >
+                                        <b-form-input style="display: none" id="type" v-model="formData.id_priority" name="ProgramObjects[id_priority]" />
+                                        <v-select2 v-model="formData.id_priority"
+                                                   :options="[
+                                                   {id:0,id_priority:'1'},
+                                                   {id:1,id_priority:'2'},
+                                                   {id:2,id_priority:'3'},
+                                                   {id:3,id_priority:'резерв'}
+                                               ]"
+                                                   :reduce="id_priority => id_priority.id"
+                                                   label="id_priority"
+                                                   id="id_priority"
                                         />
                                     </b-form-group>
                                     <b-form-group
@@ -126,16 +146,48 @@
                                             :valid-feedback="(feedback('ProgramObjects','exist_pred_nadz_orgs',' '))"
                                             :state="feedback('ProgramObjects','exist_pred_nadz_orgs')"
                                     >
-                                        <b-form-input id="exist_pred_nadz_orgs" name="ProgramObjects[exist_pred_nadz_orgs]" v-model="formData.exist_pred_nadz_orgs"/>
+                                        <b-form-input style="display: none;" id="exist_pred_nadz_orgs" name="ProgramObjects[exist_pred_nadz_orgs]" v-model="formData.exist_pred_nadz_orgs"/>
+                                        <v-select2 v-model="formData.exist_pred_nadz_orgs"
+                                                   :options="[
+                                                   {id:0,type:'Нет'},
+                                                   {id:1,type:'Да'}
+                                               ]"
+                                                   :reduce="type => type.id"
+                                                   label="type"
+                                                   id="exist_pred_nadz_orgs"
+                                        />
+                                    </b-form-group>
+                                    <b-form-group
+                                            v-if="formData.exist_pred_nadz_orgs"
+                                            label="Подробности:"
+                                            label-for="podrobnosti"
+                                            :invalid-feedback="(feedback('ProgramObjects','podrobnosti','Введите подробности'))"
+                                            :valid-feedback="(feedback('ProgramObjects','podrobnosti',' '))"
+                                            :state="feedback('ProgramObjects','podrobnosti')"
+                                    >
+                                        <b-form-input id="podrobnosti" name="ProgramObjects[podrobnosti]" v-model="formData.podrobnosti"/>
                                     </b-form-group>
                                     <b-form-group
                                             label="Износ здания (%):"
                                             label-for="wear"
-                                            :invalid-feedback="(feedback('ProgramObjects','wear','Износ здания должен быть меньше 100 (%)'))"
+                                            :invalid-feedback="(feedback('ProgramObjects','wear','Износ здания должен быть меньше 0 и больше 100 (%)'))"
                                             :valid-feedback="(feedback('ProgramObjects','wear',' '))"
                                             :state="(feedback('ProgramObjects','wear') && wear_validator)"
                                     >
-                                        <b-form-input id="wear" name="ProgramObjects[wear]" :state="wear_validator" type="number" v-model="formData.wear"/>
+                                        <!-- <b-form-input style="display: none" id="type_wear" v-model="formData" name="ProgramObjects[type]" / -->
+                                        <b-form-input style="display: none;" id="wear" min="0" name="ProgramObjects[wear]" :state="wear_validator" type="number" v-model="formData.wear"/>
+                                        <v-select2 v-model="formData.wear"
+                                                   :options="[
+                                                   {id:0,type:'Менее 20%'},
+                                                   {id:1,type:'От 20% до 50%'},
+                                                   {id:2,type:'От 50% до 70%'},
+                                                   {id:3,type:'От 70% до 90%'},
+                                                   {id:4,type:'Более 90%'}
+                                               ]"
+                                                   :reduce="type => type.id"
+                                                   label="type"
+                                                   id="wear"
+                                        />
                                     </b-form-group>
                                     <b-form-group
                                             label="Основание для использования здания:"
@@ -171,7 +223,16 @@
                                             :valid-feedback="(feedback('ProgramObjects','prav_sob',' '))"
                                             :state="feedback('ProgramObjects','prav_sob')"
                                     >
-                                        <b-form-input id="prav_sob" name="ProgramObjects[prav_sob]" v-model="formData.prav_sob"/>
+                                        <b-form-input style="display: none;" id="prav_sob" name="ProgramObjects[prav_sob]" v-model="formData.prav_sob"/>
+                                        <v-select2 v-model="formData.prav_sob"
+                                                   :options="[
+                                                   {val:'fast', label:'Оперативное управление'},
+                                                   {val: 'others', label:'Другое'},
+                                               ]"
+                                                   :reduce="type => type.val"
+                                                   label="label"
+                                                   id="prav_sob"
+                                        />
                                     </b-form-group>
                                     <b-form-group
                                             label="Общая площадь здания - всего, кв.м.:"
@@ -275,7 +336,7 @@
                         </b-card-header>
                         <b-collapse id="accordion-5" accordion="my-accordion" role="tabpanel">
                             <b-card-body>
-                                <v-riscs model-name="ProgObjectsRiscs"/>
+                                <v-riscs model-name="ProgObjectsRiscs" ref="riscs"/>
                             </b-card-body>
                         </b-collapse>
                     </b-card>
@@ -287,7 +348,7 @@
                         </b-card-header>
                         <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel" visible>
                             <b-card-body>
-                                <v-uploads model-name="Files" />
+                                <v-uploads model-name="Files" ref="files" />
                             </b-card-body>
                         </b-collapse>
                     </b-card>
@@ -345,35 +406,32 @@
             return {
                 csrf: document.getElementsByName('csrf-token')[0].content,
                 formData: {
-                    type:window.MODEL?.type || 0,
-                    name:window.MODEL?.name || null,
-                    id_region:window.MODEL?.id_region || null,
-                    id_city:window.MODEL?.id_city || null,
-                    kad_number:window.MODEL?.kad_number || null,
-                    year:window.MODEL?.year || 0,
-                    exploit_year:window.MODEL?.exploit_year || 0,
-                    wear:window.MODEL?.wear || null,
-                    exist_pred_nadz_orgs:window.MODEL?.exist_pred_nadz_orgs || null,
-                    osn_isp_zdan:window.MODEL?.osn_isp_zdan || null,
-                    assignment:window.MODEL?.assignment || null,
-                    prav_sob:window.MODEL?.prav_sob || null,
-                    square:window.MODEL?.square || null,
-                    square_kap:window.MODEL?.square_kap || null,
-                    isp_v_ust_dey:window.MODEL?.isp_v_ust_dey || null,
-                    n_isp_v_ust_dey:window.MODEL?.n_isp_v_ust_dey || null,
-                    square_ar:window.MODEL?.square_ar || null,
-                    note:window.MODEL?.note || null,
-                    prav_oper_upr:window.MODEL?.prav_oper_upr || null
+                    type:window.MODEL.base?.type || 0,
+                    name:window.MODEL.base?.name || null,
+                    id_region:window.MODEL.base?.id_region || null,
+                    id_priority:window.MODEL.base?.id_priority || null,
+                    id_city:window.MODEL.base?.id_city || null,
+                    kad_number:window.MODEL.base?.kad_number || null,
+                    year:window.MODEL.base?.year || 0,
+                    exploit_year:window.MODEL.base?.exploit_year || 0,
+                    wear:window.MODEL.base?.wear || null,
+                    exist_pred_nadz_orgs:window.MODEL.base?.exist_pred_nadz_orgs || null,
+                    osn_isp_zdan:window.MODEL.base?.osn_isp_zdan || null,
+                    podrobnosti: window.MODEL.base?.podrobnosti || null,
+                    assignment:window.MODEL.base?.assignment || null,
+                    prav_sob:window.MODEL.base?.prav_sob || null,
+                    square:window.MODEL.base?.square || null,
+                    square_kap:window.MODEL.base?.square_kap || null,
+                    isp_v_ust_dey:window.MODEL.base?.isp_v_ust_dey || null,
+                    n_isp_v_ust_dey:window.MODEL.base?.n_isp_v_ust_dey || null,
+                    square_ar:window.MODEL.base?.square_ar || null,
+                    note:window.MODEL.base?.note || null,
+                    prav_oper_upr:window.MODEL.base?.prav_oper_upr || null
                 },
                 errors:{}
             }
         },
-        watch:{
-            getCities:function () {
 
-                this.formData.id_city = ''
-            },
-        },
         methods:{
             ...mapActions(['requestPageData','requestCity']),
             feedback(model,value,errorMessage){
@@ -388,17 +446,20 @@
                 e.preventDefault();
                 let form = document.getElementById('object_form');
                 let formData = new FormData(form);
-               // formData.append('dsfsd',document.querySelector('#file_input_0'))
+
+              // formData.append('dsfsd',document.querySelector('#file_input_0'))
                 Axios.post(this.$route.path,formData,{
                     headers:
                         {
                             'X-CSRF-Token':this.csrf,
-                            'Content-Type':`multipart/form-data; boundary=${formData._boundary}`
                         },
                 }).then(response=>
                 {
                     if (!!response.data?.id)
-                        window.location.href = `/program/object/view/${response.data.id}`;
+                        {
+                            this.$refs.files.sendFile({id:response.data.id});
+
+                        }
                     this.errors = response.data;
                 })
             },
@@ -427,6 +488,7 @@
             },
         },
         mounted() {
+            console.log(window.MODEL);
             this.requestPageData({pageName:"objectCreate"});
             if (!!this.formData.id_region)
                 this.requestCity({id:this.formData.id_region});

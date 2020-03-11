@@ -6,6 +6,7 @@ namespace app\commands;
 use app\models\app\students\Students;
 use app\models\Cities;
 use app\models\Organizations;
+use app\models\OrgInfo;
 use app\models\Program;
 use app\models\Regions;
 use app\models\User;
@@ -248,5 +249,74 @@ class ReferenceController extends Controller
         }
         fclose( $csv );
         echo "success!";
+    }
+    public function actionOrgInfo(
+        $file,$id_org,$st_sr_count,
+        $st_fed_count,
+        $st_dog_count,
+        $st_in_count,
+        $prof_count,
+        $st_all,
+        $st_sr_pr_count,
+        $st_bak_count,
+        $st_spec_count,
+        $st_mag_count,$rab_count,$nauch_rab,$prof_prep_count,$in_kat_rab,$invalid_count){
+        $csvP = Yii::getAlias( '@webroot' ) . "/parce/$file.csv";
+
+        $csv = fopen( $csvP, 'r' );
+        if ( !$csvP )
+            exit( "Файл не найден" );
+
+        $row = fgetcsv( $csv, 1000, ';' ) ;
+
+
+        echo "
+            0 стоб-> {$row[$id_org]}
+            1 столб->$row[$st_sr_count]
+            \n";
+
+        fclose( $csv );
+        $csv = fopen( $csvP, 'r' );
+        echo "Вы уверене? \n ";
+        $key = readline();
+        if ( !( $key === "yes" || $key === "y" || $key === "Y" ) ) {
+            exit( 0 );
+        }
+
+        while (( $row = fgetcsv( $csv, 1000, ';' ) ) != false) {
+
+            $org_info = OrgInfo::findOne(['id_org'=>$row[$id_org]]);
+            if (!$org_info) {
+                $org_info = new OrgInfo();
+                $org_info->id_org= $row[$id_org];
+            }
+
+            $org_info->st_sr_count = $row[$st_sr_count];
+            $org_info->st_fed_count = $row[$st_fed_count];
+            $org_info->st_dog_count = $row[$st_dog_count];
+            $org_info->st_in_count = $row[$st_in_count];
+            $org_info->prof_count = $row[$prof_count];
+            $org_info->st_all = $row[$st_all];
+            $org_info->st_sr_pr_count = $row[$st_sr_pr_count];
+            $org_info->st_bak_count = $row[$st_bak_count];
+            $org_info->st_spec_count = $row[$st_spec_count];
+            $org_info->st_mag_count = $row[$st_mag_count];
+            $org_info->rab_count = $row[$rab_count];
+            $org_info->nauch_rab = $row[$nauch_rab];
+            $org_info->prof_prep_count = $row[$prof_prep_count];
+            $org_info->in_kat_rab = $row[$in_kat_rab];
+            $org_info->invalid_count = $row[$invalid_count];
+
+
+
+            if ( $org_info->save(false) ) {
+                echo "
+            орг-> {$org_info->id_org}
+             \n";
+            }
+
+        }
+        fclose( $csv );
+
     }
 }

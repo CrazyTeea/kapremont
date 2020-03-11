@@ -61,7 +61,7 @@ class Files extends \yii\db\ActiveRecord
             FileHelper::createDirectory( $path );
         $this->name = $uploadedFile->baseName;
         $this->ext = $uploadedFile->extension;
-        if ($uploadedFile->saveAs("$path/$uploadedFile->baseName") and $this->save())
+        if ($uploadedFile->saveAs("$path/$uploadedFile->baseName.$uploadedFile->extension") and $this->save())
             return $this->id;
         return null;
     }
