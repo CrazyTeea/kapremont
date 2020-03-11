@@ -95,9 +95,9 @@ export default {
     computed: {
         cost_o() {
             return index =>{ 
-                let a = parseFloat(this.items[index].cost_b) || 0 
-                let b = parseFloat(this.items[index].cost_v) || 0 
-                this.items[index].cost_o = a + b
+                let a = parseFloat(this.items[index].cost_b) || 0 ;
+                let b = parseFloat(this.items[index].cost_v) || 0 ;
+                this.items[index].cost_o = a + b;
                 return a + b
                 }
         },
