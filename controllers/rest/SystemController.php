@@ -4,6 +4,7 @@
 namespace app\controllers\rest;
 
 
+use app\models\Atz;
 use app\models\Cities;
 use app\models\Organizations;
 use app\models\Program;
@@ -13,6 +14,7 @@ use app\models\User;
 use Yii;
 use yii\bootstrap4\Html;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Json;
 use yii\helpers\Url;
 
 /***
@@ -242,6 +244,11 @@ class SystemController extends RestController
 
                     return $ret;
                     break;
+                }
+                case 'atz':{
+                    $program = Yii::$app->session->get('program');
+                    $atz = Atz::findAll(['id_program'=>$program->id]);
+                    return $atz;
                 }
             }
         }
