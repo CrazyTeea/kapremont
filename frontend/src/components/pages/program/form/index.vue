@@ -227,7 +227,7 @@
                                         <v-select2 v-model="formData.prav_sob"
                                                    :options="[
                                                    {val:'fast', label:'Оперативное управление'},
-                                                   {val: 'others', label:'Другое'},
+                                                   {val:'others', label:'Другое'},
                                                ]"
                                                    :reduce="type => type.val"
                                                    label="label"
@@ -489,6 +489,7 @@
         },
         mounted() {
             console.log(window.MODEL);
+            console.log(this.formData);
             this.requestPageData({pageName:"objectCreate"});
             if (!!this.formData.id_region)
                 this.requestCity({id:this.formData.id_region});
