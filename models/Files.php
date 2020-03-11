@@ -53,7 +53,8 @@ class Files extends \yii\db\ActiveRecord
      * @return int|null
      * @throws \yii\base\Exception
      */
-    public function upload(UploadedFile $uploadedFile, $extPath = false){
+    public function upload(UploadedFile $uploadedFile, $extPath = false)
+    {
         $path = Yii::getAlias( '@webroot' ) . '/uploads';
         if ( $extPath )
             $path .= $extPath;
