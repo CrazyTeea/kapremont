@@ -171,7 +171,7 @@ class ProgramObjectsController extends AppController
                 }
             }
         }
-        return $this->render('create',compact('model'));
+        return $this->render('create',compact('model','progObjectsEvents','progObjectsWaites','progObjectsRiscs','proObjectsNecessary');
     }
 
     /**
@@ -253,6 +253,7 @@ class ProgramObjectsController extends AppController
                         $errors['ProgObjectsWaites'][] = [$pr->getErrors()];
                     }
                     $oldIds = ArrayHelper::map($progObjectsRiscs,'id','id');
+                    $progObjectsRiscs = ProgObjectsRiscs::createMultiple(ProgObjectsRiscs::className(), $progObjectsRiscs);
                     $progObjectsRiscs = ProgObjectsRiscs::createMultiple(ProgObjectsRiscs::className(), $progObjectsRiscs);
                     ProgObjectsRiscs::loadMultiple($progObjectsRiscs, Yii::$app->request->post());
                     $deletedIDs = array_diff($oldIds, array_filter(ArrayHelper::map($progObjectsWaites, 'id', 'id')));
