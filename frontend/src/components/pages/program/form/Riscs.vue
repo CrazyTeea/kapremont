@@ -75,6 +75,15 @@ export default {
             ]
         }
     },
+    mounted() {
+        window.MODEL.riscs.forEach((item,index)=>{
+            this.items[item.element] = {
+                types: item.types,
+                poison: item.poison,
+                protect: item.protect
+            }
+        })
+    },
     methods: {
         addNewRow: function() {
             this.items.push({
