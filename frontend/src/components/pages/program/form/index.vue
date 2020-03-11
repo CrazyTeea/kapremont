@@ -157,8 +157,6 @@
                                                    id="exist_pred_nadz_orgs"
                                         />
                                     </b-form-group>
-
-
                                     <b-form-group
                                             v-if="formData.exist_pred_nadz_orgs"
                                             label="Подробности:"
@@ -169,8 +167,6 @@
                                     >
                                         <b-form-input id="podrobnosti" name="ProgramObjects[podrobnosti]" v-model="formData.podrobnosti"/>
                                     </b-form-group>
-
-
                                     <b-form-group
                                             label="Износ здания (%):"
                                             label-for="wear"
@@ -220,8 +216,6 @@
                                     >
                                         <b-form-input id="assignment" name="ProgramObjects[assignment]" v-model="formData.assignment"/>
                                     </b-form-group>
-
-
                                     <b-form-group
                                             label="Право собственности:"
                                             label-for="prav_sob"
@@ -240,8 +234,6 @@
                                                    id="prav_sob"
                                         />
                                     </b-form-group>
-
-
                                     <b-form-group
                                             label="Общая площадь здания - всего, кв.м.:"
                                             label-for="square"
@@ -344,7 +336,7 @@
                         </b-card-header>
                         <b-collapse id="accordion-5" accordion="my-accordion" role="tabpanel">
                             <b-card-body>
-                                <v-riscs model-name="ProgObjectsRiscs"/>
+                                <v-riscs model-name="ProgObjectsRiscs" ref="riscs"/>
                             </b-card-body>
                         </b-collapse>
                     </b-card>
@@ -414,27 +406,27 @@
             return {
                 csrf: document.getElementsByName('csrf-token')[0].content,
                 formData: {
-                    type:window.MODEL?.type || 0,
-                    name:window.MODEL?.name || null,
-                    id_region:window.MODEL?.id_region || null,
-                    id_priority:window.MODEL?.id_priority || null,
-                    id_city:window.MODEL?.id_city || null,
-                    kad_number:window.MODEL?.kad_number || null,
-                    year:window.MODEL?.year || 0,
-                    exploit_year:window.MODEL?.exploit_year || 0,
-                    wear:window.MODEL?.wear || null,
-                    exist_pred_nadz_orgs:window.MODEL?.exist_pred_nadz_orgs || null,
-                    osn_isp_zdan:window.MODEL?.osn_isp_zdan || null,
-                    podrobnosti: window.MODEL?.podrobnosti || null,
-                    assignment:window.MODEL?.assignment || null,
-                    prav_sob:window.MODEL?.prav_sob || null,
-                    square:window.MODEL?.square || null,
-                    square_kap:window.MODEL?.square_kap || null,
-                    isp_v_ust_dey:window.MODEL?.isp_v_ust_dey || null,
-                    n_isp_v_ust_dey:window.MODEL?.n_isp_v_ust_dey || null,
-                    square_ar:window.MODEL?.square_ar || null,
-                    note:window.MODEL?.note || null,
-                    prav_oper_upr:window.MODEL?.prav_oper_upr || null
+                    type:window.MODEL.base?.type || 0,
+                    name:window.MODEL.base?.name || null,
+                    id_region:window.MODEL.base?.id_region || null,
+                    id_priority:window.MODEL.base?.id_priority || null,
+                    id_city:window.MODEL.base?.id_city || null,
+                    kad_number:window.MODEL.base?.kad_number || null,
+                    year:window.MODEL.base?.year || 0,
+                    exploit_year:window.MODEL.base?.exploit_year || 0,
+                    wear:window.MODEL.base?.wear || null,
+                    exist_pred_nadz_orgs:window.MODEL.base?.exist_pred_nadz_orgs || null,
+                    osn_isp_zdan:window.MODEL.base?.osn_isp_zdan || null,
+                    podrobnosti: window.MODEL.base?.podrobnosti || null,
+                    assignment:window.MODEL.base?.assignment || null,
+                    prav_sob:window.MODEL.base?.prav_sob || null,
+                    square:window.MODEL.base?.square || null,
+                    square_kap:window.MODEL.base?.square_kap || null,
+                    isp_v_ust_dey:window.MODEL.base?.isp_v_ust_dey || null,
+                    n_isp_v_ust_dey:window.MODEL.base?.n_isp_v_ust_dey || null,
+                    square_ar:window.MODEL.base?.square_ar || null,
+                    note:window.MODEL.base?.note || null,
+                    prav_oper_upr:window.MODEL.base?.prav_oper_upr || null
                 },
                 errors:{}
             }
