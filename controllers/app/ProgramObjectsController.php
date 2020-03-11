@@ -171,7 +171,7 @@ class ProgramObjectsController extends AppController
                 }
             }
         }
-        return $this->render('create',compact('model','progObjectsEvents','progObjectsWaites','progObjectsRiscs','proObjectsNecessary');
+        return $this->render('create',compact('model','progObjectsEvents','progObjectsWaites','progObjectsRiscs','proObjectsNecessary'));
     }
 
     /**
