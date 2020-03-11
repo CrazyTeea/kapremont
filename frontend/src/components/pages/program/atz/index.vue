@@ -34,12 +34,13 @@
                         ></b-form-input>
                     </b-th>
                     <b-th class="vertical-align-for-table-cell normal-font-weight-for-cell">
-                        <b-form-input
+                        <label>{{ cost_o(index) }}</label>
+                        <!-- <b-form-input
                             v-model="item.cost_o" 
                             placeholder="Цена"
                             min="0"
                             type="number"
-                        ></b-form-input>
+                        ></b-form-input> -->
                     </b-th>
                 </b-tr>
                 </b-tbody>
@@ -92,6 +93,14 @@ export default {
         }
     },
     computed: {
+        cost_o() {
+            return index =>{ 
+                let a = parseFloat(this.items[index].cost_b) || 0 
+                let b = parseFloat(this.items[index].cost_v) || 0 
+                this.items[index].cost_o = a + b
+                return a + b
+                }
+        },
         cost_b_full() {
             var sum = 0;
             for(let cost of this.items) {
