@@ -69,7 +69,6 @@ class ProgramObjectsController extends AppController
      */
     public function actionCreate()
     {
-
         $model = new ProgramObjects();
         $progObjectsEvents = [new ProgObjectsEvents()];
         $proObjectsNecessary = [new ProObjectsNecessary()];
@@ -186,10 +185,10 @@ class ProgramObjectsController extends AppController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $progObjectsEvents = [new ProgObjectsEvents()];
-        $proObjectsNecessary = [new ProObjectsNecessary()];
-        $progObjectsWaites =  [new ProgObjectsWaites()];
-        $progObjectsRiscs =  [new ProgObjectsRiscs()];
+        $progObjectsEvents = ProgObjectsEvents::findAll(['id_object'=>$id])? : [new ProgObjectsEvents()];
+        $proObjectsNecessary = ProObjectsNecessary::findAll(['id_object'=>$id])? : [new ProObjectsNecessary()];
+        $progObjectsWaites = ProgObjectsWaites::findAll(['id_object'=>$id])? : [new ProgObjectsWaites()];
+        $progObjectsRiscs = ProgObjectsRiscs::findAll(['id_object'=>$id])? : [new ProgObjectsRiscs()];
         $save = true;
         //
         if ($post = Yii::$app->request->post()) {
@@ -282,7 +281,7 @@ class ProgramObjectsController extends AppController
                 }
             }
         }
-        return $this->render('update',compact('model'));
+        return $this->render('update',compact('model','progObjectsEvents','progObjectsWaites','progObjectsRiscs','proObjectsNecessary'));
     }
     public function actionAddDocs($id){
         $model = $this->findModel($id);
