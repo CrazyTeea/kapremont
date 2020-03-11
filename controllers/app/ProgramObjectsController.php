@@ -215,8 +215,13 @@ class ProgramObjectsController extends AppController
                         $save &= $pr->save();
                         $errors['ProgObjectsEvents'][] = $pr->getErrors();
                     }
+                    $deletedIDs = null;
+                    $oldIds = ArrayHelper::map($proObjectsNecessary,'id','id');
                     $proObjectsNecessary = ProObjectsNecessary::createMultiple(ProObjectsNecessary::className(), $proObjectsNecessary);
                     ProObjectsNecessary::loadMultiple($proObjectsNecessary, Yii::$app->request->post());
+                    $deletedIDs = array_diff($oldIds, array_filter(ArrayHelper::map($proObjectsNecessary, 'id', 'id')));
+                    if (! empty($deletedIDs))
+                        ProObjectsNecessary::deleteAll(['id' => $deletedIDs]);
                     foreach ($proObjectsNecessary as $index => $item) {
                         $pr = ProObjectsNecessary::findOne(['id_object' => $model->id, 'element' => $item->element]);
                         if (!$pr){

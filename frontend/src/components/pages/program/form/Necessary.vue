@@ -143,7 +143,7 @@
                 item.obosnovanie = it?.obosnovanie;
             });
             this.itemsTwo.forEach((item,index)=>{
-                let it = getKeyByValue(window.MODEL.necessary,'element',index);
+                let it = getKeyByValue(window.MODEL.necessary,'element',index+17);
                 item.nalichie = it?.nalichie;
                 item.srok_eks = it?.srok_eks;
                 item.kap_remont = it?.kap_remont;
