@@ -5,12 +5,14 @@ namespace app\controllers\app;
 use app\models\Files;
 use app\models\ObjectDocumentsList;
 use app\models\ObjectDocumentsTypes;
+use app\models\ObjectFileList;
 use app\models\ProgObjectsEvents;
 use app\models\ProgObjectsRiscs;
 use app\models\ProgObjectsWaites;
 use app\models\ProObjectsNecessary;
 use Yii;
 use app\models\ProgramObjects;
+use app\models\UploadForm;
 use yii\base\Model;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
@@ -286,50 +288,36 @@ class ProgramObjectsController extends AppController
     }
     public function actionAddDocs($id){
         $model = $this->findModel($id);
-        if (!$model)
-            return 0;
-        $docs = ObjectDocumentsTypes::find()->all();
-        $done = false;
-        foreach ($docs as $doc){
-
-            $file = UploadedFile::getInstanceByName("$doc->descriptor");
-            if (!$file)
-                continue;
-            $objDoc = new ObjectDocumentsList();
-            if (!$objDoc->add($file,$id,$doc->id)) {
-                $done = false;
-                break;
-            }else $done = true;
+        if($model) {
+            $docs = ObjectDocumentsTypes::find()->all();
+            $done = false; 
+            foreach ($docs as $doc) {
+                $file = UploadedFile::getInstanceByName("$doc->descriptor");
+                if (!$file)
+                    continue;
+                $objDoc = new ObjectDocumentsList();
+                if (!$objDoc->add($file,$id,$doc->id)) {
+                    $done = false;
+                    break;
+                }else 
+                    $done = true;
+            }
+            if ($done)
+                return 1;
         }
-        if ($done) return 1;
+
         return 0;
     }
 
-    /**
-     * Deletes an existing ProgramObjects model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     * @throws \Throwable
-     * @throws \yii\db\StaleObjectException
-     */
-    public function actionDelete($id)
-    {
-        $model = $this->findModel($id);
-        $model->system_status = 0;
-        $model->save(false);
 
-        return $this->redirect(['index']);
+    public function actionDeleteDocs($id)
+    {
+        // $description = 
+        // $list_id = select...
+        $list = new ObjectDocumentsList();
+        // $list->updateItem($list_id);
     }
 
-    /**
-     * Finds the ProgramObjects model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return ProgramObjects the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
     protected function findModel($id)
     {
         if (($model = ProgramObjects::findOne($id)) !== null) {
