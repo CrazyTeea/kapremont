@@ -218,11 +218,11 @@ class ProgramObjectsController extends AppController
                     $proObjectsNecessary = ProObjectsNecessary::createMultiple(ProObjectsNecessary::className(), $proObjectsNecessary);
                     ProObjectsNecessary::loadMultiple($proObjectsNecessary, Yii::$app->request->post());
                     foreach ($proObjectsNecessary as $index => $item) {
-                        $pr = ProObjectsNecessary::findOne(['id_object' => $model->id, 'element' => $index]);
+                        $pr = ProObjectsNecessary::findOne(['id_object' => $model->id, 'element' => $item->element]);
                         if (!$pr){
                             $pr = new ProObjectsNecessary();
                             $pr->id_object = $id;
-                            $pr->element = $index;
+                            $pr->element = $item->element;
                         }
                         $pr->nalichie = (int)$item->nalichie;
                         $pr->material = $item->material;
