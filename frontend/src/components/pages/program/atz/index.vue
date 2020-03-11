@@ -61,8 +61,8 @@
                 </b-tfoot>
         </b-table-simple>
         <div class="align-element-right">
-            <b-button size="sm" variant="info" @click="sendInfo()">Добавить</b-button>
-            <b-button size="sm" variant="danger" @click="clearInputs()">Сбросить</b-button>
+            <b-button size="sm" variant="info" @click="sendInfo()">Сохранить</b-button>
+            <b-button size="sm" variant="danger" @click="clearInputs()">Сброс</b-button>
         </div>
     </div>
 </template>
@@ -71,6 +71,11 @@
 import Axios from 'axios'
 
 export default {
+
+    mounted() {
+        Axios.post()
+    },
+
     data() {
         return {
             items: [
@@ -88,7 +93,7 @@ export default {
     },
     computed: {
         cost_b_full() {
-            var sum = 0
+            var sum = 0;
             for(let cost of this.items) {
                 sum += parseInt(cost.cost_b) || 0
             }
@@ -96,7 +101,7 @@ export default {
             return sum
         },
         cost_v_full() {
-            var sum = 0
+            var sum = 0;
             for(let cost of this.items) {
                 sum += parseInt(cost.cost_v) || 0
             }
@@ -104,7 +109,7 @@ export default {
             return sum
         },
         cost_o_full() {
-            var sum = 0
+            var sum = 0;
             for(let cost of this.items) {
                 sum += parseInt(cost.cost_o) || 0
             }
@@ -115,8 +120,8 @@ export default {
     methods: {
         clearInputs() {
             for(let val of this.items) {
-                val.cost_b = null
-                val.cost_v = null
+                val.cost_b = null;
+                val.cost_v = null;
                 val.cost_o =null
             }
         },
