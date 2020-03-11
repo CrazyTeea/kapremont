@@ -10,9 +10,6 @@ use PhpOffice\PhpWord\Settings;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Yii;
 use app\models\DevelopmentProgramme;
-use app\models\DevelopmentProgrammeSearch;
-use app\controllers\app\AppController;
-use yii\db\Exception;
 use yii\helpers\FileHelper;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -36,6 +33,14 @@ class DevelopmentProgrammeController extends AppController
             ],
         ];
     }
+
+    /**
+     * @throws \PhpOffice\PhpWord\Exception\CopyFileException
+     * @throws \PhpOffice\PhpWord\Exception\CreateTemporaryFileException
+     * @throws \PhpOffice\PhpWord\Exception\Exception
+     * @throws \yii\base\Exception
+     * @throws \yii\base\InvalidConfigException
+     */
     public function actionExport(){
 
 
