@@ -104,7 +104,7 @@ export default {
         cost_b_full() {
             var sum = 0;
             for(let cost of this.items) {
-                sum += parseInt(cost.cost_b) || 0
+                sum += parseFloat(cost.cost_b) || 0
             }
 
             return sum
@@ -112,7 +112,7 @@ export default {
         cost_v_full() {
             var sum = 0;
             for(let cost of this.items) {
-                sum += parseInt(cost.cost_v) || 0
+                sum += parseFloat(cost.cost_v) || 0
             }
 
             return sum
@@ -120,7 +120,7 @@ export default {
         cost_o_full() {
             var sum = 0;
             for(let cost of this.items) {
-                sum += parseInt(cost.cost_o) || 0
+                sum += parseFloat(cost.cost_o) || 0
             }
 
             return sum
