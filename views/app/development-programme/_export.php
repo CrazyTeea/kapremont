@@ -418,7 +418,7 @@ use yii\helpers\ArrayHelper; ?>
         <div class="text-center">
             <p><h5>Объект № <?=++$index?></h5>
             <p><?=$object->name?></p>
-            <p>Приоритет:<?=$prior[$object->id_priority ? : 0]?></p>
+            <p>Приоритет:<?=$prior[$object->id_priority ? : 1]?></p>
         </div>
     <table class="table table-bordered">
         <tr>
