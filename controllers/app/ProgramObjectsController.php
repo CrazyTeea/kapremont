@@ -390,7 +390,6 @@ class ProgramObjectsController extends AppController
         // echo "<pre>";
         // print_r($toSend);
 
-        return json_encode($toSend);
     }
 
     public function actionDeleteDocs($id)
