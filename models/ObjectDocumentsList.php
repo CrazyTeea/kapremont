@@ -52,11 +52,34 @@ class ObjectDocumentsList extends \yii\db\ActiveRecord
     public function getFile(){
         return $this->hasOne(Files::className(),['id'=>'id_file']);
     }
-    public function add(UploadedFile $uploadedFile,$id_object,$id_type){
+
+    public function add(UploadedFile $uploadedFile, $id_object, $id_type, $status = 1){
         $file = new Files();
         $this->id_file = $file->upload($uploadedFile,"/$id_object");
         $this->id_object= $id_object;
         $this->id_type= $id_type;
+        $this->system_status = $status;
+
         return $this->id_file and $this->save();
     }
+    public function updateItem($id)
+    {
+        self::update(['system_status' => 0])->where(['id' => $id]);
+    }
+
+    public function getTypes()
+    {
+        return $this->hasMany(ObjectDocumentsTypes::class, ['id' => 'id_type']);
+    }
+
+    public function getFiles()
+    {
+        return $this->hasMany(Files::class, ['id' => 'id_file']);
+    }
+
+    public function getObjects()
+    {
+        return $this->hasMany(ProgramObjects::class, ['id' => 'id_object']);
+    }
+
 }

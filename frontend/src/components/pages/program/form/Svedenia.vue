@@ -68,8 +68,8 @@
                 </template>
                 <template v-slot:cell(finanse)="row">
                     <b-form-input
-                        v-if="row.value" 
-                        v-model="sved.finanse[row.index]" 
+                        v-if="row.value"
+                        v-model="sved.finanse[row.index]"
                         placeholder="Цена"
                         min="0"
                         type="number"
