@@ -2,10 +2,13 @@
 
 namespace app\controllers\app;
 
+use app\models\User;
 use Yii;
 
 class AppController extends \yii\web\Controller
 {
+   public static $cans;
+
         public function __construct($id, $module, $config = [])
         {
             parent::__construct($id, $module, $config);
@@ -18,5 +21,7 @@ class AppController extends \yii\web\Controller
                     Yii::$app->getUser()->can('root') || Yii::$app->getUser()->can('admin'),
                 ]);
             }
+            self::$cans = Yii::$app->getSession()->get('cans');
+            Yii::$app->getSession()->set('user',User::findOne(Yii::$app->user->id));
         }
 }

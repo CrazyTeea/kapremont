@@ -1,7 +1,16 @@
 <?php
 
-use yii\helpers\Html;
+use yii\bootstrap4\Html;
 use yii\widgets\DetailView;
+
+
+$weara = [
+        'Менее 20%',
+      'От 20% до 50%',
+      'От 50% до 70%',
+      'От 70% до 90%',
+      'Более 90%'
+];
 
 /* @var $this yii\web\View */
 /* @var $model app\models\ProgramObjects */
@@ -17,6 +26,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <p>
         <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Вы уверены?',
+                'method' => 'post',
+            ],
+        ]) ?>
     </p>
 
     <?= DetailView::widget([
@@ -28,7 +44,11 @@ $this->params['breadcrumbs'][] = $this->title;
             'assignment:ntext',
             'square',
             'year',
-            'wear',
+            [                      // the owner name of the model
+                'attribute' => 'wear',
+                'value' => function($model) use ($weara){return $weara[$model->wear];},
+            ],
+            
 /*            'regulation:ntext',
             'event_type:ntext',
             'finance_sum',

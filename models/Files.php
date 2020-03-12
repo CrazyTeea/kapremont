@@ -47,6 +47,10 @@ class Files extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getDocList(){
+        return $this->hasOne(ObjectDocumentsList::className(),['id'=>'id_file']);
+    }
+
     /**
      * @param UploadedFile $uploadedFile
      * @param bool $extPath
