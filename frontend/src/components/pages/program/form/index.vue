@@ -61,6 +61,7 @@
                                     >
                                         <b-form-input style="display: none" id="type" v-model="formData.id_priority" name="ProgramObjects[id_priority]" />
                                         <v-select2 v-model="formData.id_priority"
+                                                   :get-option-value="id_priority => id_priority.id_priority"
                                                    :options="[
                                                    {id:0,id_priority:'1'},
                                                    {id:1,id_priority:'2'},
@@ -148,6 +149,7 @@
                                     >
                                         <b-form-input style="display: none;" id="exist_pred_nadz_orgs" name="ProgramObjects[exist_pred_nadz_orgs]" v-model="formData.exist_pred_nadz_orgs"/>
                                         <v-select2 v-model="formData.exist_pred_nadz_orgs"
+                                                   :get-option-value="type => type.type"
                                                    :options="[
                                                    {id:0,type:'Нет'},
                                                    {id:1,type:'Да'}
@@ -434,6 +436,9 @@
 
         methods:{
             ...mapActions(['requestPageData','requestCity']),
+            setSelected(value){
+                formData.id_priority = value;
+            },
             feedback(model,value,errorMessage){
                 let val = this.formData[value];
                 if (errorMessage)
