@@ -120,10 +120,12 @@ export default {
     methods: {
         async getLoadedFiles(id) {
             await Axios.get(`/program/object/files/${id}`).then((res) => {
-                res.data.forEach(element => {
-                    this.loadedFilesOnServer.push(element)
-                    this.setFileName(element) 
-                });
+                if (res.data.length) {
+                    res.data.forEach(element => {
+                        this.loadedFilesOnServer.push(element);
+                        this.setFileName(element)
+                    });
+                }
             });
         },
         setFileName(element){

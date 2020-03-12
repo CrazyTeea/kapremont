@@ -370,6 +370,7 @@ class ProgramObjectsController extends AppController
 
     public function actionGetAllObjFiles($id)
     {
+        $toSend = null;
         $obj = ProgramObjects::find()->where(['id' => $id])
             ->select(['id', 'name'])
             ->with([
@@ -388,7 +389,7 @@ class ProgramObjectsController extends AppController
         }
 
         // echo "<pre>";
-        // print_r($toSend);
+         return Json::encode($toSend);
 
     }
 
@@ -411,7 +412,7 @@ class ProgramObjectsController extends AppController
 
         // echo "<pre>";
         // print_r($list_obj_id[0]['id']);
-        // return $id;
+         return Json::encode($kek);
     }
 
     protected function findModel($id)
