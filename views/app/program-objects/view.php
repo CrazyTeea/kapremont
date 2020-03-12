@@ -48,7 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'wear',
                 'value' => function($model) use ($weara){return $weara[$model->wear];},
             ],
-            
+
 /*            'regulation:ntext',
             'event_type:ntext',
             'finance_sum',
