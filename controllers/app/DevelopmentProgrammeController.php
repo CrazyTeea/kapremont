@@ -2,14 +2,24 @@
 
 namespace app\controllers\app;
 
+use app\models\Atz;
 use app\models\Organizations;
 use app\models\OrgInfo;
 use app\models\ProgramObjects;
+use DOMDocument;
+use Dompdf\Dompdf;
+use HTMLtoOpenXML\Parser;
+use PhpOffice\PhpWord\Element\TextRun;
 use PhpOffice\PhpWord\IOFactory;
+use PhpOffice\PhpWord\PhpWord;
+use PhpOffice\PhpWord\shared\HTML;
 use PhpOffice\PhpWord\Settings;
 use PhpOffice\PhpWord\TemplateProcessor;
+
 use Yii;
 use app\models\DevelopmentProgramme;
+
+use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -55,6 +65,21 @@ class DevelopmentProgrammeController extends AppController
         }
         $pr_ob = ProgramObjects::findAll(['id_org'=>$user->id_org,'type'=>0]);
         $pr_cols = ProgramObjects::getTableSchema()->getColumnNames();
+        $program = Yii::$app->getSession()->get('program');
+        $atz = Atz::findAll(['id_program'=>$program->id]);
+        for($i=0;$i<9;$i++){
+            if (ArrayHelper::keyExists($i,$atz)) {
+                $file->setValue("cost_b_$i", $atz[$i]->cost_b);
+                $file->setValue("cost_v_$i", $atz[$i]->cost_v);
+                $file->setValue("cost_o_$i", $atz[$i]->cost_v + $atz[$i]->cost_b);
+            }
+            else{
+                $file->setValue("cost_b_$i", 0);
+                $file->setValue("cost_v_$i", 0);
+                $file->setValue("cost_o_$i", 0);
+            }
+        }
+
 
 
 
@@ -78,8 +103,7 @@ class DevelopmentProgrammeController extends AppController
                 $file->setValue("pr_{$col}#{$i}", $object->{$col});
             }
         }
-
-
+        
 
         $r_ob = ProgramObjects::findAll(['id_org'=>$user->id_org,'type'=>1]);
 
