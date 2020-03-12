@@ -6,7 +6,7 @@ use app\models\Atz;
 use app\models\Organizations;
 use app\models\OrgInfo;
 use app\models\ProgramObjects;
-use DOMDocument;
+
 use Dompdf\Dompdf;
 use HTMLtoOpenXML\Parser;
 use PhpOffice\PhpWord\Element\TextRun;
@@ -79,9 +79,12 @@ class DevelopmentProgrammeController extends AppController
                 $file->setValue("cost_o_$i", 0);
             }
         }
-
-
-
+        $objects = ProgramObjects::findAll(['id_program'=>$program->id]);
+        $parser = new Parser();
+        Settings::setOutputEscapingEnabled(false);
+        $html = $parser->fromHTML($this->renderPartial('_export',compact('objects','org')));
+      //  $file->setValue('table',($html));
+       // Settings::setOutputEscapingEnabled(true);
 
         $file->cloneRow("pr_id",count($pr_ob));
 

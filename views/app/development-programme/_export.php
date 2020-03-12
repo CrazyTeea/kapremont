@@ -102,46 +102,46 @@ $prior = [
         <tr>
             <td rowspan="4">3</td>
             <td>Общая численность обучающихся по программам среднего профессионального образования, бакалавриата, специалитета, магистратуры, аспирантуры, включая очную и заочную формы обучения, из них:</td>
-            <td><?=$org->orgInfo->st_sr_count?></td>
+            <td><?=$org->orgInfo ? $org->orgInfo->st_sr_count : ''?></td>
         </tr>
         <tr>
             <td>Численность обучающихся за счет средств федерального бюджета</td>
-            <td><?=$org->orgInfo->st_fed_count?></td>
+            <td><?=$org->orgInfo ? $org->orgInfo->st_fed_count : ''?></td>
         </tr>
         <tr>
             <td>Численность обучающихся по договору с полным возмещением затрат</td>
-            <td><?=$org->orgInfo->st_dog_count?></td>
+            <td><?=$org->orgInfo ? $org->orgInfo->st_dog_count : ''?></td>
 
         </tr>
         <tr>
             <td>Общая численность обучающихся иностранных граждан и лиц без гражданства</td>
-            <td><?=$org->orgInfo->st_in_count?></td>
+            <td><?=$org->orgInfo ? $org->orgInfo->st_in_count : ''?></td>
         </tr>
         <tr>
             <td>4</td>
             <td>Численность профессорско-преподавательского состава</td>
-            <td><?=$org->orgInfo->prof_count?></td>
+            <td><?=$org->orgInfo ? $org->orgInfo->prof_count : ''?></td>
         </tr>
         <tr>
             <td rowspan="6">8</td>
             <td>Обучающиеся, из них:</td>
-            <td><?=$org->orgInfo->st_all?></td>
+            <td><?=$org->orgInfo ? $org->orgInfo->st_all : ''?></td>
         </tr>
         <tr>
             <td>Среднего профессионального образования</td>
-            <td><?=$org->orgInfo->st_sr_pr_count?></td>
+            <td><?=$org->orgInfo ? $org->orgInfo->st_sr_pr_count : ''?></td>
         </tr>
         <tr>
             <td>Бакалавриата</td>
-            <td><?=$org->orgInfo->st_bak_count?></td>
+            <td><?=$org->orgInfo ? $org->orgInfo->st_bak_count : ''?></td>
         </tr>
         <tr>
             <td>Специалитета</td>
-            <td><?=$org->orgInfo->st_spec_count?></td>
+            <td><?=$org->orgInfo ? $org->orgInfo->st_spec_count : ''?></td>
         </tr>
         <tr>
             <td>Магистратуры</td>
-            <td><?=$org->orgInfo->st_mag_count?></td>
+            <td><?=$org->orgInfo ? $org->orgInfo->st_mag_count : ''?></td>
         </tr>
         <tr>
             <td>Аспиранты</td>
@@ -150,27 +150,27 @@ $prior = [
         <tr>
             <td rowspan="4">6</td>
             <td>Работники, из них:</td>
-            <td><?=$org->orgInfo->rab_count?></td>
+            <td><?=$org->orgInfo ? $org->orgInfo->rab_count : ''?></td>
         </tr>
         <tr>
             <td>Научные сотрудники</td>
-            <td><?=$org->orgInfo->nauch_rab?></td>
+            <td><?=$org->orgInfo ? $org->orgInfo->nauch_rab : ''?></td>
 
         </tr>
         <tr>
             <td>Профессорско-преподавательский состав</td>
-            <td><?=$org->orgInfo->prof_prep_count?></td>
+            <td><?=$org->orgInfo ? $org->orgInfo->prof_prep_count : ''?></td>
 
         </tr>
         <tr>
             <td>Иные категории работников</td>
-            <td><?=$org->orgInfo->in_kat_rab?></td>
+            <td><?=$org->orgInfo ? $org->orgInfo->in_kat_rab : ''?></td>
 
         </tr>
         <tr>
             <td>7</td>
             <td>Численность инвалидов и лиц с ограниченными возможностями здоровья</td>
-            <td><?=$org->orgInfo->invalid_count?></td>
+            <td><?=$org->orgInfo ? $org->orgInfo->invalid_count : ''?></td>
         </tr>
         <tr>
             <td>8</td>
