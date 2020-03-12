@@ -111,7 +111,13 @@ class ProgramObjects extends \yii\db\ActiveRecord
     public function getRegion(){
         return $this->hasOne(Regions::className(),['id'=>'id_region']);
     }
+
     public function getOrg(){
         return $this->hasOne(Organizations::className(),['id'=>'id_org']);
+    }
+
+    public function getDocList()
+    {
+        return $this->hasMany(ObjectDocumentsList::class, ['id_object' => 'id']);
     }
 }

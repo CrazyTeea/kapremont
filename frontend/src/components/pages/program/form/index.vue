@@ -463,7 +463,6 @@
                     if (!!response.data?.id)
                         {
                             this.$refs.files.sendFile({id:response.data.id});
-
                         }
                     this.errors = response.data;
                 })
@@ -489,7 +488,6 @@
             },
             onChangeRegion({id}) {
                 this.requestCity({id})
-
             },
         },
         mounted() {

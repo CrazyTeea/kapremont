@@ -56,7 +56,7 @@ class ProgramObjectsController extends AppController
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        $docList = ObjectDocumentsList::find()->where(['system_status'=>1,'id_object'=>$id])->joinWith(['file'])->all();
+        $docList = ObjectDocumentsList::findAll(['system_status'=>1,'id_object'=>$id]);
         return $this->render('view',compact('model','docList'));
     }
     public function actionDownloadDoc($id_obj){
@@ -67,6 +67,7 @@ class ProgramObjectsController extends AppController
         $path =  $path = Yii::getAlias( '@webroot' ) . '/uploads/'.$id_obj;
         return Yii::$app->response->sendFile("$path/{$file->name}.{$file->ext}")->send();
     }
+
     /**
      * Creates a new ProgramObjects model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -343,51 +344,77 @@ class ProgramObjectsController extends AppController
         }
         return $this->render('update',compact('model','progObjectsEvents','progObjectsWaites','progObjectsRiscs','proObjectsNecessary'));
     }
+
     public function actionAddDocs($id){
         $model = $this->findModel($id);
-        if (!$model)
-            return 0;
-        $docs = ObjectDocumentsTypes::find()->all();
-        $done = false;
-        foreach ($docs as $doc){
-
-            $file = UploadedFile::getInstanceByName("$doc->descriptor");
-            if (!$file)
-                continue;
-            $objDoc = new ObjectDocumentsList();
-            if (!$objDoc->add($file,$id,$doc->id)) {
-                $done = false;
-                break;
-            }else $done = true;
+        if($model) {
+            $docs = ObjectDocumentsTypes::find()->all();
+            $done = false;
+            foreach ($docs as $doc) {
+                $file = UploadedFile::getInstanceByName("$doc->descriptor");
+                if (!$file)
+                    continue;
+                $objDoc = new ObjectDocumentsList();
+                if (!$objDoc->add($file,$id,$doc->id)) {
+                    $done = false;
+                    break;
+                }else
+                    $done = true;
+            }
+            if ($done)
+                return 1;
         }
-        if ($done) return 1;
-        return '0';
+
+        return 0;
     }
 
-    /**
-     * Deletes an existing ProgramObjects model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
-     * @throws NotFoundHttpException if the model cannot be found
-     * @throws \Throwable
-     * @throws \yii\db\StaleObjectException
-     */
-    public function actionDelete($id)
+    public function actionGetAllObjFiles($id)
     {
-        $model = $this->findModel($id);
-        $model->system_status = 0;
-        $model->save(false);
-        return $this->redirect(['program/view']);
+        $obj = ProgramObjects::find()->where(['id' => $id])
+            ->select(['id', 'name'])
+            ->with([
+                'docList' => function($query) { return $query->where(['system_status' => 1]); },
+                'docList.files' => function($query) { return $query->select(['id', 'name']); },
+                'docList.types' => function($query) { return $query->select(['id', 'descriptor']); }])
+            ->asArray()
+            ->all();
+        $i = 0;
+        foreach($obj[0]['docList'] as $file) {
+            $toSend[$i] = [
+                'name' =>  $file['files'][0]['name'],
+                'descriptor' => $file['types'][0]['descriptor']
+            ];
+            $i++;
+        }
+
+        // echo "<pre>";
+        // print_r($toSend);
+
+        return json_encode($toSend);
     }
 
-    /**
-     * Finds the ProgramObjects model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return ProgramObjects the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
-     */
+    public function actionDeleteDocs($id)
+    {
+
+        $descriptor = Yii::$app->request->get('descriptor');
+
+        $list_obj_id = Yii::$app->db->createCommand("
+            select 
+                list.id, list.system_status
+            from object_documents_list as list 
+                join program_objects as obj on list.id_object = obj.id
+            where obj.id = '$id' and list.id_type in (select id from object_documents_types where descriptor = '$descriptor')
+        ")->queryAll();
+
+            $kek = ObjectDocumentsList::findOne($list_obj_id[0]['id']);
+            $kek->system_status = 0;
+            $kek->save(false);
+
+        // echo "<pre>";
+        // print_r($list_obj_id[0]['id']);
+        // return $id;
+    }
+
     protected function findModel($id)
     {
         if (($model = ProgramObjects::findOne($id)) !== null) {
