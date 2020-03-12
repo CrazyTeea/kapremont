@@ -52,6 +52,11 @@ class Files extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getObjList()
+    {
+        return $this->hasOne(ObjectDocumentsList::class, ['id_file' => 'id']);
+    }
+
     public function upload(UploadedFile $uploadedFile, $extPath = false)
     {
         $path = Yii::getAlias( '@webroot' ) . '/uploads';

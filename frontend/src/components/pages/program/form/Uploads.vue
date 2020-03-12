@@ -43,7 +43,7 @@
                     <b-th class="no-cell-border vertical-align-centre-extra-table">
                         <div class="cell-center-for-items">
                             <div class="cross">
-                                <label class="label" @click="fileRemove(index)">
+                                <label class="label" @click="fileRemove(index, item.descriptor)">
                                     <span class="title">
                                         <span class="cross-to-animate"></span>
                                         <span class="cross-to-animate"></span>
@@ -100,13 +100,49 @@ export default {
                 {descriptor:'predpis', fileName: null, label: 'Предписания надзорных органов (при наличии)'},
                 {descriptor:'proekti', fileName: null, label: 'Задание на проектирование (корректировку проектной документации), составленное в соответствии с рекомендациями Минстроя РФ (в случае разработки/корректировки проектной документации и/или направления данной документации на экспертизу)'},
             ],
+            allDescriptors: ['inv_card', 'reestr_vip', 'pravust', 'tex_kad_docs', 'sit_plan', 'tex_acts', 'tex_acts', 'def_ved', 'obj_photos', 'predpis', 'proekti'],
             loadProgress: null,
             loadingFileName: null,
+            loadedFilesOnServer: [],
             selectedFiles: [],
-            uploadSuccess: true
+            uploadSuccess: true,
+            update: false,
+            objectId: null
+        }
+    },
+    mounted() {
+        if(this.$route.path.indexOf('/program/object/update') != -1) {
+            this.update = true
+            this.objectId = this.$route.params.id
+            this.getLoadedFiles(this.objectId)
         }
     },
     methods: {
+        async getLoadedFiles(id) {
+            await Axios.get(`/program/object/files/${id}`).then((res) => {
+                res.data.forEach(element => {
+                    this.loadedFilesOnServer.push(element)
+                    this.setFileName(element) 
+                });
+            });
+        },
+        setFileName(element){
+            this.items.map((elem, index) => {
+                if(elem.descriptor === element.descriptor)
+                {
+                    if(this.allDescriptors.indexOf(elem.descriptor)) {
+                        this.items[index].fileName = element.name + '.pdf'
+                    } else {
+                            this.items.push({
+                                descriptor:  elem.descriptor,
+                                fileName: element.name,
+                                label: 1,
+                                other: true
+                        })
+                    }
+                }
+            })
+        },
         addNewRow() {
             this.items.push({
                 descriptor:  null,
@@ -124,8 +160,9 @@ export default {
         fileInput(index) {
             // let file = Array.from(event.target.files)[0]; Это тоже рабочая версия
             let file = document.querySelector('#file_input_' + index).files[0];
-            console.log(file);
             if(!this.checkFileExt(file.type) || !this.checkFileSize(file.size)) {
+                // let form = document.querySelector('#file_input_' + index)
+                // form.reset()
                 file.value = null;
                 return
             }
@@ -135,12 +172,22 @@ export default {
                 name: this.items[index].label,
                 file: file
             });
+            console.log(this.selectedFiles)
             this.items[index].fileName = file.name
-         },
-        fileRemove(index) {
+        },
+        fileRemove(index, descriptor) {
             let key = this.getSelectedFileKey(index);
-            this.selectedFiles.splice(key, 1);
-            this.items[index].fileName = null
+            if(this.items[index].fileName != null && key == null) {
+                console.log('удалить с сервера')
+                this.removeFileFromYii(this.objectId, descriptor, index)
+            } else if(this.items[index].fileName == null && key == null) {
+                this.errorMessage('Сначала выберите файлы!')
+            } else if(this.items[index].fileName != null && key != null) {
+                console.log('удалить локально')
+                console.log(this.selectedFiles)
+                this.selectedFiles.splice(key, 1);
+                this.items[index].fileName = null
+            }
         },
         checkFileExt(type) {
             if(type !== 'application/pdf') {
@@ -158,19 +205,19 @@ export default {
             return true
         },
         getSelectedFileKey(index) {
-            if(this.selectedFiles.length)
-            {
-                return this.selectedFiles.map((elem, id) => {
-                    if(elem.id === index) {
-                        return id
-                    } else {
-                        return null
-                    }
-                }).filter((elem) => {
-                    return elem !== null
-                })[0]
+            let element = this.selectedFiles.map((elem, id) => {
+                if(elem.id === index) {
+                    return id
+                } else {
+                    return null
+                }
+            }).filter((elem) => {
+                return elem !== null
+            })[0]
+            if(element != null) {
+                return element 
             } else {
-                return this.errorMessage('Сначала добавте файл!')
+                return null
             }
         },
         getSavedDocuments() {
@@ -186,29 +233,12 @@ export default {
             if (this.uploadSuccess)
                 window.location.href = `/program/object/view/${id}`;
         },
-
-
-
-        async removeFileFromYii(id, descriptor) {
-
-
-            
-            await Axios.post('/api/fileRemove', form, {
-                headers:
-                    {
-                        'X-CSRF-Token':this.csrf,
-                        'Content-Type':'multipart/form-data;'
-                    },
-                onUploadProgress: (itemUpload) => {
-                    this.loadProgress = Math.round( (itemUpload.loaded / itemUpload.total) * 100 )
-                }
-            }).then((res) => {
+        async removeFileFromYii(id, descriptor, index) {
+            await Axios.get(`/program/object/delete-docs/${id}`, { params: { descriptor: descriptor } }).then((res) => {
+                this.items[index].fileName = null
                 console.log(res.data)
             }).catch(error => console.log(error))
         },
-
-
-        
         async uploadFile(file,id) {
             let form = new FormData();
             form.append(`${file.descriptor}`, file.file);
@@ -216,7 +246,7 @@ export default {
             await Axios.post(`/program/object/add-docs/${id}`, form, {
                 headers:
                     {
-                        'X-CSRF-Token':this.csrf,
+                        'X-CSRF-Token': this.csrf,
                         'Content-Type':'multipart/form-data;'
                     },
                 onUploadProgress: (itemUpload) => {

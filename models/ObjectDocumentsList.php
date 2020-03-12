@@ -4,6 +4,8 @@ namespace app\models;
 
 use Yii;
 use yii\web\UploadedFile;
+use app\models\ObjectDocumentsTypes;
+use app\models\Files;
 
 /**
  * This is the model class for table "object_documents_list".
@@ -34,10 +36,6 @@ class ObjectDocumentsList extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getFiles()
-    {
-
-    }
     /**
      * {@inheritdoc}
      */
@@ -64,5 +62,20 @@ class ObjectDocumentsList extends \yii\db\ActiveRecord
     public function updateItem($id)
     {
         self::update(['system_status' => 0])->where(['id' => $id]);
+    }
+
+    public function getTypes()
+    {
+        return $this->hasMany(ObjectDocumentsTypes::class, ['id' => 'id_type']);
+    }
+
+    public function getFiles()
+    {
+        return $this->hasMany(Files::class, ['id' => 'id_file']);
+    }
+
+    public function getObjects()
+    {
+        return $this->hasMany(ProgramObjects::class, ['id' => 'id_object']);
     }
 }

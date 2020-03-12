@@ -293,6 +293,7 @@ class ProgramObjectsController extends AppController
         }
         return $this->render('update',compact('model','progObjectsEvents','progObjectsWaites','progObjectsRiscs','proObjectsNecessary'));
     }
+
     public function actionAddDocs($id){
         $model = $this->findModel($id);
         if($model) {
@@ -316,13 +317,48 @@ class ProgramObjectsController extends AppController
         return 0;
     }
 
+    public function actionGetAllObjFiles($id)
+    {
+        $obj = ProgramObjects::find(['id' => $id])
+            ->select(['id', 'name'])
+            ->with([
+                'docList' => function($query) { return $query->where(['system_status' => 1]); },
+                'docList.files' => function($query) { return $query->select(['id', 'name']); },
+                'docList.types' => function($query) { return $query->select(['id', 'descriptor']); }])
+            ->asArray()
+            ->all();
+        $i = 0;
+        foreach($obj[0]['docList'] as $file) {
+            $toSend[$i] = [
+                'name' =>  $file['files'][0]['name'],
+                'descriptor' => $file['types'][0]['descriptor']
+            ];
+            $i++;
+        }
+        
+        // echo "<pre>";
+        // print_r($toSend);
+
+        return json_encode($toSend);
+    }
 
     public function actionDeleteDocs($id)
     {
-        // $description = 
-        // $list_id = select...
-        $list = new ObjectDocumentsList();
-        // $list->updateItem($list_id);
+        $descriptor = Yii::$app->request->get('descriptor');
+
+        $list_obj_id = Yii::$app->db->createCommand('
+            select 
+                list.id, list.system_status
+            from object_documents_list as list 
+                join program_objects as obj on list.id_object = obj.id = ' . $id . '
+            where list.id_type in (select id from object_documents_types where descriptor = "' . $descriptor . '")
+        ')->queryAll();
+        $kek = ObjectDocumentsList::findOne($list_obj_id[0]['id']);
+        $kek->system_status = 0;
+        $kek->save(false);
+        // echo "<pre>";
+        // print_r($list_obj_id[0]['id']);
+        // return $id; 
     }
 
     protected function findModel($id)

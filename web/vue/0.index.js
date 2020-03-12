@@ -983,23 +983,32 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.filter */ "./node_modules/core-js/modules/es.array.filter.js");
 /* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.map */ "./node_modules/core-js/modules/es.array.map.js");
-/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.splice */ "./node_modules/core-js/modules/es.array.splice.js");
-/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_8__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_9__);
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_10__);
-/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.index-of */ "./node_modules/core-js/modules/es.array.index-of.js");
+/* harmony import */ var core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.array.map */ "./node_modules/core-js/modules/es.array.map.js");
+/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.array.splice */ "./node_modules/core-js/modules/es.array.splice.js");
+/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_15___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_15__);
+
+
+
 
 
 
@@ -1141,13 +1150,69 @@ __webpack_require__.r(__webpack_exports__);
         fileName: null,
         label: 'Задание на проектирование (корректировку проектной документации), составленное в соответствии с рекомендациями Минстроя РФ (в случае разработки/корректировки проектной документации и/или направления данной документации на экспертизу)'
       }],
+      allDescriptors: ['inv_card', 'reestr_vip', 'pravust', 'tex_kad_docs', 'sit_plan', 'tex_acts', 'tex_acts', 'def_ved', 'obj_photos', 'predpis', 'proekti'],
       loadProgress: null,
       loadingFileName: null,
+      loadedFilesOnServer: [],
       selectedFiles: [],
-      uploadSuccess: true
+      uploadSuccess: true,
+      update: false,
+      objectId: null
     };
   },
+  mounted: function mounted() {
+    if (this.$route.path.indexOf('/program/object/update') != -1) {
+      this.update = true;
+      this.objectId = this.$route.params.id;
+      this.getLoadedFiles(this.objectId);
+    }
+  },
   methods: {
+    getLoadedFiles: function getLoadedFiles(id) {
+      var _this = this;
+
+      return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_14__["default"])(
+      /*#__PURE__*/
+      regeneratorRuntime.mark(function _callee() {
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_15___default.a.get("/program/object/files/".concat(id)).then(function (res) {
+                  res.data.forEach(function (element) {
+                    _this.loadedFilesOnServer.push(element);
+
+                    _this.setFileName(element);
+                  });
+                });
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    setFileName: function setFileName(element) {
+      var _this2 = this;
+
+      this.items.map(function (elem, index) {
+        if (elem.descriptor === element.descriptor) {
+          if (_this2.allDescriptors.indexOf(elem.descriptor)) {
+            _this2.items[index].fileName = element.name + '.pdf';
+          } else {
+            _this2.items.push({
+              descriptor: elem.descriptor,
+              fileName: element.name,
+              label: 1,
+              other: true
+            });
+          }
+        }
+      });
+    },
     addNewRow: function addNewRow() {
       this.items.push({
         descriptor: null,
@@ -1164,9 +1229,10 @@ __webpack_require__.r(__webpack_exports__);
     fileInput: function fileInput(index) {
       // let file = Array.from(event.target.files)[0]; Это тоже рабочая версия
       var file = document.querySelector('#file_input_' + index).files[0];
-      console.log(file);
 
       if (!this.checkFileExt(file.type) || !this.checkFileSize(file.size)) {
+        // let form = document.querySelector('#file_input_' + index)
+        // form.reset()
         file.value = null;
         return;
       }
@@ -1177,12 +1243,23 @@ __webpack_require__.r(__webpack_exports__);
         name: this.items[index].label,
         file: file
       });
+      console.log(this.selectedFiles);
       this.items[index].fileName = file.name;
     },
-    fileRemove: function fileRemove(index) {
+    fileRemove: function fileRemove(index, descriptor) {
       var key = this.getSelectedFileKey(index);
-      this.selectedFiles.splice(key, 1);
-      this.items[index].fileName = null;
+
+      if (this.items[index].fileName != null && key == null) {
+        console.log('удалить с сервера');
+        this.removeFileFromYii(this.objectId, descriptor, index);
+      } else if (this.items[index].fileName == null && key == null) {
+        this.errorMessage('Сначала выберите файлы!');
+      } else if (this.items[index].fileName != null && key != null) {
+        console.log('удалить локально');
+        console.log(this.selectedFiles);
+        this.selectedFiles.splice(key, 1);
+        this.items[index].fileName = null;
+      }
     },
     checkFileExt: function checkFileExt(type) {
       if (type !== 'application/pdf') {
@@ -1203,38 +1280,40 @@ __webpack_require__.r(__webpack_exports__);
       return true;
     },
     getSelectedFileKey: function getSelectedFileKey(index) {
-      if (this.selectedFiles.length) {
-        return this.selectedFiles.map(function (elem, id) {
-          if (elem.id === index) {
-            return id;
-          } else {
-            return null;
-          }
-        }).filter(function (elem) {
-          return elem !== null;
-        })[0];
+      var element = this.selectedFiles.map(function (elem, id) {
+        if (elem.id === index) {
+          return id;
+        } else {
+          return null;
+        }
+      }).filter(function (elem) {
+        return elem !== null;
+      })[0];
+
+      if (element != null) {
+        return element;
       } else {
-        return this.errorMessage('Сначала добавте файл!');
+        return null;
       }
     },
     getSavedDocuments: function getSavedDocuments() {
       return this.selectedFiles;
     },
     sendFile: function sendFile(_ref) {
-      var _this = this;
+      var _this3 = this;
 
       var id = _ref.id;
-      return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_11__["default"])(
+      return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_14__["default"])(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee() {
+      regeneratorRuntime.mark(function _callee2() {
         var _iteratorNormalCompletion, _didIteratorError, _iteratorError, _iterator, _step, file;
 
-        return regeneratorRuntime.wrap(function _callee$(_context) {
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
-            switch (_context.prev = _context.next) {
+            switch (_context2.prev = _context2.next) {
               case 0:
-                if (!_this.selectedFiles.length) {
-                  _context.next = 27;
+                if (!_this3.selectedFiles.length) {
+                  _context2.next = 27;
                   break;
                 }
 
@@ -1242,89 +1321,86 @@ __webpack_require__.r(__webpack_exports__);
                 _iteratorNormalCompletion = true;
                 _didIteratorError = false;
                 _iteratorError = undefined;
-                _context.prev = 4;
-                _iterator = _this.selectedFiles[Symbol.iterator]();
+                _context2.prev = 4;
+                _iterator = _this3.selectedFiles[Symbol.iterator]();
 
               case 6:
                 if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-                  _context.next = 13;
+                  _context2.next = 13;
                   break;
                 }
 
                 file = _step.value;
-                _context.next = 10;
-                return _this.uploadFile(file, id);
+                _context2.next = 10;
+                return _this3.uploadFile(file, id);
 
               case 10:
                 _iteratorNormalCompletion = true;
-                _context.next = 6;
+                _context2.next = 6;
                 break;
 
               case 13:
-                _context.next = 19;
+                _context2.next = 19;
                 break;
 
               case 15:
-                _context.prev = 15;
-                _context.t0 = _context["catch"](4);
+                _context2.prev = 15;
+                _context2.t0 = _context2["catch"](4);
                 _didIteratorError = true;
-                _iteratorError = _context.t0;
+                _iteratorError = _context2.t0;
 
               case 19:
-                _context.prev = 19;
-                _context.prev = 20;
+                _context2.prev = 19;
+                _context2.prev = 20;
 
                 if (!_iteratorNormalCompletion && _iterator.return != null) {
                   _iterator.return();
                 }
 
               case 22:
-                _context.prev = 22;
+                _context2.prev = 22;
 
                 if (!_didIteratorError) {
-                  _context.next = 25;
+                  _context2.next = 25;
                   break;
                 }
 
                 throw _iteratorError;
 
               case 25:
-                return _context.finish(22);
+                return _context2.finish(22);
 
               case 26:
-                return _context.finish(19);
+                return _context2.finish(19);
 
               case 27:
-                if (_this.uploadSuccess) window.location.href = "/program/object/view/".concat(id);
+                if (_this3.uploadSuccess) window.location.href = "/program/object/view/".concat(id);
 
               case 28:
               case "end":
-                return _context.stop();
+                return _context2.stop();
             }
           }
-        }, _callee, null, [[4, 15, 19, 27], [20,, 22, 26]]);
+        }, _callee2, null, [[4, 15, 19, 27], [20,, 22, 26]]);
       }))();
     },
-    removeFileFromYii: function removeFileFromYii(id, descriptor) {
-      var _this2 = this;
+    removeFileFromYii: function removeFileFromYii(id, descriptor, index) {
+      var _this4 = this;
 
-      return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_11__["default"])(
+      return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_14__["default"])(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2() {
-        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+      regeneratorRuntime.mark(function _callee3() {
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
-            switch (_context2.prev = _context2.next) {
+            switch (_context3.prev = _context3.next) {
               case 0:
-                _context2.next = 2;
-                return axios__WEBPACK_IMPORTED_MODULE_12___default.a.post('/api/fileRemove', form, {
-                  headers: {
-                    'X-CSRF-Token': _this2.csrf,
-                    'Content-Type': 'multipart/form-data;'
-                  },
-                  onUploadProgress: function onUploadProgress(itemUpload) {
-                    _this2.loadProgress = Math.round(itemUpload.loaded / itemUpload.total * 100);
+                _context3.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_15___default.a.get("/program/object/delete-docs/".concat(id), {
+                  params: {
+                    descriptor: descriptor
                   }
                 }).then(function (res) {
+                  _this4.items[index].fileName = null;
                   console.log(res.data);
                 }).catch(function (error) {
                   return console.log(error);
@@ -1332,47 +1408,47 @@ __webpack_require__.r(__webpack_exports__);
 
               case 2:
               case "end":
-                return _context2.stop();
+                return _context3.stop();
             }
           }
-        }, _callee2);
+        }, _callee3);
       }))();
     },
     uploadFile: function uploadFile(file, id) {
-      var _this3 = this;
+      var _this5 = this;
 
-      return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_11__["default"])(
+      return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_14__["default"])(
       /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee3() {
+      regeneratorRuntime.mark(function _callee4() {
         var form;
-        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
-            switch (_context3.prev = _context3.next) {
+            switch (_context4.prev = _context4.next) {
               case 0:
                 form = new FormData();
                 form.append("".concat(file.descriptor), file.file);
-                _this3.loadingFileName = file.file.name;
-                _context3.next = 5;
-                return axios__WEBPACK_IMPORTED_MODULE_12___default.a.post("/program/object/add-docs/".concat(id), form, {
+                _this5.loadingFileName = file.file.name;
+                _context4.next = 5;
+                return axios__WEBPACK_IMPORTED_MODULE_15___default.a.post("/program/object/add-docs/".concat(id), form, {
                   headers: {
-                    'X-CSRF-Token': _this3.csrf,
+                    'X-CSRF-Token': _this5.csrf,
                     'Content-Type': 'multipart/form-data;'
                   },
                   onUploadProgress: function onUploadProgress(itemUpload) {
-                    _this3.loadProgress = Math.round(itemUpload.loaded / itemUpload.total * 100);
+                    _this5.loadProgress = Math.round(itemUpload.loaded / itemUpload.total * 100);
                   }
                 }).then(function (res) {
-                  _this3.uploadSuccess &= !!res.data;
+                  _this5.uploadSuccess &= !!res.data;
                 }).catch(function (error) {
                   return console.log(error);
                 });
 
               case 5:
               case "end":
-                return _context3.stop();
+                return _context4.stop();
             }
           }
-        }, _callee3);
+        }, _callee4);
       }))();
     },
     // loadMessage: function(file) {
@@ -2386,8 +2462,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     this.requestPageData({
       pageName: "programView"
-    });
-    this.$bvModal.show('modal-1');
+    }); // this.$bvModal.show('modal-1')
   }
 });
 
@@ -4036,7 +4111,7 @@ var render = function() {
                               staticClass: "label",
                               on: {
                                 click: function($event) {
-                                  return _vm.fileRemove(index)
+                                  return _vm.fileRemove(index, item.descriptor)
                                 }
                               }
                             },
