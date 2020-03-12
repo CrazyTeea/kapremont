@@ -5,6 +5,7 @@ namespace app\controllers\app;
 use app\models\Atz;
 use app\models\Organizations;
 use app\models\OrgInfo;
+use app\models\ProgObjectsEvents;
 use app\models\ProgramObjects;
 
 use Dompdf\Dompdf;
@@ -66,15 +67,19 @@ class DevelopmentProgrammeController extends AppController
         $program = Yii::$app->getSession()->get('program');
         $atz = Atz::findAll(['id_program'=>$program->id]);
 
-        $objects = ProgramObjects::findAll(['system_status'=>1,'id_program'=>$program->id]);
 
+        $objects = ProgramObjects::findAll(['system_status'=>1,'id_program'=>$program->id]);
+        $events = null;
+        foreach ($objects as $index=>$item) {
+            $events[$index]=ProgObjectsEvents::findAll(['id_object'=>$item->id]);
+        }
         $mpdf = new Mpdf();
         $stylesheet = file_get_contents('bootstrap/css/bootstrap.css');
         $stylesheet2 = file_get_contents('bootstrap/css/bootstrap-grid.css');
 
         $mpdf->WriteHTML($stylesheet,HTMLParserMode::HEADER_CSS);
         $mpdf->WriteHTML($stylesheet2,HTMLParserMode::HEADER_CSS);
-        $mpdf->WriteHTML($this->renderPartial('_export',compact('objects','org','atz','pr_ob','r_ob')));
+        $mpdf->WriteHTML($this->renderPartial('_export',compact('objects','org','atz','pr_ob','r_ob','events')));
 
         Yii::$app->response->headers->set('Access-Control-Allow-Origin', '*');
         $mpdf->Output();
