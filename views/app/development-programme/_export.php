@@ -450,6 +450,120 @@ use yii\helpers\ArrayHelper; ?>
             </td>
         </tr>
     </table>
+    <div class="text-center">
+        3.2.1. Характеристика объекта
+    </div>
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>№</th>
+            <th>Показатель</th>
+            <th>Значение</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>Полный адрес объекта</td>
+            <td><?=$object->address?></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Субъект Российской Федерации </td>
+            <td><?=$object->region ? $object->region->region : ''?></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Кадастровый номер</td>
+            <td><?=$object->kad_number?></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Год постройки здания</td>
+            <td><?=$object->year?></td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Год ввода здания в эксплуатацию</td>
+            <td><?=$object->exploit_year?></td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Год проведения последнего капитального ремонта/реконструкции</td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Наличие предписаний надзорных органов </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Износ здания, %</td>
+            <td><?=$wear[$object->wear and $object->wear <5 ? $object->wear : 0]?></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        </tbody>
+    </table>
     <?php endforeach;?>
 </div>
 

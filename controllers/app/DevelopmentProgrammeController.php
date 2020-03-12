@@ -25,6 +25,7 @@ use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\Response;
 
 /**
  * DevelopmentProgrammeController implements the CRUD actions for DevelopmentProgramme model.
@@ -74,7 +75,10 @@ class DevelopmentProgrammeController extends AppController
         $mpdf->WriteHTML($stylesheet,HTMLParserMode::HEADER_CSS);
         $mpdf->WriteHTML($stylesheet2,HTMLParserMode::HEADER_CSS);
         $mpdf->WriteHTML($this->renderPartial('_export',compact('objects','org','atz','pr_ob','r_ob')));
+
+        Yii::$app->response->headers->set('Access-Control-Allow-Origin', '*');
         $mpdf->Output();
+
 
     }
 
