@@ -245,7 +245,7 @@ use yii\helpers\ArrayHelper; ?>
             <td>Система видеонаблюдения</td>
             <td><?=ArrayHelper::keyExists(0,$atz) ? $atz[0]->cost_b : ''?></td>
             <td><?=ArrayHelper::keyExists(0,$atz) ? $atz[0]->cost_v : ''?></td>
-            <td><?=ArrayHelper::keyExists(0,$atz) ? $atz[0]->cost_b*1 + $atz[0]->cost_v*1: ''?></td>
+            <td><?=ArrayHelper::keyExists(0,$atz) ? (int)$atz[0]->cost_b*1 + (int)$atz[0]->cost_v*1: ''?></td>
         </tr>
         <tr>
             <td>2</td>
