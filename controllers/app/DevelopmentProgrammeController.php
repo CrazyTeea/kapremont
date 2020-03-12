@@ -66,7 +66,7 @@ class DevelopmentProgrammeController extends AppController
         $program = Yii::$app->getSession()->get('program');
         $atz = Atz::findAll(['id_program'=>$program->id]);
 
-        $objects = ProgramObjects::findAll(['id_program'=>$program->id]);
+        $objects = ProgramObjects::findAll(['system_status'=>1,'id_program'=>$program->id]);
 
         $mpdf = new Mpdf();
         $stylesheet = file_get_contents('bootstrap/css/bootstrap.css');
