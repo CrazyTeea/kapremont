@@ -177,11 +177,10 @@ export default {
             return this.selectedFiles;
         },
         async sendFile({id}) {
-            if(!this.selectedFiles.length) {
-                this.errorMessage('Сначала выберите файлы!')
-            } else {
-                for(let file of this.selectedFiles) {
-                    await this.uploadFile(file,id)
+            if(this.selectedFiles.length) {
+                //  this.errorMessage('Сначала выберите файлы!')
+                for (let file of this.selectedFiles) {
+                    await this.uploadFile(file, id)
                 }
             }
             if (this.uploadSuccess)
@@ -224,8 +223,7 @@ export default {
                     this.loadProgress = Math.round( (itemUpload.loaded / itemUpload.total) * 100 )
                 }
             }).then((res) => {
-                 if (res.data) this.uploadSuccess &= true;
-                 else this.uploadSuccess &= false;
+                 this.uploadSuccess &= !!res.data;
             }).catch(error => console.log(error))
         },
         // loadMessage: function(file) {

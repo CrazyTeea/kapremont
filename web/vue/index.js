@@ -2048,20 +2048,31 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator */ "./node_modules/core-js/modules/es.symbol.iterator.js");
 /* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
-/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
-/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
-/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_8__);
 
 
 
 
 
 
+
+
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2134,8 +2145,28 @@ __webpack_require__.r(__webpack_exports__);
 //
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+  mounted: function mounted() {
+    var _this = this;
+
+    axios__WEBPACK_IMPORTED_MODULE_8___default.a.get('/rest/system/get-page', {
+      params: {
+        pageName: 'atz' //id_org:document.getElementById('global_id_org').value
+
+      }
+    }).then(function (response) {
+      console.log(response.data);
+      response.data.forEach(function (item) {
+        _this.items[item.elem].cost_b = item.cost_b;
+        _this.items[item.elem].cost_v = item.cost_v;
+      });
+    }).catch(function (err) {
+      console.error(err);
+    });
+  },
   data: function data() {
     return {
+      csrf: document.getElementsByName('csrf-token')[0].content,
+      modelName: 'Atz',
       items: [{
         cost_b: null,
         cost_v: null,
@@ -2186,12 +2217,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     cost_o: function cost_o() {
-      var _this = this;
+      var _this2 = this;
 
       return function (index) {
-        var a = parseFloat(_this.items[index].cost_b) || 0;
-        var b = parseFloat(_this.items[index].cost_v) || 0;
-        _this.items[index].cost_o = a + b;
+        var a = parseFloat(_this2.items[index].cost_b) || 0;
+        var b = parseFloat(_this2.items[index].cost_v) || 0;
+        _this2.items[index].cost_o = a + b;
         return a + b;
       };
     },
@@ -2309,8 +2340,16 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     sendInfo: function sendInfo() {
-      console.log(this.items); // Axios.post('/куда-то там').then((res) => {
-      // })
+      console.log(this.items);
+      var formData = new FormData(document.getElementById('atz_form'));
+      axios__WEBPACK_IMPORTED_MODULE_8___default.a.post(this.$route.path, formData, {
+        headers: {
+          'X-CSRF-Token': this.csrf,
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      }).then(function (res) {
+        if (!!res.data) location.reload();
+      });
     }
   }
 });
@@ -41635,6 +41674,32 @@ hiddenKeys[HIDDEN] = true;
 
 /***/ }),
 
+/***/ "./node_modules/core-js/modules/web.dom-collections.for-each.js":
+/*!**********************************************************************!*\
+  !*** ./node_modules/core-js/modules/web.dom-collections.for-each.js ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+var global = __webpack_require__(/*! ../internals/global */ "./node_modules/core-js/internals/global.js");
+var DOMIterables = __webpack_require__(/*! ../internals/dom-iterables */ "./node_modules/core-js/internals/dom-iterables.js");
+var forEach = __webpack_require__(/*! ../internals/array-for-each */ "./node_modules/core-js/internals/array-for-each.js");
+var createNonEnumerableProperty = __webpack_require__(/*! ../internals/create-non-enumerable-property */ "./node_modules/core-js/internals/create-non-enumerable-property.js");
+
+for (var COLLECTION_NAME in DOMIterables) {
+  var Collection = global[COLLECTION_NAME];
+  var CollectionPrototype = Collection && Collection.prototype;
+  // some Chrome versions have non-configurable methods on DOMTokenList
+  if (CollectionPrototype && CollectionPrototype.forEach !== forEach) try {
+    createNonEnumerableProperty(CollectionPrototype, 'forEach', forEach);
+  } catch (error) {
+    CollectionPrototype.forEach = forEach;
+  }
+}
+
+
+/***/ }),
+
 /***/ "./node_modules/core-js/modules/web.dom-collections.iterator.js":
 /*!**********************************************************************!*\
   !*** ./node_modules/core-js/modules/web.dom-collections.iterator.js ***!
@@ -47187,30 +47252,197 @@ var render = function() {
     { staticClass: "overflow" },
     [
       _c(
-        "b-table-simple",
-        { attrs: { bordered: "", hover: "" } },
+        "b-form",
+        { attrs: { id: "atz_form", method: "post" } },
         [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.csrf,
+                expression: "csrf"
+              }
+            ],
+            attrs: { id: "hidden", name: "_csrf", type: "hidden" },
+            domProps: { value: _vm.csrf },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.csrf = $event.target.value
+              }
+            }
+          }),
+          _vm._v(" "),
           _c(
-            "b-thead",
+            "b-table-simple",
+            { attrs: { bordered: "", hover: "" } },
             [
               _c(
-                "b-tr",
+                "b-thead",
                 [
-                  _c("b-th", { staticClass: "vertical-align-for-table-cell" }, [
-                    _vm._v("Направление расходов")
-                  ]),
-                  _vm._v(" "),
-                  _c("b-th", { staticClass: "vertical-align-for-table-cell" }, [
-                    _vm._v("Сумма бюджетного финансирования (руб)")
-                  ]),
-                  _vm._v(" "),
-                  _c("b-th", { staticClass: "vertical-align-for-table-cell" }, [
-                    _vm._v("Сумма внебюджетного финансирования (руб)")
-                  ]),
-                  _vm._v(" "),
-                  _c("b-th", { staticClass: "vertical-align-for-table-cell" }, [
-                    _vm._v("Сумма общий объем финансирования (руб)")
-                  ])
+                  _c(
+                    "b-tr",
+                    [
+                      _c(
+                        "b-th",
+                        { staticClass: "vertical-align-for-table-cell" },
+                        [_vm._v("Направление расходов")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-th",
+                        { staticClass: "vertical-align-for-table-cell" },
+                        [_vm._v("Сумма бюджетного финансирования (руб)")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-th",
+                        { staticClass: "vertical-align-for-table-cell" },
+                        [_vm._v("Сумма внебюджетного финансирования (руб)")]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-th",
+                        { staticClass: "vertical-align-for-table-cell" },
+                        [_vm._v("Сумма общий объем финансирования (руб)")]
+                      )
+                    ],
+                    1
+                  )
+                ],
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "b-tbody",
+                _vm._l(_vm.items, function(item, index) {
+                  return _c(
+                    "b-tr",
+                    { key: index },
+                    [
+                      _c(
+                        "b-th",
+                        {
+                          staticClass:
+                            "vertical-align-for-table-cell normal-font-weight-for-cell"
+                        },
+                        [_c("label", [_vm._v(_vm._s(item.label))])]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-th",
+                        {
+                          staticClass:
+                            "vertical-align-for-table-cell normal-font-weight-for-cell"
+                        },
+                        [
+                          _c("b-form-input", {
+                            attrs: {
+                              name: _vm.modelName + "[" + index + "][cost_b]",
+                              placeholder: "Цена",
+                              min: "0",
+                              type: "number"
+                            },
+                            model: {
+                              value: item.cost_b,
+                              callback: function($$v) {
+                                _vm.$set(item, "cost_b", $$v)
+                              },
+                              expression: "item.cost_b"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-th",
+                        {
+                          staticClass:
+                            "vertical-align-for-table-cell normal-font-weight-for-cell"
+                        },
+                        [
+                          _c("b-form-input", {
+                            attrs: {
+                              name: _vm.modelName + "[" + index + "][cost_v]",
+                              placeholder: "Цена",
+                              min: "0",
+                              type: "number"
+                            },
+                            model: {
+                              value: item.cost_v,
+                              callback: function($$v) {
+                                _vm.$set(item, "cost_v", $$v)
+                              },
+                              expression: "item.cost_v"
+                            }
+                          })
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-th",
+                        {
+                          staticClass:
+                            "vertical-align-for-table-cell normal-font-weight-for-cell"
+                        },
+                        [_c("label", [_vm._v(_vm._s(_vm.cost_o(index)))])]
+                      )
+                    ],
+                    1
+                  )
+                }),
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "b-tfoot",
+                [
+                  _c(
+                    "b-tr",
+                    [
+                      _c(
+                        "b-th",
+                        {
+                          staticClass:
+                            "vertical-align-for-table-cell text-align-end-for-cell"
+                        },
+                        [_c("label", [_vm._v("ИТОГО:")])]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-th",
+                        {
+                          staticClass:
+                            "vertical-align-for-table-cell text-align-end-for-cell"
+                        },
+                        [_c("label", [_vm._v(_vm._s(_vm.cost_b_full))])]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-th",
+                        {
+                          staticClass:
+                            "vertical-align-for-table-cell text-align-end-for-cell"
+                        },
+                        [_c("label", [_vm._v(_vm._s(_vm.cost_v_full))])]
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "b-th",
+                        {
+                          staticClass:
+                            "vertical-align-for-table-cell text-align-end-for-cell"
+                        },
+                        [_c("label", [_vm._v(_vm._s(_vm.cost_o_full))])]
+                      )
+                    ],
+                    1
+                  )
                 ],
                 1
               )
@@ -47219,165 +47451,36 @@ var render = function() {
           ),
           _vm._v(" "),
           _c(
-            "b-tbody",
-            _vm._l(_vm.items, function(item, index) {
-              return _c(
-                "b-tr",
-                { key: index },
-                [
-                  _c(
-                    "b-th",
-                    {
-                      staticClass:
-                        "vertical-align-for-table-cell normal-font-weight-for-cell"
-                    },
-                    [_c("label", [_vm._v(_vm._s(item.label))])]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-th",
-                    {
-                      staticClass:
-                        "vertical-align-for-table-cell normal-font-weight-for-cell"
-                    },
-                    [
-                      _c("b-form-input", {
-                        attrs: {
-                          placeholder: "Цена",
-                          min: "0",
-                          type: "number"
-                        },
-                        model: {
-                          value: item.cost_b,
-                          callback: function($$v) {
-                            _vm.$set(item, "cost_b", $$v)
-                          },
-                          expression: "item.cost_b"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-th",
-                    {
-                      staticClass:
-                        "vertical-align-for-table-cell normal-font-weight-for-cell"
-                    },
-                    [
-                      _c("b-form-input", {
-                        attrs: {
-                          placeholder: "Цена",
-                          min: "0",
-                          type: "number"
-                        },
-                        model: {
-                          value: item.cost_v,
-                          callback: function($$v) {
-                            _vm.$set(item, "cost_v", $$v)
-                          },
-                          expression: "item.cost_v"
-                        }
-                      })
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-th",
-                    {
-                      staticClass:
-                        "vertical-align-for-table-cell normal-font-weight-for-cell"
-                    },
-                    [_c("label", [_vm._v(_vm._s(_vm.cost_o(index)))])]
-                  )
-                ],
-                1
-              )
-            }),
-            1
-          ),
-          _vm._v(" "),
-          _c(
-            "b-tfoot",
+            "div",
+            { staticClass: "align-element-right" },
             [
               _c(
-                "b-tr",
-                [
-                  _c(
-                    "b-th",
-                    {
-                      staticClass:
-                        "vertical-align-for-table-cell text-align-end-for-cell"
-                    },
-                    [_c("label", [_vm._v("ИТОГО:")])]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-th",
-                    {
-                      staticClass:
-                        "vertical-align-for-table-cell text-align-end-for-cell"
-                    },
-                    [_c("label", [_vm._v(_vm._s(_vm.cost_b_full))])]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-th",
-                    {
-                      staticClass:
-                        "vertical-align-for-table-cell text-align-end-for-cell"
-                    },
-                    [_c("label", [_vm._v(_vm._s(_vm.cost_v_full))])]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "b-th",
-                    {
-                      staticClass:
-                        "vertical-align-for-table-cell text-align-end-for-cell"
-                    },
-                    [_c("label", [_vm._v(_vm._s(_vm.cost_o_full))])]
-                  )
-                ],
-                1
+                "b-button",
+                {
+                  attrs: { size: "sm", variant: "info" },
+                  on: {
+                    click: function($event) {
+                      return _vm.sendInfo()
+                    }
+                  }
+                },
+                [_vm._v("Сохранить")]
+              ),
+              _vm._v(" "),
+              _c(
+                "b-button",
+                {
+                  attrs: { size: "sm", variant: "danger" },
+                  on: {
+                    click: function($event) {
+                      return _vm.clearInputs()
+                    }
+                  }
+                },
+                [_vm._v("Сброс")]
               )
             ],
             1
-          )
-        ],
-        1
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "align-element-right" },
-        [
-          _c(
-            "b-button",
-            {
-              attrs: { size: "sm", variant: "info" },
-              on: {
-                click: function($event) {
-                  return _vm.sendInfo()
-                }
-              }
-            },
-            [_vm._v("Сохранить")]
-          ),
-          _vm._v(" "),
-          _c(
-            "b-button",
-            {
-              attrs: { size: "sm", variant: "danger" },
-              on: {
-                click: function($event) {
-                  return _vm.clearInputs()
-                }
-              }
-            },
-            [_vm._v("Сброс")]
           )
         ],
         1

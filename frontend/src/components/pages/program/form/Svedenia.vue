@@ -107,6 +107,18 @@ import Multiselect from 'vue-select';
 
     export default {
         name: "Svedenia",
+        mounted() {
+            if (Array.isArray(window.MODEL.svedenia)){
+                window.MODEL.svedenia.forEach((item,index)=>{
+                    this.sved.is_nessesary[index]=item.is_nessesary;
+                    this.sved.begin_date[index]=item.date_event_start;
+                    this.sved.final_date[index]=item.date_event_end;
+                    this.sved.realization_cost[index]=item.cost_real;
+                    this.sved.kap_cost[index]=item.sum_bud_fin;
+                    this.sved.finanse[index]=item.fin_vnebud_ist;
+                });
+            }
+        },
         components: {
             "v-select": Multiselect,    
         },

@@ -137,6 +137,16 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__);
+
+
+//
+//
+//
+//
 //
 //
 //
@@ -257,6 +267,31 @@ __webpack_require__.r(__webpack_exports__);
   props: {
     modelName: String
   },
+  mounted: function mounted() {
+    function getKeyByValue(object, attr, value) {
+      var f;
+      object.forEach(function (obj) {
+        if (obj[attr] == value) f = obj;
+      });
+      return f;
+    }
+
+    this.items.forEach(function (item, index) {
+      var it = getKeyByValue(window.MODEL.necessary, 'element', index);
+      item.nalichie = it === null || it === void 0 ? void 0 : it.nalichie;
+      item.material = it === null || it === void 0 ? void 0 : it.material;
+      item.srok_eks = it === null || it === void 0 ? void 0 : it.srok_eks;
+      item.kap_remont = it === null || it === void 0 ? void 0 : it.kap_remont;
+      item.obosnovanie = it === null || it === void 0 ? void 0 : it.obosnovanie;
+    });
+    this.itemsTwo.forEach(function (item, index) {
+      var it = getKeyByValue(window.MODEL.necessary, 'element', index + 17);
+      item.nalichie = it === null || it === void 0 ? void 0 : it.nalichie;
+      item.srok_eks = it === null || it === void 0 ? void 0 : it.srok_eks;
+      item.kap_remont = it === null || it === void 0 ? void 0 : it.kap_remont;
+      item.obosnovanie = it === null || it === void 0 ? void 0 : it.obosnovanie;
+    });
+  },
   data: function data() {
     return {
       items: [{
@@ -265,222 +300,256 @@ __webpack_require__.r(__webpack_exports__);
         material: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 0
       }, {
         label: 'Отмостка',
         nalichie: null,
         material: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 1
       }, {
         label: 'Стены',
         nalichie: null,
         material: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 2
       }, {
         label: 'Колонны',
         nalichie: null,
         material: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 3
       }, {
         label: 'Перегородки',
         nalichie: null,
         material: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 4
       }, {
         label: 'Крыша',
         nalichie: null,
         material: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 5
       }, {
         label: 'Кровля',
         nalichie: null,
         material: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 6
       }, {
         label: 'Перекрытия',
         nalichie: null,
         material: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 7
       }, {
         label: 'Полы',
         nalichie: null,
         material: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 8
       }, {
         label: 'Окна',
         nalichie: null,
         material: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 9
       }, {
         label: 'Двери',
         nalichie: null,
         material: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 10
       }, {
         label: 'Ворота',
         nalichie: null,
         material: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 11
       }, {
         label: 'Лестницы',
         nalichie: null,
         material: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 12
       }, {
         label: 'Крыльца',
         nalichie: null,
         material: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 13
       }, {
         label: 'Балконы/Лоджии',
         nalichie: null,
         material: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 14
       }, {
         label: 'Внутренняя отделка',
         nalichie: null,
         material: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 15
       }, {
         label: 'Наружняя отделка',
         nalichie: null,
         material: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 16
       }],
       itemsTwo: [{
         label: 'Система электроснабжения',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 17
       }, {
         label: 'Система водоснабжения',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 18
       }, {
         label: 'Система водоотведения',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 19
       }, {
         label: 'Система газоснабжения',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 20
       }, {
         label: 'Система кондиционирования воздуха',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 21
       }, {
         label: 'Система вентиляции',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 22
       }, {
         label: 'Система отопления',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        elementt: 23
       }, {
         label: 'Система диспетчеризации',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 24
       }, {
         label: 'Радиофикация',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 25
       }, {
         label: 'Телевидение эфирное',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 26
       }, {
         label: 'Система видеонаблюдения',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 27
       }, {
         label: 'Система интернет и телефонии',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 28
       }, {
         label: 'Система контроля управления доступом',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 29
       }, {
         label: 'Пожарная сигнализация',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 30
       }, {
         label: 'Охранная сигнализация',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 31
       }, {
         label: 'Мусоропроводы',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 32
       }, {
         label: 'Лифты',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
-        obosnovanie: null
+        obosnovanie: null,
+        element: 33
       }]
     };
   }
@@ -497,6 +566,17 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/defineProperty */ "./node_modules/@babel/runtime/helpers/esm/defineProperty.js");
+
+
+
+
+var _props$mounted$data$m;
+
 //
 //
 //
@@ -558,9 +638,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({
+/* harmony default export */ __webpack_exports__["default"] = (_props$mounted$data$m = {
   props: {
     modelName: String
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    window.MODEL.riscs.forEach(function (item, index) {
+      if (!index) _this.items[0] = {
+        types: item.types,
+        poison: item.poison,
+        protect: item.protect
+      };else _this.items.push({
+        types: item.types,
+        poison: item.poison,
+        protect: item.protect
+      });
+    });
   },
   data: function data() {
     return {
@@ -570,23 +665,21 @@ __webpack_require__.r(__webpack_exports__);
         protect: null
       }]
     };
-  },
-  mounted: function mounted() {
-    this.items[0].types = 'lol';
-  },
-  methods: {
-    addNewRow: function addNewRow() {
-      this.items.push({
-        types: null,
-        poison: null,
-        protect: null
-      });
-    },
-    deleteLastRow: function deleteLastRow() {
-      this.items.pop();
-    }
   }
-});
+}, Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(_props$mounted$data$m, "mounted", function mounted() {
+  this.items[0].types = 'lol';
+}), Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_2__["default"])(_props$mounted$data$m, "methods", {
+  addNewRow: function addNewRow() {
+    this.items.push({
+      types: null,
+      poison: null,
+      protect: null
+    });
+  },
+  deleteLastRow: function deleteLastRow() {
+    this.items.pop();
+  }
+}), _props$mounted$data$m);
 
 /***/ }),
 
@@ -599,8 +692,14 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
-/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
+/* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_2__);
+
+
 //
 //
 //
@@ -708,8 +807,22 @@ __webpack_require__.r(__webpack_exports__);
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Svedenia",
+  mounted: function mounted() {
+    var _this = this;
+
+    if (Array.isArray(window.MODEL.svedenia)) {
+      window.MODEL.svedenia.forEach(function (item, index) {
+        _this.sved.is_nessesary[index] = item.is_nessesary;
+        _this.sved.begin_date[index] = item.date_event_start;
+        _this.sved.final_date[index] = item.date_event_end;
+        _this.sved.realization_cost[index] = item.cost_real;
+        _this.sved.kap_cost[index] = item.sum_bud_fin;
+        _this.sved.finanse[index] = item.fin_vnebud_ist;
+      });
+    }
+  },
   components: {
-    "v-select": vue_select__WEBPACK_IMPORTED_MODULE_0___default.a
+    "v-select": vue_select__WEBPACK_IMPORTED_MODULE_2___default.a
   },
   watch: {
     masObj: function masObj() {// console.log(this.masObj)
@@ -725,12 +838,12 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     test: function test() {
-      var _this = this;
+      var _this2 = this;
 
       return function (index) {
-        var _this$masObj$index;
+        var _this2$masObj$index;
 
-        return (_this$masObj$index = _this.masObj[index]) === null || _this$masObj$index === void 0 ? void 0 : _this$masObj$index.finance;
+        return (_this2$masObj$index = _this2.masObj[index]) === null || _this2$masObj$index === void 0 ? void 0 : _this2$masObj$index.finance;
       }; // ? this.masObj[index].finanse : this.masObj[index]
     },
     rc_full: function rc_full() {
@@ -1120,81 +1233,76 @@ __webpack_require__.r(__webpack_exports__);
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
-                if (_this.selectedFiles.length) {
-                  _context.next = 4;
+                if (!_this.selectedFiles.length) {
+                  _context.next = 27;
                   break;
                 }
 
-                _this.errorMessage('Сначала выберите файлы!');
-
-                _context.next = 30;
-                break;
-
-              case 4:
+                //  this.errorMessage('Сначала выберите файлы!')
                 _iteratorNormalCompletion = true;
                 _didIteratorError = false;
                 _iteratorError = undefined;
-                _context.prev = 7;
+                _context.prev = 4;
                 _iterator = _this.selectedFiles[Symbol.iterator]();
 
-              case 9:
+              case 6:
                 if (_iteratorNormalCompletion = (_step = _iterator.next()).done) {
-                  _context.next = 16;
+                  _context.next = 13;
                   break;
                 }
 
                 file = _step.value;
-                _context.next = 13;
+                _context.next = 10;
                 return _this.uploadFile(file, id);
 
-              case 13:
+              case 10:
                 _iteratorNormalCompletion = true;
-                _context.next = 9;
+                _context.next = 6;
                 break;
 
-              case 16:
-                _context.next = 22;
+              case 13:
+                _context.next = 19;
                 break;
 
-              case 18:
-                _context.prev = 18;
-                _context.t0 = _context["catch"](7);
+              case 15:
+                _context.prev = 15;
+                _context.t0 = _context["catch"](4);
                 _didIteratorError = true;
                 _iteratorError = _context.t0;
 
-              case 22:
-                _context.prev = 22;
-                _context.prev = 23;
+              case 19:
+                _context.prev = 19;
+                _context.prev = 20;
 
                 if (!_iteratorNormalCompletion && _iterator.return != null) {
                   _iterator.return();
                 }
 
-              case 25:
-                _context.prev = 25;
+              case 22:
+                _context.prev = 22;
 
                 if (!_didIteratorError) {
-                  _context.next = 28;
+                  _context.next = 25;
                   break;
                 }
 
                 throw _iteratorError;
 
-              case 28:
-                return _context.finish(25);
-
-              case 29:
+              case 25:
                 return _context.finish(22);
 
-              case 30:
+              case 26:
+                return _context.finish(19);
+
+              case 27:
                 if (_this.uploadSuccess) window.location.href = "/program/object/view/".concat(id);
 
-              case 31:
+              case 28:
               case "end":
                 return _context.stop();
             }
           }
-        }, _callee, null, [[7, 18, 22, 30], [23,, 25, 29]]);
+        }, _callee, null, [[4, 15, 19, 27], [20,, 22, 26]]);
       }))();
     },
     removeFileFromYii: function removeFileFromYii(id, descriptor) {
@@ -1254,7 +1362,7 @@ __webpack_require__.r(__webpack_exports__);
                     _this3.loadProgress = Math.round(itemUpload.loaded / itemUpload.total * 100);
                   }
                 }).then(function (res) {
-                  if (res.data) _this3.uploadSuccess &= true;else _this3.uploadSuccess &= false;
+                  _this3.uploadSuccess &= !!res.data;
                 }).catch(function (error) {
                   return console.log(error);
                 });
@@ -1307,6 +1415,12 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_1__);
+
+
 //
 //
 //
@@ -1404,6 +1518,17 @@ __webpack_require__.r(__webpack_exports__);
         changes: null
       }]
     };
+  },
+  mounted: function mounted() {
+    var _this = this;
+
+    window.MODEL.waited.forEach(function (item, index) {
+      if (index < 5) _this.dataFirst[item.element].plan = item.plan;else _this.dataFirst[item.element] = {
+        aim: item.aim,
+        plan: item.plan,
+        changes: item.changes
+      };
+    });
   },
   methods: {
     addNewRow: function addNewRow() {
@@ -1808,14 +1933,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
 
 
 
@@ -1854,32 +1971,32 @@ __webpack_require__.r(__webpack_exports__);
     }
   }),
   data: function data() {
-    var _window$MODEL, _window$MODEL2, _window$MODEL3, _window$MODEL4, _window$MODEL5, _window$MODEL6, _window$MODEL7, _window$MODEL8, _window$MODEL9, _window$MODEL10, _window$MODEL11, _window$MODEL12, _window$MODEL13, _window$MODEL14, _window$MODEL15, _window$MODEL16, _window$MODEL17, _window$MODEL18, _window$MODEL19, _window$MODEL20, _window$MODEL21;
+    var _window$MODEL$base, _window$MODEL$base2, _window$MODEL$base3, _window$MODEL$base4, _window$MODEL$base5, _window$MODEL$base6, _window$MODEL$base7, _window$MODEL$base8, _window$MODEL$base9, _window$MODEL$base10, _window$MODEL$base11, _window$MODEL$base12, _window$MODEL$base13, _window$MODEL$base14, _window$MODEL$base15, _window$MODEL$base16, _window$MODEL$base17, _window$MODEL$base18, _window$MODEL$base19, _window$MODEL$base20, _window$MODEL$base21;
 
     return {
       csrf: document.getElementsByName('csrf-token')[0].content,
       formData: {
-        type: ((_window$MODEL = window.MODEL) === null || _window$MODEL === void 0 ? void 0 : _window$MODEL.type) || 0,
-        name: ((_window$MODEL2 = window.MODEL) === null || _window$MODEL2 === void 0 ? void 0 : _window$MODEL2.name) || null,
-        id_region: ((_window$MODEL3 = window.MODEL) === null || _window$MODEL3 === void 0 ? void 0 : _window$MODEL3.id_region) || null,
-        id_priority: ((_window$MODEL4 = window.MODEL) === null || _window$MODEL4 === void 0 ? void 0 : _window$MODEL4.id_priority) || null,
-        id_city: ((_window$MODEL5 = window.MODEL) === null || _window$MODEL5 === void 0 ? void 0 : _window$MODEL5.id_city) || null,
-        kad_number: ((_window$MODEL6 = window.MODEL) === null || _window$MODEL6 === void 0 ? void 0 : _window$MODEL6.kad_number) || null,
-        year: ((_window$MODEL7 = window.MODEL) === null || _window$MODEL7 === void 0 ? void 0 : _window$MODEL7.year) || 0,
-        exploit_year: ((_window$MODEL8 = window.MODEL) === null || _window$MODEL8 === void 0 ? void 0 : _window$MODEL8.exploit_year) || 0,
-        wear: ((_window$MODEL9 = window.MODEL) === null || _window$MODEL9 === void 0 ? void 0 : _window$MODEL9.wear) || null,
-        exist_pred_nadz_orgs: ((_window$MODEL10 = window.MODEL) === null || _window$MODEL10 === void 0 ? void 0 : _window$MODEL10.exist_pred_nadz_orgs) || null,
-        osn_isp_zdan: ((_window$MODEL11 = window.MODEL) === null || _window$MODEL11 === void 0 ? void 0 : _window$MODEL11.osn_isp_zdan) || null,
-        podrobnosti: ((_window$MODEL12 = window.MODEL) === null || _window$MODEL12 === void 0 ? void 0 : _window$MODEL12.podrobnosti) || null,
-        assignment: ((_window$MODEL13 = window.MODEL) === null || _window$MODEL13 === void 0 ? void 0 : _window$MODEL13.assignment) || null,
-        prav_sob: ((_window$MODEL14 = window.MODEL) === null || _window$MODEL14 === void 0 ? void 0 : _window$MODEL14.prav_sob) || null,
-        square: ((_window$MODEL15 = window.MODEL) === null || _window$MODEL15 === void 0 ? void 0 : _window$MODEL15.square) || null,
-        square_kap: ((_window$MODEL16 = window.MODEL) === null || _window$MODEL16 === void 0 ? void 0 : _window$MODEL16.square_kap) || null,
-        isp_v_ust_dey: ((_window$MODEL17 = window.MODEL) === null || _window$MODEL17 === void 0 ? void 0 : _window$MODEL17.isp_v_ust_dey) || null,
-        n_isp_v_ust_dey: ((_window$MODEL18 = window.MODEL) === null || _window$MODEL18 === void 0 ? void 0 : _window$MODEL18.n_isp_v_ust_dey) || null,
-        square_ar: ((_window$MODEL19 = window.MODEL) === null || _window$MODEL19 === void 0 ? void 0 : _window$MODEL19.square_ar) || null,
-        note: ((_window$MODEL20 = window.MODEL) === null || _window$MODEL20 === void 0 ? void 0 : _window$MODEL20.note) || null,
-        prav_oper_upr: ((_window$MODEL21 = window.MODEL) === null || _window$MODEL21 === void 0 ? void 0 : _window$MODEL21.prav_oper_upr) || null
+        type: ((_window$MODEL$base = window.MODEL.base) === null || _window$MODEL$base === void 0 ? void 0 : _window$MODEL$base.type) || 0,
+        name: ((_window$MODEL$base2 = window.MODEL.base) === null || _window$MODEL$base2 === void 0 ? void 0 : _window$MODEL$base2.name) || null,
+        id_region: ((_window$MODEL$base3 = window.MODEL.base) === null || _window$MODEL$base3 === void 0 ? void 0 : _window$MODEL$base3.id_region) || null,
+        id_priority: ((_window$MODEL$base4 = window.MODEL.base) === null || _window$MODEL$base4 === void 0 ? void 0 : _window$MODEL$base4.id_priority) || null,
+        id_city: ((_window$MODEL$base5 = window.MODEL.base) === null || _window$MODEL$base5 === void 0 ? void 0 : _window$MODEL$base5.id_city) || null,
+        kad_number: ((_window$MODEL$base6 = window.MODEL.base) === null || _window$MODEL$base6 === void 0 ? void 0 : _window$MODEL$base6.kad_number) || null,
+        year: ((_window$MODEL$base7 = window.MODEL.base) === null || _window$MODEL$base7 === void 0 ? void 0 : _window$MODEL$base7.year) || 0,
+        exploit_year: ((_window$MODEL$base8 = window.MODEL.base) === null || _window$MODEL$base8 === void 0 ? void 0 : _window$MODEL$base8.exploit_year) || 0,
+        wear: ((_window$MODEL$base9 = window.MODEL.base) === null || _window$MODEL$base9 === void 0 ? void 0 : _window$MODEL$base9.wear) || null,
+        exist_pred_nadz_orgs: ((_window$MODEL$base10 = window.MODEL.base) === null || _window$MODEL$base10 === void 0 ? void 0 : _window$MODEL$base10.exist_pred_nadz_orgs) || null,
+        osn_isp_zdan: ((_window$MODEL$base11 = window.MODEL.base) === null || _window$MODEL$base11 === void 0 ? void 0 : _window$MODEL$base11.osn_isp_zdan) || null,
+        podrobnosti: ((_window$MODEL$base12 = window.MODEL.base) === null || _window$MODEL$base12 === void 0 ? void 0 : _window$MODEL$base12.podrobnosti) || null,
+        assignment: ((_window$MODEL$base13 = window.MODEL.base) === null || _window$MODEL$base13 === void 0 ? void 0 : _window$MODEL$base13.assignment) || null,
+        prav_sob: ((_window$MODEL$base14 = window.MODEL.base) === null || _window$MODEL$base14 === void 0 ? void 0 : _window$MODEL$base14.prav_sob) || null,
+        square: ((_window$MODEL$base15 = window.MODEL.base) === null || _window$MODEL$base15 === void 0 ? void 0 : _window$MODEL$base15.square) || null,
+        square_kap: ((_window$MODEL$base16 = window.MODEL.base) === null || _window$MODEL$base16 === void 0 ? void 0 : _window$MODEL$base16.square_kap) || null,
+        isp_v_ust_dey: ((_window$MODEL$base17 = window.MODEL.base) === null || _window$MODEL$base17 === void 0 ? void 0 : _window$MODEL$base17.isp_v_ust_dey) || null,
+        n_isp_v_ust_dey: ((_window$MODEL$base18 = window.MODEL.base) === null || _window$MODEL$base18 === void 0 ? void 0 : _window$MODEL$base18.n_isp_v_ust_dey) || null,
+        square_ar: ((_window$MODEL$base19 = window.MODEL.base) === null || _window$MODEL$base19 === void 0 ? void 0 : _window$MODEL$base19.square_ar) || null,
+        note: ((_window$MODEL$base20 = window.MODEL.base) === null || _window$MODEL$base20 === void 0 ? void 0 : _window$MODEL$base20.note) || null,
+        prav_oper_upr: ((_window$MODEL$base21 = window.MODEL.base) === null || _window$MODEL$base21 === void 0 ? void 0 : _window$MODEL$base21.prav_oper_upr) || null
       },
       errors: {}
     };
@@ -1941,6 +2058,7 @@ __webpack_require__.r(__webpack_exports__);
   }),
   mounted: function mounted() {
     console.log(window.MODEL);
+    console.log(this.formData);
     this.requestPageData({
       pageName: "objectCreate"
     });
@@ -2934,6 +3052,32 @@ var render = function() {
                 "b-tr",
                 { key: index },
                 [
+                  item.nalichie
+                    ? _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: item.element,
+                            expression: "item.element"
+                          }
+                        ],
+                        attrs: {
+                          type: "hidden",
+                          name: _vm.modelName + "[" + index + "][element]"
+                        },
+                        domProps: { value: item.element },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(item, "element", $event.target.value)
+                          }
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
                   _c(
                     "b-th",
                     {
@@ -2949,6 +3093,7 @@ var render = function() {
                     [
                       _c("b-form-checkbox", {
                         attrs: {
+                          value: "1",
                           type: "checkbox",
                           name: _vm.modelName + "[" + index + "][nalichie]"
                         },
@@ -3019,6 +3164,7 @@ var render = function() {
                       item.nalichie
                         ? _c("b-form-checkbox", {
                             attrs: {
+                              value: "1",
                               name:
                                 _vm.modelName + "[" + index + "][kap_remont]",
                               type: "checkbox"
@@ -3111,6 +3257,32 @@ var render = function() {
                 "b-tr",
                 { key: index },
                 [
+                  item.nalichie
+                    ? _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: item.element,
+                            expression: "item.element"
+                          }
+                        ],
+                        attrs: {
+                          type: "hidden",
+                          name: _vm.modelName + "[" + index + "][element]"
+                        },
+                        domProps: { value: item.element },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(item, "element", $event.target.value)
+                          }
+                        }
+                      })
+                    : _vm._e(),
+                  _vm._v(" "),
                   _c(
                     "b-th",
                     {
@@ -3127,6 +3299,7 @@ var render = function() {
                       _c("b-form-checkbox", {
                         attrs: {
                           type: "checkbox",
+                          value: "1",
                           name:
                             _vm.modelName +
                             "[" +
@@ -3180,6 +3353,7 @@ var render = function() {
                       item.nalichie
                         ? _c("b-form-checkbox", {
                             attrs: {
+                              value: "1",
                               name:
                                 _vm.modelName +
                                 "[" +
@@ -5605,6 +5779,7 @@ var render = function() {
                           "b-card-body",
                           [
                             _c("v-riscs", {
+                              ref: "riscs",
                               attrs: { "model-name": "ProgObjectsRiscs" }
                             })
                           ],

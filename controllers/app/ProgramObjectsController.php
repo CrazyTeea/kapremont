@@ -71,7 +71,6 @@ class ProgramObjectsController extends AppController
      */
     public function actionCreate()
     {
-
         $model = new ProgramObjects();
         $progObjectsEvents = [new ProgObjectsEvents()];
         $proObjectsNecessary = [new ProObjectsNecessary()];
@@ -174,7 +173,7 @@ class ProgramObjectsController extends AppController
                 }
             }
         }
-        return $this->render('create',compact('model'));
+        return $this->render('create',compact('model','progObjectsEvents','progObjectsWaites','progObjectsRiscs','proObjectsNecessary'));
     }
 
     /**
@@ -188,10 +187,10 @@ class ProgramObjectsController extends AppController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        $progObjectsEvents = [new ProgObjectsEvents()];
-        $proObjectsNecessary = [new ProObjectsNecessary()];
-        $progObjectsWaites =  [new ProgObjectsWaites()];
-        $progObjectsRiscs =  [new ProgObjectsRiscs()];
+        $progObjectsEvents = ProgObjectsEvents::findAll(['id_object'=>$id])? : [new ProgObjectsEvents()];
+        $proObjectsNecessary = ProObjectsNecessary::findAll(['id_object'=>$id])? : [new ProObjectsNecessary()];
+        $progObjectsWaites = ProgObjectsWaites::findAll(['id_object'=>$id])? : [new ProgObjectsWaites()];
+        $progObjectsRiscs = ProgObjectsRiscs::findAll(['id_object'=>$id])? : [new ProgObjectsRiscs()];
         $save = true;
         //
         if ($post = Yii::$app->request->post()) {
@@ -202,6 +201,7 @@ class ProgramObjectsController extends AppController
                 if ($save) {
                     $progObjectsEvents = ProgObjectsEvents::createMultiple(ProgObjectsEvents::className(), $progObjectsEvents);
                     ProgObjectsEvents::loadMultiple($progObjectsEvents, Yii::$app->request->post());
+
                     foreach ($progObjectsEvents as $index => $item) {
                         $pr = ProgObjectsEvents::findOne(['id_object' => $model->id, 'step' => $index]);
                         if (!$pr) {
@@ -209,6 +209,7 @@ class ProgramObjectsController extends AppController
                             $pr->id_object = $id;
                             $pr->step = $index;
                         }
+
                         $pr->date_event_end = $item->date_event_end;
                         $pr->date_event_start = $item->date_event_start;
                         $pr->is_nessesary = $item->is_nessesary;
@@ -218,20 +219,26 @@ class ProgramObjectsController extends AppController
                         $save &= $pr->save();
                         $errors['ProgObjectsEvents'][] = $pr->getErrors();
                     }
+                    $deletedIDs = null;
+                    $oldIds = ArrayHelper::map($proObjectsNecessary,'id','id');
                     $proObjectsNecessary = ProObjectsNecessary::createMultiple(ProObjectsNecessary::className(), $proObjectsNecessary);
                     ProObjectsNecessary::loadMultiple($proObjectsNecessary, Yii::$app->request->post());
+                    $deletedIDs = array_diff($oldIds, array_filter(ArrayHelper::map($proObjectsNecessary, 'id', 'id')));
+                    if (! empty($deletedIDs))
+                        ProObjectsNecessary::deleteAll(['id' => $deletedIDs]);
                     foreach ($proObjectsNecessary as $index => $item) {
-                        $pr = ProObjectsNecessary::findOne(['id_object' => $model->id, 'element' => $index]);
+                        $pr = ProObjectsNecessary::findOne(['id_object' => $model->id, 'element' => $item->element]);
                         if (!$pr){
                             $pr = new ProObjectsNecessary();
                             $pr->id_object = $id;
-                            $pr->element = $index;
+                            $pr->element = $item->element;
                         }
                         $pr->nalichie = (int)$item->nalichie;
                         $pr->material = $item->material;
                         $pr->srok_eks = $item->srok_eks;
                         $pr->kap_remont = (int)$item->kap_remont;
                         $pr->obosnovanie = $item->obosnovanie;
+
                         $save &= $pr->save();
                         $errors['ProObjectsNecessary'][] = $pr->getErrors();
                     }
@@ -284,7 +291,7 @@ class ProgramObjectsController extends AppController
                 }
             }
         }
-        return $this->render('update',compact('model'));
+        return $this->render('update',compact('model','progObjectsEvents','progObjectsWaites','progObjectsRiscs','proObjectsNecessary'));
     }
     public function actionAddDocs($id){
         $model = $this->findModel($id);
@@ -329,6 +336,7 @@ class ProgramObjectsController extends AppController
 
     public function actionFileUpload()
     {
-        return 'lol';
+        $files = Files::find()->where(['files.id'=>1])->select(['name'])->joinWith(['docList'])->one();
+        var_dump($files);
     }
 }
