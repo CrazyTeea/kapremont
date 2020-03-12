@@ -142,21 +142,21 @@ import Multiselect from 'vue-select';
             rc_full() {
                 var sum = 0;
                 for(let key in this.sved.realization_cost){
-                    sum += parseInt(this.sved.realization_cost[key]) || 0;
+                    sum += parseFloat(this.sved.realization_cost[key]) || 0;
                 }
                 return sum
             },
             kap_full() {
                 var sum = 0;
                 for(let key in this.sved.kap_cost){
-                    sum += parseInt(this.sved.kap_cost[key]) || 0;
+                    sum += parseFloat(this.sved.kap_cost[key]) || 0;
                 }
                 return sum
             },
             finanse_sum() {
                 var sum = 0;
                 for(let key in this.sved.finanse){
-                    sum += parseInt(this.sved.finanse[key]) || 0;
+                    sum += parseFloat(this.sved.finanse[key]) || 0;
                 }
                 return sum
 
