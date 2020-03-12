@@ -63,10 +63,10 @@
                                         <v-select2 v-model="formData.id_priority"
                                                    :get-option-value="id_priority => id_priority.id_priority"
                                                    :options="[
-                                                   {id:0,id_priority:'1'},
-                                                   {id:1,id_priority:'2'},
-                                                   {id:2,id_priority:'3'},
-                                                   {id:3,id_priority:'резерв'}
+                                                   {id:1,id_priority:'1'},
+                                                   {id:2,id_priority:'2'},
+                                                   {id:3,id_priority:'3'},
+                                                   {id:4,id_priority:'резерв'}
                                                ]"
                                                    :reduce="id_priority => id_priority.id"
                                                    label="id_priority"

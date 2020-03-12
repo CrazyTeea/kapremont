@@ -1,5 +1,6 @@
 <?php
 
+use yii\bootstrap4\Accordion;
 use yii\bootstrap4\Html;
 use yii\widgets\DetailView;
 
@@ -56,5 +57,24 @@ $this->params['breadcrumbs'][] = $this->title;
             'note:ntext',
         ],
     ]) ?>
+
+    <?=Accordion::widget([
+            'encodeLabels'=>true,
+            'itemToggleOptions'=>[
+                    'class'=>['btn', 'btn-default'],
+                'style'=>'   
+                 display: block;
+    min-width: 100%;
+    text-align: left;
+    margin: 0;
+    padding: 0 !important;'
+            ],
+            'items'=>[
+                    [
+                'label' => 'Загруженные файлы',
+                'content' => $this->render('_filesView',compact('docList','model')),
+            ],
+            ]
+    ])?>
 
 </div>

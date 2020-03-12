@@ -59,22 +59,13 @@ class DevelopmentProgrammeController extends AppController
         $user = Yii::$app->getSession()->get('user');
         $org = Organizations::findOne($user->id_org);
 
-        $pr_ob = ProgramObjects::findAll(['id_org'=>$user->id_org,'type'=>0]);
+        $pr_ob = ProgramObjects::findAll(['system_status'=>1,'id_org'=>$user->id_org,'type'=>0]);
+        $r_ob = ProgramObjects::findAll(['system_status'=>1,'id_org'=>$user->id_org,'type'=>1]);
         $pr_cols = ProgramObjects::getTableSchema()->getColumnNames();
         $program = Yii::$app->getSession()->get('program');
         $atz = Atz::findAll(['id_program'=>$program->id]);
 
         $objects = ProgramObjects::findAll(['id_program'=>$program->id]);
-
-        $prior = [
-            '1',
-            '2',
-            '3',
-            'резерв'
-        ];
-
-
-        $r_ob = ProgramObjects::findAll(['id_org'=>$user->id_org,'type'=>1]);
 
         $mpdf = new Mpdf();
         $stylesheet = file_get_contents('bootstrap/css/bootstrap.css');
@@ -84,7 +75,6 @@ class DevelopmentProgrammeController extends AppController
         $mpdf->WriteHTML($stylesheet2,HTMLParserMode::HEADER_CSS);
         $mpdf->WriteHTML($this->renderPartial('_export',compact('objects','org','atz','pr_ob','r_ob')));
         $mpdf->Output();
-
 
     }
 
