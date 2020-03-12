@@ -78,12 +78,14 @@
             </b-thead>
             <b-tbody>
                 <b-tr v-for="(item, index) in itemsTwo" :key="index">
-                    <input v-if="item.nalichie" type="hidden" v-model="item.element" :name="`${modelName}[${index}][element]`">
+                    <input v-if="item.nalichie" type="hidden" v-model="item.element" :name="`${modelName}[${index+17}][element]`">
+                    <input v-if="item.nalichie" type="hidden" v-model="item.material" :name="`${modelName}[${index+17}][material]`">
                     <b-th class="normal-font-weight-for-table cell-center-for-table">
                         <label>{{ item.label}}</label>
                     </b-th>
                     <b-th class="cell-center-for-table">
-                        <b-form-checkbox type="checkbox" value="1" v-model="item.nalichie" :name="`${modelName}[${index+17}][obosnovanie]`"></b-form-checkbox>
+                        <b-form-checkbox type="checkbox" value="1" v-model="item.nalichie" :name="`${modelName}[${index+17}][nalichie]`"></b-form-checkbox>
+
                     </b-th>
                     <b-th class="cell-center-for-table">
                         <b-form-input

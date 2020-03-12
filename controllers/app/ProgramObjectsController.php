@@ -217,14 +217,29 @@ class ProgramObjectsController extends AppController
                         $save &= $pr->save();
                         $errors['ProgObjectsEvents'][] = $pr->getErrors();
                     }
-                    $deletedIDs = null;
-                    $oldIds = ArrayHelper::map($proObjectsNecessary,'id','id');
-                    $proObjectsNecessary = ProObjectsNecessary::createMultiple(ProObjectsNecessary::className(), $proObjectsNecessary);
+                   // $deletedIDs = null;
+                    //$oldIds = ArrayHelper::map($proObjectsNecessary,'id','id');
+                    //$proObjectsNecessary = ProObjectsNecessary::createMultiple(ProObjectsNecessary::className(), $proObjectsNecessary);
                     ProObjectsNecessary::loadMultiple($proObjectsNecessary, Yii::$app->request->post());
-                    $deletedIDs = array_diff($oldIds, array_filter(ArrayHelper::map($proObjectsNecessary, 'id', 'id')));
-                    if (! empty($deletedIDs))
-                        ProObjectsNecessary::deleteAll(['id' => $deletedIDs]);
+                    foreach (Yii::$app->request->post('ProObjectsNecessary') as $index =>$item)
+                    {
+                        if (!ArrayHelper::keyExists($index,$proObjectsNecessary)){
+                            $proObjectsNecessary[$index] = new ProObjectsNecessary();
+
+                        }
+                        $proObjectsNecessary[$index]['nalichie'] = isset($item['nalichie']) ? $item['nalichie'] : 0;
+                        $proObjectsNecessary[$index]['material'] = isset($item['material']) ? $item['material'] : '';
+                        $proObjectsNecessary[$index]['srok_eks'] = isset($item['srok_eks']) ? $item['srok_eks'] : '';
+                        $proObjectsNecessary[$index]['kap_remont'] = isset($item['kap_remont']) ? $item['kap_remont'] : 0;
+                        $proObjectsNecessary[$index]['obosnovanie'] = isset($item['obosnovanie']) ? $item['obosnovanie'] : '';;
+                        $proObjectsNecessary[$index]['element'] = isset($item['element']) ? $item['element'] : '';
+                    }
+                   // $deletedIDs = array_diff($oldIds, array_filter(ArrayHelper::map($proObjectsNecessary, 'id', 'id')));
+                   // if (! empty($deletedIDs))
+                   //     ProObjectsNecessary::deleteAll(['id' => $deletedIDs]);
+
                     foreach ($proObjectsNecessary as $index => $item) {
+
                         $pr = ProObjectsNecessary::findOne(['id_object' => $model->id, 'element' => $item->element]);
                         if (!$pr){
                             $pr = new ProObjectsNecessary();
@@ -240,6 +255,7 @@ class ProgramObjectsController extends AppController
                         $save &= $pr->save();
                         $errors['ProObjectsNecessary'][] = $pr->getErrors();
                     }
+
                     $deletedIDs = null;
                     $oldIds = ArrayHelper::map($progObjectsWaites,'id','id');
                     $progObjectsWaites = ProgObjectsWaites::createMultiple(ProgObjectsWaites::className(), $progObjectsWaites);
