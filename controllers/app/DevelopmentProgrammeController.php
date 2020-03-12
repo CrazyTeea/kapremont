@@ -71,7 +71,7 @@ class DevelopmentProgrammeController extends AppController
             if (ArrayHelper::keyExists($i,$atz)) {
                 $file->setValue("cost_b_$i", $atz[$i]->cost_b);
                 $file->setValue("cost_v_$i", $atz[$i]->cost_v);
-                $file->setValue("cost_o_$i", $atz[$i]->cost_v + $atz[$i]->cost_b);
+                $file->setValue("cost_o_$i", intval($atz[$i]->cost_v) +intval( $atz[$i]->cost_b));
             }
             else{
                 $file->setValue("cost_b_$i", 0);
