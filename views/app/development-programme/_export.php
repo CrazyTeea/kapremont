@@ -13,6 +13,13 @@ $wear = [
     'Более 90%'
 ];
 
+function getEvent($arr,$i_o,$index,$attr){
+
+    if (isset($arr[$i_o]) and isset($arr[$i_o][$index]))
+        return $arr[$i_o][$index]->$attr;
+    return '';
+}
+
 use app\models\Regions;
 use yii\helpers\ArrayHelper; ?>
 
@@ -725,6 +732,119 @@ use yii\helpers\ArrayHelper; ?>
             <td>15</td>
             <td>Примечание:</td>
             <td><?=$object->note ?></td>
+        </tr>
+        </tbody>
+    </table>
+    <div class="text-center">
+        3.2.2. Сведения о планируемых мероприятиях
+    </div>
+    <table class="table-bordered table">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Этап</th>
+            <th>Необходимость выполнения (да/нет)</th>
+            <th>Дата начала (план.)</th>
+            <th>Дата окончания (план.)</th>
+            <th>Стоимость реализации
+                (тыс.руб.)
+            </th>
+            <th>Сумма бюджетного финансирования на проведение капитального ремонта
+                (тыс. руб.)
+            </th>
+            <th>Софинансирование из внебюджетных источников (тыс. руб.)</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>Проведение тендера и заключение договора на выполнение обследования</td>
+            <td><?=getEvent($events,$index,0,'is_nessesary') ? 'Да' : 'Нет'?></td>
+            <td><?=getEvent($events,$index,0,'date_event_start')?></td>
+            <td><?=getEvent($events,$index,0,'date_event_end')?></td>
+            <td><?=getEvent($events,$index,0,'cost_real')?></td>
+            <td><?=getEvent($events,$index,0,'sum_bud_fin')?></td>
+            <td><?=getEvent($events,$index,0,'fin_vnebud_ist')?></td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Выполнение обследования, подготовка и утверждение дефектного акта (дефектной ведомости). </td>
+            <td><?=getEvent($events,$index,1,'is_nessesary') ? 'Да' : 'Нет'?></td>
+            <td><?=getEvent($events,$index,1,'date_event_start')?></td>
+            <td><?=getEvent($events,$index,1,'date_event_end')?></td>
+            <td><?=getEvent($events,$index,1,'cost_real')?></td>
+            <td><?=getEvent($events,$index,1,'sum_bud_fin')?></td>
+            <td><?=getEvent($events,$index,1,'fin_vnebud_ist')?></td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Утверждение задания на проектирование (в зависимости от содержания работ, выполняемых при капитальном ремонте объектов капитального строительства).</td>
+            <td><?=getEvent($events,$index,2,'is_nessesary') ? 'Да' : 'Нет'?></td>
+            <td><?=getEvent($events,$index,2,'date_event_start')?></td>
+            <td><?=getEvent($events,$index,2,'date_event_end')?></td>
+            <td><?=getEvent($events,$index,2,'cost_real')?></td>
+            <td><?=getEvent($events,$index,2,'sum_bud_fin')?></td>
+            <td><?=getEvent($events,$index,2,'fin_vnebud_ist')?></td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Проведение тендера и заключение договора на подготовку проектно-сметной документации.</td>
+            <td><?=getEvent($events,$index,3,'is_nessesary') ? 'Да' : 'Нет'?></td>
+            <td><?=getEvent($events,$index,3,'date_event_start')?></td>
+            <td><?=getEvent($events,$index,3,'date_event_end')?></td>
+            <td><?=getEvent($events,$index,3,'cost_real')?></td>
+            <td><?=getEvent($events,$index,3,'sum_bud_fin')?></td>
+            <td><?=getEvent($events,$index,3,'fin_vnebud_ist')?></td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Подготовка проектно-сметной документации.</td>
+            <td><?=getEvent($events,$index,4,'is_nessesary') ? 'Да' : 'Нет'?></td>
+            <td><?=getEvent($events,$index,4,'date_event_start')?></td>
+            <td><?=getEvent($events,$index,4,'date_event_end')?></td>
+            <td><?=getEvent($events,$index,4,'cost_real')?></td>
+            <td><?=getEvent($events,$index,4,'sum_bud_fin')?></td>
+            <td><?=getEvent($events,$index,4,'fin_vnebud_ist')?></td>
+        </tr>
+        <tr>
+            <td>6</td>
+            <td>Прохождение экспертизы проектно-сметной документации.</td>
+            <td><?=getEvent($events,$index,5,'is_nessesary') ? 'Да' : 'Нет'?></td>
+            <td><?=getEvent($events,$index,5,'date_event_start')?></td>
+            <td><?=getEvent($events,$index,5,'date_event_end')?></td>
+            <td><?=getEvent($events,$index,5,'cost_real')?></td>
+            <td><?=getEvent($events,$index,5,'sum_bud_fin')?></td>
+            <td><?=getEvent($events,$index,5,'fin_vnebud_ist')?></td>
+        </tr>
+        <tr>
+            <td>7</td>
+            <td>Проведение тендера и заключение договора на выполнение строительно-монтажных работ.</td>
+            <td><?=getEvent($events,$index,6,'is_nessesary') ? 'Да' : 'Нет'?></td>
+            <td><?=getEvent($events,$index,6,'date_event_start')?></td>
+            <td><?=getEvent($events,$index,6,'date_event_end')?></td>
+            <td><?=getEvent($events,$index,6,'cost_real')?></td>
+            <td><?=getEvent($events,$index,6,'sum_bud_fin')?></td>
+            <td><?=getEvent($events,$index,6,'fin_vnebud_ist')?></td>
+        </tr>
+        <tr>
+            <td>8</td>
+            <td>Выполнение строительно-монтажных работ.</td>
+            <td><?=getEvent($events,$index,7,'is_nessesary') ? 'Да' : 'Нет'?></td>
+            <td><?=getEvent($events,$index,7,'date_event_start')?></td>
+            <td><?=getEvent($events,$index,7,'date_event_end')?></td>
+            <td><?=getEvent($events,$index,7,'cost_real')?></td>
+            <td><?=getEvent($events,$index,7,'sum_bud_fin')?></td>
+            <td><?=getEvent($events,$index,7,'fin_vnebud_ist')?></td>
+        </tr>
+        <tr>
+            <td>9</td>
+            <td>ИТОГО</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
         </tr>
         </tbody>
     </table>

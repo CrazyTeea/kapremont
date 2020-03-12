@@ -55,7 +55,7 @@
                 </b-tr>
                 </b-tbody>
                 <b-tfoot>
-                <b-tr>
+              <!--  <b-tr>
                     <b-td
                         @click="deleteLastRow()"
                         v-if="items.length > 10"
@@ -71,7 +71,7 @@
                         class="text-right text-info">
                         Добавить документ
                     </b-td>
-                </b-tr>
+                </b-tr>-->
                 </b-tfoot>
         </b-table-simple>
 
