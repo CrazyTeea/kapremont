@@ -46,7 +46,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'year',
             [                      // the owner name of the model
                 'attribute' => 'wear',
-                'value' => function($model) use ($weara){return $weara[$model->wear];},
+                'value' => function($model) use ($weara){return $weara[$model->wear and  $model->wear < 5 ? : 0];},
             ],
 
 /*            'regulation:ntext',
