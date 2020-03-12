@@ -82,6 +82,7 @@ $config = [
                 'program/object/view/<id:\d+>'=>'app/program-objects/view',
                 'program/object/update/<id:\d+>'=>'app/program-objects/update',
                 'program/object/add-docs/<id:\d+>'=>'app/program-objects/add-docs',
+                'program/object/download-doc/<id_obj:\d+>'=>'app/program-objects/download-doc',
                 'program/export'=>'app/development-programme/export',
                 'organization/info'=>'app/organization/info',
                 'program/atz' => 'app/atz/index',

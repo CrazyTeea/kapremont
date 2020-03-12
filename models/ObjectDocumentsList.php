@@ -46,6 +46,12 @@ class ObjectDocumentsList extends \yii\db\ActiveRecord
             'id_type' => 'Id Type',
         ];
     }
+    public function getType(){
+        return $this->hasOne(ObjectDocumentsTypes::className(),['id'=>'id_type']);
+    }
+    public function getFile(){
+        return $this->hasOne(Files::className(),['id'=>'id_file']);
+    }
     public function add(UploadedFile $uploadedFile,$id_object,$id_type){
         $file = new Files();
         $this->id_file = $file->upload($uploadedFile,"/$id_object");

@@ -86,7 +86,7 @@ class SystemController extends RestController
                         ['key'=>'finance_sum','label'=>"Сумма бюджетного финансирования на проведение кап.ремонта (тыс. руб)"],
                         ['key'=>'coFinancing','label'=>"Софинансирование из внебюджетных источников (тыс. руб)"],
                         ['key'=>'note','label'=>"Примечание"],
-                        ['key'=>'buttons','label'=>''],
+
 
                     ];
                     $ret['fieldsObjects']['fields']=[
@@ -104,7 +104,7 @@ class SystemController extends RestController
                         ['key'=>'finance_sum','label'=>"Сумма бюджетного финансирования на проведение кап.ремонта (тыс. руб)"],
                         ['key'=>'coFinancing','label'=>"Софинансирование из внебюджетных источников (тыс. руб)"],
                         ['key'=>'note','label'=>"Примечание"],
-                        ['key'=>'button','label'=>'']
+
 
                     ];
                     $ret['target']['fields'] = [
@@ -124,12 +124,19 @@ class SystemController extends RestController
 
                     $progObj = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>0])->joinWith(['region'])->all();
                     $flag = false;
+                    $prior = [
+                        1=>'1',
+                        2=>'2',
+                        3=>'3',
+                        4=>'резерв'
+                    ];
                     foreach ($progObj as $index=>$item) {
-                            $ret['priorityObjects']['items'][$index] = ArrayHelper::merge(['region' => $item->region ? $item->region->region : '','button'=>Url::to(['program/object/view','id'=>$item->id])],$item);
+
+                            $ret['priorityObjects']['items'][$index] = ArrayHelper::merge(['priority'=> $prior[$item->id_priority ? : 1],'region' => $item->region ? $item->region->region : ''],$item);
                     }
                     $progObj = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>1])->joinWith(['region'])->all();
                     foreach ($progObj as $index=>$item) {
-                        $ret['reservedObjects']['items'][$index] = ArrayHelper::merge(['region' =>$item->region ? $item->region->region : ''],$item);
+                        $ret['reservedObjects']['items'][$index] = ArrayHelper::merge(['priority'=> $prior[$item->id_priority ? : 1],'region' =>$item->region ? $item->region->region : ''],$item);
                     }
                     return $ret;
                 }

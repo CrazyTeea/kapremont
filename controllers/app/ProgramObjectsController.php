@@ -56,11 +56,17 @@ class ProgramObjectsController extends AppController
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        return $this->render('view', [  
-            'model' => $this->findModel($id),
-        ]);
+        $docList = ObjectDocumentsList::find()->where(['system_status'=>1,'id_object'=>$id])->joinWith(['file'])->all();
+        return $this->render('view',compact('model','docList'));
     }
-
+    public function actionDownloadDoc($id_obj){
+        $get= Yii::$app->request->get();
+        $file = Files::findOne($get['id']);
+        if (!$file)
+            return $this->goBack();
+        $path =  $path = Yii::getAlias( '@webroot' ) . '/uploads/'.$id_obj;
+        return Yii::$app->response->sendFile("$path/{$file->name}.{$file->ext}")->send();
+    }
     /**
      * Creates a new ProgramObjects model.
      * If creation is successful, the browser will be redirected to the 'view' page.
@@ -355,7 +361,7 @@ class ProgramObjectsController extends AppController
             }else $done = true;
         }
         if ($done) return 1;
-        return 0;
+        return '0';
     }
 
     /**
