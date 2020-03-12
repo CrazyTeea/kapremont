@@ -34,6 +34,10 @@ class ObjectDocumentsList extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getFiles()
+    {
+
+    }
     /**
      * {@inheritdoc}
      */
@@ -46,11 +50,19 @@ class ObjectDocumentsList extends \yii\db\ActiveRecord
             'id_type' => 'Id Type',
         ];
     }
-    public function add(UploadedFile $uploadedFile,$id_object,$id_type){
+
+    public function add(UploadedFile $uploadedFile, $id_object, $id_type, $status = 1){
         $file = new Files();
         $this->id_file = $file->upload($uploadedFile,"/$id_object");
         $this->id_object= $id_object;
         $this->id_type= $id_type;
+        $this->system_status = $status;
+
         return $this->id_file and $this->save();
+    }
+
+    public function updateItem($id)
+    {
+        self::update(['system_status' => 0])->where(['id' => $id]);
     }
 }

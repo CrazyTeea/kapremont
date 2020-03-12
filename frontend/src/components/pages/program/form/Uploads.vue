@@ -187,10 +187,13 @@ export default {
             if (this.uploadSuccess)
                 window.location.href = `/program/object/view/${id}`;
         },
-        async removeFileFromYii(file) {
-            let form = new FormData();
-            form.append('pdfFile', file.file);
-            this.loadingFileName = file.file.name;
+
+
+
+        async removeFileFromYii(id, descriptor) {
+
+
+            
             await Axios.post('/api/fileRemove', form, {
                 headers:
                     {
@@ -204,6 +207,9 @@ export default {
                 console.log(res.data)
             }).catch(error => console.log(error))
         },
+
+
+        
         async uploadFile(file,id) {
             let form = new FormData();
             form.append(`${file.descriptor}`, file.file);

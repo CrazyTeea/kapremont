@@ -492,7 +492,6 @@
             },
             onChangeRegion({id}) {
                 this.requestCity({id})
-
             },
         },
         mounted() {

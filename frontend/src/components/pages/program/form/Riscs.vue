@@ -75,6 +75,9 @@ export default {
             ]
         }
     },
+    mounted() {
+        this.items[0].types = 'lol'
+    },
     methods: {
         addNewRow: function() {
             this.items.push({

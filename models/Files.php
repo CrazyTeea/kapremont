@@ -16,17 +16,12 @@ use yii\web\UploadedFile;
 class Files extends \yii\db\ActiveRecord
 {
     public $file;
-    /**
-     * {@inheritdoc}
-     */
+
     public static function tableName()
     {
         return 'files';
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function rules()
     {
         return [
@@ -35,24 +30,28 @@ class Files extends \yii\db\ActiveRecord
         ];
     }
 
-    /**
-     * {@inheritdoc}
-     */
+    public function attribute()
+    {
+        return [
+            'id',
+            'name',
+            'ext',
+            'path',
+            'size',
+        ];
+    }
+
     public function attributeLabels()
     {
         return [
             'id' => 'ID',
             'name' => 'Name',
             'ext' => 'Ext',
+            'path' => 'Path',
+            'size' => 'Size'
         ];
     }
 
-    /**
-     * @param UploadedFile $uploadedFile
-     * @param bool $extPath
-     * @return int|null
-     * @throws \yii\base\Exception
-     */
     public function upload(UploadedFile $uploadedFile, $extPath = false)
     {
         $path = Yii::getAlias( '@webroot' ) . '/uploads';

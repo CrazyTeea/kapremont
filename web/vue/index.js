@@ -2131,6 +2131,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -2184,6 +2185,16 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   computed: {
+    cost_o: function cost_o() {
+      var _this = this;
+
+      return function (index) {
+        var a = parseFloat(_this.items[index].cost_b) || 0;
+        var b = parseFloat(_this.items[index].cost_v) || 0;
+        _this.items[index].cost_o = a + b;
+        return a + b;
+      };
+    },
     cost_b_full: function cost_b_full() {
       var sum = 0;
       var _iteratorNormalCompletion = true;
@@ -2193,7 +2204,7 @@ __webpack_require__.r(__webpack_exports__);
       try {
         for (var _iterator = this.items[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
           var cost = _step.value;
-          sum += parseInt(cost.cost_b) || 0;
+          sum += parseFloat(cost.cost_b) || 0;
         }
       } catch (err) {
         _didIteratorError = true;
@@ -2221,7 +2232,7 @@ __webpack_require__.r(__webpack_exports__);
       try {
         for (var _iterator2 = this.items[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
           var cost = _step2.value;
-          sum += parseInt(cost.cost_v) || 0;
+          sum += parseFloat(cost.cost_v) || 0;
         }
       } catch (err) {
         _didIteratorError2 = true;
@@ -2249,7 +2260,7 @@ __webpack_require__.r(__webpack_exports__);
       try {
         for (var _iterator3 = this.items[Symbol.iterator](), _step3; !(_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done); _iteratorNormalCompletion3 = true) {
           var cost = _step3.value;
-          sum += parseInt(cost.cost_o) || 0;
+          sum += parseFloat(cost.cost_o) || 0;
         }
       } catch (err) {
         _didIteratorError3 = true;
@@ -47279,23 +47290,7 @@ var render = function() {
                       staticClass:
                         "vertical-align-for-table-cell normal-font-weight-for-cell"
                     },
-                    [
-                      _c("b-form-input", {
-                        attrs: {
-                          placeholder: "Цена",
-                          min: "0",
-                          type: "number"
-                        },
-                        model: {
-                          value: item.cost_o,
-                          callback: function($$v) {
-                            _vm.$set(item, "cost_o", $$v)
-                          },
-                          expression: "item.cost_o"
-                        }
-                      })
-                    ],
-                    1
+                    [_c("label", [_vm._v(_vm._s(_vm.cost_o(index)))])]
                   )
                 ],
                 1
@@ -47369,7 +47364,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("Добавить")]
+            [_vm._v("Сохранить")]
           ),
           _vm._v(" "),
           _c(
@@ -47382,7 +47377,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._v("Сбросить")]
+            [_vm._v("Сброс")]
           )
         ],
         1

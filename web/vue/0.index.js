@@ -571,6 +571,9 @@ __webpack_require__.r(__webpack_exports__);
       }]
     };
   },
+  mounted: function mounted() {
+    this.items[0].types = 'lol';
+  },
   methods: {
     addNewRow: function addNewRow() {
       this.items.push({
@@ -1194,21 +1197,17 @@ __webpack_require__.r(__webpack_exports__);
         }, _callee, null, [[7, 18, 22, 30], [23,, 25, 29]]);
       }))();
     },
-    removeFileFromYii: function removeFileFromYii(file) {
+    removeFileFromYii: function removeFileFromYii(id, descriptor) {
       var _this2 = this;
 
       return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_11__["default"])(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee2() {
-        var form;
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                form = new FormData();
-                form.append('pdfFile', file.file);
-                _this2.loadingFileName = file.file.name;
-                _context2.next = 5;
+                _context2.next = 2;
                 return axios__WEBPACK_IMPORTED_MODULE_12___default.a.post('/api/fileRemove', form, {
                   headers: {
                     'X-CSRF-Token': _this2.csrf,
@@ -1223,7 +1222,7 @@ __webpack_require__.r(__webpack_exports__);
                   return console.log(error);
                 });
 
-              case 5:
+              case 2:
               case "end":
                 return _context2.stop();
             }
@@ -2067,6 +2066,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _organisms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../organisms */ "./src/components/organisms/index.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
+//
 //
 //
 //
@@ -3613,12 +3613,18 @@ var render = function() {
                 row.value
                   ? _c("b-form-input", {
                       attrs: {
-                        "v-model": _vm.test(row.index),
                         placeholder: "Цена",
                         min: "0",
                         type: "number",
                         name:
                           _vm.modelName + "[" + row.index + "][fin_vnebud_ist]"
+                      },
+                      model: {
+                        value: _vm.sved.finanse[row.index],
+                        callback: function($$v) {
+                          _vm.$set(_vm.sved.finanse, row.index, $$v)
+                        },
+                        expression: "sved.finanse[row.index]"
                       }
                     })
                   : _c("label", [_vm._v("-")])
@@ -5859,7 +5865,7 @@ var render = function() {
         [
           _c("p", { staticClass: "my-4" }, [
             _vm._v(
-              "\n            Уважаемые пользователи!\n            В модуле «Модернизация инфраструктуры» Вы можете ознакомиться с информацией об объёме средств субсидии и начать заполнение программы модернизации инфраструктуры.\n            На данный момент в модуле реализована возможность создания карточки объекта капитального строительства и заполнения вкладки «характеристика объекта».\n            Остальные вкладки будут доступны с 4 марта 2020 года.\n            Возможность загрузки документов в систему будет предоставлена с 5 марта 2020 года.\n            Выгрузка данных из системы в печатную форму «Программы модернизации» для согласования с председателем совета обучающихся и утверждения руководителем образовательной организации будет доступна с 10 марта 2020 года."
+              "\n            Уважаемые пользователи!\n            В связи с техническими работами на сервере возможность загрузки программы модернизации инфраструктуры образовательных организаций высшего \n            образования (далее - программа) \n            в формате pdf и отправка на согласование в Минобрнауки России будет доступна с 13 марта 2020 года.\n            Срок направления программы на согласование с Минобрнауки России будет продлён до 20 марта 2020 года.\n            Официальное письмо о продлении срока представления программы в Минобрнауки России будет направлено дополнительно.\n        "
             )
           ])
         ]

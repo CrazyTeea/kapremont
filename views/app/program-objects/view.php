@@ -37,4 +37,6 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+    <p> Тут сейчас будут доки </p>
+
 </div>
