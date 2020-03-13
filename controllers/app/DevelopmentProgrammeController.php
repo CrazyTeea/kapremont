@@ -6,8 +6,11 @@ use app\models\Atz;
 use app\models\Organizations;
 use app\models\OrgInfo;
 use app\models\ProgObjectsEvents;
+use app\models\ProgObjectsRiscs;
+use app\models\ProgObjectsWaites;
 use app\models\ProgramObjects;
 
+use app\models\ProObjectsNecessary;
 use Dompdf\Dompdf;
 use HTMLtoOpenXML\Parser;
 use Mpdf\HTMLParserMode;
@@ -71,25 +74,27 @@ class DevelopmentProgrammeController extends AppController
 
 
         $objects = ProgramObjects::findAll(['system_status'=>1,'id_program'=>$program->id]);
-        $events = null;
+        $events = null;$nes = null;$wai = null;;$risks = null;
         foreach ($objects as $index=>$item) {
-            $events[$index]=ProgObjectsEvents::findAll(['id_object'=>$item->id]);
+            for ($i = 0;$i<8;$i++){
+                $events[$index][$i]=ProgObjectsEvents::findOne(['id_object'=>$item->id,'step'=>$i]);
+            }
+            for ($i = 0;$i<34;$i++){
+                $nes[$index][$i]=ProObjectsNecessary::findOne(['id_object'=>$item->id,'element'=>$i]);
+            }
+            $wai[$index]=ProgObjectsWaites::findAll(['id_object'=>$item->id]);
+            $risks[$index]=ProgObjectsRiscs::findAll(['id_object'=>$item->id]);
         }
+
+
         $mpdf = new Mpdf();
         $stylesheet = file_get_contents('bootstrap/css/bootstrap.css');
         $stylesheet2 = file_get_contents('bootstrap/css/bootstrap-grid.css');
 
         $mpdf->WriteHTML($stylesheet,HTMLParserMode::HEADER_CSS);
         $mpdf->WriteHTML($stylesheet2,HTMLParserMode::HEADER_CSS);
-        $mpdf->WriteHTML($this->renderPartial('_export',compact('objects','org','atz','pr_ob','r_ob','events')));
-
-        header_remove();
-        header_remove();
-        header_remove();
-        header_remove();
+        $mpdf->WriteHTML($this->renderPartial('_export',compact('objects','org','atz','pr_ob','r_ob','events','nes','wai','risks')));
         $mpdf->Output();
-
-
     }
 
     /**
