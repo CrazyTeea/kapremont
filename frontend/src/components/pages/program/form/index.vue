@@ -31,7 +31,7 @@
                            Характеристика объекта
                        </span>
                         </b-card-header>
-                        <b-collapse id="accordion-1"  accordion="my-accordion" role="tabpanel">
+                        <b-collapse id="accordion-1"  accordion="my-accordion" role="tabpanel" visible>
                             <b-card-body>
                                 <b-form-group>
                                     <b-form-group
@@ -212,7 +212,7 @@
                                                    {value:'fast', text:'Оперативное управление'},
                                                    {value:'others', text:'Другое'},
                                                ]"/>
-                                        
+
                                     </b-form-group>
                                     <b-form-group
                                             label="Общая площадь здания - всего, кв.м.:"
@@ -221,7 +221,7 @@
                                             :valid-feedback="(feedback('ProgramObjects','square',' '))"
                                             :state="feedback('ProgramObjects','square')"
                                     >
-                                        <b-form-input id="square" name="ProgramObjects[square]" type="number" step="0.003" v-model="formData.square"/>
+                                        <b-form-input id="square" name="ProgramObjects[square]" type="number" step="0.001" v-model="formData.square" @change="val => setFloat(val,'square')"/>
                                     </b-form-group>
                                     <b-form-group
                                             label="Общая площадь здания (помещений), планируемого к капитальному ремонту, кв. м.:"
@@ -230,7 +230,7 @@
                                             :valid-feedback="(feedback('ProgramObjects','square_kap',' '))"
                                             :state="feedback('ProgramObjects','square_kap')"
                                     >
-                                        <b-form-input id="square_kap" name="ProgramObjects[square_kap]" type="number"  step="0.003" v-model="formData.square_kap"/>
+                                        <b-form-input id="square_kap" name="ProgramObjects[square_kap]" type="number"  step="0.001" v-model="formData.square_kap" @change="val => setFloat(val,'square_kap')"/>
                                     </b-form-group>
                                     <b-form-group
                                             label="Используется в уставной деятельности, кв.м.:"
@@ -239,7 +239,7 @@
                                             :valid-feedback="(feedback('ProgramObjects','isp_v_ust_dey',' '))"
                                             :state="feedback('ProgramObjects','isp_v_ust_dey')"
                                     >
-                                        <b-form-input id="isp_v_ust_dey" name="ProgramObjects[isp_v_ust_dey]" type="number"  step="0.003" v-model="formData.isp_v_ust_dey"/>
+                                        <b-form-input id="isp_v_ust_dey" name="ProgramObjects[isp_v_ust_dey]" type="number"  step="0.001" v-model="formData.isp_v_ust_dey" @change="val => setFloat(val,'isp_v_ust_dey')"/>
                                     </b-form-group>
                                     <b-form-group
                                             label="Не используется в уставной деятельности, кв.м.:"
@@ -248,7 +248,7 @@
                                             :valid-feedback="(feedback('ProgramObjects','n_isp_v_ust_dey',' '))"
                                             :state="feedback('ProgramObjects','n_isp_v_ust_dey')"
                                     >
-                                        <b-form-input id="n_isp_v_ust_dey" name="ProgramObjects[n_isp_v_ust_dey]" type="number" step="0.003" v-model="formData.n_isp_v_ust_dey"/>
+                                        <b-form-input id="n_isp_v_ust_dey" name="ProgramObjects[n_isp_v_ust_dey]" type="number" step="0.001" v-model="formData.n_isp_v_ust_dey" @change="val => setFloat(val,'n_isp_v_ust_dey')"/>
                                     </b-form-group>
                                     <b-form-group
                                             label="Предоставлено в аренду, кв.м."
@@ -257,7 +257,7 @@
                                             :valid-feedback="(feedback('ProgramObjects','square_ar',' '))"
                                             :state="feedback('ProgramObjects','square_ar')"
                                     >
-                                        <b-form-input id="square_ar" name="ProgramObjects[square_ar]" type="number"  step="0.003" v-model="formData.square_ar"/>
+                                        <b-form-input id="square_ar" name="ProgramObjects[square_ar]" type="number"  step="0.001" v-model="formData.square_ar" @change="val => setFloat(val,'square_ar')"/>
                                     </b-form-group>
                                     <b-form-group
                                             label="Примечание:"
@@ -326,7 +326,7 @@
                            <b-icon-gear-wide-connected />
                           Опись прилагаемых документов</span>
                         </b-card-header>
-                        <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel" visible>
+                        <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel">
                             <b-card-body>
                                 <v-uploads model-name="Files" ref="files" />
                             </b-card-body>
@@ -416,6 +416,9 @@
             ...mapActions(['requestPageData','requestCity']),
             setSelected(value){
                 formData.id_priority = value;
+            },
+            setFloat(val, attr) {
+                this.formData[attr] = parseFloat(val).toFixed(3);
             },
             feedback(model,value,errorMessage){
                 let val = this.formData[value];
