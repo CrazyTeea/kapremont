@@ -406,9 +406,14 @@ class ProgramObjectsController extends AppController
             where obj.id = '$id' and list.id_type in (select id from object_documents_types where descriptor = '$descriptor')
         ")->queryAll();
 
-            $kek = ObjectDocumentsList::findOne($list_obj_id[0]['id']);
-            $kek->system_status = 0;
-            $kek->save(false);
+        if ($list_obj_id){
+            foreach ($list_obj_id as $item){
+                $kek = ObjectDocumentsList::findOne($item['id']);
+                $kek->system_status = 0;
+                $kek->save(false);
+            }
+        }
+
 
         // echo "<pre>";
         // print_r($list_obj_id[0]['id']);
