@@ -65,6 +65,8 @@ class DevelopmentProgrammeController extends AppController
         $r_ob = ProgramObjects::findAll(['system_status'=>1,'id_org'=>$user->id_org,'type'=>1]);
         $pr_cols = ProgramObjects::getTableSchema()->getColumnNames();
         $program = Yii::$app->getSession()->get('program');
+        if (!$program)
+            return $this->redirect(['/']);
         $atz = Atz::findAll(['id_program'=>$program->id]);
 
 
