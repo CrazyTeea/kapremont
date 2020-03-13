@@ -81,7 +81,10 @@ class DevelopmentProgrammeController extends AppController
         $mpdf->WriteHTML($stylesheet2,HTMLParserMode::HEADER_CSS);
         $mpdf->WriteHTML($this->renderPartial('_export',compact('objects','org','atz','pr_ob','r_ob','events')));
 
-        Yii::$app->response->headers->set('Access-Control-Allow-Origin', '*');
+        header_remove();
+        header_remove();
+        header_remove();
+        header_remove();
         $mpdf->Output();
 
 
