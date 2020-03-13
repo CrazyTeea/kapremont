@@ -6,11 +6,47 @@ $prior = [
     4=>'резерв'
 ];
 $wear = [
-        'Менее 20%',
+    'Менее 20%',
     'От 20% до 50%',
     'От 50% до 70%',
     'От 70% до 90%',
     'Более 90%'
+];
+$nesLabel = [
+    'Фундаменты',
+    'Отмостка',
+    'Стены ',
+    'Колонны',
+    'Перегородки',
+    'Крыша (покрытия)',
+    'Кровля',
+    'Перекрытия',
+    'Полы',
+    'Окна',
+    'Двери',
+    'Ворота',
+    'Лестницы',
+    'Крыльца',
+    'Балконы/лоджии',
+    'Внутренняя отделка',
+    'Наружная отделка',
+    'Система электроснабжения',
+    'Система водоснабжения',
+    'Система водоотведения',
+    'Система газоснабжения',
+    'Система кондиционирования воздуха',
+    'Система вентиляции',
+    'Система отопления',
+    'Система диспетчеризации',
+    'Радиофикация',
+    'Телевидение эфирное',
+    'Система видеонаблюдения',
+    'Система интернет и телефонии',
+    'Система контроля управления доступом',
+    'Пожарная сигнализация',
+    'Охранная сигнализация',
+    'Мусоропроводы',
+    'Лифты',
 ];
 
 function getEvent($arr,$i_o,$index,$attr){
@@ -35,7 +71,7 @@ use yii\helpers\ArrayHelper; ?>
 
         </div>
         <div class="col-xs-6">
-           <h3> УТВЕРЖДАЮ</h3>
+            <h3> УТВЕРЖДАЮ</h3>
 
             <p>Ректор
             <p>ФГБОУ ВО «______»
@@ -238,13 +274,13 @@ use yii\helpers\ArrayHelper; ?>
 
     <table class="table table-bordered">
         <thead>
-            <tr>
-                <th>№</th>
-                <th>Направление расходов</th>
-                <th>Сумма бюджетного финансирования (руб.)</th>
-                <th>Сумма внебюджетного финансирования (руб.)</th>
-                <th>Общий объем финансирования (руб.)</th>
-            </tr>
+        <tr>
+            <th>№</th>
+            <th>Направление расходов</th>
+            <th>Сумма бюджетного финансирования (руб.)</th>
+            <th>Сумма внебюджетного финансирования (руб.)</th>
+            <th>Общий объем финансирования (руб.)</th>
+        </tr>
         </thead>
         <tbody>
         <tr>
@@ -321,7 +357,7 @@ use yii\helpers\ArrayHelper; ?>
     </table>
 
     <div class="text-center">
-       <h3>Раздел 3. Капитальный ремонт</h3>
+        <h3>Раздел 3. Капитальный ремонт</h3>
     </div>
     <div class="text-center">
         <h3>
@@ -355,22 +391,22 @@ use yii\helpers\ArrayHelper; ?>
         </thead>
         <tbody>
         <?php foreach ($pr_ob as $index=>$item):?>
-        <tr>
-            <td><?=++$index ?></td>
-            <td><?=$prior[$item->id_priority ? : 1] ?></td>
-            <td><?php $reg = Regions::findOne($item->id_region); echo $reg ? $reg->region : ' ' ?></td>
-            <td><?=$item->kad_number ?></td>
-            <td><?=$item->name ?></td>
-            <td><?=$item->assignment ?></td>
-            <td><?=$item->address ?></td>
-            <td><?=$item->year ?></td>
-            <td><?=$wear[$item->wear and $item->wear<5? : 0] ?></td>
-            <td><?=$item->exist_pred_nadz_orgs ? $item->podrobnosti : '' ?></td>
-            <td></td>
-            <td><?=$item ->finance_sum?></td>
-            <td><?=$item ->coFinancing?></td>
-            <td><?=$item ->note?></td>
-        </tr>
+            <tr>
+                <td><?=++$index ?></td>
+                <td><?=$prior[$item->id_priority ? : 1] ?></td>
+                <td><?php $reg = Regions::findOne($item->id_region); echo $reg ? $reg->region : ' ' ?></td>
+                <td><?=$item->kad_number ?></td>
+                <td><?=$item->name ?></td>
+                <td><?=$item->assignment ?></td>
+                <td><?=$item->address ?></td>
+                <td><?=$item->year ?></td>
+                <td><?=$wear[$item->wear and $item->wear<5? : 0] ?></td>
+                <td><?=$item->exist_pred_nadz_orgs ? $item->podrobnosti : '' ?></td>
+                <td></td>
+                <td><?=$item ->finance_sum?></td>
+                <td><?=$item ->coFinancing?></td>
+                <td><?=$item ->note?></td>
+            </tr>
         <?php endforeach;?>
         </tbody>
     </table>
@@ -427,427 +463,635 @@ use yii\helpers\ArrayHelper; ?>
             <p><?=$object->name?></p>
             <p>Приоритет:<?=$prior[$object->id_priority ? : 1]?></p>
         </div>
-    <table class="table table-bordered">
-        <tr>
-            <td>1</td>
-            <td>
-                <p>- Объекты с готовой проектно-сметной документацией (не старше 2-х лет) и положительным заключением государственной экспертизы;
-                <p>- Объекты с выборочным капитальным ремонтом (не требуется прохождение государственной экспертизы) на момент подачи заявки готовы все необходимые документы;
+        <table class="table table-bordered">
+            <tr>
+                <td>1</td>
+                <td>
+                    <p>- Объекты с готовой проектно-сметной документацией (не старше 2-х лет) и положительным заключением государственной экспертизы;
+                    <p>- Объекты с выборочным капитальным ремонтом (не требуется прохождение государственной экспертизы) на момент подачи заявки готовы все необходимые документы;
 
-            </td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>
-                <p>- Объекты с выборочным капитальным ремонтом, на момент подачи заявки готовы не все необходимые документы;
-                <p>- Объекты с готовой проектно-сметной документацией, на момент подачи заявки не получено положительное заключение государственной экспертизы.
+                </td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>
+                    <p>- Объекты с выборочным капитальным ремонтом, на момент подачи заявки готовы не все необходимые документы;
+                    <p>- Объекты с готовой проектно-сметной документацией, на момент подачи заявки не получено положительное заключение государственной экспертизы.
 
-            </td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>
-                <p>- Иные объекты
-            </td>
-        </tr>
-        <tr>
-            <td>резерв</td>
-            <td>
-                <p> - Объекты, по которым объём финансирования проведения мероприятий, предусмотренных программой, превышает предусмотренные лимиты
-            </td>
-        </tr>
-    </table>
+                </td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>
+                    <p>- Иные объекты
+                </td>
+            </tr>
+            <tr>
+                <td>резерв</td>
+                <td>
+                    <p> - Объекты, по которым объём финансирования проведения мероприятий, предусмотренных программой, превышает предусмотренные лимиты
+                </td>
+            </tr>
+        </table>
+        <div class="text-center">
+            3.2.1. Характеристика объекта
+        </div>
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>№</th>
+                <th>Показатель</th>
+                <th>Значение</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>Полный адрес объекта</td>
+                <td><?=$object->address?></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Субъект Российской Федерации </td>
+                <td><?=$object->region ? $object->region->region : ''?></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Кадастровый номер</td>
+                <td><?=$object->kad_number?></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Год постройки здания</td>
+                <td><?=$object->year?></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Год ввода здания в эксплуатацию</td>
+                <td><?=$object->exploit_year?></td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Год проведения последнего капитального ремонта/реконструкции</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Наличие предписаний надзорных органов </td>
+                <td><?=$object->exist_pred_nadz_orgs ? $object->podrobnosti : 'Нет'?></td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Износ здания, %</td>
+                <td><?=$wear[$object->wear and $object->wear <5 ? $object->wear : 0]?></td>
+            </tr>
+            <tr>
+                <td rowspan="4">9</td>
+                <td>Основание для использования здания</td>
+                <td><?=$object->osn_isp_zdan ?></td>
+            </tr>
+            <tr>
+                <td>Назначение</td>
+                <td><?=$object->assignment ?></td>
+
+            </tr>
+            <tr>
+                <td>Право оперативного управления (регистрационная запись, номер)</td>
+                <td><?=$object->prav_oper_upr ?></td>
+
+            </tr>
+            <tr>
+                <td>Право собственности</td>
+                <td><?=$object->prav_sob ?></td>
+            </tr>
+            <tr>
+                <td rowspan="22">10</td>
+                <td>Общая площадь здания – всего, кв.м.</td>
+                <td><?=$object->square ?></td>
+            </tr>
+            <tr>
+                <td>из нее площадь по целям использования:
+                    административная
+
+                </td>
+                <td></td>
+
+            </tr>
+            <tr>
+                <td>учебно-лабораторных зданий </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>в том числе: учебная</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td> из нее площадь спортивно-оздоровительных сооружений</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>в том числе крытых спортивных сооружений</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>учебно-вспомогательная</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>в том числе библиотечно-архивная</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>культурно-просветительская и музейная</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>предназначенная для лабораторных и научно-исследовательских подразделений</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>общежитий</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>в том числе жилая</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>из нее занятая обучающимися</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>гостиничных и жилых</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>подсобных</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>из нее площадь пунктов общественного питания</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>медицинских</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>бытовых</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>инфраструктурных</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>производственных и складских</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>защитных, в том числе гражданской обороны и ЧС</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>прочих зданий</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td rowspan="22">11</td>
+                <td>Общая площадь здания (помещений), планируемого к капитальному ремонту, кв. м</td>
+                <td><?=$object->square_kap ?></td>
+            </tr>
+            <tr>
+                <td>из нее площадь по целям использования:
+                    административная
+                </td>
+                <td></td>
+
+            </tr>
+            <tr>
+                <td>учебно-лабораторных зданий </td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>в том числе: учебная</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td> из нее площадь спортивно-оздоровительных сооружений</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>в том числе крытых спортивных сооружений</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>учебно-вспомогательная</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>в том числе библиотечно-архивная</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>культурно-просветительская и музейная</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>предназначенная для лабораторных и научно-исследовательских подразделений</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>общежитий</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>в том числе жилая</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>из нее занятая обучающимися</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>гостиничных и жилых</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>подсобных</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>из нее площадь пунктов общественного питания</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>медицинских</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>бытовых</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>инфраструктурных</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>производственных и складских</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>защитных, в том числе гражданской обороны и ЧС</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>прочих зданий</td>
+                <td></td>
+            </tr>
+            <tr>
+                <td>12</td>
+                <td>Используется в уставной деятельности, кв.м</td>
+                <td><?=$object->isp_v_ust_dey ?></td>
+            </tr>
+            <tr>
+                <td>13</td>
+                <td>Не используется в уставной деятельности, кв.м.</td>
+                <td><?=$object->n_isp_v_ust_dey ?></td>
+            </tr>
+            <tr>
+                <td>14</td>
+                <td>Предоставлено в аренду, кв.м.</td>
+                <td><?=$object->square_ar ?></td>
+            </tr>
+            <tr>
+                <td>15</td>
+                <td>Примечание:</td>
+                <td><?=$object->note ?></td>
+            </tr>
+            </tbody>
+        </table>
+        <div class="text-center">
+            3.2.2. Сведения о планируемых мероприятиях
+        </div>
+        <table class="table-bordered table">
+            <thead>
+            <tr>
+                <th></th>
+                <th>Этап</th>
+                <th>Необходимость выполнения (да/нет)</th>
+                <th>Дата начала (план.)</th>
+                <th>Дата окончания (план.)</th>
+                <th>Стоимость реализации
+                    (тыс.руб.)
+                </th>
+                <th>Сумма бюджетного финансирования на проведение капитального ремонта
+                    (тыс. руб.)
+                </th>
+                <th>Софинансирование из внебюджетных источников (тыс. руб.)</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>Проведение тендера и заключение договора на выполнение обследования</td>
+                <td><?=getEvent($events,$index,0,'is_nessesary') ? 'Да' : 'Нет'?></td>
+                <td><?=getEvent($events,$index,0,'date_event_start')?></td>
+                <td><?=getEvent($events,$index,0,'date_event_end')?></td>
+                <td><?=getEvent($events,$index,0,'cost_real')?></td>
+                <td><?=getEvent($events,$index,0,'sum_bud_fin')?></td>
+                <td><?=getEvent($events,$index,0,'fin_vnebud_ist')?></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Выполнение обследования, подготовка и утверждение дефектного акта (дефектной ведомости). </td>
+                <td><?=getEvent($events,$index,1,'is_nessesary') ? 'Да' : 'Нет'?></td>
+                <td><?=getEvent($events,$index,1,'date_event_start')?></td>
+                <td><?=getEvent($events,$index,1,'date_event_end')?></td>
+                <td><?=getEvent($events,$index,1,'cost_real')?></td>
+                <td><?=getEvent($events,$index,1,'sum_bud_fin')?></td>
+                <td><?=getEvent($events,$index,1,'fin_vnebud_ist')?></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Утверждение задания на проектирование (в зависимости от содержания работ, выполняемых при капитальном ремонте объектов капитального строительства).</td>
+                <td><?=getEvent($events,$index,2,'is_nessesary') ? 'Да' : 'Нет'?></td>
+                <td><?=getEvent($events,$index,2,'date_event_start')?></td>
+                <td><?=getEvent($events,$index,2,'date_event_end')?></td>
+                <td><?=getEvent($events,$index,2,'cost_real')?></td>
+                <td><?=getEvent($events,$index,2,'sum_bud_fin')?></td>
+                <td><?=getEvent($events,$index,2,'fin_vnebud_ist')?></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Проведение тендера и заключение договора на подготовку проектно-сметной документации.</td>
+                <td><?=getEvent($events,$index,3,'is_nessesary') ? 'Да' : 'Нет'?></td>
+                <td><?=getEvent($events,$index,3,'date_event_start')?></td>
+                <td><?=getEvent($events,$index,3,'date_event_end')?></td>
+                <td><?=getEvent($events,$index,3,'cost_real')?></td>
+                <td><?=getEvent($events,$index,3,'sum_bud_fin')?></td>
+                <td><?=getEvent($events,$index,3,'fin_vnebud_ist')?></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Подготовка проектно-сметной документации.</td>
+                <td><?=getEvent($events,$index,4,'is_nessesary') ? 'Да' : 'Нет'?></td>
+                <td><?=getEvent($events,$index,4,'date_event_start')?></td>
+                <td><?=getEvent($events,$index,4,'date_event_end')?></td>
+                <td><?=getEvent($events,$index,4,'cost_real')?></td>
+                <td><?=getEvent($events,$index,4,'sum_bud_fin')?></td>
+                <td><?=getEvent($events,$index,4,'fin_vnebud_ist')?></td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Прохождение экспертизы проектно-сметной документации.</td>
+                <td><?=getEvent($events,$index,5,'is_nessesary') ? 'Да' : 'Нет'?></td>
+                <td><?=getEvent($events,$index,5,'date_event_start')?></td>
+                <td><?=getEvent($events,$index,5,'date_event_end')?></td>
+                <td><?=getEvent($events,$index,5,'cost_real')?></td>
+                <td><?=getEvent($events,$index,5,'sum_bud_fin')?></td>
+                <td><?=getEvent($events,$index,5,'fin_vnebud_ist')?></td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Проведение тендера и заключение договора на выполнение строительно-монтажных работ.</td>
+                <td><?=getEvent($events,$index,6,'is_nessesary') ? 'Да' : 'Нет'?></td>
+                <td><?=getEvent($events,$index,6,'date_event_start')?></td>
+                <td><?=getEvent($events,$index,6,'date_event_end')?></td>
+                <td><?=getEvent($events,$index,6,'cost_real')?></td>
+                <td><?=getEvent($events,$index,6,'sum_bud_fin')?></td>
+                <td><?=getEvent($events,$index,6,'fin_vnebud_ist')?></td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Выполнение строительно-монтажных работ.</td>
+                <td><?=getEvent($events,$index,7,'is_nessesary') ? 'Да' : 'Нет'?></td>
+                <td><?=getEvent($events,$index,7,'date_event_start')?></td>
+                <td><?=getEvent($events,$index,7,'date_event_end')?></td>
+                <td><?=getEvent($events,$index,7,'cost_real')?></td>
+                <td><?=getEvent($events,$index,7,'sum_bud_fin')?></td>
+                <td><?=getEvent($events,$index,7,'fin_vnebud_ist')?></td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>ИТОГО</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </tbody>
+        </table>
+
+        <div class="text-center">
+            3.2.3. Обоснование необходимости (целесообразности) планируемых мероприятий
+        </div>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>№</th>
+                <th>Строительные конструкции замена и (или) восстановление которых планируются при капитальном ремонте</th>
+                <th>Наличие на объекте (да/нет)</th>
+                <th>Материал конструкции</th>
+                <th>Срок эксплуатации с момента строительства или предыдущего капитального ремонта (реконструкции)</th>
+                <th>Требуется капитальный ремонт (да/нет)</th>
+                <th>Обоснование необходимости</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php for ($i=0,$k=1;$i<17;$i++,$k++): ?>
+                <tr>
+                    <td><?=$k?></td>
+                    <td><?=$nesLabel[$i]?></td>
+                    <td><?=getEvent($nes,$index,$i,'nalichie') ? 'Да' : 'Нет'?></td>
+                    <td><?=getEvent($nes,$index,$i,'material')?></td>
+                    <td><?=getEvent($nes,$index,$i,'srok_eks')?></td>
+                    <td><?=getEvent($nes,$index,$i,'kap_remont') ? 'Да' : 'Нет'?></td>
+                    <td><?=getEvent($nes,$index,$i,'obosnovanie')?></td>
+                </tr>
+            <?php endfor;?>
+            </tbody>
+        </table>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr>
+                <th>№</th>
+                <th>Строительные конструкции замена и (или) восстановление которых планируются при капитальном ремонте</th>
+                <th>Наличие на объекте (да/нет)</th>
+                <th>Срок эксплуатации с момента строительства или предыдущего капитального ремонта (реконструкции)</th>
+                <th>Требуется капитальный ремонт (да/нет)</th>
+                <th>Обоснование необходимости</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php for ($i=17,$k=1;$i<34;$i++,$k++): ?>
+                <tr>
+                    <td><?=$k?></td>
+                    <td><?=$nesLabel[$i]?></td>
+                    <td><?=getEvent($nes,$index,$i,'nalichie') ? 'Да' : 'Нет'?></td>
+                    <td><?=getEvent($nes,$index,$i,'srok_eks')?></td>
+                    <td><?=getEvent($nes,$index,$i,'kap_remont') ? 'Да' : 'Нет'?></td>
+                    <td><?=getEvent($nes,$index,$i,'obosnovanie')?></td>
+                </tr>
+            <?php endfor;?>
+            </tbody>
+        </table>
     <div class="text-center">
-        3.2.1. Характеристика объекта
+        3.2.4. Опись прилагаемых документов
     </div>
+
     <table class="table table-bordered">
         <thead>
         <tr>
             <th>№</th>
-            <th>Показатель</th>
-            <th>Значение</th>
+            <th>Документ</th>
+            <th>Кол-во страниц</th>
         </tr>
         </thead>
         <tbody>
         <tr>
             <td>1</td>
-            <td>Полный адрес объекта</td>
-            <td><?=$object->address?></td>
+            <td>Инвентарные карточки учета основных средств на объект недвижимого имущества и на земельный участок под указанным объектом;</td>
+            <td></td>
         </tr>
         <tr>
             <td>2</td>
-            <td>Субъект Российской Федерации </td>
-            <td><?=$object->region ? $object->region->region : ''?></td>
+            <td>Выписка из реестра федерального имущества на объект федерального имущества и на земельный участок под указанным объектом;</td>
+            <td></td>
         </tr>
         <tr>
             <td>3</td>
-            <td>Кадастровый номер</td>
-            <td><?=$object->kad_number?></td>
+            <td>Правоустанавливающие и (или) правоудостоверяющие документы на объект недвижимого имущества и на земельный участок под указанным объектом;</td>
+            <td></td>
         </tr>
         <tr>
             <td>4</td>
-            <td>Год постройки здания</td>
-            <td><?=$object->year?></td>
+            <td>Документы технического и кадастрового учета на объект недвижимого имущества;</td>
+            <td></td>
         </tr>
         <tr>
             <td>5</td>
-            <td>Год ввода здания в эксплуатацию</td>
-            <td><?=$object->exploit_year?></td>
+            <td>Ситуационный план с указанием границ земельного участка, объекта недвижимого имущества и иных объектов (включая незавершенные строительные объекты), принадлежащих третьим лицам, расположенных на указанном земельном участке;</td>
+            <td></td>
         </tr>
         <tr>
             <td>6</td>
-            <td>Год проведения последнего капитального ремонта/реконструкции</td>
+            <td>Акт технического осмотра объекта капитального строительства (документ, содержащий сведения о результатах обследования объекта капитального строительства, техническом состоянии строительных конструкций и инженерного оборудования такого объекта и количественной оценке фактических показателей качества строительных конструкций и инженерного оборудования по состоянию на дату обследования, для определения состава, объёмов и сроков работ по капитальному ремонту объекта капитального строительства); </td>
             <td></td>
         </tr>
         <tr>
             <td>7</td>
-            <td>Наличие предписаний надзорных органов </td>
-            <td><?=$object->exist_pred_nadz_orgs ? $object->podrobnosti : 'Нет'?></td>
+            <td>Дефектная ведомость (первичный учётный документ, подготовленный в соответствии с требованиями законодательства Российской Федерации о бухгалтерском учёте по результатам обследования технического состояния объекта капитального строительства и содержащий перечень дефектов строительных конструкций и инженерного оборудования объекта капитального строительства с указанием качественных и количественных характеристик таких дефектов);</td>
+            <td></td>
         </tr>
         <tr>
             <td>8</td>
-            <td>Износ здания, %</td>
-            <td><?=$wear[$object->wear and $object->wear <5 ? $object->wear : 0]?></td>
-        </tr>
-        <tr>
-            <td rowspan="4">9</td>
-            <td>Основание для использования здания</td>
-            <td><?=$object->osn_isp_zdan ?></td>
-        </tr>
-        <tr>
-            <td>Назначение</td>
-            <td><?=$object->assignment ?></td>
-
-        </tr>
-        <tr>
-            <td>Право оперативного управления (регистрационная запись, номер)</td>
-            <td><?=$object->prav_oper_upr ?></td>
-
-        </tr>
-        <tr>
-            <td>Право собственности</td>
-            <td><?=$object->prav_sob ?></td>
-        </tr>
-        <tr>
-            <td rowspan="22">10</td>
-            <td>Общая площадь здания – всего, кв.м.</td>
-            <td><?=$object->square ?></td>
-        </tr>
-        <tr>
-            <td>из нее площадь по целям использования:
-                административная
-
-            </td>
+            <td>Фотографии объекта, предполагаемого к проведению капитального ремонта (подписанные по 2 шт. на листе А4, но не более 10 шт. на объект недвижимости);</td>
             <td></td>
-
-        </tr>
-        <tr>
-            <td>учебно-лабораторных зданий </td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>в том числе: учебная</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td> из нее площадь спортивно-оздоровительных сооружений</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>в том числе крытых спортивных сооружений</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>учебно-вспомогательная</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>в том числе библиотечно-архивная</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>культурно-просветительская и музейная</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>предназначенная для лабораторных и научно-исследовательских подразделений</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>общежитий</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>в том числе жилая</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>из нее занятая обучающимися</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>гостиничных и жилых</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>подсобных</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>из нее площадь пунктов общественного питания</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>медицинских</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>бытовых</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>инфраструктурных</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>производственных и складских</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>защитных, в том числе гражданской обороны и ЧС</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>прочих зданий</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td rowspan="22">11</td>
-            <td>Общая площадь здания (помещений), планируемого к капитальному ремонту, кв. м</td>
-            <td><?=$object->square_kap ?></td>
-        </tr>
-        <tr>
-            <td>из нее площадь по целям использования:
-                административная
-            </td>
-            <td></td>
-
-        </tr>
-        <tr>
-            <td>учебно-лабораторных зданий </td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>в том числе: учебная</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td> из нее площадь спортивно-оздоровительных сооружений</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>в том числе крытых спортивных сооружений</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>учебно-вспомогательная</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>в том числе библиотечно-архивная</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>культурно-просветительская и музейная</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>предназначенная для лабораторных и научно-исследовательских подразделений</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>общежитий</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>в том числе жилая</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>из нее занятая обучающимися</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>гостиничных и жилых</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>подсобных</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>из нее площадь пунктов общественного питания</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>медицинских</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>бытовых</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>инфраструктурных</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>производственных и складских</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>защитных, в том числе гражданской обороны и ЧС</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>прочих зданий</td>
-            <td></td>
-        </tr>
-        <tr>
-            <td>12</td>
-            <td>Используется в уставной деятельности, кв.м</td>
-            <td><?=$object->isp_v_ust_dey ?></td>
-        </tr>
-        <tr>
-            <td>13</td>
-            <td>Не используется в уставной деятельности, кв.м.</td>
-            <td><?=$object->n_isp_v_ust_dey ?></td>
-        </tr>
-        <tr>
-            <td>14</td>
-            <td>Предоставлено в аренду, кв.м.</td>
-            <td><?=$object->square_ar ?></td>
-        </tr>
-        <tr>
-            <td>15</td>
-            <td>Примечание:</td>
-            <td><?=$object->note ?></td>
-        </tr>
-        </tbody>
-    </table>
-    <div class="text-center">
-        3.2.2. Сведения о планируемых мероприятиях
-    </div>
-    <table class="table-bordered table">
-        <thead>
-        <tr>
-            <th></th>
-            <th>Этап</th>
-            <th>Необходимость выполнения (да/нет)</th>
-            <th>Дата начала (план.)</th>
-            <th>Дата окончания (план.)</th>
-            <th>Стоимость реализации
-                (тыс.руб.)
-            </th>
-            <th>Сумма бюджетного финансирования на проведение капитального ремонта
-                (тыс. руб.)
-            </th>
-            <th>Софинансирование из внебюджетных источников (тыс. руб.)</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td>Проведение тендера и заключение договора на выполнение обследования</td>
-            <td><?=getEvent($events,$index,0,'is_nessesary') ? 'Да' : 'Нет'?></td>
-            <td><?=getEvent($events,$index,0,'date_event_start')?></td>
-            <td><?=getEvent($events,$index,0,'date_event_end')?></td>
-            <td><?=getEvent($events,$index,0,'cost_real')?></td>
-            <td><?=getEvent($events,$index,0,'sum_bud_fin')?></td>
-            <td><?=getEvent($events,$index,0,'fin_vnebud_ist')?></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Выполнение обследования, подготовка и утверждение дефектного акта (дефектной ведомости). </td>
-            <td><?=getEvent($events,$index,1,'is_nessesary') ? 'Да' : 'Нет'?></td>
-            <td><?=getEvent($events,$index,1,'date_event_start')?></td>
-            <td><?=getEvent($events,$index,1,'date_event_end')?></td>
-            <td><?=getEvent($events,$index,1,'cost_real')?></td>
-            <td><?=getEvent($events,$index,1,'sum_bud_fin')?></td>
-            <td><?=getEvent($events,$index,1,'fin_vnebud_ist')?></td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Утверждение задания на проектирование (в зависимости от содержания работ, выполняемых при капитальном ремонте объектов капитального строительства).</td>
-            <td><?=getEvent($events,$index,2,'is_nessesary') ? 'Да' : 'Нет'?></td>
-            <td><?=getEvent($events,$index,2,'date_event_start')?></td>
-            <td><?=getEvent($events,$index,2,'date_event_end')?></td>
-            <td><?=getEvent($events,$index,2,'cost_real')?></td>
-            <td><?=getEvent($events,$index,2,'sum_bud_fin')?></td>
-            <td><?=getEvent($events,$index,2,'fin_vnebud_ist')?></td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Проведение тендера и заключение договора на подготовку проектно-сметной документации.</td>
-            <td><?=getEvent($events,$index,3,'is_nessesary') ? 'Да' : 'Нет'?></td>
-            <td><?=getEvent($events,$index,3,'date_event_start')?></td>
-            <td><?=getEvent($events,$index,3,'date_event_end')?></td>
-            <td><?=getEvent($events,$index,3,'cost_real')?></td>
-            <td><?=getEvent($events,$index,3,'sum_bud_fin')?></td>
-            <td><?=getEvent($events,$index,3,'fin_vnebud_ist')?></td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Подготовка проектно-сметной документации.</td>
-            <td><?=getEvent($events,$index,4,'is_nessesary') ? 'Да' : 'Нет'?></td>
-            <td><?=getEvent($events,$index,4,'date_event_start')?></td>
-            <td><?=getEvent($events,$index,4,'date_event_end')?></td>
-            <td><?=getEvent($events,$index,4,'cost_real')?></td>
-            <td><?=getEvent($events,$index,4,'sum_bud_fin')?></td>
-            <td><?=getEvent($events,$index,4,'fin_vnebud_ist')?></td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>Прохождение экспертизы проектно-сметной документации.</td>
-            <td><?=getEvent($events,$index,5,'is_nessesary') ? 'Да' : 'Нет'?></td>
-            <td><?=getEvent($events,$index,5,'date_event_start')?></td>
-            <td><?=getEvent($events,$index,5,'date_event_end')?></td>
-            <td><?=getEvent($events,$index,5,'cost_real')?></td>
-            <td><?=getEvent($events,$index,5,'sum_bud_fin')?></td>
-            <td><?=getEvent($events,$index,5,'fin_vnebud_ist')?></td>
-        </tr>
-        <tr>
-            <td>7</td>
-            <td>Проведение тендера и заключение договора на выполнение строительно-монтажных работ.</td>
-            <td><?=getEvent($events,$index,6,'is_nessesary') ? 'Да' : 'Нет'?></td>
-            <td><?=getEvent($events,$index,6,'date_event_start')?></td>
-            <td><?=getEvent($events,$index,6,'date_event_end')?></td>
-            <td><?=getEvent($events,$index,6,'cost_real')?></td>
-            <td><?=getEvent($events,$index,6,'sum_bud_fin')?></td>
-            <td><?=getEvent($events,$index,6,'fin_vnebud_ist')?></td>
-        </tr>
-        <tr>
-            <td>8</td>
-            <td>Выполнение строительно-монтажных работ.</td>
-            <td><?=getEvent($events,$index,7,'is_nessesary') ? 'Да' : 'Нет'?></td>
-            <td><?=getEvent($events,$index,7,'date_event_start')?></td>
-            <td><?=getEvent($events,$index,7,'date_event_end')?></td>
-            <td><?=getEvent($events,$index,7,'cost_real')?></td>
-            <td><?=getEvent($events,$index,7,'sum_bud_fin')?></td>
-            <td><?=getEvent($events,$index,7,'fin_vnebud_ist')?></td>
         </tr>
         <tr>
             <td>9</td>
-            <td>ИТОГО</td>
+            <td>Предписания надзорных органов (при наличии);</td>
             <td></td>
+        </tr>
+        <tr>
+            <td>10</td>
+            <td>Задание на проектирование (корректировку проектной документации), составленное в соответствии с рекомендациями Минстроя РФ (в случае разработки/корректировки проектной документации и/или направления данной документации на экспертизу).</td>
             <td></td>
-            <td></td>
-            <td></td>
-            <td></td>
+        </tr>
+        <tr>
+            <td>11</td>
+            <td>Иные документы</td>
             <td></td>
         </tr>
         </tbody>
     </table>
+
+    <div class="text-center">
+        3.2.5. Ожидаемые результаты
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>№</th>
+            <th>Цели и задачи</th>
+            <th>Планируемый показатель</th>
+            <th>Ед. измерения</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td>1</td>
+            <td>Проведение капитального ремонта, общая площадь  </td>
+            <td><?=getEvent($wai,$index,0,'plan')?></td>
+            <td>кв.м</td>
+        </tr>
+        <tr>
+            <td>2</td>
+            <td>Вовлечение в хозяйственную деятельность за счет проведенного капитального ремонта, общая площадь</td>
+            <td><?=getEvent($wai,$index,1,'plan')?></td>
+            <td>кв.м</td>
+        </tr>
+        <tr>
+            <td>3</td>
+            <td>Снижение затрат на эксплуатацию</td>
+            <td><?=getEvent($wai,$index,2,'plan')?></td>
+            <td>да / нет </td>
+        </tr>
+        <tr>
+            <td>4</td>
+            <td>Повышение энергоэффективности</td>
+            <td><?=getEvent($wai,$index,3,'plan')?></td>
+            <td>да / нет </td>
+        </tr>
+        <tr>
+            <td>5</td>
+            <td>Восстановление (ремонт, реставрация, за исключением реконструкции) объектов культурного наследия </td>
+            <td><?=getEvent($wai,$index,4,'plan')?></td>
+            <td>да / нет </td>
+        </tr>
+        <?php if (ArrayHelper::keyExists($index,$wai)): ?>
+            <?php for ( $i=5,$k=6;$i< count($wai[$index]); $i++,$k++): ?>
+            <tr>
+                <td><?=$k?></td>
+                <td><?=getEvent($wai,$index,$i,'aim')?></td>
+                <td><?=getEvent($wai,$index,$i,'plan')?></td>
+                <td><?=getEvent($wai,$index,$i,'changes')?></td>
+            </tr>
+            <?php endfor;?>
+        <?php endif;?>
+
+        </tbody>
+    </table>
+
+    <table class="table table-bordered">
+        <thead class="table-bordered table">
+            <tr>
+                <th>№</th>
+                <th>Виды рисков</th>
+                <th>Отрицательное влияние</th>
+                <th>Способы защиты</th>
+            </tr>
+        </thead>
+        <tbody>
+        <?php if (ArrayHelper::keyExists($index,$risks)): ?>
+            <?php foreach ($risks[$index] as $k =>$risk):?>
+                <tr>
+                    <td><?=++$k?></td>
+                    <td><?=getEvent($risks,$index,$k,'types')?></td>
+                    <td><?=getEvent($risks,$index,$k,'poison')?></td>
+                    <td><?=getEvent($risks,$index,$k,'protect')?></td>
+                </tr>
+            <?php endforeach;?>
+        <?php endif;?>
+        </tbody>
+    </table>
+
     <?php endforeach;?>
 </div>
 
