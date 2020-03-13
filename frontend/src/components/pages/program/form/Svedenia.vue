@@ -49,8 +49,9 @@
                         v-if="row.value" 
                         v-model="sved.realization_cost[row.index]" 
                         placeholder="Цена"
-                        step="0.003"
+                        step="0.001"
                         type="number"
+                        @change="val => setFloat(val,row.index,'realization_cost')"
                         :name="`${modelName}[${row.index}][cost_real]`"
                         ></b-form-input>
                         <label v-else>-</label>
@@ -60,8 +61,9 @@
                         v-if="row.value" 
                         v-model="sved.kap_cost[row.index]" 
                         placeholder="Цена"
-                        step="0.003"
+                        step="0.001"
                         type="number"
+                        @change="val => setFloat(val,row.index,'kap_cost')"
                         :name="`${modelName}[${row.index}][sum_bud_fin]`"
                         ></b-form-input>
                         <label v-else>-</label>
@@ -71,8 +73,9 @@
                         v-if="row.value"
                         v-model="sved.finanse[row.index]"
                         placeholder="Цена"
-                        step="0.003"
+                        step="0.001"
                         type="number"
+                        @change="val => setFloat(val,row.index,'finanse')"
                         :name="`${modelName}[${row.index}][fin_vnebud_ist]`"
                         ></b-form-input>
                         <label v-else>-</label>
@@ -128,6 +131,9 @@ import Multiselect from 'vue-select';
             }
         },
         methods:{
+            setFloat(val,index, attr) {
+                this.sved[attr][index] = parseFloat(val).toFixed(3);
+            },
             getSved(){
                 return this.sved;
             }
