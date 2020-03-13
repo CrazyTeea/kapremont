@@ -81,15 +81,19 @@ export default {
         }
     },
     mounted() {
-        window.MODEL.waited.forEach((item,index)=>{
-            if (index < 5)
-                this.dataFirst[item.element].plan = item.plan;
-            else this.dataFirst[item.element] = {
-                aim: item.aim,
-                plan: item.plan,
-                changes: item.changes
-            }
-        })
+        if (window.MODEL.waited.length) {
+            window.MODEL.waited.forEach((item, index) => {
+                if (index < 5)
+                    if (this.dataFirst[item.element]) {
+                        this.dataFirst[item.element].plan = item.plan;
+                    }
+                else this.dataFirst[item.element] = {
+                    aim: item.aim,
+                    plan: item.plan,
+                    changes: item.changes
+                }
+            })
+        }
     },
     methods: {
         addNewRow: function() {
