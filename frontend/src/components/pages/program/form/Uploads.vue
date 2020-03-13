@@ -120,7 +120,7 @@ export default {
     methods: {
         async getLoadedFiles(id) {
             await Axios.get(`/program/object/files/${id}`).then((res) => {
-                if (res.data.length) {
+                if (res.data?.length) {
                     res.data.forEach(element => {
                         this.loadedFilesOnServer.push(element);
                         this.setFileName(element)
@@ -172,13 +172,13 @@ export default {
         fileRemove(index, descriptor) {
             let key = this.getSelectedFileKey(index);
             if(this.items[index].fileName != null && key == null) {
-                console.log('удалить с сервера')
+                console.log('удалить с сервера');
                 this.removeFileFromYii(this.objectId, descriptor, index)
             } else if(this.items[index].fileName == null && key == null) {
                 this.errorMessage('Сначала выберите файлы!')
             } else if(this.items[index].fileName != null && key != null) {
-                console.log('удалить локально')
-                console.log(this.selectedFiles)
+                console.log('удалить локально');
+                console.log(this.selectedFiles);
                 this.selectedFiles.splice(key, 1);
                 this.items[index].fileName = null
             }
@@ -191,7 +191,7 @@ export default {
             return true
         },
         checkFileSize(size) {
-            let _size = 20971520 //20 Мб
+            let _size = 20971520; //20 Мб
             if(parseInt(size) > _size) {
                 this.errorMessage('Файл больше 20МБ!');
                 return false
@@ -207,7 +207,7 @@ export default {
                 }
             }).filter((elem) => {
                 return elem !== null
-            })[0]
+            })[0];
             if(element != null) {
                 return element 
             } else {

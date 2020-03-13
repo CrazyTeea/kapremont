@@ -80,7 +80,7 @@ class SystemController extends RestController
                         ['key'=>'assignment','label'=>"Назначение"],
                         ['key'=>'square_kap','label'=>"Площадь кап. ремонта (кв.м)"],
                         ['key'=>'year','label'=>"Год постройки"],
-                        ['key'=>'wear','label'=>"Износ здания (%)"],
+                        ['key'=>'wear2','label'=>"Износ здания (%)"],
                         ['key'=>'regulation','label'=>"Предписание надзорных органов: МЧС, Роспотребнадзор и т.д. (при наличии)"],
                         ['key'=>'event_type','label'=>"Вид планируемого мероприятия"],//co-financing
                         ['key'=>'finance_sum','label'=>"Сумма бюджетного финансирования на проведение кап.ремонта (тыс. руб)"],
@@ -98,7 +98,7 @@ class SystemController extends RestController
                         ['key'=>'square_kap','label'=>"Площадь кап. ремонта (кв.м)"],
                         ['key'=>'address','label'=>"Адрес объекта"],
                         ['key'=>'year','label'=>"Год постройки"],
-                        ['key'=>'wear','label'=>"Износ здания (%)"],
+                        ['key'=>'wear2','label'=>"Износ здания (%)"],
                         ['key'=>'regulation','label'=>"Предписание надзорных органов: МЧС, Роспотребнадзор и т.д. (при наличии)"],
                         ['key'=>'event_type','label'=>"Вид планируемого мероприятия"],//co-financing
                         ['key'=>'finance_sum','label'=>"Сумма бюджетного финансирования на проведение кап.ремонта (тыс. руб)"],
@@ -130,13 +130,29 @@ class SystemController extends RestController
                         3=>'3',
                         4=>'резерв'
                     ];
+                    $wear = [
+                        'Менее 20%',
+                        'От 20% до 50%',
+                        'От 50% до 70%',
+                        'От 70% до 90%',
+                        'Более 90%'
+                    ];
                     foreach ($progObj as $index=>$item) {
 
-                            $ret['priorityObjects']['items'][$index] = ArrayHelper::merge(['priority'=> $prior[$item->id_priority ? : 1],'region' => $item->region ? $item->region->region : ''],$item);
+                            $ret['priorityObjects']['items'][$index] = ArrayHelper::merge([
+                                'priority'=> $prior[$item->id_priority ? : 1],
+                                'region' => $item->region ? $item->region->region : '',
+                                'wear2'=> ($item->wear and $item->wear < 5 )? $wear[$item->wear] : ''
+                            ],$item
+                            );
                     }
                     $progObj = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>1])->joinWith(['region'])->all();
                     foreach ($progObj as $index=>$item) {
-                        $ret['reservedObjects']['items'][$index] = ArrayHelper::merge(['priority'=> $prior[$item->id_priority ? : 1],'region' =>$item->region ? $item->region->region : ''],$item);
+                        $ret['reservedObjects']['items'][$index] = ArrayHelper::merge([
+                            'priority'=> $prior[$item->id_priority ? : 1],
+                            'region' =>$item->region ? $item->region->region : '',
+                            'wear2'=> ($item->wear and $item->wear < 5) ? $wear[$item->wear] : ''
+                        ],$item);
                     }
                     return $ret;
                 }
