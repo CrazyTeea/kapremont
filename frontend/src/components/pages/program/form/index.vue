@@ -42,15 +42,10 @@
                                             :state="feedback('ProgramObjects','type')"
                                     >
                                         <b-form-input style="display: none" id="type" v-model="formData.type" name="ProgramObjects[type]" />
-                                        <v-select2 v-model="formData.type"
-                                                   :options="[
-                                                   {id:0,type:'Приоритетный'},
-                                                   {id:1,type:'Резервный'},
-                                               ]"
-                                                   :reduce="type => type.id"
-                                                   label="type"
-                                                   id="type"
-                                        />
+                                        <b-select v-model="formData.type" :options="[
+                                                   {value:0,text:'Приоритетный'},
+                                                   {value:1,text:'Резервный'},
+                                               ]"/>
                                     </b-form-group>
                                     <b-form-group
                                             label="Приоритет"
@@ -60,18 +55,12 @@
                                             :state="feedback('ProgramObjects','id_priority')"
                                     >
                                         <b-form-input style="display: none" id="type" v-model="formData.id_priority" name="ProgramObjects[id_priority]" />
-                                        <v-select2 v-model="formData.id_priority"
-                                                   :get-option-value="id_priority => id_priority.id_priority"
-                                                   :options="[
-                                                   {id:1,id_priority:'1'},
-                                                   {id:2,id_priority:'2'},
-                                                   {id:3,id_priority:'3'},
-                                                   {id:4,id_priority:'резерв'}
-                                               ]"
-                                                   :reduce="id_priority => id_priority.id"
-                                                   label="id_priority"
-                                                   id="id_priority"
-                                        />
+                                        <b-select v-model="formData.id_priority" :options="[
+                                                   {value:1,text:'1'},
+                                                   {value:2,text:'2'},
+                                                   {value:3,text:'3'},
+                                                   {value:4,text:'резерв'}
+                                               ]"/>
                                     </b-form-group>
                                     <b-form-group
                                             label="Субъект РФ:"
@@ -148,16 +137,12 @@
                                             :state="feedback('ProgramObjects','exist_pred_nadz_orgs')"
                                     >
                                         <b-form-input style="display: none;" id="exist_pred_nadz_orgs" name="ProgramObjects[exist_pred_nadz_orgs]" v-model="formData.exist_pred_nadz_orgs"/>
-                                        <v-select2 v-model="formData.exist_pred_nadz_orgs"
-                                                   :get-option-value="type => type.type"
-                                                   :options="[
-                                                   {id:0,type:'Нет'},
-                                                   {id:1,type:'Да'}
-                                               ]"
-                                                   :reduce="type => type.id"
-                                                   label="type"
-                                                   id="exist_pred_nadz_orgs"
-                                        />
+
+                                        <b-select v-model="formData.exist_pred_nadz_orgs" :options="[
+                                                   {value:0,text:'Нет'},
+                                                   {value:1,text:'Да'}
+                                               ]"/>
+
                                     </b-form-group>
                                     <b-form-group
                                             v-if="formData.exist_pred_nadz_orgs"
@@ -178,18 +163,14 @@
                                     >
                                         <!-- <b-form-input style="display: none" id="type_wear" v-model="formData" name="ProgramObjects[type]" / -->
                                         <b-form-input style="display: none;" id="wear" min="0" name="ProgramObjects[wear]" :state="wear_validator" type="number" v-model="formData.wear"/>
-                                        <v-select2 v-model="formData.wear"
-                                                   :options="[
-                                                   {id:0,type:'Менее 20%'},
-                                                   {id:1,type:'От 20% до 50%'},
-                                                   {id:2,type:'От 50% до 70%'},
-                                                   {id:3,type:'От 70% до 90%'},
-                                                   {id:4,type:'Более 90%'}
-                                               ]"
-                                                   :reduce="type => type.id"
-                                                   label="type"
-                                                   id="wear"
-                                        />
+
+                                        <b-select v-model="formData.wear" :options="[
+                                                   {value:0,text:'Менее 20%'},
+                                                   {value:1,text:'От 20% до 50%'},
+                                                   {value:2,text:'От 50% до 70%'},
+                                                   {value:3,text:'От 70% до 90%'},
+                                                   {value:4,text:'Более 90%'}
+                                               ]"/>
                                     </b-form-group>
                                     <b-form-group
                                             label="Основание для использования здания:"
@@ -226,15 +207,12 @@
                                             :state="feedback('ProgramObjects','prav_sob')"
                                     >
                                         <b-form-input style="display: none;" id="prav_sob" name="ProgramObjects[prav_sob]" v-model="formData.prav_sob"/>
-                                        <v-select2 v-model="formData.prav_sob"
-                                                   :options="[
-                                                   {val:'fast', label:'Оперативное управление'},
-                                                   {val:'others', label:'Другое'},
-                                               ]"
-                                                   :reduce="type => type.val"
-                                                   label="label"
-                                                   id="prav_sob"
-                                        />
+
+                                        <b-select v-model="formData.prav_sob" :options="[
+                                                   {value:'fast', text:'Оперативное управление'},
+                                                   {value:'others', text:'Другое'},
+                                               ]"/>
+                                        
                                     </b-form-group>
                                     <b-form-group
                                             label="Общая площадь здания - всего, кв.м.:"
