@@ -400,7 +400,7 @@ use yii\helpers\ArrayHelper; ?>
                 <td><?=$item->assignment ?></td>
                 <td><?=$item->address ?></td>
                 <td><?=$item->year ?></td>
-                <td><?=$wear[$item->wear and $item->wear<5? : 0] ?></td>
+                <td><?=$wear[($item->wear and $item->wear<5)? $item->wear : 0] ?></td>
                 <td><?=$item->exist_pred_nadz_orgs ? $item->podrobnosti : '' ?></td>
                 <td></td>
                 <td><?=$item ->finance_sum?></td>
@@ -446,7 +446,7 @@ use yii\helpers\ArrayHelper; ?>
                 <td><?=$item->assignment ?></td>
                 <td><?=$item->address ?></td>
                 <td><?=$item->year ?></td>
-                <td><?=$wear[$item->wear and $item->wear<5? : 0] ?></td>
+                <td><?=$wear[($item->wear and $item->wear<5)? $item->wear : 0] ?></td>
                 <td><?=$item->exist_pred_nadz_orgs ? $item->podrobnosti : '' ?></td>
                 <td></td>
                 <td><?=$item ->finance_sum?></td>
@@ -543,7 +543,7 @@ use yii\helpers\ArrayHelper; ?>
             <tr>
                 <td>8</td>
                 <td>Износ здания, %</td>
-                <td><?=$wear[$object->wear and $object->wear <5 ? $object->wear : 0]?></td>
+                <td><?=$wear[($item->wear and $item->wear<5)? $item->wear : 0]?></td>
             </tr>
             <tr>
                 <td rowspan="4">9</td>
