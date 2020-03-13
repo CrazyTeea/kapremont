@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\ChangePasswordForm;
+use app\models\Program;
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Json;
@@ -137,5 +138,53 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+    public function actionKek(){
+        $id_org = [
+            14,
+            20,
+            77,
+            78,
+            84,
+            88,
+            112,
+            119,
+            146,
+            153,
+            170,
+            171,
+            179,
+            182,
+            210,
+            221,
+            230,
+            249,
+        ];
+        $fin = [
+            53785.97,
+            35700.31,
+            28478.23,
+            84154.60,
+            29786.87,
+            30815.02,
+            43938.30,
+            34045.50,
+            17238.38,
+            32623.50,
+            21354.51,
+            57880.20,
+            61734.10,
+            70262.90,
+            37795.80,
+            31058.79,
+            18625.78,
+            22517.26
+        ];
+        $kek = Program::find()->where(['id_org'=>$id_org])->orderBy(['id_org'=>SORT_ASC])->all();
+        foreach ($kek as $k=> $item){
+            //var_dump($item->id_org);
+            $item->finance_volume = $fin[$k];
+            $item->save();
+        }
     }
 }
