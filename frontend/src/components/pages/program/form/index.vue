@@ -243,7 +243,7 @@
                                             :valid-feedback="(feedback('ProgramObjects','square',' '))"
                                             :state="feedback('ProgramObjects','square')"
                                     >
-                                        <b-form-input id="square" name="ProgramObjects[square]" type="number" step="0.02" v-model="formData.square"/>
+                                        <b-form-input id="square" name="ProgramObjects[square]" type="number" step="0.003" v-model="formData.square"/>
                                     </b-form-group>
                                     <b-form-group
                                             label="Общая площадь здания (помещений), планируемого к капитальному ремонту, кв. м.:"
@@ -252,7 +252,7 @@
                                             :valid-feedback="(feedback('ProgramObjects','square_kap',' '))"
                                             :state="feedback('ProgramObjects','square_kap')"
                                     >
-                                        <b-form-input id="square_kap" name="ProgramObjects[square_kap]" type="number"  step="0.02" v-model="formData.square_kap"/>
+                                        <b-form-input id="square_kap" name="ProgramObjects[square_kap]" type="number"  step="0.003" v-model="formData.square_kap"/>
                                     </b-form-group>
                                     <b-form-group
                                             label="Используется в уставной деятельности, кв.м.:"
@@ -261,7 +261,7 @@
                                             :valid-feedback="(feedback('ProgramObjects','isp_v_ust_dey',' '))"
                                             :state="feedback('ProgramObjects','isp_v_ust_dey')"
                                     >
-                                        <b-form-input id="isp_v_ust_dey" name="ProgramObjects[isp_v_ust_dey]" type="number"  step="0.02" v-model="formData.isp_v_ust_dey"/>
+                                        <b-form-input id="isp_v_ust_dey" name="ProgramObjects[isp_v_ust_dey]" type="number"  step="0.003" v-model="formData.isp_v_ust_dey"/>
                                     </b-form-group>
                                     <b-form-group
                                             label="Не используется в уставной деятельности, кв.м.:"
@@ -270,7 +270,7 @@
                                             :valid-feedback="(feedback('ProgramObjects','n_isp_v_ust_dey',' '))"
                                             :state="feedback('ProgramObjects','n_isp_v_ust_dey')"
                                     >
-                                        <b-form-input id="n_isp_v_ust_dey" name="ProgramObjects[n_isp_v_ust_dey]" type="number" step="0.02" v-model="formData.n_isp_v_ust_dey"/>
+                                        <b-form-input id="n_isp_v_ust_dey" name="ProgramObjects[n_isp_v_ust_dey]" type="number" step="0.003" v-model="formData.n_isp_v_ust_dey"/>
                                     </b-form-group>
                                     <b-form-group
                                             label="Предоставлено в аренду, кв.м."
@@ -279,7 +279,7 @@
                                             :valid-feedback="(feedback('ProgramObjects','square_ar',' '))"
                                             :state="feedback('ProgramObjects','square_ar')"
                                     >
-                                        <b-form-input id="square_ar" name="ProgramObjects[square_ar]" type="number"  step="0.02" v-model="formData.square_ar"/>
+                                        <b-form-input id="square_ar" name="ProgramObjects[square_ar]" type="number"  step="0.003" v-model="formData.square_ar"/>
                                     </b-form-group>
                                     <b-form-group
                                             label="Примечание:"

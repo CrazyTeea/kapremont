@@ -81,7 +81,7 @@ export default {
         }
     },
     mounted() {
-        if (window.MODEL.waited.length) {
+        if (window.MODEL.waited?.length) {
             window.MODEL.waited.forEach((item, index) => {
                 if (index < 5)
                     if (this.dataFirst[item.element]) {

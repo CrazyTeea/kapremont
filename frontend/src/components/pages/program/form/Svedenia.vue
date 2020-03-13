@@ -49,7 +49,7 @@
                         v-if="row.value" 
                         v-model="sved.realization_cost[row.index]" 
                         placeholder="Цена"
-                        min="0"
+                        step="0.003"
                         type="number"
                         :name="`${modelName}[${row.index}][cost_real]`"
                         ></b-form-input>
@@ -60,7 +60,7 @@
                         v-if="row.value" 
                         v-model="sved.kap_cost[row.index]" 
                         placeholder="Цена"
-                        min="0"
+                        step="0.003"
                         type="number"
                         :name="`${modelName}[${row.index}][sum_bud_fin]`"
                         ></b-form-input>
@@ -71,7 +71,7 @@
                         v-if="row.value"
                         v-model="sved.finanse[row.index]"
                         placeholder="Цена"
-                        min="0"
+                        step="0.003"
                         type="number"
                         :name="`${modelName}[${row.index}][fin_vnebud_ist]`"
                         ></b-form-input>
@@ -142,21 +142,21 @@ import Multiselect from 'vue-select';
             rc_full() {
                 var sum = 0;
                 for(let key in this.sved.realization_cost){
-                    sum += parseFloat(this.sved.realization_cost[key]) || 0;
+                    sum += parseFloat(this.sved.realization_cost[key]).toFixed(3)*1 || 0;
                 }
                 return sum
             },
             kap_full() {
                 var sum = 0;
                 for(let key in this.sved.kap_cost){
-                    sum += parseFloat(this.sved.kap_cost[key]) || 0;
+                    sum += parseFloat(this.sved.kap_cost[key]).toFixed(3)*1 || 0;
                 }
                 return sum
             },
             finanse_sum() {
                 var sum = 0;
                 for(let key in this.sved.finanse){
-                    sum += parseFloat(this.sved.finanse[key]) || 0;
+                    sum += parseFloat(this.sved.finanse[key]).toFixed(3)*1 || 0;
                 }
                 return sum
 

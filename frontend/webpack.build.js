@@ -15,9 +15,6 @@ module.exports = {
     mode: "production",
 
     optimization: {
-        splitChunks: {
-            chunks: 'async'
-        },
         minimizer: [new UglifyJsPlugin()],
     },
 
