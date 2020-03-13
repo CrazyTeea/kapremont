@@ -84,6 +84,7 @@ $config = [
                 'program/object/add-docs/<id:\d+>'=>'app/program-objects/add-docs',
                 'program/object/download-doc/<id_obj:\d+>'=>'app/program-objects/download-doc',
                 'program/object/delete-docs/<id:\d+>' => 'app/program-objects/delete-docs',
+                'program/object/delete/<id:\d+>' => 'app/program-objects/delete',
                 'program/object/files/<id:\d+>' => 'app/program-objects/get-all-obj-files',
                 'program/export'=>'app/development-programme/export',
                 'organization/info'=>'app/organization/info',
