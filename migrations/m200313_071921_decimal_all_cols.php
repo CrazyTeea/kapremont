@@ -12,16 +12,16 @@ class m200313_071921_decimal_all_cols extends Migration
      */
     public function safeUp()
     {
-        $this->alterColumn(\app\models\ProgObjectsEvents::tableName(),'cost_real',$this->decimal(null,3));
-        $this->alterColumn(\app\models\ProgObjectsEvents::tableName(),'sum_bud_fin',$this->decimal(null,3));
-        $this->alterColumn(\app\models\ProgObjectsEvents::tableName(),'fin_vnebud_ist',$this->decimal(null,3));
-        $this->alterColumn(\app\models\ProgramObjects::tableName(),'finance_sum',$this->decimal(null,3));
-        $this->alterColumn(\app\models\ProgramObjects::tableName(),'square',$this->decimal(null,3));
-        $this->alterColumn(\app\models\ProgramObjects::tableName(),'coFinancing',$this->decimal(null,3));
-        $this->alterColumn(\app\models\ProgramObjects::tableName(),'square_kap',$this->decimal(null,3));
-        $this->alterColumn(\app\models\ProgramObjects::tableName(),'isp_v_ust_dey',$this->decimal(null,3));
-        $this->alterColumn(\app\models\ProgramObjects::tableName(),'n_isp_v_ust_dey',$this->decimal(null,3));
-        $this->alterColumn(\app\models\ProgramObjects::tableName(),'square_ar',$this->decimal(null,3));
+        $this->alterColumn(\app\models\ProgObjectsEvents::tableName(),'cost_real',$this->decimal(10,3));
+        $this->alterColumn(\app\models\ProgObjectsEvents::tableName(),'sum_bud_fin',$this->decimal(10,3));
+        $this->alterColumn(\app\models\ProgObjectsEvents::tableName(),'fin_vnebud_ist',$this->decimal(10,3));
+        $this->alterColumn(\app\models\ProgramObjects::tableName(),'finance_sum',$this->decimal(10,3));
+        $this->alterColumn(\app\models\ProgramObjects::tableName(),'square',$this->decimal(10,3));
+        $this->alterColumn(\app\models\ProgramObjects::tableName(),'coFinancing',$this->decimal(10,3));
+        $this->alterColumn(\app\models\ProgramObjects::tableName(),'square_kap',$this->decimal(10,3));
+        $this->alterColumn(\app\models\ProgramObjects::tableName(),'isp_v_ust_dey',$this->decimal(10,3));
+        $this->alterColumn(\app\models\ProgramObjects::tableName(),'n_isp_v_ust_dey',$this->decimal(10,3));
+        $this->alterColumn(\app\models\ProgramObjects::tableName(),'square_ar',$this->decimal(10,3));
     }
 
     /**
