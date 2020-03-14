@@ -248,22 +248,22 @@ use yii\helpers\ArrayHelper; ?>
         <tr>
             <td>8</td>
             <td>Общая площадь всех зданий и сооружений</td>
-            <td></td>
+            <td><?=$sq['s_k']?></td>
         </tr>
         <tr>
             <td>9</td>
             <td>Общая площадь всех зданий и сооружений, требующих капитального ремонта (на основании акта обследования или предписаний надзорных органов)</td>
-            <td></td>
+            <td><?=$sq['s_k_s']?></td>
         </tr>
         <tr>
             <td>10</td>
             <td>Общая площадь всех зданий и сооружений, находящихся в аварийном состоянии (на основании акта обследования или предписаний надзорных органов)</td>
-            <td></td>
+            <td><?=$sq['s_av']?></td>
         </tr>
         <tr>
             <td>11</td>
             <td>Общая площадь всех зданий и сооружений, требующих мероприятий по АТЗ</td>
-            <td></td>
+            <td><?=$sq['s_atz']?></td>
         </tr>
         </tbody>
     </table>
@@ -327,35 +327,35 @@ use yii\helpers\ArrayHelper; ?>
             <td>Средства пожарной сигнализации</td>
             <td><?=ArrayHelper::keyExists(5,$atz) ? $atz[5]->cost_b : ''?></td>
             <td><?=ArrayHelper::keyExists(5,$atz) ? $atz[5]->cost_v : ''?></td>
-            <td><?=ArrayHelper::keyExists(5,$atz) ? (int)$atz[5]->cost_b + (int)$atz[5]->cost_v : ''?></td>
+            <td><?=ArrayHelper::keyExists(5,$atz) ? floatval($atz[5]->cost_b + $atz[5]->cost_v) : ''?></td>
         </tr>
         <tr>
             <td>7</td>
             <td>Средства телефонной связи и радиосвязи</td>
             <td><?=ArrayHelper::keyExists(6,$atz) ? $atz[6]->cost_b : ''?></td>
             <td><?=ArrayHelper::keyExists(6,$atz) ? $atz[6]->cost_v : ''?></td>
-            <td><?=ArrayHelper::keyExists(6,$atz) ? (int)$atz[6]->cost_b + (int)$atz[6]->cost_v : ''?></td>
+            <td><?=ArrayHelper::keyExists(6,$atz) ? floatval($atz[6]->cost_b + $atz[6]->cost_v) : ''?></td>
         </tr>
         <tr>
             <td>8</td>
             <td>Ограждение (в т.ч. ворота, шлагбаумы)</td>
             <td><?=ArrayHelper::keyExists(7,$atz) ? $atz[7]->cost_b : ''?></td>
             <td><?=ArrayHelper::keyExists(7,$atz) ? $atz[7]->cost_v : ''?></td>
-            <td><?=ArrayHelper::keyExists(7,$atz) ? (int)$atz[7]->cost_b + (int)$atz[7]->cost_v : ''?></td>
+            <td><?=ArrayHelper::keyExists(7,$atz) ? floatval($atz[7]->cost_b + $atz[7]->cost_v) : ''?></td>
         </tr>
         <tr>
             <td>9</td>
             <td>СКУД</td>
             <td><?=ArrayHelper::keyExists(8,$atz) ? $atz[8]->cost_b : ''?></td>
             <td><?=ArrayHelper::keyExists(8,$atz) ? $atz[8]->cost_v : ''?></td>
-            <td><?=ArrayHelper::keyExists(8,$atz) ? (int)$atz[8]->cost_b + (int)$atz[8]->cost_v : ''?></td>
+            <td><?=ArrayHelper::keyExists(8,$atz) ? floatval($atz[8]->cost_b + $atz[8]->cost_v) : ''?></td>
         </tr>
         <tr>
             <td></td>
             <td>Итого:</td>
-            <td>c</td>
-            <td></td>
-            <td></td>
+            <td><?=$atzC['bC']?></td>
+            <td><?=$atzC['vC']?></td>
+            <td><?=$atzC['bvC']?></td>
         </tr>
         </tbody>
     </table>
