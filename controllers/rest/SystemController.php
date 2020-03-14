@@ -81,7 +81,7 @@ class SystemController extends RestController
                         ['key'=>'square_kap','label'=>"Площадь кап. ремонта (кв.м)"],
                         ['key'=>'year','label'=>"Год постройки"],
                         ['key'=>'wear2','label'=>"Износ здания (%)"],
-                        ['key'=>'regulation','label'=>"Предписание надзорных органов: МЧС, Роспотребнадзор и т.д. (при наличии)"],
+                        ['key'=>'regulationT','label'=>"Предписание надзорных органов: МЧС, Роспотребнадзор и т.д. (при наличии)"],
                         ['key'=>'event_type','label'=>"Вид планируемого мероприятия"],//co-financing
                         ['key'=>'finance_sum','label'=>"Сумма бюджетного финансирования на проведение кап.ремонта (тыс. руб)"],
                         ['key'=>'coFinancing','label'=>"Софинансирование из внебюджетных источников (тыс. руб)"],
@@ -99,7 +99,7 @@ class SystemController extends RestController
                         ['key'=>'address','label'=>"Адрес объекта"],
                         ['key'=>'year','label'=>"Год постройки"],
                         ['key'=>'wear2','label'=>"Износ здания (%)"],
-                        ['key'=>'regulation','label'=>"Предписание надзорных органов: МЧС, Роспотребнадзор и т.д. (при наличии)"],
+                        ['key'=>'regulationT','label'=>"Предписание надзорных органов: МЧС, Роспотребнадзор и т.д. (при наличии)"],
                         ['key'=>'event_type','label'=>"Вид планируемого мероприятия"],//co-financing
                         ['key'=>'finance_sum','label'=>"Сумма бюджетного финансирования на проведение кап.ремонта (тыс. руб)"],
                         ['key'=>'coFinancing','label'=>"Софинансирование из внебюджетных источников (тыс. руб)"],
@@ -140,10 +140,11 @@ class SystemController extends RestController
                     foreach ($progObj as $index=>$item) {
                         $i = $index+1;
                             $ret['priorityObjects']['items'][$index] = ArrayHelper::merge([
+                                'regulationT'=>($item->exist_pred_nadz_orgs) ? $item->regulation : '',
                                 'index'=>$i,
                                 'priority'=> $prior[$item->id_priority ? : 1],
                                 'region' => $item->region ? $item->region->region : '',
-                                'wear2'=> ($item->wear and $item->wear < 5 )? $wear[$item->wear] : ''
+                                'wear2'=> (!is_null($item->wear) and $item->wear < 5 )? $wear[$item->wear] : ''
                             ],$item
                             );
                     }
@@ -151,10 +152,11 @@ class SystemController extends RestController
                     foreach ($progObj as $index=>$item) {
                         $i = $index+1;
                         $ret['reservedObjects']['items'][$index] = ArrayHelper::merge([
+                            'regulationT'=>($item->exist_pred_nadz_orgs) ? $item->regulation : '',
                             'index'=>$i,
                             'priority'=> $prior[$item->id_priority ? : 1],
                             'region' =>$item->region ? $item->region->region : '',
-                            'wear2'=> ($item->wear and $item->wear < 5) ? $wear[$item->wear] : ''
+                            'wear2'=> (!is_null($item->wear) and $item->wear < 5) ? $wear[$item->wear] : ''
                         ],$item);
                     }
                     return $ret;
@@ -251,19 +253,19 @@ class SystemController extends RestController
                         ],
                         ['id' => 8, 'label' =>
                             "Общая площадь всех зданий и сооружений",
-                            'value'=> $org->orgInfo?$org->orgInfo->zdan_count: 0
+                            'value'=> ProgramObjects::find()->select(['square'])->where(['system_status'=>1,'id_org'=>$this->user->id_org,])->sum('square'),
                         ],
                         ['id' => 9, 'label' =>
                             "Общая площадь всех зданий и сооружений, требующих капитального ремонта (на основании акта обследования или предписаний надзорных органов)",
-                            'value'=>  0
+                            'value'=>  ProgramObjects::find()->select(['square_kap'])->where(['system_status'=>1,'id_org'=>$this->user->id_org,])->sum('square_kap'),
                         ],
                         ['id' => 10, 'label' =>
                             "Общая площадь всех зданий и сооружений, находящихся в аварийном состоянии (на основании акта обследования или предписаний надзорных органов)",
-                            'value'=>  0
+                            'value'=>  ProgramObjects::find()->select(['square_av'])->where(['system_status'=>1,'id_org'=>$this->user->id_org,])->sum('square_av')
                         ],
                         ['id' => 11, 'label' =>
                             "Общая площадь всех зданий и сооружений, требующих мероприятий по АТЗ",
-                            'value'=>   0
+                            'value'=>  ProgramObjects::find()->select(['square_atz'])->where(['system_status'=>1,'id_org'=>$this->user->id_org,])->sum('square_atz')
                         ],
                     ];
 

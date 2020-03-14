@@ -158,12 +158,12 @@
                                     <b-form-group
                                             v-if="formData.exist_pred_nadz_orgs"
                                             label="Подробности:"
-                                            label-for="podrobnosti"
-                                            :invalid-feedback="(feedback('ProgramObjects','podrobnosti','Введите подробности'))"
-                                            :valid-feedback="(feedback('ProgramObjects','podrobnosti',' '))"
-                                            :state="feedback('ProgramObjects','podrobnosti')"
+                                            label-for="regulation"
+                                            :invalid-feedback="(feedback('ProgramObjects','regulation','Введите подробности'))"
+                                            :valid-feedback="(feedback('ProgramObjects','regulation',' '))"
+                                            :state="feedback('ProgramObjects','regulation')"
                                     >
-                                        <b-form-input id="podrobnosti" name="ProgramObjects[podrobnosti]" v-model="formData.podrobnosti"/>
+                                        <b-form-input id="regulation" name="ProgramObjects[regulation]" v-model="formData.regulation"/>
                                     </b-form-group>
                                     <b-form-group
                                             label="Износ здания (%):"
@@ -409,7 +409,7 @@
                     wear:window.MODEL.base?.wear || null,
                     exist_pred_nadz_orgs:window.MODEL.base?.exist_pred_nadz_orgs || null,
                     osn_isp_zdan:window.MODEL.base?.osn_isp_zdan || null,
-                    podrobnosti: window.MODEL.base?.podrobnosti || null,
+                    regulation: window.MODEL.base?.regulation || null,
                     assignment:window.MODEL.base?.assignment || null,
                     prav_sob:window.MODEL.base?.prav_sob || null,
                     square:window.MODEL.base?.square || null,
