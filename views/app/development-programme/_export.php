@@ -12,6 +12,10 @@ $wear = [
     'От 70% до 90%',
     'Более 90%'
 ];
+$prav = [
+    'fast'=>'Оперативное управление',
+    'others'=>'Другое',
+];
 $nesLabel = [
     'Фундаменты',
     'Отмостка',
@@ -562,7 +566,7 @@ use yii\helpers\ArrayHelper; ?>
             </tr>
             <tr>
                 <td>Право собственности</td>
-                <td><?=$object->prav_sob ?></td>
+                <td><?= is_string($object->prav_sob) ? $prav[$object->prav_sob] : '' ?></td>
             </tr>
             <tr>
                 <td rowspan="22">10</td>
