@@ -60,6 +60,19 @@ function getEvent($arr,$i_o,$index,$attr){
     return '';
 }
 
+function getSum($arr,$i_o,$attr){
+
+    $sum = 0;
+    if (isset($arr[$i_o]))
+    {
+        foreach ($arr[$i_o] as $item){
+            $sum += floatval(isset($item->$attr) ? $item->$attr : 0);
+        }
+    }
+    return $sum;
+
+}
+
 use app\models\Regions;
 use yii\helpers\ArrayHelper; ?>
 
@@ -462,8 +475,9 @@ use yii\helpers\ArrayHelper; ?>
     </table>
 
     <?php foreach ($objects as $index=> $object):?>
+    <?php $kek = $index+1 ?>
         <div class="text-center">
-            <p><h5>Объект № <?=++$index?></h5>
+            <p><h5>Объект № <?=$kek?></h5>
             <p><?=$object->name?></p>
             <p>Приоритет:<?=$prior[$object->id_priority ? : 1]?></p>
         </div>
@@ -882,9 +896,9 @@ use yii\helpers\ArrayHelper; ?>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><?=getSum($events,$index,'cost_real')?></td>
+                <td><?=getSum($events,$index,'sum_bud_fin')?></td>
+                <td><?=getSum($events,$index,'fin_vnebud_ist')?></td>
             </tr>
             </tbody>
         </table>
