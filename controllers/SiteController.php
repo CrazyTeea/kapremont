@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\ChangePasswordForm;
 use app\models\Program;
+use app\models\ProgramObjects;
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Json;
@@ -140,7 +141,12 @@ class SiteController extends Controller
         return $this->render('about');
     }
     public function actionKek(){
-        $id_org = [
+        $p = ProgramObjects::find()->all();
+        foreach ($p as $item) {
+            $item->regulation = $item->podrobnosti;
+            $item->save(false);
+        }
+        /*$id_org = [
             14,
             20,
             77,
@@ -185,6 +191,6 @@ class SiteController extends Controller
             //var_dump($item->id_org);
             $item->finance_volume = $fin[$k];
             $item->save();
-        }
+        }*/
     }
 }
