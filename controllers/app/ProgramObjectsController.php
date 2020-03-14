@@ -114,9 +114,12 @@ class ProgramObjectsController extends AppController
                         $pr->cost_real = $item->cost_real;
                         $pr->sum_bud_fin = $item->sum_bud_fin;
                         $pr->fin_vnebud_ist = $item->fin_vnebud_ist;
+                        $model->finance_sum+=floatval($pr->sum_bud_fin);
+                        $model->coFinancing+=floatval($pr->fin_vnebud_ist);
                         $save &= $pr->save();
                         $errors['ProgObjectsEvents'][] = $pr->getErrors();
                     }
+                    $save &= $model->save(false);
                     // $deletedIDs = null;
                     //$oldIds = ArrayHelper::map($proObjectsNecessary,'id','id');
                     $proObjectsNecessary = ProObjectsNecessary::createMultiple(ProObjectsNecessary::className(), $proObjectsNecessary);
@@ -234,6 +237,7 @@ class ProgramObjectsController extends AppController
                 $transaction = Yii::$app->getDb()->beginTransaction();
                 $save &= $model->save();
                 $errors['ProgramObjects'] = $model->getErrors();
+                $model->finance_sum = $model->coFinancing = 0;
                 if ($save) {
                     $progObjectsEvents = ProgObjectsEvents::createMultiple(ProgObjectsEvents::className(), $progObjectsEvents);
                     ProgObjectsEvents::loadMultiple($progObjectsEvents, Yii::$app->request->post());
@@ -252,9 +256,12 @@ class ProgramObjectsController extends AppController
                         $pr->cost_real = $item->cost_real;
                         $pr->sum_bud_fin = $item->sum_bud_fin;
                         $pr->fin_vnebud_ist = $item->fin_vnebud_ist;
+                        $model->finance_sum+=floatval($pr->sum_bud_fin);
+                        $model->coFinancing+=floatval($pr->fin_vnebud_ist);
                         $save &= $pr->save();
                         $errors['ProgObjectsEvents'][] = $pr->getErrors();
                     }
+                    $save &= $model->save(false);
                    // $deletedIDs = null;
                     //$oldIds = ArrayHelper::map($proObjectsNecessary,'id','id');
                     $proObjectsNecessary = ProObjectsNecessary::createMultiple(ProObjectsNecessary::className(), $proObjectsNecessary);
@@ -330,7 +337,7 @@ class ProgramObjectsController extends AppController
                         }
                         $pr->types = $item->types;
                         $pr->poison = $item->poison;
-                        $pr->protect = $item->protect ;
+                        $pr->protect = $item->protect;
                         $save &= $pr->save();
                         $errors['ProgObjectsWaites'][] = [$pr->getErrors()];
                     }
