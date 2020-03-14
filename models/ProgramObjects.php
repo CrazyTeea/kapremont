@@ -57,7 +57,7 @@ class ProgramObjects extends \yii\db\ActiveRecord
     {
         return [
             [['id_org', 'id_priority', 'id_program', 'year', 'system_status', 'id_region', 'id_city', 'type', 'exploit_year'], 'integer'],
-            [['name', 'assignment', 'regulation', 'event_type', 'note', 'address','prav_oper_upr'], 'string'],
+            [['name', 'assignment', 'regulation', 'event_type', 'note', 'address','prav_oper_upr'], 'string','max'=>5000],
             [['square', 'wear', 'finance_sum', 'coFinancing', 'square_kap', 'isp_v_ust_dey', 'n_isp_v_ust_dey', 'square_ar'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
             [['exist_pred_nadz_orgs', 'prav_sob', 'kad_number', 'osn_isp_zdan','podrobnosti'], 'string', 'max' => 5000],
@@ -94,7 +94,7 @@ class ProgramObjects extends \yii\db\ActiveRecord
             'updated_at' => 'Updated At',
             'id_region' => 'Регион',
             'id_city' => 'Город',
-            'address' => 'Address',
+            'address' => 'Адрес',
             'exist_pred_nadz_orgs' => 'Наличие предписаний надзорных органов:',
             'type' => 'Type',
             'prav_sob' => 'Право собственности:',
