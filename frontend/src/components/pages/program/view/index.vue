@@ -176,10 +176,10 @@
                 window.location.href = `/program/object/view/${item.id}`;
             },
             rowCount(attr){
-                if (attr == 'resTable'){
+                if (attr == 'resTable' && this.reservedObjects?.items){
                     return this.reservedObjects.items.length > this.resTable.perPage;
                 }
-                else if (attr == 'prevTable')
+                else if (attr == 'prevTable' && this.priorityObjects?.items)
                     return this.priorityObjects.items.length > this.prevTable.perPage;
                 else return false;
             }
