@@ -404,8 +404,8 @@ use yii\helpers\ArrayHelper; ?>
                 <td><?=$item->assignment ?></td>
                 <td><?=$item->address ?></td>
                 <td><?=$item->year ?></td>
-                <td><?=$wear[($item->wear and $item->wear<5)? $item->wear : 0] ?></td>
-                <td><?=$item->exist_pred_nadz_orgs ? $item->podrobnosti : '' ?></td>
+                <td><?=$wear[(!is_null($item->wear) and $item->wear<5)? $item->wear : 0] ?></td>
+                <td><?=$item->exist_pred_nadz_orgs ? $item->regulation : '' ?></td>
                 <td></td>
                 <td><?=$item->finance_sum?></td>
                 <td><?=$item->coFinancing?></td>
@@ -450,8 +450,8 @@ use yii\helpers\ArrayHelper; ?>
                 <td><?=$item->assignment ?></td>
                 <td><?=$item->address ?></td>
                 <td><?=$item->year ?></td>
-                <td><?=$wear[($item->wear and $item->wear<5)? $item->wear : 0] ?></td>
-                <td><?=$item->exist_pred_nadz_orgs ? $item->podrobnosti : '' ?></td>
+                <td><?=$wear[(!is_null($item->wear) and $item->wear<5)? $item->wear : 0] ?></td>
+                <td><?=$item->exist_pred_nadz_orgs ? $item->regulation : '' ?></td>
                 <td></td>
                 <td><?=$item ->finance_sum?></td>
                 <td><?=$item ->coFinancing?></td>
@@ -542,12 +542,12 @@ use yii\helpers\ArrayHelper; ?>
             <tr>
                 <td>7</td>
                 <td>Наличие предписаний надзорных органов </td>
-                <td><?=$object->exist_pred_nadz_orgs ? $object->podrobnosti : 'Нет'?></td>
+                <td><?=$object->exist_pred_nadz_orgs ? $object->regulation : 'Нет'?></td>
             </tr>
             <tr>
                 <td>8</td>
                 <td>Износ здания, %</td>
-                <td><?=$wear[($item->wear and $item->wear<5)? $item->wear : 0]?></td>
+                <td><?=$wear[(!is_null($object->wear) and $object->wear<5)? $object->wear : 0]?></td>
             </tr>
             <tr>
                 <td rowspan="4">9</td>

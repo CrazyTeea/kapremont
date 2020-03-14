@@ -57,7 +57,7 @@
                             :fields="fieldsObjects && fieldsObjects.fields"
                             small bordered hover
                     />
-                    <b-pagination :per-page="prevTable.perPage" v-model="prevTable.curPage" :total-rows="rowsPrev"/>
+                    <b-pagination v-show="rowCount('prevTable')" :per-page="prevTable.perPage" v-model="prevTable.curPage" :total-rows="rowsPrev"/>
                     <b-card-text>Резервные объекты</b-card-text>
                     <b-table
                             class="text-center"
@@ -69,7 +69,7 @@
                             :fields="fieldsObjects && fieldsObjects.fields"
                             small bordered
                     />
-                    <b-pagination :per-page="resTable.perPage" v-model="resTable.curPage" :total-rows="resPrev"/>
+                    <b-pagination v-show="rowCount('resTable')" :per-page="resTable.perPage" v-model="resTable.curPage" :total-rows="resPrev"/>
                 </b-card-body>
             </b-card>
 
@@ -174,6 +174,14 @@
             ...mapActions(['requestPageData']),
             onRowClick(item){
                 window.location.href = `/program/object/view/${item.id}`;
+            },
+            rowCount(attr){
+                if (attr == 'resTable'){
+                    return this.reservedObjects.items.length > this.resTable.perPage;
+                }
+                else if (attr == 'prevTable')
+                    return this.priorityObjects.items.length > this.prevTable.perPage;
+                else return false;
             }
         },
         computed:{
