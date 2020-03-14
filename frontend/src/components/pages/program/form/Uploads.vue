@@ -154,11 +154,9 @@ export default {
         fileInput(index) {
             // let file = Array.from(event.target.files)[0]; Это тоже рабочая версия
             let file = document.querySelector('#file_input_' + index).files[0];
-            if(!this.checkFileExt(file.type) || !this.checkFileSize(file.size)) {
-                // let form = document.querySelector('#file_input_' + index)
-                // form.reset()
-                file.value = null;
-                return
+            if(!this.checkFileExt(file.type) || !this.checkFileSize(file.size) || this.checkFileName(file.name)) {
+                file.innerHeight = document.getElementById(`file_input_${index}`);
+                return false;
             }
             this.selectedFiles.push({
                 id: index,
@@ -166,7 +164,7 @@ export default {
                 name: this.items[index].label,
                 file: file
             });
-            console.log(this.selectedFiles)
+            console.log(this.selectedFiles);
             this.items[index].fileName = file.name
         },
         fileRemove(index, descriptor) {
@@ -197,6 +195,14 @@ export default {
                 return false
             }
             return true
+        },
+        checkFileName(fileName){
+            if (this.items.find(f => f.fileName == fileName)){
+                this.errorMessage('Файл c таким именем уже загружен!');
+                return true;
+            }
+            return false;
+
         },
         getSelectedFileKey(index) {
             let element = this.selectedFiles.map((elem, id) => {
