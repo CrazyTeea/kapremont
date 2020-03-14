@@ -12,9 +12,8 @@
             <div class="row mt-3">
                 <div class="col-12">
                     <b-form-group
-                            id="fieldset-1"
                             label="Название объекта"
-                            label-for="input-1"
+                            label-for="name"
                             :invalid-feedback="(feedback('ProgramObjects','name','Название объекта должно быть заполнено'))"
                             :valid-feedback="(feedback('ProgramObjects','name',' '))"
                             :state="feedback('ProgramObjects','name')"
@@ -22,6 +21,18 @@
                         <b-form-input placeholder="Название..."
                                       id="name" name="ProgramObjects[name]"
                                       v-model="formData.name"
+                        />
+                    </b-form-group>
+                    <b-form-group
+                            label="Адрес объекта"
+                            label-for="address"
+                            :invalid-feedback="(feedback('ProgramObjects','address','адрес объекта должно быть заполнено'))"
+                            :valid-feedback="(feedback('ProgramObjects','address',' '))"
+                            :state="feedback('ProgramObjects','address')"
+                    >
+                        <b-form-input placeholder="адрес..."
+                                      id="address" name="ProgramObjects[address]"
+                                      v-model="formData.address"
                         />
                     </b-form-group>
                     <b-card no-body class="mb-1">
@@ -386,6 +397,7 @@
             return {
                 csrf: document.getElementsByName('csrf-token')[0].content,
                 formData: {
+                    address:window.MODEL.base?.address || null,
                     type:window.MODEL.base?.type || 0,
                     name:window.MODEL.base?.name || null,
                     id_region:window.MODEL.base?.id_region || null,
