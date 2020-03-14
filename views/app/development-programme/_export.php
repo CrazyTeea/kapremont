@@ -407,9 +407,9 @@ use yii\helpers\ArrayHelper; ?>
                 <td><?=$wear[($item->wear and $item->wear<5)? $item->wear : 0] ?></td>
                 <td><?=$item->exist_pred_nadz_orgs ? $item->podrobnosti : '' ?></td>
                 <td></td>
-                <td><?=$item ->finance_sum?></td>
-                <td><?=$item ->coFinancing?></td>
-                <td><?=$item ->note?></td>
+                <td><?=$item->finance_sum?></td>
+                <td><?=$item->coFinancing?></td>
+                <td><?=$item->note?></td>
             </tr>
         <?php endforeach;?>
         </tbody>
