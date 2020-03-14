@@ -397,7 +397,7 @@ use yii\helpers\ArrayHelper; ?>
         <?php foreach ($pr_ob as $index=>$item):?>
             <tr>
                 <td><?=++$index ?></td>
-                <td><?=$prior[$item->id_priority ? : 1] ?></td>
+                <td><?= (!$item->type) ? $prior[$item->id_priority ? : 1] : 'Резерв' ?></td>
                 <td><?php $reg = Regions::findOne($item->id_region); echo $reg ? $reg->region : ' ' ?></td>
                 <td><?=$item->kad_number ?></td>
                 <td><?=$item->name ?></td>
@@ -443,7 +443,7 @@ use yii\helpers\ArrayHelper; ?>
         <?php foreach ($r_ob as $index=>$item):?>
             <tr>
                 <td><?=++$index ?></td>
-                <td><?=$prior[$item->id_priority ? : 1] ?></td>
+                <td><?= (!$item->type) ? $prior[$item->id_priority ? : 1] : 'Резерв' ?></td>
                 <td><?php $reg = Regions::findOne($item->id_region); echo $reg ? $reg->region : ' ' ?></td>
                 <td><?=$item->kad_number ?></td>
                 <td><?=$item->name ?></td>
