@@ -70,7 +70,7 @@ class SystemController extends RestController
                 }
                 case 'programView':{
                     $ret['objects']['fields']=[
-                        ['key'=>'id','label'=>'№'],
+                        ['key'=>'index','label'=>'№'],
                         ['key'=>'org_short_name','label'=>"Сокращенное наименование органихации"],
                         ['key'=>'priority','label'=>'Приоритет'],
                         ['key'=>'name','label'=>"Наименование объекта, требующего кап. ремонт"],
@@ -90,7 +90,7 @@ class SystemController extends RestController
 
                     ];
                     $ret['fieldsObjects']['fields']=[
-                        ['key'=>'id','label'=>'№'],
+                        ['key'=>'index','label'=>'№'],
                         ['key'=>'priority','label'=>'Приоритет'],
                         ['key'=>'region','label'=>"Субъект РФ"],
                         ['key'=>'name','label'=>"Наименование объекта, требующего кап. ремонт"],
@@ -138,8 +138,9 @@ class SystemController extends RestController
                         'Более 90%'
                     ];
                     foreach ($progObj as $index=>$item) {
-
+                        $i = $index+1;
                             $ret['priorityObjects']['items'][$index] = ArrayHelper::merge([
+                                'index'=>$i,
                                 'priority'=> $prior[$item->id_priority ? : 1],
                                 'region' => $item->region ? $item->region->region : '',
                                 'wear2'=> ($item->wear and $item->wear < 5 )? $wear[$item->wear] : ''
@@ -148,7 +149,9 @@ class SystemController extends RestController
                     }
                     $progObj = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>1])->joinWith(['region'])->all();
                     foreach ($progObj as $index=>$item) {
+                        $i = $index+1;
                         $ret['reservedObjects']['items'][$index] = ArrayHelper::merge([
+                            'index'=>$i,
                             'priority'=> $prior[$item->id_priority ? : 1],
                             'region' =>$item->region ? $item->region->region : '',
                             'wear2'=> ($item->wear and $item->wear < 5) ? $wear[$item->wear] : ''
