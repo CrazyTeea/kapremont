@@ -164,19 +164,15 @@ export default {
                 name: this.items[index].label,
                 file: file
             });
-            console.log(this.selectedFiles);
             this.items[index].fileName = file.name
         },
         fileRemove(index, descriptor) {
             let key = this.getSelectedFileKey(index);
             if(this.items[index].fileName != null && key == null) {
-                console.log('удалить с сервера');
                 this.removeFileFromYii(this.objectId, descriptor, index)
             } else if(this.items[index].fileName == null && key == null) {
                 this.errorMessage('Сначала выберите файлы!')
             } else if(this.items[index].fileName != null && key != null) {
-                console.log('удалить локально');
-                console.log(this.selectedFiles);
                 this.selectedFiles.splice(key, 1);
                 this.items[index].fileName = null
             }
@@ -236,8 +232,7 @@ export default {
         async removeFileFromYii(id, descriptor, index) {
             await Axios.get(`/program/object/delete-docs/${id}`, { params: { descriptor: descriptor } }).then((res) => {
                 this.items[index].fileName = null;
-                console.log(res.data)
-            }).catch(error => console.log(error))
+            }).catch(error => console.error(error))
         },
         async uploadFile(file,id) {
             let form = new FormData();
@@ -254,7 +249,7 @@ export default {
                 }
             }).then((res) => {
                  this.uploadSuccess &= !!res.data;
-            }).catch(error => console.log(error))
+            }).catch(error => console.error(error))
         },
         // loadMessage: function(file) {
         //     message = `Файл ${this.loadingFileName} загружен на ${this.loadProgress}%`

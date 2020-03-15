@@ -486,7 +486,6 @@
             },
         },
         mounted() {
-            console.log(window.MODEL)
             this.requestPageData({pageName:"objectCreate"});
             if (!!this.formData.id_region)
                 this.requestCity({id:this.formData.id_region});
