@@ -76,21 +76,34 @@ export default {
                 {aim: 'Снижение затрат на эксплуатацию', plan: null, changes: 'да/нет'},
                 {aim: 'Повышение энергоэффективности', plan: null, changes: 'да/нет'},
                 {aim: 'Восстановление (ремонт, реставрация, за исключением реконструкции) объектов культурного наследия', plan: null, changes: 'да/нет'},
-                {aim: null, plan: null, changes: null}
+               // {aim: null, plan: null, changes: null}
             ],
         }
     },
     mounted() {
         if (window.MODEL.waited?.length) {
             window.MODEL.waited.forEach((item, index) => {
-                if (index < 5)
+                if (index < 5) {
                     if (this.dataFirst[item.element]) {
                         this.dataFirst[item.element].plan = item.plan;
                     }
-                else this.dataFirst[item.element] = {
-                    aim: item.aim,
-                    plan: item.plan,
-                    changes: item.changes
+                }
+
+                else {
+                    if(this.dataFirst[item.element]) {
+                        this.dataFirst[item.element]={
+                            aim: item.aim,
+                            plan: item.plan,
+                            changes: item.changes
+                        };
+                    }
+                    else {
+                        this.dataFirst.push({
+                            aim: item.aim,
+                            plan: item.plan,
+                            changes: item.changes
+                        });
+                    }
                 }
             })
         }

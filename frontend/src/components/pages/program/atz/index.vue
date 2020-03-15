@@ -85,7 +85,6 @@ export default {
                 //id_org:document.getElementById('global_id_org').value
             }
         }).then(response=>{
-            console.log(response.data);
             response.data.forEach(item=>{
                 this.items[item.elem].cost_b= item.cost_b;
                 this.items[item.elem].cost_v= item.cost_v;
@@ -154,7 +153,6 @@ export default {
             }
         },
         sendInfo() {
-            console.log(this.items);
             let formData = new FormData(document.getElementById('atz_form'));
              Axios.post(this.$route.path,formData,{
                  headers:

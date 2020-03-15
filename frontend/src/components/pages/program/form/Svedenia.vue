@@ -127,11 +127,6 @@ import Multiselect from 'vue-select';
         components: {
             "v-select": Multiselect,    
         },
-        watch: {
-            masObj: function () {
-                // console.log(this.masObj)
-            }
-        },
         methods:{
             setFloat(val,index, attr) {
                 if (val.search('.') !=-1)
