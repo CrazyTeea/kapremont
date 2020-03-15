@@ -270,7 +270,6 @@ class ProgramObjectsController extends AppController
                     foreach (Yii::$app->request->post('ProObjectsNecessary') as $index => $item) {
                         if (!ArrayHelper::keyExists($index, $proObjectsNecessary)) {
                             $proObjectsNecessary[$index] = new ProObjectsNecessary();
-
                         }
                         $proObjectsNecessary[$index]['nalichie'] = isset($item['nalichie']) ? $item['nalichie'] : 0;
                         $proObjectsNecessary[$index]['material'] = isset($item['material']) ? $item['material'] : '';
