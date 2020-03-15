@@ -1128,6 +1128,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -1192,6 +1194,12 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    // dubug() {
+    //     console.log('Файлы в буфере')
+    //     console.log(this.selectedFiles)
+    //     console.log('Итемы:')
+    //     console.log(this.items)
+    // },
     setLabel: function setLabel(index) {
       console.log(this.items);
     },
@@ -1249,23 +1257,21 @@ __webpack_require__.r(__webpack_exports__);
         label: null,
         other: true
       });
-      console.log('before delete items:');
-      console.log(this.items);
     },
     deleteLastRow: function deleteLastRow() {
-      this.items.pop();
       var index = this.items.length - 1;
+
+      if (this.items[index].label != null) {
+        this.removeFileFromYii(this.objectId, this.items[index].descriptor, index);
+      }
+
+      this.items.pop();
       if (this.selectedFiles.length) this.fileRemove(index);
-      console.log('after delete items:');
-      console.log(this.items);
     },
     fileInput: function fileInput(index) {
-      // let file = Array.from(event.target.files)[0]; Это тоже рабочая версия
-      var file = document.querySelector('#file_input_' + index).files[0]; // return console.log(this)
+      var file = document.querySelector('#file_input_' + index).files[0];
 
-      if (!this.checkFileExt(file.type) || !this.checkFileSize(file.size) || this.isUniqueName(file.name)) {
-        // let form = document.querySelector('#file_input_' + index)
-        // form.reset()
+      if (!this.checkFileExt(file.type) || !this.checkFileSize(file.size) || !this.isUniqueName(file.name)) {
         file.value = null;
         return;
       }
@@ -1276,8 +1282,8 @@ __webpack_require__.r(__webpack_exports__);
         name: this.items[index].label,
         file: file
       });
-      console.log(this.selectedFiles);
       this.items[index].fileName = file.name;
+      console.log('Файл введен');
     },
     fileRemove: function fileRemove(index, descriptor) {
       var key = this.getSelectedFileKey(index);
@@ -1303,7 +1309,7 @@ __webpack_require__.r(__webpack_exports__);
 
           if (item.fileName === name) {
             this.errorMessage('Файл с таким названием уже существует!');
-            return true;
+            return false;
           }
         }
       } catch (err) {
@@ -1321,7 +1327,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
 
-      return false;
+      return true;
     },
     checkFileExt: function checkFileExt(type) {
       if (type !== 'application/pdf') {
