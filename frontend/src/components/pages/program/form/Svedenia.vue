@@ -132,6 +132,8 @@ import Multiselect from 'vue-select';
         },
         methods:{
             setFloat(val,index, attr) {
+                if (val.search('.') !=-1)
+                    val.replace('.',',');
                 this.sved[attr][index] = parseFloat(val).toFixed(3);
             },
             getSved(){
@@ -148,23 +150,23 @@ import Multiselect from 'vue-select';
             rc_full() {
                 var sum = 0;
                 for(let key in this.sved.realization_cost){
-                    sum += parseFloat(this.sved.realization_cost[key]).toFixed(3)*1 || 0;
+                    sum += (parseFloat(this.sved.realization_cost[key]).toFixed(3)*1 || 0);
                 }
-                return sum
+                return sum.toFixed(3);
             },
             kap_full() {
                 var sum = 0;
                 for(let key in this.sved.kap_cost){
-                    sum += parseFloat(this.sved.kap_cost[key]).toFixed(3)*1 || 0;
+                    sum += (parseFloat(this.sved.kap_cost[key]).toFixed(3)*1 || 0);
                 }
-                return sum
+                return sum.toFixed(3);
             },
             finanse_sum() {
                 var sum = 0;
                 for(let key in this.sved.finanse){
-                    sum += parseFloat(this.sved.finanse[key]).toFixed(3)*1 || 0;
+                    sum += (parseFloat(this.sved.finanse[key]).toFixed(3)*1 || 0);
                 }
-                return sum
+                return sum.toFixed(3);
 
             }
         },
