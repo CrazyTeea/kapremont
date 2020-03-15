@@ -10,8 +10,10 @@ use yii\web\UploadedFile;
  *
  * @property int $id
  * @property int $id_object
+ * @property int $system_status
  * @property int $id_file
  * @property int $id_type
+ * @property string $label
  */
 class ObjectDocumentsList extends \yii\db\ActiveRecord
 {
@@ -29,8 +31,9 @@ class ObjectDocumentsList extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['label'],'string'],
             [['id_object', 'id_file', 'id_type'], 'required'],
-            [['id_object', 'id_file', 'id_type'], 'integer'],
+            [['id_object', 'id_file', 'id_type','system_status'], 'integer'],
         ];
     }
 
@@ -53,11 +56,12 @@ class ObjectDocumentsList extends \yii\db\ActiveRecord
         return $this->hasOne(Files::className(),['id'=>'id_file']);
     }
 
-    public function add(UploadedFile $uploadedFile, $id_object, $id_type, $status = 1){
+    public function add(UploadedFile $uploadedFile, $id_object, $id_type, $label, $status = 1){
         $file = new Files();
         $this->id_file = $file->upload($uploadedFile,"/$id_object");
-        $this->id_object= $id_object;
-        $this->id_type= $id_type;
+        $this->id_object = $id_object;
+        $this->id_type = $id_type;
+        $this->label = $label;
         $this->system_status = $status;
 
         return $this->id_file and $this->save();

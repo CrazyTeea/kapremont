@@ -356,6 +356,19 @@ class ProgramObjectsController extends AppController
     public function actionAddDocs($id){
         $model = $this->findModel($id);
         if($model) {
+            if (Yii::$app->request->post())
+            {
+                if (isset(Yii::$app->request->post()['descriptor'])){
+                    $des = Yii::$app->request->post()['descriptor'];
+                    $obt = ObjectDocumentsTypes::findOne(['descriptor'=>$des]);
+                    if (!$obt){
+                        $obt = new ObjectDocumentsTypes();
+                        $obt->descriptor = $des;
+                        $obt->label=$des;
+                        $obt->save();
+                    }
+                }
+            }
             $docs = ObjectDocumentsTypes::find()->all();
             $done = false;
             foreach ($docs as $doc) {
@@ -363,7 +376,8 @@ class ProgramObjectsController extends AppController
                 if (!$file)
                     continue;
                 $objDoc = new ObjectDocumentsList();
-                if (!$objDoc->add($file,$id,$doc->id)) {
+                $label = (isset(Yii::$app->request->post()['label'])) ? Yii::$app->request->post()['label'] : 'kek';
+                if (!$objDoc->add($file,$id,$doc->id,$label)) {
                     $done = false;
                     break;
                 }else
@@ -385,15 +399,16 @@ class ProgramObjectsController extends AppController
                 'docList' => function($query) { return $query->where(['system_status' => 1]); },
                 'docList.files' => function($query) { return $query->select(['id', 'name']); },
                 'docList.types' => function($query) { return $query->select(['id', 'descriptor']); }])
-            ->asArray()
-            ->all();
-        $i = 0;
-        foreach($obj[0]['docList'] as $file) {
+            ->one();
+        //$i = 0;
+    //    return Json::encode($obj->docList[0]->files);
+        foreach($obj->docList as $i=>$file) {
             $toSend[$i] = [
-                'name' =>  $file['files'][0]['name'],
-                'descriptor' => $file['types'][0]['descriptor']
+                'name' =>  $file->files[0]->name,
+                'descriptor' => $file->types[0]->descriptor,
+                'label'=>$file->label
             ];
-            $i++;
+          //  $i++;
         }
 
         // echo "<pre>";
