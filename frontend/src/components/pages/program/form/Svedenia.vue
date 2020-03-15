@@ -22,7 +22,8 @@
                     />
                 </template>
                 <template v-slot:cell(begin_date)="row">
-                    <b-form-datepicker 
+                    <b-form-input type="date" v-model="sved.begin_date[row.index]" :name="`${modelName}[${row.index}][date_event_start]`" />
+                    <!--<b-form-datepicker
                         today-button
                         label-today-button="сегодня"
                         reset-button
@@ -31,10 +32,11 @@
                         size="sm"
                         :name="`${modelName}[${row.index}][date_event_start]`"
                         v-model="sved.begin_date[row.index]">
-                    </b-form-datepicker>
+                    </b-form-datepicker>-->
                 </template>
                 <template v-slot:cell(final_date)="row">
-                    <b-form-datepicker
+                    <b-form-input type="date" v-model="sved.final_date[row.index]" :name="`${modelName}[${row.index}][date_event_end]`" />
+                    <!--<b-form-datepicker
                         today-button
                         label-today-button="сегодня"
                         reset-button
@@ -42,7 +44,7 @@
                         size="sm"
                         placeholder="дата"
                         :name="`${modelName}[${row.index}][date_event_end]`"
-                        v-model="sved.final_date[row.index]"></b-form-datepicker>
+                        v-model="sved.final_date[row.index]"></b-form-datepicker>-->
                 </template>
                 <template v-slot:cell(rc)="row">
                     <b-form-input
