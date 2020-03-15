@@ -158,7 +158,7 @@ export default {
         },
         addNewRow() {
             this.items.push({
-                descriptor: 'others_' +( this.items.length - 10),
+                descriptor: 'others_' + (this.items.length - 10),
                 fileName: null,
                 label: null,
                 other: true
@@ -167,13 +167,16 @@ export default {
             console.log(this.items)
         },
         deleteLastRow() {
-            this.items.pop();
             let index = this.items.length - 1;
-            if(this.selectedFiles.length)
-                this.fileRemove(index) ;
 
-            console.log('after delete items:');
-            console.log(this.items)
+            if(this.items[index].label != null) {
+                this.removeFileFromYii(this.objectId, this.items[index].descriptor, index)
+            }
+
+            this.items.pop();
+
+            if(this.selectedFiles.length)
+                this.fileRemove(index);
         },
         fileInput(index) {
             // let file = Array.from(event.target.files)[0]; Это тоже рабочая версия
@@ -295,7 +298,10 @@ export default {
                 }
             }).then((res) => {
                  this.uploadSuccess &= !!res.data;
-            }).catch(error => console.log(error))
+            }).catch( (error) => {
+                console.log(error)
+                this.uploadSuccess = false
+            })
         },
         // loadMessage: function(file) {
         //     message = `Файл ${this.loadingFileName} загружен на ${this.loadProgress}%`
