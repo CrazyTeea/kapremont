@@ -82,7 +82,7 @@ class DevelopmentProgrammeController extends AppController
         foreach ($atz as $item){
             $bC  += floatval($item->cost_b);
             $vC  += floatval($item->cost_v);
-            $bvC += (floatval($item->cost_v) + floatval($item->cost_v));
+            $bvC += (floatval($item->cost_v) + floatval($item->cost_b));
             $atzC = [
                 'bC' =>$bC,
                 'vC' =>$vC,
