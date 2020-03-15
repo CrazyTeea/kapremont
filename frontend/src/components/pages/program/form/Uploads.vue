@@ -20,11 +20,18 @@
                             v-model="item.label" 
                             placeholder="Название документа..."
                             type="text"
+                            @change="setLabel()"
                         ></b-form-input>
                     </b-th>
                     <b-th class="no-cell-border vertical-align-centre-extra-table normal-font-weight-for-table">
 
-                        <input type="file" :name="`${modelName}[${item.descriptor}]file`" :ref="'file' + index" :id="'file_input_' + index" class="hidden-file-input" @input="fileInput(index)">
+                        <input 
+                            type="file" 
+                            :name="`${modelName}[${item.descriptor}]file`" 
+                            :ref="'file' + index" 
+                            :id="'file_input_' + index" 
+                            class="hidden-file-input"
+                            @input="fileInput(index)">
 
                         <div class="cell-center-for-items" v-if="!item.fileName">
                             <div class="arrow">
@@ -54,8 +61,10 @@
                     </b-th>
                 </b-tr>
                 </b-tbody>
+
+
                 <b-tfoot>
-              <!--  <b-tr>
+               <b-tr>
                     <b-td
                         @click="deleteLastRow()"
                         v-if="items.length > 10"
@@ -71,13 +80,11 @@
                         class="text-right text-info">
                         Добавить документ
                     </b-td>
-                </b-tr>-->
+                </b-tr>
                 </b-tfoot>
+
         </b-table-simple>
-
-
             <label v-if="loadProgress">Файл {{ loadingFileName }} загружен на {{ loadProgress }}%</label>
-
     </div>
 </template>
 
@@ -110,7 +117,8 @@ export default {
             objectId: null
         }
     },
-    mounted() {
+    mounted()
+    {
         if(this.$route.path.indexOf('/program/object/update') !== -1) {
             this.update = true;
             this.objectId = this.$route.params.id;
@@ -118,6 +126,9 @@ export default {
         }
     },
     methods: {
+        setLabel(index) {
+            console.log(this.items)
+        },
         async getLoadedFiles(id) {
             await Axios.get(`/program/object/files/${id}`).then((res) => {
                 if (res.data?.length) {
@@ -128,33 +139,43 @@ export default {
                 }
             });
         },
-        setFileName(element){
+        setFileName(element) {
             this.items.map((elem, index) => {
                 if(elem.descriptor === element.descriptor)
                 {
-                    this.items[index].fileName = element.name + '.pdf';
-
+                    if(elem.descriptor.indexOf('others_')) {
+                        this.items.push(elem)
+                    } else {
+                        this.items[index].fileName = element.name + '.pdf';
+                    }
                 }
             })
         },
         addNewRow() {
             this.items.push({
-                descriptor:  null,
+                descriptor: 'others_' +( this.items.length - 10),
                 fileName: null,
                 label: null,
                 other: true
             })
+            console.log('before delete items:')
+            console.log(this.items)
         },
         deleteLastRow() {
             this.items.pop();
             let index = this.items.length - 1;
             if(this.selectedFiles.length)
                 this.fileRemove(index) 
+
+            console.log('after delete items:')
+            console.log(this.items)
         },
         fileInput(index) {
             // let file = Array.from(event.target.files)[0]; Это тоже рабочая версия
             let file = document.querySelector('#file_input_' + index).files[0];
-            if(!this.checkFileExt(file.type) || !this.checkFileSize(file.size)) {
+            
+            // return console.log(this)
+            if(!this.checkFileExt(file.type) || !this.checkFileSize(file.size) || this.isUniqueName(file.name)) {
                 // let form = document.querySelector('#file_input_' + index)
                 // form.reset()
                 file.value = null;
@@ -170,18 +191,25 @@ export default {
             this.items[index].fileName = file.name
         },
         fileRemove(index, descriptor) {
-            let key = this.getSelectedFileKey(index);
+            let key = this.getSelectedFileKey(index)
             if(this.items[index].fileName != null && key == null) {
-                console.log('удалить с сервера');
                 this.removeFileFromYii(this.objectId, descriptor, index)
             } else if(this.items[index].fileName == null && key == null) {
                 this.errorMessage('Сначала выберите файлы!')
             } else if(this.items[index].fileName != null && key != null) {
-                console.log('удалить локально');
-                console.log(this.selectedFiles);
                 this.selectedFiles.splice(key, 1);
                 this.items[index].fileName = null
+                document.querySelector('#file_input_' + index).value = null
             }
+        },
+        isUniqueName(name) {
+            for(let item of this.items) {
+                if(item.fileName === name) {
+                    this.errorMessage('Файл с таким названием уже существует!')
+                    return true
+                }
+            }
+            return false
         },
         checkFileExt(type) {
             if(type !== 'application/pdf') {
@@ -197,6 +225,15 @@ export default {
                 return false
             }
             return true
+        },
+        checkFileName(name) {
+            for(let item of this.items) {
+                if(item.fileName === name) {
+                    this.errorMessage('Файл с таким названием уже существует!')
+                    return true
+                }
+            }
+            return false
         },
         getSelectedFileKey(index) {
             let element = this.selectedFiles.map((elem, id) => {
