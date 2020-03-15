@@ -430,6 +430,8 @@
                 formData.id_priority = value;
             },
             setFloat(val, attr) {
+                if (val.search('.') !=-1)
+                    val.replace('.',',');
                 this.formData[attr] = parseFloat(val).toFixed(3);
             },
             feedback(model,value,errorMessage){
