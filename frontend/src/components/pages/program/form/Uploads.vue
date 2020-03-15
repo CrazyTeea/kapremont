@@ -295,7 +295,10 @@ export default {
                 }
             }).then((res) => {
                  this.uploadSuccess &= !!res.data;
-            }).catch(error => console.log(error))
+            }).catch( (error) => {
+                console.log(error)
+                this.uploadSuccess = false
+            })
         },
         // loadMessage: function(file) {
         //     message = `Файл ${this.loadingFileName} загружен на ${this.loadProgress}%`

@@ -59,6 +59,7 @@ class ProgramObjectsController extends AppController
         $docList = ObjectDocumentsList::findAll(['system_status'=>1,'id_object'=>$id]);
         return $this->render('view',compact('model','docList'));
     }
+
     public function actionDownloadDoc($id_obj){
         $get= Yii::$app->request->get();
         $file = Files::findOne($get['id']);
@@ -353,7 +354,8 @@ class ProgramObjectsController extends AppController
         return $this->render('update',compact('model','progObjectsEvents','progObjectsWaites','progObjectsRiscs','proObjectsNecessary'));
     }
 
-    public function actionAddDocs($id){
+    public function actionAddDocs($id)
+    {
         $model = $this->findModel($id);
         if($model) {
             if (Yii::$app->request->post())
@@ -443,7 +445,8 @@ class ProgramObjectsController extends AppController
          return Json::encode($kek);
     }
 
-    public function actionDelete($id){
+    public function actionDelete($id)
+    {
         $model = $this->findModel($id);
         $model->system_status = 0;
         $model->save(false);

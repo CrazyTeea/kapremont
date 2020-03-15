@@ -453,13 +453,36 @@
                         {
                             'X-CSRF-Token':this.csrf,
                         },
-                }).then(response=>
+                }).then(response =>
                 {
-                    if (!!response.data?.id)
+                    if(response.data.ProgramObjects) {
+                        console.log('ошибка')
+
+                        console.log(response.data)
+                        let obj = response.data.ProgramObjects
+                        for(let item in obj) {
+                            this.errorReport(obj[item][0])
+                        }
+                    } else {
+                        if (!!response.data?.id)
                         {
                             this.$refs.files.sendFile({id:response.data.id});
                         }
-                    this.errors = response.data;
+                        this.errors = response.data;
+                    }
+                    // console.log(response)
+
+                })
+            },
+            errorReport(message) {
+                    this.$bvModal.msgBoxOk(message, {
+                    title: 'Ошибка!',
+                    size: 'sm',
+                    buttonSize: 'sm',
+                    okVariant: 'outline-success',
+                    headerClass: 'p-2 border-bottom-0',
+                    footerClass: 'p-2 border-top-0',
+                    centered: true
                 })
             },
             onReset(){
