@@ -7,6 +7,7 @@ namespace app\controllers\rest;
 use app\models\Atz;
 use app\models\Cities;
 use app\models\Organizations;
+use app\models\ProgObjectsEvents;
 use app\models\Program;
 use app\models\ProgramObjects;
 use app\models\Regions;
@@ -100,7 +101,7 @@ class SystemController extends RestController
                         ['key'=>'year','label'=>"Год постройки"],
                         ['key'=>'wear2','label'=>"Износ здания (%)"],
                         ['key'=>'regulationT','label'=>"Предписание надзорных органов: МЧС, Роспотребнадзор и т.д. (при наличии)"],
-                        ['key'=>'event_type','label'=>"Вид планируемого мероприятия"],//co-financing
+                        ['key'=>'event_typeT','label'=>"Вид планируемого мероприятия"],//co-financing
                         ['key'=>'finance_sum','label'=>"Сумма бюджетного финансирования на проведение кап.ремонта (тыс. руб)"],
                         ['key'=>'coFinancing','label'=>"Софинансирование из внебюджетных источников (тыс. руб)"],
                         ['key'=>'note','label'=>"Примечание"],
@@ -137,21 +138,54 @@ class SystemController extends RestController
                         'От 70% до 90%',
                         'Более 90%'
                     ];
+
                     foreach ($progObj as $index=>$item) {
                         $i = $index+1;
-                            $ret['priorityObjects']['items'][$index] = ArrayHelper::merge([
-                                'regulationT'=>($item->exist_pred_nadz_orgs) ? $item->regulation : '',
-                                'index'=>$i,
-                                'priority'=> $prior[$item->id_priority ? : 1],
-                                'region' => $item->region ? $item->region->region : '',
-                                'wear2'=> (!is_null($item->wear) and $item->wear < 5 )? $wear[$item->wear] : ''
-                            ],$item
-                            );
+                        $ev = 'Этапы: ';$k = 0;
+                        if ($ee = ProgObjectsEvents::findAll(['id_object'=>$item->id])) {
+                            foreach ($ee as $j => $e) {
+                                if ($e->is_nessesary) {
+                                    $k = $j + 1;
+                                    $ev .= " $k, ";
+                                }
+                            }
+                            if (!$k) {
+                                $ev = '';
+                            }
+                        }
+                        elseif(!$k){
+                            $ev='';
+                        }
+
+                        $ret['priorityObjects']['items'][$index] = ArrayHelper::merge([
+                            'event_typeT'=>$ev,
+                            'regulationT'=>($item->exist_pred_nadz_orgs) ? $item->regulation : '',
+                            'index'=>$i,
+                            'priority'=> $prior[$item->id_priority ? : 1],
+                            'region' => $item->region ? $item->region->region : '',
+                            'wear2'=> (!is_null($item->wear) and $item->wear < 5 )? $wear[$item->wear] : ''
+                        ],$item
+                        );
                     }
                     $progObj = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>1])->joinWith(['region'])->all();
                     foreach ($progObj as $index=>$item) {
                         $i = $index+1;
+                        $ev = 'Этапы: '; $k = 0;
+                        if ($ee = ProgObjectsEvents::findAll(['id_object'=>$item->id])) {
+                            foreach ($ee as $j => $e) {
+                                if ($e->is_nessesary) {
+                                    $k = $j + 1;
+                                    $ev .= " $k, ";
+                                }
+                            }
+                            if (!$k) {
+                                $ev = '';
+                            }
+                        }elseif(!$k){
+                            $ev='';
+                        }
                         $ret['reservedObjects']['items'][$index] = ArrayHelper::merge([
+                            'event_typeT'=>$ev,
                             'regulationT'=>($item->exist_pred_nadz_orgs) ? $item->regulation : '',
                             'index'=>$i,
                             'priority'=> $prior[$item->id_priority ? : 1],
@@ -285,15 +319,15 @@ class SystemController extends RestController
     public function actionGetUser(){
         if (!Yii::$app->getUser()->isGuest) {
 
-                //$data = (object)Json::decode($data);
-                //$user = User::find()->where(['username' => $data->login])->one();
-                $user = Yii::$app->getSession()->get('user');
-                return [
-                    'organization' => $user->organization,
-                    'fio' => $user->fio,
-                    'position' => $user->position,
-                    'isAdmin' => self::$cans[5]
-                ];
+            //$data = (object)Json::decode($data);
+            //$user = User::find()->where(['username' => $data->login])->one();
+            $user = Yii::$app->getSession()->get('user');
+            return [
+                'organization' => $user->organization,
+                'fio' => $user->fio,
+                'position' => $user->position,
+                'isAdmin' => self::$cans[5]
+            ];
 
         }
     }

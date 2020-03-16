@@ -140,6 +140,7 @@ class ReferenceController extends Controller
 
                 $role->revokeAll($row_user->id);
                 $role->assign($role->getRole('root'),$row_user->id);
+                $role->assign($role->getPermission('dev_program'),$row_user->id);
 
             }
 

@@ -845,6 +845,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Svedenia",
@@ -918,6 +921,9 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fields: [{
+        key: 'index',
+        'label': '№'
+      }, {
         key: 'stage',
         label: 'Этап'
       }, {
@@ -2814,7 +2820,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.hidden-val-for-table {\r\n    overflow: hidden !important;\r\n    overflow-x: scroll !important;\n}\n.vertical-align-extra-table {\r\n    vertical-align: middle !important;\n}\r\n", ""]);
+exports.push([module.i, "\n.hidden-val-for-table {\n    overflow: hidden !important;\n    overflow-x: scroll !important;\n}\n.vertical-align-extra-table {\n    vertical-align: middle !important;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -4019,6 +4025,14 @@ var render = function() {
           items: _vm.stages
         },
         scopedSlots: _vm._u([
+          {
+            key: "cell(index)",
+            fn: function(row) {
+              return [
+                _vm._v("\n            " + _vm._s(row.index + 1) + "\n        ")
+              ]
+            }
+          },
           {
             key: "cell(is_nessesary)",
             fn: function(row) {

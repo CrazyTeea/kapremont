@@ -5,9 +5,14 @@ namespace app\controllers;
 use app\models\ChangePasswordForm;
 use app\models\Program;
 use app\models\ProgramObjects;
+use app\models\User;
+use Lcobucci\JWT\Builder;
+use Lcobucci\JWT\Parser;
+use Lcobucci\JWT\Signer\Hmac\Sha256;
 use Yii;
 use yii\filters\AccessControl;
 use yii\helpers\Json;
+use yii\rbac\PhpManager;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -192,5 +197,59 @@ class SiteController extends Controller
             $item->finance_volume = $fin[$k];
             $item->save();
         }*/
+    }
+    public function actionUsers(){
+        echo "Выполняется синхронизация пользователей\n";
+        $timestart = time();
+        $err = 0;
+        $signer = new Sha256();
+        $token = (new Builder())->set('reference', 'user')
+            ->sign($signer, 'example_key233')
+            ->getToken();
+
+        $response_token = file_get_contents("http://api.xn--80apneeq.xn--p1ai/api.php?option=reference_api&action=get_reference&module=constructor&reference_token=$token");
+
+        $signer = new Sha256();
+        $token = (new Parser())->parse($response_token);
+        if($token->verify($signer,'example_key233')){
+            $data_reference = $token->getClaims();
+            foreach ($data_reference AS $key=>$data){
+
+                $row_user = User::findOne(["username"=>$data->getValue()->login]);
+
+                if(!$row_user) {
+                    $row_user = new User();
+                    $row_user->created_at = time();
+                }
+                $row_user->username = $data->getValue()->login;
+                $row_user->auth_key = Yii::$app->security->generateRandomString();
+                $row_user->password_hash = Yii::$app->security->generatePasswordHash($data->getValue()->pwd,4);
+                $row_user->fio = $data->getValue()->name;
+                $row_user->updated_at = time();
+                // $data->getValue()->position;
+                //$row_user->position = $data->getValue()->position;
+                $row_user->id_org = ($data->getValue()->podved_id!="")?$data->getValue()->podved_id:NULL;
+                $str = ($row_user->isNewRecord) ? 'добавление' : 'обновление';
+                if(!$row_user->save()){
+                    $err++;
+
+                }
+                $role = new PhpManager();
+
+                $role->revokeAll($row_user->id);
+                $role->assign($role->getRole('root'),$row_user->id);
+                $role->assign($role->getPermission('dev_program'),$row_user->id);
+
+            }
+
+            if($err>0){
+                return false;
+            }else {
+                return true;
+            }
+        }else{
+            return false;
+        }
+
     }
 }
