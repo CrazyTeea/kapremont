@@ -31,7 +31,8 @@
                             :name="`${modelName}[${item.descriptor}]file`" 
                             :ref="'file' + index" 
                             :id="'file_input_' + index" 
-                            class="hidden-file-input"
+                            class="                    variant="btn"
+"
                             @input="fileInput(index)">
 
                         <div class="cell-center-for-items" v-if="!item.fileName">
@@ -85,6 +86,8 @@
                 </b-tfoot>
 
         </b-table-simple>
+            <b-button size="sm" variant="info" @click="dubug()">Debug</b-button>
+
             <label v-if="loadProgress">Файл {{ loadingFileName }} загружен на {{ loadProgress }}%</label>
     </div>
 </template>
@@ -127,6 +130,13 @@ export default {
         }
     },
     methods: {
+        dubug() {
+            console.log('Файлы в буфере:')
+            console.log(this.selectedFiles)
+
+            console.log('Итемы:')
+            console.log(this.items)
+        },
         setLabel(index) {
             console.log(this.items)
         },
@@ -163,8 +173,6 @@ export default {
                 label: null,
                 other: true
             });
-            console.log('before delete items:');
-            console.log(this.items)
         },
         deleteLastRow() {
             let index = this.items.length - 1;
@@ -179,14 +187,11 @@ export default {
                 this.fileRemove(index);
         },
         fileInput(index) {
-            // let file = Array.from(event.target.files)[0]; Это тоже рабочая версия
             let file = document.querySelector('#file_input_' + index).files[0];
             
-            // return console.log(this)
             if(!this.checkFileExt(file.type) || !this.checkFileSize(file.size) || this.isUniqueName(file.name)) {
-                // let form = document.querySelector('#file_input_' + index)
-                // form.reset()
                 file.value = null;
+                console.log('Файл не введен')
                 return
             }
             this.selectedFiles.push({
@@ -195,8 +200,8 @@ export default {
                 name: this.items[index].label,
                 file: file
             });
-            console.log(this.selectedFiles);
             this.items[index].fileName = file.name
+            console.log('Файл введен')
         },
         fileRemove(index, descriptor) {
             let key = this.getSelectedFileKey(index);
@@ -213,10 +218,12 @@ export default {
         isUniqueName(name) {
             for(let item of this.items) {
                 if(item.fileName === name) {
+                    console.log('Имя не уникальное')
                     this.errorMessage('Файл с таким названием уже существует!');
                     return true
                 }
             }
+            console.log('Имя уникальное')
             return false
         },
         checkFileExt(type) {
