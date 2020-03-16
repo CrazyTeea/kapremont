@@ -218,7 +218,7 @@ import Axios from 'axios';
                 this.banner.show = true
                 this.uploadFileToYii()
             },
-            uploadFileToYii() {
+            async uploadFileToYii() {
                 let form = new FormData();
                 form.append('descriptor', 'descriptor')
                 let id_obj = this.getUser.organization.id 
