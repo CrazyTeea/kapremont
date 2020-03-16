@@ -105,14 +105,23 @@ class DevelopmentProgrammeController extends AppController
         $atz = Atz::findAll(['id_program'=>$program->id]);
         $atzC = [];
         $bC = $vC = $bvC = 0;
-        foreach ($atz as $item){
-            $bC  += floatval($item->cost_b);
-            $vC  += floatval($item->cost_v);
-            $bvC += (floatval($item->cost_v) + floatval($item->cost_b));
+        if ($atz) {
+            foreach ($atz as $item) {
+                $bC += floatval($item->cost_b);
+                $vC += floatval($item->cost_v);
+                $bvC += (floatval($item->cost_v) + floatval($item->cost_b));
+                $atzC = [
+                    'bC' => $bC,
+                    'vC' => $vC,
+                    'bvC' => $bvC
+                ];
+            }
+        }
+        else{
             $atzC = [
-                'bC' =>$bC,
-                'vC' =>$vC,
-                'bvC' =>$bvC
+                'bC' => 0,
+                'vC' => 0,
+                'bvC' => 0
             ];
         }
 
