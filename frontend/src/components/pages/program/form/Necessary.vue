@@ -57,6 +57,8 @@
                                 v-if="item.nalichie && item.kap_remont"
                                 v-model="item.obosnovanie"
                                 placeholder="Обоснование"
+                                maxlength="255"
+                                @input="onInput(index)"
                         ></b-form-input>
                     </b-th>
                 </b-tr>
@@ -109,9 +111,11 @@
                         <b-form-input
                                 :name="`${modelName}[${index+17}][obosnovanie]`"
                                 type="text"
-                                v-if="item.nalichie"
+                                v-if="item.nalichie && item.kap_remont"
                                 v-model="item.obosnovanie"
                                 placeholder="Обоснование"
+                                maxlength="255"
+                                @input="onInputTwo(index)"
                         ></b-form-input>
                     </b-th>
                 </b-tr>
@@ -124,6 +128,30 @@
     export default {
         props:{
             modelName:String
+        },
+        methods: {
+            onInput(index) {
+                // console.log(this.items[index].obosnovanie)
+                if(this.items[index].obosnovanie.length >= 255) {
+                    this.reportErrors('Достигнуто максимальное количество символов (255 символов)')
+                }
+            },
+            onInputTwo(index) {
+                if(this.itemsTwo[index].obosnovanie.length >= 255) {
+                    this.reportErrors('Достигнуто максимальное количество символов (255 символов)')
+                }
+            },
+            reportErrors: function(message) {
+                this.$bvModal.msgBoxOk(message, {
+                    title: 'Ошибка!',
+                    size: 'sm',
+                    buttonSize: 'sm',
+                    okVariant: 'outline-success',
+                    headerClass: 'p-2 border-bottom-0',
+                    footerClass: 'p-2 border-top-0',
+                    centered: true
+                })
+            }
         },
         mounted() {
 
