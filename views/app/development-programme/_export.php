@@ -162,14 +162,14 @@ use yii\helpers\ArrayHelper; ?>
     </div>
     <table class="table-bordered table">
         <thead>
-        <tr>
-            <th>
+        <tr class="text-center">
+            <th class="text-center">
                 №
             </th>
-            <th>
+            <th class="text-center">
                 Показатель
             </th>
-            <th>
+            <th class="text-center">
                 Значение
             </th>
         </tr>
@@ -291,12 +291,12 @@ use yii\helpers\ArrayHelper; ?>
 
     <table class="table table-bordered">
         <thead>
-        <tr>
-            <th>№</th>
-            <th>Направление расходов</th>
-            <th>Сумма бюджетного финансирования (руб.)</th>
-            <th>Сумма внебюджетного финансирования (руб.)</th>
-            <th>Общий объем финансирования (руб.)</th>
+        <tr class="text-center">
+            <th class="text-center">№</th>
+            <th class="text-center">Направление расходов</th>
+            <th class="text-center">Сумма бюджетного финансирования (руб.)</th>
+            <th class="text-center">Сумма внебюджетного финансирования (руб.)</th>
+            <th class="text-center">Общий объем финансирования (руб.)</th>
         </tr>
         </thead>
         <tbody>
@@ -387,23 +387,23 @@ use yii\helpers\ArrayHelper; ?>
     </div>
     <table class="table table-bordered">
         <thead>
-        <tr>
-            <th>№ п/п</th>
-            <th>Приоритет
+        <tr class="text-center">
+            <th class="text-center">№ п/п</th>
+            <th class="text-center">Приоритет
                 (1,2,3)
             </th>
-            <th>Субъект РФ</th>
-            <th>Кадастровый номер объекта</th>
-            <th>Наименование объекта, требующего капитального ремонта</th>
-            <th>Назначение</th>
-            <th>Адрес объекта</th>
-            <th>Год постройки</th>
-            <th>Износ здания (%)</th>
-            <th>Предписание надзорных органов: МЧС, Роспотребнадзор и т. д. (при наличии)</th>
-            <th>Вид планируемого мероприятия</th>
-            <th>Сумма бюджетного финансирования на проведение капитального ремонта (тыс. руб.)</th>
-            <th>Софинансирование из внебюджетных источников (тыс. руб.)</th>
-            <th>Примечание</th>
+            <th class="text-center">Субъект РФ</th>
+            <th class="text-center">Кадастровый номер объекта</th>
+            <th class="text-center">Наименование объекта, требующего капитального ремонта</th>
+            <th class="text-center">Назначение</th>
+            <th class="text-center">Адрес объекта</th>
+            <th class="text-center">Год постройки</th>
+            <th class="text-center">Износ здания (%)</th>
+            <th class="text-center">Предписание надзорных органов: МЧС, Роспотребнадзор и т. д. (при наличии)</th>
+            <th class="text-center">Вид планируемого мероприятия</th>
+            <th class="text-center">Сумма бюджетного финансирования на проведение капитального ремонта (тыс. руб.)</th>
+            <th class="text-center">Софинансирование из внебюджетных источников (тыс. руб.)</th>
+            <th class="text-center">Примечание</th>
         </tr>
         </thead>
         <tbody>
@@ -433,23 +433,23 @@ use yii\helpers\ArrayHelper; ?>
 
     <table class="table table-bordered">
         <thead>
-        <tr>
-            <th>№ п/п</th>
-            <th>Приоритет
+        <tr class="text-center">
+            <th class="text-center">№ п/п</th>
+            <th class="text-center">Приоритет
                 (1,2,3)
             </th>
-            <th>Субъект РФ</th>
-            <th>Кадастровый номер объекта</th>
-            <th>Наименование объекта, требующего капитального ремонта</th>
-            <th>Назначение</th>
-            <th>Адрес объекта</th>
-            <th>Год постройки</th>
-            <th>Износ здания (%)</th>
-            <th>Предписание надзорных органов: МЧС, Роспотребнадзор и т. д. (при наличии)</th>
-            <th>Вид планируемого мероприятия</th>
-            <th>Сумма бюджетного финансирования на проведение капитального ремонта (тыс. руб.)</th>
-            <th>Софинансирование из внебюджетных источников (тыс. руб.)</th>
-            <th>Примечание</th>
+            <th class="text-center">Субъект РФ</th>
+            <th class="text-center">Кадастровый номер объекта</th>
+            <th class="text-center">Наименование объекта, требующего капитального ремонта</th>
+            <th class="text-center">Назначение</th>
+            <th class="text-center">Адрес объекта</th>
+            <th class="text-center">Год постройки</th>
+            <th class="text-center">Износ здания (%)</th>
+            <th class="text-center">Предписание надзорных органов: МЧС, Роспотребнадзор и т. д. (при наличии)</th>
+            <th class="text-center">Вид планируемого мероприятия</th>
+            <th class="text-center">Сумма бюджетного финансирования на проведение капитального ремонта (тыс. руб.)</th>
+            <th class="text-center">Софинансирование из внебюджетных источников (тыс. руб.)</th>
+            <th class="text-center">Примечание</th>
         </tr>
         </thead>
         <tbody>
@@ -516,10 +516,10 @@ use yii\helpers\ArrayHelper; ?>
         </div>
         <table class="table table-bordered">
             <thead>
-            <tr>
-                <th>№</th>
-                <th>Показатель</th>
-                <th>Значение</th>
+            <tr class="text-center">
+                <th class="text-center">№</th>
+                <th class="text-center">Показатель</th>
+                <th class="text-center">Значение</th>
             </tr>
             </thead>
             <tbody>
@@ -794,19 +794,19 @@ use yii\helpers\ArrayHelper; ?>
         </div>
         <table class="table-bordered table">
             <thead>
-            <tr>
-                <th></th>
-                <th>Этап</th>
-                <th>Необходимость выполнения (да/нет)</th>
-                <th>Дата начала (план.)</th>
-                <th>Дата окончания (план.)</th>
-                <th>Стоимость реализации
+            <tr class="text-center">
+                <th class="text-center"></th>
+                <th class="text-center">Этап</th>
+                <th class="text-center">Необходимость выполнения (да/нет)</th>
+                <th class="text-center">Дата начала (план.)</th>
+                <th class="text-center">Дата окончания (план.)</th>
+                <th class="text-center">Стоимость реализации
                     (тыс.руб.)
                 </th>
-                <th>Сумма бюджетного финансирования на проведение капитального ремонта
+                <th class="text-center">Сумма бюджетного финансирования на проведение капитального ремонта
                     (тыс. руб.)
                 </th>
-                <th>Софинансирование из внебюджетных источников (тыс. руб.)</th>
+                <th class="text-center">Софинансирование из внебюджетных источников (тыс. руб.)</th>
             </tr>
             </thead>
             <tbody>
@@ -909,14 +909,14 @@ use yii\helpers\ArrayHelper; ?>
 
         <table class="table table-bordered">
             <thead>
-            <tr>
-                <th>№</th>
-                <th>Строительные конструкции замена и (или) восстановление которых планируются при капитальном ремонте</th>
-                <th>Наличие на объекте (да/нет)</th>
-                <th>Материал конструкции</th>
-                <th>Срок эксплуатации с момента строительства или предыдущего капитального ремонта (реконструкции)</th>
-                <th>Требуется капитальный ремонт (да/нет)</th>
-                <th>Обоснование необходимости</th>
+            <tr class="text-center">
+                <th class="text-center">№</th>
+                <th class="text-center">Строительные конструкции замена и (или) восстановление которых планируются при капитальном ремонте</th>
+                <th class="text-center">Наличие на объекте (да/нет)</th>
+                <th class="text-center">Материал конструкции</th>
+                <th class="text-center">Срок эксплуатации с момента строительства или предыдущего капитального ремонта (реконструкции)</th>
+                <th class="text-center">Требуется капитальный ремонт (да/нет)</th>
+                <th class="text-center">Обоснование необходимости</th>
             </tr>
             </thead>
             <tbody>
@@ -936,13 +936,13 @@ use yii\helpers\ArrayHelper; ?>
 
         <table class="table table-bordered">
             <thead>
-            <tr>
-                <th>№</th>
-                <th>Строительные конструкции замена и (или) восстановление которых планируются при капитальном ремонте</th>
-                <th>Наличие на объекте (да/нет)</th>
-                <th>Срок эксплуатации с момента строительства или предыдущего капитального ремонта (реконструкции)</th>
-                <th>Требуется капитальный ремонт (да/нет)</th>
-                <th>Обоснование необходимости</th>
+            <tr class="text-center">
+                <th class="text-center">№</th>
+                <th class="text-center">Строительные конструкции замена и (или) восстановление которых планируются при капитальном ремонте</th>
+                <th class="text-center">Наличие на объекте (да/нет)</th>
+                <th class="text-center">Срок эксплуатации с момента строительства или предыдущего капитального ремонта (реконструкции)</th>
+                <th class="text-center">Требуется капитальный ремонт (да/нет)</th>
+                <th class="text-center">Обоснование необходимости</th>
             </tr>
             </thead>
             <tbody>
@@ -964,10 +964,10 @@ use yii\helpers\ArrayHelper; ?>
 
     <table class="table table-bordered">
         <thead>
-        <tr>
-            <th>№</th>
-            <th>Документ</th>
-            <th>Кол-во страниц</th>
+        <tr class="text-center">
+            <th class="text-center">№</th>
+            <th class="text-center">Документ</th>
+            <th class="text-center">Кол-во страниц</th>
         </tr>
         </thead>
         <tbody>
@@ -1035,11 +1035,11 @@ use yii\helpers\ArrayHelper; ?>
 
     <table class="table table-bordered">
         <thead>
-        <tr>
-            <th>№</th>
-            <th>Цели и задачи</th>
-            <th>Планируемый показатель</th>
-            <th>Ед. измерения</th>
+        <tr class="text-center">
+            <th class="text-center">№</th>
+            <th class="text-center">Цели и задачи</th>
+            <th class="text-center">Планируемый показатель</th>
+            <th class="text-center">Ед. измерения</th>
         </tr>
         </thead>
         <tbody>
@@ -1090,10 +1090,10 @@ use yii\helpers\ArrayHelper; ?>
     <table class="table table-bordered">
         <thead class="table-bordered table">
             <tr>
-                <th>№</th>
-                <th>Виды рисков</th>
-                <th>Отрицательное влияние</th>
-                <th>Способы защиты</th>
+                <th class="text-center">№</th>
+                <th class="text-center">Виды рисков</th>
+                <th class="text-center">Отрицательное влияние</th>
+                <th class="text-center">Способы защиты</th>
             </tr>
         </thead>
         <tbody>
@@ -1114,11 +1114,19 @@ use yii\helpers\ArrayHelper; ?>
 </div>
 
 <style>
+    body{
+        font-family: "Times New Roman", serif;
+    }
     .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
         border:0;
         padding:0;
 
-    }
+
+    th td{
+        text-align: center !important;
+        vertical-align: middle !important;
+    };
+
     .row {
         margin: 10px 0 0 0 !important;
         padding: 0 !important;
