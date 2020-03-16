@@ -39,12 +39,6 @@
                         </b-th>
                         <b-th class="vertical-align-for-table-cell normal-font-weight-for-cell">
                             <label>{{ cost_o(index) }}</label>
-                            <!-- <b-form-input
-                                v-model="item.cost_o"
-                                placeholder="Цена"
-                                min="0"
-                                type="number"
-                            ></b-form-input> -->
                         </b-th>
                     </b-tr>
                 </b-tbody>

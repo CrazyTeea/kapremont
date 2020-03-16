@@ -42,7 +42,7 @@
                            Характеристика объекта
                        </span>
                         </b-card-header>
-                        <b-collapse id="accordion-1"  accordion="my-accordion" role="tabpanel" visible>
+                        <b-collapse id="accordion-1"  accordion="my-accordion" role="tabpanel">
                             <b-card-body>
                                 <b-form-group>
                                     <b-form-group
@@ -301,7 +301,7 @@
                             <b-icon-gear-wide-connected />
                             Обоснование необходимости (целесообразности) планируемых мероприятий</span>
                         </b-card-header>
-                        <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
+                        <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel" visible>
                             <b-card-body>
                                 <v-necessary model-name="ProObjectsNecessary" ref="necessary"/>
                             </b-card-body>
