@@ -147,6 +147,16 @@ class DevelopmentProgrammeController extends AppController
         $stylesheet = file_get_contents('bootstrap/css/bootstrap.css');
         $stylesheet2 = file_get_contents('bootstrap/css/bootstrap-grid.css');
         ini_set("pcre.backtrack_limit", "5000000");
+        $mpdf->WriteHTML('
+        body{
+        font-family: "Times New Roman", serif;
+        }
+        td{
+        margin: 0 auto !important;
+        text-align: center !important;
+        vertical-align: middle !important;
+        }'
+            ,HTMLParserMode::HEADER_CSS);
         $mpdf->WriteHTML($stylesheet,HTMLParserMode::HEADER_CSS);
         $mpdf->WriteHTML($stylesheet2,HTMLParserMode::HEADER_CSS);
         $mpdf->WriteHTML($this->renderPartial('_export',compact('objects','org','atz','pr_ob','r_ob','events','nes','wai','risks','sq','atzC')));
