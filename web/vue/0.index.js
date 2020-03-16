@@ -2632,6 +2632,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2641,14 +2660,20 @@ __webpack_require__.r(__webpack_exports__);
     return {
       banner: {
         show: false,
-        fileName: String,
+        fileName: null,
         loadProgress: null
+      },
+      bannerInfo: {
+        show: false,
+        variant: null,
+        message: null
       },
       buttons: {
         upload: false,
         save: false,
         delete: false
       },
+      id_org: null,
       csrf: document.getElementsByName('csrf-token')[0].content,
       text: 'dfs',
       prevTable: {
@@ -2688,7 +2713,7 @@ __webpack_require__.r(__webpack_exports__);
       return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
       /*#__PURE__*/
       regeneratorRuntime.mark(function _callee() {
-        var form, id_obj;
+        var form;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -2696,19 +2721,35 @@ __webpack_require__.r(__webpack_exports__);
                 // return console.log(file)
                 form = new FormData();
                 form.append('progFile', file);
-                id_obj = _this.getUser.organization.id;
-                _context.next = 5;
-                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.post("/program/add-doc/".concat(id_obj), form, {
+                _context.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.post("/program/add-doc/".concat(_this.id_org), form, {
                   headers: {
                     'X-CSRF-Token': _this.csrf,
                     'Content-Type': 'multipart/form-data;'
                   },
                   onUploadProgress: function onUploadProgress(itemUpload) {
-                    _this.loadProgress = Math.round(itemUpload.loaded / itemUpload.total * 100);
+                    _this.banner.loadProgress = Math.round(itemUpload.loaded / itemUpload.total * 100);
+                  }
+                }).then(function (res) {
+                  if (res.data) {
+                    _this.bannerInfo.variant = 'success';
+                    _this.bannerInfo.message = 'Файл загружен успешно';
+                    _this.bannerInfo.show = true;
+                    _this.buttons.save = true;
+                    _this.buttons.delete = true;
+                    _this.buttons.upload = false;
+                  } else {
+                    _this.bannerInfo.variant = 'danger';
+                    _this.bannerInfo.message = 'При загрузке файла произошла ошибка, напишите в службу поддержки';
+                    _this.bannerInfo.show = true;
                   }
                 });
 
-              case 5:
+              case 4:
+                console.log(file);
+                file.value = '';
+
+              case 6:
               case "end":
                 return _context.stop();
             }
@@ -2717,25 +2758,76 @@ __webpack_require__.r(__webpack_exports__);
       }))();
     },
     deleteFileFromYii: function deleteFileFromYii() {
-      var id_obj = this.getUser.organization.id;
-      axios__WEBPACK_IMPORTED_MODULE_6___default.a.post("/program/delete-doc/".concat(id_obj), {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_6___default.a.post("/program/delete-doc/".concat(this.id_org), null, {
         headers: {
           'X-CSRF-Token': this.csrf
         }
       }).then(function (res) {
-        console.log(res);
+        if (res.data) {
+          _this2.bannerInfo.variant = 'success';
+          _this2.bannerInfo.message = 'Файл удален успешно';
+          _this2.bannerInfo.show = true;
+          _this2.buttons.save = false;
+          _this2.buttons.delete = false;
+          _this2.buttons.upload = true;
+        } else {
+          _this2.bannerInfo.variant = 'danger';
+          _this2.bannerInfo.message = 'При удалении файла произошла ошибка, напишите в службу поддержки';
+          _this2.bannerInfo.show = true;
+        }
       });
     },
-    getFileStatus: function getFileStatus(org_id) {
-      axios__WEBPACK_IMPORTED_MODULE_6___default.a.get();
+    getFileStatus: function getFileStatus() {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_6___default.a.post("/program/check-doc/".concat(this.id_org), null, {
+        headers: {
+          'X-CSRF-Token': this.csrf
+        }
+      }).then(function (res) {
+        console.log(res.data);
+
+        if (!res.data) {
+          _this3.buttons.upload = true;
+        } else {
+          _this3.buttons.save = true;
+          _this3.buttons.delete = true;
+        }
+      });
     }
   }),
   mounted: function mounted() {
-    this.requestPageData({
-      pageName: "programView"
-    });
-    this.requestUser(); //  this.$bvModal.show('modal-1')
-    // this.getFileStatus()
+    var _this4 = this;
+
+    return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
+    /*#__PURE__*/
+    regeneratorRuntime.mark(function _callee2() {
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _this4.requestPageData({
+                pageName: "programView"
+              });
+
+              _context2.next = 3;
+              return _this4.requestUser();
+
+            case 3:
+              _this4.id_org = _this4.getUser.organization.id;
+
+              _this4.getFileStatus(); //  this.$bvModal.show('modal-1')
+
+
+            case 5:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
   },
   computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_5__["mapGetters"])(['getUser', 'getPageData']), {
     objects: function objects() {
@@ -6685,7 +6777,8 @@ var render = function() {
                       items: _vm.reservedObjects && _vm.reservedObjects.items,
                       fields: _vm.fieldsObjects && _vm.fieldsObjects.fields,
                       small: "",
-                      bordered: ""
+                      bordered: "",
+                      hover: ""
                     },
                     on: { "row-clicked": _vm.onRowClick }
                   }),
@@ -6721,28 +6814,58 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c("div", { staticClass: "row mt-3" }, [
-        _c(
-          "div",
-          { staticClass: "col-12" },
-          [
-            _c(
-              "b-alert",
-              { attrs: { show: _vm.banner.show, dismissible: "", fade: "" } },
-              [
-                _vm._v("\n                Файл "),
-                _c("label", { staticClass: "font-weight-bold" }, [
-                  _vm._v(_vm._s(_vm.banner.fileName))
-                ]),
-                _vm._v(" загружается "),
-                _c("label", { staticClass: "font-weight-bold" }, [
-                  _vm._v(_vm._s(_vm.banner.fileName))
-                ])
-              ]
-            )
-          ],
-          1
-        )
+      _c("div", { staticClass: "mt-3" }, [
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            { staticClass: "col-12" },
+            [
+              _c(
+                "b-alert",
+                {
+                  attrs: {
+                    show: _vm.bannerInfo.show,
+                    variant: _vm.bannerInfo.variant,
+                    dismissible: "",
+                    fade: ""
+                  }
+                },
+                [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.bannerInfo.message) +
+                      "\n                    "
+                  )
+                ]
+              )
+            ],
+            1
+          )
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            { staticClass: "col-12" },
+            [
+              _c(
+                "b-alert",
+                { attrs: { show: _vm.banner.show, dismissible: "", fade: "" } },
+                [
+                  _vm._v("\n                    Файл "),
+                  _c("label", { staticClass: "font-weight-bold" }, [
+                    _vm._v(_vm._s(_vm.banner.fileName))
+                  ]),
+                  _vm._v(" загружается "),
+                  _c("label", { staticClass: "font-weight-bold" }, [
+                    _vm._v(_vm._s(_vm.banner.loadProgress) + "%")
+                  ])
+                ]
+              )
+            ],
+            1
+          )
+        ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
@@ -6761,14 +6884,16 @@ var render = function() {
               [_vm._v("Выгрузить программу")]
             ),
             _vm._v(" "),
-            _c(
-              "label",
-              {
-                staticClass: "btn btn-info btn-sm mt-2",
-                attrs: { for: "file_input_pdf_main" }
-              },
-              [_vm._v("Загрузить")]
-            ),
+            _vm.buttons.upload
+              ? _c(
+                  "label",
+                  {
+                    staticClass: "btn btn-info btn-sm mt-2",
+                    attrs: { for: "file_input_pdf_main" }
+                  },
+                  [_vm._v("Загрузить PDF")]
+                )
+              : _vm._e(),
             _vm._v(" "),
             _c("input", {
               staticClass: "hidden-file-input",
@@ -6780,18 +6905,31 @@ var render = function() {
               }
             }),
             _vm._v(" "),
-            _c(
-              "b-button",
-              {
-                staticClass: "btn btn-sm",
-                on: {
-                  click: function($event) {
-                    return _vm.deleteFileFromYii()
-                  }
-                }
-              },
-              [_vm._v("Удалить pdf")]
-            ),
+            _vm.buttons.delete
+              ? _c(
+                  "b-button",
+                  {
+                    staticClass: "btn btn-sm btn-danger",
+                    on: {
+                      click: function($event) {
+                        return _vm.deleteFileFromYii()
+                      }
+                    }
+                  },
+                  [_vm._v("Удалить PDF")]
+                )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.buttons.save
+              ? _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-success btn-sm",
+                    attrs: { href: "/program/download-doc/" + _vm.id_org }
+                  },
+                  [_vm._v("Сохранить PDF")]
+                )
+              : _vm._e(),
             _vm._v(" "),
             _c(
               "b-button",

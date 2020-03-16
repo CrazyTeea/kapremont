@@ -70,7 +70,7 @@ class DevelopmentProgrammeController extends AppController
     public function actionCheckDoc($id)
     {
         $path = Yii::getAlias('@webroot') . "/uploads/programDocs/$id.pdf";
-        return file_exists($path);
+        return json_encode(file_exists($path));
     }
 
     public function actionDownloadDoc($id)
@@ -79,6 +79,8 @@ class DevelopmentProgrammeController extends AppController
         if(file_exists($path)){
             return Yii::$app->response->sendFile($path)->send();
         }
+         
+        return 'Такого файла еще не существует';
     }
 
     /**

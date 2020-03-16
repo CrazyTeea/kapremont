@@ -64334,7 +64334,7 @@ vue__WEBPACK_IMPORTED_MODULE_0__["default"].use(vuex__WEBPACK_IMPORTED_MODULE_1_
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   actions: {
     requestUser: function requestUser(ctx) {
-      axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/rest/system/get-user').then(function (response) {
+      return axios__WEBPACK_IMPORTED_MODULE_2___default.a.post('/rest/system/get-user').then(function (response) {
         ctx.commit('updateUser', response.data);
       }).catch(function (error) {
         console.error(error);

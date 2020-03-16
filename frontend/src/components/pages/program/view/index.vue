@@ -55,7 +55,9 @@
                             tbody-tr-class="hover"
                             :items="priorityObjects && priorityObjects.items"
                             :fields="fieldsObjects && fieldsObjects.fields"
-                            small bordered hover
+                            small
+                            bordered
+                            hover
                     />
                     <b-pagination v-show="rowCount('prevTable')" :per-page="prevTable.perPage" v-model="prevTable.curPage" :total-rows="rowsPrev"/>
                     <b-card-text>Резервные объекты</b-card-text>
@@ -67,7 +69,9 @@
                             tbody-tr-class="hover"
                             :items="reservedObjects && reservedObjects.items"
                             :fields="fieldsObjects && fieldsObjects.fields"
-                            small bordered
+                            small
+                            bordered
+                            hover
                     />
                     <b-pagination v-show="rowCount('resTable')" :per-page="resTable.perPage" v-model="resTable.curPage" :total-rows="resPrev"/>
                 </b-card-body>
@@ -138,30 +142,45 @@
                 </b-card>
             </div>-->
         </div>
-        <div class="row mt-3">
-            <div class="col-12">
-                <b-alert 
-                    :show="banner.show" 
-                    dismissible 
-                    fade
-                    >
-                    Файл <label class="font-weight-bold">{{ banner.fileName }}</label> загружается <label class="font-weight-bold">{{ banner.fileName }}</label>
-                    </b-alert>
+        <div class="mt-3">
+            <div class="row">
+                <div class="col-12">
+                    <b-alert 
+                        :show="bannerInfo.show" 
+                        :variant="bannerInfo.variant"
+                        dismissible 
+                        fade
+                        >
+                        {{ bannerInfo.message }}
+                        </b-alert>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <b-alert 
+                        :show="banner.show" 
+                        dismissible
+                        fade
+                        >
+                        Файл <label class="font-weight-bold">{{ banner.fileName }}</label> загружается <label class="font-weight-bold">{{ banner.loadProgress }}%</label>
+                        </b-alert>
+                </div>
             </div>
         </div>
         <div class="row">
             <div class="col-6"></div>
             <div class="col-6 offset-7">
                 <a href="/program/export" class="btn btn-secondary btn-sm">Выгрузить программу</a>
-                <label for="file_input_pdf_main" class="btn btn-info btn-sm mt-2">Загрузить</label>
+                <label for="file_input_pdf_main" v-if="buttons.upload" class="btn btn-info btn-sm mt-2">Загрузить PDF</label>
                     <input
                         type="file"
                         id="file_input_pdf_main"
                         class="hidden-file-input"
                         @input="fileInput()">
                 <!-- <b-button class="btn btn-sm btn-info" for="file_input_pdf_main">Загрузить PDF</b-button> -->
-                <b-button class="btn btn-sm" @click="deleteFileFromYii()">Удалить pdf</b-button> 
+                <b-button v-if="buttons.delete" class="btn btn-sm btn-danger" @click="deleteFileFromYii()">Удалить PDF</b-button>  
 
+                <a :href="'/program/download-doc/' + id_org" v-if="buttons.save" class="btn btn-success btn-sm">Сохранить PDF</a>
                 <b-button disabled class="btn btn-sm">Отправить на согласование</b-button>
             </div>
         </div>
@@ -178,14 +197,20 @@ import Axios from 'axios';
             return{
                 banner: {
                     show: false,
-                    fileName: String,
+                    fileName: null,
                     loadProgress: null
+                },
+                bannerInfo: {
+                    show: false,
+                    variant: null,
+                    message: null,
                 },
                 buttons: {
                     upload: false,
                     save: false,
                     delete: false,
                 },
+                id_org: null,
                 csrf: document.getElementsByName('csrf-token')[0].content,
                 text:'dfs',
                 prevTable:{
@@ -225,38 +250,78 @@ import Axios from 'axios';
                 // return console.log(file)
                 let form = new FormData();
                 form.append('progFile', file)
-                let id_obj = this.getUser.organization.id 
-                await Axios.post(`/program/add-doc/${id_obj}`, form, {
+                await Axios.post(`/program/add-doc/${this.id_org}`, form, {
                     headers:
                         {
                             'X-CSRF-Token': this.csrf,
                             'Content-Type':'multipart/form-data;'
                         },
                     onUploadProgress: (itemUpload) => {
-                        this.loadProgress = Math.round( (itemUpload.loaded / itemUpload.total) * 100 )
+                        this.banner.loadProgress = Math.round( (itemUpload.loaded / itemUpload.total) * 100 )
+                    }
+                }).then((res) => {
+                    if(res.data) {
+                        this.bannerInfo.variant = 'success'
+                        this.bannerInfo.message = 'Файл загружен успешно'
+                        this.bannerInfo.show = true
+
+                        this.buttons.save = true
+                        this.buttons.delete = true
+                        this.buttons.upload = false
+                    } else{
+                        this.bannerInfo.variant = 'danger'
+                        this.bannerInfo.message = 'При загрузке файла произошла ошибка, напишите в службу поддержки'
+                        this.bannerInfo.show = true
                     }
                 })
+                console.log(file)
+                file.value = ''
             },
-            deleteFileFromYii() {
-                let id_obj = this.getUser.organization.id
-                Axios.post(`/program/delete-doc/${id_obj}`, {
+            deleteFileFromYii() { 
+                Axios.post(`/program/delete-doc/${this.id_org}`, null, {
                     headers:
                         {
                             'X-CSRF-Token': this.csrf,
                         },
                 }).then((res) => {
-                    console.log(res)
+                    if(res.data) {
+                        this.bannerInfo.variant = 'success'
+                        this.bannerInfo.message = 'Файл удален успешно'
+                        this.bannerInfo.show = true
+
+                        this.buttons.save = false
+                        this.buttons.delete = false
+                        this.buttons.upload = true
+                    } else {
+                        this.bannerInfo.variant = 'danger'
+                        this.bannerInfo.message = 'При удалении файла произошла ошибка, напишите в службу поддержки'
+                        this.bannerInfo.show = true
+                    }
                 })
             },
-            getFileStatus(org_id) {
-                Axios.get()
-            }
+            getFileStatus() {
+                Axios.post(`/program/check-doc/${this.id_org}`, null, {
+                    headers:
+                        {
+                            'X-CSRF-Token': this.csrf,
+                        },
+                }).then((res) => {
+                    console.log(res.data)
+                    if(!res.data) {
+                       this.buttons.upload = true
+                    } else {
+                        this.buttons.save = true
+                        this.buttons.delete = true
+                    }
+                })
+            },
         },
-        mounted() {
+        async mounted() {
             this.requestPageData({pageName:"programView"});
-            this.requestUser()
+            await this.requestUser();   
+            this.id_org = this.getUser.organization.id
+            this.getFileStatus()
             //  this.$bvModal.show('modal-1')
-            // this.getFileStatus()
         },
         computed: {
             ...mapGetters(['getUser','getPageData']),
