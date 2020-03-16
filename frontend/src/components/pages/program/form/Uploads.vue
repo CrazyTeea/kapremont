@@ -118,6 +118,15 @@ export default {
         }
     },
     methods: {
+        notUniqueName(name) {
+            for(let elem of this.items) {
+                if(elem.fileName === name) {
+                    this.errorMessage('Файл с таким названием уже существует!')
+                    return true
+                }
+            }
+            return false
+        },
         async getLoadedFiles(id) {
             await Axios.get(`/program/object/files/${id}`).then((res) => {
                 if (res.data?.length) {
@@ -154,12 +163,14 @@ export default {
         fileInput(index) {
             // let file = Array.from(event.target.files)[0]; Это тоже рабочая версия
             let file = document.querySelector('#file_input_' + index).files[0];
-            if(!this.checkFileExt(file.type) || !this.checkFileSize(file.size)) {
+            if(!this.checkFileExt(file.type) || !this.checkFileSize(file.size) || this.notUniqueName(file.name)) {
                 // let form = document.querySelector('#file_input_' + index)
                 // form.reset()
+                file = document.querySelector('#file_input_' + index).files[0];
                 file.value = null;
-                return
+                return false;
             }
+
             this.selectedFiles.push({
                 id: index,
                 descriptor: this.items[index].descriptor,
