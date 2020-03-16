@@ -84,12 +84,14 @@ class DevelopmentProgrammeController extends AppController
             $vC  += floatval($item->cost_v);
             $bvC += (floatval($item->cost_v) + floatval($item->cost_v));
             $atzC = [
-                'bC' =>$bC,
-                'vC' =>$vC,
-                'bvC' =>$bvC
+                'bC' =>number_format($bC, 0, ',', ' '),
+                'vC' =>number_format($vC, 0, ',', ' '),
+                'bvC' =>number_format($bvC, 0, ',', ' ')
             ];
         }
 
+        // echo"<pre>";
+        // print_r($atzC);
 
 
 
@@ -107,14 +109,14 @@ class DevelopmentProgrammeController extends AppController
         }
 
 
-        $mpdf = new Mpdf();
-        $stylesheet = file_get_contents('bootstrap/css/bootstrap.css');
-        $stylesheet2 = file_get_contents('bootstrap/css/bootstrap-grid.css');
-        ini_set("pcre.backtrack_limit", "5000000");
-        $mpdf->WriteHTML($stylesheet,HTMLParserMode::HEADER_CSS);
-        $mpdf->WriteHTML($stylesheet2,HTMLParserMode::HEADER_CSS);
-        $mpdf->WriteHTML($this->renderPartial('_export',compact('objects','org','atz','pr_ob','r_ob','events','nes','wai','risks','sq','atzC')));
-        $mpdf->Output();
+        // $mpdf = new Mpdf();
+        // $stylesheet = file_get_contents('bootstrap/css/bootstrap.css');
+        // $stylesheet2 = file_get_contents('bootstrap/css/bootstrap-grid.css');
+        // ini_set("pcre.backtrack_limit", "5000000");
+        // $mpdf->WriteHTML($stylesheet,HTMLParserMode::HEADER_CSS);
+        // $mpdf->WriteHTML($stylesheet2,HTMLParserMode::HEADER_CSS);
+        // $mpdf->WriteHTML($this->renderPartial('_export',compact('objects','org','atz','pr_ob','r_ob','events','nes','wai','risks','sq','atzC')));
+        // $mpdf->Output();
     }
 
     /**

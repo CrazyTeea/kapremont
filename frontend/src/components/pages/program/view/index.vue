@@ -138,11 +138,28 @@
                 </b-card>
             </div>-->
         </div>
+        <div class="row mt-3">
+            <div class="col-12">
+                <b-alert 
+                    :show="banner.show" 
+                    dismissible 
+                    fade
+                    >
+                    Файл <label class="font-weight-bold">{{ banner.fileName }}</label> загружается <label class="font-weight-bold">{{ banner.fileName }}</label>
+                    </b-alert>
+            </div>
+        </div>
         <div class="row">
             <div class="col-6"></div>
             <div class="col-6 offset-7">
                 <a href="/program/export" class="btn btn-secondary btn-sm">Выгрузить программу</a>
-                <b-button disabled class="btn btn-sm">Загрузить PDF</b-button>
+                <label for="file_input_pdf_main" class="btn btn-info btn-sm mt-2">Загрузить</label>
+                    <input
+                        type="file"
+                        id="file_input_pdf_main"
+                        class="hidden-file-input"
+                        @input="fileInput()">
+                <!-- <b-button class="btn btn-sm btn-info" for="file_input_pdf_main">Загрузить PDF</b-button> -->
                 <b-button disabled class="btn btn-sm">Отправить на согласование</b-button>
             </div>
         </div>
@@ -152,10 +169,21 @@
 <script>
     import {userPanel} from "../../../organisms";
     import {mapGetters,mapActions} from 'vuex'
+import Axios from 'axios';
     export default {
         name: "ProgramView",
         data(){
             return{
+                banner: {
+                    show: false,
+                    fileName: String,
+                    loadProgress: null
+                },
+                buttons: {
+                    upload: false,
+                    save: false,
+                    delete: false,
+                },
                 text:'dfs',
                 prevTable:{
                     curPage:1,
@@ -168,10 +196,10 @@
             }
         },
         components:{
-            "v-user-panel":userPanel
+            "v-user-panel": userPanel
         },
         methods:{
-            ...mapActions(['requestPageData']),
+            ...mapActions(['requestPageData', 'requestUser']),
             onRowClick(item){
                 window.location.href = `/program/object/view/${item.id}`;
             },
@@ -182,9 +210,45 @@
                 else if (attr == 'prevTable' && this.priorityObjects?.items)
                     return this.priorityObjects.items.length > this.prevTable.perPage;
                 else return false;
+            },
+            fileInput() {
+                let file = document.querySelector('#file_input_pdf_main').files[0];
+                console.log(file)
+                this.banner.fileName = file.name
+                this.banner.show = true
+                this.uploadFileToYii()
+            },
+            uploadFileToYii() {
+                let form = new FormData();
+                form.append('descriptor', 'descriptor')
+                let id_obj = this.getUser.organization.id 
+                await Axios.post(`${id}`, form, {
+                    headers:
+                        {
+                            'X-CSRF-Token': this.csrf,
+                            'Content-Type':'multipart/form-data;'
+                        },
+                    onUploadProgress: (itemUpload) => {
+                        this.loadProgress = Math.round( (itemUpload.loaded / itemUpload.total) * 100 )
+                    }
+                }).then((res) => {
+                    this.uploadSuccess &= !!res.data;
+                }).catch( (error) => {
+                    console.log(error)
+                    this.uploadSuccess = false
+                })
+            },
+            getFileStatus(org_id) {
+                Axios.get()
             }
         },
-        computed:{
+        mounted() {
+            this.requestPageData({pageName:"programView"});
+            this.requestUser()
+            //  this.$bvModal.show('modal-1')
+            // this.getFileStatus()
+        },
+        computed: {
             ...mapGetters(['getUser','getPageData']),
             objects(){
                 return this.getPageData && this.getPageData.objects
@@ -207,10 +271,6 @@
             resPrev(){
                 return this.getPageData.reservedObjects && this.getPageData.reservedObjects.items.length;
             }
-        },
-        mounted() {
-            this.requestPageData({pageName:"programView"});
-             this.$bvModal.show('modal-1')
         }
     }
 </script>

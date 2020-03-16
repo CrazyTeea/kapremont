@@ -31,7 +31,8 @@
                             :name="`${modelName}[${item.descriptor}]file`" 
                             :ref="'file' + index" 
                             :id="'file_input_' + index" 
-                            class="hidden-file-input"
+                            class="                    variant="btn"
+"
                             @input="fileInput(index)">
 
                         <div class="cell-center-for-items" v-if="!item.fileName">
@@ -85,7 +86,7 @@
                 </b-tfoot>
 
         </b-table-simple>
-            <!-- <b-button size="sm" variant="info" @click="dubug()">Debug</b-button> -->
+            <b-button size="sm" variant="info" @click="dubug()">Debug</b-button>
 
             <label v-if="loadProgress">Файл {{ loadingFileName }} загружен на {{ loadProgress }}%</label>
     </div>
@@ -129,13 +130,13 @@ export default {
         }
     },
     methods: {
-        // dubug() {
-        //     console.log('Файлы в буфере')
-        //     console.log(this.selectedFiles)
+        dubug() {
+            console.log('Файлы в буфере:')
+            console.log(this.selectedFiles)
 
-        //     console.log('Итемы:')
-        //     console.log(this.items)
-        // },
+            console.log('Итемы:')
+            console.log(this.items)
+        },
         setLabel(index) {
             console.log(this.items)
         },
@@ -188,8 +189,9 @@ export default {
         fileInput(index) {
             let file = document.querySelector('#file_input_' + index).files[0];
             
-            if(!this.checkFileExt(file.type) || !this.checkFileSize(file.size) || !this.isUniqueName(file.name)) {
+            if(!this.checkFileExt(file.type) || !this.checkFileSize(file.size) || this.isUniqueName(file.name)) {
                 file.value = null;
+                console.log('Файл не введен')
                 return
             }
             this.selectedFiles.push({
@@ -216,11 +218,13 @@ export default {
         isUniqueName(name) {
             for(let item of this.items) {
                 if(item.fileName === name) {
+                    console.log('Имя не уникальное')
                     this.errorMessage('Файл с таким названием уже существует!');
-                    return false
+                    return true
                 }
             }
-            return true
+            console.log('Имя уникальное')
+            return false
         },
         checkFileExt(type) {
             if(type !== 'application/pdf') {

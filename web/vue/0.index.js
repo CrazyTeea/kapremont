@@ -265,9 +265,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     modelName: String
+  },
+  methods: {
+    onInput: function onInput(index) {
+      // console.log(this.items[index].obosnovanie)
+      if (this.items[index].obosnovanie.length >= 255) {
+        this.reportErrors('Достигнуто максимальное количество символов (255 символов)');
+      }
+    },
+    onInputTwo: function onInputTwo(index) {
+      if (this.itemsTwo[index].obosnovanie.length >= 255) {
+        this.reportErrors('Достигнуто максимальное количество символов (255 символов)');
+      }
+    },
+    reportErrors: function reportErrors(message) {
+      this.$bvModal.msgBoxOk(message, {
+        title: 'Ошибка!',
+        size: 'sm',
+        buttonSize: 'sm',
+        okVariant: 'outline-success',
+        headerClass: 'p-2 border-bottom-0',
+        footerClass: 'p-2 border-top-0',
+        centered: true
+      });
+    }
   },
   mounted: function mounted() {
     function getKeyByValue(object, attr, value) {
@@ -1130,6 +1158,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -1194,12 +1223,12 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
-    // dubug() {
-    //     console.log('Файлы в буфере')
-    //     console.log(this.selectedFiles)
-    //     console.log('Итемы:')
-    //     console.log(this.items)
-    // },
+    dubug: function dubug() {
+      console.log('Файлы в буфере:');
+      console.log(this.selectedFiles);
+      console.log('Итемы:');
+      console.log(this.items);
+    },
     setLabel: function setLabel(index) {
       console.log(this.items);
     },
@@ -1273,8 +1302,9 @@ __webpack_require__.r(__webpack_exports__);
     fileInput: function fileInput(index) {
       var file = document.querySelector('#file_input_' + index).files[0];
 
-      if (!this.checkFileExt(file.type) || !this.checkFileSize(file.size) || !this.isUniqueName(file.name)) {
+      if (!this.checkFileExt(file.type) || !this.checkFileSize(file.size) || this.isUniqueName(file.name)) {
         file.value = null;
+        console.log('Файл не введен');
         return;
       }
 
@@ -1310,8 +1340,9 @@ __webpack_require__.r(__webpack_exports__);
           var item = _step.value;
 
           if (item.fileName === name) {
+            console.log('Имя не уникальное');
             this.errorMessage('Файл с таким названием уже существует!');
-            return false;
+            return true;
           }
         }
       } catch (err) {
@@ -1329,7 +1360,8 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
 
-      return true;
+      console.log('Имя уникальное');
+      return false;
     },
     checkFileExt: function checkFileExt(type) {
       if (type !== 'application/pdf') {
@@ -2406,227 +2438,9 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/view/index.vue?vue&type=script&lang=js& ***!
   \****************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports) {
 
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
-/* harmony import */ var _organisms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../organisms */ "./src/components/organisms/index.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-
-
-/* harmony default export */ __webpack_exports__["default"] = ({
-  name: "ProgramView",
-  data: function data() {
-    return {
-      text: 'dfs',
-      prevTable: {
-        curPage: 1,
-        perPage: 5
-      },
-      resTable: {
-        curPage: 1,
-        perPage: 5
-      }
-    };
-  },
-  components: {
-    "v-user-panel": _organisms__WEBPACK_IMPORTED_MODULE_1__["userPanel"]
-  },
-  methods: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])(['requestPageData']), {
-    onRowClick: function onRowClick(item) {
-      window.location.href = "/program/object/view/".concat(item.id);
-    },
-    rowCount: function rowCount(attr) {
-      var _this$reservedObjects, _this$priorityObjects;
-
-      if (attr == 'resTable' && ((_this$reservedObjects = this.reservedObjects) === null || _this$reservedObjects === void 0 ? void 0 : _this$reservedObjects.items)) {
-        return this.reservedObjects.items.length > this.resTable.perPage;
-      } else if (attr == 'prevTable' && ((_this$priorityObjects = this.priorityObjects) === null || _this$priorityObjects === void 0 ? void 0 : _this$priorityObjects.items)) return this.priorityObjects.items.length > this.prevTable.perPage;else return false;
-    }
-  }),
-  computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(['getUser', 'getPageData']), {
-    objects: function objects() {
-      return this.getPageData && this.getPageData.objects;
-    },
-    fieldsObjects: function fieldsObjects() {
-      return this.getPageData && this.getPageData.fieldsObjects;
-    },
-    priorityObjects: function priorityObjects() {
-      return this.getPageData && this.getPageData.priorityObjects;
-    },
-    reservedObjects: function reservedObjects() {
-      return this.getPageData && this.getPageData.reservedObjects;
-    },
-    target: function target() {
-      return this.getPageData && this.getPageData.target;
-    },
-    rowsPrev: function rowsPrev() {
-      return this.getPageData.priorityObjects && this.getPageData.priorityObjects.items.length;
-    },
-    resPrev: function resPrev() {
-      return this.getPageData.reservedObjects && this.getPageData.reservedObjects.items.length;
-    }
-  }),
-  mounted: function mounted() {
-    this.requestPageData({
-      pageName: "programView"
-    });
-    this.$bvModal.show('modal-1');
-  }
-});
+throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/src/components/pages/program/view/index.vue: Can not use keyword 'await' outside an async function (225:16)\n\n\u001b[0m \u001b[90m 223 | \u001b[39m                form\u001b[33m.\u001b[39mappend(\u001b[32m'descriptor'\u001b[39m\u001b[33m,\u001b[39m \u001b[32m'descriptor'\u001b[39m)\u001b[0m\n\u001b[0m \u001b[90m 224 | \u001b[39m                let id_obj \u001b[33m=\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mgetUser\u001b[33m.\u001b[39morganization\u001b[33m.\u001b[39mid \u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 225 | \u001b[39m                await \u001b[33mAxios\u001b[39m\u001b[33m.\u001b[39mpost(\u001b[32m`${id}`\u001b[39m\u001b[33m,\u001b[39m form\u001b[33m,\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m                \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 226 | \u001b[39m                    headers\u001b[33m:\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 227 | \u001b[39m                        {\u001b[0m\n\u001b[0m \u001b[90m 228 | \u001b[39m                            \u001b[32m'X-CSRF-Token'\u001b[39m\u001b[33m:\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mcsrf\u001b[33m,\u001b[39m\u001b[0m\n    at Object.raise (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:7017:17)\n    at Object.checkReservedWord (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:10401:14)\n    at Object.parseIdentifierName (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:10363:12)\n    at Object.parseIdentifier (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:10335:23)\n    at Object.parseExprAtom (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:9516:27)\n    at Object.parseExprAtom (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:4120:20)\n    at Object.parseExprSubscripts (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:9259:23)\n    at Object.parseMaybeUnary (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:9239:21)\n    at Object.parseExprOps (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:9109:23)\n    at Object.parseMaybeConditional (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:9082:23)\n    at Object.parseMaybeAssign (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:9037:21)\n    at Object.parseExpression (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:8989:23)\n    at Object.parseStatementContent (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:10819:23)\n    at Object.parseStatement (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:10690:17)\n    at Object.parseBlockOrModuleBlockBody (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:11264:25)\n    at Object.parseBlockBody (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:11251:10)\n    at Object.parseBlock (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:11235:10)\n    at Object.parseFunctionBody (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:10252:24)\n    at Object.parseFunctionBodyAndFinish (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:10222:10)\n    at Object.parseMethod (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:10187:10)\n    at Object.parseObjectMethod (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:10104:19)\n    at Object.parseObjPropValue (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:10146:23)\n    at Object.parseObjectMember (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:10070:10)\n    at Object.parseObj (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:9991:25)\n    at Object.parseExprAtom (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:9616:28)\n    at Object.parseExprAtom (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:4120:20)\n    at Object.parseExprSubscripts (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:9259:23)\n    at Object.parseMaybeUnary (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:9239:21)\n    at Object.parseExprOps (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:9109:23)\n    at Object.parseMaybeConditional (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:9082:23)\n    at Object.parseMaybeAssign (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:9037:21)\n    at Object.parseObjectProperty (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:10121:101)\n    at Object.parseObjPropValue (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:10146:101)\n    at Object.parseObjectMember (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:10070:10)\n    at Object.parseObj (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:9991:25)\n    at Object.parseExprAtom (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/parser/lib/index.js:9616:28)");
 
 /***/ }),
 
@@ -3429,7 +3243,13 @@ var render = function() {
                               name:
                                 _vm.modelName + "[" + index + "][obosnovanie]",
                               type: "text",
-                              placeholder: "Обоснование"
+                              placeholder: "Обоснование",
+                              maxlength: "255"
+                            },
+                            on: {
+                              input: function($event) {
+                                return _vm.onInput(index)
+                              }
                             },
                             model: {
                               value: item.obosnovanie,
@@ -3640,7 +3460,7 @@ var render = function() {
                     "b-th",
                     { staticClass: "cell-center-for-table" },
                     [
-                      item.nalichie
+                      item.nalichie && item.kap_remont
                         ? _c("b-form-input", {
                             attrs: {
                               name:
@@ -3649,7 +3469,13 @@ var render = function() {
                                 (index + 17) +
                                 "][obosnovanie]",
                               type: "text",
-                              placeholder: "Обоснование"
+                              placeholder: "Обоснование",
+                              maxlength: "255"
+                            },
+                            on: {
+                              input: function($event) {
+                                return _vm.onInputTwo(index)
+                              }
                             },
                             model: {
                               value: item.obosnovanie,
@@ -4245,22 +4071,9 @@ var render = function() {
                         "no-cell-border vertical-align-centre-extra-table normal-font-weight-for-table"
                     },
                     [
-                      _c("input", {
-                        ref: "file" + index,
-                        refInFor: true,
-                        staticClass: "hidden-file-input",
-                        attrs: {
-                          type: "file",
-                          name: _vm.modelName + "[" + item.descriptor + "]file",
-                          id: "file_input_" + index
-                        },
-                        on: {
-                          input: function($event) {
-                            return _vm.fileInput(index)
-                          }
-                        }
-                      }),
-                      _vm._v(" "),
+                      _vm._v(
+                        '"\n"\n                            @input="fileInput(index)">\n\n                        '
+                      ),
                       !item.fileName
                         ? _c("div", { staticClass: "cell-center-for-items" }, [
                             _c("div", { staticClass: "arrow" }, [
@@ -4360,7 +4173,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                    Удалить документ\n                "
+                            "\n                        Удалить документ\n                    "
                           )
                         ]
                       )
@@ -4379,7 +4192,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                    Добавить документ\n                "
+                        "\n                        Добавить документ\n                    "
                       )
                     ]
                   )
@@ -4391,6 +4204,19 @@ var render = function() {
           )
         ],
         1
+      ),
+      _vm._v(" "),
+      _c(
+        "b-button",
+        {
+          attrs: { size: "sm", variant: "info" },
+          on: {
+            click: function($event) {
+              return _vm.dubug()
+            }
+          }
+        },
+        [_vm._v("Debug")]
       ),
       _vm._v(" "),
       _vm.loadProgress
@@ -4773,8 +4599,7 @@ var render = function() {
                         attrs: {
                           id: "accordion-1",
                           accordion: "my-accordion",
-                          role: "tabpanel",
-                          visible: ""
+                          role: "tabpanel"
                         }
                       },
                       [
@@ -5974,7 +5799,8 @@ var render = function() {
                         attrs: {
                           id: "accordion-3",
                           accordion: "my-accordion",
-                          role: "tabpanel"
+                          role: "tabpanel",
+                          visible: ""
                         }
                       },
                       [
@@ -6567,6 +6393,30 @@ var render = function() {
         1
       ),
       _vm._v(" "),
+      _c("div", { staticClass: "row mt-3" }, [
+        _c(
+          "div",
+          { staticClass: "col-12" },
+          [
+            _c(
+              "b-alert",
+              { attrs: { show: _vm.banner.show, dismissible: "", fade: "" } },
+              [
+                _vm._v("\n                Файл "),
+                _c("label", { staticClass: "font-weight-bold" }, [
+                  _vm._v(_vm._s(_vm.banner.fileName))
+                ]),
+                _vm._v(" загружается "),
+                _c("label", { staticClass: "font-weight-bold" }, [
+                  _vm._v(_vm._s(_vm.banner.fileName))
+                ])
+              ]
+            )
+          ],
+          1
+        )
+      ]),
+      _vm._v(" "),
       _c("div", { staticClass: "row" }, [
         _c("div", { staticClass: "col-6" }),
         _vm._v(" "),
@@ -6584,10 +6434,23 @@ var render = function() {
             ),
             _vm._v(" "),
             _c(
-              "b-button",
-              { staticClass: "btn btn-sm", attrs: { disabled: "" } },
-              [_vm._v("Загрузить PDF")]
+              "label",
+              {
+                staticClass: "btn btn-info btn-sm mt-2",
+                attrs: { for: "file_input_pdf_main" }
+              },
+              [_vm._v("Загрузить")]
             ),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "hidden-file-input",
+              attrs: { type: "file", id: "file_input_pdf_main" },
+              on: {
+                input: function($event) {
+                  return _vm.fileInput()
+                }
+              }
+            }),
             _vm._v(" "),
             _c(
               "b-button",
