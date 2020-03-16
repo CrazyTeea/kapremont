@@ -22,7 +22,7 @@
                         ]"
                         small bordered
                 />
-                <b-button class="btn btn-sm" style="float: right" href="/organization/info">Подробнее</b-button>
+                <b-button class="btn btn-sm" style="float: right" href="/organization/info">Заполнить общие сведения</b-button>
             </div>
 
             <div class="col-4 offset-2">

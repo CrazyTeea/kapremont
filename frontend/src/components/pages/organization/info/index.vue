@@ -4,6 +4,7 @@
             <div class="row">
                 <div class="col-6">
                     <b-table small bordered class="text-center" :fields="getPageData.fields" :items="getPageData.items"/>
+                    <b-button variant="info" @click="link" > Редактировать </b-button>
                 </div>
                 <div class="col-3 offset-3">
                     <user-panel/>
@@ -24,9 +25,12 @@
             userPanel
         },
         computed: {
-            ...mapGetters(['getPageData']),
+            ...mapGetters(['getPageData','getUser']),
         },
         methods:{
+            link(){
+              return window.location.href = `/organization/update/${this.getUser.organization.id}`
+            },
             ...mapActions(['requestPageData'])
         },
         mounted() {
