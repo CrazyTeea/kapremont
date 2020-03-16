@@ -160,6 +160,8 @@
                         class="hidden-file-input"
                         @input="fileInput()">
                 <!-- <b-button class="btn btn-sm btn-info" for="file_input_pdf_main">Загрузить PDF</b-button> -->
+                <!-- <b-button class="btn btn-sm" @click="deleteFileFromYii()">Отправить на согласование</b-button>  -->
+
                 <b-button disabled class="btn btn-sm">Отправить на согласование</b-button>
             </div>
         </div>
@@ -184,6 +186,7 @@ import Axios from 'axios';
                     save: false,
                     delete: false,
                 },
+                csrf: document.getElementsByName('csrf-token')[0].content,
                 text:'dfs',
                 prevTable:{
                     curPage:1,
@@ -216,13 +219,14 @@ import Axios from 'axios';
                 console.log(file)
                 this.banner.fileName = file.name
                 this.banner.show = true
-                this.uploadFileToYii()
+                this.uploadFileToYii(file)
             },
-            async uploadFileToYii() {
+            async uploadFileToYii(file) {
+                // return console.log(file)
                 let form = new FormData();
-                form.append('descriptor', 'descriptor')
+                form.append('progFile', file)
                 let id_obj = this.getUser.organization.id 
-                await Axios.post(`${id}`, form, {
+                await Axios.post(`/program/add-doc/${id_obj}`, form, {
                     headers:
                         {
                             'X-CSRF-Token': this.csrf,
@@ -231,12 +235,10 @@ import Axios from 'axios';
                     onUploadProgress: (itemUpload) => {
                         this.loadProgress = Math.round( (itemUpload.loaded / itemUpload.total) * 100 )
                     }
-                }).then((res) => {
-                    this.uploadSuccess &= !!res.data;
-                }).catch( (error) => {
-                    console.log(error)
-                    this.uploadSuccess = false
                 })
+            },
+            deleteFileFromYii() {
+
             },
             getFileStatus(org_id) {
                 Axios.get()

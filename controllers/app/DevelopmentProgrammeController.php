@@ -46,15 +46,13 @@ class DevelopmentProgrammeController extends AppController
 
     public function actionAddDoc($id)
     {
-        if (Yii::$app->request->post()){
-            $file = UploadedFile::getInstanceByName('progFile');
-            if ($file) {
-                $path = Yii::getAlias('@webroot') . "/uploads/programDocs";
-                if (!file_exists($path))
-                    FileHelper::createDirectory($path);
-                $file->saveAs("$path/$id.pdf");
-                return 1;
-            }
+        $file = UploadedFile::getInstanceByName('progFile');
+        if ($file) {
+            $path = Yii::getAlias('@webroot') . "/uploads/programDocs";
+            if (!file_exists($path))
+                FileHelper::createDirectory($path);
+            $file->saveAs("$path/$id.pdf");
+            return 1;
         }
         return 0;
     }
@@ -68,11 +66,13 @@ class DevelopmentProgrammeController extends AppController
         }
         return 0;
     }
+
     public function actionCheckDoc($id)
     {
         $path = Yii::getAlias('@webroot') . "/uploads/programDocs/$id.pdf";
         return file_exists($path);
     }
+
     public function actionDownloadDoc($id)
     {
         $path = Yii::getAlias('@webroot') . "/uploads/programDocs/$id.pdf";
@@ -80,12 +80,14 @@ class DevelopmentProgrammeController extends AppController
             return Yii::$app->response->sendFile($path)->send();
         }
     }
+
     /**
      * @throws Exception
      * @throws InvalidConfigException
      * @throws MpdfException
      */
-    public function actionExport(){
+    public function actionExport()
+    {
 
         $user = Yii::$app->getSession()->get('user');
         $org = Organizations::findOne($user->id_org);
