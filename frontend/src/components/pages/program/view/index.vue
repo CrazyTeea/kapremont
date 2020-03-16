@@ -160,7 +160,7 @@
                         class="hidden-file-input"
                         @input="fileInput()">
                 <!-- <b-button class="btn btn-sm btn-info" for="file_input_pdf_main">Загрузить PDF</b-button> -->
-                <!-- <b-button class="btn btn-sm" @click="deleteFileFromYii()">Отправить на согласование</b-button>  -->
+                <b-button class="btn btn-sm" @click="deleteFileFromYii()">Удалить pdf</b-button> 
 
                 <b-button disabled class="btn btn-sm">Отправить на согласование</b-button>
             </div>
@@ -238,7 +238,15 @@ import Axios from 'axios';
                 })
             },
             deleteFileFromYii() {
-
+                let id_obj = this.getUser.organization.id
+                Axios.post(`/program/delete-doc/${id_obj}`, {
+                    headers:
+                        {
+                            'X-CSRF-Token': this.csrf,
+                        },
+                }).then((res) => {
+                    console.log(res)
+                })
             },
             getFileStatus(org_id) {
                 Axios.get()

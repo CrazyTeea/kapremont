@@ -2630,6 +2630,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 
@@ -2647,6 +2649,7 @@ __webpack_require__.r(__webpack_exports__);
         save: false,
         delete: false
       },
+      csrf: document.getElementsByName('csrf-token')[0].content,
       text: 'dfs',
       prevTable: {
         curPage: 1,
@@ -2677,9 +2680,9 @@ __webpack_require__.r(__webpack_exports__);
       console.log(file);
       this.banner.fileName = file.name;
       this.banner.show = true;
-      this.uploadFileToYii();
+      this.uploadFileToYii(file);
     },
-    uploadFileToYii: function uploadFileToYii() {
+    uploadFileToYii: function uploadFileToYii(file) {
       var _this = this;
 
       return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
@@ -2690,11 +2693,12 @@ __webpack_require__.r(__webpack_exports__);
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
+                // return console.log(file)
                 form = new FormData();
-                form.append('descriptor', 'descriptor');
+                form.append('progFile', file);
                 id_obj = _this.getUser.organization.id;
                 _context.next = 5;
-                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.post("".concat(id), form, {
+                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.post("/program/add-doc/".concat(id_obj), form, {
                   headers: {
                     'X-CSRF-Token': _this.csrf,
                     'Content-Type': 'multipart/form-data;'
@@ -2702,11 +2706,6 @@ __webpack_require__.r(__webpack_exports__);
                   onUploadProgress: function onUploadProgress(itemUpload) {
                     _this.loadProgress = Math.round(itemUpload.loaded / itemUpload.total * 100);
                   }
-                }).then(function (res) {
-                  _this.uploadSuccess &= !!res.data;
-                }).catch(function (error) {
-                  console.log(error);
-                  _this.uploadSuccess = false;
                 });
 
               case 5:
@@ -2716,6 +2715,16 @@ __webpack_require__.r(__webpack_exports__);
           }
         }, _callee);
       }))();
+    },
+    deleteFileFromYii: function deleteFileFromYii() {
+      var id_obj = this.getUser.organization.id;
+      axios__WEBPACK_IMPORTED_MODULE_6___default.a.post("/program/delete-doc/".concat(id_obj), {
+        headers: {
+          'X-CSRF-Token': this.csrf
+        }
+      }).then(function (res) {
+        console.log(res);
+      });
     },
     getFileStatus: function getFileStatus(org_id) {
       axios__WEBPACK_IMPORTED_MODULE_6___default.a.get();
@@ -6770,6 +6779,19 @@ var render = function() {
                 }
               }
             }),
+            _vm._v(" "),
+            _c(
+              "b-button",
+              {
+                staticClass: "btn btn-sm",
+                on: {
+                  click: function($event) {
+                    return _vm.deleteFileFromYii()
+                  }
+                }
+              },
+              [_vm._v("Удалить pdf")]
+            ),
             _vm._v(" "),
             _c(
               "b-button",
