@@ -210,7 +210,7 @@
         },
         mounted() {
             this.requestPageData({pageName:"programView"});
-             this.$bvModal.show('modal-1')
+            this.$bvModal.show('modal-1')
         }
     }
 </script>
