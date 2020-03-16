@@ -8,9 +8,9 @@ module.exports = {
     entry: './src/main.js',
     output: {
 
-        path: path.resolve(__dirname, '../web/vue/'),
+        path: path.resolve(__dirname, '../web/dev/'),
         filename: 'index.js',
-        publicPath: `/vue/`,
+        publicPath: '/dev/',
     },
     mode: "development",
     devtool: 'source-map',
