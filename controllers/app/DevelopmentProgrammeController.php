@@ -4,32 +4,20 @@ namespace app\controllers\app;
 
 use app\models\Atz;
 use app\models\Organizations;
-use app\models\OrgInfo;
 use app\models\ProgObjectsEvents;
 use app\models\ProgObjectsRiscs;
 use app\models\ProgObjectsWaites;
 use app\models\ProgramObjects;
-
 use app\models\ProObjectsNecessary;
-use Dompdf\Dompdf;
-use HTMLtoOpenXML\Parser;
 use Mpdf\HTMLParserMode;
 use Mpdf\Mpdf;
-use PhpOffice\PhpWord\Element\TextRun;
-use PhpOffice\PhpWord\IOFactory;
-use PhpOffice\PhpWord\PhpWord;
-use PhpOffice\PhpWord\shared\HTML;
-use PhpOffice\PhpWord\Settings;
-use PhpOffice\PhpWord\TemplateProcessor;
-
+use Mpdf\MpdfException;
 use Yii;
 use app\models\DevelopmentProgramme;
-
-use yii\helpers\ArrayHelper;
-use yii\helpers\FileHelper;
+use yii\base\Exception;
+use yii\base\InvalidConfigException;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\Response;
 
 /**
  * DevelopmentProgrammeController implements the CRUD actions for DevelopmentProgramme model.
@@ -52,12 +40,9 @@ class DevelopmentProgrammeController extends AppController
     }
 
     /**
-     * @throws \PhpOffice\PhpWord\Exception\CopyFileException
-     * @throws \PhpOffice\PhpWord\Exception\CreateTemporaryFileException
-     * @throws \PhpOffice\PhpWord\Exception\Exception
-     * @throws \yii\base\Exception
-     * @throws \yii\base\InvalidConfigException
-     * @throws \Mpdf\MpdfException
+     * @throws Exception
+     * @throws InvalidConfigException
+     * @throws MpdfException
      */
     public function actionExport(){
 
