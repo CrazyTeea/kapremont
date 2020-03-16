@@ -26,14 +26,13 @@
                     </b-th>
                     <b-th class="no-cell-border vertical-align-centre-extra-table normal-font-weight-for-table">
 
-                        <input 
-                            type="file" 
-                            :name="`${modelName}[${item.descriptor}]file`" 
-                            :ref="'file' + index" 
-                            :id="'file_input_' + index" 
-                            class="                    variant="btn"
-"
-                            @input="fileInput(index)">
+                        <input
+                                type="file"
+                                :name="`${modelName}[${item.descriptor}]file`"
+                                :ref="'file' + index"
+                                :id="'file_input_' + index"
+                                class="hidden-file-input"
+                                @input="fileInput(index)">
 
                         <div class="cell-center-for-items" v-if="!item.fileName">
                             <div class="arrow">
