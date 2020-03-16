@@ -143,9 +143,9 @@ class SystemController extends RestController
                         $i = $index+1;
                         $ev = 'Этапы: ';$k = 0;
                         if ($ee = ProgObjectsEvents::findAll(['id_object'=>$item->id])) {
-                            foreach ($ee as $i => $e) {
+                            foreach ($ee as $j => $e) {
                                 if ($e->is_nessesary) {
-                                    $k = $i + 1;
+                                    $k = $j + 1;
                                     $ev .= " $k, ";
                                 }
                             }
@@ -172,9 +172,9 @@ class SystemController extends RestController
                         $i = $index+1;
                         $ev = 'Этапы: '; $k = 0;
                         if ($ee = ProgObjectsEvents::findAll(['id_object'=>$item->id])) {
-                            foreach ($ee as $i => $e) {
+                            foreach ($ee as $j => $e) {
                                 if ($e->is_nessesary) {
-                                    $k = $i + 1;
+                                    $k = $j + 1;
                                     $ev .= " $k, ";
                                 }
                             }
