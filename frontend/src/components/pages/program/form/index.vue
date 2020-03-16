@@ -12,9 +12,8 @@
             <div class="row mt-3">
                 <div class="col-12">
                     <b-form-group
-                            id="fieldset-1"
                             label="Название объекта"
-                            label-for="input-1"
+                            label-for="name"
                             :invalid-feedback="(feedback('ProgramObjects','name','Название объекта должно быть заполнено'))"
                             :valid-feedback="(feedback('ProgramObjects','name',' '))"
                             :state="feedback('ProgramObjects','name')"
@@ -22,6 +21,18 @@
                         <b-form-input placeholder="Название..."
                                       id="name" name="ProgramObjects[name]"
                                       v-model="formData.name"
+                        />
+                    </b-form-group>
+                    <b-form-group
+                            label="Адрес объекта"
+                            label-for="address"
+                            :invalid-feedback="(feedback('ProgramObjects','address','адрес объекта должно быть заполнено'))"
+                            :valid-feedback="(feedback('ProgramObjects','address',' '))"
+                            :state="feedback('ProgramObjects','address')"
+                    >
+                        <b-form-input placeholder="адрес..."
+                                      id="address" name="ProgramObjects[address]"
+                                      v-model="formData.address"
                         />
                     </b-form-group>
                     <b-card no-body class="mb-1">
@@ -147,12 +158,12 @@
                                     <b-form-group
                                             v-if="formData.exist_pred_nadz_orgs"
                                             label="Подробности:"
-                                            label-for="podrobnosti"
-                                            :invalid-feedback="(feedback('ProgramObjects','podrobnosti','Введите подробности'))"
-                                            :valid-feedback="(feedback('ProgramObjects','podrobnosti',' '))"
-                                            :state="feedback('ProgramObjects','podrobnosti')"
+                                            label-for="regulation"
+                                            :invalid-feedback="(feedback('ProgramObjects','regulation','Введите подробности'))"
+                                            :valid-feedback="(feedback('ProgramObjects','regulation',' '))"
+                                            :state="feedback('ProgramObjects','regulation')"
                                     >
-                                        <b-form-input id="podrobnosti" name="ProgramObjects[podrobnosti]" v-model="formData.podrobnosti"/>
+                                        <b-form-input id="regulation" name="ProgramObjects[regulation]" v-model="formData.regulation"/>
                                     </b-form-group>
                                     <b-form-group
                                             label="Износ здания (%):"
@@ -386,6 +397,7 @@
             return {
                 csrf: document.getElementsByName('csrf-token')[0].content,
                 formData: {
+                    address:window.MODEL.base?.address || null,
                     type:window.MODEL.base?.type || 0,
                     name:window.MODEL.base?.name || null,
                     id_region:window.MODEL.base?.id_region || null,
@@ -397,7 +409,7 @@
                     wear:window.MODEL.base?.wear || null,
                     exist_pred_nadz_orgs:window.MODEL.base?.exist_pred_nadz_orgs || null,
                     osn_isp_zdan:window.MODEL.base?.osn_isp_zdan || null,
-                    podrobnosti: window.MODEL.base?.podrobnosti || null,
+                    regulation: window.MODEL.base?.regulation || null,
                     assignment:window.MODEL.base?.assignment || null,
                     prav_sob:window.MODEL.base?.prav_sob || null,
                     square:window.MODEL.base?.square || null,
@@ -418,6 +430,8 @@
                 formData.id_priority = value;
             },
             setFloat(val, attr) {
+                if (val.search('.') !=-1)
+                    val.replace('.',',');
                 this.formData[attr] = parseFloat(val).toFixed(3);
             },
             feedback(model,value,errorMessage){
@@ -439,13 +453,36 @@
                         {
                             'X-CSRF-Token':this.csrf,
                         },
-                }).then(response=>
+                }).then(response =>
                 {
-                    if (!!response.data?.id)
+                    if(response.data.ProgramObjects) {
+                        console.log('ошибка')
+
+                        console.log(response.data)
+                        let obj = response.data.ProgramObjects
+                        for(let item in obj) {
+                            this.errorReport(obj[item][0])
+                        }
+                    } else {
+                        if (!!response.data?.id)
                         {
                             this.$refs.files.sendFile({id:response.data.id});
                         }
-                    this.errors = response.data;
+                        this.errors = response.data;
+                    }
+                    // console.log(response)
+
+                })
+            },
+            errorReport(message) {
+                    this.$bvModal.msgBoxOk(message, {
+                    title: 'Ошибка!',
+                    size: 'sm',
+                    buttonSize: 'sm',
+                    okVariant: 'outline-success',
+                    headerClass: 'p-2 border-bottom-0',
+                    footerClass: 'p-2 border-top-0',
+                    centered: true
                 })
             },
             onReset(){

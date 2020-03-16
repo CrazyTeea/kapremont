@@ -66,11 +66,31 @@ class DevelopmentProgrammeController extends AppController
 
         $pr_ob = ProgramObjects::findAll(['system_status'=>1,'id_org'=>$user->id_org,'type'=>0]);
         $r_ob = ProgramObjects::findAll(['system_status'=>1,'id_org'=>$user->id_org,'type'=>1]);
+        $sq =[
+        's_k' => ProgramObjects::find()->select(['square'])->where(['system_status'=>1,'id_org'=>$org->id,])->sum('square'),
+        's_k_s' => ProgramObjects::find()->select(['square_kap'])->where(['system_status'=>1,'id_org'=>$org->id,])->sum('square_kap'),
+        's_av' => ProgramObjects::find()->select(['square_ar'])->where(['system_status'=>1,'id_org'=>$org->id,])->sum('square_av'),
+        's_atz' => ProgramObjects::find()->select(['square_ar'])->where(['system_status'=>1,'id_org'=>$org->id,])->sum('square_av'),
+        ];
         $pr_cols = ProgramObjects::getTableSchema()->getColumnNames();
         $program = Yii::$app->getSession()->get('program');
         if (!$program)
             return $this->redirect(['/']);
         $atz = Atz::findAll(['id_program'=>$program->id]);
+        $atzC = [];
+        $bC = $vC = $bvC = 0;
+        foreach ($atz as $item){
+            $bC  += floatval($item->cost_b);
+            $vC  += floatval($item->cost_v);
+            $bvC += (floatval($item->cost_v) + floatval($item->cost_b));
+            $atzC = [
+                'bC' =>$bC,
+                'vC' =>$vC,
+                'bvC' =>$bvC
+            ];
+        }
+
+
 
 
         $objects = ProgramObjects::findAll(['system_status'=>1,'id_program'=>$program->id]);
@@ -93,7 +113,7 @@ class DevelopmentProgrammeController extends AppController
         ini_set("pcre.backtrack_limit", "5000000");
         $mpdf->WriteHTML($stylesheet,HTMLParserMode::HEADER_CSS);
         $mpdf->WriteHTML($stylesheet2,HTMLParserMode::HEADER_CSS);
-        $mpdf->WriteHTML($this->renderPartial('_export',compact('objects','org','atz','pr_ob','r_ob','events','nes','wai','risks')));
+        $mpdf->WriteHTML($this->renderPartial('_export',compact('objects','org','atz','pr_ob','r_ob','events','nes','wai','risks','sq','atzC')));
         $mpdf->Output();
     }
 

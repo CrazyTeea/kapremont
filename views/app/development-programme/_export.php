@@ -12,6 +12,10 @@ $wear = [
     'От 70% до 90%',
     'Более 90%'
 ];
+$prav = [
+    'fast'=>'Оперативное управление',
+    'others'=>'Другое',
+];
 $nesLabel = [
     'Фундаменты',
     'Отмостка',
@@ -54,6 +58,19 @@ function getEvent($arr,$i_o,$index,$attr){
     if (isset($arr[$i_o]) and isset($arr[$i_o][$index]))
         return $arr[$i_o][$index]->$attr;
     return '';
+}
+
+function getSum($arr,$i_o,$attr){
+
+    $sum = 0;
+    if (isset($arr[$i_o]))
+    {
+        foreach ($arr[$i_o] as $item){
+            $sum += floatval(isset($item->$attr) ? $item->$attr : 0);
+        }
+    }
+    return $sum;
+
 }
 
 use app\models\Regions;
@@ -244,22 +261,22 @@ use yii\helpers\ArrayHelper; ?>
         <tr>
             <td>8</td>
             <td>Общая площадь всех зданий и сооружений</td>
-            <td></td>
+            <td><?=$sq['s_k']?></td>
         </tr>
         <tr>
             <td>9</td>
             <td>Общая площадь всех зданий и сооружений, требующих капитального ремонта (на основании акта обследования или предписаний надзорных органов)</td>
-            <td></td>
+            <td><?=$sq['s_k_s']?></td>
         </tr>
         <tr>
             <td>10</td>
             <td>Общая площадь всех зданий и сооружений, находящихся в аварийном состоянии (на основании акта обследования или предписаний надзорных органов)</td>
-            <td></td>
+            <td><?=$sq['s_av']?></td>
         </tr>
         <tr>
             <td>11</td>
             <td>Общая площадь всех зданий и сооружений, требующих мероприятий по АТЗ</td>
-            <td></td>
+            <td><?=$sq['s_atz']?></td>
         </tr>
         </tbody>
     </table>
@@ -288,70 +305,70 @@ use yii\helpers\ArrayHelper; ?>
             <td>Система видеонаблюдения</td>
             <td><?=ArrayHelper::keyExists(0,$atz) ? $atz[0]->cost_b : ''?></td>
             <td><?=ArrayHelper::keyExists(0,$atz) ? $atz[0]->cost_v : ''?></td>
-            <td><?=ArrayHelper::keyExists(0,$atz) ? (int)$atz[0]->cost_b*1 + (int)$atz[0]->cost_v*1: ''?></td>
+            <td><?=ArrayHelper::keyExists(0,$atz) ? floatval($atz[0]->cost_b) + floatval($atz[0]->cost_v): ''?></td>
         </tr>
         <tr>
             <td>2</td>
             <td>Система оповещения и управления эвакуацией</td>
             <td><?=ArrayHelper::keyExists(1,$atz) ? $atz[1]->cost_b : ''?></td>
             <td><?=ArrayHelper::keyExists(1,$atz) ? $atz[1]->cost_v : ''?></td>
-            <td><?=ArrayHelper::keyExists(1,$atz) ? (int)$atz[1]->cost_b + (int)$atz[1]->cost_v : ''?></td>
+            <td><?=ArrayHelper::keyExists(1,$atz) ? floatval($atz[1]->cost_b) + floatval($atz[1]->cost_v) : ''?></td>
         </tr>
         <tr>
             <td>3</td>
             <td>Система освещения</td>
             <td><?=ArrayHelper::keyExists(2,$atz) ? $atz[2]->cost_b : ''?></td>
             <td><?=ArrayHelper::keyExists(2,$atz) ? $atz[2]->cost_v : ''?></td>
-            <td><?=ArrayHelper::keyExists(2,$atz) ? (int)$atz[2]->cost_b + (int)$atz[2]->cost_v : ''?></td>
+            <td><?=ArrayHelper::keyExists(2,$atz) ? floatval($atz[2]->cost_b) + floatval($atz[2]->cost_v) : ''?></td>
         </tr>
         <tr>
             <td>4</td>
             <td>Средства охранной сигнализации</td>
             <td><?=ArrayHelper::keyExists(3,$atz) ? $atz[3]->cost_b : ''?></td>
             <td><?=ArrayHelper::keyExists(3,$atz) ? $atz[3]->cost_v : ''?></td>
-            <td><?=ArrayHelper::keyExists(3,$atz) ? (int)$atz[3]->cost_b + (int)$atz[3]->cost_v : ''?></td>
+            <td><?=ArrayHelper::keyExists(3,$atz) ? floatval($atz[3]->cost_b) + floatval($atz[3]->cost_v) : ''?></td>
         </tr>
         <tr>
             <td>5</td>
             <td>Средства тревожной сигнализации</td>
             <td><?=ArrayHelper::keyExists(4,$atz) ? $atz[4]->cost_b : ''?></td>
             <td><?=ArrayHelper::keyExists(4,$atz) ? $atz[4]->cost_v : ''?></td>
-            <td><?=ArrayHelper::keyExists(4,$atz) ? (int)$atz[4]->cost_b + (int)$atz[4]->cost_v : ''?></td>
+            <td><?=ArrayHelper::keyExists(4,$atz) ? floatval($atz[4]->cost_b) + floatval($atz[4]->cost_v) : ''?></td>
         </tr>
         <tr>
             <td>6</td>
             <td>Средства пожарной сигнализации</td>
             <td><?=ArrayHelper::keyExists(5,$atz) ? $atz[5]->cost_b : ''?></td>
             <td><?=ArrayHelper::keyExists(5,$atz) ? $atz[5]->cost_v : ''?></td>
-            <td><?=ArrayHelper::keyExists(5,$atz) ? (int)$atz[5]->cost_b + (int)$atz[5]->cost_v : ''?></td>
+            <td><?=ArrayHelper::keyExists(5,$atz) ? floatval($atz[5]->cost_b) + floatval($atz[5]->cost_v) : ''?></td>
         </tr>
         <tr>
             <td>7</td>
             <td>Средства телефонной связи и радиосвязи</td>
             <td><?=ArrayHelper::keyExists(6,$atz) ? $atz[6]->cost_b : ''?></td>
             <td><?=ArrayHelper::keyExists(6,$atz) ? $atz[6]->cost_v : ''?></td>
-            <td><?=ArrayHelper::keyExists(6,$atz) ? (int)$atz[6]->cost_b + (int)$atz[6]->cost_v : ''?></td>
+            <td><?=ArrayHelper::keyExists(6,$atz) ? floatval($atz[6]->cost_b) + floatval($atz[6]->cost_v) : ''?></td>
         </tr>
         <tr>
             <td>8</td>
             <td>Ограждение (в т.ч. ворота, шлагбаумы)</td>
             <td><?=ArrayHelper::keyExists(7,$atz) ? $atz[7]->cost_b : ''?></td>
             <td><?=ArrayHelper::keyExists(7,$atz) ? $atz[7]->cost_v : ''?></td>
-            <td><?=ArrayHelper::keyExists(7,$atz) ? (int)$atz[7]->cost_b + (int)$atz[7]->cost_v : ''?></td>
+            <td><?=ArrayHelper::keyExists(7,$atz) ? floatval($atz[7]->cost_b) + floatval($atz[7]->cost_v) : ''?></td>
         </tr>
         <tr>
             <td>9</td>
             <td>СКУД</td>
             <td><?=ArrayHelper::keyExists(8,$atz) ? $atz[8]->cost_b : ''?></td>
             <td><?=ArrayHelper::keyExists(8,$atz) ? $atz[8]->cost_v : ''?></td>
-            <td><?=ArrayHelper::keyExists(8,$atz) ? (int)$atz[8]->cost_b + (int)$atz[8]->cost_v : ''?></td>
+            <td><?=ArrayHelper::keyExists(8,$atz) ? floatval($atz[8]->cost_b) + floatval($atz[8]->cost_v) : ''?></td>
         </tr>
         <tr>
             <td></td>
             <td>Итого:</td>
-            <td>c</td>
-            <td></td>
-            <td></td>
+            <td><?=$atzC['bC']?></td>
+            <td><?=$atzC['vC']?></td>
+            <td><?=$atzC['bvC']?></td>
         </tr>
         </tbody>
     </table>
@@ -393,19 +410,19 @@ use yii\helpers\ArrayHelper; ?>
         <?php foreach ($pr_ob as $index=>$item):?>
             <tr>
                 <td><?=++$index ?></td>
-                <td><?=$prior[$item->id_priority ? : 1] ?></td>
+                <td><?= (!$item->type) ? $prior[$item->id_priority ? : 1] : 'Резерв' ?></td>
                 <td><?php $reg = Regions::findOne($item->id_region); echo $reg ? $reg->region : ' ' ?></td>
                 <td><?=$item->kad_number ?></td>
                 <td><?=$item->name ?></td>
                 <td><?=$item->assignment ?></td>
                 <td><?=$item->address ?></td>
                 <td><?=$item->year ?></td>
-                <td><?=$wear[($item->wear and $item->wear<5)? $item->wear : 0] ?></td>
-                <td><?=$item->exist_pred_nadz_orgs ? $item->podrobnosti : '' ?></td>
+                <td><?=$wear[(!is_null($item->wear) and $item->wear<5)? $item->wear : 0] ?></td>
+                <td><?=$item->exist_pred_nadz_orgs ? $item->regulation : '' ?></td>
                 <td></td>
-                <td><?=$item ->finance_sum?></td>
-                <td><?=$item ->coFinancing?></td>
-                <td><?=$item ->note?></td>
+                <td><?=$item->finance_sum?></td>
+                <td><?=$item->coFinancing?></td>
+                <td><?=$item->note?></td>
             </tr>
         <?php endforeach;?>
         </tbody>
@@ -439,15 +456,15 @@ use yii\helpers\ArrayHelper; ?>
         <?php foreach ($r_ob as $index=>$item):?>
             <tr>
                 <td><?=++$index ?></td>
-                <td><?=$prior[$item->id_priority ? : 1] ?></td>
+                <td><?= (!$item->type) ? $prior[$item->id_priority ? : 1] : 'Резерв' ?></td>
                 <td><?php $reg = Regions::findOne($item->id_region); echo $reg ? $reg->region : ' ' ?></td>
                 <td><?=$item->kad_number ?></td>
                 <td><?=$item->name ?></td>
                 <td><?=$item->assignment ?></td>
                 <td><?=$item->address ?></td>
                 <td><?=$item->year ?></td>
-                <td><?=$wear[($item->wear and $item->wear<5)? $item->wear : 0] ?></td>
-                <td><?=$item->exist_pred_nadz_orgs ? $item->podrobnosti : '' ?></td>
+                <td><?=$wear[(!is_null($item->wear) and $item->wear<5)? $item->wear : 0] ?></td>
+                <td><?=$item->exist_pred_nadz_orgs ? $item->regulation : '' ?></td>
                 <td></td>
                 <td><?=$item ->finance_sum?></td>
                 <td><?=$item ->coFinancing?></td>
@@ -458,8 +475,9 @@ use yii\helpers\ArrayHelper; ?>
     </table>
 
     <?php foreach ($objects as $index=> $object):?>
+    <?php $kek = $index+1 ?>
         <div class="text-center">
-            <p><h5>Объект № <?=++$index?></h5>
+            <p><h5>Объект № <?=$kek?></h5>
             <p><?=$object->name?></p>
             <p>Приоритет:<?=$prior[$object->id_priority ? : 1]?></p>
         </div>
@@ -538,12 +556,12 @@ use yii\helpers\ArrayHelper; ?>
             <tr>
                 <td>7</td>
                 <td>Наличие предписаний надзорных органов </td>
-                <td><?=$object->exist_pred_nadz_orgs ? $object->podrobnosti : 'Нет'?></td>
+                <td><?=$object->exist_pred_nadz_orgs ? $object->regulation : 'Нет'?></td>
             </tr>
             <tr>
                 <td>8</td>
                 <td>Износ здания, %</td>
-                <td><?=$wear[($item->wear and $item->wear<5)? $item->wear : 0]?></td>
+                <td><?=$wear[(!is_null($object->wear) and $object->wear<5)? $object->wear : 0]?></td>
             </tr>
             <tr>
                 <td rowspan="4">9</td>
@@ -562,107 +580,107 @@ use yii\helpers\ArrayHelper; ?>
             </tr>
             <tr>
                 <td>Право собственности</td>
-                <td><?=$object->prav_sob ?></td>
+                <td><?= is_string($object->prav_sob) ? $prav[$object->prav_sob] : '' ?></td>
             </tr>
             <tr>
-                <td rowspan="22">10</td>
+                <td >10</td>
                 <td>Общая площадь здания – всего, кв.м.</td>
                 <td><?=$object->square ?></td>
             </tr>
             <tr>
-                <td>из нее площадь по целям использования:
-                    административная
+                <!--  <td>из нее площадь по целям использования:
+                      административная
 
-                </td>
-                <td></td>
+                  </td>
+                  <td></td>
 
-            </tr>
-            <tr>
-                <td>учебно-лабораторных зданий </td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>в том числе: учебная</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td> из нее площадь спортивно-оздоровительных сооружений</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>в том числе крытых спортивных сооружений</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>учебно-вспомогательная</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>в том числе библиотечно-архивная</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>культурно-просветительская и музейная</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>предназначенная для лабораторных и научно-исследовательских подразделений</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>общежитий</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>в том числе жилая</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>из нее занятая обучающимися</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>гостиничных и жилых</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>подсобных</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>из нее площадь пунктов общественного питания</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>медицинских</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>бытовых</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>инфраструктурных</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>производственных и складских</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>защитных, в том числе гражданской обороны и ЧС</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>прочих зданий</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td rowspan="22">11</td>
+              </tr>
+              <tr>
+                  <td>учебно-лабораторных зданий </td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>в том числе: учебная</td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td> из нее площадь спортивно-оздоровительных сооружений</td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>в том числе крытых спортивных сооружений</td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>учебно-вспомогательная</td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>в том числе библиотечно-архивная</td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>культурно-просветительская и музейная</td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>предназначенная для лабораторных и научно-исследовательских подразделений</td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>общежитий</td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>в том числе жилая</td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>из нее занятая обучающимися</td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>гостиничных и жилых</td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>подсобных</td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>из нее площадь пунктов общественного питания</td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>медицинских</td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>бытовых</td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>инфраструктурных</td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>производственных и складских</td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>защитных, в том числе гражданской обороны и ЧС</td>
+                  <td></td>
+              </tr>
+              <tr>
+                  <td>прочих зданий</td>
+                  <td></td>
+              </tr>-->
+              <tr>
+                <td>11</td>
                 <td>Общая площадь здания (помещений), планируемого к капитальному ремонту, кв. м</td>
                 <td><?=$object->square_kap ?></td>
             </tr>
-            <tr>
+           <!-- <tr>
                 <td>из нее площадь по целям использования:
                     административная
                 </td>
@@ -748,7 +766,7 @@ use yii\helpers\ArrayHelper; ?>
             <tr>
                 <td>прочих зданий</td>
                 <td></td>
-            </tr>
+            </tr>-->
             <tr>
                 <td>12</td>
                 <td>Используется в уставной деятельности, кв.м</td>
@@ -878,9 +896,9 @@ use yii\helpers\ArrayHelper; ?>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td></td>
-                <td></td>
-                <td></td>
+                <td><?=getSum($events,$index,'cost_real')?></td>
+                <td><?=getSum($events,$index,'sum_bud_fin')?></td>
+                <td><?=getSum($events,$index,'fin_vnebud_ist')?></td>
             </tr>
             </tbody>
         </table>

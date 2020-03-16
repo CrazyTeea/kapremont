@@ -59,6 +59,7 @@ class ProgramObjectsController extends AppController
         $docList = ObjectDocumentsList::findAll(['system_status'=>1,'id_object'=>$id]);
         return $this->render('view',compact('model','docList'));
     }
+
     public function actionDownloadDoc($id_obj){
         $get= Yii::$app->request->get();
         $file = Files::findOne($get['id']);
@@ -114,9 +115,12 @@ class ProgramObjectsController extends AppController
                         $pr->cost_real = $item->cost_real;
                         $pr->sum_bud_fin = $item->sum_bud_fin;
                         $pr->fin_vnebud_ist = $item->fin_vnebud_ist;
+                        $model->finance_sum+=floatval($pr->sum_bud_fin);
+                        $model->coFinancing+=floatval($pr->fin_vnebud_ist);
                         $save &= $pr->save();
                         $errors['ProgObjectsEvents'][] = $pr->getErrors();
                     }
+                    $save &= $model->save(false);
                     // $deletedIDs = null;
                     //$oldIds = ArrayHelper::map($proObjectsNecessary,'id','id');
                     $proObjectsNecessary = ProObjectsNecessary::createMultiple(ProObjectsNecessary::className(), $proObjectsNecessary);
@@ -234,6 +238,7 @@ class ProgramObjectsController extends AppController
                 $transaction = Yii::$app->getDb()->beginTransaction();
                 $save &= $model->save();
                 $errors['ProgramObjects'] = $model->getErrors();
+                $model->finance_sum = $model->coFinancing = 0;
                 if ($save) {
                     $progObjectsEvents = ProgObjectsEvents::createMultiple(ProgObjectsEvents::className(), $progObjectsEvents);
                     ProgObjectsEvents::loadMultiple($progObjectsEvents, Yii::$app->request->post());
@@ -252,9 +257,12 @@ class ProgramObjectsController extends AppController
                         $pr->cost_real = $item->cost_real;
                         $pr->sum_bud_fin = $item->sum_bud_fin;
                         $pr->fin_vnebud_ist = $item->fin_vnebud_ist;
+                        $model->finance_sum+=floatval($pr->sum_bud_fin);
+                        $model->coFinancing+=floatval($pr->fin_vnebud_ist);
                         $save &= $pr->save();
                         $errors['ProgObjectsEvents'][] = $pr->getErrors();
                     }
+                    $save &= $model->save(false);
                    // $deletedIDs = null;
                     //$oldIds = ArrayHelper::map($proObjectsNecessary,'id','id');
                     $proObjectsNecessary = ProObjectsNecessary::createMultiple(ProObjectsNecessary::className(), $proObjectsNecessary);
@@ -263,7 +271,6 @@ class ProgramObjectsController extends AppController
                     foreach (Yii::$app->request->post('ProObjectsNecessary') as $index => $item) {
                         if (!ArrayHelper::keyExists($index, $proObjectsNecessary)) {
                             $proObjectsNecessary[$index] = new ProObjectsNecessary();
-
                         }
                         $proObjectsNecessary[$index]['nalichie'] = isset($item['nalichie']) ? $item['nalichie'] : 0;
                         $proObjectsNecessary[$index]['material'] = isset($item['material']) ? $item['material'] : '';
@@ -330,7 +337,7 @@ class ProgramObjectsController extends AppController
                         }
                         $pr->types = $item->types;
                         $pr->poison = $item->poison;
-                        $pr->protect = $item->protect ;
+                        $pr->protect = $item->protect;
                         $save &= $pr->save();
                         $errors['ProgObjectsWaites'][] = [$pr->getErrors()];
                     }
@@ -347,9 +354,23 @@ class ProgramObjectsController extends AppController
         return $this->render('update',compact('model','progObjectsEvents','progObjectsWaites','progObjectsRiscs','proObjectsNecessary'));
     }
 
-    public function actionAddDocs($id){
+    public function actionAddDocs($id)
+    {
         $model = $this->findModel($id);
         if($model) {
+            if (Yii::$app->request->post())
+            {
+                if (isset(Yii::$app->request->post()['descriptor'])){
+                    $des = Yii::$app->request->post()['descriptor'];
+                    $obt = ObjectDocumentsTypes::findOne(['descriptor'=>$des]);
+                    if (!$obt){
+                        $obt = new ObjectDocumentsTypes();
+                        $obt->descriptor = $des;
+                        $obt->label=$des;
+                        $obt->save();
+                    }
+                }
+            }
             $docs = ObjectDocumentsTypes::find()->all();
             $done = false;
             foreach ($docs as $doc) {
@@ -357,7 +378,8 @@ class ProgramObjectsController extends AppController
                 if (!$file)
                     continue;
                 $objDoc = new ObjectDocumentsList();
-                if (!$objDoc->add($file,$id,$doc->id)) {
+                $label = (isset(Yii::$app->request->post()['label'])) ? Yii::$app->request->post()['label'] : 'kek';
+                if (!$objDoc->add($file,$id,$doc->id,$label)) {
                     $done = false;
                     break;
                 }else
@@ -379,15 +401,16 @@ class ProgramObjectsController extends AppController
                 'docList' => function($query) { return $query->where(['system_status' => 1]); },
                 'docList.files' => function($query) { return $query->select(['id', 'name']); },
                 'docList.types' => function($query) { return $query->select(['id', 'descriptor']); }])
-            ->asArray()
-            ->all();
-        $i = 0;
-        foreach($obj[0]['docList'] as $file) {
+            ->one();
+        //$i = 0;
+    //    return Json::encode($obj->docList[0]->files);
+        foreach($obj->docList as $i=>$file) {
             $toSend[$i] = [
-                'name' =>  $file['files'][0]['name'],
-                'descriptor' => $file['types'][0]['descriptor']
+                'name' =>  $file->files[0]->name,
+                'descriptor' => $file->types[0]->descriptor,
+                'label'=>$file->label
             ];
-            $i++;
+          //  $i++;
         }
 
         // echo "<pre>";
@@ -422,7 +445,8 @@ class ProgramObjectsController extends AppController
          return Json::encode($kek);
     }
 
-    public function actionDelete($id){
+    public function actionDelete($id)
+    {
         $model = $this->findModel($id);
         $model->system_status = 0;
         $model->save(false);

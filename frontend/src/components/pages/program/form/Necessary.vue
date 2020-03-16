@@ -181,7 +181,7 @@
                     {label: 'Система газоснабжения', nalichie: null, srok_eks: null, kap_remont: null, obosnovanie: null,element:20},
                     {label: 'Система кондиционирования воздуха', nalichie: null, srok_eks: null, kap_remont: null, obosnovanie: null,element:21},
                     {label: 'Система вентиляции', nalichie: null, srok_eks: null, kap_remont: null, obosnovanie: null,element:22},
-                    {label: 'Система отопления', nalichie: null, srok_eks: null, kap_remont: null, obosnovanie: null,elementt:23},
+                    {label: 'Система отопления', nalichie: null, srok_eks: null, kap_remont: null, obosnovanie: null,element:23},
                     {label: 'Система диспетчеризации', nalichie: null, srok_eks: null, kap_remont: null, obosnovanie: null,element:24},
                     {label: 'Радиофикация', nalichie: null, srok_eks: null, kap_remont: null, obosnovanie: null,element:25},
                     {label: 'Телевидение эфирное', nalichie: null, srok_eks: null, kap_remont: null, obosnovanie: null,element:26},

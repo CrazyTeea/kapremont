@@ -42,6 +42,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'org.name',
             'name:ntext',
+            'address:ntext',
             'assignment:ntext',
             'square',
             'year',
@@ -50,10 +51,10 @@ $this->params['breadcrumbs'][] = $this->title;
                 'value' => function($model) use ($weara){return $weara[($model->wear and  $model->wear < 5) ? $model->wear : 0];},
             ],
 
-/*            'regulation:ntext',
-            'event_type:ntext',
-            'finance_sum',
-            'coFinancing',*/
+
+            /*        'event_type:ntext',
+                    'finance_sum',
+                    'coFinancing',*/
             'note:ntext',
         ],
     ]) ?>
