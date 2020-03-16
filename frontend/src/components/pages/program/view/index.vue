@@ -252,8 +252,7 @@ import Axios from 'axios';
         },
         mounted() {
             this.requestPageData({pageName:"programView"});
-            this.requestUser()
-            //  this.$bvModal.show('modal-1')
+             this.$bvModal.show('modal-1');
             // this.getFileStatus()
         },
         computed: {
