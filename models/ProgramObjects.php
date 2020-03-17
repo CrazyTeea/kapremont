@@ -120,4 +120,5 @@ class ProgramObjects extends \yii\db\ActiveRecord
     {
         return $this->hasMany(ObjectDocumentsList::class, ['id_object' => 'id']);
     }
+
 }
