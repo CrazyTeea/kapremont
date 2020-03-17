@@ -87,7 +87,7 @@ function getFile($object,$file){
 function getEvent($arr,$i_o,$index,$attr){
 
     if (isset($arr[$i_o]) and isset($arr[$i_o][$index]))
-        return $arr[$i_o][$index]->$attr;
+        return $arr[$i_o][$index][$attr];
     return '';
 }
 
@@ -1106,19 +1106,19 @@ use yii\helpers\ArrayHelper; ?>
             <td>3</td>
             <td>Снижение затрат на эксплуатацию</td>
             <td><?=getEvent($wai,$index,2,'plan')?></td>
-            <td>да / нет </td>
+            <td> </td>
         </tr>
         <tr>
             <td>4</td>
             <td>Повышение энергоэффективности</td>
             <td><?=getEvent($wai,$index,3,'plan')?></td>
-            <td>да / нет </td>
+            <td> </td>
         </tr>
         <tr>
             <td>5</td>
             <td>Восстановление (ремонт, реставрация, за исключением реконструкции) объектов культурного наследия </td>
             <td><?=getEvent($wai,$index,4,'plan')?></td>
-            <td>да / нет </td>
+            <td> </td>
         </tr>
         <?php if (ArrayHelper::keyExists($index,$wai)): ?>
             <?php for ( $i=5,$k=6;$i< count($wai[$index]); $i++,$k++): ?>
