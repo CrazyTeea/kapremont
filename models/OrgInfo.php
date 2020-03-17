@@ -30,6 +30,7 @@ use Yii;
  * @property float|null $square_all_kap
  * @property float|null $square_all_av
  * @property float|null $square_all_atz
+ * @property string|null $rector
  */
 class OrgInfo extends \yii\db\ActiveRecord
 {
@@ -55,7 +56,8 @@ class OrgInfo extends \yii\db\ActiveRecord
                 'st_asp_count', 'rab_count', 'nauch_rab',
                 'prof_prep_count', 'in_kat_rab', 'invalid_count',
                 'zdan_count'], 'integer'],
-            [['square_all','square_all_kap','square_all_av','square_all_atz'],'number']
+            [['square_all','square_all_kap','square_all_av','square_all_atz'],'number'],
+            [['rector'],'string']
         ];
     }
 
@@ -88,6 +90,7 @@ class OrgInfo extends \yii\db\ActiveRecord
             'square_all_kap'=>'Общая площадь всех зданий и сооружений, требующих капитального ремонта (на основании акта обследования или предписаний надзорных органов)',
             'square_all_av'=>'Общая площадь всех зданий и сооружений, находящихся в аварийном состоянии ',
             'square_all_atz'=>'Общая площадь всех зданий и сооружений, требующих мероприятий по АТЗ',
+            'rector'=>'ФИО ректора'
         ];
     }
 }
