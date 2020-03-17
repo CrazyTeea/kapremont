@@ -266,7 +266,7 @@ export default {
                 window.location.href = `/program/object/view/${id}`;
         },
         async removeFileFromYii(id, descriptor, index) {
-            await Axios.get(`/program/object/delete-docs/${id}`, { params: { descriptor: descriptor } }).then((res) => {
+            await Axios.get(`/program/object/delete-docs/${id}`, { params: { descriptor: descriptor } }).then(() => {
                 this.items[index].fileName = null;
             }).catch(error => console.log(error))
         },
@@ -291,6 +291,7 @@ export default {
             }).then((res) => {
                  this.uploadSuccess &= !!res.data;
             }).catch( (error) => {
+                console.log(error);
                 this.uploadSuccess = false
             })
         },
