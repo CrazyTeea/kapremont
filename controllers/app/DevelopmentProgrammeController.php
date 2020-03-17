@@ -163,11 +163,6 @@ class DevelopmentProgrammeController extends AppController
         $mpdf->WriteHTML('
         body{
         font-family: "Times New Roman", serif;
-        }
-        td{
-        margin: 0 auto !important;
-        text-align: center !important;
-        vertical-align: middle !important;
         }'
             ,HTMLParserMode::HEADER_CSS);
         $mpdf->WriteHTML($stylesheet,HTMLParserMode::HEADER_CSS);
