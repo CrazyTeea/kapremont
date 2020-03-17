@@ -91,9 +91,6 @@ class ProgramObjectsController extends AppController
         $model->id_program = $program->id;
         if ($post = Yii::$app->request->post()) {
             if ($model->load($post)) {
-                if ($model->id_priority == 4)
-                    $model->type = 1;
-                else $model->type = 0;
                 $transaction = Yii::$app->getDb()->beginTransaction();
                 $save &= $model->save();
                 $errors['ProgramObjects'] = $model->getErrors();
@@ -232,9 +229,6 @@ class ProgramObjectsController extends AppController
         //
         if ($post = Yii::$app->request->post()) {
             if ($model->load($post)) {
-                if ($model->id_priority == 4)
-                    $model->type = 1;
-                else $model->type = 0;
                 $transaction = Yii::$app->getDb()->beginTransaction();
                 $save &= $model->save();
                 $errors['ProgramObjects'] = $model->getErrors();
