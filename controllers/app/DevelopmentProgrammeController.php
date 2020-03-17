@@ -17,6 +17,7 @@ use yii\base\Exception;
 use yii\base\InvalidConfigException;
 use yii\filters\VerbFilter;
 use yii\helpers\FileHelper;
+use yii\helpers\Json;
 use yii\web\UploadedFile;
 
 /**
@@ -39,6 +40,11 @@ class DevelopmentProgrammeController extends AppController
         ];
     }
 
+    /**
+     * @param $id
+     * @return int
+     * @throws Exception
+     */
     public function actionAddDoc($id)
     {
         $file = UploadedFile::getInstanceByName('progFile');
@@ -52,6 +58,10 @@ class DevelopmentProgrammeController extends AppController
         return 0;
     }
 
+    /**
+     * @param $id
+     * @return int
+     */
     public function actionDeleteDoc($id)
     {
         $path = Yii::getAlias('@webroot') . "/uploads/programDocs/$id.pdf";
@@ -62,12 +72,20 @@ class DevelopmentProgrammeController extends AppController
         return 0;
     }
 
+    /**
+     * @param $id
+     * @return string
+     */
     public function actionCheckDoc($id)
     {
         $path = Yii::getAlias('@webroot') . "/uploads/programDocs/$id.pdf";
-        return json_encode(file_exists($path));
+        return Json::encode(file_exists($path));
     }
 
+    /**
+     * @param $id
+     * @return string|void
+     */
     public function actionDownloadDoc($id)
     {
         $path = Yii::getAlias('@webroot') . "/uploads/programDocs/$id.pdf";
@@ -157,7 +175,7 @@ class DevelopmentProgrammeController extends AppController
         $mpdf->WriteHTML($stylesheet,HTMLParserMode::HEADER_CSS);
         $mpdf->WriteHTML($stylesheet2,HTMLParserMode::HEADER_CSS);
         $mpdf->WriteHTML($this->renderPartial('_export',compact('objects','org','atz','pr_ob','r_ob','events','nes','wai','risks','sq','atzC')));
-        $mpdf->Output();
+        return $mpdf->Output();
     }
 
     /**

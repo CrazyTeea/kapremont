@@ -77,7 +77,7 @@ class OrgInfo extends \yii\db\ActiveRecord
             'st_bak_count' => 'St Bak Count',
             'st_spec_count' => 'St Spec Count',
             'st_mag_count' => 'St Mag Count',
-            'st_asp_count' => 'St Asp Count',
+            'st_asp_count' => 'Аспиранты',
             'rab_count' => 'Rab Count',
             'nauch_rab' => 'Nauch Rab',
             'prof_prep_count' => 'Prof Prep Count',
