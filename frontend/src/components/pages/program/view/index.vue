@@ -1,79 +1,119 @@
 <template>
-
     <div id="dev_programme">
         <b-modal centered id="modal-1" title="Внимание">
             <p class="my-4">
-                Уважаемые пользователи!
-                В связи с техническими работами на сервере возможность загрузки программы модернизации инфраструктуры образовательных организаций высшего 
-                образования (далее - программа) 
-                в формате pdf и отправка на согласование в Минобрнауки России будет доступна с 13 марта 2020 года.
-                Срок направления программы на согласование с Минобрнауки России будет продлён до 20 марта 2020 года.
-                Официальное письмо о продлении срока представления программы в Минобрнауки России: <a href="/baner.pdf" target="_blank">MN-17_90</a> .
+                Уважаемые пользователи! В связи с техническими работами на
+                сервере возможность загрузки программы модернизации
+                инфраструктуры образовательных организаций высшего образования
+                (далее - программа) в формате pdf и отправка на согласование в
+                Минобрнауки России будет доступна с 13 марта 2020 года. Срок
+                направления программы на согласование с Минобрнауки России будет
+                продлён до 20 марта 2020 года. Официальное письмо о продлении
+                срока представления программы в Минобрнауки России:
+                <a href="/baner.pdf" target="_blank">MN-17_90</a> .
             </p>
         </b-modal>
         <div class="row">
             <div class="col-6">
                 <b-table
-                        :fields="[{ key:'id',label:'№' },{ key:'label',label:'Показатель' },{ key:'value',label:'Значение' }]"
-                        :items="
-                        [
-                        { id:'1',label:'Полное наименование организации',value:getUser && getUser.organization && getUser.organization.name },
-                        { id:'2' ,label:'Сокращенное наименование организации',value:getUser && getUser.organization && getUser.organization.short_name},
-                        ]"
-                        small bordered
+                    :fields="[
+                        { key: 'id', label: '№' },
+                        { key: 'label', label: 'Показатель' },
+                        { key: 'value', label: 'Значение' }
+                    ]"
+                    :items="[
+                        {
+                            id: '1',
+                            label: 'Полное наименование организации',
+                            value:
+                                getUser &&
+                                getUser.organization &&
+                                getUser.organization.name
+                        },
+                        {
+                            id: '2',
+                            label: 'Сокращенное наименование организации',
+                            value:
+                                getUser &&
+                                getUser.organization &&
+                                getUser.organization.short_name
+                        }
+                    ]"
+                    small
+                    bordered
                 />
-                <b-button class="btn btn-sm" style="float: right" href="/organization/info">Заполнить общие сведения</b-button>
+                <b-button
+                    class="btn btn-sm"
+                    style="float: right"
+                    href="/organization/info"
+                    >Подробнее</b-button
+                >
             </div>
 
             <div class="col-4 offset-2">
                 <v-user-panel />
             </div>
         </div>
-        <br>
+        <br />
         <div class="row">
             <div class="col-6">
-                <b-button variant="info" href="object/create">Добавить объект кап. ремонта</b-button>
-                <b-button variant="info" href="atz">Добавить мероприятия по АТЗ</b-button>
+                <b-button variant="info" href="object/create"
+                    >Добавить объект кап. ремонта</b-button
+                >
+                <b-button variant="info" href="atz"
+                    >Добавить мероприятия по АТЗ</b-button
+                >
             </div>
-            <div class="col-6"></div> 
+            <div class="col-6"></div>
         </div>
-        <br>
-        <div class="row" >
+        <br />
+        <div class="row">
             <b-card no-body>
                 <b-card-header header-tag="header" class="p-1" role="tab">
-                       <span>
-                           <b-icon-gear-wide-connected />
-                           Объекты требующие капитального ремонта</span>
+                    <span>
+                        <b-icon-gear-wide-connected />Объекты требующие
+                        капитального ремонта
+                    </span>
                 </b-card-header>
                 <b-card-body>
                     <b-card-text>Приоритетные объекты</b-card-text>
                     <b-table
-                            class="text-center"
-                            :per-page="prevTable.perPage"
-                            :current-page="prevTable.curPage"
-                            @row-clicked="onRowClick"
-                            tbody-tr-class="hover"
-                            :items="priorityObjects && priorityObjects.items"
-                            :fields="fieldsObjects && fieldsObjects.fields"
-                            small
-                            bordered
-                            hover
+                        class="text-center"
+                        :per-page="prevTable.perPage"
+                        :current-page="prevTable.curPage"
+                        @row-clicked="onRowClick"
+                        tbody-tr-class="hover"
+                        :items="priorityObjects && priorityObjects.items"
+                        :fields="fieldsObjects && fieldsObjects.fields"
+                        small
+                        bordered
+                        hover
                     />
-                    <b-pagination v-show="rowCount('prevTable')" :per-page="prevTable.perPage" v-model="prevTable.curPage" :total-rows="rowsPrev"/>
+                    <b-pagination
+                        v-show="rowCount('prevTable')"
+                        :per-page="prevTable.perPage"
+                        v-model="prevTable.curPage"
+                        :total-rows="rowsPrev"
+                    />
                     <b-card-text>Резервные объекты</b-card-text>
                     <b-table
-                            class="text-center"
-                            :per-page="resTable.perPage"
-                            :current-page="resTable.curPage"
-                            @row-clicked="onRowClick"
-                            tbody-tr-class="hover"
-                            :items="reservedObjects && reservedObjects.items"
-                            :fields="fieldsObjects && fieldsObjects.fields"
-                            small
-                            bordered
-                            hover
+                        class="text-center"
+                        :per-page="resTable.perPage"
+                        :current-page="resTable.curPage"
+                        @row-clicked="onRowClick"
+                        tbody-tr-class="hover"
+                        :items="reservedObjects && reservedObjects.items"
+                        :fields="fieldsObjects && fieldsObjects.fields"
+                        small
+                        bordered
+                        hover
                     />
-                    <b-pagination v-show="rowCount('resTable')" :per-page="resTable.perPage" v-model="resTable.curPage" :total-rows="resPrev"/>
+                    <b-pagination
+                        v-show="rowCount('resTable')"
+                        :per-page="resTable.perPage"
+                        v-model="resTable.curPage"
+                        :total-rows="resPrev"
+                    />
                 </b-card-body>
             </b-card>
 
@@ -140,226 +180,270 @@
                         </b-card-body>
                     </b-collapse>
                 </b-card>
-            </div>-->
+      </div>-->
         </div>
         <div class="mt-3">
             <div class="row">
                 <div class="col-12">
-                    <b-alert 
-                        :show="bannerInfo.show" 
-                        :variant="bannerInfo.variant"
-                        dismissible 
-                        fade
-                        >
-                        {{ bannerInfo.message }}
-                        </b-alert>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <b-alert 
-                        :show="banner.show" 
+                    <b-alert
+                        v-for="(banner, index) in bannerInfo"
+                        :key="index"
+                        :show="banner.show"
+                        :variant="banner.variant"
                         dismissible
                         fade
-                        >
-                        Файл <label class="font-weight-bold">{{ banner.fileName }}</label> загружается <label class="font-weight-bold">{{ banner.loadProgress }}%</label>
-                        </b-alert>
+                        >{{ banner.message }}</b-alert
+                    >
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="col-6"></div>
-            <div class="col-6 offset-7">
-                <a href="/program/export" class="btn btn-secondary btn-sm">Выгрузить программу</a>
-                <label for="file_input_pdf_main" v-if="buttons.upload" class="btn btn-info btn-sm mt-2">Загрузить PDF</label>
-                    <input
-                        type="file"
-                        id="file_input_pdf_main"
-                        class="hidden-file-input"
-                        @input="fileInput()">
+        <div class="row justify-content-end">
+            <div>
+                <a href="/program/export" class="btn btn-secondary btn-sm"
+                    >Выгрузить программу</a
+                >
+                <label
+                    for="file_input_pdf_main"
+                    v-if="buttons.upload"
+                    class="btn btn-info btn-sm mt-2"
+                    >Загрузить PDF</label
+                >
+                <input
+                    type="file"
+                    id="file_input_pdf_main"
+                    class="hidden-file-input"
+                    @input="fileInput()"
+                />
                 <!-- <b-button class="btn btn-sm btn-info" for="file_input_pdf_main">Загрузить PDF</b-button> -->
-                <b-button v-if="buttons.delete" class="btn btn-sm btn-danger" @click="deleteFileFromYii()">Удалить PDF</b-button>  
+                <b-button
+                    v-if="buttons.delete"
+                    class="btn btn-sm btn-danger"
+                    @click="deleteFileFromYii()"
+                    >Удалить PDF</b-button
+                >
 
-                <a :href="'/program/download-doc/' + id_org" v-if="buttons.save" class="btn btn-success btn-sm">Сохранить PDF</a>
-                <b-button disabled class="btn btn-sm">Отправить на согласование</b-button>
+                <a
+                    :href="'/program/download-doc/' + id_org"
+                    v-if="buttons.save"
+                    class="btn btn-success btn-sm"
+                    >Скачать PDF</a
+                >
+                <b-button disabled class="btn btn-sm"
+                    >Отправить на согласование</b-button
+                >
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import {userPanel} from "../../../organisms";
-    import {mapGetters,mapActions} from 'vuex'
-import Axios from 'axios';
-    export default {
-        name: "ProgramView",
-        data(){
-            return{
-                banner: {
-                    show: false,
-                    fileName: null,
-                    loadProgress: null
-                },
-                bannerInfo: {
-                    show: false,
-                    variant: null,
-                    message: null,
-                },
-                buttons: {
-                    upload: false,
-                    save: false,
-                    delete: false,
-                },
-                id_org: null,
-                csrf: document.getElementsByName('csrf-token')[0].content,
-                text:'dfs',
-                prevTable:{
-                    curPage:1,
-                    perPage:5,
-                },
-                resTable:{
-                    curPage:1,
-                    perPage:5,
-                }
+import { userPanel } from "../../../organisms";
+import { mapGetters, mapActions } from "vuex";
+import Axios from "axios";
+export default {
+    name: "ProgramView",
+    data() {
+        return {
+            bannerInfo: [],
+            loadProgress: null,
+            buttons: {
+                upload: false,
+                save: false,
+                delete: false
+            },
+            id_org: null,
+            csrf: document.getElementsByName("csrf-token")[0].content,
+            text: "dfs",
+            prevTable: {
+                curPage: 1,
+                perPage: 5
+            },
+            resTable: {
+                curPage: 1,
+                perPage: 5
             }
+        };
+    },
+    components: {
+        "v-user-panel": userPanel
+    },
+    methods: {
+        ...mapActions(["requestPageData", "requestUser"]),
+        onRowClick(item) {
+            window.location.href = `/program/object/view/${item.id}`;
         },
-        components:{
-            "v-user-panel": userPanel
+        rowCount(attr) {
+            if (attr == "resTable" && this.reservedObjects?.items) {
+                return (
+                    this.reservedObjects.items.length > this.resTable.perPage
+                );
+            } else if (attr == "prevTable" && this.priorityObjects?.items)
+                return (
+                    this.priorityObjects.items.length > this.prevTable.perPage
+                );
+            else return false;
         },
-        methods:{
-            ...mapActions(['requestPageData', 'requestUser']),
-            onRowClick(item){
-                window.location.href = `/program/object/view/${item.id}`;
-            },
-            rowCount(attr){
-                if (attr == 'resTable' && this.reservedObjects?.items){
-                    return this.reservedObjects.items.length > this.resTable.perPage;
-                }
-                else if (attr == 'prevTable' && this.priorityObjects?.items)
-                    return this.priorityObjects.items.length > this.prevTable.perPage;
-                else return false;
-            },
-            fileInput() {
-                let file = document.querySelector('#file_input_pdf_main').files[0];
-                console.log(file);
-                this.banner.fileName = file.name;
-                this.banner.show = true;
-                this.uploadFileToYii(file)
-            },
-            async uploadFileToYii(file) {
-                // return console.log(file)
-                let form = new FormData();
-                form.append('progFile', file);
-                await Axios.post(`/program/add-doc/${this.id_org}`, form, {
-                    headers:
-                        {
-                            'X-CSRF-Token': this.csrf,
-                            'Content-Type':'multipart/form-data;'
-                        },
-                    onUploadProgress: (itemUpload) => {
-                        this.banner.loadProgress = Math.round( (itemUpload.loaded / itemUpload.total) * 100 )
-                    }
-                }).then((res) => {
-                    if(res.data) {
-                        this.bannerInfo.variant = 'success';
-                        this.bannerInfo.message = 'Файл загружен успешно';
-                        this.bannerInfo.show = true;
-
-                        this.buttons.save = true;
-                        this.buttons.delete = true;
-                        this.buttons.upload = false;
-                    } else{
-                        this.bannerInfo.variant = 'danger';
-                        this.bannerInfo.message = 'При загрузке файла произошла ошибка, напишите в службу поддержки';
-                        this.bannerInfo.show = true
-                    }
-                });
-                console.log(file);
-                file.value = ''
-            },
-            deleteFileFromYii() { 
-                Axios.post(`/program/delete-doc/${this.id_org}`, null, {
-                    headers:
-                        {
-                            'X-CSRF-Token': this.csrf,
-                        },
-                }).then((res) => {
-                    if(res.data) {
-                        this.bannerInfo.variant = 'success';
-                        this.bannerInfo.message = 'Файл удален успешно';
-                        this.bannerInfo.show = true;
-
-                        this.buttons.save = false;
-                        this.buttons.delete = false;
-                        this.buttons.upload = true;
-                    } else {
-                        this.bannerInfo.variant = 'danger';
-                        this.bannerInfo.message = 'При удалении файла произошла ошибка, напишите в службу поддержки';
-                        this.bannerInfo.show = true;
-                    }
-                })
-            },
-            getFileStatus() {
-                Axios.post(`/program/check-doc/${this.id_org}`, null, {
-                    headers:
-                        {
-                            'X-CSRF-Token': this.csrf,
-                        },
-                }).then((res) => {
-                    if(!res.data) {
-                       this.buttons.upload = true
-                    } else {
-                        this.buttons.save = true;
-                        this.buttons.delete = true
-                    }
-                })
-            },
-        },
-        async mounted() {
-            this.requestPageData({pageName:"programView"});
-            await this.requestUser();
-            this.id_org = this.getUser.organization.id;
-            this.getFileStatus();
-            this.$bvModal.show('modal-1')
-        },
-        computed: {
-            ...mapGetters(['getUser','getPageData']),
-            objects(){
-                return this.getPageData && this.getPageData.objects
-            },
-            fieldsObjects(){
-                return this.getPageData && this.getPageData.fieldsObjects
-            },
-            priorityObjects(){
-                return this.getPageData && this.getPageData.priorityObjects
-            },
-            reservedObjects(){
-                return this.getPageData && this.getPageData.reservedObjects
-            },
-            target(){
-                return this.getPageData && this.getPageData.target
-            },
-            rowsPrev(){
-                return this.getPageData.priorityObjects && this.getPageData.priorityObjects.items.length;
-            },
-            resPrev(){
-                return this.getPageData.reservedObjects && this.getPageData.reservedObjects.items.length;
+        fileInput() {
+            let selector = document.querySelector("#file_input_pdf_main");
+            let file = selector.files[0];
+            if (!this.checkExt(file.type)) {
+                selector.value = null;
+                return;
             }
+
+            // let message = `Файл ${file.name} загружается ${this.loadProgress}%`;
+            this.setBanner(
+                "primary",
+                `Файл ${file.name} загружается ${this.loadProgress}%`
+            );
+            this.uploadFileToYii(file);
+            selector.value = null;
+        },
+        async uploadFileToYii(file) {
+            // return console.log(file)
+            let form = new FormData();
+            form.append("progFile", file);
+            await Axios.post(`/program/add-doc/${this.id_org}`, form, {
+                headers: {
+                    "X-CSRF-Token": this.csrf,
+                    "Content-Type": "multipart/form-data;"
+                },
+                onUploadProgress: itemUpload => {
+                    this.loadProgress = Math.round(
+                        (itemUpload.loaded / itemUpload.total) * 100
+                    );
+                }
+            }).then(res => {
+                if (res.data) {
+                    this.setBanner("success", "Файл загружен успешно");
+
+                    this.buttons.save = true;
+                    this.buttons.delete = true;
+                    this.buttons.upload = false;
+                } else {
+                    this.setBanner(
+                        "danger",
+                        "При загрузке файла произошла ошибка, напишите в службу поддержки"
+                    );
+                }
+            });
+        },
+        checkExt(ext) {
+            if (ext === "application/pdf") {
+                return true;
+            }
+            this.errorReport("Файл не является документом pdf!");
+            return false;
+        },
+        setBanner(variant, message) {
+            this.bannerInfo.unshift({
+                show: true,
+                variant: variant,
+                message: message
+            });
+            setTimeout(() => {
+                this.resetBanners();
+            }, 1400);
+        },
+        resetBanners() {
+            this.bannerInfo.pop();
+        },
+        deleteFileFromYii() {
+            Axios.post(`/program/delete-doc/${this.id_org}`, null, {
+                headers: {
+                    "X-CSRF-Token": this.csrf
+                }
+            }).then(res => {
+                if (res.data) {
+                    this.setBanner("success", "Файл удален успешно");
+
+                    this.buttons.save = false;
+                    this.buttons.delete = false;
+                    this.buttons.upload = true;
+                } else {
+                    this.setBanner(
+                        "danger",
+                        "При удалении файла произошла ошибка, напишите в службу поддержки"
+                    );
+                }
+            });
+        },
+        getFileStatus() {
+            Axios.post(`/program/check-doc/${this.id_org}`, null, {
+                headers: {
+                    "X-CSRF-Token": this.csrf
+                }
+            }).then(res => {
+                if (!res.data) {
+                    this.buttons.upload = true;
+                } else {
+                    this.buttons.save = true;
+                    this.buttons.delete = true;
+                }
+            });
+        },
+        errorReport(message) {
+            this.$bvModal.msgBoxOk(message, {
+                title: "Ошибка!",
+                size: "sm",
+                buttonSize: "sm",
+                okVariant: "outline-success",
+                headerClass: "p-2 border-bottom-0",
+                footerClass: "p-2 border-top-0",
+                centered: true
+            });
+        }
+    },
+    async mounted() {
+        this.requestPageData({ pageName: "programView" });
+        await this.requestUser();
+        this.id_org = this.getUser.organization.id;
+        this.getFileStatus();
+        //  this.$bvModal.show('modal-1')
+    },
+    computed: {
+        ...mapGetters(["getUser", "getPageData"]),
+        objects() {
+            return this.getPageData && this.getPageData.objects;
+        },
+        fieldsObjects() {
+            return this.getPageData && this.getPageData.fieldsObjects;
+        },
+        priorityObjects() {
+            return this.getPageData && this.getPageData.priorityObjects;
+        },
+        reservedObjects() {
+            return this.getPageData && this.getPageData.reservedObjects;
+        },
+        target() {
+            return this.getPageData && this.getPageData.target;
+        },
+        rowsPrev() {
+            return (
+                this.getPageData.priorityObjects &&
+                this.getPageData.priorityObjects.items.length
+            );
+        },
+        resPrev() {
+            return (
+                this.getPageData.reservedObjects &&
+                this.getPageData.reservedObjects.items.length
+            );
         }
     }
+};
 </script>
 <style>
-    .hover{
-        cursor: pointer;
-    }
+.hover {
+    cursor: pointer;
+}
 </style>
 <style scoped>
-
-    .toggle_button{
-        display: block;
-        cursor: pointer;
-    }
-    .card-body{
-        overflow-y: auto;
-    }
+.toggle_button {
+    display: block;
+    cursor: pointer;
+}
+.card-body {
+    overflow-y: auto;
+}
 </style>
