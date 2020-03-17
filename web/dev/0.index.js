@@ -2858,7 +2858,7 @@ __webpack_require__.r(__webpack_exports__);
         return true;
       }
 
-      this.errorReport("Файл не является документом pdf!");
+      this.setBanner('danger', 'Файл не является документом pdf!');
       return false;
     },
     setBanner: function setBanner(variant, message) {
