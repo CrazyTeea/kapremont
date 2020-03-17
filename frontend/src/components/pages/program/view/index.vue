@@ -304,12 +304,16 @@ export default {
             else return false;
         },
         fileInput() {
-            let file = document.querySelector("#file_input_pdf_main").files[0];
-            console.log(file);
+            let selector = document.querySelector("#file_input_pdf_main");
+            let file = selector.files[0];
+            if (!this.checkExt(file.type)) {
+                selector.value = null;
+                return;
+            }
             this.banner.fileName = file.name;
             this.banner.show = true;
             this.uploadFileToYii(file);
-            file.value = null;
+            selector.value = null;
         },
         async uploadFileToYii(file) {
             // return console.log(file)
@@ -344,12 +348,11 @@ export default {
             if (ext === "application/pdf") {
                 return true;
             }
-            this.error;
+            this.errorReport("Файл не является документом pdf!");
+            return false;
         },
         reportErors() {}, // НЕ УВЕРЕН ЧТО НУЖНО
         setError(variant, message) {
-            let key = this.bannerInfo.length - 1;
-            console.log(key);
             this.bannerInfo.push({
                 show: true,
                 variant: variant,
@@ -365,7 +368,6 @@ export default {
                     "X-CSRF-Token": this.csrf
                 }
             }).then(res => {
-                console.log(res);
                 if (res.data) {
                     this.bannerInfo.variant = "success";
                     this.bannerInfo.message = "Файл удален успешно";
@@ -388,13 +390,23 @@ export default {
                     "X-CSRF-Token": this.csrf
                 }
             }).then(res => {
-                console.log(res.data);
                 if (!res.data) {
                     this.buttons.upload = true;
                 } else {
                     this.buttons.save = true;
                     this.buttons.delete = true;
                 }
+            });
+        },
+        errorReport(message) {
+            this.$bvModal.msgBoxOk(message, {
+                title: "Ошибка!",
+                size: "sm",
+                buttonSize: "sm",
+                okVariant: "outline-success",
+                headerClass: "p-2 border-bottom-0",
+                footerClass: "p-2 border-top-0",
+                centered: true
             });
         }
     },

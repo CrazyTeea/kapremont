@@ -20,7 +20,6 @@
                             :name="`${modelName}[${item.descriptor}]label`"
                             placeholder="Название документа..."
                             type="text"
-                            @change="setLabel()"
                         ></b-form-input>
                     </b-th>
                     <b-th
@@ -207,16 +206,13 @@ export default {
         }
     },
     methods: {
-        dubug() {
-            console.log("Файлы в буфере:");
-            console.log(this.selectedFiles);
+        // dubug() {
+        //     console.log("Файлы в буфере:");
+        //     console.log(this.selectedFiles);
 
-            console.log("Итемы:");
-            console.log(this.items);
-        },
-        setLabel(index) {
-            console.log(this.items);
-        },
+        //     console.log("Итемы:");
+        //     console.log(this.items);
+        // },
         async getLoadedFiles(id) {
             await Axios.get(`/program/object/files/${id}`).then(res => {
                 if (res.data?.length) {
@@ -266,15 +262,14 @@ export default {
             if (this.selectedFiles.length) this.fileRemove(index);
         },
         fileInput(index) {
-            let file = document.querySelector("#file_input_" + index).files[0];
-
+            let selector = document.querySelector(`#file_input_${index}`)
+            let file = selector.files[0];
             if (
                 !this.checkFileExt(file.type) ||
                 !this.checkFileSize(file.size) ||
                 this.isUniqueName(file.name)
             ) {
-                file.value = null;
-                console.log("Файл не введен");
+                selector.value = null;
                 return;
             }
             this.selectedFiles.push({
@@ -284,7 +279,6 @@ export default {
                 file: file
             });
             this.items[index].fileName = file.name;
-            console.log("Файл введен");
         },
         fileRemove(index, descriptor) {
             let key = this.getSelectedFileKey(index);
@@ -301,12 +295,12 @@ export default {
         isUniqueName(name) {
             for (let item of this.items) {
                 if (item.fileName === name) {
-                    console.log("Имя не уникальное");
+                    // console.log("Имя не уникальное");
                     this.errorMessage("Файл с таким названием уже существует!");
                     return true;
                 }
             }
-            console.log("Имя уникальное");
+            // console.log("Имя уникальное");
             return false;
         },
         checkFileExt(type) {
@@ -367,12 +361,11 @@ export default {
         async removeFileFromYii(id, descriptor, index) {
             await Axios.get(`/program/object/delete-docs/${id}`, {
                 params: { descriptor: descriptor }
-            })
-                .then(res => {
-                    this.items[index].fileName = null;
-                    console.log(res.data);
-                })
-                .catch(error => console.log(error));
+            }).then(res => {
+                this.items[index].fileName = null;
+                // console.log(res.data);
+            });
+            // .catch(error => console.log(error));
         },
         async uploadFile(file, id) {
             let form = new FormData();
@@ -400,7 +393,7 @@ export default {
                     this.uploadSuccess &= !!res.data;
                 })
                 .catch(error => {
-                    console.log(error);
+                    // console.log(error);
                     this.uploadSuccess = false;
                 });
         },
