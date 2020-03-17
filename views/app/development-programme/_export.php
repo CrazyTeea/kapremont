@@ -1147,7 +1147,7 @@ use yii\helpers\ArrayHelper; ?>
         <?php if (ArrayHelper::keyExists($index,$risks)): ?>
             <?php foreach ($risks[$index] as $k =>$risk):?>
                 <tr>
-                    <td><?=++$k?></td>
+                    <td><?=$fdshj = $k+1?></td>
                     <td><?=getEvent($risks,$index,$k,'types')?></td>
                     <td><?=getEvent($risks,$index,$k,'poison')?></td>
                     <td><?=getEvent($risks,$index,$k,'protect')?></td>

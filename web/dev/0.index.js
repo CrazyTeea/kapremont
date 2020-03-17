@@ -710,6 +710,10 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
+    if (window.MODEL.riscs[0]) {
+      this.items.pop();
+    }
+
     window.MODEL.riscs.forEach(function (item, index) {
       if (!index) _this.items[0] = {
         types: item.types,

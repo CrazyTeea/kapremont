@@ -62,9 +62,12 @@
 <script>
 export default {
     props:{
-      modelName:String
+        modelName:String
     },
     mounted() {
+        if(window.MODEL.riscs[0]) {
+            this.items.pop()
+        }
         window.MODEL.riscs.forEach((item,index)=> {
             if (!index)
                 this.items[0] = {
@@ -93,10 +96,10 @@ export default {
     methods: {
         addNewRow: function() {
             this.items.push({
-                    types: null,
-                    poison: null,
-                    protect: null
-                })
+                types: null,
+                poison: null,
+                protect: null
+            })
         },
         deleteLastRow: function() {
             this.items.pop()
