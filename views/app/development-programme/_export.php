@@ -11,6 +11,10 @@ $wear = [
     'От 70% до 90%',
     'Более 90%'
 ];
+$r = [
+    'Комплексный',
+    'Выборочный'
+];
 $prav = [
     'fast'=>'Оперативное управление',
     'others'=>'Другое',
@@ -429,27 +433,7 @@ use yii\helpers\ArrayHelper; ?>
                 <td><?=$wear[(!is_null($item->wear) and $item->wear<5)? $item->wear : 0] ?></td>
                 <td><?=$item->exist_pred_nadz_orgs ? $item->regulation : '' ?></td>
                 <td>
-                    <?php
-
-                    $ev = 'Этапы: ';$k = 0;
-
-                    if ($ee = getEvents($evAll,$item->id)) {
-                        foreach ($ee as $l => $e) {
-                            if ($e->is_nessesary) {
-                                $k = $l+1;
-                                $ev .= " $k, ";
-                            }
-                        }
-                        if (!$k) {
-                            $ev = '';
-                        }
-                    }
-                    if (!$k) {
-                        $ev = '';
-                    }
-
-                    echo $ev;
-                    ?>
+                    <?= (isset($item->type_remont)) ? $r[$item->type_remont] : ''?>
                 </td>
                 <td><?=$item->finance_sum?></td>
                 <td><?=$item->coFinancing?></td>
@@ -497,27 +481,7 @@ use yii\helpers\ArrayHelper; ?>
                 <td><?=$wear[(!is_null($item->wear) and $item->wear<5)? $item->wear : 0] ?></td>
                 <td><?=$item->exist_pred_nadz_orgs ? $item->regulation : '' ?></td>
                 <td>
-                    <?php
-
-                    $ev = 'Этапы: ';$k = 0;
-
-                    if ($ee = getEvents($evAll,$item->id)) {
-                        foreach ($ee as $l => $e) {
-                            if ($e->is_nessesary) {
-                                $k = $l+1;
-                                $ev .= " $k, ";
-                            }
-                        }
-                        if (!$k) {
-                            $ev = '';
-                        }
-                    }
-                    if (!$k) {
-                        $ev = '';
-                    }
-
-                    echo $ev;
-                    ?>
+                    <?= (isset($item->type_remont)) ? $r[$item->type_remont] : ''?>
                 </td>
                 <td><?=$item ->finance_sum?></td>
                 <td><?=$item ->coFinancing?></td>
