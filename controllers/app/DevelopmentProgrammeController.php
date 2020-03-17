@@ -106,8 +106,8 @@ class DevelopmentProgrammeController extends AppController
         $user = Yii::$app->getSession()->get('user');
         $org = Organizations::findOne($user->id_org);
 
-        $pr_ob = ProgramObjects::findAll(['system_status'=>1,'id_org'=>$user->id_org,'type'=>0]);
-        $r_ob = ProgramObjects::findAll(['system_status'=>1,'id_org'=>$user->id_org,'type'=>1]);
+        $pr_ob = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$user->id_org,'type'=>0])->orderBy(['created_at'=>SORT_ASC])->all();
+        $r_ob = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$user->id_org,'type'=>1])->orderBy(['created_at'=>SORT_ASC])->all();
         $sq =[
         's_k' => ProgramObjects::find()->select(['square'])->where(['system_status'=>1,'id_org'=>$org->id,])->sum('square'),
         's_k_s' => ProgramObjects::find()->select(['square_kap'])->where(['system_status'=>1,'id_org'=>$org->id,])->sum('square_kap'),
@@ -142,7 +142,7 @@ class DevelopmentProgrammeController extends AppController
         }
 
 
-        $objects = ProgramObjects::findAll(['system_status'=>1,'id_program'=>$program->id]);
+        $objects = ProgramObjects::find()->where(['system_status'=>1,'id_program'=>$program->id])->orderBy(['created_at'=>SORT_ASC])->all();
         $events = null;$nes = null;$wai = null;;$risks = null;
         foreach ($objects as $index=>$item) {
             for ($i = 0;$i<8;$i++){

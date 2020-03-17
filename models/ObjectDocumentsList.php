@@ -71,19 +71,10 @@ class ObjectDocumentsList extends \yii\db\ActiveRecord
         self::update(['system_status' => 0])->where(['id' => $id]);
     }
 
-    public function getTypes()
-    {
-        return $this->hasMany(ObjectDocumentsTypes::class, ['id' => 'id_type']);
-    }
 
-    public function getFiles()
+    public function getObject()
     {
-        return $this->hasMany(Files::class, ['id' => 'id_file']);
-    }
-
-    public function getObjects()
-    {
-        return $this->hasMany(ProgramObjects::class, ['id' => 'id_object']);
+        return $this->hasOne(ProgramObjects::class, ['id_object' => 'id']);
     }
 
 }
