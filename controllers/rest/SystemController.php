@@ -220,7 +220,13 @@ class SystemController extends RestController
                         ],
                         ['id' => 5, 'label' =>
                             "Студенты всего, из них:",
-                            'value' => $org->orgInfo?$org->orgInfo->st_all: 0
+                            'value' => ($org->orgInfo) ?
+                                floatval($org->orgInfo->st_sr_pr_count) +
+                                floatval($org->orgInfo->st_bak_count) +
+                                floatval($org->orgInfo->st_spec_count) +
+                                floatval($org->orgInfo->st_mag_count) +
+                                floatval($org->orgInfo->st_asp_count)
+                                : 0
                         ],
                         ['id' => 5.1, 'label' =>
                             "Среднего профессионального образования",

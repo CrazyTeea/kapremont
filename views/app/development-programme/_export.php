@@ -224,7 +224,11 @@ use yii\helpers\ArrayHelper; ?>
         <tr>
             <td rowspan="6">8</td>
             <td>Обучающиеся, из них:</td>
-            <td><?=$org->orgInfo ? $org->orgInfo->st_all : ''?></td>
+            <td><?=$org->orgInfo ? floatval($org->orgInfo->st_sr_pr_count) +
+                    floatval($org->orgInfo->st_bak_count) +
+                    floatval($org->orgInfo->st_spec_count) +
+                    floatval($org->orgInfo->st_mag_count) +
+                    floatval($org->orgInfo->st_asp_count) : ''?></td>
         </tr>
         <tr>
             <td>Среднего профессионального образования</td>
