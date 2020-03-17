@@ -241,15 +241,15 @@ import Axios from 'axios';
             },
             fileInput() {
                 let file = document.querySelector('#file_input_pdf_main').files[0];
-                console.log(file)
-                this.banner.fileName = file.name
-                this.banner.show = true
+                console.log(file);
+                this.banner.fileName = file.name;
+                this.banner.show = true;
                 this.uploadFileToYii(file)
             },
             async uploadFileToYii(file) {
                 // return console.log(file)
                 let form = new FormData();
-                form.append('progFile', file)
+                form.append('progFile', file);
                 await Axios.post(`/program/add-doc/${this.id_org}`, form, {
                     headers:
                         {
@@ -261,20 +261,20 @@ import Axios from 'axios';
                     }
                 }).then((res) => {
                     if(res.data) {
-                        this.bannerInfo.variant = 'success'
-                        this.bannerInfo.message = 'Файл загружен успешно'
-                        this.bannerInfo.show = true
+                        this.bannerInfo.variant = 'success';
+                        this.bannerInfo.message = 'Файл загружен успешно';
+                        this.bannerInfo.show = true;
 
-                        this.buttons.save = true
-                        this.buttons.delete = true
-                        this.buttons.upload = false
+                        this.buttons.save = true;
+                        this.buttons.delete = true;
+                        this.buttons.upload = false;
                     } else{
-                        this.bannerInfo.variant = 'danger'
-                        this.bannerInfo.message = 'При загрузке файла произошла ошибка, напишите в службу поддержки'
+                        this.bannerInfo.variant = 'danger';
+                        this.bannerInfo.message = 'При загрузке файла произошла ошибка, напишите в службу поддержки';
                         this.bannerInfo.show = true
                     }
-                })
-                console.log(file)
+                });
+                console.log(file);
                 file.value = ''
             },
             deleteFileFromYii() { 
@@ -285,17 +285,17 @@ import Axios from 'axios';
                         },
                 }).then((res) => {
                     if(res.data) {
-                        this.bannerInfo.variant = 'success'
-                        this.bannerInfo.message = 'Файл удален успешно'
-                        this.bannerInfo.show = true
+                        this.bannerInfo.variant = 'success';
+                        this.bannerInfo.message = 'Файл удален успешно';
+                        this.bannerInfo.show = true;
 
-                        this.buttons.save = false
-                        this.buttons.delete = false
-                        this.buttons.upload = true
+                        this.buttons.save = false;
+                        this.buttons.delete = false;
+                        this.buttons.upload = true;
                     } else {
-                        this.bannerInfo.variant = 'danger'
-                        this.bannerInfo.message = 'При удалении файла произошла ошибка, напишите в службу поддержки'
-                        this.bannerInfo.show = true
+                        this.bannerInfo.variant = 'danger';
+                        this.bannerInfo.message = 'При удалении файла произошла ошибка, напишите в службу поддержки';
+                        this.bannerInfo.show = true;
                     }
                 })
             },
@@ -306,11 +306,11 @@ import Axios from 'axios';
                             'X-CSRF-Token': this.csrf,
                         },
                 }).then((res) => {
-                    console.log(res.data)
+                    console.log(res.data);
                     if(!res.data) {
                        this.buttons.upload = true
                     } else {
-                        this.buttons.save = true
+                        this.buttons.save = true;
                         this.buttons.delete = true
                     }
                 })
@@ -319,7 +319,7 @@ import Axios from 'axios';
         async mounted() {
             this.requestPageData({pageName:"programView"});
             await this.requestUser();   
-            this.id_org = this.getUser.organization.id
+            this.id_org = this.getUser.organization.id;
             this.getFileStatus()
             //  this.$bvModal.show('modal-1')
         },
