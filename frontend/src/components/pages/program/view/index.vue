@@ -226,7 +226,7 @@
                     :href="'/program/download-doc/' + id_org"
                     v-if="buttons.save"
                     class="btn btn-success btn-sm"
-                    >Сохранить PDF</a
+                    >Скачать PDF</a
                 >
                 <b-button disabled class="btn btn-sm"
                     >Отправить на согласование</b-button
@@ -332,7 +332,7 @@ export default {
             if (ext === "application/pdf") {
                 return true;
             }
-            this.setBanner('danger', 'Файл не является документом pdf!')
+            this.setBanner('danger', 'Файл не является документом pdf!');
             return false;
         },
         setBanner(variant, message) {

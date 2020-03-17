@@ -3,7 +3,6 @@ $prior = [
     1=>'1',
     2=>'2',
     3=>'3',
-    4=>'резерв'
 ];
 $wear = [
     'Менее 20%',
@@ -11,6 +10,10 @@ $wear = [
     'От 50% до 70%',
     'От 70% до 90%',
     'Более 90%'
+];
+$r = [
+    'Комплексный',
+    'Выборочный'
 ];
 $prav = [
     'fast'=>'Оперативное управление',
@@ -53,10 +56,38 @@ $nesLabel = [
     'Лифты',
 ];
 
+function getEvents($arr,$i_o){
+    $a = [];
+    foreach ($arr as $item){
+        if ($item->id_object == $i_o)
+            $a[]=$item;
+    }
+    return $a;
+}
+function getOther($object,$index){
+    if ($object->docList){
+        foreach ($object->docList as $doc){
+            if ($doc->type->descriptor == "others_$index")
+                return ['file' => $doc->file->name, 'label'=>$doc->label];
+        }
+    }
+    return false;
+}
+
+function getFile($object,$file){
+    if ($object->docList){
+        foreach ($object->docList as $doc){
+            if ($doc->type->descriptor == $file)
+                return $doc->file->name;
+        }
+    }
+    return 'Не обнаружен';
+}
+
 function getEvent($arr,$i_o,$index,$attr){
 
     if (isset($arr[$i_o]) and isset($arr[$i_o][$index]))
-        return $arr[$i_o][$index]->$attr;
+        return $arr[$i_o][$index][$attr];
     return '';
 }
 
@@ -73,6 +104,7 @@ function getSum($arr,$i_o,$attr){
 
 }
 
+use app\models\ProgObjectsEvents;
 use app\models\Regions;
 use yii\helpers\ArrayHelper; ?>
 
@@ -211,7 +243,11 @@ use yii\helpers\ArrayHelper; ?>
         <tr>
             <td rowspan="6">8</td>
             <td>Обучающиеся, из них:</td>
-            <td><?=$org->orgInfo ? $org->orgInfo->st_all : ''?></td>
+            <td><?=$org->orgInfo ? floatval($org->orgInfo->st_sr_pr_count) +
+                    floatval($org->orgInfo->st_bak_count) +
+                    floatval($org->orgInfo->st_spec_count) +
+                    floatval($org->orgInfo->st_mag_count) +
+                    floatval($org->orgInfo->st_asp_count) : ''?></td>
         </tr>
         <tr>
             <td>Среднего профессионального образования</td>
@@ -231,7 +267,7 @@ use yii\helpers\ArrayHelper; ?>
         </tr>
         <tr>
             <td>Аспиранты</td>
-            <td></td>
+            <td><?=$org->orgInfo ? $org->orgInfo->st_asp_count : ''?></td>
         </tr>
         <tr>
             <td rowspan="4">6</td>
@@ -419,7 +455,9 @@ use yii\helpers\ArrayHelper; ?>
                 <td><?=$item->year ?></td>
                 <td><?=$wear[(!is_null($item->wear) and $item->wear<5)? $item->wear : 0] ?></td>
                 <td><?=$item->exist_pred_nadz_orgs ? $item->regulation : '' ?></td>
-                <td></td>
+                <td>
+                    <?= (isset($item->type_remont)) ? $r[$item->type_remont] : ''?>
+                </td>
                 <td><?=$item->finance_sum?></td>
                 <td><?=$item->coFinancing?></td>
                 <td><?=$item->note?></td>
@@ -465,7 +503,9 @@ use yii\helpers\ArrayHelper; ?>
                 <td><?=$item->year ?></td>
                 <td><?=$wear[(!is_null($item->wear) and $item->wear<5)? $item->wear : 0] ?></td>
                 <td><?=$item->exist_pred_nadz_orgs ? $item->regulation : '' ?></td>
-                <td></td>
+                <td>
+                    <?= (isset($item->type_remont)) ? $r[$item->type_remont] : ''?>
+                </td>
                 <td><?=$item ->finance_sum?></td>
                 <td><?=$item ->coFinancing?></td>
                 <td><?=$item ->note?></td>
@@ -967,65 +1007,72 @@ use yii\helpers\ArrayHelper; ?>
         <tr class="text-center">
             <th class="text-center">№</th>
             <th class="text-center">Документ</th>
-            <th class="text-center">Кол-во страниц</th>
+            <th class="text-center">Наличие</th>
         </tr>
         </thead>
         <tbody>
         <tr>
             <td>1</td>
             <td>Инвентарные карточки учета основных средств на объект недвижимого имущества и на земельный участок под указанным объектом;</td>
-            <td></td>
+            <td><?= getFile($object,'inv_card') ?></td>
         </tr>
         <tr>
             <td>2</td>
             <td>Выписка из реестра федерального имущества на объект федерального имущества и на земельный участок под указанным объектом;</td>
-            <td></td>
+            <td><?= getFile($object,'reestr_vip') ?></td>
         </tr>
         <tr>
             <td>3</td>
             <td>Правоустанавливающие и (или) правоудостоверяющие документы на объект недвижимого имущества и на земельный участок под указанным объектом;</td>
-            <td></td>
+            <td><?= getFile($object,'pravust') ?></td>
         </tr>
         <tr>
             <td>4</td>
             <td>Документы технического и кадастрового учета на объект недвижимого имущества;</td>
-            <td></td>
+            <td><?= getFile($object,'tex_kad_docs') ?></td>
         </tr>
         <tr>
             <td>5</td>
             <td>Ситуационный план с указанием границ земельного участка, объекта недвижимого имущества и иных объектов (включая незавершенные строительные объекты), принадлежащих третьим лицам, расположенных на указанном земельном участке;</td>
-            <td></td>
+            <td><?= getFile($object,'sit_plan') ?></td>
         </tr>
         <tr>
             <td>6</td>
             <td>Акт технического осмотра объекта капитального строительства (документ, содержащий сведения о результатах обследования объекта капитального строительства, техническом состоянии строительных конструкций и инженерного оборудования такого объекта и количественной оценке фактических показателей качества строительных конструкций и инженерного оборудования по состоянию на дату обследования, для определения состава, объёмов и сроков работ по капитальному ремонту объекта капитального строительства); </td>
-            <td></td>
+            <td><?= getFile($object,'tex_acts') ?></td>
         </tr>
         <tr>
             <td>7</td>
             <td>Дефектная ведомость (первичный учётный документ, подготовленный в соответствии с требованиями законодательства Российской Федерации о бухгалтерском учёте по результатам обследования технического состояния объекта капитального строительства и содержащий перечень дефектов строительных конструкций и инженерного оборудования объекта капитального строительства с указанием качественных и количественных характеристик таких дефектов);</td>
-            <td></td>
+            <td><?= getFile($object,'def_ved') ?></td>
         </tr>
         <tr>
             <td>8</td>
             <td>Фотографии объекта, предполагаемого к проведению капитального ремонта (подписанные по 2 шт. на листе А4, но не более 10 шт. на объект недвижимости);</td>
-            <td></td>
+            <td><?= getFile($object,'obj_photos') ?></td>
         </tr>
         <tr>
             <td>9</td>
             <td>Предписания надзорных органов (при наличии);</td>
-            <td></td>
+            <td><?= getFile($object,'predpis') ?></td>
         </tr>
         <tr>
             <td>10</td>
             <td>Задание на проектирование (корректировку проектной документации), составленное в соответствии с рекомендациями Минстроя РФ (в случае разработки/корректировки проектной документации и/или направления данной документации на экспертизу).</td>
-            <td></td>
+            <td><?= getFile($object,'proekti') ?></td>
         </tr>
-        <tr>
-            <td>11</td>
-            <td>Иные документы</td>
-            <td></td>
-        </tr>
+        <?php foreach (range(0,20) as $key): ?>
+            <?php if ($file = getOther($object,$key)):?>
+                <tr>
+                    <td><?=$asd = $key+11?></td>
+                    <td><?= $file['label']?></td>
+                    <td><?= $file['file']?></td>
+                </tr>
+            <?php else:?>
+                <?php break ?>
+            <?php endif;?>
+
+        <?php endforeach;?>
         </tbody>
     </table>
 
@@ -1059,19 +1106,19 @@ use yii\helpers\ArrayHelper; ?>
             <td>3</td>
             <td>Снижение затрат на эксплуатацию</td>
             <td><?=getEvent($wai,$index,2,'plan')?></td>
-            <td>да / нет </td>
+            <td> </td>
         </tr>
         <tr>
             <td>4</td>
             <td>Повышение энергоэффективности</td>
             <td><?=getEvent($wai,$index,3,'plan')?></td>
-            <td>да / нет </td>
+            <td> </td>
         </tr>
         <tr>
             <td>5</td>
             <td>Восстановление (ремонт, реставрация, за исключением реконструкции) объектов культурного наследия </td>
             <td><?=getEvent($wai,$index,4,'plan')?></td>
-            <td>да / нет </td>
+            <td> </td>
         </tr>
         <?php if (ArrayHelper::keyExists($index,$wai)): ?>
             <?php for ( $i=5,$k=6;$i< count($wai[$index]); $i++,$k++): ?>
@@ -1100,7 +1147,7 @@ use yii\helpers\ArrayHelper; ?>
         <?php if (ArrayHelper::keyExists($index,$risks)): ?>
             <?php foreach ($risks[$index] as $k =>$risk):?>
                 <tr>
-                    <td><?=++$k?></td>
+                    <td><?=$fdshj = $k+1?></td>
                     <td><?=getEvent($risks,$index,$k,'types')?></td>
                     <td><?=getEvent($risks,$index,$k,'poison')?></td>
                     <td><?=getEvent($risks,$index,$k,'protect')?></td>

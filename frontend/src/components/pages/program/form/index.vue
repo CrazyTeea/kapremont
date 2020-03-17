@@ -60,6 +60,19 @@
                             v-model="formData.address"
                         />
                     </b-form-group>
+                    <b-form-group
+                            label="Вид ремонта"
+                            label-for="type_remont"
+                            :invalid-feedback="(feedback('ProgramObjects','type_remont','Заполните вид ремонта'))"
+                            :valid-feedback="(feedback('ProgramObjects','type_remont',' '))"
+                            :state="feedback('ProgramObjects','type_remont')"
+                    >
+                        <b-form-input style="display: none" id="type_remont" v-model="formData.type_remont" name="ProgramObjects[type_remont]" />
+                        <b-select v-model="formData.type_remont" :options="[
+                                                   {value:0,text:'Комплексный'},
+                                                   {value:1,text:'Выборочный'},
+                                               ]"/>
+                    </b-form-group>
                     <b-card no-body class="mb-1">
                         <b-card-header
                             header-tag="header"

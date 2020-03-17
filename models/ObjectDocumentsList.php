@@ -81,9 +81,10 @@ class ObjectDocumentsList extends \yii\db\ActiveRecord
         return $this->hasMany(Files::class, ['id' => 'id_file']);
     }
 
-    public function getObjects()
+
+    public function getObject()
     {
-        return $this->hasMany(ProgramObjects::class, ['id' => 'id_object']);
+        return $this->hasOne(ProgramObjects::class, ['id_object' => 'id']);
     }
 
 }

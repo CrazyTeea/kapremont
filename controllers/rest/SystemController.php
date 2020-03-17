@@ -139,27 +139,16 @@ class SystemController extends RestController
                         'От 70% до 90%',
                         'Более 90%'
                     ];
+                    $r = [
+                      'Комплексный',
+                      'Выборочный'
+                    ];
 
                     foreach ($progObj as $index=>$item) {
                         $i = $index+1;
-                        $ev = 'Этапы: ';$k = 0;
-                        if ($ee = ProgObjectsEvents::findAll(['id_object'=>$item->id])) {
-                            foreach ($ee as $j => $e) {
-                                if ($e->is_nessesary) {
-                                    $k = $j + 1;
-                                    $ev .= " $k, ";
-                                }
-                            }
-                            if (!$k) {
-                                $ev = '';
-                            }
-                        }
-                        elseif(!$k){
-                            $ev='';
-                        }
 
                         $ret['priorityObjects']['items'][$index] = ArrayHelper::merge([
-                            'event_typeT'=>$ev,
+                            'event_typeT'=>(isset($item->type_remont) ? $r[$item->type_remont] : ''),
                             'regulationT'=>($item->exist_pred_nadz_orgs) ? $item->regulation : '',
                             'index'=>$i,
                             'priority'=> $prior[$item->id_priority ? : 1],
@@ -171,22 +160,9 @@ class SystemController extends RestController
                     $progObj = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>1])->joinWith(['region'])->all();
                     foreach ($progObj as $index=>$item) {
                         $i = $index+1;
-                        $ev = 'Этапы: '; $k = 0;
-                        if ($ee = ProgObjectsEvents::findAll(['id_object'=>$item->id])) {
-                            foreach ($ee as $j => $e) {
-                                if ($e->is_nessesary) {
-                                    $k = $j + 1;
-                                    $ev .= " $k, ";
-                                }
-                            }
-                            if (!$k) {
-                                $ev = '';
-                            }
-                        }elseif(!$k){
-                            $ev='';
-                        }
+
                         $ret['reservedObjects']['items'][$index] = ArrayHelper::merge([
-                            'event_typeT'=>$ev,
+                            'event_typeT'=>(isset($item->type_remont) ? $r[$item->type_remont] : ''),
                             'regulationT'=>($item->exist_pred_nadz_orgs) ? $item->regulation : '',
                             'index'=>$i,
                             'priority'=> $prior[$item->id_priority ? : 1],
@@ -244,7 +220,13 @@ class SystemController extends RestController
                         ],
                         ['id' => 5, 'label' =>
                             "Студенты всего, из них:",
-                            'value' => $org->orgInfo?$org->orgInfo->st_all: 0
+                            'value' => ($org->orgInfo) ?
+                                floatval($org->orgInfo->st_sr_pr_count) +
+                                floatval($org->orgInfo->st_bak_count) +
+                                floatval($org->orgInfo->st_spec_count) +
+                                floatval($org->orgInfo->st_mag_count) +
+                                floatval($org->orgInfo->st_asp_count)
+                                : 0
                         ],
                         ['id' => 5.1, 'label' =>
                             "Среднего профессионального образования",

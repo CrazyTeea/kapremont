@@ -91,9 +91,6 @@ class ProgramObjectsController extends AppController
         $model->id_program = $program->id;
         if ($post = Yii::$app->request->post()) {
             if ($model->load($post)) {
-                if ($model->id_priority == 4)
-                    $model->type = 1;
-                else $model->type = 0;
                 $transaction = Yii::$app->getDb()->beginTransaction();
                 $save &= $model->save();
                 $errors['ProgramObjects'] = $model->getErrors();
@@ -175,7 +172,7 @@ class ProgramObjectsController extends AppController
                             $pr->id_object = $model->id;
                             $pr->element = $index;
                         }
-                        $pr->aim = $item->aim ? : $index;
+                        $pr->aim = $item->aim ? : '';
                         $pr->plan = $item->plan;
                         $pr->changes = $item->changes ? : '';
                         $save &= $pr->save();
@@ -232,9 +229,6 @@ class ProgramObjectsController extends AppController
         //
         if ($post = Yii::$app->request->post()) {
             if ($model->load($post)) {
-                if ($model->id_priority == 4)
-                    $model->type = 1;
-                else $model->type = 0;
                 $transaction = Yii::$app->getDb()->beginTransaction();
                 $save &= $model->save();
                 $errors['ProgramObjects'] = $model->getErrors();
@@ -323,7 +317,7 @@ class ProgramObjectsController extends AppController
                             $pr->id_object = $id;
                             $pr->element = $index;
                         }
-                        $pr->aim = $item->aim ? : $index;
+                        $pr->aim = $item->aim ? : '';
                         $pr->plan = $item->plan;
                         $pr->changes = $item->changes ? : '';
                         $save &= $pr->save();

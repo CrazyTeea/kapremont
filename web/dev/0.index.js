@@ -710,6 +710,10 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this = this;
 
+    if (window.MODEL.riscs[0]) {
+      this.items.pop();
+    }
+
     window.MODEL.riscs.forEach(function (item, index) {
       if (!index) _this.items[0] = {
         types: item.types,
@@ -1885,6 +1889,19 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -5733,6 +5750,60 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c(
+                  "b-form-group",
+                  {
+                    attrs: {
+                      label: "Вид ремонта",
+                      "label-for": "type_remont",
+                      "invalid-feedback": _vm.feedback(
+                        "ProgramObjects",
+                        "type_remont",
+                        "Заполните вид ремонта"
+                      ),
+                      "valid-feedback": _vm.feedback(
+                        "ProgramObjects",
+                        "type_remont",
+                        " "
+                      ),
+                      state: _vm.feedback("ProgramObjects", "type_remont")
+                    }
+                  },
+                  [
+                    _c("b-form-input", {
+                      staticStyle: { display: "none" },
+                      attrs: {
+                        id: "type_remont",
+                        name: "ProgramObjects[type_remont]"
+                      },
+                      model: {
+                        value: _vm.formData.type_remont,
+                        callback: function($$v) {
+                          _vm.$set(_vm.formData, "type_remont", $$v)
+                        },
+                        expression: "formData.type_remont"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("b-select", {
+                      attrs: {
+                        options: [
+                          { value: 0, text: "Комплексный" },
+                          { value: 1, text: "Выборочный" }
+                        ]
+                      },
+                      model: {
+                        value: _vm.formData.type_remont,
+                        callback: function($$v) {
+                          _vm.$set(_vm.formData, "type_remont", $$v)
+                        },
+                        expression: "formData.type_remont"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
                   "b-card",
                   { staticClass: "mb-1", attrs: { "no-body": "" } },
                   [
@@ -7666,7 +7737,7 @@ var render = function() {
                     staticClass: "btn btn-success btn-sm",
                     attrs: { href: "/program/download-doc/" + _vm.id_org }
                   },
-                  [_vm._v("Сохранить PDF")]
+                  [_vm._v("Скачать PDF")]
                 )
               : _vm._e(),
             _vm._v(" "),

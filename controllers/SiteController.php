@@ -148,108 +148,14 @@ class SiteController extends Controller
     public function actionKek(){
         $p = ProgramObjects::find()->all();
         foreach ($p as $item) {
-            $item->regulation = $item->podrobnosti;
+            if ($item->id_priority > 3)
+                $item->id_priority = 1;
+            if ($item->wear > 4)
+                $item->wear = 1;
+            if (isset($item->prav_sob) and !($item->prav_sob=='fast' || $item->prav_sob=='others'))
+                $item->prav_sob = 'fast';
             $item->save(false);
         }
-        /*$id_org = [
-            14,
-            20,
-            77,
-            78,
-            84,
-            88,
-            112,
-            119,
-            146,
-            153,
-            170,
-            171,
-            179,
-            182,
-            210,
-            221,
-            230,
-            249,
-        ];
-        $fin = [
-            53785.97,
-            35700.31,
-            28478.23,
-            84154.60,
-            29786.87,
-            30815.02,
-            43938.30,
-            34045.50,
-            17238.38,
-            32623.50,
-            21354.51,
-            57880.20,
-            61734.10,
-            70262.90,
-            37795.80,
-            31058.79,
-            18625.78,
-            22517.26
-        ];
-        $kek = Program::find()->where(['id_org'=>$id_org])->orderBy(['id_org'=>SORT_ASC])->all();
-        foreach ($kek as $k=> $item){
-            //var_dump($item->id_org);
-            $item->finance_volume = $fin[$k];
-            $item->save();
-        }*/
     }
-    public function actionUsers(){
-        echo "Выполняется синхронизация пользователей\n";
-        $timestart = time();
-        $err = 0;
-        $signer = new Sha256();
-        $token = (new Builder())->set('reference', 'user')
-            ->sign($signer, 'example_key233')
-            ->getToken();
 
-        $response_token = file_get_contents("http://api.xn--80apneeq.xn--p1ai/api.php?option=reference_api&action=get_reference&module=constructor&reference_token=$token");
-
-        $signer = new Sha256();
-        $token = (new Parser())->parse($response_token);
-        if($token->verify($signer,'example_key233')){
-            $data_reference = $token->getClaims();
-            foreach ($data_reference AS $key=>$data){
-
-                $row_user = User::findOne(["username"=>$data->getValue()->login]);
-
-                if(!$row_user) {
-                    $row_user = new User();
-                    $row_user->created_at = time();
-                }
-                $row_user->username = $data->getValue()->login;
-                $row_user->auth_key = Yii::$app->security->generateRandomString();
-                $row_user->password_hash = Yii::$app->security->generatePasswordHash($data->getValue()->pwd,4);
-                $row_user->fio = $data->getValue()->name;
-                $row_user->updated_at = time();
-                // $data->getValue()->position;
-                //$row_user->position = $data->getValue()->position;
-                $row_user->id_org = ($data->getValue()->podved_id!="")?$data->getValue()->podved_id:NULL;
-                $str = ($row_user->isNewRecord) ? 'добавление' : 'обновление';
-                if(!$row_user->save()){
-                    $err++;
-
-                }
-                $role = new PhpManager();
-
-                $role->revokeAll($row_user->id);
-                $role->assign($role->getRole('root'),$row_user->id);
-                $role->assign($role->getPermission('dev_program'),$row_user->id);
-
-            }
-
-            if($err>0){
-                return false;
-            }else {
-                return true;
-            }
-        }else{
-            return false;
-        }
-
-    }
 }

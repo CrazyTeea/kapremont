@@ -106,8 +106,8 @@ class DevelopmentProgrammeController extends AppController
         $user = Yii::$app->getSession()->get('user');
         $org = Organizations::findOne($user->id_org);
 
-        $pr_ob = ProgramObjects::findAll(['system_status'=>1,'id_org'=>$user->id_org,'type'=>0]);
-        $r_ob = ProgramObjects::findAll(['system_status'=>1,'id_org'=>$user->id_org,'type'=>1]);
+        $pr_ob = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$user->id_org,'type'=>0])->orderBy(['created_at'=>SORT_ASC])->all();
+        $r_ob = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$user->id_org,'type'=>1])->orderBy(['created_at'=>SORT_ASC])->all();
         $sq =[
         's_k' => ProgramObjects::find()->select(['square'])->where(['system_status'=>1,'id_org'=>$org->id,])->sum('square'),
         's_k_s' => ProgramObjects::find()->select(['square_kap'])->where(['system_status'=>1,'id_org'=>$org->id,])->sum('square_kap'),
@@ -142,9 +142,7 @@ class DevelopmentProgrammeController extends AppController
         }
 
 
-
-
-        $objects = ProgramObjects::findAll(['system_status'=>1,'id_program'=>$program->id]);
+        $objects = ProgramObjects::find()->where(['system_status'=>1,'id_program'=>$program->id])->orderBy(['created_at'=>SORT_ASC])->all();
         $events = null;$nes = null;$wai = null;;$risks = null;
         foreach ($objects as $index=>$item) {
             for ($i = 0;$i<8;$i++){
@@ -165,16 +163,12 @@ class DevelopmentProgrammeController extends AppController
         $mpdf->WriteHTML('
         body{
         font-family: "Times New Roman", serif;
-        }
-        td{
-        margin: 0 auto !important;
-        text-align: center !important;
-        vertical-align: middle !important;
         }'
             ,HTMLParserMode::HEADER_CSS);
         $mpdf->WriteHTML($stylesheet,HTMLParserMode::HEADER_CSS);
         $mpdf->WriteHTML($stylesheet2,HTMLParserMode::HEADER_CSS);
-        $mpdf->WriteHTML($this->renderPartial('_export',compact('objects','org','atz','pr_ob','r_ob','events','nes','wai','risks','sq','atzC')));
+        $mpdf->WriteHTML($this->renderPartial('_export',compact('objects','org','atz',
+            'pr_ob','r_ob','events','nes','wai','risks','sq','atzC')));
         return $mpdf->Output();
     }
 
