@@ -1167,8 +1167,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
@@ -1524,7 +1522,7 @@ __webpack_require__.r(__webpack_exports__);
                   params: {
                     descriptor: descriptor
                   }
-                }).then(function (res) {
+                }).then(function () {
                   _this4.items[index].fileName = null;
                 }).catch(function (error) {
                   return console.log(error);
@@ -1569,6 +1567,7 @@ __webpack_require__.r(__webpack_exports__);
                 }).then(function (res) {
                   _this5.uploadSuccess &= !!res.data;
                 }).catch(function (error) {
+                  console.log(error);
                   _this5.uploadSuccess = false;
                 });
 
@@ -2155,6 +2154,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2193,33 +2204,34 @@ __webpack_require__.r(__webpack_exports__);
     }
   }),
   data: function data() {
-    var _window$MODEL$base, _window$MODEL$base2, _window$MODEL$base3, _window$MODEL$base4, _window$MODEL$base5, _window$MODEL$base6, _window$MODEL$base7, _window$MODEL$base8, _window$MODEL$base9, _window$MODEL$base10, _window$MODEL$base11, _window$MODEL$base12, _window$MODEL$base13, _window$MODEL$base14, _window$MODEL$base15, _window$MODEL$base16, _window$MODEL$base17, _window$MODEL$base18, _window$MODEL$base19, _window$MODEL$base20, _window$MODEL$base21, _window$MODEL$base22;
+    var _window$MODEL$base, _window$MODEL$base2, _window$MODEL$base3, _window$MODEL$base4, _window$MODEL$base5, _window$MODEL$base6, _window$MODEL$base7, _window$MODEL$base8, _window$MODEL$base9, _window$MODEL$base10, _window$MODEL$base11, _window$MODEL$base12, _window$MODEL$base13, _window$MODEL$base14, _window$MODEL$base15, _window$MODEL$base16, _window$MODEL$base17, _window$MODEL$base18, _window$MODEL$base19, _window$MODEL$base20, _window$MODEL$base21, _window$MODEL$base22, _window$MODEL$base23;
 
     return {
       csrf: document.getElementsByName('csrf-token')[0].content,
       formData: {
-        address: ((_window$MODEL$base = window.MODEL.base) === null || _window$MODEL$base === void 0 ? void 0 : _window$MODEL$base.address) || null,
-        type: ((_window$MODEL$base2 = window.MODEL.base) === null || _window$MODEL$base2 === void 0 ? void 0 : _window$MODEL$base2.type) || 0,
-        name: ((_window$MODEL$base3 = window.MODEL.base) === null || _window$MODEL$base3 === void 0 ? void 0 : _window$MODEL$base3.name) || null,
-        id_region: ((_window$MODEL$base4 = window.MODEL.base) === null || _window$MODEL$base4 === void 0 ? void 0 : _window$MODEL$base4.id_region) || null,
-        id_priority: ((_window$MODEL$base5 = window.MODEL.base) === null || _window$MODEL$base5 === void 0 ? void 0 : _window$MODEL$base5.id_priority) || null,
-        id_city: ((_window$MODEL$base6 = window.MODEL.base) === null || _window$MODEL$base6 === void 0 ? void 0 : _window$MODEL$base6.id_city) || null,
-        kad_number: ((_window$MODEL$base7 = window.MODEL.base) === null || _window$MODEL$base7 === void 0 ? void 0 : _window$MODEL$base7.kad_number) || null,
-        year: ((_window$MODEL$base8 = window.MODEL.base) === null || _window$MODEL$base8 === void 0 ? void 0 : _window$MODEL$base8.year) || 0,
-        exploit_year: ((_window$MODEL$base9 = window.MODEL.base) === null || _window$MODEL$base9 === void 0 ? void 0 : _window$MODEL$base9.exploit_year) || 0,
-        wear: ((_window$MODEL$base10 = window.MODEL.base) === null || _window$MODEL$base10 === void 0 ? void 0 : _window$MODEL$base10.wear) || null,
-        exist_pred_nadz_orgs: ((_window$MODEL$base11 = window.MODEL.base) === null || _window$MODEL$base11 === void 0 ? void 0 : _window$MODEL$base11.exist_pred_nadz_orgs) || null,
-        osn_isp_zdan: ((_window$MODEL$base12 = window.MODEL.base) === null || _window$MODEL$base12 === void 0 ? void 0 : _window$MODEL$base12.osn_isp_zdan) || null,
-        regulation: ((_window$MODEL$base13 = window.MODEL.base) === null || _window$MODEL$base13 === void 0 ? void 0 : _window$MODEL$base13.regulation) || null,
-        assignment: ((_window$MODEL$base14 = window.MODEL.base) === null || _window$MODEL$base14 === void 0 ? void 0 : _window$MODEL$base14.assignment) || null,
-        prav_sob: ((_window$MODEL$base15 = window.MODEL.base) === null || _window$MODEL$base15 === void 0 ? void 0 : _window$MODEL$base15.prav_sob) || null,
-        square: ((_window$MODEL$base16 = window.MODEL.base) === null || _window$MODEL$base16 === void 0 ? void 0 : _window$MODEL$base16.square) || null,
-        square_kap: ((_window$MODEL$base17 = window.MODEL.base) === null || _window$MODEL$base17 === void 0 ? void 0 : _window$MODEL$base17.square_kap) || null,
-        isp_v_ust_dey: ((_window$MODEL$base18 = window.MODEL.base) === null || _window$MODEL$base18 === void 0 ? void 0 : _window$MODEL$base18.isp_v_ust_dey) || null,
-        n_isp_v_ust_dey: ((_window$MODEL$base19 = window.MODEL.base) === null || _window$MODEL$base19 === void 0 ? void 0 : _window$MODEL$base19.n_isp_v_ust_dey) || null,
-        square_ar: ((_window$MODEL$base20 = window.MODEL.base) === null || _window$MODEL$base20 === void 0 ? void 0 : _window$MODEL$base20.square_ar) || null,
-        note: ((_window$MODEL$base21 = window.MODEL.base) === null || _window$MODEL$base21 === void 0 ? void 0 : _window$MODEL$base21.note) || null,
-        prav_oper_upr: ((_window$MODEL$base22 = window.MODEL.base) === null || _window$MODEL$base22 === void 0 ? void 0 : _window$MODEL$base22.prav_oper_upr) || null
+        type_remont: ((_window$MODEL$base = window.MODEL.base) === null || _window$MODEL$base === void 0 ? void 0 : _window$MODEL$base.type_remont) || 0,
+        address: ((_window$MODEL$base2 = window.MODEL.base) === null || _window$MODEL$base2 === void 0 ? void 0 : _window$MODEL$base2.address) || null,
+        type: ((_window$MODEL$base3 = window.MODEL.base) === null || _window$MODEL$base3 === void 0 ? void 0 : _window$MODEL$base3.type) || 0,
+        name: ((_window$MODEL$base4 = window.MODEL.base) === null || _window$MODEL$base4 === void 0 ? void 0 : _window$MODEL$base4.name) || null,
+        id_region: ((_window$MODEL$base5 = window.MODEL.base) === null || _window$MODEL$base5 === void 0 ? void 0 : _window$MODEL$base5.id_region) || null,
+        id_priority: ((_window$MODEL$base6 = window.MODEL.base) === null || _window$MODEL$base6 === void 0 ? void 0 : _window$MODEL$base6.id_priority) || null,
+        id_city: ((_window$MODEL$base7 = window.MODEL.base) === null || _window$MODEL$base7 === void 0 ? void 0 : _window$MODEL$base7.id_city) || null,
+        kad_number: ((_window$MODEL$base8 = window.MODEL.base) === null || _window$MODEL$base8 === void 0 ? void 0 : _window$MODEL$base8.kad_number) || null,
+        year: ((_window$MODEL$base9 = window.MODEL.base) === null || _window$MODEL$base9 === void 0 ? void 0 : _window$MODEL$base9.year) || 0,
+        exploit_year: ((_window$MODEL$base10 = window.MODEL.base) === null || _window$MODEL$base10 === void 0 ? void 0 : _window$MODEL$base10.exploit_year) || 0,
+        wear: ((_window$MODEL$base11 = window.MODEL.base) === null || _window$MODEL$base11 === void 0 ? void 0 : _window$MODEL$base11.wear) || null,
+        exist_pred_nadz_orgs: ((_window$MODEL$base12 = window.MODEL.base) === null || _window$MODEL$base12 === void 0 ? void 0 : _window$MODEL$base12.exist_pred_nadz_orgs) || null,
+        osn_isp_zdan: ((_window$MODEL$base13 = window.MODEL.base) === null || _window$MODEL$base13 === void 0 ? void 0 : _window$MODEL$base13.osn_isp_zdan) || null,
+        regulation: ((_window$MODEL$base14 = window.MODEL.base) === null || _window$MODEL$base14 === void 0 ? void 0 : _window$MODEL$base14.regulation) || null,
+        assignment: ((_window$MODEL$base15 = window.MODEL.base) === null || _window$MODEL$base15 === void 0 ? void 0 : _window$MODEL$base15.assignment) || null,
+        prav_sob: ((_window$MODEL$base16 = window.MODEL.base) === null || _window$MODEL$base16 === void 0 ? void 0 : _window$MODEL$base16.prav_sob) || null,
+        square: ((_window$MODEL$base17 = window.MODEL.base) === null || _window$MODEL$base17 === void 0 ? void 0 : _window$MODEL$base17.square) || null,
+        square_kap: ((_window$MODEL$base18 = window.MODEL.base) === null || _window$MODEL$base18 === void 0 ? void 0 : _window$MODEL$base18.square_kap) || null,
+        isp_v_ust_dey: ((_window$MODEL$base19 = window.MODEL.base) === null || _window$MODEL$base19 === void 0 ? void 0 : _window$MODEL$base19.isp_v_ust_dey) || null,
+        n_isp_v_ust_dey: ((_window$MODEL$base20 = window.MODEL.base) === null || _window$MODEL$base20 === void 0 ? void 0 : _window$MODEL$base20.n_isp_v_ust_dey) || null,
+        square_ar: ((_window$MODEL$base21 = window.MODEL.base) === null || _window$MODEL$base21 === void 0 ? void 0 : _window$MODEL$base21.square_ar) || null,
+        note: ((_window$MODEL$base22 = window.MODEL.base) === null || _window$MODEL$base22 === void 0 ? void 0 : _window$MODEL$base22.note) || null,
+        prav_oper_upr: ((_window$MODEL$base23 = window.MODEL.base) === null || _window$MODEL$base23 === void 0 ? void 0 : _window$MODEL$base23.prav_oper_upr) || null
       },
       errors: {}
     };
@@ -4622,19 +4634,6 @@ var render = function() {
         1
       ),
       _vm._v(" "),
-      _c(
-        "b-button",
-        {
-          attrs: { size: "sm", variant: "info" },
-          on: {
-            click: function($event) {
-              return _vm.dubug()
-            }
-          }
-        },
-        [_vm._v("Debug")]
-      ),
-      _vm._v(" "),
       _vm.loadProgress
         ? _c("label", [
             _vm._v(
@@ -4976,6 +4975,60 @@ var render = function() {
                 ),
                 _vm._v(" "),
                 _c(
+                  "b-form-group",
+                  {
+                    attrs: {
+                      label: "Вид ремонта",
+                      "label-for": "type_remont",
+                      "invalid-feedback": _vm.feedback(
+                        "ProgramObjects",
+                        "type_remont",
+                        "Заполните вид ремонта"
+                      ),
+                      "valid-feedback": _vm.feedback(
+                        "ProgramObjects",
+                        "type_remont",
+                        " "
+                      ),
+                      state: _vm.feedback("ProgramObjects", "type_remont")
+                    }
+                  },
+                  [
+                    _c("b-form-input", {
+                      staticStyle: { display: "none" },
+                      attrs: {
+                        id: "type_remont",
+                        name: "ProgramObjects[type_remont]"
+                      },
+                      model: {
+                        value: _vm.formData.type_remont,
+                        callback: function($$v) {
+                          _vm.$set(_vm.formData, "type_remont", $$v)
+                        },
+                        expression: "formData.type_remont"
+                      }
+                    }),
+                    _vm._v(" "),
+                    _c("b-select", {
+                      attrs: {
+                        options: [
+                          { value: 0, text: "Комплексный" },
+                          { value: 1, text: "Выборочный" }
+                        ]
+                      },
+                      model: {
+                        value: _vm.formData.type_remont,
+                        callback: function($$v) {
+                          _vm.$set(_vm.formData, "type_remont", $$v)
+                        },
+                        expression: "formData.type_remont"
+                      }
+                    })
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
                   "b-card",
                   { staticClass: "mb-1", attrs: { "no-body": "" } },
                   [
@@ -5129,8 +5182,7 @@ var render = function() {
                                         options: [
                                           { value: 1, text: "1" },
                                           { value: 2, text: "2" },
-                                          { value: 3, text: "3" },
-                                          { value: 4, text: "резерв" }
+                                          { value: 3, text: "3" }
                                         ]
                                       },
                                       model: {
