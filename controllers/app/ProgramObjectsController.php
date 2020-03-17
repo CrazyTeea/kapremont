@@ -172,7 +172,7 @@ class ProgramObjectsController extends AppController
                             $pr->id_object = $model->id;
                             $pr->element = $index;
                         }
-                        $pr->aim = $item->aim ? : $index;
+                        $pr->aim = $item->aim ? : '';
                         $pr->plan = $item->plan;
                         $pr->changes = $item->changes ? : '';
                         $save &= $pr->save();
@@ -317,7 +317,7 @@ class ProgramObjectsController extends AppController
                             $pr->id_object = $id;
                             $pr->element = $index;
                         }
-                        $pr->aim = $item->aim ? : $index;
+                        $pr->aim = $item->aim ? : '';
                         $pr->plan = $item->plan;
                         $pr->changes = $item->changes ? : '';
                         $save &= $pr->save();
