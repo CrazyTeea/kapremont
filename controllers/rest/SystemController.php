@@ -124,7 +124,7 @@ class SystemController extends RestController
                         ['id'=>6,'target'=>'Иное:','indicator'=>'','unit'=>''],
                     ];
 
-                    $progObj = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>0])->joinWith(['region'])->all();
+                    $progObj = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>0])->joinWith(['region'])->orderBy(['created_at'=>SORT_ASC])->all();
                     $flag = false;
                     $prior = [
                         1=>'1',
@@ -288,8 +288,7 @@ class SystemController extends RestController
                         ],
                         ['id' => 8, 'label' =>
                             "Общая площадь всех зданий и сооружений",
-                            'kek'=>$org->orgInfo->square_all,
-                            'value'=> ($org->orgInfo)? $org->orgInfo->square_all_kap: 0
+                            'value'=> ($org->orgInfo)? $org->orgInfo->square_all: 0
                         ],
                         ['id' => 9, 'label' =>
                             "Общая площадь всех зданий и сооружений, требующих капитального ремонта (на основании акта обследования или предписаний надзорных органов)",

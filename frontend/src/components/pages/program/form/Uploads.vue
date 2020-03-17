@@ -129,16 +129,6 @@ export default {
         }
     },
     methods: {
-        dubug() {
-            console.log('Файлы в буфере:')
-            console.log(this.selectedFiles)
-
-            console.log('Итемы:')
-            console.log(this.items)
-        },
-        setLabel(index) {
-            console.log(this.items)
-        },
         async getLoadedFiles(id) {
             await Axios.get(`/program/object/files/${id}`).then((res) => {
                 if (res.data?.length) {
@@ -190,7 +180,6 @@ export default {
             
             if(!this.checkFileExt(file.type) || !this.checkFileSize(file.size) || this.isUniqueName(file.name)) {
                 file.value = null;
-                console.log('Файл не введен')
                 return
             }
             this.selectedFiles.push({
@@ -199,7 +188,7 @@ export default {
                 name: this.items[index].label,
                 file: file
             });
-            this.items[index].fileName = file.name
+            this.items[index].fileName = file.name;
             console.log('Файл введен')
         },
         fileRemove(index, descriptor) {
@@ -217,12 +206,10 @@ export default {
         isUniqueName(name) {
             for(let item of this.items) {
                 if(item.fileName === name) {
-                    console.log('Имя не уникальное')
                     this.errorMessage('Файл с таким названием уже существует!');
                     return true
                 }
             }
-            console.log('Имя уникальное')
             return false
         },
         checkFileExt(type) {
@@ -281,7 +268,6 @@ export default {
         async removeFileFromYii(id, descriptor, index) {
             await Axios.get(`/program/object/delete-docs/${id}`, { params: { descriptor: descriptor } }).then((res) => {
                 this.items[index].fileName = null;
-                console.log(res.data)
             }).catch(error => console.log(error))
         },
         async uploadFile(file,id) {
@@ -305,7 +291,6 @@ export default {
             }).then((res) => {
                  this.uploadSuccess &= !!res.data;
             }).catch( (error) => {
-                console.log(error)
                 this.uploadSuccess = false
             })
         },

@@ -3,23 +3,18 @@
 namespace app\controllers\app;
 
 use app\models\Atz;
-use app\models\ObjectDocumentsList;
-use app\models\ObjectDocumentsTypes;
 use app\models\Organizations;
 use app\models\ProgObjectsEvents;
 use app\models\ProgObjectsRiscs;
 use app\models\ProgObjectsWaites;
 use app\models\ProgramObjects;
 use app\models\ProObjectsNecessary;
-use Mpdf\Gif\FileHeader;
 use Mpdf\HTMLParserMode;
 use Mpdf\Mpdf;
 use Mpdf\MpdfException;
 use Yii;
-
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
-
 use yii\filters\VerbFilter;
 use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
@@ -70,7 +65,7 @@ class DevelopmentProgrammeController extends AppController
     public function actionCheckDoc($id)
     {
         $path = Yii::getAlias('@webroot') . "/uploads/programDocs/$id.pdf";
-        return file_exists($path);
+        return json_encode(file_exists($path));
     }
 
     public function actionDownloadDoc($id)
@@ -79,6 +74,8 @@ class DevelopmentProgrammeController extends AppController
         if(file_exists($path)){
             return Yii::$app->response->sendFile($path)->send();
         }
+         
+        return 'Такого файла еще не существует';
     }
 
     /**
