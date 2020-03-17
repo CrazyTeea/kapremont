@@ -332,7 +332,7 @@ export default {
             if (ext === "application/pdf") {
                 return true;
             }
-            this.errorReport("Файл не является документом pdf!");
+            this.setBanner('danger', 'Файл не является документом pdf!')
             return false;
         },
         setBanner(variant, message) {
