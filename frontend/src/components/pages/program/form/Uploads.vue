@@ -1,19 +1,18 @@
 <template>
     <div class="overflow">
-        <b-table-simple
-            bordered
-            hover
-            >
-                <b-thead>
+        <b-table-simple bordered hover>
+            <b-thead>
                 <b-tr>
                     <b-th>Документы</b-th>
                     <b-th>Загрузка</b-th>
                     <b-th>Удалить</b-th>
                 </b-tr>
-                </b-thead>
-                <b-tbody>
+            </b-thead>
+            <b-tbody>
                 <b-tr v-for="(item, index) in items" :key="index">
-                    <b-th class="cell-center-for-table normal-font-weight-for-table">
+                    <b-th
+                        class="cell-center-for-table normal-font-weight-for-table"
+                    >
                         <label v-if="!item.other">{{ item.label }}</label>
                         <b-form-input
                             v-else
@@ -21,22 +20,29 @@
                             :name="`${modelName}[${item.descriptor}]label`"
                             placeholder="Название документа..."
                             type="text"
-                            @change="setLabel()"
                         ></b-form-input>
                     </b-th>
-                    <b-th class="no-cell-border vertical-align-centre-extra-table normal-font-weight-for-table">
-
+                    <b-th
+                        class="no-cell-border vertical-align-centre-extra-table normal-font-weight-for-table"
+                    >
                         <input
-                                type="file"
-                                :name="`${modelName}[${item.descriptor}]file`"
-                                :ref="'file' + index"
-                                :id="'file_input_' + index"
-                                class="hidden-file-input"
-                                @input="fileInput(index)">
+                            type="file"
+                            :name="`${modelName}[${item.descriptor}]file`"
+                            :ref="'file' + index"
+                            :id="'file_input_' + index"
+                            class="hidden-file-input"
+                            @input="fileInput(index)"
+                        />
 
-                        <div class="cell-center-for-items" v-if="!item.fileName">
+                        <div
+                            class="cell-center-for-items"
+                            v-if="!item.fileName"
+                        >
                             <div class="arrow">
-                                <label :for="`file_input_${index}`" class="label">
+                                <label
+                                    :for="`file_input_${index}`"
+                                    class="label"
+                                >
                                     <span class="title">
                                         <span class="scope-to-animate"></span>
                                         <span class="scope-to-animate"></span>
@@ -46,12 +52,21 @@
                                 </label>
                             </div>
                         </div>
-                        <label v-else class="normal-font-size-for-cell-file-name">{{ item.fileName }}</label>
+                        <label
+                            v-else
+                            class="normal-font-size-for-cell-file-name"
+                            >{{ item.fileName }}</label
+                        >
                     </b-th>
-                    <b-th class="no-cell-border vertical-align-centre-extra-table">
+                    <b-th
+                        class="no-cell-border vertical-align-centre-extra-table"
+                    >
                         <div class="cell-center-for-items">
                             <div class="cross">
-                                <label class="label" @click="fileRemove(index, item.descriptor)">
+                                <label
+                                    class="label"
+                                    @click="fileRemove(index, item.descriptor)"
+                                >
                                     <span class="title">
                                         <span class="cross-to-animate"></span>
                                         <span class="cross-to-animate"></span>
@@ -61,54 +76,119 @@
                         </div>
                     </b-th>
                 </b-tr>
-                </b-tbody>
+            </b-tbody>
 
-
-                <b-tfoot>
-               <b-tr>
+            <b-tfoot>
+                <b-tr>
                     <b-td
                         @click="deleteLastRow()"
                         v-if="items.length > 10"
                         colspan="1"
                         variant="secondary"
-                        class="text-right text-danger">
+                        class="text-right text-danger"
+                    >
                         Удалить документ
                     </b-td>
                     <b-td
                         colspan="3"
                         @click="addNewRow()"
                         variant="secondary"
-                        class="text-right text-info">
+                        class="text-right text-info"
+                    >
                         Добавить документ
                     </b-td>
                 </b-tr>
-                </b-tfoot>
-
+            </b-tfoot>
         </b-table-simple>
-            <label v-if="loadProgress">Файл {{ loadingFileName }} загружен на {{ loadProgress }}%</label>
+        <!-- <b-button size="sm" variant="info" @click="dubug()">Debug</b-button> -->
+
+        <label v-if="loadProgress"
+            >Файл {{ loadingFileName }} загружен на {{ loadProgress }}%</label
+        >
     </div>
 </template>
 
 <script>
-import Axios from 'axios';
+import Axios from "axios";
 
 export default {
     data() {
         return {
-            csrf: document.getElementsByName('csrf-token')[0].content,
+            csrf: document.getElementsByName("csrf-token")[0].content,
             items: [
-                {descriptor:'inv_card', fileName: null, label: 'Инвентарные карточки учета основных средств на объект недвижимого имущества и на земельный участок под указанным объектом'},
-                {descriptor:'reestr_vip', fileName: null, label: 'Выписка из реестра федерального имущества на объект федерального имущества и на земельный участок под указанным объектом'},
-                {descriptor:'pravust', fileName: null, label: 'Правоустанавливающие и (или) правоудостоверяющие документы на объект недвижимого имущества и на земельный участок под указанным объектом'},
-                {descriptor:'tex_kad_docs', fileName: null, label: 'Документы технического и кадастрового учета на объект недвижимого имущества'},
-                {descriptor:'sit_plan', fileName: null, label: 'Ситуационный план с указанием границ земельного участка, объекта недвижимого имущества и иных объектов (включая незавершенные строительные объекты), принадлежащих третьим лицам, расположенных на указанном земельном участке'},
-                {descriptor:'tex_acts', fileName: null, label: 'Акт технического осмотра объекта капитального строительства (документ, содержащий сведения о результатах обследования объекта капитального строительства, техническом состоянии строительных конструкций и инженерного оборудования такого объекта и количественной оценке фактических показателей качества строительных конструкций и инженерного оборудования по состоянию на дату обследования, для определения состава, объёмов и сроков работ по капитальному ремонту объекта капитального строительства)'},
-                {descriptor:'def_ved', fileName: null, label: 'Дефектная ведомость (первичный учётный документ, подготовленный в соответствии с требованиями законодательства Российской Федерации о бухгалтерском учёте по результатам обследования технического состояния объекта капитального строительства и содержащий перечень дефектов строительных конструкций и инженерного оборудования объекта капитального строительства с указанием качественных и количественных характеристик таких дефектов)'},
-                {descriptor:'obj_photos', fileName: null, label: 'Фотографии объекта, предполагаемого к проведению капитального ремонта (подписанные по 2 шт. на листе А4, но не более 10 шт. на объект недвижимости)'},
-                {descriptor:'predpis', fileName: null, label: 'Предписания надзорных органов (при наличии)'},
-                {descriptor:'proekti', fileName: null, label: 'Задание на проектирование (корректировку проектной документации), составленное в соответствии с рекомендациями Минстроя РФ (в случае разработки/корректировки проектной документации и/или направления данной документации на экспертизу)'},
+                {
+                    descriptor: "inv_card",
+                    fileName: null,
+                    label:
+                        "Инвентарные карточки учета основных средств на объект недвижимого имущества и на земельный участок под указанным объектом"
+                },
+                {
+                    descriptor: "reestr_vip",
+                    fileName: null,
+                    label:
+                        "Выписка из реестра федерального имущества на объект федерального имущества и на земельный участок под указанным объектом"
+                },
+                {
+                    descriptor: "pravust",
+                    fileName: null,
+                    label:
+                        "Правоустанавливающие и (или) правоудостоверяющие документы на объект недвижимого имущества и на земельный участок под указанным объектом"
+                },
+                {
+                    descriptor: "tex_kad_docs",
+                    fileName: null,
+                    label:
+                        "Документы технического и кадастрового учета на объект недвижимого имущества"
+                },
+                {
+                    descriptor: "sit_plan",
+                    fileName: null,
+                    label:
+                        "Ситуационный план с указанием границ земельного участка, объекта недвижимого имущества и иных объектов (включая незавершенные строительные объекты), принадлежащих третьим лицам, расположенных на указанном земельном участке"
+                },
+                {
+                    descriptor: "tex_acts",
+                    fileName: null,
+                    label:
+                        "Акт технического осмотра объекта капитального строительства (документ, содержащий сведения о результатах обследования объекта капитального строительства, техническом состоянии строительных конструкций и инженерного оборудования такого объекта и количественной оценке фактических показателей качества строительных конструкций и инженерного оборудования по состоянию на дату обследования, для определения состава, объёмов и сроков работ по капитальному ремонту объекта капитального строительства)"
+                },
+                {
+                    descriptor: "def_ved",
+                    fileName: null,
+                    label:
+                        "Дефектная ведомость (первичный учётный документ, подготовленный в соответствии с требованиями законодательства Российской Федерации о бухгалтерском учёте по результатам обследования технического состояния объекта капитального строительства и содержащий перечень дефектов строительных конструкций и инженерного оборудования объекта капитального строительства с указанием качественных и количественных характеристик таких дефектов)"
+                },
+                {
+                    descriptor: "obj_photos",
+                    fileName: null,
+                    label:
+                        "Фотографии объекта, предполагаемого к проведению капитального ремонта (подписанные по 2 шт. на листе А4, но не более 10 шт. на объект недвижимости)"
+                },
+                {
+                    descriptor: "predpis",
+                    fileName: null,
+                    label: "Предписания надзорных органов (при наличии)"
+                },
+                {
+                    descriptor: "proekti",
+                    fileName: null,
+                    label:
+                        "Задание на проектирование (корректировку проектной документации), составленное в соответствии с рекомендациями Минстроя РФ (в случае разработки/корректировки проектной документации и/или направления данной документации на экспертизу)"
+                }
             ],
-            allDescriptors: ['inv_card', 'reestr_vip', 'pravust', 'tex_kad_docs', 'sit_plan', 'tex_acts', 'tex_acts', 'def_ved', 'obj_photos', 'predpis', 'proekti'],
+            allDescriptors: [
+                "inv_card",
+                "reestr_vip",
+                "pravust",
+                "tex_kad_docs",
+                "sit_plan",
+                "tex_acts",
+                "tex_acts",
+                "def_ved",
+                "obj_photos",
+                "predpis",
+                "proekti"
+            ],
             loadProgress: null,
             loadingFileName: null,
             loadedFilesOnServer: [],
@@ -116,46 +196,51 @@ export default {
             uploadSuccess: true,
             update: false,
             objectId: null
-        }
+        };
     },
-    mounted()
-    {
-        if(this.$route.path.indexOf('/program/object/update') !== -1) {
+    mounted() {
+        if (this.$route.path.indexOf("/program/object/update") !== -1) {
             this.update = true;
             this.objectId = this.$route.params.id;
-            this.getLoadedFiles(this.objectId)
+            this.getLoadedFiles(this.objectId);
         }
     },
     methods: {
+        // dubug() {
+        //     console.log("Файлы в буфере:");
+        //     console.log(this.selectedFiles);
+
+        //     console.log("Итемы:");
+        //     console.log(this.items);
+        // },
         async getLoadedFiles(id) {
-            await Axios.get(`/program/object/files/${id}`).then((res) => {
+            await Axios.get(`/program/object/files/${id}`).then(res => {
                 if (res.data?.length) {
                     res.data.forEach(element => {
                         this.loadedFilesOnServer.push(element);
-                        this.setFileName(element)
+                        this.setFileName(element);
                     });
                 }
             });
         },
         setFileName(element) {
             this.items.map((elem, index) => {
-                if(elem.descriptor === element.descriptor)
-                {
-                    this.items[index].fileName = element.name + '.pdf';
+                if (elem.descriptor === element.descriptor) {
+                    this.items[index].fileName = element.name + ".pdf";
                 }
             });
-            if (!element.descriptor.indexOf('others_')){
+            if (!element.descriptor.indexOf("others_")) {
                 this.items.push({
                     descriptor: element.descriptor,
-                    fileName: element.name + '.pdf',
+                    fileName: element.name + ".pdf",
                     label: element.label,
-                    other:true
+                    other: true
                 });
             }
         },
         addNewRow() {
             this.items.push({
-                descriptor: 'others_' + (this.items.length - 10),
+                descriptor: "others_" + (this.items.length - 10),
                 fileName: null,
                 label: null,
                 other: true
@@ -164,21 +249,28 @@ export default {
         deleteLastRow() {
             let index = this.items.length - 1;
 
-            if(this.items[index].label != null) {
-                this.removeFileFromYii(this.objectId, this.items[index].descriptor, index)
+            if (this.items[index].label != null) {
+                this.removeFileFromYii(
+                    this.objectId,
+                    this.items[index].descriptor,
+                    index
+                );
             }
 
             this.items.pop();
 
-            if(this.selectedFiles.length)
-                this.fileRemove(index);
+            if (this.selectedFiles.length) this.fileRemove(index);
         },
         fileInput(index) {
-            let file = document.querySelector('#file_input_' + index).files[0];
-            
-            if(!this.checkFileExt(file.type) || !this.checkFileSize(file.size) || this.isUniqueName(file.name)) {
-                file.value = null;
-                return
+            let selector = document.querySelector(`#file_input_${index}`)
+            let file = selector.files[0];
+            if (
+                !this.checkFileExt(file.type) ||
+                !this.checkFileSize(file.size) ||
+                this.isUniqueName(file.name)
+            ) {
+                selector.value = null;
+                return;
             }
             this.selectedFiles.push({
                 id: index,
@@ -187,111 +279,123 @@ export default {
                 file: file
             });
             this.items[index].fileName = file.name;
-            console.log('Файл введен')
         },
         fileRemove(index, descriptor) {
             let key = this.getSelectedFileKey(index);
-            if(this.items[index].fileName != null && key == null) {
-                this.removeFileFromYii(this.objectId, descriptor, index)
-            } else if(this.items[index].fileName == null && key == null) {
-                this.errorMessage('Сначала выберите файлы!')
-            } else if(this.items[index].fileName != null && key != null) {
+            if (this.items[index].fileName != null && key == null) {
+                this.removeFileFromYii(this.objectId, descriptor, index);
+            } else if (this.items[index].fileName == null && key == null) {
+                this.errorMessage("Сначала выберите файлы!");
+            } else if (this.items[index].fileName != null && key != null) {
                 this.selectedFiles.splice(key, 1);
                 this.items[index].fileName = null;
-                document.querySelector('#file_input_' + index).value = null
+                document.querySelector("#file_input_" + index).value = null;
             }
         },
         isUniqueName(name) {
-            for(let item of this.items) {
-                if(item.fileName === name) {
-                    this.errorMessage('Файл с таким названием уже существует!');
-                    return true
+            for (let item of this.items) {
+                if (item.fileName === name) {
+                    // console.log("Имя не уникальное");
+                    this.errorMessage("Файл с таким названием уже существует!");
+                    return true;
                 }
             }
-            return false
+            // console.log("Имя уникальное");
+            return false;
         },
         checkFileExt(type) {
-            if(type !== 'application/pdf') {
-                this.errorMessage('Файл не является документом pdf!');
-                return false
+            if (type !== "application/pdf") {
+                this.errorMessage("Файл не является документом pdf!");
+                return false;
             }
-            return true
+            return true;
         },
         checkFileSize(size) {
             let _size = 20971520; //20 Мб
-            if(parseInt(size) > _size) {
-                this.errorMessage('Файл больше 20МБ!');
-                return false
+            if (parseInt(size) > _size) {
+                this.errorMessage("Файл больше 20МБ!");
+                return false;
             }
-            return true
+            return true;
         },
         checkFileName(name) {
-            for(let item of this.items) {
-                if(item.fileName === name) {
-                    this.errorMessage('Файл с таким названием уже существует!');
-                    return true
+            for (let item of this.items) {
+                if (item.fileName === name) {
+                    this.errorMessage("Файл с таким названием уже существует!");
+                    return true;
                 }
             }
-            return false
+            return false;
         },
         getSelectedFileKey(index) {
-            let element = this.selectedFiles.map((elem, id) => {
-                if(elem.id === index) {
-                    return id
-                } else {
-                    return null
-                }
-            }).filter((elem) => {
-                return elem !== null
-            })[0];
-            if(element != null) {
-                return element 
+            let element = this.selectedFiles
+                .map((elem, id) => {
+                    if (elem.id === index) {
+                        return id;
+                    } else {
+                        return null;
+                    }
+                })
+                .filter(elem => {
+                    return elem !== null;
+                })[0];
+            if (element != null) {
+                return element;
             } else {
-                return null
+                return null;
             }
         },
         getSavedDocuments() {
             return this.selectedFiles;
         },
-        async sendFile({id}) {
-            if(this.selectedFiles.length) {
+        async sendFile({ id }) {
+            if (this.selectedFiles.length) {
                 //  this.errorMessage('Сначала выберите файлы!')
                 for (let file of this.selectedFiles) {
-                    await this.uploadFile(file, id)
+                    await this.uploadFile(file, id);
                 }
             }
             if (this.uploadSuccess)
                 window.location.href = `/program/object/view/${id}`;
         },
         async removeFileFromYii(id, descriptor, index) {
-            await Axios.get(`/program/object/delete-docs/${id}`, { params: { descriptor: descriptor } }).then(() => {
+            await Axios.get(`/program/object/delete-docs/${id}`, {
+                params: { descriptor: descriptor }
+            }).then(res => {
                 this.items[index].fileName = null;
-            }).catch(error => console.log(error))
+                // console.log(res.data);
+            });
+            // .catch(error => console.log(error));
         },
-        async uploadFile(file,id) {
+        async uploadFile(file, id) {
             let form = new FormData();
-            if (!file.descriptor.indexOf('others_')) {
-                let input = document.getElementsByName(`${this.modelName}[${file.descriptor}]label`)[0];
-                form.append('descriptor', file.descriptor);
-                form.append('label', input.value);
+            if (!file.descriptor.indexOf("others_")) {
+                let input = document.getElementsByName(
+                    `${this.modelName}[${file.descriptor}]label`
+                )[0];
+                form.append("descriptor", file.descriptor);
+                form.append("label", input.value);
             }
             form.append(`${file.descriptor}`, file.file);
             this.loadingFileName = file.file.name;
             await Axios.post(`/program/object/add-docs/${id}`, form, {
-                headers:
-                    {
-                        'X-CSRF-Token': this.csrf,
-                        'Content-Type':'multipart/form-data;'
-                    },
-                onUploadProgress: (itemUpload) => {
-                    this.loadProgress = Math.round( (itemUpload.loaded / itemUpload.total) * 100 )
+                headers: {
+                    "X-CSRF-Token": this.csrf,
+                    "Content-Type": "multipart/form-data;"
+                },
+                onUploadProgress: itemUpload => {
+                    this.loadProgress = Math.round(
+                        (itemUpload.loaded / itemUpload.total) * 100
+                    );
                 }
-            }).then((res) => {
-                 this.uploadSuccess &= !!res.data;
-            }).catch( (error) => {
-                console.log(error);
-                this.uploadSuccess = false
             })
+                .then(res => {
+                    this.uploadSuccess &= !!res.data;
+                })
+                .catch(error => {
+                    // console.log(error);
+                    this.uploadSuccess = false;
+                });
         },
         // loadMessage: function(file) {
         //     message = `Файл ${this.loadingFileName} загружен на ${this.loadProgress}%`
@@ -307,20 +411,20 @@ export default {
         // },
         errorMessage: function(message) {
             this.$bvModal.msgBoxOk(message, {
-                title: 'Ошибка!',
-                size: 'sm',
-                buttonSize: 'sm',
-                okVariant: 'outline-success',
-                headerClass: 'p-2 border-bottom-0',
-                footerClass: 'p-2 border-top-0',
+                title: "Ошибка!",
+                size: "sm",
+                buttonSize: "sm",
+                okVariant: "outline-success",
+                headerClass: "p-2 border-bottom-0",
+                footerClass: "p-2 border-top-0",
                 centered: true
-            })
+            });
         }
     },
     props: {
-        modelName:String
+        modelName: String
     }
-}
+};
 </script>
 
 <style>
@@ -411,34 +515,36 @@ export default {
     display: flex;
     align-items: center;
 }
-.arrow input[type=file] {
-    outline:0;
-    opacity:0;
-    pointer-events:none;
-    user-select:none
+.arrow input[type="file"] {
+    outline: 0;
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
 }
-.arrow .label  {
+.arrow .label {
     height: 28px;
-    border:1px solid grey;
-    border-radius:5px;
-    display:block;
-    transition:border 300ms ease;
-    cursor:pointer;
-    text-align:center
+    border: 1px solid grey;
+    border-radius: 5px;
+    display: block;
+    transition: border 300ms ease;
+    cursor: pointer;
+    text-align: center;
 }
 .arrow .label i {
-    display:block;
-    font-size:42px;
+    display: block;
+    font-size: 42px;
 }
-.arrow .label i,.example-1 .label .title {
-    color:grey;
-    transition:200ms color
+.arrow .label i,
+.example-1 .label .title {
+    color: grey;
+    transition: 200ms color;
 }
 .arrow .label:hover {
-    border:2px solid #5bc0de
+    border: 2px solid #5bc0de;
 }
-.arrow .label:hover i,.example-1 .label:hover .title {
-    color:#5bc0de
+.arrow .label:hover i,
+.example-1 .label:hover .title {
+    color: #5bc0de;
 }
 .cross-to-animate {
     z-index: 999;
@@ -471,24 +577,25 @@ export default {
     display: flex;
     align-items: center;
 }
-.cross .label  {
+.cross .label {
     height: 28px;
-    border:1px solid grey;
-    border-radius:5px;
-    display:block;
-    transition:border 300ms ease;
-    cursor:pointer;
-    text-align:center
+    border: 1px solid grey;
+    border-radius: 5px;
+    display: block;
+    transition: border 300ms ease;
+    cursor: pointer;
+    text-align: center;
 }
 .cross .label i {
-    display:block;
-    font-size:42px;
+    display: block;
+    font-size: 42px;
 }
-.cross .label i,.cross .label .title {
-    color:grey;
-    transition:200ms color
+.cross .label i,
+.cross .label .title {
+    color: grey;
+    transition: 200ms color;
 }
 .cross .label:hover {
-    border:2px solid #d9534f
+    border: 2px solid #d9534f;
 }
 </style>
