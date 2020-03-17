@@ -196,20 +196,6 @@
                     >
                 </div>
             </div>
-            <div class="row">
-                <div class="col-12">
-                    <b-alert :show="banner.show" dismissible fade>
-                        Файл
-                        <label class="font-weight-bold">{{
-                            banner.fileName
-                        }}</label>
-                        загружается
-                        <label class="font-weight-bold"
-                            >{{ banner.loadProgress }}%</label
-                        >
-                    </b-alert>
-                </div>
-            </div>
         </div>
         <div class="row justify-content-end">
             <div>
@@ -258,14 +244,8 @@ export default {
     name: "ProgramView",
     data() {
         return {
-            dismissSecs: 3,
-            dismissCountDown: 0,
             bannerInfo: [],
-            banner: {
-                show: 0,
-                fileName: null,
-                loadProgress: null
-            },
+            loadProgress: null,
             buttons: {
                 upload: false,
                 save: false,
@@ -310,8 +290,12 @@ export default {
                 selector.value = null;
                 return;
             }
-            this.banner.fileName = file.name;
-            this.banner.show = true;
+
+            // let message = `Файл ${file.name} загружается ${this.loadProgress}%`;
+            this.setBanner(
+                "primary",
+                `Файл ${file.name} загружается ${this.loadProgress}%`
+            );
             this.uploadFileToYii(file);
             selector.value = null;
         },
@@ -325,19 +309,19 @@ export default {
                     "Content-Type": "multipart/form-data;"
                 },
                 onUploadProgress: itemUpload => {
-                    this.banner.loadProgress = Math.round(
+                    this.loadProgress = Math.round(
                         (itemUpload.loaded / itemUpload.total) * 100
                     );
                 }
             }).then(res => {
                 if (res.data) {
-                    this.setError("success", "Файл загружен успешно");
+                    this.setBanner("success", "Файл загружен успешно");
 
                     this.buttons.save = true;
                     this.buttons.delete = true;
                     this.buttons.upload = false;
                 } else {
-                    this.setError(
+                    this.setBanner(
                         "danger",
                         "При загрузке файла произошла ошибка, напишите в службу поддержки"
                     );
@@ -351,16 +335,18 @@ export default {
             this.errorReport("Файл не является документом pdf!");
             return false;
         },
-        reportErors() {}, // НЕ УВЕРЕН ЧТО НУЖНО
-        setError(variant, message) {
-            this.bannerInfo.push({
+        setBanner(variant, message) {
+            this.bannerInfo.unshift({
                 show: true,
                 variant: variant,
                 message: message
             });
+            setTimeout(() => {
+                this.resetBanners();
+            }, 1400);
         },
-        resetError(index) {
-            this.bannerInfo.splice(index, 1);
+        resetBanners() {
+            this.bannerInfo.pop();
         },
         deleteFileFromYii() {
             Axios.post(`/program/delete-doc/${this.id_org}`, null, {
@@ -369,18 +355,16 @@ export default {
                 }
             }).then(res => {
                 if (res.data) {
-                    this.bannerInfo.variant = "success";
-                    this.bannerInfo.message = "Файл удален успешно";
-                    this.bannerInfo.show = true;
+                    this.setBanner("success", "Файл удален успешно");
 
                     this.buttons.save = false;
                     this.buttons.delete = false;
                     this.buttons.upload = true;
                 } else {
-                    this.bannerInfo.variant = "danger";
-                    this.bannerInfo.message =
-                        "При удалении файла произошла ошибка, напишите в службу поддержки";
-                    this.bannerInfo.show = true;
+                    this.setBanner(
+                        "danger",
+                        "При удалении файла произошла ошибка, напишите в службу поддержки"
+                    );
                 }
             });
         },
