@@ -53,6 +53,15 @@ $nesLabel = [
     'Лифты',
 ];
 
+function getEvents($arr,$i_o){
+    $a = [];
+    foreach ($arr as $item){
+        if ($item->id_object == $i_o)
+            $a[]=$item;
+    }
+    return $a;
+}
+
 function getEvent($arr,$i_o,$index,$attr){
 
     if (isset($arr[$i_o]) and isset($arr[$i_o][$index]))
@@ -73,6 +82,7 @@ function getSum($arr,$i_o,$attr){
 
 }
 
+use app\models\ProgObjectsEvents;
 use app\models\Regions;
 use yii\helpers\ArrayHelper; ?>
 
@@ -231,7 +241,7 @@ use yii\helpers\ArrayHelper; ?>
         </tr>
         <tr>
             <td>Аспиранты</td>
-            <td></td>
+            <td><?=$org->orgInfo ? $org->orgInfo->st_asp_count : ''?></td>
         </tr>
         <tr>
             <td rowspan="4">6</td>
@@ -419,7 +429,29 @@ use yii\helpers\ArrayHelper; ?>
                 <td><?=$item->year ?></td>
                 <td><?=$wear[(!is_null($item->wear) and $item->wear<5)? $item->wear : 0] ?></td>
                 <td><?=$item->exist_pred_nadz_orgs ? $item->regulation : '' ?></td>
-                <td></td>
+                <td>
+                    <?php
+
+                    $ev = 'Этапы: ';$k = 0;
+
+                    if ($ee = getEvents($evAll,$item->id)) {
+                        foreach ($ee as $l => $e) {
+                            if ($e->is_nessesary) {
+                                $k = $l+1;
+                                $ev .= " $k, ";
+                            }
+                        }
+                        if (!$k) {
+                            $ev = '';
+                        }
+                    }
+                    if (!$k) {
+                        $ev = '';
+                    }
+
+                    echo $ev;
+                    ?>
+                </td>
                 <td><?=$item->finance_sum?></td>
                 <td><?=$item->coFinancing?></td>
                 <td><?=$item->note?></td>
@@ -465,7 +497,29 @@ use yii\helpers\ArrayHelper; ?>
                 <td><?=$item->year ?></td>
                 <td><?=$wear[(!is_null($item->wear) and $item->wear<5)? $item->wear : 0] ?></td>
                 <td><?=$item->exist_pred_nadz_orgs ? $item->regulation : '' ?></td>
-                <td></td>
+                <td>
+                    <?php
+
+                    $ev = 'Этапы: ';$k = 0;
+
+                    if ($ee = getEvents($evAll,$item->id)) {
+                        foreach ($ee as $l => $e) {
+                            if ($e->is_nessesary) {
+                                $k = $l+1;
+                                $ev .= " $k, ";
+                            }
+                        }
+                        if (!$k) {
+                            $ev = '';
+                        }
+                    }
+                    if (!$k) {
+                        $ev = '';
+                    }
+
+                    echo $ev;
+                    ?>
+                </td>
                 <td><?=$item ->finance_sum?></td>
                 <td><?=$item ->coFinancing?></td>
                 <td><?=$item ->note?></td>

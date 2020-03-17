@@ -141,8 +141,7 @@ class DevelopmentProgrammeController extends AppController
             ];
         }
 
-
-
+        $evAll = ProgObjectsEvents::find()->joinWith(['object'])->where(['program_objects.id_org'=>$org->id])->all();
 
         $objects = ProgramObjects::findAll(['system_status'=>1,'id_program'=>$program->id]);
         $events = null;$nes = null;$wai = null;;$risks = null;
@@ -174,7 +173,8 @@ class DevelopmentProgrammeController extends AppController
             ,HTMLParserMode::HEADER_CSS);
         $mpdf->WriteHTML($stylesheet,HTMLParserMode::HEADER_CSS);
         $mpdf->WriteHTML($stylesheet2,HTMLParserMode::HEADER_CSS);
-        $mpdf->WriteHTML($this->renderPartial('_export',compact('objects','org','atz','pr_ob','r_ob','events','nes','wai','risks','sq','atzC')));
+        $mpdf->WriteHTML($this->renderPartial('_export',compact('objects','org','atz',
+            'pr_ob','r_ob','events','nes','wai','risks','sq','atzC','evAll')));
         return $mpdf->Output();
     }
 
