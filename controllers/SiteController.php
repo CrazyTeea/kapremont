@@ -152,6 +152,8 @@ class SiteController extends Controller
                 $item->id_priority = 1;
             if ($item->wear > 4)
                 $item->wear = 1;
+            if (isset($item->prav_sob) and !($item->prav_sob=='fast' || $item->prav_sob=='others'))
+                $item->prav_sob = 'fast';
             $item->save(false);
         }
     }
