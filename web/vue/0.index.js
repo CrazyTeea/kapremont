@@ -269,6 +269,41 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     modelName: String
@@ -277,22 +312,22 @@ __webpack_require__.r(__webpack_exports__);
     onInput: function onInput(index) {
       // console.log(this.items[index].obosnovanie)
       if (this.items[index].obosnovanie.length >= 255) {
-        this.reportErrors('Достигнуто максимальное количество символов (255 символов)');
+        this.reportErrors("Достигнуто максимальное количество символов (255 символов)");
       }
     },
     onInputTwo: function onInputTwo(index) {
       if (this.itemsTwo[index].obosnovanie.length >= 255) {
-        this.reportErrors('Достигнуто максимальное количество символов (255 символов)');
+        this.reportErrors("Достигнуто максимальное количество символов (255 символов)");
       }
     },
     reportErrors: function reportErrors(message) {
       this.$bvModal.msgBoxOk(message, {
-        title: 'Ошибка!',
-        size: 'sm',
-        buttonSize: 'sm',
-        okVariant: 'outline-success',
-        headerClass: 'p-2 border-bottom-0',
-        footerClass: 'p-2 border-top-0',
+        title: "Ошибка!",
+        size: "sm",
+        buttonSize: "sm",
+        okVariant: "outline-success",
+        headerClass: "p-2 border-bottom-0",
+        footerClass: "p-2 border-top-0",
         centered: true
       });
     }
@@ -307,7 +342,7 @@ __webpack_require__.r(__webpack_exports__);
     }
 
     this.items.forEach(function (item, index) {
-      var it = getKeyByValue(window.MODEL.necessary, 'element', index);
+      var it = getKeyByValue(window.MODEL.necessary, "element", index);
       item.nalichie = it === null || it === void 0 ? void 0 : it.nalichie;
       item.material = it === null || it === void 0 ? void 0 : it.material;
       item.srok_eks = it === null || it === void 0 ? void 0 : it.srok_eks;
@@ -315,7 +350,7 @@ __webpack_require__.r(__webpack_exports__);
       item.obosnovanie = it === null || it === void 0 ? void 0 : it.obosnovanie;
     });
     this.itemsTwo.forEach(function (item, index) {
-      var it = getKeyByValue(window.MODEL.necessary, 'element', index + 17);
+      var it = getKeyByValue(window.MODEL.necessary, "element", index + 17);
       item.nalichie = it === null || it === void 0 ? void 0 : it.nalichie;
       item.srok_eks = it === null || it === void 0 ? void 0 : it.srok_eks;
       item.kap_remont = it === null || it === void 0 ? void 0 : it.kap_remont;
@@ -325,7 +360,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       items: [{
-        label: 'Фундаменты',
+        label: "Фундаменты",
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -333,7 +368,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 0
       }, {
-        label: 'Отмостка',
+        label: "Отмостка",
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -341,7 +376,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 1
       }, {
-        label: 'Стены',
+        label: "Стены",
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -349,7 +384,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 2
       }, {
-        label: 'Колонны',
+        label: "Колонны",
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -357,7 +392,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 3
       }, {
-        label: 'Перегородки',
+        label: "Перегородки",
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -365,7 +400,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 4
       }, {
-        label: 'Крыша',
+        label: "Крыша",
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -373,7 +408,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 5
       }, {
-        label: 'Кровля',
+        label: "Кровля",
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -381,7 +416,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 6
       }, {
-        label: 'Перекрытия',
+        label: "Перекрытия",
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -389,7 +424,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 7
       }, {
-        label: 'Полы',
+        label: "Полы",
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -397,7 +432,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 8
       }, {
-        label: 'Окна',
+        label: "Окна",
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -405,7 +440,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 9
       }, {
-        label: 'Двери',
+        label: "Двери",
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -413,7 +448,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 10
       }, {
-        label: 'Ворота',
+        label: "Ворота",
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -421,7 +456,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 11
       }, {
-        label: 'Лестницы',
+        label: "Лестницы",
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -429,7 +464,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 12
       }, {
-        label: 'Крыльца',
+        label: "Крыльца",
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -437,7 +472,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 13
       }, {
-        label: 'Балконы/Лоджии',
+        label: "Балконы/Лоджии",
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -445,7 +480,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 14
       }, {
-        label: 'Внутренняя отделка',
+        label: "Внутренняя отделка",
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -453,7 +488,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 15
       }, {
-        label: 'Наружняя отделка',
+        label: "Наружняя отделка",
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -462,119 +497,119 @@ __webpack_require__.r(__webpack_exports__);
         element: 16
       }],
       itemsTwo: [{
-        label: 'Система электроснабжения',
+        label: "Система электроснабжения",
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 17
       }, {
-        label: 'Система водоснабжения',
+        label: "Система водоснабжения",
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 18
       }, {
-        label: 'Система водоотведения',
+        label: "Система водоотведения",
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 19
       }, {
-        label: 'Система газоснабжения',
+        label: "Система газоснабжения",
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 20
       }, {
-        label: 'Система кондиционирования воздуха',
+        label: "Система кондиционирования воздуха",
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 21
       }, {
-        label: 'Система вентиляции',
+        label: "Система вентиляции",
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 22
       }, {
-        label: 'Система отопления',
+        label: "Система отопления",
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 23
       }, {
-        label: 'Система диспетчеризации',
+        label: "Система диспетчеризации",
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 24
       }, {
-        label: 'Радиофикация',
+        label: "Радиофикация",
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 25
       }, {
-        label: 'Телевидение эфирное',
+        label: "Телевидение эфирное",
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 26
       }, {
-        label: 'Система видеонаблюдения',
+        label: "Система видеонаблюдения",
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 27
       }, {
-        label: 'Система интернет и телефонии',
+        label: "Система интернет и телефонии",
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 28
       }, {
-        label: 'Система контроля управления доступом',
+        label: "Система контроля управления доступом",
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 29
       }, {
-        label: 'Пожарная сигнализация',
+        label: "Пожарная сигнализация",
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 30
       }, {
-        label: 'Охранная сигнализация',
+        label: "Охранная сигнализация",
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 31
       }, {
-        label: 'Мусоропроводы',
+        label: "Мусоропроводы",
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 32
       }, {
-        label: 'Лифты',
+        label: "Лифты",
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
@@ -1165,53 +1200,70 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      csrf: document.getElementsByName('csrf-token')[0].content,
+      csrf: document.getElementsByName("csrf-token")[0].content,
       items: [{
-        descriptor: 'inv_card',
+        descriptor: "inv_card",
         fileName: null,
-        label: 'Инвентарные карточки учета основных средств на объект недвижимого имущества и на земельный участок под указанным объектом'
+        label: "Инвентарные карточки учета основных средств на объект недвижимого имущества и на земельный участок под указанным объектом"
       }, {
-        descriptor: 'reestr_vip',
+        descriptor: "reestr_vip",
         fileName: null,
-        label: 'Выписка из реестра федерального имущества на объект федерального имущества и на земельный участок под указанным объектом'
+        label: "Выписка из реестра федерального имущества на объект федерального имущества и на земельный участок под указанным объектом"
       }, {
-        descriptor: 'pravust',
+        descriptor: "pravust",
         fileName: null,
-        label: 'Правоустанавливающие и (или) правоудостоверяющие документы на объект недвижимого имущества и на земельный участок под указанным объектом'
+        label: "Правоустанавливающие и (или) правоудостоверяющие документы на объект недвижимого имущества и на земельный участок под указанным объектом"
       }, {
-        descriptor: 'tex_kad_docs',
+        descriptor: "tex_kad_docs",
         fileName: null,
-        label: 'Документы технического и кадастрового учета на объект недвижимого имущества'
+        label: "Документы технического и кадастрового учета на объект недвижимого имущества"
       }, {
-        descriptor: 'sit_plan',
+        descriptor: "sit_plan",
         fileName: null,
-        label: 'Ситуационный план с указанием границ земельного участка, объекта недвижимого имущества и иных объектов (включая незавершенные строительные объекты), принадлежащих третьим лицам, расположенных на указанном земельном участке'
+        label: "Ситуационный план с указанием границ земельного участка, объекта недвижимого имущества и иных объектов (включая незавершенные строительные объекты), принадлежащих третьим лицам, расположенных на указанном земельном участке"
       }, {
-        descriptor: 'tex_acts',
+        descriptor: "tex_acts",
         fileName: null,
-        label: 'Акт технического осмотра объекта капитального строительства (документ, содержащий сведения о результатах обследования объекта капитального строительства, техническом состоянии строительных конструкций и инженерного оборудования такого объекта и количественной оценке фактических показателей качества строительных конструкций и инженерного оборудования по состоянию на дату обследования, для определения состава, объёмов и сроков работ по капитальному ремонту объекта капитального строительства)'
+        label: "Акт технического осмотра объекта капитального строительства (документ, содержащий сведения о результатах обследования объекта капитального строительства, техническом состоянии строительных конструкций и инженерного оборудования такого объекта и количественной оценке фактических показателей качества строительных конструкций и инженерного оборудования по состоянию на дату обследования, для определения состава, объёмов и сроков работ по капитальному ремонту объекта капитального строительства)"
       }, {
-        descriptor: 'def_ved',
+        descriptor: "def_ved",
         fileName: null,
-        label: 'Дефектная ведомость (первичный учётный документ, подготовленный в соответствии с требованиями законодательства Российской Федерации о бухгалтерском учёте по результатам обследования технического состояния объекта капитального строительства и содержащий перечень дефектов строительных конструкций и инженерного оборудования объекта капитального строительства с указанием качественных и количественных характеристик таких дефектов)'
+        label: "Дефектная ведомость (первичный учётный документ, подготовленный в соответствии с требованиями законодательства Российской Федерации о бухгалтерском учёте по результатам обследования технического состояния объекта капитального строительства и содержащий перечень дефектов строительных конструкций и инженерного оборудования объекта капитального строительства с указанием качественных и количественных характеристик таких дефектов)"
       }, {
-        descriptor: 'obj_photos',
+        descriptor: "obj_photos",
         fileName: null,
-        label: 'Фотографии объекта, предполагаемого к проведению капитального ремонта (подписанные по 2 шт. на листе А4, но не более 10 шт. на объект недвижимости)'
+        label: "Фотографии объекта, предполагаемого к проведению капитального ремонта (подписанные по 2 шт. на листе А4, но не более 10 шт. на объект недвижимости)"
       }, {
-        descriptor: 'predpis',
+        descriptor: "predpis",
         fileName: null,
-        label: 'Предписания надзорных органов (при наличии)'
+        label: "Предписания надзорных органов (при наличии)"
       }, {
-        descriptor: 'proekti',
+        descriptor: "proekti",
         fileName: null,
-        label: 'Задание на проектирование (корректировку проектной документации), составленное в соответствии с рекомендациями Минстроя РФ (в случае разработки/корректировки проектной документации и/или направления данной документации на экспертизу)'
+        label: "Задание на проектирование (корректировку проектной документации), составленное в соответствии с рекомендациями Минстроя РФ (в случае разработки/корректировки проектной документации и/или направления данной документации на экспертизу)"
       }],
-      allDescriptors: ['inv_card', 'reestr_vip', 'pravust', 'tex_kad_docs', 'sit_plan', 'tex_acts', 'tex_acts', 'def_ved', 'obj_photos', 'predpis', 'proekti'],
+      allDescriptors: ["inv_card", "reestr_vip", "pravust", "tex_kad_docs", "sit_plan", "tex_acts", "tex_acts", "def_ved", "obj_photos", "predpis", "proekti"],
       loadProgress: null,
       loadingFileName: null,
       loadedFilesOnServer: [],
@@ -1222,7 +1274,7 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   mounted: function mounted() {
-    if (this.$route.path.indexOf('/program/object/update') !== -1) {
+    if (this.$route.path.indexOf("/program/object/update") !== -1) {
       this.update = true;
       this.objectId = this.$route.params.id;
       this.getLoadedFiles(this.objectId);
@@ -1230,9 +1282,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     dubug: function dubug() {
-      console.log('Файлы в буфере:');
+      console.log("Файлы в буфере:");
       console.log(this.selectedFiles);
-      console.log('Итемы:');
+      console.log("Итемы:");
       console.log(this.items);
     },
     setLabel: function setLabel(index) {
@@ -1241,9 +1293,7 @@ __webpack_require__.r(__webpack_exports__);
     getLoadedFiles: function getLoadedFiles(id) {
       var _this = this;
 
-      return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_15__["default"])(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee() {
+      return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_15__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -1274,14 +1324,14 @@ __webpack_require__.r(__webpack_exports__);
 
       this.items.map(function (elem, index) {
         if (elem.descriptor === element.descriptor) {
-          _this2.items[index].fileName = element.name + '.pdf';
+          _this2.items[index].fileName = element.name + ".pdf";
         }
       });
 
-      if (!element.descriptor.indexOf('others_')) {
+      if (!element.descriptor.indexOf("others_")) {
         this.items.push({
           descriptor: element.descriptor,
-          fileName: element.name + '.pdf',
+          fileName: element.name + ".pdf",
           label: element.label,
           other: true
         });
@@ -1289,7 +1339,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     addNewRow: function addNewRow() {
       this.items.push({
-        descriptor: 'others_' + (this.items.length - 10),
+        descriptor: "others_" + (this.items.length - 10),
         fileName: null,
         label: null,
         other: true
@@ -1306,11 +1356,11 @@ __webpack_require__.r(__webpack_exports__);
       if (this.selectedFiles.length) this.fileRemove(index);
     },
     fileInput: function fileInput(index) {
-      var file = document.querySelector('#file_input_' + index).files[0];
+      var file = document.querySelector("#file_input_" + index).files[0];
 
       if (!this.checkFileExt(file.type) || !this.checkFileSize(file.size) || this.isUniqueName(file.name)) {
         file.value = null;
-        console.log('Файл не введен');
+        console.log("Файл не введен");
         return;
       }
 
@@ -1321,7 +1371,7 @@ __webpack_require__.r(__webpack_exports__);
         file: file
       });
       this.items[index].fileName = file.name;
-      console.log('Файл введен');
+      console.log("Файл введен");
     },
     fileRemove: function fileRemove(index, descriptor) {
       var key = this.getSelectedFileKey(index);
@@ -1329,11 +1379,11 @@ __webpack_require__.r(__webpack_exports__);
       if (this.items[index].fileName != null && key == null) {
         this.removeFileFromYii(this.objectId, descriptor, index);
       } else if (this.items[index].fileName == null && key == null) {
-        this.errorMessage('Сначала выберите файлы!');
+        this.errorMessage("Сначала выберите файлы!");
       } else if (this.items[index].fileName != null && key != null) {
         this.selectedFiles.splice(key, 1);
         this.items[index].fileName = null;
-        document.querySelector('#file_input_' + index).value = null;
+        document.querySelector("#file_input_" + index).value = null;
       }
     },
     isUniqueName: function isUniqueName(name) {
@@ -1346,8 +1396,8 @@ __webpack_require__.r(__webpack_exports__);
           var item = _step.value;
 
           if (item.fileName === name) {
-            console.log('Имя не уникальное');
-            this.errorMessage('Файл с таким названием уже существует!');
+            console.log("Имя не уникальное");
+            this.errorMessage("Файл с таким названием уже существует!");
             return true;
           }
         }
@@ -1366,12 +1416,12 @@ __webpack_require__.r(__webpack_exports__);
         }
       }
 
-      console.log('Имя уникальное');
+      console.log("Имя уникальное");
       return false;
     },
     checkFileExt: function checkFileExt(type) {
-      if (type !== 'application/pdf') {
-        this.errorMessage('Файл не является документом pdf!');
+      if (type !== "application/pdf") {
+        this.errorMessage("Файл не является документом pdf!");
         return false;
       }
 
@@ -1381,7 +1431,7 @@ __webpack_require__.r(__webpack_exports__);
       var _size = 20971520; //20 Мб
 
       if (parseInt(size) > _size) {
-        this.errorMessage('Файл больше 20МБ!');
+        this.errorMessage("Файл больше 20МБ!");
         return false;
       }
 
@@ -1397,7 +1447,7 @@ __webpack_require__.r(__webpack_exports__);
           var item = _step2.value;
 
           if (item.fileName === name) {
-            this.errorMessage('Файл с таким названием уже существует!');
+            this.errorMessage("Файл с таким названием уже существует!");
             return true;
           }
         }
@@ -1442,9 +1492,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       var id = _ref.id;
-      return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_15__["default"])(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee2() {
+      return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_15__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
         var _iteratorNormalCompletion3, _didIteratorError3, _iteratorError3, _iterator3, _step3, file;
 
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
@@ -1526,9 +1574,7 @@ __webpack_require__.r(__webpack_exports__);
     removeFileFromYii: function removeFileFromYii(id, descriptor, index) {
       var _this4 = this;
 
-      return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_15__["default"])(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee3() {
+      return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_15__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
@@ -1556,9 +1602,7 @@ __webpack_require__.r(__webpack_exports__);
     uploadFile: function uploadFile(file, id) {
       var _this5 = this;
 
-      return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_15__["default"])(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee4() {
+      return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_15__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
         var form, input;
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
@@ -1566,10 +1610,10 @@ __webpack_require__.r(__webpack_exports__);
               case 0:
                 form = new FormData();
 
-                if (!file.descriptor.indexOf('others_')) {
+                if (!file.descriptor.indexOf("others_")) {
                   input = document.getElementsByName("".concat(_this5.modelName, "[").concat(file.descriptor, "]label"))[0];
-                  form.append('descriptor', file.descriptor);
-                  form.append('label', input.value);
+                  form.append("descriptor", file.descriptor);
+                  form.append("label", input.value);
                 }
 
                 form.append("".concat(file.descriptor), file.file);
@@ -1577,8 +1621,8 @@ __webpack_require__.r(__webpack_exports__);
                 _context4.next = 6;
                 return axios__WEBPACK_IMPORTED_MODULE_16___default.a.post("/program/object/add-docs/".concat(id), form, {
                   headers: {
-                    'X-CSRF-Token': _this5.csrf,
-                    'Content-Type': 'multipart/form-data;'
+                    "X-CSRF-Token": _this5.csrf,
+                    "Content-Type": "multipart/form-data;"
                   },
                   onUploadProgress: function onUploadProgress(itemUpload) {
                     _this5.loadProgress = Math.round(itemUpload.loaded / itemUpload.total * 100);
@@ -1612,12 +1656,12 @@ __webpack_require__.r(__webpack_exports__);
     // },
     errorMessage: function errorMessage(message) {
       this.$bvModal.msgBoxOk(message, {
-        title: 'Ошибка!',
-        size: 'sm',
-        buttonSize: 'sm',
-        okVariant: 'outline-success',
-        headerClass: 'p-2 border-bottom-0',
-        footerClass: 'p-2 border-top-0',
+        title: "Ошибка!",
+        size: "sm",
+        buttonSize: "sm",
+        okVariant: "outline-success",
+        headerClass: "p-2 border-bottom-0",
+        footerClass: "p-2 border-top-0",
         centered: true
       });
     }
@@ -2448,20 +2492,86 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
-/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
-/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
-/* harmony import */ var _organisms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../organisms */ "./src/components/organisms/index.js");
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.array.splice */ "./node_modules/core-js/modules/es.array.splice.js");
+/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
+/* harmony import */ var _organisms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../organisms */ "./src/components/organisms/index.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_7__);
 
 
 
 
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -2658,15 +2768,13 @@ __webpack_require__.r(__webpack_exports__);
   name: "ProgramView",
   data: function data() {
     return {
+      dismissSecs: 3,
+      dismissCountDown: 0,
+      bannerInfo: [],
       banner: {
-        show: false,
+        show: 0,
         fileName: null,
         loadProgress: null
-      },
-      bannerInfo: {
-        show: false,
-        variant: null,
-        message: null
       },
       buttons: {
         upload: false,
@@ -2674,8 +2782,8 @@ __webpack_require__.r(__webpack_exports__);
         delete: false
       },
       id_org: null,
-      csrf: document.getElementsByName('csrf-token')[0].content,
-      text: 'dfs',
+      csrf: document.getElementsByName("csrf-token")[0].content,
+      text: "dfs",
       prevTable: {
         curPage: 1,
         perPage: 5
@@ -2687,32 +2795,31 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   components: {
-    "v-user-panel": _organisms__WEBPACK_IMPORTED_MODULE_4__["userPanel"]
+    "v-user-panel": _organisms__WEBPACK_IMPORTED_MODULE_5__["userPanel"]
   },
-  methods: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_5__["mapActions"])(['requestPageData', 'requestUser']), {
+  methods: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_4__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_6__["mapActions"])(["requestPageData", "requestUser"]), {
     onRowClick: function onRowClick(item) {
       window.location.href = "/program/object/view/".concat(item.id);
     },
     rowCount: function rowCount(attr) {
       var _this$reservedObjects, _this$priorityObjects;
 
-      if (attr == 'resTable' && ((_this$reservedObjects = this.reservedObjects) === null || _this$reservedObjects === void 0 ? void 0 : _this$reservedObjects.items)) {
+      if (attr == "resTable" && ((_this$reservedObjects = this.reservedObjects) === null || _this$reservedObjects === void 0 ? void 0 : _this$reservedObjects.items)) {
         return this.reservedObjects.items.length > this.resTable.perPage;
-      } else if (attr == 'prevTable' && ((_this$priorityObjects = this.priorityObjects) === null || _this$priorityObjects === void 0 ? void 0 : _this$priorityObjects.items)) return this.priorityObjects.items.length > this.prevTable.perPage;else return false;
+      } else if (attr == "prevTable" && ((_this$priorityObjects = this.priorityObjects) === null || _this$priorityObjects === void 0 ? void 0 : _this$priorityObjects.items)) return this.priorityObjects.items.length > this.prevTable.perPage;else return false;
     },
     fileInput: function fileInput() {
-      var file = document.querySelector('#file_input_pdf_main').files[0];
+      var file = document.querySelector("#file_input_pdf_main").files[0];
       console.log(file);
       this.banner.fileName = file.name;
       this.banner.show = true;
       this.uploadFileToYii(file);
+      file.value = null;
     },
     uploadFileToYii: function uploadFileToYii(file) {
       var _this = this;
 
-      return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
-      /*#__PURE__*/
-      regeneratorRuntime.mark(function _callee() {
+      return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         var form;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -2720,36 +2827,29 @@ __webpack_require__.r(__webpack_exports__);
               case 0:
                 // return console.log(file)
                 form = new FormData();
-                form.append('progFile', file);
+                form.append("progFile", file);
                 _context.next = 4;
-                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.post("/program/add-doc/".concat(_this.id_org), form, {
+                return axios__WEBPACK_IMPORTED_MODULE_7___default.a.post("/program/add-doc/".concat(_this.id_org), form, {
                   headers: {
-                    'X-CSRF-Token': _this.csrf,
-                    'Content-Type': 'multipart/form-data;'
+                    "X-CSRF-Token": _this.csrf,
+                    "Content-Type": "multipart/form-data;"
                   },
                   onUploadProgress: function onUploadProgress(itemUpload) {
                     _this.banner.loadProgress = Math.round(itemUpload.loaded / itemUpload.total * 100);
                   }
                 }).then(function (res) {
                   if (res.data) {
-                    _this.bannerInfo.variant = 'success';
-                    _this.bannerInfo.message = 'Файл загружен успешно';
-                    _this.bannerInfo.show = true;
+                    _this.setError("success", "Файл загружен успешно");
+
                     _this.buttons.save = true;
                     _this.buttons.delete = true;
                     _this.buttons.upload = false;
                   } else {
-                    _this.bannerInfo.variant = 'danger';
-                    _this.bannerInfo.message = 'При загрузке файла произошла ошибка, напишите в службу поддержки';
-                    _this.bannerInfo.show = true;
+                    _this.setError("danger", "При загрузке файла произошла ошибка, напишите в службу поддержки");
                   }
                 });
 
               case 4:
-                console.log(file);
-                file.value = '';
-
-              case 6:
               case "end":
                 return _context.stop();
             }
@@ -2757,24 +2857,47 @@ __webpack_require__.r(__webpack_exports__);
         }, _callee);
       }))();
     },
+    checkExt: function checkExt(ext) {
+      if (ext === "application/pdf") {
+        return true;
+      }
+
+      this.error;
+    },
+    reportErors: function reportErors() {},
+    // НЕ УВЕРЕН ЧТО НУЖНО
+    setError: function setError(variant, message) {
+      var key = this.bannerInfo.length - 1;
+      console.log(key);
+      this.bannerInfo.push({
+        show: true,
+        variant: variant,
+        message: message
+      });
+    },
+    resetError: function resetError(index) {
+      this.bannerInfo.splice(index, 1);
+    },
     deleteFileFromYii: function deleteFileFromYii() {
       var _this2 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_6___default.a.post("/program/delete-doc/".concat(this.id_org), null, {
+      axios__WEBPACK_IMPORTED_MODULE_7___default.a.post("/program/delete-doc/".concat(this.id_org), null, {
         headers: {
-          'X-CSRF-Token': this.csrf
+          "X-CSRF-Token": this.csrf
         }
       }).then(function (res) {
+        console.log(res);
+
         if (res.data) {
-          _this2.bannerInfo.variant = 'success';
-          _this2.bannerInfo.message = 'Файл удален успешно';
+          _this2.bannerInfo.variant = "success";
+          _this2.bannerInfo.message = "Файл удален успешно";
           _this2.bannerInfo.show = true;
           _this2.buttons.save = false;
           _this2.buttons.delete = false;
           _this2.buttons.upload = true;
         } else {
-          _this2.bannerInfo.variant = 'danger';
-          _this2.bannerInfo.message = 'При удалении файла произошла ошибка, напишите в службу поддержки';
+          _this2.bannerInfo.variant = "danger";
+          _this2.bannerInfo.message = "При удалении файла произошла ошибка, напишите в службу поддержки";
           _this2.bannerInfo.show = true;
         }
       });
@@ -2782,9 +2905,9 @@ __webpack_require__.r(__webpack_exports__);
     getFileStatus: function getFileStatus() {
       var _this3 = this;
 
-      axios__WEBPACK_IMPORTED_MODULE_6___default.a.post("/program/check-doc/".concat(this.id_org), null, {
+      axios__WEBPACK_IMPORTED_MODULE_7___default.a.post("/program/check-doc/".concat(this.id_org), null, {
         headers: {
-          'X-CSRF-Token': this.csrf
+          "X-CSRF-Token": this.csrf
         }
       }).then(function (res) {
         console.log(res.data);
@@ -2801,9 +2924,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this4 = this;
 
-    return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])(
-    /*#__PURE__*/
-    regeneratorRuntime.mark(function _callee2() {
+    return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -2829,7 +2950,7 @@ __webpack_require__.r(__webpack_exports__);
       }, _callee2);
     }))();
   },
-  computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_5__["mapGetters"])(['getUser', 'getPageData']), {
+  computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_4__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_6__["mapGetters"])(["getUser", "getPageData"]), {
     objects: function objects() {
       return this.getPageData && this.getPageData.objects;
     },
@@ -2885,7 +3006,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.extra-table-class {\n    vertical-align: middle !important;\n    text-align: center;\n}\n.vertical-align-centre-extra-table {\n    vertical-align: middle !important;\n}\n.overflow {\n    overflow: hidden;\n}\n.normal-font-weight-for-table {\n    font-weight: normal !important;\n}\n.cell-center-for-table {\n    vertical-align: middle !important;\n    text-align: center !important;\n}\n", ""]);
+exports.push([module.i, "\n.extra-table-class {\r\n    vertical-align: middle !important;\r\n    text-align: center;\n}\n.vertical-align-centre-extra-table {\r\n    vertical-align: middle !important;\n}\n.overflow {\r\n    overflow: hidden;\n}\n.normal-font-weight-for-table {\r\n    font-weight: normal !important;\n}\n.cell-center-for-table {\r\n    vertical-align: middle !important;\r\n    text-align: center !important;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -2939,7 +3060,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.extra-table-class {\r\n    vertical-align: middle !important;\r\n    text-align: center;\n}\n.vertical-align-centre-extra-table {\r\n    vertical-align: middle !important;\n}\n.overflow {\r\n    overflow: hidden;\n}\n.normal-font-weight-for-table {\r\n    font-weight: normal !important;\n}\n.normal-font-size-for-cell-file-name {\r\n    font-size: 13px !important;\n}\n.cell-center-for-table {\r\n    vertical-align: middle !important;\r\n    text-align: center !important;\n}\n.cell-center-for-items {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n.scope-to-animate {\r\n    z-index: 999;\r\n    height: 2px;\r\n    width: 8px;\r\n    background: grey;\r\n    transition: 0.4s ease;\n}\n.scope-to-animate:first-child {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 25%;\r\n    bottom: 35%;\n}\n.scope-to-animate:nth-child(2) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 45%;\r\n    bottom: 35%;\n}\n.scope-to-animate:nth-child(3) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 25%;\r\n    bottom: 54%;\n}\n.scope-to-animate:nth-child(4) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 45%;\r\n    bottom: 54%;\n}\n.label:hover .scope-to-animate:nth-child(1) {\r\n    transform: rotate(-135deg);\r\n    background: #5bc0de;\n}\n.label:hover .scope-to-animate:nth-child(2) {\r\n    transform: rotate(135deg);\r\n    background: #5bc0de;\n}\n.label:hover .scope-to-animate:nth-child(3) {\r\n    transform: rotate(225deg);\r\n    background: #5bc0de;\n}\n.label:hover .scope-to-animate:nth-child(4) {\r\n    transform: rotate(-225deg);\r\n    background: #5bc0de;\n}\n.hidden-file-input {\r\n    display: none;\n}\n.label {\r\n    position: relative;\r\n    width: 28px;\n}\n.arrow {\r\n    display: flex;\r\n    align-items: center;\n}\n.arrow input[type=file] {\r\n    outline:0;\r\n    opacity:0;\r\n    pointer-events:none;\r\n    user-select:none\n}\n.arrow .label  {\r\n    height: 28px;\r\n    border:1px solid grey;\r\n    border-radius:5px;\r\n    display:block;\r\n    transition:border 300ms ease;\r\n    cursor:pointer;\r\n    text-align:center\n}\n.arrow .label i {\r\n    display:block;\r\n    font-size:42px;\n}\n.arrow .label i,.example-1 .label .title {\r\n    color:grey;\r\n    transition:200ms color\n}\n.arrow .label:hover {\r\n    border:2px solid #5bc0de\n}\n.arrow .label:hover i,.example-1 .label:hover .title {\r\n    color:#5bc0de\n}\n.cross-to-animate {\r\n    z-index: 999;\r\n    height: 2px;\r\n    width: 15px;\r\n    background: #d9534f;\r\n    transition: 0.4s ease;\n}\n.cross-to-animate:first-child {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 20%;\r\n    bottom: 45%;\n}\n.cross-to-animate:nth-child(2) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 22%;\r\n    bottom: 45%;\n}\n.label:hover .cross-to-animate:nth-child(1) {\r\n    transform: rotate(-135deg);\n}\n.label:hover .cross-to-animate:nth-child(2) {\r\n    transform: rotate(135deg);\n}\n.cross {\r\n    display: flex;\r\n    align-items: center;\n}\n.cross .label  {\r\n    height: 28px;\r\n    border:1px solid grey;\r\n    border-radius:5px;\r\n    display:block;\r\n    transition:border 300ms ease;\r\n    cursor:pointer;\r\n    text-align:center\n}\n.cross .label i {\r\n    display:block;\r\n    font-size:42px;\n}\n.cross .label i,.cross .label .title {\r\n    color:grey;\r\n    transition:200ms color\n}\n.cross .label:hover {\r\n    border:2px solid #d9534f\n}\r\n", ""]);
+exports.push([module.i, "\n.extra-table-class {\r\n    vertical-align: middle !important;\r\n    text-align: center;\n}\n.vertical-align-centre-extra-table {\r\n    vertical-align: middle !important;\n}\n.overflow {\r\n    overflow: hidden;\n}\n.normal-font-weight-for-table {\r\n    font-weight: normal !important;\n}\n.normal-font-size-for-cell-file-name {\r\n    font-size: 13px !important;\n}\n.cell-center-for-table {\r\n    vertical-align: middle !important;\r\n    text-align: center !important;\n}\n.cell-center-for-items {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n.scope-to-animate {\r\n    z-index: 999;\r\n    height: 2px;\r\n    width: 8px;\r\n    background: grey;\r\n    transition: 0.4s ease;\n}\n.scope-to-animate:first-child {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 25%;\r\n    bottom: 35%;\n}\n.scope-to-animate:nth-child(2) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 45%;\r\n    bottom: 35%;\n}\n.scope-to-animate:nth-child(3) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 25%;\r\n    bottom: 54%;\n}\n.scope-to-animate:nth-child(4) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 45%;\r\n    bottom: 54%;\n}\n.label:hover .scope-to-animate:nth-child(1) {\r\n    transform: rotate(-135deg);\r\n    background: #5bc0de;\n}\n.label:hover .scope-to-animate:nth-child(2) {\r\n    transform: rotate(135deg);\r\n    background: #5bc0de;\n}\n.label:hover .scope-to-animate:nth-child(3) {\r\n    transform: rotate(225deg);\r\n    background: #5bc0de;\n}\n.label:hover .scope-to-animate:nth-child(4) {\r\n    transform: rotate(-225deg);\r\n    background: #5bc0de;\n}\n.hidden-file-input {\r\n    display: none;\n}\n.label {\r\n    position: relative;\r\n    width: 28px;\n}\n.arrow {\r\n    display: flex;\r\n    align-items: center;\n}\n.arrow input[type=\"file\"] {\r\n    outline: 0;\r\n    opacity: 0;\r\n    pointer-events: none;\r\n    user-select: none;\n}\n.arrow .label {\r\n    height: 28px;\r\n    border: 1px solid grey;\r\n    border-radius: 5px;\r\n    display: block;\r\n    transition: border 300ms ease;\r\n    cursor: pointer;\r\n    text-align: center;\n}\n.arrow .label i {\r\n    display: block;\r\n    font-size: 42px;\n}\n.arrow .label i,\r\n.example-1 .label .title {\r\n    color: grey;\r\n    transition: 200ms color;\n}\n.arrow .label:hover {\r\n    border: 2px solid #5bc0de;\n}\n.arrow .label:hover i,\r\n.example-1 .label:hover .title {\r\n    color: #5bc0de;\n}\n.cross-to-animate {\r\n    z-index: 999;\r\n    height: 2px;\r\n    width: 15px;\r\n    background: #d9534f;\r\n    transition: 0.4s ease;\n}\n.cross-to-animate:first-child {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 20%;\r\n    bottom: 45%;\n}\n.cross-to-animate:nth-child(2) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 22%;\r\n    bottom: 45%;\n}\n.label:hover .cross-to-animate:nth-child(1) {\r\n    transform: rotate(-135deg);\n}\n.label:hover .cross-to-animate:nth-child(2) {\r\n    transform: rotate(135deg);\n}\n.cross {\r\n    display: flex;\r\n    align-items: center;\n}\n.cross .label {\r\n    height: 28px;\r\n    border: 1px solid grey;\r\n    border-radius: 5px;\r\n    display: block;\r\n    transition: border 300ms ease;\r\n    cursor: pointer;\r\n    text-align: center;\n}\n.cross .label i {\r\n    display: block;\r\n    font-size: 42px;\n}\n.cross .label i,\r\n.cross .label .title {\r\n    color: grey;\r\n    transition: 200ms color;\n}\n.cross .label:hover {\r\n    border: 2px solid #d9534f;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -2993,7 +3114,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.hover{\n    cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.hover {\r\n    cursor: pointer;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -3011,7 +3132,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.toggle_button[data-v-f2da7ae4]{\n    display: block;\n    cursor: pointer;\n}\n.card-body[data-v-f2da7ae4]{\n    overflow-y: auto;\n}\n", ""]);
+exports.push([module.i, "\n.toggle_button[data-v-f2da7ae4] {\r\n    display: block;\r\n    cursor: pointer;\n}\n.card-body[data-v-f2da7ae4] {\r\n    overflow-y: auto;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -3484,7 +3605,7 @@ var render = function() {
                 [
                   _c("b-th", [
                     _vm._v(
-                      "Строительные конструкции замена и (или) восстановление которых планируются при капитальном ремонте"
+                      "Строительные конструкции замена и (или) восстановление\n                    которых планируются при капитальном ремонте"
                     )
                   ]),
                   _vm._v(" "),
@@ -3494,7 +3615,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("b-th", [
                     _vm._v(
-                      "Срок эксплуатации с момента строительства или предыдущего капитального ремонта"
+                      "Срок эксплуатации с момента строительства или\n                    предыдущего капитального ремонта"
                     )
                   ]),
                   _vm._v(" "),
@@ -3697,7 +3818,7 @@ var render = function() {
                 [
                   _c("b-th", [
                     _vm._v(
-                      "Системы инженерно-технического обеспечения замена и (или) восстановление которых планируются при капитальном ремонте"
+                      "Системы инженерно-технического обеспечения замена и\n                    (или) восстановление которых планируются при капитальном\n                    ремонте"
                     )
                   ]),
                   _vm._v(" "),
@@ -3705,7 +3826,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("b-th", [
                     _vm._v(
-                      "Срок эксплуатации с момента строительства или предыдущего капитального ремонта"
+                      "Срок эксплуатации с момента строительства или\n                    предыдущего капитального ремонта"
                     )
                   ]),
                   _vm._v(" "),
@@ -4491,9 +4612,22 @@ var render = function() {
                         "no-cell-border vertical-align-centre-extra-table normal-font-weight-for-table"
                     },
                     [
-                      _vm._v(
-                        '"\n"\n                            @input="fileInput(index)">\n\n                        '
-                      ),
+                      _c("input", {
+                        ref: "file" + index,
+                        refInFor: true,
+                        staticClass: "hidden-file-input",
+                        attrs: {
+                          type: "file",
+                          name: _vm.modelName + "[" + item.descriptor + "]file",
+                          id: "file_input_" + index
+                        },
+                        on: {
+                          input: function($event) {
+                            return _vm.fileInput(index)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
                       !item.fileName
                         ? _c("div", { staticClass: "cell-center-for-items" }, [
                             _c("div", { staticClass: "arrow" }, [
@@ -4593,7 +4727,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\n                        Удалить документ\n                    "
+                            "\n                    Удалить документ\n                "
                           )
                         ]
                       )
@@ -4612,7 +4746,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        Добавить документ\n                    "
+                        "\n                    Добавить документ\n                "
                       )
                     ]
                   )
@@ -6610,7 +6744,7 @@ var render = function() {
         [
           _c("p", { staticClass: "my-4" }, [
             _vm._v(
-              "\n            Уважаемые пользователи!\n            В связи с техническими работами на сервере возможность загрузки программы модернизации инфраструктуры образовательных организаций высшего \n            образования (далее - программа) \n            в формате pdf и отправка на согласование в Минобрнауки России будет доступна с 13 марта 2020 года.\n            Срок направления программы на согласование с Минобрнауки России будет продлён до 20 марта 2020 года.\n            Официальное письмо о продлении срока представления программы в Минобрнауки России: "
+              "\n            Уважаемые пользователи! В связи с техническими работами на\n            сервере возможность загрузки программы модернизации\n            инфраструктуры образовательных организаций высшего образования\n            (далее - программа) в формате pdf и отправка на согласование в\n            Минобрнауки России будет доступна с 13 марта 2020 года. Срок\n            направления программы на согласование с Минобрнауки России будет\n            продлён до 20 марта 2020 года. Официальное письмо о продлении\n            срока представления программы в Минобрнауки России:\n            "
             ),
             _c("a", { attrs: { href: "/baner.pdf", target: "_blank" } }, [
               _vm._v("MN-17_90")
@@ -6716,7 +6850,7 @@ var render = function() {
                     [
                       _c("b-icon-gear-wide-connected"),
                       _vm._v(
-                        "\n                       Объекты требующие капитального ремонта"
+                        "Объекты требующие\n                    капитального ремонта\n                "
                       )
                     ],
                     1
@@ -6819,26 +6953,21 @@ var render = function() {
           _c(
             "div",
             { staticClass: "col-12" },
-            [
-              _c(
+            _vm._l(_vm.bannerInfo, function(banner, index) {
+              return _c(
                 "b-alert",
                 {
+                  key: index,
                   attrs: {
-                    show: _vm.bannerInfo.show,
-                    variant: _vm.bannerInfo.variant,
+                    show: banner.show,
+                    variant: banner.variant,
                     dismissible: "",
                     fade: ""
                   }
                 },
-                [
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(_vm.bannerInfo.message) +
-                      "\n                    "
-                  )
-                ]
+                [_vm._v(_vm._s(banner.message))]
               )
-            ],
+            }),
             1
           )
         ]),
@@ -6852,11 +6981,13 @@ var render = function() {
                 "b-alert",
                 { attrs: { show: _vm.banner.show, dismissible: "", fade: "" } },
                 [
-                  _vm._v("\n                    Файл "),
+                  _vm._v("\n                    Файл\n                    "),
                   _c("label", { staticClass: "font-weight-bold" }, [
                     _vm._v(_vm._s(_vm.banner.fileName))
                   ]),
-                  _vm._v(" загружается "),
+                  _vm._v(
+                    "\n                    загружается\n                    "
+                  ),
                   _c("label", { staticClass: "font-weight-bold" }, [
                     _vm._v(_vm._s(_vm.banner.loadProgress) + "%")
                   ])
@@ -6868,12 +6999,9 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-6" }),
-        _vm._v(" "),
+      _c("div", { staticClass: "row justify-content-end" }, [
         _c(
           "div",
-          { staticClass: "col-6 offset-7" },
           [
             _c(
               "a",
