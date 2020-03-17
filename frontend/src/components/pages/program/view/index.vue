@@ -348,8 +348,8 @@ export default {
         },
         reportErors() {}, // НЕ УВЕРЕН ЧТО НУЖНО
         setError(variant, message) {
-            let key = this.bannerInfo.length - 1
-            console.log(key)
+            let key = this.bannerInfo.length - 1;
+            console.log(key);
             this.bannerInfo.push({
                 show: true,
                 variant: variant,

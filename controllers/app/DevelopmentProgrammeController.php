@@ -3,25 +3,21 @@
 namespace app\controllers\app;
 
 use app\models\Atz;
-use app\models\ObjectDocumentsList;
-use app\models\ObjectDocumentsTypes;
 use app\models\Organizations;
 use app\models\ProgObjectsEvents;
 use app\models\ProgObjectsRiscs;
 use app\models\ProgObjectsWaites;
 use app\models\ProgramObjects;
 use app\models\ProObjectsNecessary;
-use Mpdf\Gif\FileHeader;
 use Mpdf\HTMLParserMode;
 use Mpdf\Mpdf;
 use Mpdf\MpdfException;
 use Yii;
-
 use yii\base\Exception;
 use yii\base\InvalidConfigException;
-
 use yii\filters\VerbFilter;
 use yii\helpers\FileHelper;
+use yii\helpers\Json;
 use yii\web\UploadedFile;
 
 /**
@@ -44,6 +40,11 @@ class DevelopmentProgrammeController extends AppController
         ];
     }
 
+    /**
+     * @param $id
+     * @return int
+     * @throws Exception
+     */
     public function actionAddDoc($id)
     {
         $file = UploadedFile::getInstanceByName('progFile');
@@ -57,6 +58,10 @@ class DevelopmentProgrammeController extends AppController
         return 0;
     }
 
+    /**
+     * @param $id
+     * @return int
+     */
     public function actionDeleteDoc($id)
     {
         $path = Yii::getAlias('@webroot') . "/uploads/programDocs/$id.pdf";
@@ -67,12 +72,20 @@ class DevelopmentProgrammeController extends AppController
         return 0;
     }
 
+    /**
+     * @param $id
+     * @return string
+     */
     public function actionCheckDoc($id)
     {
         $path = Yii::getAlias('@webroot') . "/uploads/programDocs/$id.pdf";
-        return json_encode(file_exists($path));
+        return Json::encode(file_exists($path));
     }
 
+    /**
+     * @param $id
+     * @return string|void
+     */
     public function actionDownloadDoc($id)
     {
         $path = Yii::getAlias('@webroot') . "/uploads/programDocs/$id.pdf";
@@ -88,8 +101,7 @@ class DevelopmentProgrammeController extends AppController
      * @throws InvalidConfigException
      * @throws MpdfException
      */
-    public function actionExport()
-    {
+    public function actionExport(){
 
         $user = Yii::$app->getSession()->get('user');
         $org = Organizations::findOne($user->id_org);
@@ -109,19 +121,26 @@ class DevelopmentProgrammeController extends AppController
         $atz = Atz::findAll(['id_program'=>$program->id]);
         $atzC = [];
         $bC = $vC = $bvC = 0;
-        foreach ($atz as $item){
-            $bC  += floatval($item->cost_b);
-            $vC  += floatval($item->cost_v);
-            $bvC += (floatval($item->cost_v) + floatval($item->cost_b));
+        if ($atz) {
+            foreach ($atz as $item) {
+                $bC += floatval($item->cost_b);
+                $vC += floatval($item->cost_v);
+                $bvC += (floatval($item->cost_v) + floatval($item->cost_b));
+                $atzC = [
+                    'bC' => $bC,
+                    'vC' => $vC,
+                    'bvC' => $bvC
+                ];
+            }
+        }
+        else{
             $atzC = [
-                'bC' =>number_format($bC, 0, ',', ' '),
-                'vC' =>number_format($vC, 0, ',', ' '),
-                'bvC' =>number_format($bvC, 0, ',', ' ')
+                'bC' => 0,
+                'vC' => 0,
+                'bvC' => 0
             ];
         }
 
-        // echo"<pre>";
-        // print_r($atzC);
 
 
 
@@ -139,14 +158,24 @@ class DevelopmentProgrammeController extends AppController
         }
 
 
-        // $mpdf = new Mpdf();
-        // $stylesheet = file_get_contents('bootstrap/css/bootstrap.css');
-        // $stylesheet2 = file_get_contents('bootstrap/css/bootstrap-grid.css');
-        // ini_set("pcre.backtrack_limit", "5000000");
-        // $mpdf->WriteHTML($stylesheet,HTMLParserMode::HEADER_CSS);
-        // $mpdf->WriteHTML($stylesheet2,HTMLParserMode::HEADER_CSS);
-        // $mpdf->WriteHTML($this->renderPartial('_export',compact('objects','org','atz','pr_ob','r_ob','events','nes','wai','risks','sq','atzC')));
-        // $mpdf->Output();
+        $mpdf = new Mpdf();
+        $stylesheet = file_get_contents('bootstrap/css/bootstrap.css');
+        $stylesheet2 = file_get_contents('bootstrap/css/bootstrap-grid.css');
+        ini_set("pcre.backtrack_limit", "5000000");
+        $mpdf->WriteHTML('
+        body{
+        font-family: "Times New Roman", serif;
+        }
+        td{
+        margin: 0 auto !important;
+        text-align: center !important;
+        vertical-align: middle !important;
+        }'
+            ,HTMLParserMode::HEADER_CSS);
+        $mpdf->WriteHTML($stylesheet,HTMLParserMode::HEADER_CSS);
+        $mpdf->WriteHTML($stylesheet2,HTMLParserMode::HEADER_CSS);
+        $mpdf->WriteHTML($this->renderPartial('_export',compact('objects','org','atz','pr_ob','r_ob','events','nes','wai','risks','sq','atzC')));
+        return $mpdf->Output();
     }
 
     /**

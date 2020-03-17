@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
+/* harmony import */ var _mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 //
@@ -41,8 +41,8 @@ __webpack_require__.r(__webpack_exports__);
       user: {}
     };
   },
-  computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['getUser'])),
-  methods: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['requestUser'])),
+  computed: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['getUser'])),
+  methods: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['requestUser'])),
   mounted: function mounted() {
     this.requestUser(); // this.user = this.getUser;
   }
@@ -90,7 +90,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
+/* harmony import */ var _mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _organisms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../organisms */ "./src/components/organisms/index.js");
 
@@ -118,8 +118,8 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     userPanel: _organisms__WEBPACK_IMPORTED_MODULE_2__["userPanel"]
   },
-  computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['getPageData', 'getUser'])),
-  methods: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({
+  computed: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['getPageData', 'getUser'])),
+  methods: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({
     link: function link() {
       return window.location.href = "/organization/update/".concat(this.getUser.organization.id);
     }
@@ -274,41 +274,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     modelName: String
@@ -317,22 +282,22 @@ __webpack_require__.r(__webpack_exports__);
     onInput: function onInput(index) {
       // console.log(this.items[index].obosnovanie)
       if (this.items[index].obosnovanie.length >= 255) {
-        this.reportErrors("Достигнуто максимальное количество символов (255 символов)");
+        this.reportErrors('Достигнуто максимальное количество символов (255 символов)');
       }
     },
     onInputTwo: function onInputTwo(index) {
       if (this.itemsTwo[index].obosnovanie.length >= 255) {
-        this.reportErrors("Достигнуто максимальное количество символов (255 символов)");
+        this.reportErrors('Достигнуто максимальное количество символов (255 символов)');
       }
     },
     reportErrors: function reportErrors(message) {
       this.$bvModal.msgBoxOk(message, {
-        title: "Ошибка!",
-        size: "sm",
-        buttonSize: "sm",
-        okVariant: "outline-success",
-        headerClass: "p-2 border-bottom-0",
-        footerClass: "p-2 border-top-0",
+        title: 'Ошибка!',
+        size: 'sm',
+        buttonSize: 'sm',
+        okVariant: 'outline-success',
+        headerClass: 'p-2 border-bottom-0',
+        footerClass: 'p-2 border-top-0',
         centered: true
       });
     }
@@ -347,7 +312,7 @@ __webpack_require__.r(__webpack_exports__);
     }
 
     this.items.forEach(function (item, index) {
-      var it = getKeyByValue(window.MODEL.necessary, "element", index);
+      var it = getKeyByValue(window.MODEL.necessary, 'element', index);
       item.nalichie = it === null || it === void 0 ? void 0 : it.nalichie;
       item.material = it === null || it === void 0 ? void 0 : it.material;
       item.srok_eks = it === null || it === void 0 ? void 0 : it.srok_eks;
@@ -355,7 +320,7 @@ __webpack_require__.r(__webpack_exports__);
       item.obosnovanie = it === null || it === void 0 ? void 0 : it.obosnovanie;
     });
     this.itemsTwo.forEach(function (item, index) {
-      var it = getKeyByValue(window.MODEL.necessary, "element", index + 17);
+      var it = getKeyByValue(window.MODEL.necessary, 'element', index + 17);
       item.nalichie = it === null || it === void 0 ? void 0 : it.nalichie;
       item.srok_eks = it === null || it === void 0 ? void 0 : it.srok_eks;
       item.kap_remont = it === null || it === void 0 ? void 0 : it.kap_remont;
@@ -365,7 +330,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       items: [{
-        label: "Фундаменты",
+        label: 'Фундаменты',
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -373,7 +338,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 0
       }, {
-        label: "Отмостка",
+        label: 'Отмостка',
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -381,7 +346,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 1
       }, {
-        label: "Стены",
+        label: 'Стены',
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -389,7 +354,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 2
       }, {
-        label: "Колонны",
+        label: 'Колонны',
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -397,7 +362,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 3
       }, {
-        label: "Перегородки",
+        label: 'Перегородки',
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -405,7 +370,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 4
       }, {
-        label: "Крыша",
+        label: 'Крыша',
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -413,7 +378,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 5
       }, {
-        label: "Кровля",
+        label: 'Кровля',
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -421,7 +386,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 6
       }, {
-        label: "Перекрытия",
+        label: 'Перекрытия',
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -429,7 +394,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 7
       }, {
-        label: "Полы",
+        label: 'Полы',
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -437,7 +402,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 8
       }, {
-        label: "Окна",
+        label: 'Окна',
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -445,7 +410,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 9
       }, {
-        label: "Двери",
+        label: 'Двери',
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -453,7 +418,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 10
       }, {
-        label: "Ворота",
+        label: 'Ворота',
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -461,7 +426,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 11
       }, {
-        label: "Лестницы",
+        label: 'Лестницы',
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -469,7 +434,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 12
       }, {
-        label: "Крыльца",
+        label: 'Крыльца',
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -477,7 +442,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 13
       }, {
-        label: "Балконы/Лоджии",
+        label: 'Балконы/Лоджии',
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -485,7 +450,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 14
       }, {
-        label: "Внутренняя отделка",
+        label: 'Внутренняя отделка',
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -493,7 +458,7 @@ __webpack_require__.r(__webpack_exports__);
         obosnovanie: null,
         element: 15
       }, {
-        label: "Наружняя отделка",
+        label: 'Наружняя отделка',
         nalichie: null,
         material: null,
         srok_eks: null,
@@ -502,119 +467,119 @@ __webpack_require__.r(__webpack_exports__);
         element: 16
       }],
       itemsTwo: [{
-        label: "Система электроснабжения",
+        label: 'Система электроснабжения',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 17
       }, {
-        label: "Система водоснабжения",
+        label: 'Система водоснабжения',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 18
       }, {
-        label: "Система водоотведения",
+        label: 'Система водоотведения',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 19
       }, {
-        label: "Система газоснабжения",
+        label: 'Система газоснабжения',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 20
       }, {
-        label: "Система кондиционирования воздуха",
+        label: 'Система кондиционирования воздуха',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 21
       }, {
-        label: "Система вентиляции",
+        label: 'Система вентиляции',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 22
       }, {
-        label: "Система отопления",
+        label: 'Система отопления',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 23
       }, {
-        label: "Система диспетчеризации",
+        label: 'Система диспетчеризации',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 24
       }, {
-        label: "Радиофикация",
+        label: 'Радиофикация',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 25
       }, {
-        label: "Телевидение эфирное",
+        label: 'Телевидение эфирное',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 26
       }, {
-        label: "Система видеонаблюдения",
+        label: 'Система видеонаблюдения',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 27
       }, {
-        label: "Система интернет и телефонии",
+        label: 'Система интернет и телефонии',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 28
       }, {
-        label: "Система контроля управления доступом",
+        label: 'Система контроля управления доступом',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 29
       }, {
-        label: "Пожарная сигнализация",
+        label: 'Пожарная сигнализация',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 30
       }, {
-        label: "Охранная сигнализация",
+        label: 'Охранная сигнализация',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 31
       }, {
-        label: "Мусоропроводы",
+        label: 'Мусоропроводы',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
         obosnovanie: null,
         element: 32
       }, {
-        label: "Лифты",
+        label: 'Лифты',
         nalichie: null,
         srok_eks: null,
         kap_remont: null,
@@ -1058,9 +1023,591 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/form/Uploads.vue?vue&type=script&lang=js& ***!
   \******************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/src/components/pages/program/form/Uploads.vue: Unexpected token (222:0)\n\n\u001b[0m \u001b[90m 220 | \u001b[39m    }\u001b[33m,\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 221 | \u001b[39m    methods\u001b[33m:\u001b[39m {\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 222 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m\u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 223 | \u001b[39m        dubug() {\u001b[0m\n\u001b[0m \u001b[90m 224 | \u001b[39m            console\u001b[33m.\u001b[39mlog(\u001b[32m\"Файлы в буфере:\"\u001b[39m)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 225 | \u001b[39m            console\u001b[33m.\u001b[39mlog(\u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mselectedFiles)\u001b[33m;\u001b[39m\u001b[0m\n    at Object.raise (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:7044:17)\n    at Object.unexpected (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:8422:16)\n    at Object.parseIdentifierName (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:10391:18)\n    at Object.parseIdentifier (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:10369:23)\n    at Object.parseMaybePrivateName (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9728:19)\n    at Object.parsePropertyName (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:10187:126)\n    at Object.parseObjectMember (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:10088:10)\n    at Object.parseObj (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:10019:25)\n    at Object.parseExprAtom (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9644:28)\n    at Object.parseExprAtom (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:4115:20)\n    at Object.parseExprSubscripts (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9287:23)\n    at Object.parseMaybeUnary (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9267:21)\n    at Object.parseExprOps (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9137:23)\n    at Object.parseMaybeConditional (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9110:23)\n    at Object.parseMaybeAssign (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9065:21)\n    at Object.parseObjectProperty (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:10149:101)\n    at Object.parseObjPropValue (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:10174:101)\n    at Object.parseObjectMember (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:10098:10)\n    at Object.parseObj (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:10019:25)\n    at Object.parseExprAtom (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9644:28)\n    at Object.parseExprAtom (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:4115:20)\n    at Object.parseExprSubscripts (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9287:23)\n    at Object.parseMaybeUnary (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9267:21)\n    at Object.parseExprOps (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9137:23)\n    at Object.parseMaybeConditional (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9110:23)\n    at Object.parseMaybeAssign (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9065:21)\n    at Object.parseExportDefaultExpression (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:11906:24)\n    at Object.parseExport (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:11808:31)\n    at Object.parseStatementContent (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:10828:27)\n    at Object.parseStatement (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:10724:17)\n    at Object.parseBlockOrModuleBlockBody (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:11298:25)\n    at Object.parseBlockBody (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:11285:10)\n    at Object.parseTopLevel (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:10655:10)\n    at Object.parse (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:12264:10)\n    at parse (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:12290:26)\n    at parser (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/lib/parser/index.js:54:34)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.symbol */ "./node_modules/core-js/modules/es.symbol.js");
+/* harmony import */ var core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! core-js/modules/es.symbol.description */ "./node_modules/core-js/modules/es.symbol.description.js");
+/* harmony import */ var core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_description__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! core-js/modules/es.symbol.iterator */ "./node_modules/core-js/modules/es.symbol.iterator.js");
+/* harmony import */ var core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_symbol_iterator__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! core-js/modules/es.array.concat */ "./node_modules/core-js/modules/es.array.concat.js");
+/* harmony import */ var core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_concat__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.array.filter */ "./node_modules/core-js/modules/es.array.filter.js");
+/* harmony import */ var core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_filter__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! core-js/modules/es.array.for-each */ "./node_modules/core-js/modules/es.array.for-each.js");
+/* harmony import */ var core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_for_each__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! core-js/modules/es.array.index-of */ "./node_modules/core-js/modules/es.array.index-of.js");
+/* harmony import */ var core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_index_of__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! core-js/modules/es.array.map */ "./node_modules/core-js/modules/es.array.map.js");
+/* harmony import */ var core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_map__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! core-js/modules/es.array.splice */ "./node_modules/core-js/modules/es.array.splice.js");
+/* harmony import */ var core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_array_splice__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! core-js/modules/es.object.to-string */ "./node_modules/core-js/modules/es.object.to-string.js");
+/* harmony import */ var core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_10___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_object_to_string__WEBPACK_IMPORTED_MODULE_10__);
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! core-js/modules/es.string.iterator */ "./node_modules/core-js/modules/es.string.iterator.js");
+/* harmony import */ var core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_iterator__WEBPACK_IMPORTED_MODULE_11__);
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! core-js/modules/web.dom-collections.for-each */ "./node_modules/core-js/modules/web.dom-collections.for-each.js");
+/* harmony import */ var core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_for_each__WEBPACK_IMPORTED_MODULE_12__);
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_13__ = __webpack_require__(/*! core-js/modules/web.dom-collections.iterator */ "./node_modules/core-js/modules/web.dom-collections.iterator.js");
+/* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_13__);
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_14__);
+/* harmony import */ var _mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_16__);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      csrf: document.getElementsByName('csrf-token')[0].content,
+      items: [{
+        descriptor: 'inv_card',
+        fileName: null,
+        label: 'Инвентарные карточки учета основных средств на объект недвижимого имущества и на земельный участок под указанным объектом'
+      }, {
+        descriptor: 'reestr_vip',
+        fileName: null,
+        label: 'Выписка из реестра федерального имущества на объект федерального имущества и на земельный участок под указанным объектом'
+      }, {
+        descriptor: 'pravust',
+        fileName: null,
+        label: 'Правоустанавливающие и (или) правоудостоверяющие документы на объект недвижимого имущества и на земельный участок под указанным объектом'
+      }, {
+        descriptor: 'tex_kad_docs',
+        fileName: null,
+        label: 'Документы технического и кадастрового учета на объект недвижимого имущества'
+      }, {
+        descriptor: 'sit_plan',
+        fileName: null,
+        label: 'Ситуационный план с указанием границ земельного участка, объекта недвижимого имущества и иных объектов (включая незавершенные строительные объекты), принадлежащих третьим лицам, расположенных на указанном земельном участке'
+      }, {
+        descriptor: 'tex_acts',
+        fileName: null,
+        label: 'Акт технического осмотра объекта капитального строительства (документ, содержащий сведения о результатах обследования объекта капитального строительства, техническом состоянии строительных конструкций и инженерного оборудования такого объекта и количественной оценке фактических показателей качества строительных конструкций и инженерного оборудования по состоянию на дату обследования, для определения состава, объёмов и сроков работ по капитальному ремонту объекта капитального строительства)'
+      }, {
+        descriptor: 'def_ved',
+        fileName: null,
+        label: 'Дефектная ведомость (первичный учётный документ, подготовленный в соответствии с требованиями законодательства Российской Федерации о бухгалтерском учёте по результатам обследования технического состояния объекта капитального строительства и содержащий перечень дефектов строительных конструкций и инженерного оборудования объекта капитального строительства с указанием качественных и количественных характеристик таких дефектов)'
+      }, {
+        descriptor: 'obj_photos',
+        fileName: null,
+        label: 'Фотографии объекта, предполагаемого к проведению капитального ремонта (подписанные по 2 шт. на листе А4, но не более 10 шт. на объект недвижимости)'
+      }, {
+        descriptor: 'predpis',
+        fileName: null,
+        label: 'Предписания надзорных органов (при наличии)'
+      }, {
+        descriptor: 'proekti',
+        fileName: null,
+        label: 'Задание на проектирование (корректировку проектной документации), составленное в соответствии с рекомендациями Минстроя РФ (в случае разработки/корректировки проектной документации и/или направления данной документации на экспертизу)'
+      }],
+      allDescriptors: ['inv_card', 'reestr_vip', 'pravust', 'tex_kad_docs', 'sit_plan', 'tex_acts', 'tex_acts', 'def_ved', 'obj_photos', 'predpis', 'proekti'],
+      loadProgress: null,
+      loadingFileName: null,
+      loadedFilesOnServer: [],
+      selectedFiles: [],
+      uploadSuccess: true,
+      update: false,
+      objectId: null
+    };
+  },
+  mounted: function mounted() {
+    if (this.$route.path.indexOf('/program/object/update') !== -1) {
+      this.update = true;
+      this.objectId = this.$route.params.id;
+      this.getLoadedFiles(this.objectId);
+    }
+  },
+  methods: {
+    getLoadedFiles: function getLoadedFiles(id) {
+      var _this = this;
+
+      return Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_15__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                _context.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_16___default.a.get("/program/object/files/".concat(id)).then(function (res) {
+                  var _res$data;
+
+                  if ((_res$data = res.data) === null || _res$data === void 0 ? void 0 : _res$data.length) {
+                    res.data.forEach(function (element) {
+                      _this.loadedFilesOnServer.push(element);
+
+                      _this.setFileName(element);
+                    });
+                  }
+                });
+
+              case 2:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    setFileName: function setFileName(element) {
+      var _this2 = this;
+
+      this.items.map(function (elem, index) {
+        if (elem.descriptor === element.descriptor) {
+          _this2.items[index].fileName = element.name + '.pdf';
+        }
+      });
+
+      if (!element.descriptor.indexOf('others_')) {
+        this.items.push({
+          descriptor: element.descriptor,
+          fileName: element.name + '.pdf',
+          label: element.label,
+          other: true
+        });
+      }
+    },
+    addNewRow: function addNewRow() {
+      this.items.push({
+        descriptor: 'others_' + (this.items.length - 10),
+        fileName: null,
+        label: null,
+        other: true
+      });
+    },
+    deleteLastRow: function deleteLastRow() {
+      var index = this.items.length - 1;
+
+      if (this.items[index].label != null) {
+        this.removeFileFromYii(this.objectId, this.items[index].descriptor, index);
+      }
+
+      this.items.pop();
+      if (this.selectedFiles.length) this.fileRemove(index);
+    },
+    fileInput: function fileInput(index) {
+      var file = document.querySelector('#file_input_' + index).files[0];
+
+      if (!this.checkFileExt(file.type) || !this.checkFileSize(file.size) || this.isUniqueName(file.name)) {
+        file.value = null;
+        return;
+      }
+
+      this.selectedFiles.push({
+        id: index,
+        descriptor: this.items[index].descriptor,
+        name: this.items[index].label,
+        file: file
+      });
+      this.items[index].fileName = file.name;
+      console.log('Файл введен');
+    },
+    fileRemove: function fileRemove(index, descriptor) {
+      var key = this.getSelectedFileKey(index);
+
+      if (this.items[index].fileName != null && key == null) {
+        this.removeFileFromYii(this.objectId, descriptor, index);
+      } else if (this.items[index].fileName == null && key == null) {
+        this.errorMessage('Сначала выберите файлы!');
+      } else if (this.items[index].fileName != null && key != null) {
+        this.selectedFiles.splice(key, 1);
+        this.items[index].fileName = null;
+        document.querySelector('#file_input_' + index).value = null;
+      }
+    },
+    isUniqueName: function isUniqueName(name) {
+      var _iteratorNormalCompletion = true;
+      var _didIteratorError = false;
+      var _iteratorError = undefined;
+
+      try {
+        for (var _iterator = this.items[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+          var item = _step.value;
+
+          if (item.fileName === name) {
+            this.errorMessage('Файл с таким названием уже существует!');
+            return true;
+          }
+        }
+      } catch (err) {
+        _didIteratorError = true;
+        _iteratorError = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion && _iterator.return != null) {
+            _iterator.return();
+          }
+        } finally {
+          if (_didIteratorError) {
+            throw _iteratorError;
+          }
+        }
+      }
+
+      return false;
+    },
+    checkFileExt: function checkFileExt(type) {
+      if (type !== 'application/pdf') {
+        this.errorMessage('Файл не является документом pdf!');
+        return false;
+      }
+
+      return true;
+    },
+    checkFileSize: function checkFileSize(size) {
+      var _size = 20971520; //20 Мб
+
+      if (parseInt(size) > _size) {
+        this.errorMessage('Файл больше 20МБ!');
+        return false;
+      }
+
+      return true;
+    },
+    checkFileName: function checkFileName(name) {
+      var _iteratorNormalCompletion2 = true;
+      var _didIteratorError2 = false;
+      var _iteratorError2 = undefined;
+
+      try {
+        for (var _iterator2 = this.items[Symbol.iterator](), _step2; !(_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done); _iteratorNormalCompletion2 = true) {
+          var item = _step2.value;
+
+          if (item.fileName === name) {
+            this.errorMessage('Файл с таким названием уже существует!');
+            return true;
+          }
+        }
+      } catch (err) {
+        _didIteratorError2 = true;
+        _iteratorError2 = err;
+      } finally {
+        try {
+          if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
+            _iterator2.return();
+          }
+        } finally {
+          if (_didIteratorError2) {
+            throw _iteratorError2;
+          }
+        }
+      }
+
+      return false;
+    },
+    getSelectedFileKey: function getSelectedFileKey(index) {
+      var element = this.selectedFiles.map(function (elem, id) {
+        if (elem.id === index) {
+          return id;
+        } else {
+          return null;
+        }
+      }).filter(function (elem) {
+        return elem !== null;
+      })[0];
+
+      if (element != null) {
+        return element;
+      } else {
+        return null;
+      }
+    },
+    getSavedDocuments: function getSavedDocuments() {
+      return this.selectedFiles;
+    },
+    sendFile: function sendFile(_ref) {
+      var _this3 = this;
+
+      var id = _ref.id;
+      return Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_15__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+        var _iteratorNormalCompletion3, _didIteratorError3, _iteratorError3, _iterator3, _step3, file;
+
+        return regeneratorRuntime.wrap(function _callee2$(_context2) {
+          while (1) {
+            switch (_context2.prev = _context2.next) {
+              case 0:
+                if (!_this3.selectedFiles.length) {
+                  _context2.next = 27;
+                  break;
+                }
+
+                //  this.errorMessage('Сначала выберите файлы!')
+                _iteratorNormalCompletion3 = true;
+                _didIteratorError3 = false;
+                _iteratorError3 = undefined;
+                _context2.prev = 4;
+                _iterator3 = _this3.selectedFiles[Symbol.iterator]();
+
+              case 6:
+                if (_iteratorNormalCompletion3 = (_step3 = _iterator3.next()).done) {
+                  _context2.next = 13;
+                  break;
+                }
+
+                file = _step3.value;
+                _context2.next = 10;
+                return _this3.uploadFile(file, id);
+
+              case 10:
+                _iteratorNormalCompletion3 = true;
+                _context2.next = 6;
+                break;
+
+              case 13:
+                _context2.next = 19;
+                break;
+
+              case 15:
+                _context2.prev = 15;
+                _context2.t0 = _context2["catch"](4);
+                _didIteratorError3 = true;
+                _iteratorError3 = _context2.t0;
+
+              case 19:
+                _context2.prev = 19;
+                _context2.prev = 20;
+
+                if (!_iteratorNormalCompletion3 && _iterator3.return != null) {
+                  _iterator3.return();
+                }
+
+              case 22:
+                _context2.prev = 22;
+
+                if (!_didIteratorError3) {
+                  _context2.next = 25;
+                  break;
+                }
+
+                throw _iteratorError3;
+
+              case 25:
+                return _context2.finish(22);
+
+              case 26:
+                return _context2.finish(19);
+
+              case 27:
+                if (_this3.uploadSuccess) window.location.href = "/program/object/view/".concat(id);
+
+              case 28:
+              case "end":
+                return _context2.stop();
+            }
+          }
+        }, _callee2, null, [[4, 15, 19, 27], [20,, 22, 26]]);
+      }))();
+    },
+    removeFileFromYii: function removeFileFromYii(id, descriptor, index) {
+      var _this4 = this;
+
+      return Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_15__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+        return regeneratorRuntime.wrap(function _callee3$(_context3) {
+          while (1) {
+            switch (_context3.prev = _context3.next) {
+              case 0:
+                _context3.next = 2;
+                return axios__WEBPACK_IMPORTED_MODULE_16___default.a.get("/program/object/delete-docs/".concat(id), {
+                  params: {
+                    descriptor: descriptor
+                  }
+                }).then(function (res) {
+                  _this4.items[index].fileName = null;
+                }).catch(function (error) {
+                  return console.log(error);
+                });
+
+              case 2:
+              case "end":
+                return _context3.stop();
+            }
+          }
+        }, _callee3);
+      }))();
+    },
+    uploadFile: function uploadFile(file, id) {
+      var _this5 = this;
+
+      return Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_15__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+        var form, input;
+        return regeneratorRuntime.wrap(function _callee4$(_context4) {
+          while (1) {
+            switch (_context4.prev = _context4.next) {
+              case 0:
+                form = new FormData();
+
+                if (!file.descriptor.indexOf('others_')) {
+                  input = document.getElementsByName("".concat(_this5.modelName, "[").concat(file.descriptor, "]label"))[0];
+                  form.append('descriptor', file.descriptor);
+                  form.append('label', input.value);
+                }
+
+                form.append("".concat(file.descriptor), file.file);
+                _this5.loadingFileName = file.file.name;
+                _context4.next = 6;
+                return axios__WEBPACK_IMPORTED_MODULE_16___default.a.post("/program/object/add-docs/".concat(id), form, {
+                  headers: {
+                    'X-CSRF-Token': _this5.csrf,
+                    'Content-Type': 'multipart/form-data;'
+                  },
+                  onUploadProgress: function onUploadProgress(itemUpload) {
+                    _this5.loadProgress = Math.round(itemUpload.loaded / itemUpload.total * 100);
+                  }
+                }).then(function (res) {
+                  _this5.uploadSuccess &= !!res.data;
+                }).catch(function (error) {
+                  _this5.uploadSuccess = false;
+                });
+
+              case 6:
+              case "end":
+                return _context4.stop();
+            }
+          }
+        }, _callee4);
+      }))();
+    },
+    // loadMessage: function(file) {
+    //     message = `Файл ${this.loadingFileName} загружен на ${this.loadProgress}%`
+    //     this.$bvModal.msgBoxOk(message, {
+    //         title: 'Загрузка!',
+    //         size: 'sm',
+    //         buttonSize: 'sm',
+    //         okVariant: 'outline-success',
+    //         headerClass: 'p-2 border-bottom-0',
+    //         footerClass: 'p-2 border-top-0',
+    //         centered: true
+    //     })
+    // },
+    errorMessage: function errorMessage(message) {
+      this.$bvModal.msgBoxOk(message, {
+        title: 'Ошибка!',
+        size: 'sm',
+        buttonSize: 'sm',
+        okVariant: 'outline-success',
+        headerClass: 'p-2 border-bottom-0',
+        footerClass: 'p-2 border-top-0',
+        centered: true
+      });
+    }
+  },
+  props: {
+    modelName: String
+  }
+});
 
 /***/ }),
 
@@ -1237,7 +1784,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var core_js_modules_es_string_search__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.string.search */ "./node_modules/core-js/modules/es.string.search.js");
 /* harmony import */ var core_js_modules_es_string_search__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_search__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
+/* harmony import */ var _mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
 /* harmony import */ var _organisms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../organisms */ "./src/components/organisms/index.js");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_7__);
@@ -1628,7 +2175,7 @@ __webpack_require__.r(__webpack_exports__);
     "v-riscs": _Riscs_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
     "v-uploads": _Uploads_vue__WEBPACK_IMPORTED_MODULE_13__["default"]
   },
-  computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_5__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapGetters"])(['getPageData', 'getCities', "getRegions"]), {
+  computed: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_5__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapGetters"])(['getPageData', 'getCities', "getRegions"]), {
     kad_number_validator: function kad_number_validator() {
       var pattern = /\d+:\d+:\d+:\d+/;
       return pattern.test(this.formData.kad_number);
@@ -1677,7 +2224,7 @@ __webpack_require__.r(__webpack_exports__);
       errors: {}
     };
   },
-  methods: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_5__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapActions"])(['requestPageData', 'requestCity']), {
+  methods: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_5__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapActions"])(['requestPageData', 'requestCity']), {
     setSelected: function setSelected(value) {
       formData.id_priority = value;
     },
@@ -1782,7 +2329,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
+/* harmony import */ var _mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
 /* harmony import */ var _organisms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../organisms */ "./src/components/organisms/index.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
@@ -1840,7 +2387,7 @@ __webpack_require__.r(__webpack_exports__);
       currentPage: 1
     };
   },
-  computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(['getUser', 'getOrg', 'getRegion', 'getPageData']), {
+  computed: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(['getUser', 'getOrg', 'getRegion', 'getPageData']), {
     rows: function rows() {
       if (this.getPageData && this.getPageData.items) return this.getPageData.items.length;
       return 0;
@@ -1861,7 +2408,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  methods: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])(['requestProgram', 'requestOrg', 'requestPageData'])),
+  methods: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])(['requestProgram', 'requestOrg', 'requestPageData'])),
   components: {
     "v-userPanel": _organisms__WEBPACK_IMPORTED_MODULE_1__["userPanel"]
   },
@@ -1879,9 +2426,410 @@ __webpack_require__.r(__webpack_exports__);
   !*** ./node_modules/babel-loader/lib!./node_modules/vue-loader/lib??vue-loader-options!./src/components/pages/program/view/index.vue?vue&type=script&lang=js& ***!
   \****************************************************************************************************************************************************************/
 /*! exports provided: default */
-/***/ (function(module, exports) {
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-throw new Error("Module build failed (from ./node_modules/babel-loader/lib/index.js):\nSyntaxError: /mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/src/components/pages/program/view/index.vue: Unexpected token (371:3)\n\n\u001b[0m \u001b[90m 369 | \u001b[39m                    \u001b[32m\"X-CSRF-Token\"\u001b[39m\u001b[33m:\u001b[39m \u001b[36mthis\u001b[39m\u001b[33m.\u001b[39mcsrf\u001b[0m\n\u001b[0m \u001b[90m 370 | \u001b[39m                }\u001b[0m\n\u001b[0m\u001b[31m\u001b[1m>\u001b[22m\u001b[39m\u001b[90m 371 | \u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<<\u001b[39m\u001b[33m<\u001b[39m \u001b[33mHEAD\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m     | \u001b[39m   \u001b[31m\u001b[1m^\u001b[22m\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 372 | \u001b[39m            })\u001b[33m.\u001b[39mthen(res \u001b[33m=>\u001b[39m {\u001b[0m\n\u001b[0m \u001b[90m 373 | \u001b[39m                console\u001b[33m.\u001b[39mlog(res)\u001b[33m;\u001b[39m\u001b[0m\n\u001b[0m \u001b[90m 374 | \u001b[39m                \u001b[36mif\u001b[39m (res\u001b[33m.\u001b[39mdata) {\u001b[0m\n    at Object.raise (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:7044:17)\n    at Object.unexpected (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:8422:16)\n    at Object.jsxParseIdentifier (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:3889:12)\n    at Object.jsxParseNamespacedName (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:3899:23)\n    at Object.jsxParseElementName (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:3910:21)\n    at Object.jsxParseOpeningElementAt (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:3996:22)\n    at Object.jsxParseElementAt (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:4029:33)\n    at Object.jsxParseElement (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:4103:17)\n    at Object.parseExprAtom (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:4110:19)\n    at Object.parseExprSubscripts (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9287:23)\n    at Object.parseMaybeUnary (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9267:21)\n    at Object.parseExprOpBaseRightExpr (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9230:34)\n    at Object.parseExprOpRightExpr (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9223:21)\n    at Object.parseExprOp (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9189:27)\n    at Object.parseExprOps (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9147:17)\n    at Object.parseMaybeConditional (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9110:23)\n    at Object.parseMaybeAssign (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9065:21)\n    at Object.parseObjectProperty (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:10149:101)\n    at Object.parseObjPropValue (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:10174:101)\n    at Object.parseObjectMember (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:10098:10)\n    at Object.parseObj (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:10019:25)\n    at Object.parseExprAtom (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9644:28)\n    at Object.parseExprAtom (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:4115:20)\n    at Object.parseExprSubscripts (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9287:23)\n    at Object.parseMaybeUnary (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9267:21)\n    at Object.parseExprOps (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9137:23)\n    at Object.parseMaybeConditional (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9110:23)\n    at Object.parseMaybeAssign (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9065:21)\n    at Object.parseExprListItem (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:10361:18)\n    at Object.parseCallExpressionArguments (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9468:22)\n    at Object.parseSubscript (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9374:31)\n    at Object.parseSubscripts (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9304:19)\n    at Object.parseExprSubscripts (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9293:17)\n    at Object.parseMaybeUnary (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9267:21)\n    at Object.parseExprOps (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9137:23)\n    at Object.parseMaybeConditional (/mnt/c/Users/maks1/Desktop/php/kap_stroi/frontend/node_modules/@babel/core/node_modules/@babel/parser/lib/index.js:9110:23)");
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! core-js/modules/es.function.name */ "./node_modules/core-js/modules/es.function.name.js");
+/* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
+/* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
+/* harmony import */ var _organisms__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../organisms */ "./src/components/organisms/index.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_6__);
+
+
+
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "ProgramView",
+  data: function data() {
+    return {
+      banner: {
+        show: false,
+        fileName: null,
+        loadProgress: null
+      },
+      bannerInfo: {
+        show: false,
+        variant: null,
+        message: null
+      },
+      buttons: {
+        upload: false,
+        save: false,
+        delete: false
+      },
+      id_org: null,
+      csrf: document.getElementsByName('csrf-token')[0].content,
+      text: 'dfs',
+      prevTable: {
+        curPage: 1,
+        perPage: 5
+      },
+      resTable: {
+        curPage: 1,
+        perPage: 5
+      }
+    };
+  },
+  components: {
+    "v-user-panel": _organisms__WEBPACK_IMPORTED_MODULE_4__["userPanel"]
+  },
+  methods: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_5__["mapActions"])(['requestPageData', 'requestUser']), {
+    onRowClick: function onRowClick(item) {
+      window.location.href = "/program/object/view/".concat(item.id);
+    },
+    rowCount: function rowCount(attr) {
+      var _this$reservedObjects, _this$priorityObjects;
+
+      if (attr == 'resTable' && ((_this$reservedObjects = this.reservedObjects) === null || _this$reservedObjects === void 0 ? void 0 : _this$reservedObjects.items)) {
+        return this.reservedObjects.items.length > this.resTable.perPage;
+      } else if (attr == 'prevTable' && ((_this$priorityObjects = this.priorityObjects) === null || _this$priorityObjects === void 0 ? void 0 : _this$priorityObjects.items)) return this.priorityObjects.items.length > this.prevTable.perPage;else return false;
+    },
+    fileInput: function fileInput() {
+      var file = document.querySelector('#file_input_pdf_main').files[0];
+      console.log(file);
+      this.banner.fileName = file.name;
+      this.banner.show = true;
+      this.uploadFileToYii(file);
+    },
+    uploadFileToYii: function uploadFileToYii(file) {
+      var _this = this;
+
+      return Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+        var form;
+        return regeneratorRuntime.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                // return console.log(file)
+                form = new FormData();
+                form.append('progFile', file);
+                _context.next = 4;
+                return axios__WEBPACK_IMPORTED_MODULE_6___default.a.post("/program/add-doc/".concat(_this.id_org), form, {
+                  headers: {
+                    'X-CSRF-Token': _this.csrf,
+                    'Content-Type': 'multipart/form-data;'
+                  },
+                  onUploadProgress: function onUploadProgress(itemUpload) {
+                    _this.banner.loadProgress = Math.round(itemUpload.loaded / itemUpload.total * 100);
+                  }
+                }).then(function (res) {
+                  if (res.data) {
+                    _this.bannerInfo.variant = 'success';
+                    _this.bannerInfo.message = 'Файл загружен успешно';
+                    _this.bannerInfo.show = true;
+                    _this.buttons.save = true;
+                    _this.buttons.delete = true;
+                    _this.buttons.upload = false;
+                  } else {
+                    _this.bannerInfo.variant = 'danger';
+                    _this.bannerInfo.message = 'При загрузке файла произошла ошибка, напишите в службу поддержки';
+                    _this.bannerInfo.show = true;
+                  }
+                });
+
+              case 4:
+                console.log(file);
+                file.value = '';
+
+              case 6:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee);
+      }))();
+    },
+    deleteFileFromYii: function deleteFileFromYii() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_6___default.a.post("/program/delete-doc/".concat(this.id_org), null, {
+        headers: {
+          'X-CSRF-Token': this.csrf
+        }
+      }).then(function (res) {
+        if (res.data) {
+          _this2.bannerInfo.variant = 'success';
+          _this2.bannerInfo.message = 'Файл удален успешно';
+          _this2.bannerInfo.show = true;
+          _this2.buttons.save = false;
+          _this2.buttons.delete = false;
+          _this2.buttons.upload = true;
+        } else {
+          _this2.bannerInfo.variant = 'danger';
+          _this2.bannerInfo.message = 'При удалении файла произошла ошибка, напишите в службу поддержки';
+          _this2.bannerInfo.show = true;
+        }
+      });
+    },
+    getFileStatus: function getFileStatus() {
+      var _this3 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_6___default.a.post("/program/check-doc/".concat(this.id_org), null, {
+        headers: {
+          'X-CSRF-Token': this.csrf
+        }
+      }).then(function (res) {
+        if (!res.data) {
+          _this3.buttons.upload = true;
+        } else {
+          _this3.buttons.save = true;
+          _this3.buttons.delete = true;
+        }
+      });
+    }
+  }),
+  mounted: function mounted() {
+    var _this4 = this;
+
+    return Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_2__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+      return regeneratorRuntime.wrap(function _callee2$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              _this4.requestPageData({
+                pageName: "programView"
+              });
+
+              _context2.next = 3;
+              return _this4.requestUser();
+
+            case 3:
+              _this4.id_org = _this4.getUser.organization.id;
+
+              _this4.getFileStatus();
+
+              _this4.$bvModal.show('modal-1');
+
+            case 6:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      }, _callee2);
+    }))();
+  },
+  computed: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_3__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_5__["mapGetters"])(['getUser', 'getPageData']), {
+    objects: function objects() {
+      return this.getPageData && this.getPageData.objects;
+    },
+    fieldsObjects: function fieldsObjects() {
+      return this.getPageData && this.getPageData.fieldsObjects;
+    },
+    priorityObjects: function priorityObjects() {
+      return this.getPageData && this.getPageData.priorityObjects;
+    },
+    reservedObjects: function reservedObjects() {
+      return this.getPageData && this.getPageData.reservedObjects;
+    },
+    target: function target() {
+      return this.getPageData && this.getPageData.target;
+    },
+    rowsPrev: function rowsPrev() {
+      return this.getPageData.priorityObjects && this.getPageData.priorityObjects.items.length;
+    },
+    resPrev: function resPrev() {
+      return this.getPageData.reservedObjects && this.getPageData.reservedObjects.items.length;
+    }
+  })
+});
 
 /***/ }),
 
@@ -1914,7 +2862,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.extra-table-class {\r\n    vertical-align: middle !important;\r\n    text-align: center;\n}\n.vertical-align-centre-extra-table {\r\n    vertical-align: middle !important;\n}\n.overflow {\r\n    overflow: hidden;\n}\n.normal-font-weight-for-table {\r\n    font-weight: normal !important;\n}\n.cell-center-for-table {\r\n    vertical-align: middle !important;\r\n    text-align: center !important;\n}\r\n", ""]);
+exports.push([module.i, "\n.extra-table-class {\n    vertical-align: middle !important;\n    text-align: center;\n}\n.vertical-align-centre-extra-table {\n    vertical-align: middle !important;\n}\n.overflow {\n    overflow: hidden;\n}\n.normal-font-weight-for-table {\n    font-weight: normal !important;\n}\n.cell-center-for-table {\n    vertical-align: middle !important;\n    text-align: center !important;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -1968,7 +2916,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.extra-table-class {\r\n    vertical-align: middle !important;\r\n    text-align: center;\n}\n.vertical-align-centre-extra-table {\r\n    vertical-align: middle !important;\n}\n.overflow {\r\n    overflow: hidden;\n}\n.normal-font-weight-for-table {\r\n    font-weight: normal !important;\n}\n.normal-font-size-for-cell-file-name {\r\n    font-size: 13px !important;\n}\n.cell-center-for-table {\r\n    vertical-align: middle !important;\r\n    text-align: center !important;\n}\n.cell-center-for-items {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n.scope-to-animate {\r\n    z-index: 999;\r\n    height: 2px;\r\n    width: 8px;\r\n    background: grey;\r\n    transition: 0.4s ease;\n}\n.scope-to-animate:first-child {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 25%;\r\n    bottom: 35%;\n}\n.scope-to-animate:nth-child(2) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 45%;\r\n    bottom: 35%;\n}\n.scope-to-animate:nth-child(3) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 25%;\r\n    bottom: 54%;\n}\n.scope-to-animate:nth-child(4) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 45%;\r\n    bottom: 54%;\n}\n.label:hover .scope-to-animate:nth-child(1) {\r\n    transform: rotate(-135deg);\r\n    background: #5bc0de;\n}\n.label:hover .scope-to-animate:nth-child(2) {\r\n    transform: rotate(135deg);\r\n    background: #5bc0de;\n}\n.label:hover .scope-to-animate:nth-child(3) {\r\n    transform: rotate(225deg);\r\n    background: #5bc0de;\n}\n.label:hover .scope-to-animate:nth-child(4) {\r\n    transform: rotate(-225deg);\r\n    background: #5bc0de;\n}\n.hidden-file-input {\r\n    display: none;\n}\n.label {\r\n    position: relative;\r\n    width: 28px;\n}\n.arrow {\r\n    display: flex;\r\n    align-items: center;\n}\n.arrow input[type=\"file\"] {\r\n    outline: 0;\r\n    opacity: 0;\r\n    pointer-events: none;\r\n    user-select: none;\n}\n.arrow .label {\r\n    height: 28px;\r\n    border: 1px solid grey;\r\n    border-radius: 5px;\r\n    display: block;\r\n    transition: border 300ms ease;\r\n    cursor: pointer;\r\n    text-align: center;\n}\n.arrow .label i {\r\n    display: block;\r\n    font-size: 42px;\n}\n.arrow .label i,\r\n.example-1 .label .title {\r\n    color: grey;\r\n    transition: 200ms color;\n}\n.arrow .label:hover {\r\n    border: 2px solid #5bc0de;\n}\n.arrow .label:hover i,\r\n.example-1 .label:hover .title {\r\n    color: #5bc0de;\n}\n.cross-to-animate {\r\n    z-index: 999;\r\n    height: 2px;\r\n    width: 15px;\r\n    background: #d9534f;\r\n    transition: 0.4s ease;\n}\n.cross-to-animate:first-child {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 20%;\r\n    bottom: 45%;\n}\n.cross-to-animate:nth-child(2) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 22%;\r\n    bottom: 45%;\n}\n.label:hover .cross-to-animate:nth-child(1) {\r\n    transform: rotate(-135deg);\n}\n.label:hover .cross-to-animate:nth-child(2) {\r\n    transform: rotate(135deg);\n}\n.cross {\r\n    display: flex;\r\n    align-items: center;\n}\n.cross .label {\r\n    height: 28px;\r\n    border: 1px solid grey;\r\n    border-radius: 5px;\r\n    display: block;\r\n    transition: border 300ms ease;\r\n    cursor: pointer;\r\n    text-align: center;\n}\n.cross .label i {\r\n    display: block;\r\n    font-size: 42px;\n}\n.cross .label i,\r\n.cross .label .title {\r\n    color: grey;\r\n    transition: 200ms color;\n}\n.cross .label:hover {\r\n    border: 2px solid #d9534f;\n}\r\n", ""]);
+exports.push([module.i, "\n.extra-table-class {\r\n    vertical-align: middle !important;\r\n    text-align: center;\n}\n.vertical-align-centre-extra-table {\r\n    vertical-align: middle !important;\n}\n.overflow {\r\n    overflow: hidden;\n}\n.normal-font-weight-for-table {\r\n    font-weight: normal !important;\n}\n.normal-font-size-for-cell-file-name {\r\n    font-size: 13px !important;\n}\n.cell-center-for-table {\r\n    vertical-align: middle !important;\r\n    text-align: center !important;\n}\n.cell-center-for-items {\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: center;\n}\n.scope-to-animate {\r\n    z-index: 999;\r\n    height: 2px;\r\n    width: 8px;\r\n    background: grey;\r\n    transition: 0.4s ease;\n}\n.scope-to-animate:first-child {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 25%;\r\n    bottom: 35%;\n}\n.scope-to-animate:nth-child(2) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 45%;\r\n    bottom: 35%;\n}\n.scope-to-animate:nth-child(3) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 25%;\r\n    bottom: 54%;\n}\n.scope-to-animate:nth-child(4) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 45%;\r\n    bottom: 54%;\n}\n.label:hover .scope-to-animate:nth-child(1) {\r\n    transform: rotate(-135deg);\r\n    background: #5bc0de;\n}\n.label:hover .scope-to-animate:nth-child(2) {\r\n    transform: rotate(135deg);\r\n    background: #5bc0de;\n}\n.label:hover .scope-to-animate:nth-child(3) {\r\n    transform: rotate(225deg);\r\n    background: #5bc0de;\n}\n.label:hover .scope-to-animate:nth-child(4) {\r\n    transform: rotate(-225deg);\r\n    background: #5bc0de;\n}\n.hidden-file-input {\r\n    display: none;\n}\n.label {\r\n    position: relative;\r\n    width: 28px;\n}\n.arrow {\r\n    display: flex;\r\n    align-items: center;\n}\n.arrow input[type=file] {\r\n    outline:0;\r\n    opacity:0;\r\n    pointer-events:none;\r\n    user-select:none\n}\n.arrow .label  {\r\n    height: 28px;\r\n    border:1px solid grey;\r\n    border-radius:5px;\r\n    display:block;\r\n    transition:border 300ms ease;\r\n    cursor:pointer;\r\n    text-align:center\n}\n.arrow .label i {\r\n    display:block;\r\n    font-size:42px;\n}\n.arrow .label i,.example-1 .label .title {\r\n    color:grey;\r\n    transition:200ms color\n}\n.arrow .label:hover {\r\n    border:2px solid #5bc0de\n}\n.arrow .label:hover i,.example-1 .label:hover .title {\r\n    color:#5bc0de\n}\n.cross-to-animate {\r\n    z-index: 999;\r\n    height: 2px;\r\n    width: 15px;\r\n    background: #d9534f;\r\n    transition: 0.4s ease;\n}\n.cross-to-animate:first-child {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(45deg);\r\n    left: 20%;\r\n    bottom: 45%;\n}\n.cross-to-animate:nth-child(2) {\r\n    display: block;\r\n    position: absolute;\r\n    transform: rotate(-45deg);\r\n    left: 22%;\r\n    bottom: 45%;\n}\n.label:hover .cross-to-animate:nth-child(1) {\r\n    transform: rotate(-135deg);\n}\n.label:hover .cross-to-animate:nth-child(2) {\r\n    transform: rotate(135deg);\n}\n.cross {\r\n    display: flex;\r\n    align-items: center;\n}\n.cross .label  {\r\n    height: 28px;\r\n    border:1px solid grey;\r\n    border-radius:5px;\r\n    display:block;\r\n    transition:border 300ms ease;\r\n    cursor:pointer;\r\n    text-align:center\n}\n.cross .label i {\r\n    display:block;\r\n    font-size:42px;\n}\n.cross .label i,.cross .label .title {\r\n    color:grey;\r\n    transition:200ms color\n}\n.cross .label:hover {\r\n    border:2px solid #d9534f\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -1986,7 +2934,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.font-normal-first-colomn {\r\n    font-weight: normal !important;\n}\r\n", ""]);
+exports.push([module.i, "\n.font-normal-first-colomn {\n    font-weight: normal !important;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -2022,7 +2970,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.hover {\r\n    cursor: pointer;\n}\r\n", ""]);
+exports.push([module.i, "\n.hover{\n    cursor: pointer;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -2040,7 +2988,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.toggle_button[data-v-f2da7ae4] {\r\n    display: block;\r\n    cursor: pointer;\n}\n.card-body[data-v-f2da7ae4] {\r\n    overflow-y: auto;\n}\r\n", ""]);
+exports.push([module.i, "\n.toggle_button[data-v-f2da7ae4]{\n    display: block;\n    cursor: pointer;\n}\n.card-body[data-v-f2da7ae4]{\n    overflow-y: auto;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -2519,7 +3467,7 @@ var render = function() {
                 [
                   _c("b-th", [
                     _vm._v(
-                      "Строительные конструкции замена и (или) восстановление\n                    которых планируются при капитальном ремонте"
+                      "Строительные конструкции замена и (или) восстановление которых планируются при капитальном ремонте"
                     )
                   ]),
                   _vm._v(" "),
@@ -2529,7 +3477,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("b-th", [
                     _vm._v(
-                      "Срок эксплуатации с момента строительства или\n                    предыдущего капитального ремонта"
+                      "Срок эксплуатации с момента строительства или предыдущего капитального ремонта"
                     )
                   ]),
                   _vm._v(" "),
@@ -2732,7 +3680,7 @@ var render = function() {
                 [
                   _c("b-th", [
                     _vm._v(
-                      "Системы инженерно-технического обеспечения замена и\n                    (или) восстановление которых планируются при капитальном\n                    ремонте"
+                      "Системы инженерно-технического обеспечения замена и (или) восстановление которых планируются при капитальном ремонте"
                     )
                   ]),
                   _vm._v(" "),
@@ -2740,7 +3688,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("b-th", [
                     _vm._v(
-                      "Срок эксплуатации с момента строительства или\n                    предыдущего капитального ремонта"
+                      "Срок эксплуатации с момента строительства или предыдущего капитального ремонта"
                     )
                   ]),
                   _vm._v(" "),
@@ -3446,8 +4394,264 @@ render._withStripped = true
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function () {}
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c(
+    "div",
+    { staticClass: "overflow" },
+    [
+      _c(
+        "b-table-simple",
+        { attrs: { bordered: "", hover: "" } },
+        [
+          _c(
+            "b-thead",
+            [
+              _c(
+                "b-tr",
+                [
+                  _c("b-th", [_vm._v("Документы")]),
+                  _vm._v(" "),
+                  _c("b-th", [_vm._v("Загрузка")]),
+                  _vm._v(" "),
+                  _c("b-th", [_vm._v("Удалить")])
+                ],
+                1
+              )
+            ],
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-tbody",
+            _vm._l(_vm.items, function(item, index) {
+              return _c(
+                "b-tr",
+                { key: index },
+                [
+                  _c(
+                    "b-th",
+                    {
+                      staticClass:
+                        "cell-center-for-table normal-font-weight-for-table"
+                    },
+                    [
+                      !item.other
+                        ? _c("label", [_vm._v(_vm._s(item.label))])
+                        : _c("b-form-input", {
+                            attrs: {
+                              name:
+                                _vm.modelName +
+                                "[" +
+                                item.descriptor +
+                                "]label",
+                              placeholder: "Название документа...",
+                              type: "text"
+                            },
+                            on: {
+                              change: function($event) {
+                                return _vm.setLabel()
+                              }
+                            },
+                            model: {
+                              value: item.label,
+                              callback: function($$v) {
+                                _vm.$set(item, "label", $$v)
+                              },
+                              expression: "item.label"
+                            }
+                          })
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-th",
+                    {
+                      staticClass:
+                        "no-cell-border vertical-align-centre-extra-table normal-font-weight-for-table"
+                    },
+                    [
+                      _c("input", {
+                        ref: "file" + index,
+                        refInFor: true,
+                        staticClass: "hidden-file-input",
+                        attrs: {
+                          type: "file",
+                          name: _vm.modelName + "[" + item.descriptor + "]file",
+                          id: "file_input_" + index
+                        },
+                        on: {
+                          input: function($event) {
+                            return _vm.fileInput(index)
+                          }
+                        }
+                      }),
+                      _vm._v(" "),
+                      !item.fileName
+                        ? _c("div", { staticClass: "cell-center-for-items" }, [
+                            _c("div", { staticClass: "arrow" }, [
+                              _c(
+                                "label",
+                                {
+                                  staticClass: "label",
+                                  attrs: { for: "file_input_" + index }
+                                },
+                                [
+                                  _c("span", { staticClass: "title" }, [
+                                    _c("span", {
+                                      staticClass: "scope-to-animate"
+                                    }),
+                                    _vm._v(" "),
+                                    _c("span", {
+                                      staticClass: "scope-to-animate"
+                                    }),
+                                    _vm._v(" "),
+                                    _c("span", {
+                                      staticClass: "scope-to-animate"
+                                    }),
+                                    _vm._v(" "),
+                                    _c("span", {
+                                      staticClass: "scope-to-animate"
+                                    })
+                                  ])
+                                ]
+                              )
+                            ])
+                          ])
+                        : _c(
+                            "label",
+                            {
+                              staticClass: "normal-font-size-for-cell-file-name"
+                            },
+                            [_vm._v(_vm._s(item.fileName))]
+                          )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "b-th",
+                    {
+                      staticClass:
+                        "no-cell-border vertical-align-centre-extra-table"
+                    },
+                    [
+                      _c("div", { staticClass: "cell-center-for-items" }, [
+                        _c("div", { staticClass: "cross" }, [
+                          _c(
+                            "label",
+                            {
+                              staticClass: "label",
+                              on: {
+                                click: function($event) {
+                                  return _vm.fileRemove(index, item.descriptor)
+                                }
+                              }
+                            },
+                            [
+                              _c("span", { staticClass: "title" }, [
+                                _c("span", { staticClass: "cross-to-animate" }),
+                                _vm._v(" "),
+                                _c("span", { staticClass: "cross-to-animate" })
+                              ])
+                            ]
+                          )
+                        ])
+                      ])
+                    ]
+                  )
+                ],
+                1
+              )
+            }),
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-tfoot",
+            [
+              _c(
+                "b-tr",
+                [
+                  _vm.items.length > 10
+                    ? _c(
+                        "b-td",
+                        {
+                          staticClass: "text-right text-danger",
+                          attrs: { colspan: "1", variant: "secondary" },
+                          on: {
+                            click: function($event) {
+                              return _vm.deleteLastRow()
+                            }
+                          }
+                        },
+                        [
+                          _vm._v(
+                            "\n                    Удалить документ\n                "
+                          )
+                        ]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c(
+                    "b-td",
+                    {
+                      staticClass: "text-right text-info",
+                      attrs: { colspan: "3", variant: "secondary" },
+                      on: {
+                        click: function($event) {
+                          return _vm.addNewRow()
+                        }
+                      }
+                    },
+                    [
+                      _vm._v(
+                        "\n                    Добавить документ\n                "
+                      )
+                    ]
+                  )
+                ],
+                1
+              )
+            ],
+            1
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "b-button",
+        {
+          attrs: { size: "sm", variant: "info" },
+          on: {
+            click: function($event) {
+              return _vm.dubug()
+            }
+          }
+        },
+        [_vm._v("Debug")]
+      ),
+      _vm._v(" "),
+      _vm.loadProgress
+        ? _c("label", [
+            _vm._v(
+              "Файл " +
+                _vm._s(_vm.loadingFileName) +
+                " загружен на " +
+                _vm._s(_vm.loadProgress) +
+                "%"
+            )
+          ])
+        : _vm._e()
+    ],
+    1
+  )
+}
 var staticRenderFns = []
+render._withStripped = true
 
 
 
@@ -5402,12 +6606,12 @@ var render = function() {
         [
           _c("p", { staticClass: "my-4" }, [
             _vm._v(
-              "\n                Уважаемые пользователи! В связи с техническими работами на\n                сервере возможность загрузки программы модернизации\n                инфраструктуры образовательных организаций высшего образования\n                (далее - программа) в формате pdf и отправка на согласование в\n                Минобрнауки России будет доступна с 13 марта 2020 года. Срок\n                направления программы на согласование с Минобрнауки России будет\n                продлён до 20 марта 2020 года. Официальное письмо о продлении\n                срока представления программы в Минобрнауки России:\n                "
+              "\n            Уважаемые пользователи!\n            В связи с техническими работами на сервере возможность загрузки программы модернизации инфраструктуры образовательных организаций высшего \n            образования (далее - программа) \n            в формате pdf и отправка на согласование в Минобрнауки России будет доступна с 13 марта 2020 года.\n            Срок направления программы на согласование с Минобрнауки России будет продлён до 20 марта 2020 года.\n            Официальное письмо о продлении срока представления программы в Минобрнауки России: "
             ),
             _c("a", { attrs: { href: "/baner.pdf", target: "_blank" } }, [
               _vm._v("MN-17_90")
             ]),
-            _vm._v(" .\n            ")
+            _vm._v(" .\n        ")
           ])
         ]
       ),
@@ -5446,17 +6650,7 @@ var render = function() {
                 bordered: ""
               }
             }),
-            _vm._v("\n<<<<<<< HEAD\n                "),
-            _c(
-              "b-button",
-              {
-                staticClass: "btn btn-sm",
-                staticStyle: { float: "right" },
-                attrs: { href: "/organization/info" }
-              },
-              [_vm._v("Подробнее")]
-            ),
-            _vm._v("\n=======\n                "),
+            _vm._v(" "),
             _c(
               "b-button",
               {
@@ -5465,9 +6659,6 @@ var render = function() {
                 attrs: { href: "/organization/info" }
               },
               [_vm._v("Заполнить общие сведения")]
-            ),
-            _vm._v(
-              "\n>>>>>>> e130ef1abd675597f69b4b047f6931774ddf84ef\n            "
             )
           ],
           1
@@ -5521,7 +6712,7 @@ var render = function() {
                     [
                       _c("b-icon-gear-wide-connected"),
                       _vm._v(
-                        "Объекты требующие\n                        капитального ремонта\n                    "
+                        "\n                       Объекты требующие капитального ремонта"
                       )
                     ],
                     1
@@ -5624,21 +6815,26 @@ var render = function() {
           _c(
             "div",
             { staticClass: "col-12" },
-            _vm._l(_vm.bannerInfo, function(banner, index) {
-              return _c(
+            [
+              _c(
                 "b-alert",
                 {
-                  key: index,
                   attrs: {
-                    show: banner.show,
-                    variant: banner.variant,
+                    show: _vm.bannerInfo.show,
+                    variant: _vm.bannerInfo.variant,
                     dismissible: "",
                     fade: ""
                   }
                 },
-                [_vm._v(_vm._s(banner.message))]
+                [
+                  _vm._v(
+                    "\n                    " +
+                      _vm._s(_vm.bannerInfo.message) +
+                      "\n                    "
+                  )
+                ]
               )
-            }),
+            ],
             1
           )
         ]),
@@ -5652,15 +6848,11 @@ var render = function() {
                 "b-alert",
                 { attrs: { show: _vm.banner.show, dismissible: "", fade: "" } },
                 [
-                  _vm._v(
-                    "\n                        Файл\n                        "
-                  ),
+                  _vm._v("\n                    Файл "),
                   _c("label", { staticClass: "font-weight-bold" }, [
                     _vm._v(_vm._s(_vm.banner.fileName))
                   ]),
-                  _vm._v(
-                    "\n                        загружается\n                        "
-                  ),
+                  _vm._v(" загружается "),
                   _c("label", { staticClass: "font-weight-bold" }, [
                     _vm._v(_vm._s(_vm.banner.loadProgress) + "%")
                   ])
@@ -5672,9 +6864,12 @@ var render = function() {
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row justify-content-end" }, [
+      _c("div", { staticClass: "row" }, [
+        _c("div", { staticClass: "col-6" }),
+        _vm._v(" "),
         _c(
           "div",
+          { staticClass: "col-6 offset-7" },
           [
             _c(
               "a",

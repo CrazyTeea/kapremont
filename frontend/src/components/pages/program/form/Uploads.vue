@@ -101,7 +101,7 @@
                 </b-tr>
             </b-tfoot>
         </b-table-simple>
-        <b-button size="sm" variant="info" @click="dubug()">Debug</b-button>
+        <!-- <b-button size="sm" variant="info" @click="dubug()">Debug</b-button> -->
 
         <label v-if="loadProgress"
             >Файл {{ loadingFileName }} загружен на {{ loadProgress }}%</label

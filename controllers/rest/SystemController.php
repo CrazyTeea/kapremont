@@ -7,6 +7,7 @@ namespace app\controllers\rest;
 use app\models\Atz;
 use app\models\Cities;
 use app\models\Organizations;
+use app\models\OrgInfo;
 use app\models\ProgObjectsEvents;
 use app\models\Program;
 use app\models\ProgramObjects;
@@ -123,7 +124,7 @@ class SystemController extends RestController
                         ['id'=>6,'target'=>'Иное:','indicator'=>'','unit'=>''],
                     ];
 
-                    $progObj = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>0])->joinWith(['region'])->all();
+                    $progObj = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>0])->joinWith(['region'])->orderBy(['created_at'=>SORT_ASC])->all();
                     $flag = false;
                     $prior = [
                         1=>'1',
@@ -287,25 +288,23 @@ class SystemController extends RestController
                         ],
                         ['id' => 8, 'label' =>
                             "Общая площадь всех зданий и сооружений",
-                            'value'=> ProgramObjects::find()->select(['square'])->where(['system_status'=>1,'id_org'=>$this->user->id_org,])->sum('square'),
+                            'value'=> ($org->orgInfo)? $org->orgInfo->square_all: 0
                         ],
                         ['id' => 9, 'label' =>
                             "Общая площадь всех зданий и сооружений, требующих капитального ремонта (на основании акта обследования или предписаний надзорных органов)",
-                            'value'=>  ProgramObjects::find()->select(['square_kap'])->where(['system_status'=>1,'id_org'=>$this->user->id_org,])->sum('square_kap'),
+                            'value'=>  ($org->orgInfo)? $org->orgInfo->square_all_kap: 0
                         ],
                         ['id' => 10, 'label' =>
                             "Общая площадь всех зданий и сооружений, находящихся в аварийном состоянии (на основании акта обследования или предписаний надзорных органов)",
-                            'value'=>  ProgramObjects::find()->select(['square_av'])->where(['system_status'=>1,'id_org'=>$this->user->id_org,])->sum('square_av')
+                            'value'=>  $org->orgInfo? $org->orgInfo->square_all_av: 0
                         ],
                         ['id' => 11, 'label' =>
                             "Общая площадь всех зданий и сооружений, требующих мероприятий по АТЗ",
-                            'value'=>  ProgramObjects::find()->select(['square_atz'])->where(['system_status'=>1,'id_org'=>$this->user->id_org,])->sum('square_atz')
+                            'value'=>  $org->orgInfo? $org->orgInfo->square_all_atz: 0
                         ],
                     ];
 
-
                     return $ret;
-                    break;
                 }
                 case 'atz':{
                     $program = Yii::$app->session->get('program');

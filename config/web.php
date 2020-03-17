@@ -92,6 +92,7 @@ $config = [
                 'program/object/files/<id:\d+>' => 'app/program-objects/get-all-obj-files',
                 'program/export'=>'app/development-programme/export',
                 'organization/info'=>'app/organization/info',
+                'organization/update/<id:\d+>'=>'app/organization/update',
                 'program/atz' => 'app/atz/index',
                 'api/fileUpload' => '/rest/upload/upload',
                 'api/fileRemove' => '/rest/upload/delete'
