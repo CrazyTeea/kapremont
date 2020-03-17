@@ -64,6 +64,10 @@ function getEvents($arr,$i_o){
     }
     return $a;
 }
+/*
+function getFile($arr,$i_o,$file){
+    if (isset($arr[$i_o]) and $arr[$i_o]->)
+}*/
 
 function getEvent($arr,$i_o,$index,$attr){
 
