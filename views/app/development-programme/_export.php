@@ -434,6 +434,7 @@ use yii\helpers\ArrayHelper; ?>
                 <th class="text-center">Кадастровый номер объекта</th>
                 <th class="text-center">Наименование объекта, требующего капитального ремонта</th>
                 <th class="text-center">Назначение</th>
+                <th class="text-center">Площадь капитального ремонта</th>
                 <th class="text-center">Адрес объекта</th>
                 <th class="text-center">Год постройки</th>
                 <th class="text-center">Износ здания (%)</th>
@@ -445,7 +446,11 @@ use yii\helpers\ArrayHelper; ?>
             </tr>
             </thead>
             <tbody>
+            <?php $s_sum = 0; $sum_sum = 0?>
             <?php foreach ($pr_ob as $index=>$item):?>
+            <?php $s_sum += floatval($item->square_kap );
+                $sum_sum += floatval($item->finance_sum);
+            ?>
                 <tr>
                     <td><?=++$index ?></td>
                     <td><?= $prior[$item->id_priority ? : 1] ?></td>
@@ -453,6 +458,7 @@ use yii\helpers\ArrayHelper; ?>
                     <td><?=$item->kad_number ?></td>
                     <td><?=$item->name ?></td>
                     <td><?=$item->assignment ?></td>
+                    <td><?=$item->square_kap ?></td>
                     <td><?=$item->address ?></td>
                     <td><?=$item->year ?></td>
                     <td><?=$wear[(!is_null($item->wear) and $item->wear<5)? $item->wear : 0] ?></td>
@@ -465,6 +471,19 @@ use yii\helpers\ArrayHelper; ?>
                     <td><?=$item->note?></td>
                 </tr>
             <?php endforeach;?>
+            <tr>
+                <td></td>
+                <td class="text-right" colspan="5">Итого</td>
+                <td><?= $s_sum ?></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><?= $sum_sum ?></td>
+                <td></td>
+                <td></td>
+            </tr>
             </tbody>
         </table>
         <div style="float: right">
@@ -482,6 +501,7 @@ use yii\helpers\ArrayHelper; ?>
                 <th class="text-center">Кадастровый номер объекта</th>
                 <th class="text-center">Наименование объекта, требующего капитального ремонта</th>
                 <th class="text-center">Назначение</th>
+                <th class="text-center">Площадь капитального ремонта</th>
                 <th class="text-center">Адрес объекта</th>
                 <th class="text-center">Год постройки</th>
                 <th class="text-center">Износ здания (%)</th>
@@ -493,7 +513,11 @@ use yii\helpers\ArrayHelper; ?>
             </tr>
             </thead>
             <tbody>
+            <?php $s_sum = 0; $sum_sum = 0?>
             <?php foreach ($r_ob as $index=>$item):?>
+                <?php $s_sum += floatval($item->square_kap );
+                $sum_sum += floatval($item->finance_sum);
+                ?>
                 <tr>
                     <td><?=++$index ?></td>
                     <td><?= $prior[$item->id_priority ? : 1] ?></td>
@@ -501,6 +525,7 @@ use yii\helpers\ArrayHelper; ?>
                     <td><?=$item->kad_number ?></td>
                     <td><?=$item->name ?></td>
                     <td><?=$item->assignment ?></td>
+                    <td><?=$item->square_kap ?></td>
                     <td><?=$item->address ?></td>
                     <td><?=$item->year ?></td>
                     <td><?=$wear[(!is_null($item->wear) and $item->wear<5)? $item->wear : 0] ?></td>
@@ -513,6 +538,19 @@ use yii\helpers\ArrayHelper; ?>
                     <td><?=$item ->note?></td>
                 </tr>
             <?php endforeach;?>
+            <tr>
+                <td></td>
+                <td class="text-right" colspan="5">Итого</td>
+                <td><?= $s_sum ?></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td><?= $sum_sum ?></td>
+                <td></td>
+                <td></td>
+            </tr>
             </tbody>
         </table>
     </div>
