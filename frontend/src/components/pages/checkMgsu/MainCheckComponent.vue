@@ -23,10 +23,11 @@
                         <label>{{ item.region }}</label>
                     </b-th>
                     <b-th class="normal-font-weight-for-sell">
-                        <label>{{ item.count_org }}</label>
+                        <label>{{ item.quantity }}</label>
                     </b-th>
                     <b-th class="normal-font-weight-for-sell">
-                        скоро
+                        <label v-if="item.file_exist === '1'" class="text-success">PDF</label>
+                        <label v-else class="text-danger">PDF</label>
                     </b-th>
                     <b-th class="normal-font-weight-for-sell">
                         скоро
@@ -66,6 +67,8 @@ export default {
                     "X-CSRF-Token": this.csrf
                 }
             }).then(res => {
+                console.log(res.data);
+
                 this.items = res.data;
             });
         },
@@ -95,5 +98,8 @@ export default {
 }
 .normal-font-weight-for-sell {
     font-weight: normal !important;
+}
+.center-text-in-cell {
+
 }
 </style>
