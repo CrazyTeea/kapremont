@@ -30,7 +30,8 @@
                         <label v-else class="text-danger">PDF</label>
                     </b-th>
                     <b-th class="normal-font-weight-for-sell">
-                        скоро
+                        <label v-if="item.status === '1'" class="text-success">галочка</label>
+                        <label v-else class="text-danger">х</label>
                     </b-th>
                 </b-tr>
             </b-tbody>
@@ -67,8 +68,6 @@ export default {
                     "X-CSRF-Token": this.csrf
                 }
             }).then(res => {
-                console.log(res.data);
-
                 this.items = res.data;
             });
         },
@@ -100,6 +99,7 @@ export default {
     font-weight: normal !important;
 }
 .center-text-in-cell {
-
+    vertical-align: middle !important;
+    text-align: center !important;
 }
 </style>
