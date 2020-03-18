@@ -161,6 +161,12 @@ class DevelopmentProgrammeController extends AppController
         $stylesheet2 = file_get_contents('bootstrap/css/bootstrap-grid.css');
         ini_set("pcre.backtrack_limit", "5000000");
         $mpdf->WriteHTML('
+       @page page-landscape { size: landscape; }
+         @page page-portrait { size: portrait; }
+
+        div.landscape { page: page-landscape; }
+        div.portrait { page: page-portrait; }
+    
         body{
         font-family: "Times New Roman", serif;
         }'

@@ -297,22 +297,22 @@ use yii\helpers\ArrayHelper; ?>
         <tr>
             <td>8</td>
             <td>Общая площадь всех зданий и сооружений</td>
-            <td><?=$sq['s_k']?></td>
+            <td><?=$org->orgInfo ? $org->orgInfo->square_all : ''?></td>
         </tr>
         <tr>
             <td>9</td>
             <td>Общая площадь всех зданий и сооружений, требующих капитального ремонта (на основании акта обследования или предписаний надзорных органов)</td>
-            <td><?=$sq['s_k_s']?></td>
+            <td><?=$org->orgInfo ? $org->orgInfo->square_all_kap : ''?></td>
         </tr>
         <tr>
             <td>10</td>
             <td>Общая площадь всех зданий и сооружений, находящихся в аварийном состоянии (на основании акта обследования или предписаний надзорных органов)</td>
-            <td><?=$sq['s_av']?></td>
+            <td><?=$org->orgInfo ? $org->orgInfo->square_all_av : ''?></td>
         </tr>
         <tr>
             <td>11</td>
             <td>Общая площадь всех зданий и сооружений, требующих мероприятий по АТЗ</td>
-            <td><?=$sq['s_atz']?></td>
+            <td><?=$org->orgInfo ? $org->orgInfo->square_all_atz : ''?></td>
         </tr>
         </tbody>
     </table>
@@ -409,113 +409,120 @@ use yii\helpers\ArrayHelper; ?>
         </tbody>
     </table>
 
-    <div class="text-center">
-        <h3>Раздел 3. Капитальный ремонт</h3>
-    </div>
-    <div class="text-center">
-        <h3>
-            3.1 Объекты, требующие капитального ремонта
-        </h3>
-    </div>
+    <div class="landscape">
+        <div class="text-center ">
+            <h3>Раздел 3. Капитальный ремонт</h3>
+        </div>
+        <div class="text-center">
+            <h3>
+                3.1 Объекты, требующие капитального ремонта
+            </h3>
+        </div>
 
-    <div style="float: right">
-        Таблица 3.1. Приоритетные объекты
-    </div>
-    <table class="table table-bordered">
-        <thead>
-        <tr class="text-center">
-            <th class="text-center">№ п/п</th>
-            <th class="text-center">Приоритет
-                (1,2,3)
-            </th>
-            <th class="text-center">Субъект РФ</th>
-            <th class="text-center">Кадастровый номер объекта</th>
-            <th class="text-center">Наименование объекта, требующего капитального ремонта</th>
-            <th class="text-center">Назначение</th>
-            <th class="text-center">Адрес объекта</th>
-            <th class="text-center">Год постройки</th>
-            <th class="text-center">Износ здания (%)</th>
-            <th class="text-center">Предписание надзорных органов: МЧС, Роспотребнадзор и т. д. (при наличии)</th>
-            <th class="text-center">Вид планируемого мероприятия</th>
-            <th class="text-center">Сумма бюджетного финансирования на проведение капитального ремонта (тыс. руб.)</th>
-            <th class="text-center">Софинансирование из внебюджетных источников (тыс. руб.)</th>
-            <th class="text-center">Примечание</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($pr_ob as $index=>$item):?>
-            <tr>
-                <td><?=++$index ?></td>
-                <td><?= (!$item->type) ? $prior[$item->id_priority ? : 1] : 'Резерв' ?></td>
-                <td><?php $reg = Regions::findOne($item->id_region); echo $reg ? $reg->region : ' ' ?></td>
-                <td><?=$item->kad_number ?></td>
-                <td><?=$item->name ?></td>
-                <td><?=$item->assignment ?></td>
-                <td><?=$item->address ?></td>
-                <td><?=$item->year ?></td>
-                <td><?=$wear[(!is_null($item->wear) and $item->wear<5)? $item->wear : 0] ?></td>
-                <td><?=$item->exist_pred_nadz_orgs ? $item->regulation : '' ?></td>
-                <td>
-                    <?= (isset($item->type_remont)) ? $r[$item->type_remont] : ''?>
-                </td>
-                <td><?=$item->finance_sum?></td>
-                <td><?=$item->coFinancing?></td>
-                <td><?=$item->note?></td>
+        <div style="float: right">
+            Таблица 3.1. Приоритетные объекты
+        </div>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr class="text-center">
+                <th class="text-center">№ п/п</th>
+                <th class="text-center">Приоритет
+                    (1,2,3)
+                </th>
+                <th class="text-center">Субъект РФ</th>
+                <th class="text-center">Кадастровый номер объекта</th>
+                <th class="text-center">Наименование объекта, требующего капитального ремонта</th>
+                <th class="text-center">Назначение</th>
+                <th class="text-center">Адрес объекта</th>
+                <th class="text-center">Год постройки</th>
+                <th class="text-center">Износ здания (%)</th>
+                <th class="text-center">Предписание надзорных органов: МЧС, Роспотребнадзор и т. д. (при наличии)</th>
+                <th class="text-center">Вид планируемого мероприятия</th>
+                <th class="text-center">Сумма бюджетного финансирования на проведение капитального ремонта (тыс. руб.)</th>
+                <th class="text-center">Софинансирование из внебюджетных источников (тыс. руб.)</th>
+                <th class="text-center">Примечание</th>
             </tr>
-        <?php endforeach;?>
-        </tbody>
-    </table>
-    <div style="float: right">
-        Таблица 3.2. Резерв
+            </thead>
+            <tbody>
+            <?php foreach ($pr_ob as $index=>$item):?>
+                <tr>
+                    <td><?=++$index ?></td>
+                    <td><?= (!$item->type) ? $prior[$item->id_priority ? : 1] : 'Резерв' ?></td>
+                    <td><?php $reg = Regions::findOne($item->id_region); echo $reg ? $reg->region : ' ' ?></td>
+                    <td><?=$item->kad_number ?></td>
+                    <td><?=$item->name ?></td>
+                    <td><?=$item->assignment ?></td>
+                    <td><?=$item->address ?></td>
+                    <td><?=$item->year ?></td>
+                    <td><?=$wear[(!is_null($item->wear) and $item->wear<5)? $item->wear : 0] ?></td>
+                    <td><?=$item->exist_pred_nadz_orgs ? $item->regulation : '' ?></td>
+                    <td>
+                        <?= (isset($item->type_remont)) ? $r[$item->type_remont] : ''?>
+                    </td>
+                    <td><?=$item->finance_sum?></td>
+                    <td><?=$item->coFinancing?></td>
+                    <td><?=$item->note?></td>
+                </tr>
+            <?php endforeach;?>
+            </tbody>
+        </table>
+        <div style="float: right">
+            Таблица 3.2. Резерв
+        </div>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr class="text-center">
+                <th class="text-center">№ п/п</th>
+                <th class="text-center">Приоритет
+                    (1,2,3)
+                </th>
+                <th class="text-center">Субъект РФ</th>
+                <th class="text-center">Кадастровый номер объекта</th>
+                <th class="text-center">Наименование объекта, требующего капитального ремонта</th>
+                <th class="text-center">Назначение</th>
+                <th class="text-center">Адрес объекта</th>
+                <th class="text-center">Год постройки</th>
+                <th class="text-center">Износ здания (%)</th>
+                <th class="text-center">Предписание надзорных органов: МЧС, Роспотребнадзор и т. д. (при наличии)</th>
+                <th class="text-center">Вид планируемого мероприятия</th>
+                <th class="text-center">Сумма бюджетного финансирования на проведение капитального ремонта (тыс. руб.)</th>
+                <th class="text-center">Софинансирование из внебюджетных источников (тыс. руб.)</th>
+                <th class="text-center">Примечание</th>
+            </tr>
+            </thead>
+            <tbody>
+            <?php foreach ($r_ob as $index=>$item):?>
+                <tr>
+                    <td><?=++$index ?></td>
+                    <td><?= (!$item->type) ? $prior[$item->id_priority ? : 1] : 'Резерв' ?></td>
+                    <td><?php $reg = Regions::findOne($item->id_region); echo $reg ? $reg->region : ' ' ?></td>
+                    <td><?=$item->kad_number ?></td>
+                    <td><?=$item->name ?></td>
+                    <td><?=$item->assignment ?></td>
+                    <td><?=$item->address ?></td>
+                    <td><?=$item->year ?></td>
+                    <td><?=$wear[(!is_null($item->wear) and $item->wear<5)? $item->wear : 0] ?></td>
+                    <td><?=$item->exist_pred_nadz_orgs ? $item->regulation : '' ?></td>
+                    <td>
+                        <?= (isset($item->type_remont)) ? $r[$item->type_remont] : ''?>
+                    </td>
+                    <td><?=$item ->finance_sum?></td>
+                    <td><?=$item ->coFinancing?></td>
+                    <td><?=$item ->note?></td>
+                </tr>
+            <?php endforeach;?>
+            </tbody>
+        </table>
     </div>
 
-    <table class="table table-bordered">
-        <thead>
-        <tr class="text-center">
-            <th class="text-center">№ п/п</th>
-            <th class="text-center">Приоритет
-                (1,2,3)
-            </th>
-            <th class="text-center">Субъект РФ</th>
-            <th class="text-center">Кадастровый номер объекта</th>
-            <th class="text-center">Наименование объекта, требующего капитального ремонта</th>
-            <th class="text-center">Назначение</th>
-            <th class="text-center">Адрес объекта</th>
-            <th class="text-center">Год постройки</th>
-            <th class="text-center">Износ здания (%)</th>
-            <th class="text-center">Предписание надзорных органов: МЧС, Роспотребнадзор и т. д. (при наличии)</th>
-            <th class="text-center">Вид планируемого мероприятия</th>
-            <th class="text-center">Сумма бюджетного финансирования на проведение капитального ремонта (тыс. руб.)</th>
-            <th class="text-center">Софинансирование из внебюджетных источников (тыс. руб.)</th>
-            <th class="text-center">Примечание</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php foreach ($r_ob as $index=>$item):?>
-            <tr>
-                <td><?=++$index ?></td>
-                <td><?= (!$item->type) ? $prior[$item->id_priority ? : 1] : 'Резерв' ?></td>
-                <td><?php $reg = Regions::findOne($item->id_region); echo $reg ? $reg->region : ' ' ?></td>
-                <td><?=$item->kad_number ?></td>
-                <td><?=$item->name ?></td>
-                <td><?=$item->assignment ?></td>
-                <td><?=$item->address ?></td>
-                <td><?=$item->year ?></td>
-                <td><?=$wear[(!is_null($item->wear) and $item->wear<5)? $item->wear : 0] ?></td>
-                <td><?=$item->exist_pred_nadz_orgs ? $item->regulation : '' ?></td>
-                <td>
-                    <?= (isset($item->type_remont)) ? $r[$item->type_remont] : ''?>
-                </td>
-                <td><?=$item ->finance_sum?></td>
-                <td><?=$item ->coFinancing?></td>
-                <td><?=$item ->note?></td>
-            </tr>
-        <?php endforeach;?>
-        </tbody>
-    </table>
+        <div class="portrait">
 
-    <?php foreach ($objects as $index=> $object):?>
-    <?php $kek = $index+1 ?>
+
+
+    <?php foreach ($objects as $index=> $object):  ?>
+        <?php $kek = $index+1 ?>
         <div class="text-center">
             <p><h5>Объект № <?=$kek?></h5>
             <p><?=$object->name?></p>
@@ -715,98 +722,98 @@ use yii\helpers\ArrayHelper; ?>
                   <td>прочих зданий</td>
                   <td></td>
               </tr>-->
-              <tr>
+            <tr>
                 <td>11</td>
                 <td>Общая площадь здания (помещений), планируемого к капитальному ремонту, кв. м</td>
                 <td><?=$object->square_kap ?></td>
             </tr>
-           <!-- <tr>
-                <td>из нее площадь по целям использования:
-                    административная
-                </td>
-                <td></td>
+            <!-- <tr>
+                 <td>из нее площадь по целям использования:
+                     административная
+                 </td>
+                 <td></td>
 
-            </tr>
-            <tr>
-                <td>учебно-лабораторных зданий </td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>в том числе: учебная</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td> из нее площадь спортивно-оздоровительных сооружений</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>в том числе крытых спортивных сооружений</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>учебно-вспомогательная</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>в том числе библиотечно-архивная</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>культурно-просветительская и музейная</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>предназначенная для лабораторных и научно-исследовательских подразделений</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>общежитий</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>в том числе жилая</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>из нее занятая обучающимися</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>гостиничных и жилых</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>подсобных</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>из нее площадь пунктов общественного питания</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>медицинских</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>бытовых</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>инфраструктурных</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>производственных и складских</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>защитных, в том числе гражданской обороны и ЧС</td>
-                <td></td>
-            </tr>
-            <tr>
-                <td>прочих зданий</td>
-                <td></td>
-            </tr>-->
+             </tr>
+             <tr>
+                 <td>учебно-лабораторных зданий </td>
+                 <td></td>
+             </tr>
+             <tr>
+                 <td>в том числе: учебная</td>
+                 <td></td>
+             </tr>
+             <tr>
+                 <td> из нее площадь спортивно-оздоровительных сооружений</td>
+                 <td></td>
+             </tr>
+             <tr>
+                 <td>в том числе крытых спортивных сооружений</td>
+                 <td></td>
+             </tr>
+             <tr>
+                 <td>учебно-вспомогательная</td>
+                 <td></td>
+             </tr>
+             <tr>
+                 <td>в том числе библиотечно-архивная</td>
+                 <td></td>
+             </tr>
+             <tr>
+                 <td>культурно-просветительская и музейная</td>
+                 <td></td>
+             </tr>
+             <tr>
+                 <td>предназначенная для лабораторных и научно-исследовательских подразделений</td>
+                 <td></td>
+             </tr>
+             <tr>
+                 <td>общежитий</td>
+                 <td></td>
+             </tr>
+             <tr>
+                 <td>в том числе жилая</td>
+                 <td></td>
+             </tr>
+             <tr>
+                 <td>из нее занятая обучающимися</td>
+                 <td></td>
+             </tr>
+             <tr>
+                 <td>гостиничных и жилых</td>
+                 <td></td>
+             </tr>
+             <tr>
+                 <td>подсобных</td>
+                 <td></td>
+             </tr>
+             <tr>
+                 <td>из нее площадь пунктов общественного питания</td>
+                 <td></td>
+             </tr>
+             <tr>
+                 <td>медицинских</td>
+                 <td></td>
+             </tr>
+             <tr>
+                 <td>бытовых</td>
+                 <td></td>
+             </tr>
+             <tr>
+                 <td>инфраструктурных</td>
+                 <td></td>
+             </tr>
+             <tr>
+                 <td>производственных и складских</td>
+                 <td></td>
+             </tr>
+             <tr>
+                 <td>защитных, в том числе гражданской обороны и ЧС</td>
+                 <td></td>
+             </tr>
+             <tr>
+                 <td>прочих зданий</td>
+                 <td></td>
+             </tr>-->
             <tr>
                 <td>12</td>
                 <td>Используется в уставной деятельности, кв.м</td>
@@ -998,166 +1005,167 @@ use yii\helpers\ArrayHelper; ?>
             <?php endfor;?>
             </tbody>
         </table>
-    <div class="text-center">
-        3.2.4. Опись прилагаемых документов
-    </div>
+        <div class="text-center">
+            3.2.4. Опись прилагаемых документов
+        </div>
 
-    <table class="table table-bordered">
-        <thead>
-        <tr class="text-center">
-            <th class="text-center">№</th>
-            <th class="text-center">Документ</th>
-            <th class="text-center">Наличие</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td>Инвентарные карточки учета основных средств на объект недвижимого имущества и на земельный участок под указанным объектом;</td>
-            <td><?= getFile($object,'inv_card') ?></td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Выписка из реестра федерального имущества на объект федерального имущества и на земельный участок под указанным объектом;</td>
-            <td><?= getFile($object,'reestr_vip') ?></td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Правоустанавливающие и (или) правоудостоверяющие документы на объект недвижимого имущества и на земельный участок под указанным объектом;</td>
-            <td><?= getFile($object,'pravust') ?></td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Документы технического и кадастрового учета на объект недвижимого имущества;</td>
-            <td><?= getFile($object,'tex_kad_docs') ?></td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Ситуационный план с указанием границ земельного участка, объекта недвижимого имущества и иных объектов (включая незавершенные строительные объекты), принадлежащих третьим лицам, расположенных на указанном земельном участке;</td>
-            <td><?= getFile($object,'sit_plan') ?></td>
-        </tr>
-        <tr>
-            <td>6</td>
-            <td>Акт технического осмотра объекта капитального строительства (документ, содержащий сведения о результатах обследования объекта капитального строительства, техническом состоянии строительных конструкций и инженерного оборудования такого объекта и количественной оценке фактических показателей качества строительных конструкций и инженерного оборудования по состоянию на дату обследования, для определения состава, объёмов и сроков работ по капитальному ремонту объекта капитального строительства); </td>
-            <td><?= getFile($object,'tex_acts') ?></td>
-        </tr>
-        <tr>
-            <td>7</td>
-            <td>Дефектная ведомость (первичный учётный документ, подготовленный в соответствии с требованиями законодательства Российской Федерации о бухгалтерском учёте по результатам обследования технического состояния объекта капитального строительства и содержащий перечень дефектов строительных конструкций и инженерного оборудования объекта капитального строительства с указанием качественных и количественных характеристик таких дефектов);</td>
-            <td><?= getFile($object,'def_ved') ?></td>
-        </tr>
-        <tr>
-            <td>8</td>
-            <td>Фотографии объекта, предполагаемого к проведению капитального ремонта (подписанные по 2 шт. на листе А4, но не более 10 шт. на объект недвижимости);</td>
-            <td><?= getFile($object,'obj_photos') ?></td>
-        </tr>
-        <tr>
-            <td>9</td>
-            <td>Предписания надзорных органов (при наличии);</td>
-            <td><?= getFile($object,'predpis') ?></td>
-        </tr>
-        <tr>
-            <td>10</td>
-            <td>Задание на проектирование (корректировку проектной документации), составленное в соответствии с рекомендациями Минстроя РФ (в случае разработки/корректировки проектной документации и/или направления данной документации на экспертизу).</td>
-            <td><?= getFile($object,'proekti') ?></td>
-        </tr>
-        <?php foreach (range(0,20) as $key): ?>
-            <?php if ($file = getOther($object,$key)):?>
-                <tr>
-                    <td><?=$asd = $key+11?></td>
-                    <td><?= $file['label']?></td>
-                    <td><?= $file['file']?></td>
-                </tr>
-            <?php else:?>
-                <?php break ?>
+        <table class="table table-bordered">
+            <thead>
+            <tr class="text-center">
+                <th class="text-center">№</th>
+                <th class="text-center">Документ</th>
+                <th class="text-center">Наличие</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>Инвентарные карточки учета основных средств на объект недвижимого имущества и на земельный участок под указанным объектом;</td>
+                <td><?= getFile($object,'inv_card') ?></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Выписка из реестра федерального имущества на объект федерального имущества и на земельный участок под указанным объектом;</td>
+                <td><?= getFile($object,'reestr_vip') ?></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Правоустанавливающие и (или) правоудостоверяющие документы на объект недвижимого имущества и на земельный участок под указанным объектом;</td>
+                <td><?= getFile($object,'pravust') ?></td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Документы технического и кадастрового учета на объект недвижимого имущества;</td>
+                <td><?= getFile($object,'tex_kad_docs') ?></td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Ситуационный план с указанием границ земельного участка, объекта недвижимого имущества и иных объектов (включая незавершенные строительные объекты), принадлежащих третьим лицам, расположенных на указанном земельном участке;</td>
+                <td><?= getFile($object,'sit_plan') ?></td>
+            </tr>
+            <tr>
+                <td>6</td>
+                <td>Акт технического осмотра объекта капитального строительства (документ, содержащий сведения о результатах обследования объекта капитального строительства, техническом состоянии строительных конструкций и инженерного оборудования такого объекта и количественной оценке фактических показателей качества строительных конструкций и инженерного оборудования по состоянию на дату обследования, для определения состава, объёмов и сроков работ по капитальному ремонту объекта капитального строительства); </td>
+                <td><?= getFile($object,'tex_acts') ?></td>
+            </tr>
+            <tr>
+                <td>7</td>
+                <td>Дефектная ведомость (первичный учётный документ, подготовленный в соответствии с требованиями законодательства Российской Федерации о бухгалтерском учёте по результатам обследования технического состояния объекта капитального строительства и содержащий перечень дефектов строительных конструкций и инженерного оборудования объекта капитального строительства с указанием качественных и количественных характеристик таких дефектов);</td>
+                <td><?= getFile($object,'def_ved') ?></td>
+            </tr>
+            <tr>
+                <td>8</td>
+                <td>Фотографии объекта, предполагаемого к проведению капитального ремонта (подписанные по 2 шт. на листе А4, но не более 10 шт. на объект недвижимости);</td>
+                <td><?= getFile($object,'obj_photos') ?></td>
+            </tr>
+            <tr>
+                <td>9</td>
+                <td>Предписания надзорных органов (при наличии);</td>
+                <td><?= getFile($object,'predpis') ?></td>
+            </tr>
+            <tr>
+                <td>10</td>
+                <td>Задание на проектирование (корректировку проектной документации), составленное в соответствии с рекомендациями Минстроя РФ (в случае разработки/корректировки проектной документации и/или направления данной документации на экспертизу).</td>
+                <td><?= getFile($object,'proekti') ?></td>
+            </tr>
+            <?php foreach (range(0,20) as $key): ?>
+                <?php if ($file = getOther($object,$key)):?>
+                    <tr>
+                        <td><?=$asd = $key+11?></td>
+                        <td><?= $file['label']?></td>
+                        <td><?= $file['file']?></td>
+                    </tr>
+                <?php else:?>
+                    <?php break ?>
+                <?php endif;?>
+
+            <?php endforeach;?>
+            </tbody>
+        </table>
+
+        <div class="text-center">
+            3.2.5. Ожидаемые результаты
+        </div>
+
+        <table class="table table-bordered">
+            <thead>
+            <tr class="text-center">
+                <th class="text-center">№</th>
+                <th class="text-center">Цели и задачи</th>
+                <th class="text-center">Планируемый показатель</th>
+                <th class="text-center">Ед. измерения</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr>
+                <td>1</td>
+                <td>Проведение капитального ремонта, общая площадь  </td>
+                <td><?=getEvent($wai,$index,0,'plan')?></td>
+                <td>кв.м</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>Вовлечение в хозяйственную деятельность за счет проведенного капитального ремонта, общая площадь</td>
+                <td><?=getEvent($wai,$index,1,'plan')?></td>
+                <td>кв.м</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>Снижение затрат на эксплуатацию</td>
+                <td><?=getEvent($wai,$index,2,'plan')?></td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>Повышение энергоэффективности</td>
+                <td><?=getEvent($wai,$index,3,'plan')?></td>
+                <td> </td>
+            </tr>
+            <tr>
+                <td>5</td>
+                <td>Восстановление (ремонт, реставрация, за исключением реконструкции) объектов культурного наследия </td>
+                <td><?=getEvent($wai,$index,4,'plan')?></td>
+                <td> </td>
+            </tr>
+            <?php if (ArrayHelper::keyExists($index,$wai)): ?>
+                <?php for ( $i=5,$k=6;$i< count($wai[$index]); $i++,$k++): ?>
+                    <tr>
+                        <td><?=$k?></td>
+                        <td><?=getEvent($wai,$index,$i,'aim')?></td>
+                        <td><?=getEvent($wai,$index,$i,'plan')?></td>
+                        <td><?=getEvent($wai,$index,$i,'changes')?></td>
+                    </tr>
+                <?php endfor;?>
             <?php endif;?>
 
-        <?php endforeach;?>
-        </tbody>
-    </table>
+            </tbody>
+        </table>
 
-    <div class="text-center">
-        3.2.5. Ожидаемые результаты
-    </div>
-
-    <table class="table table-bordered">
-        <thead>
-        <tr class="text-center">
-            <th class="text-center">№</th>
-            <th class="text-center">Цели и задачи</th>
-            <th class="text-center">Планируемый показатель</th>
-            <th class="text-center">Ед. измерения</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-            <td>1</td>
-            <td>Проведение капитального ремонта, общая площадь  </td>
-            <td><?=getEvent($wai,$index,0,'plan')?></td>
-            <td>кв.м</td>
-        </tr>
-        <tr>
-            <td>2</td>
-            <td>Вовлечение в хозяйственную деятельность за счет проведенного капитального ремонта, общая площадь</td>
-            <td><?=getEvent($wai,$index,1,'plan')?></td>
-            <td>кв.м</td>
-        </tr>
-        <tr>
-            <td>3</td>
-            <td>Снижение затрат на эксплуатацию</td>
-            <td><?=getEvent($wai,$index,2,'plan')?></td>
-            <td> </td>
-        </tr>
-        <tr>
-            <td>4</td>
-            <td>Повышение энергоэффективности</td>
-            <td><?=getEvent($wai,$index,3,'plan')?></td>
-            <td> </td>
-        </tr>
-        <tr>
-            <td>5</td>
-            <td>Восстановление (ремонт, реставрация, за исключением реконструкции) объектов культурного наследия </td>
-            <td><?=getEvent($wai,$index,4,'plan')?></td>
-            <td> </td>
-        </tr>
-        <?php if (ArrayHelper::keyExists($index,$wai)): ?>
-            <?php for ( $i=5,$k=6;$i< count($wai[$index]); $i++,$k++): ?>
-            <tr>
-                <td><?=$k?></td>
-                <td><?=getEvent($wai,$index,$i,'aim')?></td>
-                <td><?=getEvent($wai,$index,$i,'plan')?></td>
-                <td><?=getEvent($wai,$index,$i,'changes')?></td>
-            </tr>
-            <?php endfor;?>
-        <?php endif;?>
-
-        </tbody>
-    </table>
-
-    <table class="table table-bordered">
-        <thead class="table-bordered table">
+        <table class="table table-bordered">
+            <thead class="table-bordered table">
             <tr>
                 <th class="text-center">№</th>
                 <th class="text-center">Виды рисков</th>
                 <th class="text-center">Отрицательное влияние</th>
                 <th class="text-center">Способы защиты</th>
             </tr>
-        </thead>
-        <tbody>
-        <?php if (ArrayHelper::keyExists($index,$risks)): ?>
-            <?php foreach ($risks[$index] as $k =>$risk):?>
-                <tr>
-                    <td><?=$fdshj = $k+1?></td>
-                    <td><?=getEvent($risks,$index,$k,'types')?></td>
-                    <td><?=getEvent($risks,$index,$k,'poison')?></td>
-                    <td><?=getEvent($risks,$index,$k,'protect')?></td>
-                </tr>
-            <?php endforeach;?>
-        <?php endif;?>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+            <?php if (ArrayHelper::keyExists($index,$risks)): ?>
+                <?php foreach ($risks[$index] as $k =>$risk):?>
+                    <tr>
+                        <td><?=$fdshj = $k+1?></td>
+                        <td><?=getEvent($risks,$index,$k,'types')?></td>
+                        <td><?=getEvent($risks,$index,$k,'poison')?></td>
+                        <td><?=getEvent($risks,$index,$k,'protect')?></td>
+                    </tr>
+                <?php endforeach;?>
+            <?php endif;?>
+            </tbody>
+        </table>
 
     <?php endforeach;?>
+</div>
 </div>
 
 <style>
