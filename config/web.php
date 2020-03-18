@@ -2,6 +2,7 @@
 
 $params = require __DIR__ . '/params.php';
 $db = require __DIR__ . '/db.php';
+// $routes = require __DIR__ . '/routes/MainRouter.php';
 
 $config = [
     'id' => 'basic',
@@ -91,11 +92,14 @@ $config = [
                 'program/object/delete/<id:\d+>' => 'app/program-objects/delete',
                 'program/object/files/<id:\d+>' => 'app/program-objects/get-all-obj-files',
                 'program/export'=>'app/development-programme/export',
+                'organization/list'=>'app/organization/list',
                 'organization/info'=>'app/organization/info',
                 'organization/update/<id:\d+>'=>'app/organization/update',
                 'program/atz' => 'app/atz/index',
                 'api/fileUpload' => '/rest/upload/upload',
-                'api/fileRemove' => '/rest/upload/delete'
+                'api/fileRemove' => '/rest/upload/delete',
+
+                'check' => 'app/mgsu-admin/view'
             ],
         ],
         'assetManager' => [

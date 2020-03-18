@@ -12036,7 +12036,7 @@ return [
         'dev_program',
     ],
     2994 => [
-        'root',
+        'mgsu',
     ],
     2995 => [
         'root',

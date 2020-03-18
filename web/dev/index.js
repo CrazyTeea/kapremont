@@ -64250,68 +64250,75 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_pages_program_atz_index_vue__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/pages/program/atz/index.vue */ "./src/components/pages/program/atz/index.vue");
 
 
- //import {Year,Month, orgList} from './components/pages'
 
 
 vue__WEBPACK_IMPORTED_MODULE_1__["default"].use(vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]);
 var routes = [{
-  path: '/',
+  path: "/",
   component: function component() {
     return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(0)]).then(__webpack_require__.bind(null, /*! ./components/pages */ "./src/components/pages/index.js")).then(function (module) {
       return module.mainPage;
     });
   }
 }, {
-  path: '/program',
+  path: "/program",
   component: function component() {
     return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(0)]).then(__webpack_require__.bind(null, /*! ./components/pages */ "./src/components/pages/index.js")).then(function (module) {
       return module.mainPage;
     });
   }
 }, {
-  path: '/program/view',
+  path: "/program/view",
   component: function component() {
     return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(0)]).then(__webpack_require__.bind(null, /*! ./components/pages */ "./src/components/pages/index.js")).then(function (module) {
       return module.devView;
     });
   }
 }, {
-  path: '/program/object/create',
+  path: "/program/object/create",
   component: function component() {
     return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(0)]).then(__webpack_require__.bind(null, /*! ./components/pages */ "./src/components/pages/index.js")).then(function (module) {
       return module.form;
     });
   }
 }, {
-  path: '/program/object/update/:id',
+  path: "/program/object/update/:id",
   component: function component() {
     return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(0)]).then(__webpack_require__.bind(null, /*! ./components/pages */ "./src/components/pages/index.js")).then(function (module) {
       return module.form;
     });
   }
 }, {
-  path: '/organization/info',
-  name: 'orgInfo',
+  path: "/organization/info",
+  name: "orgInfo",
   component: function component() {
     return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(0)]).then(__webpack_require__.bind(null, /*! ./components/pages */ "./src/components/pages/index.js")).then(function (module) {
       return module.orgInfo;
     });
   }
 }, {
-  path: '/error/browser',
-  name: 'error',
+  path: "/error/browser",
+  name: "error",
   component: function component() {
     return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(0)]).then(__webpack_require__.bind(null, /*! ./components/pages */ "./src/components/pages/index.js")).then(function (module) {
       return module.errorPage;
     });
   }
 }, {
-  path: '/program/atz',
-  name: 'atz',
+  path: "/program/atz",
+  name: "atz",
   component: _components_pages_program_atz_index_vue__WEBPACK_IMPORTED_MODULE_3__["default"]
+}, {
+  path: "/organization/list",
+  name: "MainCheck",
+  component: function component() {
+    return Promise.all(/*! import() */[__webpack_require__.e(1), __webpack_require__.e(0)]).then(__webpack_require__.bind(null, /*! ./components/pages */ "./src/components/pages/index.js")).then(function (module) {
+      return module.checkMgsu;
+    });
+  }
 }];
 /* harmony default export */ __webpack_exports__["default"] = (new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
-  mode: 'history',
+  mode: "history",
   routes: routes
 }));
 
