@@ -24,4 +24,16 @@ return [
     '/app/development-programme/index' => [
         'type' => 2,
     ],
+    'mgsu' => [
+        'type' => 1,
+    ],
+    'orglist_view' => [
+        'type' => 2,
+        'children' => [
+            '/app/organization/list',
+        ],
+    ],
+    '/app/organization/list' => [
+        'type' => 2,
+    ],
 ];

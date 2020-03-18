@@ -19,4 +19,7 @@ class OrganizationController extends AppController
             return $this->redirect(['organization/info']);
         return $this->render('update',compact('model'));
     }
+    public function actionList(){
+        return $this->render('list');
+    }
 }

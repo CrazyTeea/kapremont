@@ -11,6 +11,9 @@ use yii\helpers\Json;
 
 class OrganizationsController extends RestController
 {
+    public function actionAll(){
+        return Organizations::find()->all();
+    }
     public function actionByUsername(){
         if ($data = Yii::$app->getRequest()->getRawBody()){
             $data = (object)Json::decode($data);

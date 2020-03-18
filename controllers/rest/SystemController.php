@@ -294,6 +294,8 @@ class SystemController extends RestController
                 }
                 case 'atz':{
                     $program = Yii::$app->session->get('program');
+                    if (!$program)
+                        $program = Program::findOne(['id_org'=>Yii::$app->session->get('user')->id_org]);
                     $atz = Atz::findAll(['id_program'=>$program->id]);
                     return $atz;
                 }
