@@ -39,6 +39,7 @@ use Yii;
  * @property int|null $exploit_year
  * @property int $type_remont
  * @property string|null $osn_isp_zdan
+ * @property int $last_exploit_year
  */
 class ProgramObjects extends \yii\db\ActiveRecord
 {
@@ -57,7 +58,7 @@ class ProgramObjects extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_org', 'id_priority', 'id_program', 'year', 'system_status', 'id_region', 'id_city', 'type', 'exploit_year','type_remont'], 'integer'],
+            [['id_org', 'id_priority', 'id_program', 'year', 'system_status', 'id_region', 'id_city', 'type', 'exploit_year','type_remont','last_exploit_year'], 'integer'],
             [['name', 'assignment', 'regulation', 'event_type', 'note', 'address','prav_oper_upr'], 'string','max'=>5000],
             [['square', 'wear', 'finance_sum', 'coFinancing', 'square_kap', 'isp_v_ust_dey', 'n_isp_v_ust_dey', 'square_ar', 'square_av', 'square_atz'], 'number'],
             [['created_at', 'updated_at'], 'safe'],

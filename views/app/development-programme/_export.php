@@ -598,7 +598,7 @@ use yii\helpers\ArrayHelper; ?>
             <tr>
                 <td>6</td>
                 <td>Год проведения последнего капитального ремонта/реконструкции</td>
-                <td></td>
+                <td><?=$object->last_exploit_year?></td>
             </tr>
             <tr>
                 <td>7</td>
