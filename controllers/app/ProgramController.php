@@ -26,6 +26,7 @@ class ProgramController extends AppController
         if ($objects) {
             foreach ($objects as $object){
                 $object->status = 0;
+                $object->save(false);
             }
         }
 
