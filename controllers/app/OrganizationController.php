@@ -10,16 +10,26 @@ use Yii;
 
 class OrganizationController extends AppController
 {
-    public function actionInfo(){
+    public function actionInfo()
+    {
         return $this->render('info');
     }
-    public function actionUpdate($id){
+
+    public function actionUpdate($id)
+    {
         $model = OrgInfo::findOne(['id_org'=>$id]);
         if ($model->load(Yii::$app->getRequest()->post()) and $model->save())
             return $this->redirect(['organization/info']);
         return $this->render('update',compact('model'));
     }
-    public function actionList(){
+
+    public function actionList()
+    {
         return $this->render('list');
+    }
+
+    public function actionListObject($id)
+    {
+        return $this->render('ListObject');
     }
 }
