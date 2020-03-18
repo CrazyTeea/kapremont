@@ -91,14 +91,11 @@ class ProgramObjects extends \yii\db\ActiveRecord
             'finance_sum' => 'Finance Sum',
             'coFinancing' => 'Co Financing',
             'note' => 'Примечание',
-            'system_status' => 'System Status',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
             'id_region' => 'Регион',
             'id_city' => 'Город',
-            'address' => 'Адрес',
+            'address' => 'Полный адрес объекта',
             'exist_pred_nadz_orgs' => 'Наличие предписаний надзорных органов:',
-            'type' => 'Type',
+            'type' => 'Тип объекта',
             'prav_sob' => 'Право собственности:',
             'square_kap' => 'Общая площадь здания (помещений), планируемого к капитальному ремонту, кв. м.:',
             'isp_v_ust_dey' => 'Используется в уставной деятельности, кв.м.:',
@@ -107,7 +104,8 @@ class ProgramObjects extends \yii\db\ActiveRecord
             'kad_number' => 'Кадастровый номер',
             'exploit_year' => 'Год ввода здания в эксплуатацию:',
             'osn_isp_zdan' => 'Основание для использования здания:',
-            'prav_oper_upr'=>'Право оперативного управления (рег. запись, номер):'
+            'prav_oper_upr'=>'Право оперативного управления (рег. запись, номер):',
+            'last_exploit_year'=>'Год проведения последнего капитального ремонта/реконструкции'
         ];
     }
     public function getRegion(){
