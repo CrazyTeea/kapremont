@@ -98,7 +98,9 @@ $config = [
                 'api/fileUpload' => '/rest/upload/upload',
                 'api/fileRemove' => '/rest/upload/delete',
 
-                'check' => 'app/mgsu-admin/view'
+                'check' => 'app/mgsu-admin/view',
+                'api/mgsu/main-table/<offset:\d+>'=> '/app/mgsu-admin/main-table',
+                'api/mgsu/count' => '/app/mgsu-admin/count'
             ],
         ],
         'assetManager' => [

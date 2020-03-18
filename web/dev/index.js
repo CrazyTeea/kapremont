@@ -2042,6 +2042,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 //
 //
 //
@@ -2060,7 +2062,84 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-/* harmony default export */ __webpack_exports__["default"] = ({});
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  data: function data() {
+    return {
+      csrf: document.getElementsByName("csrf-token")[0].content,
+      items: [],
+      currentPage: 1,
+      perPage: 10,
+      totalRows: 1
+    };
+  },
+  mounted: function mounted() {
+    this.getTotalRows();
+    this.getTable();
+  },
+  methods: {
+    getTable: function getTable() {
+      var _this = this;
+
+      var offset = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 0;
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/mgsu/main-table/".concat(offset), null, {
+        headers: {
+          "X-CSRF-Token": this.csrf
+        }
+      }).then(function (res) {
+        _this.items = res.data;
+      });
+    },
+    getTotalRows: function getTotalRows() {
+      var _this2 = this;
+
+      axios__WEBPACK_IMPORTED_MODULE_0___default.a.post("/api/mgsu/count", null, {
+        headers: {
+          "X-CSRF-Token": this.csrf
+        }
+      }).then(function (res) {
+        _this2.totalRows = res.data[0].quantity;
+      });
+    }
+  },
+  watch: {
+    currentPage: function currentPage() {
+      var offset = parseInt(this.currentPage) * 10;
+      this.getTable(offset);
+    }
+  }
+});
 
 /***/ }),
 
@@ -41796,7 +41875,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.table-overflow-hidden {\r\n    overflow: hidden !important;\r\n    overflow-x: scroll !important;\n}\r\n", ""]);
+exports.push([module.i, "\n.table-overflow-hidden {\r\n    overflow: hidden !important;\r\n    overflow-x: scroll !important;\n}\n.normal-font-weight-for-sell {\r\n    font-weight: normal !important;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -47353,10 +47432,62 @@ var render = function() {
               )
             ],
             1
+          ),
+          _vm._v(" "),
+          _c(
+            "b-tbody",
+            _vm._l(_vm.items, function(item, index) {
+              return _c(
+                "b-tr",
+                { key: index },
+                [
+                  _c("b-th", { staticClass: "normal-font-weight-for-sell" }, [
+                    _c("label", [_vm._v(_vm._s(item.id))])
+                  ]),
+                  _vm._v(" "),
+                  _c("b-th", { staticClass: "normal-font-weight-for-sell" }, [
+                    _c("label", [_vm._v(_vm._s(item.name))])
+                  ]),
+                  _vm._v(" "),
+                  _c("b-th", { staticClass: "normal-font-weight-for-sell" }, [
+                    _c("label", [_vm._v(_vm._s(item.region))])
+                  ]),
+                  _vm._v(" "),
+                  _c("b-th", { staticClass: "normal-font-weight-for-sell" }, [
+                    _c("label", [_vm._v(_vm._s(item.count_org))])
+                  ]),
+                  _vm._v(" "),
+                  _c("b-th", { staticClass: "normal-font-weight-for-sell" }, [
+                    _vm._v("\n                    скоро\n                ")
+                  ]),
+                  _vm._v(" "),
+                  _c("b-th", { staticClass: "normal-font-weight-for-sell" }, [
+                    _vm._v("\n                    скоро\n                ")
+                  ]),
+                  _vm._v(" "),
+                  _c("b-th", { staticClass: "normal-font-weight-for-sell" }, [
+                    _vm._v("\n                    скоро\n                ")
+                  ])
+                ],
+                1
+              )
+            }),
+            1
           )
         ],
         1
-      )
+      ),
+      _vm._v(" "),
+      _c("b-pagination", {
+        attrs: { "total-rows": _vm.totalRows, "per-page": _vm.perPage },
+        model: {
+          value: _vm.currentPage,
+          callback: function($$v) {
+            _vm.currentPage = $$v
+          },
+          expression: "currentPage"
+        }
+      })
     ],
     1
   )
