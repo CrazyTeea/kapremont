@@ -297,22 +297,22 @@ use yii\helpers\ArrayHelper; ?>
         <tr>
             <td>8</td>
             <td>Общая площадь всех зданий и сооружений</td>
-            <td><?=$sq['s_k']?></td>
+            <td><?=$org->orgInfo ? $org->orgInfo->square_all : ''?></td>
         </tr>
         <tr>
             <td>9</td>
             <td>Общая площадь всех зданий и сооружений, требующих капитального ремонта (на основании акта обследования или предписаний надзорных органов)</td>
-            <td><?=$sq['s_k_s']?></td>
+            <td><?=$org->orgInfo ? $org->orgInfo->square_all_kap : ''?></td>
         </tr>
         <tr>
             <td>10</td>
             <td>Общая площадь всех зданий и сооружений, находящихся в аварийном состоянии (на основании акта обследования или предписаний надзорных органов)</td>
-            <td><?=$sq['s_av']?></td>
+            <td><?=$org->orgInfo ? $org->orgInfo->square_all_av : ''?></td>
         </tr>
         <tr>
             <td>11</td>
             <td>Общая площадь всех зданий и сооружений, требующих мероприятий по АТЗ</td>
-            <td><?=$sq['s_atz']?></td>
+            <td><?=$org->orgInfo ? $org->orgInfo->square_all_atz : ''?></td>
         </tr>
         </tbody>
     </table>
