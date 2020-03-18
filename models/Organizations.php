@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\ProgramObjects;
 
 /**
  * This is the model class for table "organizations".
@@ -49,10 +50,14 @@ class Organizations extends \yii\db\ActiveRecord
             'system_status' => 'System Status',
         ];
     }
-    public function getRegion(){
-        return $this->hasOne(Regions::className(),['id'=>'id_region']);
+
+    public function getRegion()
+    {
+        return $this->hasOne(Regions::className(), ['id'=>'id_region']);
     }
-    public function getOrgInfo(){
-        return $this->hasOne(OrgInfo::className(),['id_org'=>'id']);
+
+    public function getProgramObjects()
+    {
+        return $this->hasMany(ProgramObjects::class, ['id_org' => 'id']);
     }
 }
