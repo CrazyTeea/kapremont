@@ -148,7 +148,7 @@ use yii\helpers\ArrayHelper; ?>
             ПРОГРАММА
             МОДЕРНИЗАЦИИ ИНФРАСТРУКТУРЫ, ВКЛЮЧАЯ КАПИТАЛЬНЫЙ РЕМОНТ ОБЪЕКТОВ И ПРОВЕДЕНИЕ МЕРОПРИЯТИЙ
             ПО АНТИТЕРРОРИСТИЧЕСКОЙ ЗАЩИЩЕННОСТИ ОБЪЕКТОВ
-            ФГБОУ ВО «<?=$org->name?>» В 2020 ГОДУ
+            <?=$org->full_name?>» В 2020 ГОДУ
 
         </h4>
     </div>
@@ -526,7 +526,8 @@ use yii\helpers\ArrayHelper; ?>
         <div class="text-center">
             <p><h5>Объект № <?=$kek?></h5>
             <p><?=$object->name?></p>
-            <p>Приоритет:<?=$prior[$object->id_priority ? : 1]?></p>
+            <p><b>Тип объекта: <?php $t = ['Приоритетный','Резервный']; echo $t[$object->type ? : 0] ?></b></p>
+            <p><i>Приоритет: <?=$prior[$object->id_priority ? : 1]?></i></p>
         </div>
         <table class="table table-bordered">
             <tr>
