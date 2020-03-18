@@ -284,6 +284,10 @@ class SystemController extends RestController
                             "Общая площадь всех зданий и сооружений, требующих мероприятий по АТЗ",
                             'value'=>  $org->orgInfo? $org->orgInfo->square_all_atz: 0
                         ],
+                        ['id' => 12, 'label' =>
+                            "ФИО ректора",
+                            'value'=>  $org->orgInfo? $org->orgInfo->rector: ''
+                        ],
                     ];
 
                     return $ret;
