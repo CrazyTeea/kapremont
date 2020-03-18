@@ -892,6 +892,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Svedenia",
@@ -914,7 +928,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     setFloat: function setFloat(val, index, attr) {
-      if (val.search('.') != -1) val.replace('.', ',');
+      if (val.search(".") != -1) val.replace(".", ",");
       this.sved[attr][index] = parseFloat(val).toFixed(3);
     },
     getSved: function getSved() {
@@ -965,75 +979,75 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       fields: [{
-        key: 'index',
-        'label': '№'
+        key: "index",
+        label: "№"
       }, {
-        key: 'stage',
-        label: 'Этап'
+        key: "stage",
+        label: "Этап"
       }, {
-        key: 'is_nessesary',
-        label: 'Необходимость выполнения'
+        key: "is_nessesary",
+        label: "Необходимость выполнения"
       }, {
-        key: 'begin_date',
-        label: 'Дата начала',
-        tdClass: 'date vertical-align-extra-table'
+        key: "begin_date",
+        label: "Дата начала",
+        tdClass: "date vertical-align-extra-table"
       }, {
-        key: 'final_date',
-        label: 'Дата окончания',
-        tdClass: 'date vertical-align-extra-table'
+        key: "final_date",
+        label: "Дата окончания",
+        tdClass: "date vertical-align-extra-table"
       }, {
-        key: 'rc',
-        label: 'Стоимость реализации (тыс.руб)',
-        tdClass: 'vertical-align-extra-table'
+        key: "rc",
+        label: "Стоимость реализации (тыс.руб)",
+        tdClass: "vertical-align-extra-table"
       }, {
-        key: 'kap_cost',
-        label: 'Сумма бюджетного финансирования на проведение кап.ремонта (тыс.руб)',
-        tdClass: 'vertical-align-extra-table'
+        key: "kap_cost",
+        label: "Сумма бюджетного финансирования на проведение кап.ремонта (тыс.руб)",
+        tdClass: "vertical-align-extra-table"
       }, {
-        key: 'finanse',
-        label: 'Софинансирование из внебюджетных источников (тыс.руб)',
-        tdClass: 'vertical-align-extra-table'
+        key: "finanse",
+        label: "Софинансирование из внебюджетных источников (тыс.руб)",
+        tdClass: "vertical-align-extra-table"
       }],
       stages: [{
-        'stage': 'Проведение тендера и заключение договора на выполнение обследования',
-        'rc': false,
-        'kap_cost': false,
-        'finanse': false
+        stage: "Проведение тендера и заключение договора на выполнение обследования",
+        rc: false,
+        kap_cost: false,
+        finanse: false
       }, {
-        'stage': 'Выполнение обследования, подготовка и утверждение дефектного акта',
-        'rc': true,
-        'kap_cost': false,
-        'finanse': true
+        stage: "Выполнение обследования, подготовка и утверждение дефектного акта",
+        rc: true,
+        kap_cost: false,
+        finanse: true
       }, {
-        'stage': 'Утверждение задания на проектирование',
-        'rc': false,
-        'kap_cost': false,
-        'finanse': false
+        stage: "Утверждение задания на проектирование",
+        rc: false,
+        kap_cost: false,
+        finanse: false
       }, {
-        'stage': 'Проведение тендера и заключение договора на подготовку проектно-сметной документации',
-        'rc': false,
-        'kap_cost': false,
-        'finanse': false
+        stage: "Проведение тендера и заключение договора на подготовку проектно-сметной документации",
+        rc: false,
+        kap_cost: false,
+        finanse: false
       }, {
-        'stage': 'Подготовка проектно-сметной документации',
-        'rc': true,
-        'kap_cost': true,
-        'finanse': true
+        stage: "Подготовка проектно-сметной документации",
+        rc: true,
+        kap_cost: true,
+        finanse: true
       }, {
-        'stage': 'Прохождение экспертизы проектно-сметной документации',
-        'rc': true,
-        'kap_cost': true,
-        'finanse': true
+        stage: "Прохождение экспертизы проектно-сметной документации",
+        rc: true,
+        kap_cost: true,
+        finanse: true
       }, {
-        'stage': 'Проведение тендера и заключение договора на выполнение строительно-монтажных работ',
-        'rc': false,
-        'kap_cost': false,
-        'finanse': false
+        stage: "Проведение тендера и заключение договора на выполнение строительно-монтажных работ",
+        rc: false,
+        kap_cost: false,
+        finanse: false
       }, {
-        'stage': 'Выполнение строительно-монтажных работ',
-        'rc': true,
-        'kap_cost': true,
-        'finanse': true
+        stage: "Выполнение строительно-монтажных работ",
+        rc: true,
+        kap_cost: true,
+        finanse: true
       }],
       sved: {
         is_nessesary: [],
@@ -3645,7 +3659,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.date {\n    min-width: 111px !important;\n}\n", ""]);
+exports.push([module.i, "\n.date {\r\n    min-width: 111px !important;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -3663,7 +3677,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.hidden-val-for-table {\n    overflow: hidden !important;\n    overflow-x: scroll !important;\n}\n.vertical-align-extra-table {\n    vertical-align: middle !important;\n}\n", ""]);
+exports.push([module.i, "\n.hidden-val-for-table {\r\n    overflow: hidden !important;\r\n    overflow-x: scroll !important;\n}\n.vertical-align-extra-table {\r\n    vertical-align: middle !important;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
