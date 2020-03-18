@@ -16,27 +16,27 @@
 </template>
 
 <script>
-    import {mapActions, mapGetters} from "vuex";
-    import {userPanel} from "../../../organisms";
-    export default {
+import {mapActions, mapGetters} from "vuex";
+import {userPanel} from "../../../organisms";
+export default {
 
-        name: "OrgInfo",
-        components:{
-            userPanel
+    name: "OrgInfo",
+    components: {
+        userPanel
+    },
+    computed: {
+        ...mapGetters(['getPageData','getUser']),
+    },
+    methods: {
+        link() {
+            return window.location.href = `/organization/update/${this.getUser.organization.id}`
         },
-        computed: {
-            ...mapGetters(['getPageData','getUser']),
-        },
-        methods:{
-            link(){
-              return window.location.href = `/organization/update/${this.getUser.organization.id}`
-            },
-            ...mapActions(['requestPageData'])
-        },
-        mounted() {
-            this.requestPageData({pageName:"orgInfo"});
-        }
+        ...mapActions(['requestPageData'])
+    },
+    mounted() {
+        this.requestPageData({pageName:"orgInfo"});
     }
+}
 </script>
 
 <style scoped>
