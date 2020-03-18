@@ -1112,19 +1112,19 @@ use yii\helpers\ArrayHelper; ?>
             <tr>
                 <td>3</td>
                 <td>Снижение затрат на эксплуатацию</td>
-                <td><?=getEvent($wai,$index,2,'plan')?></td>
+                <td><?=getEvent($wai,$index,2,'plan') ? 'Да' : 'Нет'?></td>
                 <td> </td>
             </tr>
             <tr>
                 <td>4</td>
                 <td>Повышение энергоэффективности</td>
-                <td><?=getEvent($wai,$index,3,'plan')?></td>
+                <td><?=getEvent($wai,$index,3,'plan') ? 'Да' : 'Нет'?></td>
                 <td> </td>
             </tr>
             <tr>
                 <td>5</td>
                 <td>Восстановление (ремонт, реставрация, за исключением реконструкции) объектов культурного наследия </td>
-                <td><?=getEvent($wai,$index,4,'plan')?></td>
+                <td><?=getEvent($wai,$index,4,'plan') ? 'Да' : 'Нет'?></td>
                 <td> </td>
             </tr>
             <?php if (ArrayHelper::keyExists($index,$wai)): ?>

@@ -1764,6 +1764,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     modelName: String
@@ -1771,27 +1784,33 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       dataFirst: [{
-        aim: 'Проведение капитального ремонта, общая площадь',
+        aim: "Проведение капитального ремонта, общая площадь",
         plan: null,
-        changes: 'кв.м'
+        changes: "кв.м"
       }, {
-        aim: 'Вовлечение в хозяйственную деятельность за счет проведенного капитального ремонта, общая площадь',
+        aim: "Вовлечение в хозяйственную деятельность за счет проведенного капитального ремонта, общая площадь",
         plan: null,
-        changes: 'кв.м'
+        changes: "кв.м"
       }, {
-        aim: 'Снижение затрат на эксплуатацию',
-        plan: null,
-        changes: 'да/нет'
+        aim: "Снижение затрат на эксплуатацию",
+        plan: 0,
+        changes: "",
+        var: true
       }, {
-        aim: 'Повышение энергоэффективности',
-        plan: null,
-        changes: 'да/нет'
+        aim: "Повышение энергоэффективности",
+        plan: 0,
+        changes: "",
+        var: true
       }, {
-        aim: 'Восстановление (ремонт, реставрация, за исключением реконструкции) объектов культурного наследия',
+        aim: "Восстановление (ремонт, реставрация, за исключением реконструкции) объектов культурного наследия",
+        plan: 0,
+        changes: "",
+        var: true
+      }, {
+        aim: null,
         plan: null,
-        changes: 'да/нет'
-      } // {aim: null, plan: null, changes: null}
-      ]
+        changes: null
+      }]
     };
   },
   mounted: function mounted() {
@@ -2240,6 +2259,598 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -2260,7 +2871,7 @@ __webpack_require__.r(__webpack_exports__);
     "v-riscs": _Riscs_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
     "v-uploads": _Uploads_vue__WEBPACK_IMPORTED_MODULE_13__["default"]
   },
-  computed: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_5__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapGetters"])(['getPageData', 'getCities', "getRegions"]), {
+  computed: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_5__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapGetters"])(["getPageData", "getCities", "getRegions"]), {
     kad_number_validator: function kad_number_validator() {
       var pattern = /\d+:\d+:\d+:\d+/;
       return pattern.test(this.formData.kad_number);
@@ -2281,7 +2892,7 @@ __webpack_require__.r(__webpack_exports__);
     var _window$MODEL$base, _window$MODEL$base2, _window$MODEL$base3, _window$MODEL$base4, _window$MODEL$base5, _window$MODEL$base6, _window$MODEL$base7, _window$MODEL$base8, _window$MODEL$base9, _window$MODEL$base10, _window$MODEL$base11, _window$MODEL$base12, _window$MODEL$base13, _window$MODEL$base14, _window$MODEL$base15, _window$MODEL$base16, _window$MODEL$base17, _window$MODEL$base18, _window$MODEL$base19, _window$MODEL$base20, _window$MODEL$base21, _window$MODEL$base22, _window$MODEL$base23;
 
     return {
-      csrf: document.getElementsByName('csrf-token')[0].content,
+      csrf: document.getElementsByName("csrf-token")[0].content,
       formData: {
         type_remont: ((_window$MODEL$base = window.MODEL.base) === null || _window$MODEL$base === void 0 ? void 0 : _window$MODEL$base.type_remont) || 0,
         address: ((_window$MODEL$base2 = window.MODEL.base) === null || _window$MODEL$base2 === void 0 ? void 0 : _window$MODEL$base2.address) || null,
@@ -2310,12 +2921,12 @@ __webpack_require__.r(__webpack_exports__);
       errors: {}
     };
   },
-  methods: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_5__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapActions"])(['requestPageData', 'requestCity']), {
+  methods: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_5__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapActions"])(["requestPageData", "requestCity"]), {
     setSelected: function setSelected(value) {
       formData.id_priority = value;
     },
     setFloat: function setFloat(val, attr) {
-      if (val.search('.') != -1) val.replace('.', ',');
+      if (val.search(".") != -1) val.replace(".", ",");
       this.formData[attr] = parseFloat(val).toFixed(3);
     },
     feedback: function feedback(model, value, errorMessage) {
@@ -2328,16 +2939,16 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       e.preventDefault();
-      var form = document.getElementById('object_form');
+      var form = document.getElementById("object_form");
       var formData = new FormData(form); // formData.append('dsfsd',document.querySelector('#file_input_0'))
 
       axios__WEBPACK_IMPORTED_MODULE_14___default.a.post(this.$route.path, formData, {
         headers: {
-          'X-CSRF-Token': this.csrf
+          "X-CSRF-Token": this.csrf
         }
       }).then(function (response) {
         if (response.data.ProgramObjects) {
-          console.log('ошибка');
+          console.log("ошибка");
           console.log(response.data);
           var obj = response.data.ProgramObjects;
 
@@ -2347,7 +2958,7 @@ __webpack_require__.r(__webpack_exports__);
         } else {
           var _response$data;
 
-          if (!!((_response$data = response.data) === null || _response$data === void 0 ? void 0 : _response$data.id)) {
+          if ((_response$data = response.data) === null || _response$data === void 0 ? void 0 : _response$data.id) {
             _this.$refs.files.sendFile({
               id: response.data.id
             });
@@ -2360,27 +2971,27 @@ __webpack_require__.r(__webpack_exports__);
     },
     errorReport: function errorReport(message) {
       this.$bvModal.msgBoxOk(message, {
-        title: 'Ошибка!',
-        size: 'sm',
-        buttonSize: 'sm',
-        okVariant: 'outline-success',
-        headerClass: 'p-2 border-bottom-0',
-        footerClass: 'p-2 border-top-0',
+        title: "Ошибка!",
+        size: "sm",
+        buttonSize: "sm",
+        okVariant: "outline-success",
+        headerClass: "p-2 border-bottom-0",
+        footerClass: "p-2 border-top-0",
         centered: true
       });
     },
     onReset: function onReset() {
       this.formData.id_region = 0;
       this.formData.id_city = 0;
-      this.formData.kad_number = '';
+      this.formData.kad_number = "";
       this.formData.year = 0;
       this.formData.exploit_year = 0;
       this.formData.wear = 0;
-      this.formData.exist_pred_nadz_orgs = '';
-      this.formData.osn_isp_zdan = '';
-      this.formData.assignment = '';
-      this.formData.prav_sob = '';
-      this.formData.note = '';
+      this.formData.exist_pred_nadz_orgs = "";
+      this.formData.osn_isp_zdan = "";
+      this.formData.assignment = "";
+      this.formData.prav_sob = "";
+      this.formData.note = "";
       this.formData.square = 0;
       this.formData.square_kap = 0;
       this.formData.isp_v_ust_dey = 0;
@@ -2399,7 +3010,7 @@ __webpack_require__.r(__webpack_exports__);
     this.requestPageData({
       pageName: "objectCreate"
     });
-    if (!!this.formData.id_region) this.requestCity({
+    if (this.formData.id_region) this.requestCity({
       id: this.formData.id_region
     });
   }
@@ -3113,7 +3724,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.toggle_button[data-v-da428c26] {\n    display: block;\n    cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.toggle_button[data-v-da428c26] {\r\n    display: block;\r\n    cursor: pointer;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -4884,19 +5495,57 @@ var render = function() {
                   _c(
                     "b-th",
                     [
-                      _c("b-form-input", {
-                        attrs: {
-                          type: "text",
-                          name: _vm.modelName + "[" + index + "][plan]"
-                        },
-                        model: {
-                          value: item.plan,
-                          callback: function($$v) {
-                            _vm.$set(item, "plan", $$v)
-                          },
-                          expression: "item.plan"
-                        }
-                      })
+                      item.var
+                        ? _c(
+                            "div",
+                            [
+                              _c("b-form-input", {
+                                staticStyle: { display: "none" },
+                                attrs: {
+                                  name: _vm.modelName + "[" + index + "][plan]"
+                                },
+                                model: {
+                                  value: item.plan,
+                                  callback: function($$v) {
+                                    _vm.$set(item, "plan", $$v)
+                                  },
+                                  expression: "item.plan"
+                                }
+                              }),
+                              _vm._v(" "),
+                              item.var
+                                ? _c("b-select", {
+                                    attrs: {
+                                      options: [
+                                        { value: 0, text: "нет" },
+                                        { value: 1, text: "да" }
+                                      ]
+                                    },
+                                    model: {
+                                      value: item.plan,
+                                      callback: function($$v) {
+                                        _vm.$set(item, "plan", $$v)
+                                      },
+                                      expression: "item.plan"
+                                    }
+                                  })
+                                : _vm._e()
+                            ],
+                            1
+                          )
+                        : _c("b-form-input", {
+                            attrs: {
+                              type: "text",
+                              name: _vm.modelName + "[" + index + "][plan]"
+                            },
+                            model: {
+                              value: item.plan,
+                              callback: function($$v) {
+                                _vm.$set(item, "plan", $$v)
+                              },
+                              expression: "item.plan"
+                            }
+                          })
                     ],
                     1
                   ),
@@ -5209,7 +5858,7 @@ var render = function() {
                           [
                             _c("b-icon-gear-wide-connected"),
                             _vm._v(
-                              "\n                       Характеристика объекта\n                   "
+                              "\n                            Характеристика объекта\n                        "
                             )
                           ],
                           1
@@ -5274,7 +5923,10 @@ var render = function() {
                                     _c("b-select", {
                                       attrs: {
                                         options: [
-                                          { value: 0, text: "Приоритетный" },
+                                          {
+                                            value: 0,
+                                            text: "Приоритетный"
+                                          },
                                           { value: 1, text: "Резервный" }
                                         ]
                                       },
@@ -5337,7 +5989,8 @@ var render = function() {
                                         options: [
                                           { value: 1, text: "1" },
                                           { value: 2, text: "2" },
-                                          { value: 3, text: "3" }
+                                          { value: 3, text: "3" },
+                                          { value: 4, text: "резерв" }
                                         ]
                                       },
                                       model: {
@@ -5471,7 +6124,10 @@ var render = function() {
                                     _c("v-select2", {
                                       attrs: {
                                         options: _vm.getCities || [
-                                          { city: "Выберите регион", id: null }
+                                          {
+                                            city: "Выберите регион",
+                                            id: null
+                                          }
                                         ],
                                         reduce: function(city) {
                                           return city.id
@@ -5667,7 +6323,7 @@ var render = function() {
                                           )
                                         },
                                         expression:
-                                          "formData.exist_pred_nadz_orgs"
+                                          "\n                                            formData.exist_pred_nadz_orgs\n                                        "
                                       }
                                     }),
                                     _vm._v(" "),
@@ -5689,7 +6345,7 @@ var render = function() {
                                           )
                                         },
                                         expression:
-                                          "formData.exist_pred_nadz_orgs"
+                                          "\n                                            formData.exist_pred_nadz_orgs\n                                        "
                                       }
                                     })
                                   ],
@@ -5788,9 +6444,18 @@ var render = function() {
                                       attrs: {
                                         options: [
                                           { value: 0, text: "Менее 20%" },
-                                          { value: 1, text: "От 20% до 50%" },
-                                          { value: 2, text: "От 50% до 70%" },
-                                          { value: 3, text: "От 70% до 90%" },
+                                          {
+                                            value: 1,
+                                            text: "От 20% до 50%"
+                                          },
+                                          {
+                                            value: 2,
+                                            text: "От 50% до 70%"
+                                          },
+                                          {
+                                            value: 3,
+                                            text: "От 70% до 90%"
+                                          },
                                           { value: 4, text: "Более 90%" }
                                         ]
                                       },
@@ -5989,7 +6654,10 @@ var render = function() {
                                             value: "fast",
                                             text: "Оперативное управление"
                                           },
-                                          { value: "others", text: "Другое" }
+                                          {
+                                            value: "others",
+                                            text: "Другое"
+                                          }
                                         ]
                                       },
                                       model: {
@@ -6347,7 +7015,7 @@ var render = function() {
                           [
                             _c("b-icon-gear-wide-connected"),
                             _vm._v(
-                              "\n                       Сведения о планируемых мероприятиях"
+                              "\n                            Сведения о планируемых мероприятиях"
                             )
                           ],
                           1
@@ -6408,7 +7076,7 @@ var render = function() {
                           [
                             _c("b-icon-gear-wide-connected"),
                             _vm._v(
-                              "\n                        Обоснование необходимости (целесообразности) планируемых мероприятий"
+                              "\n                            Обоснование необходимости (целесообразности)\n                            планируемых мероприятий"
                             )
                           ],
                           1
@@ -6422,8 +7090,7 @@ var render = function() {
                         attrs: {
                           id: "accordion-3",
                           accordion: "my-accordion",
-                          role: "tabpanel",
-                          visible: ""
+                          role: "tabpanel"
                         }
                       },
                       [
@@ -6470,7 +7137,7 @@ var render = function() {
                           [
                             _c("b-icon-gear-wide-connected"),
                             _vm._v(
-                              "\n                        Ожидаемые результаты"
+                              "\n                            Ожидаемые результаты"
                             )
                           ],
                           1
@@ -6484,7 +7151,8 @@ var render = function() {
                         attrs: {
                           id: "accordion-4",
                           accordion: "my-accordion",
-                          role: "tabpanel"
+                          role: "tabpanel",
+                          visible: ""
                         }
                       },
                       [
@@ -6531,7 +7199,7 @@ var render = function() {
                           [
                             _c("b-icon-gear-wide-connected"),
                             _vm._v(
-                              "\n                        Прогнозируемые риски"
+                              "\n                            Прогнозируемые риски"
                             )
                           ],
                           1
@@ -6592,7 +7260,7 @@ var render = function() {
                           [
                             _c("b-icon-gear-wide-connected"),
                             _vm._v(
-                              "\n                      Опись прилагаемых документов"
+                              "\n                            Опись прилагаемых документов"
                             )
                           ],
                           1
