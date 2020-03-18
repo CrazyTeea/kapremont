@@ -26,6 +26,10 @@ return [
     ],
     'mgsu' => [
         'type' => 1,
+        'children' => [
+            'orglist_view',
+            '/*',
+        ],
     ],
     'orglist_view' => [
         'type' => 2,
