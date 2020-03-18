@@ -7,4 +7,5 @@
 
 $this->title = 'Программа модернизации';
 $this->params['breadcrumbs'][] = $this->title;
-
+?>
+<div id="app"></div>

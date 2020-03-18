@@ -28,7 +28,8 @@ return [
         'type' => 1,
         'children' => [
             'orglist_view',
-            '/*',
+            '/app/organization/*',
+            '/app/program/index',
         ],
     ],
     'orglist_view' => [
@@ -38,6 +39,12 @@ return [
         ],
     ],
     '/app/organization/list' => [
+        'type' => 2,
+    ],
+    '/app/organization/*' => [
+        'type' => 2,
+    ],
+    '/app/program/index' => [
         'type' => 2,
     ],
 ];
