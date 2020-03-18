@@ -7,6 +7,7 @@ use app\models\Organizations;
 use app\models\ProgObjectsEvents;
 use app\models\ProgObjectsRiscs;
 use app\models\ProgObjectsWaites;
+use app\models\Program;
 use app\models\ProgramObjects;
 use app\models\ProObjectsNecessary;
 use Mpdf\HTMLParserMode;
@@ -50,6 +51,15 @@ class DevelopmentProgrammeController extends AppController
         $file = UploadedFile::getInstanceByName('progFile');
         if ($file) {
             $path = Yii::getAlias('@webroot') . "/uploads/programDocs";
+
+            $program = Yii::$app->session->get('program');
+            if (!$program)
+                $program = Program::findOne(['id_org'=>$id]);
+
+            $program->file_exist = 1;
+            $program->save(false);
+
+
             if (!file_exists($path))
                 FileHelper::createDirectory($path);
             $file->saveAs("$path/$id.pdf");
@@ -66,6 +76,13 @@ class DevelopmentProgrammeController extends AppController
     {
         $path = Yii::getAlias('@webroot') . "/uploads/programDocs/$id.pdf";
         if (file_exists($path)) {
+            $program = Yii::$app->session->get('program');
+            if (!$program)
+                $program = Program::findOne(['id_org'=>$id]);
+
+            $program->file_exist = 0;
+            $program->save(false);
+
             unlink($path);
             return 1;
         }

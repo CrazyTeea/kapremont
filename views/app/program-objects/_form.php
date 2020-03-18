@@ -21,3 +21,4 @@ use yii\widgets\ActiveForm;
     </script>
 
 </div>
+<div id="app"></div>
