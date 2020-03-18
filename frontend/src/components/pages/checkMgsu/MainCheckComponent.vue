@@ -9,7 +9,6 @@
                     <b-th>Объектов добавлено</b-th>
                     <b-th>Выгрузка PDF</b-th>
                     <b-th>Выгрузка отправлена</b-th>
-                    <b-th>Подробнее</b-th>
                 </b-tr>
             </b-thead>
             <b-tbody>
@@ -25,9 +24,6 @@
                     </b-th>
                     <b-th class="normal-font-weight-for-sell">
                         <label>{{ item.count_org }}</label>
-                    </b-th>
-                    <b-th class="normal-font-weight-for-sell">
-                        скоро
                     </b-th>
                     <b-th class="normal-font-weight-for-sell">
                         скоро
@@ -85,7 +81,7 @@ export default {
     },
     watch: {
         currentPage: function() {
-            let offset = parseInt(this.currentPage) * 10;
+            let offset = (parseInt(this.currentPage) - 1) * 10;
             this.getTable(offset);
         }
     }
