@@ -13,6 +13,8 @@ use Yii;
  * @property float|null $cost
  * @property int|null $system_status
  * @property int|null $id_org
+ * @property int $status
+ * @property int $
  */
 class Program extends \yii\db\ActiveRecord
 {

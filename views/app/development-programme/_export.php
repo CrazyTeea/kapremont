@@ -123,7 +123,7 @@ use yii\helpers\ArrayHelper; ?>
             <h3> УТВЕРЖДАЮ</h3>
 
             <p>Ректор
-            <p><?=$org->name?>
+            <p><?=$org->short_name?>
             <p><?=$org->orgInfo ? $org->orgInfo->rector : ''?>
             <p>Дата утверждения: «___» 2020 г
 

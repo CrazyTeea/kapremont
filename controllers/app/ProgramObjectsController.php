@@ -11,7 +11,6 @@ use app\models\ProgObjectsWaites;
 use app\models\ProObjectsNecessary;
 use Yii;
 use app\models\ProgramObjects;
-use yii\base\Model;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
