@@ -349,6 +349,40 @@
                                             v-model="formData.exploit_year"
                                         />
                                     </b-form-group>
+
+                                    <b-form-group
+                                            label="Год проведения последнего капитального ремонта/реконструкции:"
+                                            label-for="exploit_year"
+                                            :invalid-feedback="
+                                            feedback(
+                                                'ProgramObjects',
+                                                'last_exploit_year',
+                                                'Введите год проведения последнего капитального ремонта/реконструкции :'
+                                            )
+                                        "
+                                            :valid-feedback="
+                                            feedback(
+                                                'ProgramObjects',
+                                                'last_exploit_year',
+                                                ' '
+                                            )
+                                        "
+                                            :state="
+                                            feedback(
+                                                'ProgramObjects',
+                                                'last_exploit_year'
+                                            ) && exp_year_validator
+                                        "
+                                    >
+                                        <b-form-input
+                                                id="exploit_year"
+                                                name="ProgramObjects[last_exploit_year]"
+                                                type="number"
+                                                v-model="formData.last_exploit_year"
+                                        />
+                                    </b-form-group>
+
+
                                     <b-form-group
                                         label="Наличие предписаний надзорных органов:"
                                         label-for="exist_pred_nadz_orgs"
@@ -999,6 +1033,7 @@ export default {
         return {
             csrf: document.getElementsByName("csrf-token")[0].content,
             formData: {
+                last_exploit_year: window.MODEL.base?.last_exploit_year || null,
                 type_remont: window.MODEL.base?.type_remont || 0,
                 address: window.MODEL.base?.address || null,
                 type: window.MODEL.base?.type || 0,

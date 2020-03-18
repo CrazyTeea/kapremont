@@ -39,6 +39,7 @@ use Yii;
  * @property int|null $exploit_year
  * @property int $type_remont
  * @property string|null $osn_isp_zdan
+ * @property int $last_exploit_year
  */
 class ProgramObjects extends \yii\db\ActiveRecord
 {
@@ -57,7 +58,7 @@ class ProgramObjects extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_org', 'id_priority', 'id_program', 'year', 'system_status', 'id_region', 'id_city', 'type', 'exploit_year','type_remont'], 'integer'],
+            [['id_org', 'id_priority', 'id_program', 'year', 'system_status', 'id_region', 'id_city', 'type', 'exploit_year','type_remont','last_exploit_year'], 'integer'],
             [['name', 'assignment', 'regulation', 'event_type', 'note', 'address','prav_oper_upr'], 'string','max'=>5000],
             [['square', 'wear', 'finance_sum', 'coFinancing', 'square_kap', 'isp_v_ust_dey', 'n_isp_v_ust_dey', 'square_ar', 'square_av', 'square_atz'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
@@ -90,14 +91,11 @@ class ProgramObjects extends \yii\db\ActiveRecord
             'finance_sum' => 'Finance Sum',
             'coFinancing' => 'Co Financing',
             'note' => 'Примечание',
-            'system_status' => 'System Status',
-            'created_at' => 'Created At',
-            'updated_at' => 'Updated At',
             'id_region' => 'Регион',
             'id_city' => 'Город',
-            'address' => 'Адрес',
+            'address' => 'Полный адрес объекта',
             'exist_pred_nadz_orgs' => 'Наличие предписаний надзорных органов:',
-            'type' => 'Type',
+            'type' => 'Тип объекта',
             'prav_sob' => 'Право собственности:',
             'square_kap' => 'Общая площадь здания (помещений), планируемого к капитальному ремонту, кв. м.:',
             'isp_v_ust_dey' => 'Используется в уставной деятельности, кв.м.:',
@@ -106,7 +104,8 @@ class ProgramObjects extends \yii\db\ActiveRecord
             'kad_number' => 'Кадастровый номер',
             'exploit_year' => 'Год ввода здания в эксплуатацию:',
             'osn_isp_zdan' => 'Основание для использования здания:',
-            'prav_oper_upr'=>'Право оперативного управления (рег. запись, номер):'
+            'prav_oper_upr'=>'Право оперативного управления (рег. запись, номер):',
+            'last_exploit_year'=>'Год проведения последнего капитального ремонта/реконструкции'
         ];
     }
     public function getRegion(){

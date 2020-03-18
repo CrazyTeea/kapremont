@@ -115,7 +115,7 @@ use yii\helpers\ArrayHelper; ?>
             <h3>ОДОБРЕНО</h3>
 
             <p>Учёным советом
-            <p>ФГБОУ ВО «<?=$org->name?>»
+            <p><?=$org->short_name?>
             <p>Протокол от «___» 2020 г №_____
 
         </div>
@@ -123,7 +123,7 @@ use yii\helpers\ArrayHelper; ?>
             <h3> УТВЕРЖДАЮ</h3>
 
             <p>Ректор
-            <p>ФГБОУ ВО «<?=$org->name?>»
+            <p><?=$org->name?>
             <p><?=$org->orgInfo ? $org->orgInfo->rector : ''?>
             <p>Дата утверждения: «___» 2020 г
 
@@ -135,7 +135,7 @@ use yii\helpers\ArrayHelper; ?>
             <h3>ОДОБРЕНО</h3>
 
             <p>Председатель Совета обучающихся
-            <p>ФГБОУ ВО «<?=$org->name?>»
+            <p><?=$org->short_name?>
 
         </div>
     </div>
@@ -598,7 +598,7 @@ use yii\helpers\ArrayHelper; ?>
             <tr>
                 <td>6</td>
                 <td>Год проведения последнего капитального ремонта/реконструкции</td>
-                <td></td>
+                <td><?=$object->last_exploit_year?></td>
             </tr>
             <tr>
                 <td>7</td>
