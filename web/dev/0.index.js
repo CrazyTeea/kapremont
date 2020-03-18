@@ -9,7 +9,7 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
+/* harmony import */ var _mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
 //
@@ -41,8 +41,8 @@ __webpack_require__.r(__webpack_exports__);
       user: {}
     };
   },
-  computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['getUser'])),
-  methods: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['requestUser'])),
+  computed: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['getUser'])),
+  methods: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapActions"])(['requestUser'])),
   mounted: function mounted() {
     this.requestUser(); // this.user = this.getUser;
   }
@@ -90,7 +90,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
+/* harmony import */ var _mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _organisms__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../organisms */ "./src/components/organisms/index.js");
 
@@ -118,8 +118,8 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     userPanel: _organisms__WEBPACK_IMPORTED_MODULE_2__["userPanel"]
   },
-  computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['getPageData', 'getUser'])),
-  methods: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({
+  computed: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['getPageData', 'getUser'])),
+  methods: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({
     link: function link() {
       return window.location.href = "/organization/update/".concat(this.getUser.organization.id);
     }
@@ -1096,7 +1096,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_13___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_web_dom_collections_iterator__WEBPACK_IMPORTED_MODULE_13__);
 /* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
 /* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_14__);
-/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_16__);
 
@@ -1308,7 +1308,7 @@ __webpack_require__.r(__webpack_exports__);
     getLoadedFiles: function getLoadedFiles(id) {
       var _this = this;
 
-      return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_15__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      return Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_15__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
@@ -1506,7 +1506,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this3 = this;
 
       var id = _ref.id;
-      return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_15__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+      return Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_15__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
         var _iteratorNormalCompletion3, _didIteratorError3, _iteratorError3, _iterator3, _step3, file;
 
         return regeneratorRuntime.wrap(function _callee2$(_context2) {
@@ -1588,7 +1588,7 @@ __webpack_require__.r(__webpack_exports__);
     removeFileFromYii: function removeFileFromYii(id, descriptor, index) {
       var _this4 = this;
 
-      return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_15__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
+      return Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_15__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee3() {
         return regeneratorRuntime.wrap(function _callee3$(_context3) {
           while (1) {
             switch (_context3.prev = _context3.next) {
@@ -1613,7 +1613,7 @@ __webpack_require__.r(__webpack_exports__);
     uploadFile: function uploadFile(file, id) {
       var _this5 = this;
 
-      return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_15__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
+      return Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_15__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee4() {
         var form, input;
         return regeneratorRuntime.wrap(function _callee4$(_context4) {
           while (1) {
@@ -1772,6 +1772,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
     modelName: String
@@ -1788,17 +1793,17 @@ __webpack_require__.r(__webpack_exports__);
         changes: "кв.м"
       }, {
         aim: "Снижение затрат на эксплуатацию",
-        plan: null,
+        plan: 0,
         changes: "",
         var: true
       }, {
         aim: "Повышение энергоэффективности",
-        plan: null,
+        plan: 0,
         changes: "",
         var: true
       }, {
         aim: "Восстановление (ремонт, реставрация, за исключением реконструкции) объектов культурного наследия",
-        plan: null,
+        plan: 0,
         changes: "",
         var: true
       }, {
@@ -1871,7 +1876,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_replace__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var core_js_modules_es_string_search__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! core-js/modules/es.string.search */ "./node_modules/core-js/modules/es.string.search.js");
 /* harmony import */ var core_js_modules_es_string_search__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_string_search__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
+/* harmony import */ var _mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
 /* harmony import */ var _organisms__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../organisms */ "./src/components/organisms/index.js");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! vue-select */ "./node_modules/vue-select/dist/vue-select.js");
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_7__);
@@ -2866,7 +2871,7 @@ __webpack_require__.r(__webpack_exports__);
     "v-riscs": _Riscs_vue__WEBPACK_IMPORTED_MODULE_11__["default"],
     "v-uploads": _Uploads_vue__WEBPACK_IMPORTED_MODULE_13__["default"]
   },
-  computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_5__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapGetters"])(["getPageData", "getCities", "getRegions"]), {
+  computed: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_5__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapGetters"])(["getPageData", "getCities", "getRegions"]), {
     kad_number_validator: function kad_number_validator() {
       var pattern = /\d+:\d+:\d+:\d+/;
       return pattern.test(this.formData.kad_number);
@@ -2884,38 +2889,39 @@ __webpack_require__.r(__webpack_exports__);
     }
   }),
   data: function data() {
-    var _window$MODEL$base, _window$MODEL$base2, _window$MODEL$base3, _window$MODEL$base4, _window$MODEL$base5, _window$MODEL$base6, _window$MODEL$base7, _window$MODEL$base8, _window$MODEL$base9, _window$MODEL$base10, _window$MODEL$base11, _window$MODEL$base12, _window$MODEL$base13, _window$MODEL$base14, _window$MODEL$base15, _window$MODEL$base16, _window$MODEL$base17, _window$MODEL$base18, _window$MODEL$base19, _window$MODEL$base20, _window$MODEL$base21, _window$MODEL$base22;
+    var _window$MODEL$base, _window$MODEL$base2, _window$MODEL$base3, _window$MODEL$base4, _window$MODEL$base5, _window$MODEL$base6, _window$MODEL$base7, _window$MODEL$base8, _window$MODEL$base9, _window$MODEL$base10, _window$MODEL$base11, _window$MODEL$base12, _window$MODEL$base13, _window$MODEL$base14, _window$MODEL$base15, _window$MODEL$base16, _window$MODEL$base17, _window$MODEL$base18, _window$MODEL$base19, _window$MODEL$base20, _window$MODEL$base21, _window$MODEL$base22, _window$MODEL$base23;
 
     return {
       csrf: document.getElementsByName("csrf-token")[0].content,
       formData: {
-        address: ((_window$MODEL$base = window.MODEL.base) === null || _window$MODEL$base === void 0 ? void 0 : _window$MODEL$base.address) || null,
-        type: ((_window$MODEL$base2 = window.MODEL.base) === null || _window$MODEL$base2 === void 0 ? void 0 : _window$MODEL$base2.type) || 0,
-        name: ((_window$MODEL$base3 = window.MODEL.base) === null || _window$MODEL$base3 === void 0 ? void 0 : _window$MODEL$base3.name) || null,
-        id_region: ((_window$MODEL$base4 = window.MODEL.base) === null || _window$MODEL$base4 === void 0 ? void 0 : _window$MODEL$base4.id_region) || null,
-        id_priority: ((_window$MODEL$base5 = window.MODEL.base) === null || _window$MODEL$base5 === void 0 ? void 0 : _window$MODEL$base5.id_priority) || null,
-        id_city: ((_window$MODEL$base6 = window.MODEL.base) === null || _window$MODEL$base6 === void 0 ? void 0 : _window$MODEL$base6.id_city) || null,
-        kad_number: ((_window$MODEL$base7 = window.MODEL.base) === null || _window$MODEL$base7 === void 0 ? void 0 : _window$MODEL$base7.kad_number) || null,
-        year: ((_window$MODEL$base8 = window.MODEL.base) === null || _window$MODEL$base8 === void 0 ? void 0 : _window$MODEL$base8.year) || 0,
-        exploit_year: ((_window$MODEL$base9 = window.MODEL.base) === null || _window$MODEL$base9 === void 0 ? void 0 : _window$MODEL$base9.exploit_year) || 0,
-        wear: ((_window$MODEL$base10 = window.MODEL.base) === null || _window$MODEL$base10 === void 0 ? void 0 : _window$MODEL$base10.wear) || null,
-        exist_pred_nadz_orgs: ((_window$MODEL$base11 = window.MODEL.base) === null || _window$MODEL$base11 === void 0 ? void 0 : _window$MODEL$base11.exist_pred_nadz_orgs) || null,
-        osn_isp_zdan: ((_window$MODEL$base12 = window.MODEL.base) === null || _window$MODEL$base12 === void 0 ? void 0 : _window$MODEL$base12.osn_isp_zdan) || null,
-        regulation: ((_window$MODEL$base13 = window.MODEL.base) === null || _window$MODEL$base13 === void 0 ? void 0 : _window$MODEL$base13.regulation) || null,
-        assignment: ((_window$MODEL$base14 = window.MODEL.base) === null || _window$MODEL$base14 === void 0 ? void 0 : _window$MODEL$base14.assignment) || null,
-        prav_sob: ((_window$MODEL$base15 = window.MODEL.base) === null || _window$MODEL$base15 === void 0 ? void 0 : _window$MODEL$base15.prav_sob) || null,
-        square: ((_window$MODEL$base16 = window.MODEL.base) === null || _window$MODEL$base16 === void 0 ? void 0 : _window$MODEL$base16.square) || null,
-        square_kap: ((_window$MODEL$base17 = window.MODEL.base) === null || _window$MODEL$base17 === void 0 ? void 0 : _window$MODEL$base17.square_kap) || null,
-        isp_v_ust_dey: ((_window$MODEL$base18 = window.MODEL.base) === null || _window$MODEL$base18 === void 0 ? void 0 : _window$MODEL$base18.isp_v_ust_dey) || null,
-        n_isp_v_ust_dey: ((_window$MODEL$base19 = window.MODEL.base) === null || _window$MODEL$base19 === void 0 ? void 0 : _window$MODEL$base19.n_isp_v_ust_dey) || null,
-        square_ar: ((_window$MODEL$base20 = window.MODEL.base) === null || _window$MODEL$base20 === void 0 ? void 0 : _window$MODEL$base20.square_ar) || null,
-        note: ((_window$MODEL$base21 = window.MODEL.base) === null || _window$MODEL$base21 === void 0 ? void 0 : _window$MODEL$base21.note) || null,
-        prav_oper_upr: ((_window$MODEL$base22 = window.MODEL.base) === null || _window$MODEL$base22 === void 0 ? void 0 : _window$MODEL$base22.prav_oper_upr) || null
+        type_remont: ((_window$MODEL$base = window.MODEL.base) === null || _window$MODEL$base === void 0 ? void 0 : _window$MODEL$base.type_remont) || 0,
+        address: ((_window$MODEL$base2 = window.MODEL.base) === null || _window$MODEL$base2 === void 0 ? void 0 : _window$MODEL$base2.address) || null,
+        type: ((_window$MODEL$base3 = window.MODEL.base) === null || _window$MODEL$base3 === void 0 ? void 0 : _window$MODEL$base3.type) || 0,
+        name: ((_window$MODEL$base4 = window.MODEL.base) === null || _window$MODEL$base4 === void 0 ? void 0 : _window$MODEL$base4.name) || null,
+        id_region: ((_window$MODEL$base5 = window.MODEL.base) === null || _window$MODEL$base5 === void 0 ? void 0 : _window$MODEL$base5.id_region) || null,
+        id_priority: ((_window$MODEL$base6 = window.MODEL.base) === null || _window$MODEL$base6 === void 0 ? void 0 : _window$MODEL$base6.id_priority) || null,
+        id_city: ((_window$MODEL$base7 = window.MODEL.base) === null || _window$MODEL$base7 === void 0 ? void 0 : _window$MODEL$base7.id_city) || null,
+        kad_number: ((_window$MODEL$base8 = window.MODEL.base) === null || _window$MODEL$base8 === void 0 ? void 0 : _window$MODEL$base8.kad_number) || null,
+        year: ((_window$MODEL$base9 = window.MODEL.base) === null || _window$MODEL$base9 === void 0 ? void 0 : _window$MODEL$base9.year) || 0,
+        exploit_year: ((_window$MODEL$base10 = window.MODEL.base) === null || _window$MODEL$base10 === void 0 ? void 0 : _window$MODEL$base10.exploit_year) || 0,
+        wear: ((_window$MODEL$base11 = window.MODEL.base) === null || _window$MODEL$base11 === void 0 ? void 0 : _window$MODEL$base11.wear) || null,
+        exist_pred_nadz_orgs: ((_window$MODEL$base12 = window.MODEL.base) === null || _window$MODEL$base12 === void 0 ? void 0 : _window$MODEL$base12.exist_pred_nadz_orgs) || null,
+        osn_isp_zdan: ((_window$MODEL$base13 = window.MODEL.base) === null || _window$MODEL$base13 === void 0 ? void 0 : _window$MODEL$base13.osn_isp_zdan) || null,
+        regulation: ((_window$MODEL$base14 = window.MODEL.base) === null || _window$MODEL$base14 === void 0 ? void 0 : _window$MODEL$base14.regulation) || null,
+        assignment: ((_window$MODEL$base15 = window.MODEL.base) === null || _window$MODEL$base15 === void 0 ? void 0 : _window$MODEL$base15.assignment) || null,
+        prav_sob: ((_window$MODEL$base16 = window.MODEL.base) === null || _window$MODEL$base16 === void 0 ? void 0 : _window$MODEL$base16.prav_sob) || null,
+        square: ((_window$MODEL$base17 = window.MODEL.base) === null || _window$MODEL$base17 === void 0 ? void 0 : _window$MODEL$base17.square) || null,
+        square_kap: ((_window$MODEL$base18 = window.MODEL.base) === null || _window$MODEL$base18 === void 0 ? void 0 : _window$MODEL$base18.square_kap) || null,
+        isp_v_ust_dey: ((_window$MODEL$base19 = window.MODEL.base) === null || _window$MODEL$base19 === void 0 ? void 0 : _window$MODEL$base19.isp_v_ust_dey) || null,
+        n_isp_v_ust_dey: ((_window$MODEL$base20 = window.MODEL.base) === null || _window$MODEL$base20 === void 0 ? void 0 : _window$MODEL$base20.n_isp_v_ust_dey) || null,
+        square_ar: ((_window$MODEL$base21 = window.MODEL.base) === null || _window$MODEL$base21 === void 0 ? void 0 : _window$MODEL$base21.square_ar) || null,
+        note: ((_window$MODEL$base22 = window.MODEL.base) === null || _window$MODEL$base22 === void 0 ? void 0 : _window$MODEL$base22.note) || null,
+        prav_oper_upr: ((_window$MODEL$base23 = window.MODEL.base) === null || _window$MODEL$base23 === void 0 ? void 0 : _window$MODEL$base23.prav_oper_upr) || null
       },
       errors: {}
     };
   },
-  methods: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_5__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapActions"])(["requestPageData", "requestCity"]), {
+  methods: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_5__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_8__["mapActions"])(["requestPageData", "requestCity"]), {
     setSelected: function setSelected(value) {
       formData.id_priority = value;
     },
@@ -3000,6 +3006,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   }),
   mounted: function mounted() {
+    console.log(window.MODEL);
     this.requestPageData({
       pageName: "objectCreate"
     });
@@ -3020,7 +3027,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
+/* harmony import */ var _mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
 /* harmony import */ var _organisms__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../organisms */ "./src/components/organisms/index.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 
@@ -3078,7 +3085,7 @@ __webpack_require__.r(__webpack_exports__);
       currentPage: 1
     };
   },
-  computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(['getUser', 'getOrg', 'getRegion', 'getPageData']), {
+  computed: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(['getUser', 'getOrg', 'getRegion', 'getPageData']), {
     rows: function rows() {
       if (this.getPageData && this.getPageData.items) return this.getPageData.items.length;
       return 0;
@@ -3099,7 +3106,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  methods: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])(['requestProgram', 'requestOrg', 'requestPageData'])),
+  methods: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_0__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapActions"])(['requestProgram', 'requestOrg', 'requestPageData'])),
   components: {
     "v-userPanel": _organisms__WEBPACK_IMPORTED_MODULE_1__["userPanel"]
   },
@@ -3127,8 +3134,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(core_js_modules_es_function_name__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! regenerator-runtime/runtime */ "./node_modules/regenerator-runtime/runtime.js");
 /* harmony import */ var regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(regenerator_runtime_runtime__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
-/* harmony import */ var _mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
+/* harmony import */ var _mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/asyncToGenerator */ "./node_modules/@babel/runtime/helpers/esm/asyncToGenerator.js");
+/* harmony import */ var _mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./node_modules/@babel/runtime/helpers/esm/objectSpread2 */ "./node_modules/@babel/runtime/helpers/esm/objectSpread2.js");
 /* harmony import */ var _organisms__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../organisms */ "./src/components/organisms/index.js");
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
@@ -3406,7 +3413,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     "v-user-panel": _organisms__WEBPACK_IMPORTED_MODULE_5__["userPanel"]
   },
-  methods: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_4__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_6__["mapActions"])(["requestPageData", "requestUser"]), {
+  methods: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_4__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_6__["mapActions"])(["requestPageData", "requestUser"]), {
     onRowClick: function onRowClick(item) {
       window.location.href = "/program/object/view/".concat(item.id);
     },
@@ -3434,7 +3441,7 @@ __webpack_require__.r(__webpack_exports__);
     uploadFileToYii: function uploadFileToYii(file) {
       var _this = this;
 
-      return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+      return Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
         var form;
         return regeneratorRuntime.wrap(function _callee$(_context) {
           while (1) {
@@ -3545,7 +3552,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     var _this5 = this;
 
-    return Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
+    return Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_3__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee2() {
       return regeneratorRuntime.wrap(function _callee2$(_context2) {
         while (1) {
           switch (_context2.prev = _context2.next) {
@@ -3571,7 +3578,7 @@ __webpack_require__.r(__webpack_exports__);
       }, _callee2);
     }))();
   },
-  computed: Object(_mnt_c_Users_maks1_Desktop_php_kap_stroi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_4__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_6__["mapGetters"])(["getUser", "getPageData"]), {
+  computed: Object(_mnt_c_Users_lipat_Documents_projects_htdocs_program_mi_frontend_node_modules_babel_runtime_helpers_esm_objectSpread2__WEBPACK_IMPORTED_MODULE_4__["default"])({}, Object(vuex__WEBPACK_IMPORTED_MODULE_6__["mapGetters"])(["getUser", "getPageData"]), {
     objects: function objects() {
       return this.getPageData && this.getPageData.objects;
     },
@@ -3699,7 +3706,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.font-normal-first-colomn {\r\n    font-weight: normal !important;\n}\r\n", ""]);
+exports.push([module.i, "\n.font-normal-first-colomn {\n    font-weight: normal !important;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -5489,21 +5496,43 @@ var render = function() {
                     "b-th",
                     [
                       item.var
-                        ? _c("b-select", {
-                            attrs: {
-                              options: [
-                                { value: 0, text: "нет" },
-                                { value: 1, text: "да" }
-                              ]
-                            },
-                            model: {
-                              value: item.plan,
-                              callback: function($$v) {
-                                _vm.$set(item, "plan", $$v)
-                              },
-                              expression: "item.plan"
-                            }
-                          })
+                        ? _c(
+                            "div",
+                            [
+                              _c("b-form-input", {
+                                staticStyle: { display: "none" },
+                                attrs: {
+                                  name: _vm.modelName + "[" + index + "][plan]"
+                                },
+                                model: {
+                                  value: item.plan,
+                                  callback: function($$v) {
+                                    _vm.$set(item, "plan", $$v)
+                                  },
+                                  expression: "item.plan"
+                                }
+                              }),
+                              _vm._v(" "),
+                              item.var
+                                ? _c("b-select", {
+                                    attrs: {
+                                      options: [
+                                        { value: 0, text: "нет" },
+                                        { value: 1, text: "да" }
+                                      ]
+                                    },
+                                    model: {
+                                      value: item.plan,
+                                      callback: function($$v) {
+                                        _vm.$set(item, "plan", $$v)
+                                      },
+                                      expression: "item.plan"
+                                    }
+                                  })
+                                : _vm._e()
+                            ],
+                            1
+                          )
                         : _c("b-form-input", {
                             attrs: {
                               type: "text",

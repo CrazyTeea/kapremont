@@ -1000,6 +1000,7 @@ export default {
         return {
             csrf: document.getElementsByName("csrf-token")[0].content,
             formData: {
+                type_remont: window.MODEL.base?.type_remont || 0,
                 address: window.MODEL.base?.address || null,
                 type: window.MODEL.base?.type || 0,
                 name: window.MODEL.base?.name || null,
@@ -1010,8 +1011,7 @@ export default {
                 year: window.MODEL.base?.year || 0,
                 exploit_year: window.MODEL.base?.exploit_year || 0,
                 wear: window.MODEL.base?.wear || null,
-                exist_pred_nadz_orgs:
-                    window.MODEL.base?.exist_pred_nadz_orgs || null,
+                exist_pred_nadz_orgs: window.MODEL.base?.exist_pred_nadz_orgs || null,
                 osn_isp_zdan: window.MODEL.base?.osn_isp_zdan || null,
                 regulation: window.MODEL.base?.regulation || null,
                 assignment: window.MODEL.base?.assignment || null,
@@ -1108,6 +1108,7 @@ export default {
         }
     },
     mounted() {
+        console.log(window.MODEL)
         this.requestPageData({ pageName: "objectCreate" });
         if (this.formData.id_region)
             this.requestCity({ id: this.formData.id_region });

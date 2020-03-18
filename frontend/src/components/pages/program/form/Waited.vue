@@ -20,20 +20,25 @@
                         ></b-form-input>
                     </b-th>
                     <b-th>
-                        <b-select
-                            v-if="item.var"
-                            v-model="item.plan"
-                            :options="[
+                        <div v-if="item.var">
+                            <b-form-input style="display: none" v-model="item.plan" :name="`${modelName}[${index}][plan]`" />
+                            <b-select
+                                    v-if="item.var"
+                                    v-model="item.plan"
+                                    :options="[
                                 { value: 0, text: 'нет' },
                                 { value: 1, text: 'да' }
                             ]"
-                        />
+                            />
+                        </div>
+
                         <b-form-input
-                            v-else
-                            type="text"
-                            :name="`${modelName}[${index}][plan]`"
-                            v-model="item.plan"
+                                v-else
+                                type="text"
+                                :name="`${modelName}[${index}][plan]`"
+                                v-model="item.plan"
                         ></b-form-input>
+
                     </b-th>
                     <b-th class="font-normal-first-colomn">
                         <label v-if="index < 5">{{ item.changes }}</label>
@@ -92,20 +97,20 @@ export default {
                 },
                 {
                     aim: "Снижение затрат на эксплуатацию",
-                    plan: null,
+                    plan: 0,
                     changes: "",
                     var: true
                 },
                 {
                     aim: "Повышение энергоэффективности",
-                    plan: null,
+                    plan: 0,
                     changes: "",
                     var: true
                 },
                 {
                     aim:
                         "Восстановление (ремонт, реставрация, за исключением реконструкции) объектов культурного наследия",
-                    plan: null,
+                    plan: 0,
                     changes: "",
                     var: true
                 },
