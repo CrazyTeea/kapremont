@@ -16,7 +16,7 @@ class MgsuAdminController extends Controller
     public function actionMainTable($offset)
     {
         $select = Organizations::getMainCheckTable($offset);
-        
+
         return json_encode($select);
     }
 

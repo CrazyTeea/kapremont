@@ -93,7 +93,10 @@ $config = [
                 'program/object/delete/<id:\d+>' => 'app/program-objects/delete',
                 'program/object/files/<id:\d+>' => 'app/program-objects/get-all-obj-files',
                 'program/export'=>'app/development-programme/export',
+                
                 'organization/list'=>'app/organization/list',
+                'organization/list/<id:\d+>' =>  'app/organization/list-object',
+
                 'organization/info'=>'app/organization/info',
                 'organization/update/<id:\d+>'=>'app/organization/update',
                 'program/atz' => 'app/atz/index',
@@ -102,7 +105,12 @@ $config = [
 
                 'check' => 'app/mgsu-admin/view',
                 'api/mgsu/main-table/<offset:\d+>'=> '/app/mgsu-admin/main-table',
-                'api/mgsu/count' => '/app/mgsu-admin/count'
+                'api/mgsu/count' => '/app/mgsu-admin/count',
+
+
+
+
+                'api/org-table/<id:\d+>' => '/app/organization/table-list'
             ],
         ],
         'assetManager' => [

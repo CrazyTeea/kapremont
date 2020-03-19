@@ -1,6 +1,7 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Atz from "./components/pages/program/atz/index.vue";
+import ListObject from "./components/pages/organization/info/ListObjectComponent.vue";
 
 Vue.use(VueRouter);
 
@@ -64,9 +65,15 @@ const routes = [
     {
         path: "/organization/list",
         name: "MainCheck",
-        component: ()=>import("./components/pages").then(module => {
-            return module.checkMgsu;
-        })
+        component: () =>
+            import("./components/pages").then(module => {
+                return module.checkMgsu;
+            })
+    },
+    {
+        path: "/organization/list/:id",
+        name: "ObjList",
+        component: ListObject
     }
 ];
 
