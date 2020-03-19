@@ -4,6 +4,7 @@ namespace app\controllers\app;
 
 use app\models\Atz;
 use app\models\ProgObjectsEvents;
+use app\models\Program;
 use Yii;
 use yii\helpers\Json;
 use yii\web\Controller;
@@ -13,6 +14,8 @@ class AtzController extends Controller
     public function actionIndex()
     {
         $program = \Yii::$app->getSession()->get('program');
+        if (!$program)
+            $program = Program::findOne(['id_org'=>Yii::$app->session->get('user')->id_org]);
         //$atz = Atz::findAll(['id_program'=>$program->id]) ? : [new Atz()];
         $save = true;
         if (Yii::$app->request->post()) {
