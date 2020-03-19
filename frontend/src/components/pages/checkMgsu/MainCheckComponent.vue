@@ -42,7 +42,7 @@
                             class="document-item"
                             :href="`/program/download-doc/${item.id}`"
                         >
-                            <span class="fileCorner"></span>
+                            <b-icon icon="cloud-download" scale="2" aria-hidden="true"></b-icon>
                         </a>
                         <b-icon v-else icon="alert-circle" scale="2"></b-icon>
                     </b-th>
@@ -144,7 +144,7 @@ export default {
     position: relative;
     color: black;
 }
-.document-item::before {
+/*.document-item::before {
     position: absolute;
     width: 29px;
     height: 34px;
@@ -154,10 +154,8 @@ export default {
     border: solid 2px #920035;
 }
 .document-item::after {
-    content: "file";
-    content: attr(filetype);
     left: -4px;
-    padding: 0px 2px;
+    padding: 0 2px;
     text-align: right;
     line-height: 1.3;
     position: absolute;
@@ -167,7 +165,7 @@ export default {
     text-transform: uppercase;
     letter-spacing: 1px;
     top: 9px;
-}
+}*/
 .document-item .fileCorner {
     width: 0;
     height: 0;
