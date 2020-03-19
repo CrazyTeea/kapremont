@@ -6,6 +6,7 @@ namespace app\controllers\app;
 
 use app\models\Organizations;
 use app\models\OrgInfo;
+use app\models\Program;
 use Yii;
 use yii\helpers\Json;
 
@@ -13,15 +14,17 @@ class OrganizationController extends AppController
 {
     public function actionInfo()
     {
-        return $this->render('info');
+        $canChange = !Program::findOne(['id_org'=>Yii::$app->session->get('user')->id_org])->p_status;
+        return $this->render('info',compact('canChange'));
     }
 
     public function actionUpdate($id)
     {
         $model = OrgInfo::findOne(['id_org'=>$id]);
+
         if ($model->load(Yii::$app->getRequest()->post()) and $model->save())
             return $this->redirect(['organization/info']);
-        return $this->render('update',compact('model'));
+        return $this->render('update',compact('model','canChange'));
     }
 
     public function actionList()
