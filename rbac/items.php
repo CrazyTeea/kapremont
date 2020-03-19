@@ -31,6 +31,7 @@ return [
             '/app/organization/*',
             '/app/program/index',
             '/app/program-objects/download-doc',
+            '/app/development-programme/download-doc',
         ],
     ],
     'orglist_view' => [
@@ -61,6 +62,9 @@ return [
         'type' => 2,
     ],
     '/app/program-objects/download-doc' => [
+        'type' => 2,
+    ],
+    '/app/development-programme/download-doc' => [
         'type' => 2,
     ],
 ];
