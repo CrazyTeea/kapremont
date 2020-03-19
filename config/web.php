@@ -93,9 +93,10 @@ $config = [
                 'program/object/delete/<id:\d+>' => 'app/program-objects/delete',
                 'program/object/files/<id:\d+>' => 'app/program-objects/get-all-obj-files',
                 'program/export'=>'app/development-programme/export',
-                
+
                 'organization/list'=>'app/organization/list',
-                'organization/list/<id:\d+>' =>  'app/organization/list-object',
+                'organization/list/<id:\d+>' => 'app/organization/list-object',
+                'organization/obj/<id:\d+>' => 'app/organization/object-view',
 
                 'organization/info'=>'app/organization/info',
                 'organization/update/<id:\d+>'=>'app/organization/update',
@@ -110,7 +111,8 @@ $config = [
 
 
 
-                'api/org-table/<id:\d+>' => '/app/organization/table-list'
+                'api/org-table/<id:\d+>' => '/app/organization/table-list',
+                'api/object/<id:\d+>' => '/app/organization/get-object-by-id'
             ],
         ],
         'assetManager' => [

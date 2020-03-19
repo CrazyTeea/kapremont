@@ -30,6 +30,7 @@ return [
             'orglist_view',
             '/app/organization/*',
             '/app/program/index',
+            '/app/program-objects/download-doc',
         ],
     ],
     'orglist_view' => [
@@ -57,6 +58,9 @@ return [
         'type' => 2,
     ],
     '/app/mgsu-admin/count' => [
+        'type' => 2,
+    ],
+    '/app/program-objects/download-doc' => [
         'type' => 2,
     ],
 ];
