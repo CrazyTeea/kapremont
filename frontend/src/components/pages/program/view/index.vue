@@ -57,10 +57,10 @@
         <br />
         <div class="row">
             <div class="col-6">
-                <b-button variant="info" href="object/create"
+                <b-button variant="info" href="object/create" v-show="!programStatus"
                     >Добавить объект кап. ремонта</b-button
                 >
-                <b-button variant="info" href="atz"
+                <b-button variant="info" href="atz" v-show="!programStatus"
                     >Добавить мероприятия по АТЗ</b-button
                 >
             </div>
@@ -199,23 +199,23 @@
         </div>
         <div class="row justify-content-end">
             <div>
-                <a href="/program/export" class="btn btn-secondary btn-sm"
+                <a href="/program/export" class="btn btn-secondary btn-sm" v-show="!programStatus"
                     >Выгрузить программу</a
                 >
-                <label
+                <label v-show="!programStatus"
                     for="file_input_pdf_main"
                     v-if="buttons.upload"
                     class="btn btn-info btn-sm mt-2"
                     >Загрузить PDF</label
                 >
-                <input
+                <input v-show="!programStatus"
                     type="file"
                     id="file_input_pdf_main"
                     class="hidden-file-input"
                     @input="fileInput()"
                 />
                 <!-- <b-button class="btn btn-sm btn-info" for="file_input_pdf_main">Загрузить PDF</b-button> -->
-                <b-button
+                <b-button v-show="!programStatus"
                     v-if="buttons.delete"
                     class="btn btn-sm btn-danger"
                     @click="deleteFileFromYii()"
@@ -228,7 +228,7 @@
                     class="btn btn-success btn-sm"
                     >Скачать PDF</a
                 >
-                <b-button disabled class="btn btn-sm"
+                <b-button class="btn btn-sm" @click="setApprove" v-show="!programStatus"
                     >Отправить на согласование</b-button
                 >
             </div>
@@ -244,6 +244,7 @@ export default {
     name: "ProgramView",
     data() {
         return {
+            programStatus:null,
             bannerInfo: [],
             loadProgress: null,
             buttons: {
@@ -269,6 +270,22 @@ export default {
     },
     methods: {
         ...mapActions(["requestPageData", "requestUser"]),
+        getApprove(){
+            Axios.get('/program/is-approve').then(response=>{
+                this.programStatus = response.data.p_status == '0' ? false : true ;
+                console.log(this.programStatus)
+            });  
+        },
+        setApprove() {
+            Axios.post('/program/approve', null, {
+                headers: {
+                    "X-CSRF-Token": this.csrf,
+                }
+            }).then(response=>{
+                this.programStatus = response.data.programStatus;
+                console.log(this.programStatus)
+            })
+        },
         onRowClick(item) {
             if (item.id) {
                 window.location.href = `/program/object/view/${item.id}`;
@@ -398,6 +415,7 @@ export default {
     },
     async mounted() {
         this.requestPageData({ pageName: "programView" });
+        await this.getApprove();
         await this.requestUser();
         this.id_org = this.getUser.organization.id;
         this.getFileStatus();

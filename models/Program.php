@@ -13,8 +13,8 @@ use Yii;
  * @property float|null $cost
  * @property int|null $system_status
  * @property int|null $id_org
- * @property int $status
- * @property int $
+ * @property int $file_exist
+ * @property int $p_status
  */
 class Program extends \yii\db\ActiveRecord
 {
@@ -32,7 +32,7 @@ class Program extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['finance_volume', 'finance_events', 'cost'], 'number'],
+            [['finance_volume', 'finance_events', 'cost','p_status'], 'number'],
             [['system_status', 'id_org'], 'integer'],
         ];
     }
