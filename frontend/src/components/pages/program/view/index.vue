@@ -228,7 +228,7 @@
                     class="btn btn-success btn-sm"
                     >Скачать PDF</a
                 >
-                <b-button class="btn btn-sm" @click="setApprove" v-show="!programStatus"
+                <b-button class="btn btn-sm" @click="approveModal" v-show="!programStatus"
                     >Отправить на согласование</b-button
                 >
             </div>
@@ -244,6 +244,7 @@ export default {
     name: "ProgramView",
     data() {
         return {
+            canAxios: false,
             programStatus:null,
             bannerInfo: [],
             loadProgress: null,
@@ -276,15 +277,34 @@ export default {
                 console.log(this.programStatus)
             });  
         },
+        approveModal(){
+            this.canAxios = false;
+            this.$bvModal.msgBoxConfirm('Редактирование программы модернизации ифоструктуры будет временно заблокировано',{
+                title: 'Подтверждение действий.',
+                okTitle: 'Да',
+                okVariant: 'danger',
+                cancelTitle: 'Нет',
+                centered: true,
+            }).then(value => {
+                this.canAxios = value;
+                this.setApprove();
+            });
+        },
         setApprove() {
-            Axios.post('/program/approve', null, {
-                headers: {
-                    "X-CSRF-Token": this.csrf,
-                }
-            }).then(response=>{
-                this.programStatus = response.data.programStatus;
-                console.log(this.programStatus)
-            })
+
+            if (this.canAxios) {
+                Axios.post('/program/approve', null, {
+                    headers: {
+                        "X-CSRF-Token": this.csrf,
+                    }
+                }).then(response => {
+                    this.programStatus = response.data.programStatus;
+                    if (!response.data.status){
+                        this.errorReport(response.data.msg);
+                    }
+                    console.log(this.programStatus)
+                })
+            }
         },
         onRowClick(item) {
             if (item.id) {

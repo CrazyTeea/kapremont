@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\ActiveRecord;
 
 /**
  * This is the model class for table "program".
@@ -16,7 +17,7 @@ use Yii;
  * @property int $file_exist
  * @property int $p_status
  */
-class Program extends \yii\db\ActiveRecord
+class Program extends ActiveRecord
 {
     /**
      * {@inheritdoc}

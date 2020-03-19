@@ -39,7 +39,8 @@ class ProgramController extends AppController
             if (!$program)
                 $program = Program::findOne(['id_org' => Yii::$app->session->get('user')->id_org]);
             if ($program->file_exist) {
-                $gg = Yii::$app->db->createCommand("UPDATE program set p_status = 1 where id_org = {$id_org} ")->execute();
+                Yii::$app->db->createCommand("UPDATE program set p_status = 1 where id_org = {$id_org} ")->execute();
+                $status = true;
             } else  $errrMsg = 'Файл должен быть загружен';
             $program = Program::findOne(['id_org' => Yii::$app->session->get('user')->id_org]);
             return Json::encode(['programStatus'=>$program->p_status,'status' => $status, 'msg' => $errrMsg]);
