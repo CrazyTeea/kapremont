@@ -1,4 +1,23 @@
 <?php
+
+use app\models\Regions;
+use yii\helpers\ArrayHelper;
+
+
+/***
+ * @var \app\models\Organizations $org
+ * @var array $atz
+ * @var array $atzC
+ * @var array $pr_ob
+ * @var array $r_ob
+ * @var array $objects
+ * @var array $events
+ * @var array $nes
+ * @var array $wai
+ * @var array $risks
+ */
+
+
 $prior = [
     1=>'1',
     2=>'2',
@@ -104,9 +123,10 @@ function getSum($arr,$i_o,$attr){
 
 }
 
-use app\models\ProgObjectsEvents;
-use app\models\Regions;
-use yii\helpers\ArrayHelper; ?>
+
+
+
+?>
 
 
 <div class="container" id="export">
@@ -116,7 +136,9 @@ use yii\helpers\ArrayHelper; ?>
 
             <p>Учёным советом
             <p><?=$org->short_name?>
-            <p>Протокол от «___» 2020 г №_____
+            <p>Заместитель председателя
+            <p>Протокол от «___» _______2020 г
+            <p>№_____
 
         </div>
         <div class="col-xs-6">
@@ -124,8 +146,8 @@ use yii\helpers\ArrayHelper; ?>
 
             <p>Ректор
             <p><?=$org->short_name?>
-            <p><?=$org->orgInfo ? $org->orgInfo->rector : ''?>
-            <p>Дата утверждения: «___» 2020 г
+            <p>____________________<?=$org->orgInfo ? $org->orgInfo->rector : ''?>
+            <p>Дата утверждения: «___» _______2020 г
 
         </div>
     </div>
@@ -136,6 +158,7 @@ use yii\helpers\ArrayHelper; ?>
 
             <p>Председатель Совета обучающихся
             <p><?=$org->short_name?>
+            <p>_________________&nbsp;&nbsp;&nbsp;_________________
 
         </div>
     </div>
@@ -168,7 +191,7 @@ use yii\helpers\ArrayHelper; ?>
     </div>
     <br><br><br><br>
     <div class="row">
-        <div style="float: left" align="center">
+        <div style="float: left">
             <p> Раздел 1. Общие сведения
             <p>Раздел 2. Антитеррористическая защищённость объектов (территорий)
             <p>Раздел 3. Капитальный ремонт
@@ -474,13 +497,13 @@ use yii\helpers\ArrayHelper; ?>
             <tr>
                 <td></td>
                 <td class="text-right" colspan="5">Итого</td>
-                <td><?= $s_sum ?></td>
+                <td><?= number_format($s_sum, 3, '.',' ') ?></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><?= $sum_sum ?></td>
+                <td><?= number_format($sum_sum, 3, '.',' ') ?></td>
                 <td></td>
                 <td></td>
             </tr>
@@ -541,13 +564,13 @@ use yii\helpers\ArrayHelper; ?>
             <tr>
                 <td></td>
                 <td class="text-right" colspan="5">Итого</td>
-                <td><?= $s_sum ?></td>
+                <td><?= number_format($s_sum, 3, '.',' ') ?></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><?= $sum_sum ?></td>
+                <td><?= number_format($sum_sum, 3, '.',' ') ?></td>
                 <td></td>
                 <td></td>
             </tr>

@@ -143,10 +143,11 @@ class SystemController extends RestController
                       'Комплексный',
                       'Выборочный'
                     ];
-
+                    $s_sum = 0; $sum_sum = 0;
                     foreach ($progObj as $index=>$item) {
                         $i = $index+1;
-
+                        $s_sum += floatval($item->square_kap );
+                        $sum_sum += floatval($item->finance_sum);
                         $ret['priorityObjects']['items'][$index] = ArrayHelper::merge([
                             'event_typeT'=>(isset($item->type_remont) ? $r[$item->type_remont] : ''),
                             'regulationT'=>($item->exist_pred_nadz_orgs) ? $item->regulation : '',
@@ -157,10 +158,15 @@ class SystemController extends RestController
                         ],$item
                         );
                     }
+                    if (isset($ret['priorityObjects']['items'])) {
+                        array_push($ret['priorityObjects']['items'], ['assignment' => 'итого', 'square_kap' => number_format($s_sum, 3, '.',' ') , 'finance_sum' => number_format($sum_sum, 3, '.',' ')]);
+                    }
+                    $s_sum = 0; $sum_sum = 0;
                     $progObj = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>1])->joinWith(['region'])->all();
                     foreach ($progObj as $index=>$item) {
                         $i = $index+1;
-
+                        $s_sum += floatval($item->square_kap );
+                        $sum_sum += floatval($item->finance_sum);
                         $ret['reservedObjects']['items'][$index] = ArrayHelper::merge([
                             'event_typeT'=>(isset($item->type_remont) ? $r[$item->type_remont] : ''),
                             'regulationT'=>($item->exist_pred_nadz_orgs) ? $item->regulation : '',
@@ -170,6 +176,10 @@ class SystemController extends RestController
                             'wear2'=> (!is_null($item->wear) and $item->wear < 5) ? $wear[$item->wear] : ''
                         ],$item);
                     }
+                    if (isset($ret['reservedObjects']['items'])) {
+                        array_push($ret['reservedObjects']['items'], ['assignment' => 'итого', 'square_kap' => number_format($s_sum, 3, '.',' ') , 'finance_sum' => number_format($sum_sum, 3, '.',' ')]);
+                    }
+
                     return $ret;
                 }
                 case 'objectCreate':{

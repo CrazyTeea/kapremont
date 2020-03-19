@@ -88,8 +88,8 @@ export default {
             totalRows: 1
         };
     },
-    mounted() {
-        this.getTotalRows();
+    async mounted() {
+        await this.getTotalRows();
         this.getTable();
     },
     methods: {
@@ -103,6 +103,7 @@ export default {
                 }
             }).then(res => {
                 this.items = res.data;
+                //this.totalRows = this.items.length;
             });
         },
         getTotalRows() {
@@ -111,7 +112,7 @@ export default {
                     "X-CSRF-Token": this.csrf
                 }
             }).then(res => {
-                this.totalRows = res.data[0].quantity;
+                this.totalRows = res.data.quantity;
             });
         }
     },

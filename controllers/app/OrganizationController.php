@@ -7,6 +7,7 @@ namespace app\controllers\app;
 use app\models\Organizations;
 use app\models\OrgInfo;
 use Yii;
+use yii\helpers\Json;
 
 class OrganizationController extends AppController
 {
@@ -56,7 +57,7 @@ class OrganizationController extends AppController
             WHERE
                 po.id_org = $id AND po.system_status = 1")->queryAll();
 
-        return json_encode($query);
+        return Json::encode($query);
     }
 
     public function actionObjectView($id)

@@ -51,19 +51,26 @@ class Organizations extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getRegion()
-    {
-        return $this->hasOne(Regions::className(), ['id'=>'id_region']);
+    public function getRegion(){
+        return $this->hasOne(Regions::className(),['id'=>'id_region']);
     }
+    public function getOrgInfo(){
+        return $this->hasOne(OrgInfo::className(),['id_org'=>'id']);
+    }
+
 
     public function getProgramObjects()
     {
         return $this->hasMany(ProgramObjects::class, ['id_org' => 'id']);
     }
+    public function getProgram(){
+        return $this->hasOne(Program::class,['id_org'=>'id']);
+    }
 
     public static function getMainCheckTable($offset)
     {
-        $query = Yii::$app->db
+       // $query = self::find()->offset($offset)->limit(10)->all();
+       $query = Yii::$app->db
             ->createCommand("
                 SELECT 
                     res.id, res.name, res.region, res.quantity, pr.file_exist, pr.status

@@ -42062,7 +42062,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.hidden-overflow {\r\n    overflow: hidden;\r\n    overflow-x: scroll;\n}\n.normal-font-weight-for-sell {\r\n    font-weight: normal !important;\n}\n.cursor-pointer {\r\n    cursor: pointer;\n}\r\n", ""]);
+exports.push([module.i, "\n.hidden-overflow {\n    overflow: hidden;\n    overflow-x: scroll;\n}\n.normal-font-weight-for-sell {\n    font-weight: normal !important;\n}\n.cursor-pointer {\n    cursor: pointer;\n}\n", ""]);
 // Exports
 module.exports = exports;
 
