@@ -4,7 +4,7 @@
             <div class="row">
                 <div class="col-6">
                     <b-table small bordered class="text-center" :fields="getPageData.fields" :items="getPageData.items"/>
-                    <b-button variant="info" @click="link" > Редактировать </b-button>
+                    <b-button v-show="canChange" variant="info" @click="link" > Редактировать </b-button>
                 </div>
                 <div class="col-3 offset-3">
                     <user-panel/>
@@ -21,6 +21,11 @@ import {userPanel} from "../../../organisms";
 export default {
 
     name: "OrgInfo",
+    data(){
+        return {
+            canChange: window.canChange
+        }  
+    },
     components: {
         userPanel
     },
