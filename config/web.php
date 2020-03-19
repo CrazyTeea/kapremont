@@ -105,7 +105,12 @@ $config = [
 
                 'check' => 'app/mgsu-admin/view',
                 'api/mgsu/main-table/<offset:\d+>'=> '/app/mgsu-admin/main-table',
-                'api/mgsu/count' => '/app/mgsu-admin/count'
+                'api/mgsu/count' => '/app/mgsu-admin/count',
+
+
+
+
+                'api/org-table/<id:\d+>' => '/app/organization/table-list'
             ],
         ],
         'assetManager' => [

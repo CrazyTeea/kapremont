@@ -41,7 +41,7 @@ class OrganizationsController extends RestController
     public function actionById()
     {
         if ($data = Yii::$app->getRequest()->getRawBody()){
-            $data = (object)Json::decode($data);
+            $data = (object)Json::deceod($data);
             $org = Organizations::findOne($data->id);
             if ($org)
                 return [

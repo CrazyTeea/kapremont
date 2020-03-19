@@ -32,4 +32,30 @@ class OrganizationController extends AppController
     {
         return $this->render('ListObject');
     }
+    
+    public function actionTableList($id)
+    {
+        $query = Yii::$app->db->createCommand("SELECT 
+                po.id,
+                po.id_priority,
+                cities.city,
+                po.name,
+                po.assignment,
+                po.square_kap,
+                po.address,
+                po.year,
+                po.wear,
+                po.regulation,
+                po.finance_sum,
+                po.coFinancing,
+                po.system_status
+            FROM
+                program_objects AS po
+                    JOIN
+                cities ON cities.id = po.id_city
+            WHERE
+                po.id_org = $id AND po.system_status = 1")->queryAll();
+
+        return json_encode($query);
+    }
 }

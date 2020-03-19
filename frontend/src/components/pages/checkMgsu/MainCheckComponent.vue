@@ -131,7 +131,6 @@ export default {
 .cursor-pointer {
     cursor: pointer;
 }
-
 .document-item {
     display: block;
     position: relative;
