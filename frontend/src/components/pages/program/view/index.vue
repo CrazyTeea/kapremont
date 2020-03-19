@@ -270,7 +270,9 @@ export default {
     methods: {
         ...mapActions(["requestPageData", "requestUser"]),
         onRowClick(item) {
-            window.location.href = `/program/object/view/${item.id}`;
+            if (item.id) {
+                window.location.href = `/program/object/view/${item.id}`;
+            }
         },
         rowCount(attr) {
             if (attr == "resTable" && this.reservedObjects?.items) {
