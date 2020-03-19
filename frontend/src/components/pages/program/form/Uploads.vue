@@ -118,6 +118,7 @@ import Axios from "axios";
 export default {
     data() {
         return {
+            csrf: document.getElementsByName("csrf-token")[0].content,
             items: [
                 {
                     descriptor: "inv_card",
