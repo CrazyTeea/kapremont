@@ -176,7 +176,7 @@ class SystemController extends RestController
                             'wear2'=> (!is_null($item->wear) and $item->wear < 5) ? $wear[$item->wear] : ''
                         ],$item);
                     }
-                    if (isset($ret['priorityObjects']['items'])) {
+                    if (isset($ret['reservedObjects']['items'])) {
                         array_push($ret['reservedObjects']['items'], ['assignment' => 'итого', 'square_kap' => $s_sum, 'finance_sum' => $sum_sum]);
                     }
 
