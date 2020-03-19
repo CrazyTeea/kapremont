@@ -192,7 +192,11 @@ class DevelopmentProgrammeController extends AppController
         $mpdf->WriteHTML($stylesheet2,HTMLParserMode::HEADER_CSS);
         $mpdf->WriteHTML($this->renderPartial('_export',compact('objects','org','atz',
             'pr_ob','r_ob','events','nes','wai','risks','sq','atzC')));
-        return $mpdf->Output();
+        $path = Yii::getAlias( '@webroot' ) . '/uploads/tempPdf/'.$org->id.'/';
+        if (!file_exists($path))
+            FileHelper::createDirectory($path);
+        $mpdf->Output($path.'vig.pdf',\Mpdf\Output\Destination::FILE);
+        return Yii::$app->response->sendFile("{$path}vig.pdf");
     }
 
     /**
