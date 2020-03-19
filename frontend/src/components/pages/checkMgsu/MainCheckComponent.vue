@@ -23,7 +23,8 @@
                     >
                         <label>{{ item.region }}</label>
                     </b-th>
-                    <b-th @click="goToRef(item.id)"
+                    <b-th
+                        @click="goToRef(item.id)"
                         class="normal-font-weight-for-sell cursor-pointer center-text-in-cell"
                     >
                         <label class="cursor-pointer">{{ item.name }}</label>
@@ -49,8 +50,18 @@
                     <b-th
                         class="normal-font-weight-for-sell center-text-in-cell"
                     >
-                        <b-icon v-if="item.status === '1'" icon="check" variant="success" scale="2"></b-icon>
-                        <b-icon v-else icon="x-octagon" variant="danger" scale="2"></b-icon>
+                        <b-icon
+                            v-if="item.status === '1'"
+                            icon="check"
+                            variant="success"
+                            scale="2"
+                        ></b-icon>
+                        <b-icon
+                            v-else
+                            icon="x-octagon"
+                            variant="danger"
+                            scale="2"
+                        ></b-icon>
                     </b-th>
                 </b-tr>
             </b-tbody>
@@ -66,7 +77,6 @@
 
 <script>
 import Axios from "axios";
-
 
 export default {
     data() {
@@ -84,7 +94,7 @@ export default {
     },
     methods: {
         goToRef(id) {
-            window.location = `/organization/list/${id}`
+            window.location = `/organization/list/${id}`;
         },
         getTable(offset = 0) {
             Axios.post(`/api/mgsu/main-table/${offset}`, null, {

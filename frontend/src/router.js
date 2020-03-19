@@ -2,6 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import Atz from "./components/pages/program/atz/index.vue";
 import ListObject from "./components/pages/organization/info/ListObjectComponent.vue";
+import ObjView from "./components/pages/organization/info/ObjectShowComponent.vue";
 
 Vue.use(VueRouter);
 
@@ -74,6 +75,11 @@ const routes = [
         path: "/organization/list/:id",
         name: "ObjList",
         component: ListObject
+    },
+    {
+        path: "/organization/obj/:id",
+        name: "ObjView",
+        component: ObjView
     }
 ];
 
