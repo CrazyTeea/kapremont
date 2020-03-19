@@ -80,12 +80,12 @@
 
         <b-card no-body>
             <b-card-header header-tag="header" class="p-1" role="tab">
-                <span> <b-icon icon="document-text" scale="1.5" class="mr-2 p2"></b-icon>Загруженные документы</span>
+                <span> <b-icon icon="document-text" scale="1.5" class="mr-2 ml-1"></b-icon>Загруженные документы</span>
             </b-card-header>
             <b-card-body>
                 <div v-if="docs.length">
                     <ul>
-                        <li v-for="(doc, index) in docs" :key="index"><a :href="`/program/object/download-doc/1069?id=${doc.id}`">{{ `${doc.name}.pfd` }}</a></li>
+                        <li v-for="(doc, index) in docs" :key="index"><a :href="`/program/object/download-doc/${obj_id}?id=${doc.id}`">{{ `${doc.name}.pfd` }}</a></li>
                     </ul>
                 </div>
                 <div v-else>
