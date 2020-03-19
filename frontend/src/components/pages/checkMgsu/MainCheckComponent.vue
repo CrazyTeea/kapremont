@@ -40,8 +40,7 @@
                         <a
                             v-if="item.file_exist === '1'"
                             class="document-item"
-                            href="1"
-                            filetype="pdf"
+                            :href="`/program/download-doc/${item.id}`"
                         >
                             <span class="fileCorner"></span>
                         </a>
