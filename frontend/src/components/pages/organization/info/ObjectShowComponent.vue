@@ -85,7 +85,7 @@
             <b-card-body>
                 <div v-if="docs.length">
                     <ul>
-                        <li v-for="(doc, index) in docs" :key="index"><a :href="`/program/object/download-doc/${obj_id}?id=${doc.id}`">{{ `${doc.name}.pfd` }}</a></li>
+                        <li v-for="(doc, index) in docs" :key="index"><a :href="`/program/object/download-doc/${this.obj_id}?id=${doc.id}`">{{ `${doc.name}.pdf` }}</a></li>
                     </ul>
                 </div>
                 <div v-else>
