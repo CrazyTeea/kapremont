@@ -2166,7 +2166,6 @@ __webpack_require__.r(__webpack_exports__);
     },
     goToObj: function goToObj(id) {
       window.location = "/organization/obj/".concat(id);
-      console.log(id);
     }
   }
 });
@@ -42062,7 +42061,7 @@ module.exports = exports;
 var ___CSS_LOADER_API_IMPORT___ = __webpack_require__(/*! ../../../../../node_modules/css-loader/dist/runtime/api.js */ "./node_modules/css-loader/dist/runtime/api.js");
 exports = ___CSS_LOADER_API_IMPORT___(false);
 // Module
-exports.push([module.i, "\n.hidden-overflow {\n    overflow: hidden;\n    overflow-x: scroll;\n}\n.normal-font-weight-for-sell {\n    font-weight: normal !important;\n}\n.cursor-pointer {\n    cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.hidden-overflow {\r\n    overflow: hidden;\r\n    overflow-x: scroll;\n}\n.normal-font-weight-for-sell {\r\n    font-weight: normal !important;\n}\n.cursor-pointer {\r\n    cursor: pointer;\n}\r\n", ""]);
 // Exports
 module.exports = exports;
 
@@ -48122,7 +48121,7 @@ var render = function() {
                 "span",
                 [
                   _c("b-icon", {
-                    staticClass: "mr-2 p2",
+                    staticClass: "mr-2 ml-1",
                     attrs: { icon: "document-text", scale: "1.5" }
                   }),
                   _vm._v("Загруженные документы")
@@ -48144,7 +48143,10 @@ var render = function() {
                           {
                             attrs: {
                               href:
-                                "/program/object/download-doc/1069?id=" + doc.id
+                                "/program/object/download-doc/" +
+                                _vm.obj_id +
+                                "?id=" +
+                                doc.id
                             }
                           },
                           [_vm._v(_vm._s(doc.name + ".pfd"))]

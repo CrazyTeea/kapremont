@@ -67,7 +67,7 @@ class Organizations extends \yii\db\ActiveRecord
         return $this->hasOne(Program::class,['id_org'=>'id']);
     }
 
-    public static function getMainCheckTable($offset)
+    public static function getMainCheckTable($offset, $whereClouse)
     {
        // $query = self::find()->offset($offset)->limit(10)->all();
        $query = Yii::$app->db
@@ -87,11 +87,37 @@ class Organizations extends \yii\db\ActiveRecord
                     ) AS res
                         JOIN
                     program pr ON pr.id_org = res.id
+                    where 1 $whereClouse
                 ORDER BY res.id
                 LIMIT 10
                 OFFSET $offset")
             ->queryAll();
 
         return $query;
+    }
+
+    public static function getMainCheckTableCount($params)
+    {
+        $count = Yii::$app->db->createCommand("
+            SELECT 
+                    COUNT(res.id) as quantity
+                FROM
+                    (SELECT 
+                        org.id, org.name, COUNT(po.id_org) AS quantity, reg.region
+                    FROM
+                        organizations AS org
+                    JOIN regions AS reg ON org.id_region = reg.id
+                    JOIN program_objects po ON org.id = po.id_org
+                    WHERE
+                        org.system_status = 1
+                    GROUP BY po.id_org
+                    ) AS res
+                        JOIN
+                    program pr ON pr.id_org = res.id
+                where 1 $params
+                ORDER BY res.id
+            ")->queryOne();
+
+        return $count;
     }
 }
