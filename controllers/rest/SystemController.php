@@ -158,7 +158,9 @@ class SystemController extends RestController
                         ],$item
                         );
                     }
-                     array_push($ret['priorityObjects']['items'],['assignment'=>'итого','square_kap'=>$s_sum,'finance_sum'=>$sum_sum]);
+                    if (isset($ret['priorityObjects']['items'])) {
+                        array_push($ret['priorityObjects']['items'], ['assignment' => 'итого', 'square_kap' => $s_sum, 'finance_sum' => $sum_sum]);
+                    }
                     $s_sum = 0; $sum_sum = 0;
                     $progObj = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>1])->joinWith(['region'])->all();
                     foreach ($progObj as $index=>$item) {
@@ -174,7 +176,9 @@ class SystemController extends RestController
                             'wear2'=> (!is_null($item->wear) and $item->wear < 5) ? $wear[$item->wear] : ''
                         ],$item);
                     }
-                    array_push($ret['reservedObjects']['items'],['assignment'=>'итого','square_kap'=>$s_sum,'finance_sum'=>$sum_sum]);
+                    if (isset($ret['priorityObjects']['items'])) {
+                        array_push($ret['reservedObjects']['items'], ['assignment' => 'итого', 'square_kap' => $s_sum, 'finance_sum' => $sum_sum]);
+                    }
 
                     return $ret;
                 }
