@@ -118,7 +118,7 @@ class ProgramObjects extends \yii\db\ActiveRecord
 
     public function getDocList()
     {
-        return $this->hasMany(ObjectDocumentsList::class, ['id_object' => 'id']);
+        return $this->hasMany(ObjectDocumentsList::class, ['id_object' => 'id'])->andOnCondition([ObjectDocumentsList::tableName().'.system_status'=>1]);
     }
 
 }

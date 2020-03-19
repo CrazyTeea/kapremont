@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use app\models\ProgramObjects;
 
 /**
  * This is the model class for table "organizations".
@@ -49,10 +50,48 @@ class Organizations extends \yii\db\ActiveRecord
             'system_status' => 'System Status',
         ];
     }
+
     public function getRegion(){
         return $this->hasOne(Regions::className(),['id'=>'id_region']);
     }
     public function getOrgInfo(){
         return $this->hasOne(OrgInfo::className(),['id_org'=>'id']);
+    }
+
+
+    public function getProgramObjects()
+    {
+        return $this->hasMany(ProgramObjects::class, ['id_org' => 'id']);
+    }
+    public function getProgram(){
+        return $this->hasOne(Program::class,['id_org'=>'id']);
+    }
+
+    public static function getMainCheckTable($offset)
+    {
+       // $query = self::find()->offset($offset)->limit(10)->all();
+       $query = Yii::$app->db
+            ->createCommand("
+                SELECT 
+                    res.id, res.name, res.region, res.quantity, pr.file_exist, pr.status
+                FROM
+                    (SELECT 
+                        org.id, org.name, COUNT(po.id_org) AS quantity, reg.region
+                    FROM
+                        organizations AS org
+                    JOIN regions AS reg ON org.id_region = reg.id
+                    JOIN program_objects po ON org.id = po.id_org
+                    WHERE
+                        org.system_status = 1
+                    GROUP BY po.id_org
+                    ) AS res
+                        JOIN
+                    program pr ON pr.id_org = res.id
+                ORDER BY res.id
+                LIMIT 10
+                OFFSET $offset")
+            ->queryAll();
+
+        return $query;
     }
 }

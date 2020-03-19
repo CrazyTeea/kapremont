@@ -11,10 +11,13 @@ use yii\helpers\Json;
 
 class OrganizationsController extends RestController
 {
-    public function actionAll(){
+    public function actionAll()
+    {
         return Organizations::find()->all();
     }
-    public function actionByUsername(){
+
+    public function actionByUsername()
+    {
         if ($data = Yii::$app->getRequest()->getRawBody()){
             $data = (object)Json::decode($data);
             $user = User::find()->where(['username'=>$data->login])->one();
@@ -23,7 +26,9 @@ class OrganizationsController extends RestController
             ];
         }
     }
-    public function actionCurrent(){
+
+    public function actionCurrent()
+    {
 
 
             $user = Yii::$app->getSession()->get('user');
@@ -32,7 +37,9 @@ class OrganizationsController extends RestController
             ];
 
     }
-    public function actionById(){
+
+    public function actionById()
+    {
         if ($data = Yii::$app->getRequest()->getRawBody()){
             $data = (object)Json::decode($data);
             $org = Organizations::findOne($data->id);

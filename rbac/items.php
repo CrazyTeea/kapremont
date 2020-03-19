@@ -36,6 +36,9 @@ return [
         'type' => 2,
         'children' => [
             '/app/organization/list',
+            '/app/mgsu-admin/main-table',
+            '/app/mgsu-admin/view',
+            '/app/mgsu-admin/count',
         ],
     ],
     '/app/organization/list' => [
@@ -45,6 +48,15 @@ return [
         'type' => 2,
     ],
     '/app/program/index' => [
+        'type' => 2,
+    ],
+    '/app/mgsu-admin/view' => [
+        'type' => 2,
+    ],
+    '/app/mgsu-admin/main-table' => [
+        'type' => 2,
+    ],
+    '/app/mgsu-admin/count' => [
         'type' => 2,
     ],
 ];
