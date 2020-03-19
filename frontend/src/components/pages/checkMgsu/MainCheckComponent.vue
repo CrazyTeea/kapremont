@@ -39,22 +39,18 @@
                         <a
                             v-if="item.file_exist === '1'"
                             class="document-item"
-                            href="test.pdf"
+                            href="1"
                             filetype="pdf"
                         >
                             <span class="fileCorner"></span>
                         </a>
-                        <label v-else>-</label>
+                        <b-icon v-else icon="alert-circle" scale="2"></b-icon>
                     </b-th>
                     <b-th
                         class="normal-font-weight-for-sell center-text-in-cell"
                     >
-                        <label v-if="item.status === '1'" class="text-success"
-                            >V</label
-                        >
-                        <label v-else class="text-danger"
-                            >X</label
-                        >
+                        <b-icon v-if="item.status === '1'" icon="check" variant="success" scale="2"></b-icon>
+                        <b-icon v-else icon="x-octagon" variant="danger" scale="2"></b-icon>
                     </b-th>
                 </b-tr>
             </b-tbody>
@@ -70,6 +66,8 @@
 
 <script>
 import Axios from "axios";
+
+
 export default {
     data() {
         return {
