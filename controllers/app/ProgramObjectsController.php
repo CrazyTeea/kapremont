@@ -8,6 +8,7 @@ use app\models\ObjectDocumentsTypes;
 use app\models\ProgObjectsEvents;
 use app\models\ProgObjectsRiscs;
 use app\models\ProgObjectsWaites;
+use app\models\Program;
 use app\models\ProObjectsNecessary;
 use Yii;
 use app\models\ProgramObjects;
@@ -55,8 +56,9 @@ class ProgramObjectsController extends AppController
     public function actionView($id)
     {
         $model = $this->findModel($id);
+        $canChange = !Program::findOne($model->id_program)->p_status;
         $docList = ObjectDocumentsList::findAll(['system_status'=>1,'id_object'=>$id]);
-        return $this->render('view',compact('model','docList'));
+        return $this->render('view',compact('model','docList','canChange'));
     }
 
     public function actionDownloadDoc($id_obj){
