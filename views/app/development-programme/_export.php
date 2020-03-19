@@ -497,13 +497,13 @@ function getSum($arr,$i_o,$attr){
             <tr>
                 <td></td>
                 <td class="text-right" colspan="5">Итого</td>
-                <td><?= $s_sum ?></td>
+                <td><?= number_format($s_sum, 3, '.',' ') ?></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><?= $sum_sum ?></td>
+                <td><?= number_format($sum_sum, 3, '.',' ') ?></td>
                 <td></td>
                 <td></td>
             </tr>
@@ -564,13 +564,13 @@ function getSum($arr,$i_o,$attr){
             <tr>
                 <td></td>
                 <td class="text-right" colspan="5">Итого</td>
-                <td><?= $s_sum ?></td>
+                <td><?= number_format($s_sum, 3, '.',' ') ?></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><?= $sum_sum ?></td>
+                <td><?= number_format($sum_sum, 3, '.',' ') ?></td>
                 <td></td>
                 <td></td>
             </tr>
