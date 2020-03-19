@@ -22,7 +22,7 @@ class MgsuAdminController extends Controller
 
     public function actionCount()
     {
-        $count = Yii::$app->db->createCommand('SELECT count(*) as quantity FROM programm_mi.organizations')->queryAll();
+        $count = Yii::$app->db->createCommand('SELECT count(*) as quantity FROM organizations')->queryAll();
 
         return json_encode($count);
     }

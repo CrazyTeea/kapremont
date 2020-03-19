@@ -51,10 +51,13 @@ class Organizations extends \yii\db\ActiveRecord
         ];
     }
 
-    public function getRegion()
-    {
-        return $this->hasOne(Regions::className(), ['id'=>'id_region']);
+    public function getRegion(){
+        return $this->hasOne(Regions::className(),['id'=>'id_region']);
     }
+    public function getOrgInfo(){
+        return $this->hasOne(OrgInfo::className(),['id_org'=>'id']);
+    }
+
 
     public function getProgramObjects()
     {
