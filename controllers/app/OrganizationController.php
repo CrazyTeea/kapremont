@@ -58,7 +58,6 @@ class OrganizationController extends AppController
                 cities ON cities.id = po.id_city
             WHERE
                 po.id_org = $id AND po.system_status = 1")->queryAll();
-
         return Json::encode($query);
     }
 
