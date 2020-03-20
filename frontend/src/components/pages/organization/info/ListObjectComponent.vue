@@ -118,8 +118,6 @@ export default {
         },
         goToObj(id) {
             window.location = `/organization/obj/${id}`;
-
-            console.log(id);
         }
     }
 };
