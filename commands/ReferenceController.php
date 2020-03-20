@@ -42,7 +42,7 @@ class ReferenceController extends Controller
                 $row_org->full_name = htmlspecialchars_decode( $data->getValue()->fullname );
                 $row_org->short_name = htmlspecialchars_decode( $data->getValue()->shot_name );
                 $row_org->name = htmlspecialchars_decode( $data->getValue()->name );
-                $row_org->id_region = ($data->getValue()->region_id!="")?$data->getValue()->region_id:87;
+                $row_org->id_region = ($data->getValue()->region_id != 0)?$data->getValue()->region_id:87;
                 $row_org->save();
 
             }
