@@ -67,10 +67,9 @@ class Organizations extends \yii\db\ActiveRecord
         return $this->hasOne(Program::class,['id_org'=>'id']);
     }
 
-    public static function getMainCheckTable($offset, $whereClouse)
+    public static function getMainCheckTable($offset, $whereClouse, $order)
     {
-       // $query = self::find()->offset($offset)->limit(10)->all();
-       $query = Yii::$app->db
+        $query = Yii::$app->db
             ->createCommand("
                 SELECT 
                     res.id, res.name, res.region, res.quantity, pr.file_exist, pr.p_status
@@ -88,7 +87,7 @@ class Organizations extends \yii\db\ActiveRecord
                         JOIN
                     program pr ON pr.id_org = res.id
                     where 1 $whereClouse
-                ORDER BY res.id
+                ORDER BY $order
                 LIMIT 10
                 OFFSET $offset")
             ->queryAll();
