@@ -93,7 +93,8 @@ $config = [
                 'program/object/delete/<id:\d+>' => 'app/program-objects/delete',
                 'program/object/files/<id:\d+>' => 'app/program-objects/get-all-obj-files',
                 'program/export'=>'app/development-programme/export',
-
+                'program/approve'=>'app/program/approve',
+                'program/is-approve'=>'app/program/is-approve',
                 'organization/list'=>'app/organization/list',
                 'organization/list/<id:\d+>' => 'app/organization/list-object',
                 'organization/obj/<id:\d+>' => 'app/organization/object-view',

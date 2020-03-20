@@ -15,9 +15,9 @@
 </template>
 
 <script>
-    export default {
-        name: "errorPage"
-    }
+export default {
+    name: "errorPage"
+}
 </script>
 
 <style scoped>

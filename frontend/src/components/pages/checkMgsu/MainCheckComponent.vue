@@ -14,7 +14,7 @@
                             <b-form-input type="number" aria-label="First name" v-model="filters.id"></b-form-input>
                             <b-input-group-append>
                                 <b-button variant="outline-secondary" @click="filters.id = null"
-                                    ><b-icon icon="backspace" variant="danger" scale="1.2"></b-icon
+                                ><b-icon icon="backspace" variant="danger" scale="1.2"></b-icon
                                 ></b-button>
                             </b-input-group-append>
                         </b-input-group>
@@ -22,7 +22,7 @@
                             <b-form-input aria-label="First name" v-model="filters.region"></b-form-input>
                             <b-input-group-append>
                                 <b-button variant="outline-secondary" @click="filters.region = null"
-                                    ><b-icon icon="backspace" variant="danger" scale="1.2"></b-icon
+                                ><b-icon icon="backspace" variant="danger" scale="1.2"></b-icon
                                 ></b-button>
                             </b-input-group-append>
                         </b-input-group>
@@ -30,7 +30,7 @@
                             <b-form-input aria-label="First name" v-model="filters.organization"></b-form-input>
                             <b-input-group-append>
                                 <b-button variant="outline-secondary" @click="filters.organization = null"
-                                    ><b-icon icon="backspace" variant="danger" scale="1.2"></b-icon
+                                ><b-icon icon="backspace" variant="danger" scale="1.2"></b-icon
                                 ></b-button>
                             </b-input-group-append>
                         </b-input-group>
@@ -38,7 +38,7 @@
                             <b-form-select v-model="filters.quantity" :options="options.quantity"></b-form-select>
                             <b-input-group-append>
                                 <b-button variant="outline-secondary" @click="filters.quantity = null"
-                                    ><b-icon icon="backspace" variant="danger" scale="1.2"></b-icon
+                                ><b-icon icon="backspace" variant="danger" scale="1.2"></b-icon
                                 ></b-button>
                             </b-input-group-append>
                         </b-input-group>
@@ -46,15 +46,15 @@
                             <b-form-select v-model="filters.file_exist" :options="options.file_exist"></b-form-select>
                             <b-input-group-append>
                                 <b-button variant="outline-secondary" @click="filters.file_exist = null"
-                                    ><b-icon icon="backspace" variant="danger" scale="1.2"></b-icon
+                                ><b-icon icon="backspace" variant="danger" scale="1.2"></b-icon
                                 ></b-button>
                             </b-input-group-append>
                         </b-input-group>
                         <b-input-group prepend="Выгрузка отправлена" class="mb-2">
-                            <b-form-select v-model="filters.status" :options="options.status"></b-form-select>
+                            <b-form-select v-model="filters.p_status" :options="options.p_status"></b-form-select>
                             <b-input-group-append>
-                                <b-button variant="outline-secondary" @click="filters.status = null"
-                                    ><b-icon icon="backspace" variant="danger" scale="1.2"></b-icon
+                                <b-button variant="outline-secondary" @click="filters.p_status = null"
+                                ><b-icon icon="backspace" variant="danger" scale="1.2"></b-icon
                                 ></b-button>
                             </b-input-group-append>
                         </b-input-group>
@@ -83,8 +83,8 @@
                             <label>{{ item.region }}</label>
                         </b-th>
                         <b-th
-                            @click="goToRef(item.id)"
-                            class="normal-font-weight-for-sell cursor-pointer center-text-in-cell"
+                                @click="goToRef(item.id)"
+                                class="normal-font-weight-for-sell cursor-pointer center-text-in-cell"
                         >
                             <label class="cursor-pointer">{{ item.name }}</label>
                         </b-th>
@@ -92,13 +92,13 @@
                             <label>{{ item.quantity }}</label>
                         </b-th>
                         <b-th class="normal-font-weight-for-sell center-text-in-cell">
-                            <a v-if="item.file_exist === '1'" class="document-item" href="1" filetype="pdf">
+                            <a v-if="item.file_exist === '1'" class="document-item" :href="`/program/download-doc/${item.id}`" filetype="pdf">
                                 <span class="fileCorner"></span>
                             </a>
                             <b-icon v-else icon="alert-circle" scale="2"></b-icon>
                         </b-th>
                         <b-th class="normal-font-weight-for-sell center-text-in-cell">
-                            <b-icon v-if="item.status === '1'" icon="check" variant="success" scale="2"></b-icon>
+                            <b-icon v-if="item.p_status == '1'" icon="check" variant="success" scale="2"></b-icon>
                             <b-icon v-else icon="x-octagon" variant="danger" scale="2"></b-icon>
                         </b-th>
                     </b-tr>
@@ -122,7 +122,7 @@ export default {
                 organization: null,
                 quantity: null,
                 file_exist: null,
-                status: null
+                p_status: null
             },
             options: {
                 quantity: [
@@ -181,57 +181,57 @@ export default {
 </script>
 
 <style>
-.table-overflow-hidden {
-    overflow: hidden !important;
-    overflow-x: scroll !important;
-}
-.normal-font-weight-for-sell {
-    font-weight: normal !important;
-}
-.center-text-in-cell {
-    vertical-align: middle !important;
-    text-align: center !important;
-}
-.cursor-pointer {
-    cursor: pointer;
-}
-.document-item {
-    display: block;
-    position: relative;
-    color: black;
-}
-.document-item::before {
-    position: absolute;
-    width: 29px;
-    height: 34px;
-    left: 0;
-    top: -7px;
-    content: "";
-    border: solid 2px #920035;
-}
-.document-item::after {
-    content: "file";
-    content: attr(filetype);
-    left: -4px;
-    padding: 0px 2px;
-    text-align: right;
-    line-height: 1.3;
-    position: absolute;
-    background-color: #000;
-    color: #fff;
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    top: 9px;
-}
-.document-item .fileCorner {
-    width: 0;
-    height: 0;
-    border-style: solid;
-    border-width: 11px 0 0 7px;
-    border-color: white transparent transparent #920035;
-    position: absolute;
-    top: -7px;
-    left: 22px;
-}
+    .table-overflow-hidden {
+        overflow: hidden !important;
+        overflow-x: scroll !important;
+    }
+    .normal-font-weight-for-sell {
+        font-weight: normal !important;
+    }
+    .center-text-in-cell {
+        vertical-align: middle !important;
+        text-align: center !important;
+    }
+    .cursor-pointer {
+        cursor: pointer;
+    }
+    .document-item {
+        display: block;
+        position: relative;
+        color: black;
+    }
+    .document-item::before {
+        position: absolute;
+        width: 29px;
+        height: 34px;
+        left: 0;
+        top: -7px;
+        content: "";
+        border: solid 2px #920035;
+    }
+    .document-item::after {
+        content: "file";
+        content: attr(filetype);
+        left: -4px;
+        padding: 0px 2px;
+        text-align: right;
+        line-height: 1.3;
+        position: absolute;
+        background-color: #000;
+        color: #fff;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        top: 9px;
+    }
+    .document-item .fileCorner {
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 11px 0 0 7px;
+        border-color: white transparent transparent #920035;
+        position: absolute;
+        top: -7px;
+        left: 22px;
+    }
 </style>

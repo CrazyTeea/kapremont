@@ -264,7 +264,7 @@ function getSum($arr,$i_o,$attr){
             <td><?=$org->orgInfo ? $org->orgInfo->prof_count : ''?></td>
         </tr>
         <tr>
-            <td rowspan="6">8</td>
+            <td rowspan="6">5</td>
             <td>Обучающиеся, из них:</td>
             <td><?=$org->orgInfo ? floatval($org->orgInfo->st_sr_pr_count) +
                     floatval($org->orgInfo->st_bak_count) +
@@ -1005,9 +1005,9 @@ function getSum($arr,$i_o,$attr){
                 <td></td>
                 <td></td>
                 <td></td>
-                <td><?=getSum($events,$index,'cost_real')?></td>
-                <td><?=getSum($events,$index,'sum_bud_fin')?></td>
-                <td><?=getSum($events,$index,'fin_vnebud_ist')?></td>
+                <td><?=number_format(getSum($events,$index,'cost_real'), 3, '.',' ')?></td>
+                <td><?=number_format(getSum($events,$index,'sum_bud_fin'), 3, '.',' ')?></td>
+                <td><?=number_format(getSum($events,$index,'fin_vnebud_ist'), 3, '.',' ')?></td>
             </tr>
             </tbody>
         </table>
