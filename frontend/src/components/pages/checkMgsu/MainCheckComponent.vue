@@ -92,9 +92,7 @@
                             <label>{{ item.quantity }}</label>
                         </b-th>
                         <b-th class="normal-font-weight-for-sell center-text-in-cell">
-                            <a v-if="item.file_exist === '1'" class="document-item" :href="`/program/download-doc/${item.id}`" filetype="pdf">
-                                <span class="fileCorner"></span>
-                            </a>
+                            <a v-if="item.file_exist === '1'" :href="`/program/download-doc/${item.id}`" class="a-decorating"><b-icon icon="document-text" scale="2" vriant="success"></b-icon></a>
                             <b-icon v-else icon="alert-circle" scale="2"></b-icon>
                         </b-th>
                         <b-th class="normal-font-weight-for-sell center-text-in-cell">
@@ -193,45 +191,10 @@ export default {
         text-align: center !important;
     }
     .cursor-pointer {
-        cursor: pointer;
+        cursor: pointer !important;
     }
-    .document-item {
-        display: block;
-        position: relative;
-        color: black;
-    }
-    .document-item::before {
-        position: absolute;
-        width: 29px;
-        height: 34px;
-        left: 0;
-        top: -7px;
-        content: "";
-        border: solid 2px #920035;
-    }
-    .document-item::after {
-        content: "file";
-        content: attr(filetype);
-        left: -4px;
-        padding: 0px 2px;
-        text-align: right;
-        line-height: 1.3;
-        position: absolute;
-        background-color: #000;
-        color: #fff;
-        font-size: 11px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        top: 9px;
-    }
-    .document-item .fileCorner {
-        width: 0;
-        height: 0;
-        border-style: solid;
-        border-width: 11px 0 0 7px;
-        border-color: white transparent transparent #920035;
-        position: absolute;
-        top: -7px;
-        left: 22px;
+    .a-decorating {
+        text-decoration: none !important;
+        color: darkgreen !important;
     }
 </style>

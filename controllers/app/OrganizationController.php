@@ -14,16 +14,16 @@ class OrganizationController extends AppController
 {
     public function actionInfo()
     {
-        $canChange = !Program::findOne(['id_org'=>Yii::$app->session->get('user')->id_org])->p_status;
-        return $this->render('info',compact('canChange'));
+        $canChange = !Program::findOne(['id_org' => Yii::$app->session->get('user')->id_org])->p_status;
+        return $this->render('info', compact('canChange'));
     }
 
     public function actionUpdate($id)
     {
-        $model = OrgInfo::findOne(['id_org'=>$id]);
+        $model = OrgInfo::findOne(['id_org' => $id]);
         if ($model->load(Yii::$app->getRequest()->post()) and $model->save())
             return $this->redirect(['organization/info']);
-        return $this->render('update',compact('model'));
+        return $this->render('update', compact('model'));
     }
 
     public function actionList()
@@ -35,10 +35,11 @@ class OrganizationController extends AppController
     {
         return $this->render('ListObject');
     }
-    
+
     public function actionTableList($id)
     {
-        $query = Yii::$app->db->createCommand("SELECT 
+        $query = Yii::$app->db->createCommand("
+            SELECT 
                 po.id,
                 po.id_priority,
                 cities.city,
@@ -58,7 +59,13 @@ class OrganizationController extends AppController
                 cities ON cities.id = po.id_city
             WHERE
                 po.id_org = $id AND po.system_status = 1")->queryAll();
-        return Json::encode($query);
+
+        $programm = Program::find()->select(['finance_volume', 'finance_events', 'cost'])->where(['id' => $id, 'system_status' => Program::ACTIVE])->one();
+
+        return Json::encode([
+            'objects' => $query,
+            'programm' => $programm
+        ]);
     }
 
     public function actionObjectView($id)
@@ -68,7 +75,8 @@ class OrganizationController extends AppController
 
     public function actionGetObjectById($id)
     {
-        $queryObj = Yii::$app->db->createCommand("SELECT 
+        $queryObj = Yii::$app->db->createCommand("
+            SELECT 
                 po.id,
                 org.name,
                 po.name as poname,
@@ -84,15 +92,16 @@ class OrganizationController extends AppController
                 organizations org ON po.id_org = org.id
             WHERE
                 po.id = $id")->queryAll();
-        $queryDocs = Yii::$app->db->createCommand("SELECT 
-            files.id, files.name
+        $queryDocs = Yii::$app->db->createCommand("
+            SELECT 
+                files.id, files.name
             FROM
                 object_documents_list list
                 join
                 files on files.id = list.id_file
             WHERE id_object = $id and system_status = 1")->queryAll();
 
-        
+
         return json_encode([
             'obj' => $queryObj,
             'docs' => $queryDocs

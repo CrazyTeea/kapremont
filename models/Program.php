@@ -19,6 +19,8 @@ use yii\db\ActiveRecord;
  */
 class Program extends ActiveRecord
 {
+
+    public const ACTIVE = 1;
     /**
      * {@inheritdoc}
      */
