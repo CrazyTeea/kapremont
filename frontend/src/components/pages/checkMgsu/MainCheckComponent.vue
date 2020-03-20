@@ -133,7 +133,7 @@ export default {
                     { value: "1", text: "Выгружено" },
                     { value: "0", text: "Не выгружено" }
                 ],
-                status: [
+                p_status: [
                     { value: "1", text: "Отправлена" },
                     { value: "0", text: "Не отправлена" }
                 ]

@@ -16,7 +16,7 @@ class MgsuAdminController extends Controller
 
     public function actionMainTable($offset)
     {
-        $params = $this->getParams(json_decode(Yii::$app->request->post('form')));
+        $params = $this->getParams(Json::decode(Yii::$app->request->post('form')));
         $select = Organizations::getMainCheckTable($offset, $params);
         $count = Organizations::getMainCheckTableCount($params);
 
