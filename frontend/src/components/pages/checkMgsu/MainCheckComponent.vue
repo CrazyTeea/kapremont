@@ -7,7 +7,7 @@
                     Фильтры</span
                 >
             </b-card-header>
-            <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
+            <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel" visible>
                 <b-card-body>
                     <div>
                         <b-input-group prepend="ID" class="mb-2">
@@ -27,9 +27,9 @@
                             </b-input-group-append>
                         </b-input-group>
                         <b-input-group prepend="Организация" class="mb-2">
-                            <b-form-input aria-label="First name" v-model="filters.organization"></b-form-input>
+                            <b-form-input aria-label="First name" v-model="filters.name"></b-form-input>
                             <b-input-group-append>
-                                <b-button variant="outline-secondary" @click="filters.organization = null"
+                                <b-button variant="outline-secondary" @click="filters.name = null"
                                 ><b-icon icon="backspace" variant="danger" scale="1.2"></b-icon
                                 ></b-button>
                             </b-input-group-append>
@@ -119,7 +119,7 @@ export default {
             filters: {
                 id: null,
                 region: null,
-                organization: null,
+                name: null,
                 quantity: null,
                 file_exist: null,
                 p_status: null
@@ -133,7 +133,7 @@ export default {
                     { value: "1", text: "Выгружено" },
                     { value: "0", text: "Не выгружено" }
                 ],
-                status: [
+                p_status: [
                     { value: "1", text: "Отправлена" },
                     { value: "0", text: "Не отправлена" }
                 ]
