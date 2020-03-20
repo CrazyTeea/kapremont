@@ -7,7 +7,7 @@
                     Фильтры</span
                 >
             </b-card-header>
-            <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel" visible>
+            <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
                 <b-card-body>
                     <div>
                         <b-input-group prepend="ID" class="mb-2">
