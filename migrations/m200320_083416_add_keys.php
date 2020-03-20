@@ -12,7 +12,12 @@ class m200320_083416_add_keys extends Migration
      */
     public function safeUp()
     {
-
+        $this->addForeignKey('fk-pro_objects_necessary-id_object',\app\models\ProObjectsNecessary::tableName(),['id_object'],\app\models\ProgramObjects::tableName(),['id'],'CASCADE');
+        $this->addForeignKey('fk-prog_objects_waites-id_object',\app\models\ProgObjectsWaites::tableName(),['id_object'],\app\models\ProgramObjects::tableName(),['id'],'CASCADE');
+        $this->addForeignKey('fk-prog_objects_events-id_object',\app\models\ProgObjectsEvents::tableName(),['id_object'],\app\models\ProgramObjects::tableName(),['id'],'CASCADE');
+        $this->addForeignKey('fk-prog_objects_riscs-id_object',\app\models\ProgObjectsRiscs::tableName(),['id_object'],\app\models\ProgramObjects::tableName(),['id'],'CASCADE');
+        $this->addForeignKey('fk-object_documents_list-id_object',\app\models\ObjectDocumentsList::tableName(),['id_object'],\app\models\ProgramObjects::tableName(),['id'],'CASCADE');
+        $this->addForeignKey('fk-object_documents_list-id_file',\app\models\ObjectDocumentsList::tableName(),['id_file'],\app\models\Files::tableName(),['id'],'CASCADE');
     }
 
     /**

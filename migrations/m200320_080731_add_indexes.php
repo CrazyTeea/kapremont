@@ -12,10 +12,10 @@ class m200320_080731_add_indexes extends Migration
      */
     public function safeUp()
     {
-        $this->createIndex('ID_OBJECT_INDEX',\app\models\ProObjectsNecessary::tableName(),['id_object']);
-        $this->createIndex('ID_OBJECT_INDEX',\app\models\ProgObjectsWaites::tableName(),['id_object']);
-        $this->createIndex('ID_OBJECT_INDEX',\app\models\ProgObjectsEvents::tableName(),['id_object']);
-        $this->createIndex('ID_OBJECT_INDEX',\app\models\ProgObjectsRiscs::tableName(),['id_object']);
+        $this->createIndex('I-pro-objects-necessary-id_object',\app\models\ProObjectsNecessary::tableName(),['id_object']);
+        $this->createIndex('I-prog-objects-waites-id_object',\app\models\ProgObjectsWaites::tableName(),['id_object']);
+        $this->createIndex('I-prog-objects-events-id_object',\app\models\ProgObjectsEvents::tableName(),['id_object']);
+        $this->createIndex('I-prog-objects-riscs-id_object',\app\models\ProgObjectsRiscs::tableName(),['id_object']);
     }
 
     /**

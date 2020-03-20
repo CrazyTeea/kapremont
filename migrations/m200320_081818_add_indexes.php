@@ -12,6 +12,8 @@ class m200320_081818_add_indexes extends Migration
      */
     public function safeUp()
     {
+        $this->createIndex('I-object_documents-list-id_object',\app\models\ObjectDocumentsList::tableName(),['id_object']);
+
 
     }
 
