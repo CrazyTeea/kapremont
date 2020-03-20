@@ -279,7 +279,7 @@ export default {
         },
         approveModal(){
             this.canAxios = false;
-            this.$bvModal.msgBoxConfirm('Редактирование программы модернизации ифоструктуры будет временно заблокировано',{
+            this.$bvModal.msgBoxConfirm('Редактирование программы модернизации ифраструктуры будет временно заблокировано',{
                 title: 'Подтверждение действий.',
                 okTitle: 'Да',
                 okVariant: 'danger',
