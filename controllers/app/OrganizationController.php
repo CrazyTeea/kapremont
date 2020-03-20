@@ -21,7 +21,7 @@ class OrganizationController extends AppController
     public function actionUpdate($id)
     {
         $model = OrgInfo::findOne(['id_org'=>$id]);
-
+        $canChange = !Program::findOne(['id_org'=>Yii::$app->session->get('user')->id_org])->p_status;
         if ($model->load(Yii::$app->getRequest()->post()) and $model->save())
             return $this->redirect(['organization/info']);
         return $this->render('update',compact('model','canChange'));
