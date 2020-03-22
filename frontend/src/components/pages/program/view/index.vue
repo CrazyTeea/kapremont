@@ -15,11 +15,11 @@
         </b-modal>
         <div class="row">
             <div class="col-12">
-                <b-alert dismissible fade :show="!programStatus" variant="warning">
+                <b-modal cancel-title="Отмена" centered :visible="!programStatus">
                     Уважаемые пользователи!
                     В связи с техническими работами на сервере возможность загрузки программы модернизации инфраструктуры образовательных организаций высшего образования
                     в формате pdf и её отправки на согласование в Минобрнауки России продлена до 23 марта 2020 года.
-                </b-alert>
+                </b-modal>
             </div>
             <div class="col-6">
                 <b-table
