@@ -20,7 +20,6 @@ class MgsuAdminController extends Controller
         $order = $this->getOrder(json_decode(Yii::$app->request->post('form')));
         $select = Organizations::getMainCheckTable($offset, $params, $order);
         $count = Organizations::getMainCheckTableCount($params);
-
         // echo "<pre>";
         // print_r($order);
 
@@ -38,10 +37,11 @@ class MgsuAdminController extends Controller
 
         $params1 =  [
             'id' => $request->id ?? null,
-            'name' => $request->name ?? null,
+            
         ];
 
         $regParams = [
+            'name' => $request->name ?? null,
             'region' => $request->region ?? null,
         ];
 

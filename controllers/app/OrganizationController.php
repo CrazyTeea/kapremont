@@ -61,7 +61,6 @@ class OrganizationController extends AppController
                 po.id_org = $id AND po.system_status = 1")->queryAll();
 
         $programm = Program::find()->select(['finance_volume', 'finance_events', 'cost'])->where(['id_org' => $id, 'system_status' => Program::ACTIVE])->one();
-
         return Json::encode([
             'objects' => $query,
             'programm' => $programm

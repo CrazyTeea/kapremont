@@ -152,7 +152,7 @@ export default {
         },
         getTable(offset = 0) {
             let form = new FormData();
-            form.append('form', JSON.stringify(this.filters))
+            form.append('form', JSON.stringify(this.filters));
             Axios.post(`/api/mgsu/main-table/${offset}`, form, {
                 headers: {
                     "X-CSRF-Token": this.csrf
