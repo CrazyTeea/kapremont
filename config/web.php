@@ -75,6 +75,13 @@ $config = [
             'enablePrettyUrl' => true,
             'showScriptName' => false,
             'rules' => [
+
+                [
+                    'class' => 'yii\rest\UrlRule',
+                    'controller' => 'api/comment',
+                    'pluralize' => false
+                ],
+
                 'program'=>'app/program',
                 ''=>'app/program',
                 'login'=>'site/login',
