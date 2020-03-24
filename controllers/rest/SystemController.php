@@ -93,6 +93,7 @@ class SystemController extends RestController
                     ];
                     $ret['fieldsObjects']['fields']=[
                         ['key'=>'index','label'=>'№'],
+                        ['key'=>'type2','label'=>'Тип'],
                         ['key'=>'priority','label'=>'Приоритет'],
                         ['key'=>'region','label'=>"Субъект РФ"],
                         ['key'=>'name','label'=>"Наименование объекта, требующего кап. ремонт"],
@@ -149,6 +150,7 @@ class SystemController extends RestController
                         $s_sum += floatval($item->square_kap );
                         $sum_sum += floatval($item->finance_sum);
                         $ret['priorityObjects']['items'][$index] = ArrayHelper::merge([
+                            'type2'=>'Приоритетный',
                             'event_typeT'=>(isset($item->type_remont) ? $r[$item->type_remont] : ''),
                             'regulationT'=>($item->exist_pred_nadz_orgs) ? $item->regulation : '',
                             'index'=>$i,
@@ -168,6 +170,7 @@ class SystemController extends RestController
                         $s_sum += floatval($item->square_kap );
                         $sum_sum += floatval($item->finance_sum);
                         $ret['reservedObjects']['items'][$index] = ArrayHelper::merge([
+                            'type2'=>'Резервный',
                             'event_typeT'=>(isset($item->type_remont) ? $r[$item->type_remont] : ''),
                             'regulationT'=>($item->exist_pred_nadz_orgs) ? $item->regulation : '',
                             'index'=>$i,
