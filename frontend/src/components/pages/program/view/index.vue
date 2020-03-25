@@ -15,7 +15,10 @@
         </b-modal>
         <div class="row">
             <div class="col-12">
-                <b-modal cancel-title="Отмена" centered :visible="!programStatus">
+                <b-modal cancel-title="Отмена" centered :visible="ban">
+                    Уважаемые пользователи! Сбор данных завершён. Доступ в систему закрыт
+                </b-modal>
+                <b-modal cancel-title="Отмена" centered :visible="!programStatus && !ban">
                     Уважаемые пользователи!
                     В связи с техническими работами на сервере возможность загрузки программы модернизации инфраструктуры образовательных организаций высшего образования
                     в формате pdf и её отправки на согласование в Минобрнауки России продлена до 23 марта 2020 года.
@@ -64,10 +67,10 @@
         <br />
         <div class="row">
             <div class="col-6">
-                <b-button variant="info" href="object/create" v-show="!programStatus"
+                <b-button variant="info" href="object/create" v-show="!programStatus && !ban"
                     >Добавить объект кап. ремонта</b-button
                 >
-                <b-button variant="info" href="atz" v-show="!programStatus"
+                <b-button variant="info" href="atz" v-show="!programStatus && !ban"
                     >Добавить мероприятия по АТЗ</b-button
                 >
             </div>
@@ -206,7 +209,7 @@
         </div>
         <div class="row justify-content-end">
             <div>
-                <a href="/program/export" class="btn btn-secondary btn-sm" v-show="!programStatus"
+                <a href="/program/export" class="btn btn-secondary btn-sm" v-show="!programStatus && !ban"
                     >Выгрузить программу</a
                 >
                 <label v-show="!programStatus"
@@ -235,7 +238,7 @@
                     class="btn btn-success btn-sm"
                     >Скачать PDF</a
                 >
-                <b-button class="btn btn-sm" @click="approveModal" v-show="!programStatus"
+                <b-button class="btn btn-sm" @click="approveModal" v-show="!programStatus && !ban"
                     >Отправить на согласование</b-button
                 >
             </div>
@@ -252,6 +255,7 @@ export default {
     data() {
         return {
             canAxios: false,
+            ban:false,
             programStatus:null,
             bannerInfo: [],
             loadProgress: null,
@@ -281,7 +285,8 @@ export default {
         getApprove(){
             Axios.get('/program/is-approve').then(response=>{
                 this.programStatus = response.data.p_status == '0' ? false : true ;
-                console.log(this.programStatus)
+                this.ban = response.data.ban == '0' ? false : true;
+                console.log(this.ban)
             });  
         },
         approveModal(){

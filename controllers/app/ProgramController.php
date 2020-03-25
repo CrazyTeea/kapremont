@@ -24,7 +24,7 @@ class ProgramController extends AppController
 
         $id_org = Yii::$app->session->get('user')->id_org;
 
-        $gg = Yii::$app->db->createCommand("SELECT p_status FROM program where id_org = {$id_org} ")->queryOne();
+        $gg = Yii::$app->db->createCommand("SELECT p_status,ban FROM program where id_org = {$id_org} ")->queryOne();
 
 
         return Json::encode($gg);
