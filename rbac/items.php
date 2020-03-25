@@ -32,6 +32,13 @@ return [
             '/app/program/index',
             '/app/program-objects/download-doc',
             '/app/development-programme/download-doc',
+            '/api/comment/index',
+            '/api/comment/view',
+            '/api/comment/create',
+            '/api/comment/update',
+            '/api/comment/delete',
+            '/api/comment/options',
+            '/api/comment/*',
         ],
     ],
     'orglist_view' => [
@@ -65,6 +72,27 @@ return [
         'type' => 2,
     ],
     '/app/development-programme/download-doc' => [
+        'type' => 2,
+    ],
+    '/api/comment/index' => [
+        'type' => 2,
+    ],
+    '/api/comment/view' => [
+        'type' => 2,
+    ],
+    '/api/comment/create' => [
+        'type' => 2,
+    ],
+    '/api/comment/update' => [
+        'type' => 2,
+    ],
+    '/api/comment/delete' => [
+        'type' => 2,
+    ],
+    '/api/comment/options' => [
+        'type' => 2,
+    ],
+    '/api/comment/*' => [
         'type' => 2,
     ],
 ];
