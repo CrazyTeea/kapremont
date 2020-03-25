@@ -15,7 +15,10 @@
         </b-modal>
         <div class="row">
             <div class="col-12">
-                <b-modal cancel-title="Отмена" centered :visible="!programStatus">
+                <b-modal cancel-title="Отмена" centered :visible="ban">
+                    Уважаемые пользователи! Сбор данных завершён. Доступ в систему закрыт
+                </b-modal>
+                <b-modal cancel-title="Отмена" centered :visible="!programStatus && !ban">
                     Уважаемые пользователи!
                     В связи с техническими работами на сервере возможность загрузки программы модернизации инфраструктуры образовательных организаций высшего образования
                     в формате pdf и её отправки на согласование в Минобрнауки России продлена до 23 марта 2020 года.
@@ -282,7 +285,7 @@ export default {
         getApprove(){
             Axios.get('/program/is-approve').then(response=>{
                 this.programStatus = response.data.p_status == '0' ? false : true ;
-                this.ban = response.data.ban == '0' ? true : false;
+                this.ban = response.data.ban == '0' ? false : true;
                 console.log(this.ban)
             });  
         },
