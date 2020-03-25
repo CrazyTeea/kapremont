@@ -82,6 +82,7 @@ $config = [
                     'pluralize' => false
                 ],
 
+                'api/comment/obj/<id:\d+>' => 'api/comment/obj',
                 'program'=>'app/program',
                 ''=>'app/program',
                 'login'=>'site/login',

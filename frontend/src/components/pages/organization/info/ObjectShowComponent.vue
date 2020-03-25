@@ -95,7 +95,7 @@
                 </div>
             </b-card-body>
         </b-card>
-        <v-comments :obj_id="obj_id" :user_id="user_id" />
+        <v-comments :obj_id="obj_id" />
     </div>
 </template>
 

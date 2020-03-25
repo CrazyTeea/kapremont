@@ -3,6 +3,7 @@ import VueRouter from "vue-router";
 import Atz from "./components/pages/program/atz/index.vue";
 import ListObject from "./components/pages/organization/info/ListObjectComponent.vue";
 import ObjView from "./components/pages/organization/info/ObjectShowComponent.vue";
+import ObjectsForKrestiane from "./components/pages/program/ObjectView/ViewComponent.vue"
 
 Vue.use(VueRouter);
 
@@ -80,6 +81,11 @@ const routes = [
         path: "/organization/obj/:id",
         name: "ObjView",
         component: ObjView
+    },
+    {
+        path: "/program/object/view/:id",
+        name: "ObjectsForKrestiane",
+        component: ObjectsForKrestiane
     }
 ];
 

@@ -177,7 +177,8 @@ class User extends ActiveRecord implements IdentityInterface
         $this->password_reset_token = null;
     }
 
-    public function getOrganization(){
+    public function getOrganization()
+    {
         return $this->hasOne(Organizations::className(),['id'=>'id_org']);
     }
 }
