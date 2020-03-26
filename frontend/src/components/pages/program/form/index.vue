@@ -562,9 +562,6 @@ export default {
                 }
             }).then(response => {
                 if (response.data.ProgramObjects) {
-                    console.log("ошибка");
-
-                    console.log(response.data);
                     let obj = response.data.ProgramObjects;
                     for (let item in obj) {
                         this.setBanner("danger", obj[item][0]);
@@ -577,7 +574,7 @@ export default {
                     }
                     this.errors = response.data;
                 }
-                // console.log(response)
+
             });
         },
         errorReport(message) {
@@ -614,7 +611,6 @@ export default {
         }
     },
     mounted() {
-        console.log(window.MODEL);
         this.requestPageData({ pageName: "objectCreate" });
         if (this.formData.id_region) this.requestCity({ id: this.formData.id_region });
     }

@@ -121,4 +121,8 @@ class ProgramObjects extends \yii\db\ActiveRecord
         return $this->hasMany(ObjectDocumentsList::class, ['id_object' => 'id'])->andOnCondition([ObjectDocumentsList::tableName().'.system_status'=>1]);
     }
 
+    public function getSvedenia(){
+        return $this->hasMany(ProgObjectsEvents::class,['id_object'=>'id']);
+    }
+
 }

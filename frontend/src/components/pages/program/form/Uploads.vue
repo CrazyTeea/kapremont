@@ -308,12 +308,10 @@ export default {
         isUniqueName(name) {
             for (let item of this.items) {
                 if (item.fileName === name) {
-                    // console.log("Имя не уникальное");
                     this.errorMessage("Файл с таким названием уже существует!");
                     return true;
                 }
             }
-            // console.log("Имя уникальное");
             return false;
         },
         checkFileExt(type) {
@@ -376,9 +374,7 @@ export default {
                 params: { descriptor: descriptor }
             }).then(res => {
                 this.items[index].fileName = null;
-                // console.log(res.data);
             });
-            // .catch(error => console.log(error));
         },
         async uploadFile(file, id) {
             let form = new FormData();
@@ -406,7 +402,6 @@ export default {
                     this.uploadSuccess &= !!res.data;
                 })
                 .catch(error => {
-                    // console.log(error);
                     this.uploadSuccess = false;
                 });
         },

@@ -216,12 +216,10 @@ export default {
     },
     methods: {
         ...mapActions(["requestPageData", "requestUser"]),
-        setSpinner() {},
-        getApprove() {
-            Axios.get("/program/is-approve").then(response => {
-                this.programStatus = response.data.p_status == "0" ? false : true;
-                this.ban = response.data.ban == "0" ? false : true;
-                console.log(this.ban);
+        getApprove(){
+            Axios.get('/program/is-approve').then(response=>{
+                this.programStatus = response.data.p_status !== '0' ;
+                this.ban = response.data.ban !== '0';
             });
         },
         approveModal() {
@@ -251,8 +249,7 @@ export default {
                     if (!response.data.status) {
                         this.errorReport(response.data.msg);
                     }
-                    console.log(this.programStatus);
-                });
+                })
             }
         },
         onRowClick(item) {
@@ -261,9 +258,14 @@ export default {
             }
         },
         rowCount(attr) {
-            if (attr == "resTable" && this.reservedObjects?.items) {
-                return this.reservedObjects.items.length > this.resTable.perPage;
-            } else if (attr == "prevTable" && this.priorityObjects?.items) return this.priorityObjects.items.length > this.prevTable.perPage;
+            if (attr === "resTable" && this.reservedObjects?.items) {
+                return (
+                    this.reservedObjects.items.length > this.resTable.perPage
+                );
+            } else if (attr === "prevTable" && this.priorityObjects?.items)
+                return (
+                    this.priorityObjects.items.length > this.prevTable.perPage
+                );
             else return false;
         },
         fileInput() {
@@ -280,7 +282,6 @@ export default {
             selector.value = null;
         },
         async uploadFileToYii(file) {
-            // return console.log(file)
             let form = new FormData();
             form.append("progFile", file);
             await Axios.post(`/program/add-doc/${this.id_org}`, form, {

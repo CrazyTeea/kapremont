@@ -77,7 +77,6 @@ export default {
         async refreshComments(id) {
             return Axios.get(`/api/comment/obj/${this.obj_id}`).then(res => {
                 this.allComments = res.data;
-                console.log(res);
             });
         },
         async deleteComment(id) {
@@ -98,7 +97,6 @@ export default {
             }).then(res => {
                 this.refreshComments();
                 this.newComment = "";
-                console.log(res);
             });
         }
     }

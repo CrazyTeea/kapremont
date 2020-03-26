@@ -138,7 +138,6 @@ export default {
     async mounted() {
         this.org_id = this.$route.params.id;
         await this.getCurentOrg();
-        console.log(this.programm);
     },
     computed: {
         waited_square() {

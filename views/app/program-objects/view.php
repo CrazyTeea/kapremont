@@ -62,26 +62,33 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
     <?=Accordion::widget([
-            'encodeLabels'=>true,
-            'itemToggleOptions'=>[
-                    'class'=>['btn', 'btn-default'],
-                'style'=>'   
+        'encodeLabels'=>true,
+        'itemToggleOptions'=>[
+            'class'=>['btn', 'btn-default'],
+            'style'=>'   
                  display: block;
     min-width: 100%;
     text-align: left;
     margin: 0;
     padding: 0 !important;'
+        ],
+        'items'=>[
+            [
+                'label'=>'Сведения о планируемых мероприятиях',
+                'content'=>$this->render('_svediniaView',compact('model'))
             ],
-            'items'=>[
-                    [
+            [
                 'label' => 'Загруженные файлы',
                 'content' => $this->render('_filesView',compact('docList','model')),
             ],
-            ]
+        ]
     ])?>
 
 
+
+
+    <div id="app"></div>
+
 </div>
 
-<div id="app">
-</div>
+
