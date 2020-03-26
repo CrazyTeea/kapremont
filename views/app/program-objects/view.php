@@ -82,3 +82,6 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 </div>
+
+<div id="app">
+</div>

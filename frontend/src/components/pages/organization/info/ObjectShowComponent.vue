@@ -85,7 +85,9 @@
             <b-card-body>
                 <div v-if="docs.length">
                     <ul>
-                        <li v-for="(doc, index) in docs" :key="index"><a :href="`/program/object/download-doc/${obj_id}?id=${doc.id}`">{{doc.name}}.pdf</a></li>
+                        <li v-for="(doc, index) in docs" :key="index">
+                            <a :href="`/program/object/download-doc/${obj_id}?id=${doc.id}`">{{ doc.name }}.pdf</a>
+                        </li>
                     </ul>
                 </div>
                 <div v-else>
@@ -93,32 +95,44 @@
                 </div>
             </b-card-body>
         </b-card>
+        <v-comments :obj_id="obj_id" />
     </div>
 </template>
 
 <script>
 import Axios from "axios";
+import { CommentComponent } from "../../../organisms";
+import {mapActions, mapGetters} from "vuex";
 export default {
+    components: {
+        "v-comments": CommentComponent
+    },
     data() {
         return {
             csrf: document.getElementsByName("csrf-token")[0].content,
             items: [],
             obj_id: null,
+            user_id: null,
             docs: []
         };
     },
-    mounted() {
+    computed: {
+        ...mapGetters(['getUser']),
+    },
+    async mounted() {
         this.obj_id = this.$route.params.id;
+        await this.requestUser();
+        this.user_id = this.getUser.organization.id
         this.getObject();
     },
     methods: {
+        ...mapActions(['requestUser']),
         getObject() {
             Axios.post(`/api/object/${this.obj_id}`, null, {
                 headers: {
                     "X-CSRF-Token": this.csrf
                 }
             }).then(res => {
-                console.log(res.data.docs);
                 this.items = res.data.obj[0];
                 this.docs = res.data.docs;
             });
