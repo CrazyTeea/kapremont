@@ -12,6 +12,7 @@ class AllController extends Controller
         $query = Yii::$app->db->createCommand("SELECT 
                 po.id_priority,
                 cities.city,
+                po.type
                 po.regulation,
                 po.assignment,
                 po.square,

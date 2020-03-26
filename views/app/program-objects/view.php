@@ -6,11 +6,11 @@ use yii\widgets\DetailView;
 
 
 $weara = [
-        'Менее 20%',
-      'От 20% до 50%',
-      'От 50% до 70%',
-      'От 70% до 90%',
-      'Более 90%'
+    'Менее 20%',
+    'От 20% до 50%',
+    'От 50% до 70%',
+    'От 70% до 90%',
+    'Более 90%'
 ];
 
 /* @var $this yii\web\View */
@@ -26,16 +26,16 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?php if ($canChange): ?>
-    <p>
-        <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Вы уверены?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+        <p>
+            <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => 'Вы уверены?',
+                    'method' => 'post',
+                ],
+            ]) ?>
+        </p>
     <?php endif; ?>
 
     <?= DetailView::widget([
@@ -65,17 +65,24 @@ $this->params['breadcrumbs'][] = $this->title;
         'encodeLabels'=>true,
         'itemToggleOptions'=>[
             'class'=>['btn', 'btn-default'],
-            'style'=>'   
-                 display: block;
-    min-width: 100%;
-    text-align: left;
-    margin: 0;
-    padding: 0 !important;'
+            'style'=>'display: block;min-width: 100%;text-align: left;margin: 0; padding: 0 !important;'
         ],
         'items'=>[
             [
                 'label'=>'Сведения о планируемых мероприятиях',
                 'content'=>$this->render('_svediniaView',compact('model'))
+            ],
+            [
+                'label'=>'Обоснование необходимости (целесообразности) планируемых мероприятий',
+                'content'=>$this->render('_nesView',compact('model'))
+            ],
+            [
+                'label'=>'Ожидаемые результаты',
+                'content'=>$this->render('_waitesView',compact('model'))
+            ],
+            [
+                'label'=>'Прогнозируемые риски',
+                'content'=>$this->render('_risksView',compact('model'))
             ],
             [
                 'label' => 'Загруженные файлы',

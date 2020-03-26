@@ -41,6 +41,7 @@ class OrganizationController extends AppController
         $query = Yii::$app->db->createCommand("
             SELECT 
                 po.id,
+                po.type,
                 po.id_priority,
                 cities.city,
                 po.name,
