@@ -78,6 +78,59 @@
             </b-tbody>
         </b-table-simple>
 
+        <b-card no-body class="mb-1">
+            <b-card-header header-tag="header" class="p-1" role="tab">
+                            <span class="toggle_button" v-b-toggle.accordion-2>
+                                <b-icon-gear-wide-connected />
+                                Сведения о планируемых мероприятиях</span
+                            >
+            </b-card-header>
+            <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
+                <b-card-body>
+                    <b-table bordered :fields="svedenia.fields" :items="svedenia.items" />
+                </b-card-body>
+            </b-collapse>
+        </b-card>
+        <b-card no-body class="mb-1">
+            <b-card-header header-tag="header" class="p-1" role="tab">
+                            <span class="toggle_button" v-b-toggle.accordion-3>
+                                <b-icon-gear-wide-connected />
+                                Обоснование необходимости (целесообразности) планируемых мероприятий</span
+                            >
+            </b-card-header>
+            <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
+                <b-card-body>
+                    3
+                </b-card-body>
+            </b-collapse>
+        </b-card>
+        <b-card no-body class="mb-1">
+            <b-card-header header-tag="header" class="p-1" role="tab">
+                            <span class="toggle_button" v-b-toggle.accordion-4>
+                                <b-icon-gear-wide-connected />
+                                Ожидаемые результаты</span
+                            >
+            </b-card-header>
+            <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel" visible>
+                <b-card-body>
+                    4
+                </b-card-body>
+            </b-collapse>
+        </b-card>
+        <b-card no-body class="mb-1">
+            <b-card-header header-tag="header" class="p-1" role="tab">
+                            <span class="toggle_button" v-b-toggle.accordion-5>
+                                <b-icon-gear-wide-connected />
+                                Прогнозируемые риски</span
+                            >
+            </b-card-header>
+            <b-collapse id="accordion-5" accordion="my-accordion" role="tabpanel">
+                <b-card-body>
+                    5
+                </b-card-body>
+            </b-collapse>
+        </b-card>
+
         <b-card no-body>
             <b-card-header header-tag="header" class="p-1" role="tab">
                 <span> <b-icon icon="document-text" scale="1.5" class="mr-2 ml-1"></b-icon>Загруженные документы</span>
@@ -109,11 +162,36 @@ export default {
     },
     data() {
         return {
+
             csrf: document.getElementsByName("csrf-token")[0].content,
             items: [],
             obj_id: null,
             user_id: null,
-            docs: []
+            docs: [],
+            svedenia: {
+                labels: [
+                    'Проведение тендера и заключение договора на выполнение обследования',
+                    'Выполнение обследования, подготовка и утверждение дефектного акта',
+                    'Утверждение задания на проектирование',
+                    'Проведение тендера и заключение договора на подготовку проектно-сметной документации',
+                    'Подготовка проектно-сметной документации',
+                    'Прохождение экспертизы проектно-сметной документации',
+                    'Проведение тендера и заключение договора на выполнение строительно-монтажных работ',
+                    'Выполнение строительно-монтажных работ'
+                ],
+                fromServer:{},
+                items:[],
+                fields:[
+                    {key:'index',label:'№'},
+                    {key:'step',label:'Этап'},
+                    {key:'is_nessesary',label:'Необходимость выполнения'},
+                    {key:'date_event_start',label:'Дата начала'},
+                    {key:'date_event_end',label:'Дата окончания'},
+                    {key:'cost_real',label:'Стоимость реализации (тыс.руб)'},
+                    {key:'sum_bud_fin',label:'Сумма бюджетного финансирования на проведение кап.ремонта (тыс.руб)'},
+                    {key:'fin_vnebud_ist',label:'Софинансирование из внебюджетных источников (тыс.руб)'},
+                ]
+            }
         };
     },
     computed: {
@@ -123,10 +201,40 @@ export default {
         this.obj_id = this.$route.params.id;
         await this.requestUser();
         this.user_id = this.getUser.organization.id;
-        this.getObject();
+        await this.getObject();
+        await this.getObject2();
     },
     methods: {
         ...mapActions(['requestUser']),
+        getObject2(){
+            Axios.get(`/api/get-object/${this.obj_id}`).then(res=>{
+                this.svedenia.fromServer = JSON.parse(res.data);
+                this.svedenia.fromServer = this.svedenia.fromServer.svedenia;
+                console.log(this.svedenia.fromServer);
+                let c=0.0, v=0.0,b=0.0;
+                this.svedenia.fromServer.forEach((item,index)=>{
+                    c+=Number(item.cost_real);
+                    v+=Number(item.sum_bud_fin);
+                    b+=Number(item.fin_vnebud_ist);
+                    this.svedenia.items.push({
+                        index:index+1,
+                        step:this.svedenia.labels[index],
+                        is_nessesary:item.is_nessesary ? 'Да' : 'Нет',
+                        date_event_start:item.date_event_start,
+                        date_event_end:item.date_event_end,
+                        cost_real:item.cost_real,
+                        sum_bud_fin:item.sum_bud_fin,
+                        fin_vnebud_ist:item.fin_vnebud_ist,
+                    })
+                });
+                this.svedenia.items.push({
+                    step:'Готово',
+                    cost_real:c.toFixed(3),
+                    sum_bud_fin:v.toFixed(3),
+                    fin_vnebud_ist:b.toFixed(3),
+                })
+            });
+        },
         getObject() {
             Axios.post(`/api/object/${this.obj_id}`, null, {
                 headers: {
