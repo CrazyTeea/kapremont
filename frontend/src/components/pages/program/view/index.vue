@@ -284,10 +284,9 @@ export default {
         ...mapActions(["requestPageData", "requestUser"]),
         getApprove(){
             Axios.get('/program/is-approve').then(response=>{
-                this.programStatus = response.data.p_status == '0' ? false : true ;
-                this.ban = response.data.ban == '0' ? false : true;
-                console.log(this.ban)
-            });  
+                this.programStatus = response.data.p_status !== '0' ;
+                this.ban = response.data.ban !== '0';
+            });
         },
         approveModal(){
             this.canAxios = false;
@@ -314,7 +313,6 @@ export default {
                     if (!response.data.status){
                         this.errorReport(response.data.msg);
                     }
-                    console.log(this.programStatus)
                 })
             }
         },
@@ -324,11 +322,11 @@ export default {
             }
         },
         rowCount(attr) {
-            if (attr == "resTable" && this.reservedObjects?.items) {
+            if (attr === "resTable" && this.reservedObjects?.items) {
                 return (
                     this.reservedObjects.items.length > this.resTable.perPage
                 );
-            } else if (attr == "prevTable" && this.priorityObjects?.items)
+            } else if (attr === "prevTable" && this.priorityObjects?.items)
                 return (
                     this.priorityObjects.items.length > this.prevTable.perPage
                 );
