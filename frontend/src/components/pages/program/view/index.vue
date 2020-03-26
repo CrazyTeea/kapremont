@@ -299,11 +299,11 @@ export default {
                 centered: true,
             }).then(value => {
                 this.canAxios = value;
-                this.setApprove();
+                console.log(value)
+                // this.setApprove();
             });
         },
         setApprove() {
-
             if (this.canAxios) {
                 Axios.post('/program/approve', null, {
                     headers: {
