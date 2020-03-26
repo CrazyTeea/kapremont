@@ -100,7 +100,7 @@
             </b-card-header>
             <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
                 <b-card-body>
-                    3
+
                 </b-card-body>
             </b-collapse>
         </b-card>
@@ -113,7 +113,7 @@
             </b-card-header>
             <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel" visible>
                 <b-card-body>
-                    4
+
                 </b-card-body>
             </b-collapse>
         </b-card>
@@ -126,7 +126,7 @@
             </b-card-header>
             <b-collapse id="accordion-5" accordion="my-accordion" role="tabpanel">
                 <b-card-body>
-                    5
+
                 </b-card-body>
             </b-collapse>
         </b-card>
