@@ -4,7 +4,6 @@ const VueLoaderPlugin = require('vue-loader/lib/plugin');
 const webpack = require('webpack');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
-//console.log(path.resolve(__dirname, '../web/build/'), '11111111');
 module.exports = {
     entry: './src/main.js',
     output: {
