@@ -119,7 +119,7 @@ $config = [
                 'api/mgsu/count' => '/app/mgsu-admin/count',
 
 
-
+                'api/get-object/<id:\d+>'=>'/rest/program-objects/by-id',
 
                 'api/org-table/<id:\d+>' => '/app/organization/table-list',
                 'api/object/<id:\d+>' => '/app/organization/get-object-by-id'
