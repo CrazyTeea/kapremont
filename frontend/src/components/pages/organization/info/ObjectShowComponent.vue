@@ -122,7 +122,7 @@ export default {
     async mounted() {
         this.obj_id = this.$route.params.id;
         await this.requestUser();
-        this.user_id = this.getUser.organization.id
+        this.user_id = this.getUser.organization.id;
         this.getObject();
     },
     methods: {
