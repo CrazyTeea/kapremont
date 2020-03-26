@@ -108,21 +108,53 @@ class ProgramObjects extends \yii\db\ActiveRecord
             'last_exploit_year'=>'Год проведения последнего капитального ремонта/реконструкции'
         ];
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getRegion(){
         return $this->hasOne(Regions::className(),['id'=>'id_region']);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getOrg(){
         return $this->hasOne(Organizations::className(),['id'=>'id_org']);
     }
 
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getDocList()
     {
         return $this->hasMany(ObjectDocumentsList::class, ['id_object' => 'id'])->andOnCondition([ObjectDocumentsList::tableName().'.system_status'=>1]);
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getNecessary(){
         return $this->hasMany(ProObjectsNecessary::class,['id_object'=>'id']);
     }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getWaites(){
+        return $this->hasMany(ProgObjectsWaites::class,['id_object'=>'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
+    public function getRisks(){
+        return $this->hasMany(ProgObjectsRiscs::class,['id_object'=>'id']);
+    }
+
+    /**
+     * @return \yii\db\ActiveQuery
+     */
     public function getSvedenia(){
         return $this->hasMany(ProgObjectsEvents::class,['id_object'=>'id']);
     }

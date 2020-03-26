@@ -77,6 +77,14 @@ $this->params['breadcrumbs'][] = $this->title;
                 'content'=>$this->render('_nesView',compact('model'))
             ],
             [
+                'label'=>'Ожидаемые результаты',
+                'content'=>$this->render('_waitesView',compact('model'))
+            ],
+            [
+                'label'=>'Прогнозируемые риски',
+                'content'=>$this->render('_risksView',compact('model'))
+            ],
+            [
                 'label' => 'Загруженные файлы',
                 'content' => $this->render('_filesView',compact('docList','model')),
             ],
