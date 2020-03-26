@@ -2,14 +2,9 @@
     <div id="dev_programme">
         <b-modal centered id="modal-1" title="Внимание">
             <p class="my-4">
-                Уважаемые пользователи! В связи с техническими работами на
-                сервере возможность загрузки программы модернизации
-                инфраструктуры образовательных организаций высшего образования
-                (далее - программа) в формате pdf и отправка на согласование в
-                Минобрнауки России будет доступна с 13 марта 2020 года. Срок
-                направления программы на согласование с Минобрнауки России будет
-                продлён до 20 марта 2020 года. Официальное письмо о продлении
-                срока представления программы в Минобрнауки России:
+                Уважаемые пользователи! В связи с техническими работами на сервере возможность загрузки программы модернизации инфраструктуры образовательных организаций высшего образования (далее -
+                программа) в формате pdf и отправка на согласование в Минобрнауки России будет доступна с 13 марта 2020 года. Срок направления программы на согласование с Минобрнауки России будет
+                продлён до 20 марта 2020 года. Официальное письмо о продлении срока представления программы в Минобрнауки России:
                 <a href="/baner.pdf" target="_blank">MN-17_90</a> .
             </p>
         </b-modal>
@@ -19,9 +14,8 @@
                     Уважаемые пользователи! Сбор данных завершён. Доступ в систему закрыт
                 </b-modal>
                 <b-modal cancel-title="Отмена" centered :visible="!programStatus && !ban">
-                    Уважаемые пользователи!
-                    В связи с техническими работами на сервере возможность загрузки программы модернизации инфраструктуры образовательных организаций высшего образования
-                    в формате pdf и её отправки на согласование в Минобрнауки России продлена до 23 марта 2020 года.
+                    Уважаемые пользователи! В связи с техническими работами на сервере возможность загрузки программы модернизации инфраструктуры образовательных организаций высшего образования в
+                    формате pdf и её отправки на согласование в Минобрнауки России продлена до 23 марта 2020 года.
                 </b-modal>
             </div>
             <div class="col-6">
@@ -35,29 +29,18 @@
                         {
                             id: '1',
                             label: 'Полное наименование организации',
-                            value:
-                                getUser &&
-                                getUser.organization &&
-                                getUser.organization.name
+                            value: getUser && getUser.organization && getUser.organization.name
                         },
                         {
                             id: '2',
                             label: 'Сокращенное наименование организации',
-                            value:
-                                getUser &&
-                                getUser.organization &&
-                                getUser.organization.short_name
+                            value: getUser && getUser.organization && getUser.organization.short_name
                         }
                     ]"
                     small
                     bordered
                 />
-                <b-button
-                    class="btn btn-sm"
-                    style="float: right"
-                    href="/organization/info"
-                    >Подробнее</b-button
-                >
+                <b-button class="btn btn-sm" style="float: right" href="/organization/info">Подробнее</b-button>
             </div>
 
             <div class="col-4 offset-2">
@@ -67,12 +50,8 @@
         <br />
         <div class="row">
             <div class="col-6">
-                <b-button variant="info" href="object/create" v-show="!programStatus && !ban"
-                    >Добавить объект кап. ремонта</b-button
-                >
-                <b-button variant="info" href="atz" v-show="!programStatus && !ban"
-                    >Добавить мероприятия по АТЗ</b-button
-                >
+                <b-button variant="info" href="object/create" v-show="!programStatus && !ban">Добавить объект кап. ремонта</b-button>
+                <b-button variant="info" href="atz" v-show="!programStatus && !ban">Добавить мероприятия по АТЗ</b-button>
             </div>
             <div class="col-6"></div>
         </div>
@@ -80,10 +59,7 @@
         <div class="row">
             <b-card no-body>
                 <b-card-header header-tag="header" class="p-1" role="tab">
-                    <span>
-                        <b-icon-gear-wide-connected />Объекты требующие
-                        капитального ремонта
-                    </span>
+                    <span> <b-icon-gear-wide-connected />Объекты требующие капитального ремонта </span>
                 </b-card-header>
                 <b-card-body>
                     <b-card-text>Приоритетные объекты</b-card-text>
@@ -99,12 +75,7 @@
                         bordered
                         hover
                     />
-                    <b-pagination
-                        v-show="rowCount('prevTable')"
-                        :per-page="prevTable.perPage"
-                        v-model="prevTable.curPage"
-                        :total-rows="rowsPrev"
-                    />
+                    <b-pagination v-show="rowCount('prevTable')" :per-page="prevTable.perPage" v-model="prevTable.curPage" :total-rows="rowsPrev" />
                     <b-card-text>Резервные объекты</b-card-text>
                     <b-table
                         class="text-center"
@@ -118,12 +89,7 @@
                         bordered
                         hover
                     />
-                    <b-pagination
-                        v-show="rowCount('resTable')"
-                        :per-page="resTable.perPage"
-                        v-model="resTable.curPage"
-                        :total-rows="resPrev"
-                    />
+                    <b-pagination v-show="rowCount('resTable')" :per-page="resTable.perPage" v-model="resTable.curPage" :total-rows="resPrev" />
                 </b-card-body>
             </b-card>
 
@@ -195,52 +161,20 @@
         <div class="mt-3">
             <div class="row">
                 <div class="col-12">
-                    <b-alert
-                        v-for="(banner, index) in bannerInfo"
-                        :key="index"
-                        :show="banner.show"
-                        :variant="banner.variant"
-                        dismissible
-                        fade
-                        >{{ banner.message }}</b-alert
-                    >
+                    <b-alert v-for="(banner, index) in bannerInfo" :key="index" :show="banner.show" :variant="banner.variant" dismissible fade>{{ banner.message }}</b-alert>
                 </div>
             </div>
         </div>
         <div class="row justify-content-end">
             <div>
-                <a href="/program/export" class="btn btn-secondary btn-sm" v-show="!programStatus && !ban"
-                    >Выгрузить программу</a
-                >
-                <label v-show="!programStatus"
-                    for="file_input_pdf_main"
-                    v-if="buttons.upload"
-                    class="btn btn-info btn-sm mt-2"
-                    >Загрузить PDF</label
-                >
-                <input v-show="!programStatus"
-                    type="file"
-                    id="file_input_pdf_main"
-                    class="hidden-file-input"
-                    @input="fileInput()"
-                />
+                <a href="/program/export" @click="setSpinner()" class="btn btn-secondary btn-sm" v-show="!programStatus && !ban">Выгрузить программу</a>
+                <label v-show="!programStatus" for="file_input_pdf_main" v-if="buttons.upload" class="btn btn-info btn-sm mt-2">Загрузить PDF</label>
+                <input v-show="!programStatus" type="file" id="file_input_pdf_main" class="hidden-file-input" @input="fileInput()" />
                 <!-- <b-button class="btn btn-sm btn-info" for="file_input_pdf_main">Загрузить PDF</b-button> -->
-                <b-button v-show="!programStatus"
-                    v-if="buttons.delete"
-                    class="btn btn-sm btn-danger"
-                    @click="deleteFileFromYii()"
-                    >Удалить PDF</b-button
-                >
+                <b-button v-show="!programStatus" v-if="buttons.delete" class="btn btn-sm btn-danger" @click="deleteFileFromYii()">Удалить PDF</b-button>
 
-                <a
-                    :href="'/program/download-doc/' + id_org"
-                    v-if="buttons.save"
-                    class="btn btn-success btn-sm"
-                    >Скачать PDF</a
-                >
-                <b-button class="btn btn-sm" @click="approveModal" v-show="!programStatus && !ban"
-                    >Отправить на согласование</b-button
-                >
+                <a :href="'/program/download-doc/' + id_org" v-if="buttons.save" class="btn btn-success btn-sm">Скачать PDF</a>
+                <b-button class="btn btn-sm" @click="approveModal" v-show="!programStatus && !ban">Отправить на согласование</b-button>
             </div>
         </div>
     </div>
@@ -255,8 +189,8 @@ export default {
     data() {
         return {
             canAxios: false,
-            ban:false,
-            programStatus:null,
+            ban: false,
+            programStatus: null,
             bannerInfo: [],
             loadProgress: null,
             buttons: {
@@ -282,40 +216,43 @@ export default {
     },
     methods: {
         ...mapActions(["requestPageData", "requestUser"]),
-        getApprove(){
-            Axios.get('/program/is-approve').then(response=>{
-                this.programStatus = response.data.p_status == '0' ? false : true ;
-                this.ban = response.data.ban == '0' ? false : true;
-                console.log(this.ban)
-            });  
-        },
-        approveModal(){
-            this.canAxios = false;
-            this.$bvModal.msgBoxConfirm('Редактирование программы модернизации ифраструктуры будет временно заблокировано',{
-                title: 'Подтверждение действий.',
-                okTitle: 'Да',
-                okVariant: 'danger',
-                cancelTitle: 'Нет',
-                centered: true,
-            }).then(value => {
-                this.canAxios = value;
-                console.log(value)
-                // this.setApprove();
+        setSpinner() {},
+        getApprove() {
+            Axios.get("/program/is-approve").then(response => {
+                this.programStatus = response.data.p_status == "0" ? false : true;
+                this.ban = response.data.ban == "0" ? false : true;
+                console.log(this.ban);
             });
+        },
+        approveModal() {
+            this.canAxios = false;
+            this.$bvModal
+                .msgBoxConfirm("Редактирование программы модернизации ифраструктуры будет временно заблокировано", {
+                    title: "Подтверждение действий.",
+                    okTitle: "Да",
+                    okVariant: "danger",
+                    cancelTitle: "Нет",
+                    centered: true
+                })
+                .then(value => {
+                    this.canAxios = value;
+                    console.log(value);
+                    // this.setApprove();
+                });
         },
         setApprove() {
             if (this.canAxios) {
-                Axios.post('/program/approve', null, {
+                Axios.post("/program/approve", null, {
                     headers: {
-                        "X-CSRF-Token": this.csrf,
+                        "X-CSRF-Token": this.csrf
                     }
                 }).then(response => {
                     this.programStatus = response.data.programStatus;
-                    if (!response.data.status){
+                    if (!response.data.status) {
                         this.errorReport(response.data.msg);
                     }
-                    console.log(this.programStatus)
-                })
+                    console.log(this.programStatus);
+                });
             }
         },
         onRowClick(item) {
@@ -325,13 +262,8 @@ export default {
         },
         rowCount(attr) {
             if (attr == "resTable" && this.reservedObjects?.items) {
-                return (
-                    this.reservedObjects.items.length > this.resTable.perPage
-                );
-            } else if (attr == "prevTable" && this.priorityObjects?.items)
-                return (
-                    this.priorityObjects.items.length > this.prevTable.perPage
-                );
+                return this.reservedObjects.items.length > this.resTable.perPage;
+            } else if (attr == "prevTable" && this.priorityObjects?.items) return this.priorityObjects.items.length > this.prevTable.perPage;
             else return false;
         },
         fileInput() {
@@ -343,10 +275,7 @@ export default {
             }
 
             // let message = `Файл ${file.name} загружается ${this.loadProgress}%`;
-            this.setBanner(
-                "primary",
-                `Файл ${file.name} загружается ${this.loadProgress}%`
-            );
+            this.setBanner("primary", `Файл ${file.name} загружается ${this.loadProgress}%`);
             this.uploadFileToYii(file);
             selector.value = null;
         },
@@ -360,9 +289,7 @@ export default {
                     "Content-Type": "multipart/form-data;"
                 },
                 onUploadProgress: itemUpload => {
-                    this.loadProgress = Math.round(
-                        (itemUpload.loaded / itemUpload.total) * 100
-                    );
+                    this.loadProgress = Math.round((itemUpload.loaded / itemUpload.total) * 100);
                 }
             }).then(res => {
                 if (res.data) {
@@ -372,10 +299,7 @@ export default {
                     this.buttons.delete = true;
                     this.buttons.upload = false;
                 } else {
-                    this.setBanner(
-                        "danger",
-                        "При загрузке файла произошла ошибка, напишите в службу поддержки"
-                    );
+                    this.setBanner("danger", "При загрузке файла произошла ошибка, напишите в службу поддержки");
                 }
             });
         },
@@ -383,7 +307,7 @@ export default {
             if (ext === "application/pdf") {
                 return true;
             }
-            this.setBanner('danger', 'Файл не является документом pdf!');
+            this.setBanner("danger", "Файл не является документом pdf!");
             return false;
         },
         setBanner(variant, message) {
@@ -412,10 +336,7 @@ export default {
                     this.buttons.delete = false;
                     this.buttons.upload = true;
                 } else {
-                    this.setBanner(
-                        "danger",
-                        "При удалении файла произошла ошибка, напишите в службу поддержки"
-                    );
+                    this.setBanner("danger", "При удалении файла произошла ошибка, напишите в службу поддержки");
                 }
             });
         },
@@ -471,16 +392,10 @@ export default {
             return this.getPageData && this.getPageData.target;
         },
         rowsPrev() {
-            return (
-                this.getPageData.priorityObjects &&
-                this.getPageData.priorityObjects.items.length
-            );
+            return this.getPageData.priorityObjects && this.getPageData.priorityObjects.items.length;
         },
         resPrev() {
-            return (
-                this.getPageData.reservedObjects &&
-                this.getPageData.reservedObjects.items.length
-            );
+            return this.getPageData.reservedObjects && this.getPageData.reservedObjects.items.length;
         }
     }
 };

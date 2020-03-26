@@ -5,10 +5,24 @@ import router from "./router";
 import platform from "platform";
 import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
 import "../src/styles";
+import Axios from "axios";
 // Install BootstrapVue
 Vue.use(BootstrapVue);
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin);
+
+Vue.directive("can", {
+    bind(element, binding) {
+        let style = element.style.display 
+        element.style.display = "none";
+        Axios.get("/api/permissions").then(res => {
+            console.log("пермишн");
+            if (res.data === binding.arg) {
+                element.style.display = style;
+            }
+        });
+    }
+});
 
 const browser = [
     { name: "Chrome", version: 79 },

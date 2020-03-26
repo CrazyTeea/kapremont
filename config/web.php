@@ -81,7 +81,7 @@ $config = [
                     'controller' => 'api/comment',
                     'pluralize' => false
                 ],
-
+                'api/permissions' => 'api/permission/permissions',
                 'api/comment/obj/<id:\d+>' => 'api/comment/obj',
                 'program'=>'app/program',
                 ''=>'app/program',
