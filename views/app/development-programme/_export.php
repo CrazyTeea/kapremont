@@ -450,6 +450,7 @@ function getSum($arr,$i_o,$attr){
             <thead>
             <tr class="text-center">
                 <th class="text-center">№ п/п</th>
+                <th class="text-center">Тип</th>
                 <th class="text-center">Приоритет
                     (1,2,3)
                 </th>
@@ -476,6 +477,7 @@ function getSum($arr,$i_o,$attr){
             ?>
                 <tr>
                     <td><?=++$index ?></td>
+                    <td>Приоритетный</td>
                     <td><?= $prior[$item->id_priority ? : 1] ?></td>
                     <td><?php $reg = Regions::findOne($item->id_region); echo $reg ? $reg->region : ' ' ?></td>
                     <td><?=$item->kad_number ?></td>
@@ -517,6 +519,7 @@ function getSum($arr,$i_o,$attr){
             <thead>
             <tr class="text-center">
                 <th class="text-center">№ п/п</th>
+                <th class="text-center">Тип</th>
                 <th class="text-center">Приоритет
                     (1,2,3)
                 </th>
@@ -543,6 +546,7 @@ function getSum($arr,$i_o,$attr){
                 ?>
                 <tr>
                     <td><?=++$index ?></td>
+                    <td>Резервный</td>
                     <td><?= $prior[$item->id_priority ? : 1] ?></td>
                     <td><?php $reg = Regions::findOne($item->id_region); echo $reg ? $reg->region : ' ' ?></td>
                     <td><?=$item->kad_number ?></td>

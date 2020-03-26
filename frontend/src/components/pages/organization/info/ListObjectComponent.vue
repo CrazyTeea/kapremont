@@ -53,6 +53,7 @@
                     <b-thead>
                         <b-tr>
                             <b-th>№</b-th>
+                            <b-th>Тип</b-th>
                             <b-th>Приоритет</b-th>
                             <b-th>Субъект РФ</b-th>
                             <b-th>Наименование объекта, требующего кап. ремонта</b-th>
@@ -72,6 +73,9 @@
                         <b-tr v-for="(item, index) in items" :key="index" @click="goToObj(item.id)">
                             <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
                                 <label class="cursor-pointer">{{ index + 1 }}</label>
+                            </b-th>
+                            <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
+                                <label class="cursor-pointer">{{ item.type == '1' ? 'Резервный' : 'Приоритетный' }}</label>
                             </b-th>
                             <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
                                 <label class="cursor-pointer">{{ item.id_priority }}</label>
