@@ -20,8 +20,7 @@ export default {
     async mounted() {
         this.obj_id = this.$route.params.id;
         await this.requestUser();
-        this.user_id = this.getUser.organization.id
-        console.log(this.getUser);
+        this.user_id = this.getUser.organization.id;
     },
     computed: {
         ...mapGetters(["getUser"])

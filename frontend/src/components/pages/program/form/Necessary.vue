@@ -166,7 +166,6 @@ export default {
     },
     methods: {
         onInput(index) {
-            // console.log(this.items[index].obosnovanie)
             if (this.items[index].obosnovanie.length >= 255) {
                 this.reportErrors(
                     "Достигнуто максимальное количество символов (255 символов)"

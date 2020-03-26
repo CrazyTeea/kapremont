@@ -349,7 +349,6 @@ export default {
             selector.value = null;
         },
         async uploadFileToYii(file) {
-            // return console.log(file)
             let form = new FormData();
             form.append("progFile", file);
             await Axios.post(`/program/add-doc/${this.id_org}`, form, {
