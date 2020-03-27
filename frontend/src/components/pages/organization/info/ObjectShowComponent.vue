@@ -1,7 +1,15 @@
 <template>
     <div>
         <h1 class="mt-3">{{ this.items.name }}</h1>
-        <b-table-simple bordered hover class="mt-5">
+        <div class="d-flex justify-content-between align-items-center">
+            <h3 class="vertcal-gorizontal-align">Текущий статус: <label :class="`text-${status.variant}`">{{ status.label }}</label></h3>
+            <b-dropdown id="dropdown-left" right  text="Изменить статус" variant="info" class="m-2">
+                <b-dropdown-item :href="`/api/set-status/recomend/${obj_id}`" variant="success">Рекомендуется к согласованию</b-dropdown-item>
+                <b-dropdown-item :href="`/api/set-status/not-recomend/${obj_id}`" variant="danger">Не рекомендуется к согласованию</b-dropdown-item>
+                <b-dropdown-item :href="`/api/set-status/to-work/${obj_id}`" variant="warning">На доработку</b-dropdown-item>
+            </b-dropdown>
+        </div>
+        <b-table-simple bordered hover class="mt-3">
             <b-tbody>
                 <b-tr>
                     <b-th class="center-text-in-cell">
@@ -98,7 +106,7 @@
                                 Обоснование необходимости (целесообразности) планируемых мероприятий</span
                             >
             </b-card-header>
-            <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
+            <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel" visible>
                 <b-card-body>
                     <b-table bordered :fields="necessary.fields.one" :items="necessary.items.one" />
                     <b-table bordered :fields="necessary.fields.two" :items="necessary.items.two" />
@@ -112,7 +120,7 @@
                                 Ожидаемые результаты</span
                             >
             </b-card-header>
-            <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel" visible>
+            <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
                 <b-card-body>
                     <b-table bordered :fields="waited.fields" :items="waited.items" />
                 </b-card-body>
@@ -172,7 +180,10 @@ export default {
     },
     data() {
         return {
-
+            status: {
+                label: '',
+                variant: ''
+            },
             csrf: document.getElementsByName("csrf-token")[0].content,
             items: [],
             obj_id: null,
@@ -285,11 +296,17 @@ export default {
     async mounted() {
         this.obj_id = this.$route.params.id;
         await this.requestUser();
+        await this.getStatus();
         this.user_id = this.getUser.organization.id;
         await this.getObject();
+
+        // console.log(this.obj_id)
         //await this.getObject2();
     },
     methods: {
+        actionStatus() {
+            console.log('выбран экшн')
+        },
         ...mapActions(['requestUser']),
         getEl(arr,index){
             let el = null;
@@ -301,13 +318,29 @@ export default {
             });
             return el;
         },
+        async getStatus() {
+            Axios.get(`/api/get-status/${this.obj_id}`).then((res) =>{
+                this.status.label = res.data.label;
+                let color = '';
+                if(res.data.id == 1) {
+                    color = 'secondary'
+                } else if (res.data.id == 2) {
+                    color = 'success'
+                } else if (res.data.id == 3) {
+                    color = 'danger'
+                } else if (res.data.id == 4) {
+                    color = 'warning '
+                }
+                this.status.variant = color;
+                console.log(res)
+            })
+        },
         getObject(){
             Axios.get(`/api/get-object/${this.obj_id}`).then(res=>{
                 this.fromServer = JSON.parse(res.data);
                 this.items = this.fromServer.object;
                 this.items.org_name = this.fromServer.organization.name;
                 this.docs = this.fromServer.docs;
-                console.log(this.fromServer);
 
 
                 let c=0.0, v=0.0,b=0.0;
@@ -445,3 +478,13 @@ export default {
     }
 };
 </script>
+
+<style>
+.normal-font-weight-for-sell {
+    font-weight: normal !important;
+}
+.vertcal-gorizontal-align {
+    vertical-align: middle !important;
+    text-align: center;
+}
+</style>

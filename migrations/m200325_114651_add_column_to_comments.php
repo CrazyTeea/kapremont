@@ -12,7 +12,7 @@ class m200325_114651_add_column_to_comments extends Migration
      */
     public function safeUp()
     {
-        $this->addColumn('comments', 'created_at','datetime DEFAULT NOW()'); //->notNull()->defaultValue();
+        $this->addColumn('comments', 'created_at','datetime DEFAULT NOW()');
 
     }
 

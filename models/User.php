@@ -183,8 +183,8 @@ class User extends ActiveRecord implements IdentityInterface
         return $this->hasOne(Organizations::className(),['id'=>'id_org']);
     }
 
-    public static function getRoleById($id){
-        $rbac = new PhpManager();
-        return $rbac->getRolesByUser($id);
+    public static function getRole($id)
+    {
+        return (new PhpManager())->getRolesByUser($id);
     }
 }

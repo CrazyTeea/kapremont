@@ -3,10 +3,12 @@
 
 namespace app\controllers\app;
 
-
+use app\models\ApproveStatus;
 use app\models\Organizations;
 use app\models\OrgInfo;
 use app\models\Program;
+use app\models\ProgramObjects;
+use app\models\User;
 use Yii;
 use yii\helpers\Json;
 
@@ -71,6 +73,49 @@ class OrganizationController extends AppController
     public function actionObjectView($id)
     {
         return $this->render('ObjectView');
+    }
+
+    public function actionSetRecomendStatus($obj_id)
+    {
+        $this->setStatus($obj_id, ApproveStatus::STATUS_RECOMEND);
+
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function actionSetNotRecomendStatus($obj_id)
+    {
+        $this->setStatus($obj_id, ApproveStatus::STATUS_NOT_RECOMEND);
+
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function actionSetToWorkStatus($obj_id)
+    {
+        $this->setStatus($obj_id, ApproveStatus::STATUS_TO_WORK);
+
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    private function setStatus($obj_id, $status)
+    {
+        if(Yii::$app->getUser()->can('mgsu')) {
+            $object = ProgramObjects::findOne($obj_id);
+            $object->status = $status;
+            $object->save(false);
+            return true;
+        }
+    }
+
+    public function actionGetApproveStatus($obj_id)
+    {
+        // $query = ProgramObjects::findOne($obj_id)->astatus; 
+        // echo "<pre>";
+        // print_r($query);
+        
+        return json_encode([
+            'label' => ProgramObjects::findOne($obj_id)->astatus->label,
+            'id' => ProgramObjects::findOne($obj_id)->astatus->id
+        ]);
     }
 
 }

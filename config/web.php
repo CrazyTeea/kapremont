@@ -82,6 +82,12 @@ $config = [
                     'pluralize' => false
                 ],
 
+                'api/set-status/recomend/<obj_id:\d+>' => '/app/organization/set-recomend-status',
+                'api/set-status/not-recomend/<obj_id:\d+>' => '/app/organization/set-not-recomend-status',
+                'api/set-status/to-work/<obj_id:\d+>' => '/app/organization/set-to-work-status',
+                'api/get-status/<obj_id:\d+>' => 'app/organization/get-approve-status',
+
+                'api/permissions' => 'api/permission/permissions',
                 'api/comment/obj/<id:\d+>' => 'api/comment/obj',
                 'program'=>'app/program',
                 ''=>'app/program',
