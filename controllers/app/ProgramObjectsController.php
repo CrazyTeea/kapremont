@@ -13,10 +13,12 @@ use app\models\ProObjectsNecessary;
 use Yii;
 use app\models\ProgramObjects;
 use yii\helpers\ArrayHelper;
+use yii\helpers\FileHelper;
 use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use ZipArchive;
 
 /**
  * ProgramObjectsController implements the CRUD actions for ProgramObjects model.
@@ -45,6 +47,35 @@ class ProgramObjectsController extends AppController
     public function actionIndex()
     {
         return $this->render('index');
+    }
+
+    /**
+     * @param $id
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \yii\base\Exception
+     */
+    public function actionZip($id){
+        $model = $this->findModel($id);
+        $zip = new ZipArchive();
+        $path = Yii::getAlias( '@webroot' ) . "/uploads/$id/";
+        if (!file_exists($path))
+            FileHelper::createDirectory($path);
+        $zip->open("{$path}files.zip",ZipArchive::CREATE);
+        foreach ($model->docList as $doc){
+            $path = Yii::getAlias( '@webroot' ) . "/uploads/$id/{$doc->file->name}.{$doc->file->ext}";
+            if (file_exists($path)){
+                $zip->addFile($path,"{$doc->file->name}.{$doc->file->ext}");
+            }
+        }
+        $zip->close();
+        $path = Yii::getAlias( '@webroot' ) . "/uploads/$id/files.zip";
+        if (file_exists($path)) {
+            Yii::$app->response->sendFile($path)->send();
+            unlink($path);
+        }
+
+        return "Что не так с файлами, обратитесь в тех поддержку. ID объекта $id";
     }
 
     /**

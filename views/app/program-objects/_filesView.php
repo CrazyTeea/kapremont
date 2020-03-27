@@ -6,12 +6,24 @@
 use yii\bootstrap4\Html;
 ?>
 
-<ul>
-    <?php foreach ($docList as $doc):?>
 
-            <li>
-                <?=  Html::a($doc->file->name,"/program/object/download-doc/$model->id?id={$doc->file->id}")?>
-            </li>
+    <table class="table-bordered table">
+        <thead>
+        <tr>
+            <th>Наименование</th>
+            <th>Файл</th>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach ($docList as $doc):?>
 
-    <?php endforeach;?>
-</ul>
+            <tr>
+                <td><?=$doc->type->label?></td>
+                <td><?=  Html::a($doc->file->name,"/program/object/download-doc/$model->id?id={$doc->file->id}")?></td>
+            </tr>
+
+        <?php endforeach;?>
+        </tbody>
+    </table>
+    <a class="btn btn-danger" target="_blank" href="/program/object/zip/<?=$model->id?>">Скачать архивом</a>
+
