@@ -40,6 +40,8 @@ use Yii;
  * @property int $type_remont
  * @property string|null $osn_isp_zdan
  * @property int $last_exploit_year
+ * @property int $status
+ * @var $docList ObjectDocumentsList[]
  */
 class ProgramObjects extends \yii\db\ActiveRecord
 {

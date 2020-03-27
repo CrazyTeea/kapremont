@@ -107,21 +107,20 @@ $config = [
                 'organization/list'=>'app/organization/list',
                 'organization/list/<id:\d+>' => 'app/organization/list-object',
                 'organization/obj/<id:\d+>' => 'app/organization/object-view',
-
                 'organization/info'=>'app/organization/info',
                 'organization/update/<id:\d+>'=>'app/organization/update',
                 'program/atz' => 'app/atz/index',
+                'check' => 'app/mgsu-admin/view',
+
                 'api/fileUpload' => '/rest/upload/upload',
                 'api/fileRemove' => '/rest/upload/delete',
-
-                'check' => 'app/mgsu-admin/view',
-                
                 'api/mgsu/main-table/<offset:\d+>'=> '/app/mgsu-admin/main-table',
                 'api/mgsu/count' => '/app/mgsu-admin/count',
-
-
+                'api/object/get-status/<id:\d+>'=>'/rest/program-objects/get-status',
                 'api/get-object/<id:\d+>'=>'/rest/program-objects/by-id',
 
+
+                //НАДО ПЕРЕДЕЛАТЬ
                 'api/org-table/<id:\d+>' => '/app/organization/table-list',
                 //'api/object/<id:\d+>' => '/app/organization/get-object-by-id'
             ],

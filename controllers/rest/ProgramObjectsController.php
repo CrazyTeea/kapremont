@@ -32,4 +32,8 @@ class ProgramObjectsController extends RestController
         }
         return null;
     }
+    public function actionGetStatus($id){
+        $model = ProgramObjects::findOne($id);
+        return Json::encode($model->status);
+    }
 }
