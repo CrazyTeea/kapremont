@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1 class="mt-3">{{ this.items.poname }}</h1>
+        <h1 class="mt-3">{{ this.items.name }}</h1>
         <b-table-simple bordered hover class="mt-5">
             <b-tbody>
                 <b-tr>
@@ -16,7 +16,7 @@
                         <label>Наименование организации</label>
                     </b-th>
                     <b-th class="normal-font-weight-for-sell center-text-in-cell">
-                        <label>{{ this.items.name }}</label>
+                        <label>{{ this.items.org_name }}</label>
                     </b-th>
                 </b-tr>
                 <b-tr>
@@ -24,7 +24,7 @@
                         <label>Наименование</label>
                     </b-th>
                     <b-th class="normal-font-weight-for-sell center-text-in-cell">
-                        <label>{{ this.items.poname }}</label>
+                        <label>{{ this.items.name }}</label>
                     </b-th>
                 </b-tr>
                 <b-tr>
@@ -100,7 +100,7 @@
             </b-card-header>
             <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
                 <b-card-body>
-
+                    <b-table bordered :fields="necessary.fields" :items="necessary.items" />
                 </b-card-body>
             </b-collapse>
         </b-card>
@@ -168,6 +168,7 @@ export default {
             obj_id: null,
             user_id: null,
             docs: [],
+            fromServer:{},
             svedenia: {
                 labels: [
                     'Проведение тендера и заключение договора на выполнение обследования',
@@ -179,7 +180,6 @@ export default {
                     'Проведение тендера и заключение договора на выполнение строительно-монтажных работ',
                     'Выполнение строительно-монтажных работ'
                 ],
-                fromServer:{},
                 items:[],
                 fields:[
                     {key:'index',label:'№'},
@@ -191,7 +191,54 @@ export default {
                     {key:'sum_bud_fin',label:'Сумма бюджетного финансирования на проведение кап.ремонта (тыс.руб)'},
                     {key:'fin_vnebud_ist',label:'Софинансирование из внебюджетных источников (тыс.руб)'},
                 ]
-            }
+            },
+            necessary: {
+                labels:[
+                    'Фундаменты',
+                    'Отмостка',
+                    'Стены ',
+                    'Колонны',
+                    'Перегородки',
+                    'Крыша (покрытия)',
+                    'Кровля',
+                    'Перекрытия',
+                    'Полы',
+                    'Окна',
+                    'Двери',
+                    'Ворота',
+                    'Лестницы',
+                    'Крыльца',
+                    'Балконы/лоджии',
+                    'Внутренняя отделка',
+                    'Наружная отделка',
+                    'Система электроснабжения',
+                    'Система водоснабжения',
+                    'Система водоотведения',
+                    'Система газоснабжения',
+                    'Система кондиционирования воздуха',
+                    'Система вентиляции',
+                    'Система отопления',
+                    'Система диспетчеризации',
+                    'Радиофикация',
+                    'Телевидение эфирное',
+                    'Система видеонаблюдения',
+                    'Система интернет и телефонии',
+                    'Система контроля управления доступом',
+                    'Пожарная сигнализация',
+                    'Охранная сигнализация',
+                    'Мусоропроводы',
+                    'Лифты',
+                ],  
+                items:[],
+                fields:[
+                    {key:'element',label:'Строительные конструкции замена и (или) восстановление которых планируются при капитальном ремонте'},
+                    {key:'nalichie',label:'Наличие на объекте'},
+                    {key:'material',label:'Материал конструкции'},
+                    {key:'srok_eks',label:'Срок эксплуатации с момента строительства или предыдущего капитального ремонта'},
+                    {key:'kap_remont',label:'Требуется капитальный ремонт'},
+                    {key:'obosnovanie',label:'Обоснование необходимости'},
+                ]
+            },
         };
     },
     computed: {
@@ -202,17 +249,21 @@ export default {
         await this.requestUser();
         this.user_id = this.getUser.organization.id;
         await this.getObject();
-        await this.getObject2();
+        //await this.getObject2();
     },
     methods: {
         ...mapActions(['requestUser']),
-        getObject2(){
+        getObject(){
             Axios.get(`/api/get-object/${this.obj_id}`).then(res=>{
-                this.svedenia.fromServer = JSON.parse(res.data);
-                this.svedenia.fromServer = this.svedenia.fromServer.svedenia;
-                console.log(this.svedenia.fromServer);
+                this.fromServer = JSON.parse(res.data);
+                this.items = this.fromServer.object;
+                this.items.org_name = this.fromServer.organization.name;
+                this.docs = this.fromServer.docs;
+                console.log(this.fromServer);
+
+
                 let c=0.0, v=0.0,b=0.0;
-                this.svedenia.fromServer.forEach((item,index)=>{
+                this.fromServer.svedenia.forEach((item,index)=>{
                     c+=Number(item.cost_real);
                     v+=Number(item.sum_bud_fin);
                     b+=Number(item.fin_vnebud_ist);
@@ -232,17 +283,18 @@ export default {
                     cost_real:c.toFixed(3),
                     sum_bud_fin:v.toFixed(3),
                     fin_vnebud_ist:b.toFixed(3),
-                })
-            });
-        },
-        getObject() {
-            Axios.post(`/api/object/${this.obj_id}`, null, {
-                headers: {
-                    "X-CSRF-Token": this.csrf
-                }
-            }).then(res => {
-                this.items = res.data.obj[0];
-                this.docs = res.data.docs;
+                });
+                this.fromServer.necessary.forEach((item,index)=>{
+                    if (index>16)return false;
+                    this.necessary.items.push({
+                        element: this.necessary.labels[index],
+                        nalichie: item.nalichie == '1' ? 'Да' : 'Нет' ,
+                        material: item.nalichie == '1' ? item.material : '',
+                        srok_eks: item.nalichie == '1' ? item.srok_eks : '',
+                        kap_remont: item.nalichie == '1' ? item.kap_remont ? 'Да' : 'Нет' : '',
+                        obosnovanie: item.nalichie == '1' ? item.kap_remont ? item.obosnovanie : '' : '',
+                    })
+                });
             });
         },
         getIznos(iznos) {

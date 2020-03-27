@@ -73,38 +73,4 @@ class OrganizationController extends AppController
         return $this->render('ObjectView');
     }
 
-    public function actionGetObjectById($id)
-    {
-        $queryObj = Yii::$app->db->createCommand("
-            SELECT 
-                po.id,
-                org.name,
-                po.name as poname,
-                po.address,
-                po.assignment,
-                po.square,
-                po.year,
-                po.wear,
-                po.note
-            FROM
-                program_objects po
-                    JOIN
-                organizations org ON po.id_org = org.id
-            WHERE
-                po.id = $id")->queryAll();
-        $queryDocs = Yii::$app->db->createCommand("
-            SELECT 
-                files.id, files.name
-            FROM
-                object_documents_list list
-                join
-                files on files.id = list.id_file
-            WHERE id_object = $id and system_status = 1")->queryAll();
-
-
-        return json_encode([
-            'obj' => $queryObj,
-            'docs' => $queryDocs
-        ]);
-    }
 }
