@@ -137,13 +137,20 @@
                 <span> <b-icon icon="document-text" scale="1.5" class="mr-2 ml-1"></b-icon>Загруженные документы</span>
             </b-card-header>
             <b-card-body>
-                <div v-if="docs.length">
-                    <ul>
-                        <li v-for="(doc, index) in docs" :key="index">
-                            {{doc.label}} <a :href="`/program/object/download-doc/${obj_id}?id=${doc.id}`">{{doc.name }}.pdf</a>
-                        </li>
-                    </ul>
+                <div  v-if="docs.length">
+                    <table class="table table-bordered">
+                        <thead>
+                        <tr>
+                            <th>Наименование</th>
+                            <th>Файл</th>
+                        </tr>
+                        </thead>
 
+                        <tr v-for="(doc, index) in docs" :key="index">
+                            <td>{{doc.label}}</td>
+                            <td><a :href="`/program/object/download-doc/${obj_id}?id=${doc.id}`">{{doc.name }}.pdf</a></td>
+                        </tr>
+                    </table>
                     <a class="btn btn-danger" target="_blank" :href="`/program/object/zip/${obj_id}`">Скачать архивом</a>
                 </div>
                 <div v-else>
@@ -231,7 +238,7 @@ export default {
                     'Охранная сигнализация',
                     'Мусоропроводы',
                     'Лифты',
-                ],  
+                ],
                 items:{
                     one:[],
                     two:[]
