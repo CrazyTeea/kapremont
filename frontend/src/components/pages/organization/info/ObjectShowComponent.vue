@@ -143,6 +143,8 @@
                             {{doc.label}} <a :href="`/program/object/download-doc/${obj_id}?id=${doc.id}`">{{doc.name }}.pdf</a>
                         </li>
                     </ul>
+
+                    <a class="btn btn-danger" target="_blank" :href="`/program/object/zip/${obj_id}`">Скачать архивом</a>
                 </div>
                 <div v-else>
                     <label>Документы отсутствуют</label>

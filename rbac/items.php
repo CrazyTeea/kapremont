@@ -39,6 +39,7 @@ return [
             '/api/comment/delete',
             '/api/comment/options',
             '/api/comment/*',
+            '/app/program-objects/zip',
         ],
     ],
     'orglist_view' => [
@@ -93,6 +94,9 @@ return [
         'type' => 2,
     ],
     '/api/comment/*' => [
+        'type' => 2,
+    ],
+    '/app/program-objects/zip' => [
         'type' => 2,
     ],
 ];
