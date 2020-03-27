@@ -16,7 +16,8 @@ class ProgramObjectsController extends RestController
             foreach ($model->docList as $item){
                 $docs[]=[
                     'name'=>$item->file->name,
-                    'id'=>$item->file->id
+                    'id'=>$item->file->id,
+                    'label'=>$item->type->label
                 ];
             }
             return Json::encode([
