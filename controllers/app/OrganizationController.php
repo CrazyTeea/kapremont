@@ -92,14 +92,18 @@ class OrganizationController extends AppController
                 organizations org ON po.id_org = org.id
             WHERE
                 po.id = $id")->queryAll();
+
         $queryDocs = Yii::$app->db->createCommand("
             SELECT 
-                files.id, files.name
+                files.id, files.name, types.descriptor
             FROM
                 object_documents_list list
-                join
-                files on files.id = list.id_file
-            WHERE id_object = $id and system_status = 1")->queryAll();
+                    JOIN
+                files ON files.id = list.id_file
+                    JOIN
+                object_documents_types types ON list.id_type = types.id
+            WHERE
+                id_object = $id AND system_status = 1")->queryAll();
 
 
         return json_encode([
