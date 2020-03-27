@@ -100,6 +100,7 @@ $config = [
                 'program/object/delete-docs/<id:\d+>' => 'app/program-objects/delete-docs',
                 'program/object/delete/<id:\d+>' => 'app/program-objects/delete',
                 'program/object/files/<id:\d+>' => 'app/program-objects/get-all-obj-files',
+                'program/object/zip/<id:\d+>' => 'app/program-objects/zip',
                 'program/export'=>'app/development-programme/export',
                 'program/approve'=>'app/program/approve',
                 'program/is-approve'=>'app/program/is-approve',
