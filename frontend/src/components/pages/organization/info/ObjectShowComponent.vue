@@ -100,7 +100,8 @@
             </b-card-header>
             <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
                 <b-card-body>
-                    <b-table bordered :fields="necessary.fields" :items="necessary.items" />
+                    <b-table bordered :fields="necessary.fields.one" :items="necessary.items.one" />
+                    <b-table bordered :fields="necessary.fields.two" :items="necessary.items.two" />
                 </b-card-body>
             </b-collapse>
         </b-card>
@@ -113,7 +114,7 @@
             </b-card-header>
             <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel" visible>
                 <b-card-body>
-
+                    <b-table bordered :fields="waited.fields" :items="waited.items" />
                 </b-card-body>
             </b-collapse>
         </b-card>
@@ -126,7 +127,7 @@
             </b-card-header>
             <b-collapse id="accordion-5" accordion="my-accordion" role="tabpanel">
                 <b-card-body>
-
+                    <b-table bordered :fields="risks.fields" :items="risks.items" />
                 </b-card-body>
             </b-collapse>
         </b-card>
@@ -229,16 +230,44 @@ export default {
                     'Мусоропроводы',
                     'Лифты',
                 ],  
-                items:[],
-                fields:[
-                    {key:'element',label:'Строительные конструкции замена и (или) восстановление которых планируются при капитальном ремонте'},
-                    {key:'nalichie',label:'Наличие на объекте'},
-                    {key:'material',label:'Материал конструкции'},
-                    {key:'srok_eks',label:'Срок эксплуатации с момента строительства или предыдущего капитального ремонта'},
-                    {key:'kap_remont',label:'Требуется капитальный ремонт'},
-                    {key:'obosnovanie',label:'Обоснование необходимости'},
-                ]
+                items:{
+                    one:[],
+                    two:[]
+                },
+                fields:{
+                    one:[
+                        {key:'element',label:'Строительные конструкции замена и (или) восстановление которых планируются при капитальном ремонте'},
+                        {key:'nalichie',label:'Наличие на объекте'},
+                        {key:'material',label:'Материал конструкции'},
+                        {key:'srok_eks',label:'Срок эксплуатации с момента строительства или предыдущего капитального ремонта'},
+                        {key:'kap_remont',label:'Требуется капитальный ремонт'},
+                        {key:'obosnovanie',label:'Обоснование необходимости'},
+                    ],
+                    two:[
+                        {key:'element',label:'Строительные конструкции замена и (или) восстановление которых планируются при капитальном ремонте'},
+                        {key:'nalichie',label:'Наличие на объекте'},
+                        {key:'srok_eks',label:'Срок эксплуатации с момента строительства или предыдущего капитального ремонта'},
+                        {key:'kap_remont',label:'Требуется капитальный ремонт'},
+                        {key:'obosnovanie',label:'Обоснование необходимости'},
+                    ]
+                }
             },
+            waited:{
+                fields:[
+                    {key:'aim',label:'Цели и задачи'},
+                    {key:'plan',label:'Планируемый показатель'},
+                    {key:'changes',label:'Единица измерения'},
+                ],
+                items:[]
+            },
+            risks:{
+                fields:[
+                    {key:'types',label:'Виды рисков'},
+                    {key:'poison',label:'Отрицательные влияния'},
+                    {key:'protect',label:'Способы защиты'},
+                ],
+                items:[]
+            }
         };
     },
     computed: {
@@ -253,6 +282,16 @@ export default {
     },
     methods: {
         ...mapActions(['requestUser']),
+        getEl(arr,index){
+            let el = null;
+            arr.forEach(item=>{
+                if (item.element == index) {
+                    el = item;
+                    return false;
+                }
+            });
+            return el;
+        },
         getObject(){
             Axios.get(`/api/get-object/${this.obj_id}`).then(res=>{
                 this.fromServer = JSON.parse(res.data);
@@ -284,17 +323,100 @@ export default {
                     sum_bud_fin:v.toFixed(3),
                     fin_vnebud_ist:b.toFixed(3),
                 });
-                this.fromServer.necessary.forEach((item,index)=>{
-                    if (index>16)return false;
-                    this.necessary.items.push({
-                        element: this.necessary.labels[index],
-                        nalichie: item.nalichie == '1' ? 'Да' : 'Нет' ,
-                        material: item.nalichie == '1' ? item.material : '',
-                        srok_eks: item.nalichie == '1' ? item.srok_eks : '',
-                        kap_remont: item.nalichie == '1' ? item.kap_remont ? 'Да' : 'Нет' : '',
-                        obosnovanie: item.nalichie == '1' ? item.kap_remont ? item.obosnovanie : '' : '',
-                    })
+                this.necessary.labels.forEach((item,index)=>{
+                    let el = this.getEl(this.fromServer.necessary,index);
+                    if (!el) {
+                        if (index < 17) {
+                            this.necessary.items.one.push({
+                                element: item,
+                                nalichie: null,
+                                material: null,
+                                srok_eks: null,
+                                kap_remont: null,
+                                obosnovanie: null,
+                            })
+                        }
+                        else{
+                            this.necessary.items.two.push({
+                                element: item,
+                                nalichie: null,
+                                srok_eks: null,
+                                kap_remont: null,
+                                obosnovanie: null,
+                            })
+                        }
+                    }else {
+                        if (index < 17) {
+                            this.necessary.items.one.push({
+                                element: item,
+                                nalichie: el.nalichie == '1' ? 'Да' : 'Нет',
+                                material: el.nalichie == '1' ? el.material : '',
+                                srok_eks: el.nalichie == '1' ? el.srok_eks : '',
+                                kap_remont: el.nalichie == '1' ? el.kap_remont ? 'Да' : 'Нет' : '',
+                                obosnovanie: el.nalichie == '1' ? el.kap_remont ? item.obosnovanie : '' : '',
+                            })
+
+                        } else {
+                            this.necessary.items.two.push({
+                                element: item,
+                                nalichie: el.nalichie == '1' ? 'Да' : 'Нет',
+                                srok_eks: el.nalichie == '1' ? el.srok_eks : '',
+                                kap_remont: el.nalichie == '1' ? el.kap_remont ? 'Да' : 'Нет' : '',
+                                obosnovanie: el.nalichie == '1' ? el.kap_remont ? el.obosnovanie : '' : '',
+                            })
+
+                        }
+                    }
                 });
+                let w0 = this.getEl(this.fromServer.waited,0);
+                let w1 = this.getEl(this.fromServer.waited,1);
+                let w2 = this.getEl(this.fromServer.waited,2);
+                let w3 = this.getEl(this.fromServer.waited,3);
+                let w4 = this.getEl(this.fromServer.waited,4);
+                this.waited.items.push({
+                    aim:'Проведение капитального ремонта, общая площадь',
+                    plan:w0.plan,
+                    changes:'кв.м'
+                });
+                this.waited.items.push({
+                    aim:'Вовлечение в хозяйственную деятельность за счет проведенного капитального ремонта, общая площадь',
+                    plan:w1.plan,
+                    changes:'кв.м'
+                });
+                this.waited.items.push({
+                    aim:'Снижение затрат на эксплуатацию',
+                    plan:w2.plan == '1' ? 'Да' : 'Нет',
+                    changes:''
+                });
+                this.waited.items.push({
+                    aim:'Повышение энергоэффективности',
+                    plan:w3.plan == '1' ? 'Да' : 'Нет',
+                    changes:''
+                });
+                this.waited.items.push({
+                    aim:'Восстановление (ремонт, реставрация, за исключением реконструкции) объектов культурного наследия',
+                    plan:w4.plan == '1' ? 'Да' : 'Нет',
+                    changes:''
+                });
+                for (let i = 5; i<this.fromServer.waited.length;i++){
+                    let el = this.fromServer.waited[i];
+                    this.waited.items.push({
+                        aim:el.aim,
+                        plan:el.plan,
+                        changes:el.changes
+                    });
+                }
+                if (this.fromServer.risks) {
+                    this.fromServer.risks.forEach(item => {
+                        this.risks.items.push({
+                            types: item.types,
+                            poison: item.poison,
+                            protect: item.protect,
+                        });
+                    });
+                }
+
+
             });
         },
         getIznos(iznos) {
