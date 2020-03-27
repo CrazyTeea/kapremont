@@ -140,7 +140,7 @@
                 <div v-if="docs.length">
                     <ul>
                         <li v-for="(doc, index) in docs" :key="index">
-                            <a :href="`/program/object/download-doc/${obj_id}?id=${doc.id}`">{{ doc.name }}.pdf</a>
+                            {{doc.label}} <a :href="`/program/object/download-doc/${obj_id}?id=${doc.id}`">{{doc.name }}.pdf</a>
                         </li>
                     </ul>
                 </div>
