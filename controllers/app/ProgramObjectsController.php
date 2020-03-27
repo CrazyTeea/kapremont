@@ -87,7 +87,9 @@ class ProgramObjectsController extends AppController
     public function actionView($id)
     {
         $model = $this->findModel($id);
-        $canChange = !Program::findOne($model->id_program)->p_status;
+        $program = Program::findOne($model->id_program);
+        $canChange = !$program->ban;
+        $canChange &=  (!$program->p_status or !$model->status || $model->status == 4);
         $docList = ObjectDocumentsList::findAll(['system_status'=>1,'id_object'=>$id]);
         return $this->render('view',compact('model','docList','canChange'));
     }

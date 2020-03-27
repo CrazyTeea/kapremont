@@ -36,7 +36,7 @@ class m200327_104604_create_approval_status extends Migration
 
         ProgramObjects::updateAll(['status' => 1]);
 
-        $this->addForeignKey('fk-program_objects-status', 'program_objects', 'status', 'approve_status', 'id', 'CASCADE');
+        //$this->addForeignKey('fk-program_objects-status', 'program_objects', 'status', 'approve_status', 'id', 'CASCADE');
 
     }
 
@@ -45,7 +45,7 @@ class m200327_104604_create_approval_status extends Migration
      */
     public function safeDown()
     {
-        $this->dropForeignKey('fk-program_objects-status', 'program_objects');
+        //$this->dropForeignKey('fk-program_objects-status', 'program_objects');
 
         $this->dropTable('approve_status');
 

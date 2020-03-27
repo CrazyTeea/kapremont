@@ -296,7 +296,7 @@ export default {
     async mounted() {
         this.obj_id = this.$route.params.id;
         await this.requestUser();
-        await this.getStatus()
+        await this.getStatus();
         this.user_id = this.getUser.organization.id;
         await this.getObject();
 
@@ -320,8 +320,8 @@ export default {
         },
         async getStatus() {
             Axios.get(`/api/get-status/${this.obj_id}`).then((res) =>{
-                this.status.label = res.data.label
-                let color = ''
+                this.status.label = res.data.label;
+                let color = '';
                 if(res.data.id == 1) {
                     color = 'secondary'
                 } else if (res.data.id == 2) {
@@ -331,7 +331,7 @@ export default {
                 } else if (res.data.id == 4) {
                     color = 'warning '
                 }
-                this.status.variant = color
+                this.status.variant = color;
                 console.log(res)
             })
         },
@@ -460,14 +460,6 @@ export default {
 
 
             });
-        },
-        getValueByDescriptor(val) {
-            for(let item in this.descriptors) {
-                if(Object.keys(this.descriptors[item])[0] == val) {
-                    console.log(item[val])
-                }
-                // console.log(Object.keys(this.descriptors[item])[0])
-            }
         },
         getIznos(iznos) {
             let izn = parseInt(iznos);
