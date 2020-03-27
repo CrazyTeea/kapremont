@@ -81,6 +81,12 @@ $config = [
                     'controller' => 'api/comment',
                     'pluralize' => false
                 ],
+
+                'api/set-status/recomend/<obj_id:\d+>' => '/app/organization/set-recomend-status',
+                'api/set-status/not-recomend/<obj_id:\d+>' => '/app/organization/set-not-recomend-status',
+                'api/set-status/to-work/<obj_id:\d+>' => '/app/organization/set-to-work-status',
+                'api/get-status/<obj_id:\d+>' => 'app/organization/get-approve-status',
+
                 'api/permissions' => 'api/permission/permissions',
                 'api/comment/obj/<id:\d+>' => 'api/comment/obj',
                 'program'=>'app/program',
@@ -122,7 +128,7 @@ $config = [
                 'api/get-object/<id:\d+>'=>'/rest/program-objects/by-id',
 
                 'api/org-table/<id:\d+>' => '/app/organization/table-list',
-                'api/object/<id:\d+>' => '/app/organization/get-object-by-id'
+                //'api/object/<id:\d+>' => '/app/organization/get-object-by-id'
             ],
         ],
         'assetManager' => [

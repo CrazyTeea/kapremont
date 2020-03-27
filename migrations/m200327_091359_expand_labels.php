@@ -3,17 +3,16 @@
 use yii\db\Migration;
 
 /**
- * Class m200325_114651_add_column_to_comments
+ * Class m200327_091359_expand_labels
  */
-class m200325_114651_add_column_to_comments extends Migration
+class m200327_091359_expand_labels extends Migration
 {
     /**
      * {@inheritdoc}
      */
     public function safeUp()
     {
-        $this->addColumn('comments', 'created_at','datetime DEFAULT NOW()');
-
+        $this->alterColumn(\app\models\ObjectDocumentsTypes::tableName(),'label',$this->text());
     }
 
     /**
@@ -21,7 +20,9 @@ class m200325_114651_add_column_to_comments extends Migration
      */
     public function safeDown()
     {
-        $this->dropColumn('comments', 'created_at');
+        echo "m200327_091359_expand_labels cannot be reverted.\n";
+
+        return false;
     }
 
     /*
@@ -33,7 +34,7 @@ class m200325_114651_add_column_to_comments extends Migration
 
     public function down()
     {
-        echo "m200325_114651_add_column_to_comments cannot be reverted.\n";
+        echo "m200327_091359_expand_labels cannot be reverted.\n";
 
         return false;
     }

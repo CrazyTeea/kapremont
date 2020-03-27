@@ -3,10 +3,12 @@
 
 namespace app\controllers\app;
 
-
+use app\models\ApproveStatus;
 use app\models\Organizations;
 use app\models\OrgInfo;
 use app\models\Program;
+use app\models\ProgramObjects;
+use app\models\User;
 use Yii;
 use yii\helpers\Json;
 
@@ -73,42 +75,47 @@ class OrganizationController extends AppController
         return $this->render('ObjectView');
     }
 
-    public function actionGetObjectById($id)
+    public function actionSetRecomendStatus($obj_id)
     {
-        $queryObj = Yii::$app->db->createCommand("
-            SELECT 
-                po.id,
-                org.name,
-                po.name as poname,
-                po.address,
-                po.assignment,
-                po.square,
-                po.year,
-                po.wear,
-                po.note
-            FROM
-                program_objects po
-                    JOIN
-                organizations org ON po.id_org = org.id
-            WHERE
-                po.id = $id")->queryAll();
+        $this->setStatus($obj_id, ApproveStatus::STATUS_RECOMEND);
 
-        $queryDocs = Yii::$app->db->createCommand("
-            SELECT 
-                files.id, files.name, types.descriptor
-            FROM
-                object_documents_list list
-                    JOIN
-                files ON files.id = list.id_file
-                    JOIN
-                object_documents_types types ON list.id_type = types.id
-            WHERE
-                id_object = $id AND system_status = 1")->queryAll();
+        return $this->redirect(Yii::$app->request->referrer);
+    }
 
+    public function actionSetNotRecomendStatus($obj_id)
+    {
+        $this->setStatus($obj_id, ApproveStatus::STATUS_NOT_RECOMEND);
 
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function actionSetToWorkStatus($obj_id)
+    {
+        $this->setStatus($obj_id, ApproveStatus::STATUS_TO_WORK);
+
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    private function setStatus($obj_id, $status)
+    {
+        if(Yii::$app->getUser()->can('mgsu')) {
+            $object = ProgramObjects::findOne($obj_id);
+            $object->status = $status;
+            $object->save(false);
+            return true;
+        }
+    }
+
+    public function actionGetApproveStatus($obj_id)
+    {
+        // $query = ProgramObjects::findOne($obj_id)->astatus; 
+        // echo "<pre>";
+        // print_r($query);
+        
         return json_encode([
-            'obj' => $queryObj,
-            'docs' => $queryDocs
+            'label' => ProgramObjects::findOne($obj_id)->astatus->label,
+            'id' => ProgramObjects::findOne($obj_id)->astatus->id
         ]);
     }
+
 }

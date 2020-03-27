@@ -44,6 +44,8 @@ use Yii;
 class ProgramObjects extends \yii\db\ActiveRecord
 {
 
+    
+
     /**
      * {@inheritdoc}
      */
@@ -157,6 +159,11 @@ class ProgramObjects extends \yii\db\ActiveRecord
      */
     public function getSvedenia(){
         return $this->hasMany(ProgObjectsEvents::class,['id_object'=>'id']);
+    }
+
+    public function getAstatus()
+    {
+        return $this->hasOne(ApproveStatus::class, ['id' => 'status']);
     }
 
 }
