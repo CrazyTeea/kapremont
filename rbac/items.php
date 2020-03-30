@@ -40,6 +40,7 @@ return [
             '/api/comment/options',
             '/api/comment/*',
             '/app/program-objects/zip',
+            '/app/program-objects/export',
         ],
     ],
     'orglist_view' => [
@@ -97,6 +98,9 @@ return [
         'type' => 2,
     ],
     '/app/program-objects/zip' => [
+        'type' => 2,
+    ],
+    '/app/program-objects/export' => [
         'type' => 2,
     ],
 ];

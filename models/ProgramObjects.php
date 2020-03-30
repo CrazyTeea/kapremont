@@ -168,4 +168,12 @@ class ProgramObjects extends \yii\db\ActiveRecord
         return $this->hasOne(ApproveStatus::class, ['id' => 'status']);
     }
 
+    public function getCity(){
+        return $this->hasOne(Cities::class, ['id' => 'id_city']);
+    }
+
+    public function getProgram(){
+        return $this->hasOne(Program::class, ['id' => 'id_program']);
+    }
+
 }

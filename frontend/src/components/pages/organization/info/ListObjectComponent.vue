@@ -152,6 +152,7 @@ export default {
         }
     },
     methods: {
+
         async getCurentOrg() {
             return Axios.post(`/api/org-table/${this.org_id}`, null, {
                 headers: {
