@@ -9,7 +9,8 @@ use yii\helpers\Json;
 
 class ProgramObjectsController extends RestController
 {
-    public function actionById($id){
+    public function actionById($id)
+    {
         if ($id) {
             $model = ProgramObjects::findOne($id);
             $docs=[];
@@ -27,12 +28,15 @@ class ProgramObjectsController extends RestController
                 'necessary'=>$model->necessary,
                 'waited'=>$model->waites,
                 'risks'=>$model->risks,
-                'docs'=>$docs
+                'docs'=>$docs,
+                'org_id' => $model->id_org
             ]);
         }
         return null;
     }
-    public function actionGetStatus($id){
+
+    public function actionGetStatus($id)
+    {
         $model = ProgramObjects::findOne($id);
         return Json::encode($model->status);
     }
