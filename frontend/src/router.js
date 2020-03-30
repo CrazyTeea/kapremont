@@ -90,15 +90,16 @@ const routes = [
         component: ObjectsForKrestiane
     },
     {
+        path: "/faif/user/create",
+        name: "FaifUserCreate",
+        component: UserFormComponent
+    },
+    {
         path: "/faif/user",
         name: "FaifUser",
         component: UserListComponent
     },
-    {
-        path: "/faif/user/create",
-        name: "FaifUserCreate",
-        component: UserFormComponent
-    }
+
 ];
 
 export default new VueRouter({
