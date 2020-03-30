@@ -21,6 +21,14 @@
                 </b-tr>
                 <b-tr>
                     <b-th class="center-text-in-cell">
+                        <label>ID организации</label>
+                    </b-th>
+                    <b-th class="normal-font-weight-for-sell center-text-in-cell">
+                        <label>{{ org_id }}</label>
+                    </b-th>
+                </b-tr>
+                <b-tr>
+                    <b-th class="center-text-in-cell">
                         <label>Наименование организации</label>
                     </b-th>
                     <b-th class="normal-font-weight-for-sell center-text-in-cell">
@@ -187,6 +195,7 @@ export default {
             csrf: document.getElementsByName("csrf-token")[0].content,
             items: [],
             obj_id: null,
+            org_id: null,
             user_id: null,
             docs: [],
             fromServer:{},
@@ -341,7 +350,7 @@ export default {
                 this.items = this.fromServer.object;
                 this.items.org_name = this.fromServer.organization.name;
                 this.docs = this.fromServer.docs;
-
+                this.org_id = JSON.parse(res.data).org_id
 
                 let c=0.0, v=0.0,b=0.0;
                 this.fromServer.svedenia.forEach((item,index)=>{
