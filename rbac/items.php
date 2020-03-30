@@ -103,4 +103,10 @@ return [
     '/app/program-objects/export' => [
         'type' => 2,
     ],
+    'faiv_user' => [
+        'type' => 1,
+    ],
+    'faiv_admin' => [
+        'type' => 1,
+    ],
 ];
