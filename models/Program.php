@@ -20,6 +20,16 @@ use yii\db\ActiveRecord;
 class Program extends ActiveRecord
 {
 
+    public function getObjects(){
+        return $this->hasMany(ProgramObjects::class,['id_program'=>'id'])->andOnCondition([ProgramObjects::tableName().'.system_status'=>1]);
+    }
+    public function getObjectsCount(){
+        return $this->hasMany(ProgramObjects::class,['id_program'=>'id'])->andOnCondition([ProgramObjects::tableName().'.system_status'=>1])->count();
+    }
+    public function getOrg(){
+        return $this->hasOne(Organizations::class,['id'=>'id_org']);
+    }
+
     public const ACTIVE = 1;
     /**
      * {@inheritdoc}
