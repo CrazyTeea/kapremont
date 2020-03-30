@@ -502,4 +502,6 @@ class ProgramObjectsController extends AppController
         $files = Files::find()->where(['files.id'=>1])->select(['name'])->joinWith(['docList'])->one();
         var_dump($files);
     }
+
+
 }

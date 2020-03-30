@@ -105,6 +105,8 @@
 
             <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage"></b-pagination>
         </div>
+        <br>
+        <a class="btn btn-warning" href="/organization/export">Скачать выгрузку</a>
     </div>
 </template>
 

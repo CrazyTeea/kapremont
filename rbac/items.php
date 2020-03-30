@@ -40,6 +40,8 @@ return [
             '/api/comment/options',
             '/api/comment/*',
             '/app/program-objects/zip',
+            '/app/program-objects/export',
+            '/app/program/export',
         ],
     ],
     'orglist_view' => [
@@ -97,6 +99,18 @@ return [
         'type' => 2,
     ],
     '/app/program-objects/zip' => [
+        'type' => 2,
+    ],
+    '/app/program-objects/export' => [
+        'type' => 2,
+    ],
+    'faiv_user' => [
+        'type' => 1,
+    ],
+    'faiv_admin' => [
+        'type' => 1,
+    ],
+    '/app/program/export' => [
         'type' => 2,
     ],
 ];
