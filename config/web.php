@@ -129,6 +129,11 @@ $config = [
                 //НАДО ПЕРЕДЕЛАТЬ
                 'api/org-table/<id:\d+>' => '/app/organization/table-list',
                 //'api/object/<id:\d+>' => '/app/organization/get-object-by-id'
+
+                //Маршруты фаифа
+                'faif/user' => '/faif/faif/user-view',
+                'faif/user/create' => '/faif/faif/user-create-view',
+                'faif/admin' => '/faif/faif/admin-view',
             ],
         ],
         'assetManager' => [

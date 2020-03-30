@@ -4,6 +4,8 @@ import Atz from "./components/pages/program/atz/index.vue";
 import ListObject from "./components/pages/organization/info/ListObjectComponent.vue";
 import ObjView from "./components/pages/organization/info/ObjectShowComponent.vue";
 import ObjectsForKrestiane from "./components/pages/program/ObjectView/ViewComponent.vue"
+import UserListComponent from "./components/pages/faif/UserListComponent.vue"
+import UserFormComponent from "./components/pages/faif/UserFormComponent.vue"
 
 Vue.use(VueRouter);
 
@@ -86,6 +88,16 @@ const routes = [
         path: "/program/object/view/:id",
         name: "ObjectsForKrestiane",
         component: ObjectsForKrestiane
+    },
+    {
+        path: "/faif/user",
+        name: "FaifUser",
+        component: UserListComponent
+    },
+    {
+        path: "/faif/user/create",
+        name: "FaifUserCreate",
+        component: UserFormComponent
     }
 ];
 

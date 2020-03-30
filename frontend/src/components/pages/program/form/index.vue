@@ -552,6 +552,7 @@ export default {
         },
         onSubmit(e) {
             e.preventDefault();
+            console.log(this.$route.path)
             let form = document.getElementById("object_form");
             let formData = new FormData(form);
 
