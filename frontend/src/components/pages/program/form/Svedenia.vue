@@ -126,6 +126,7 @@
 
 <script>
 import Multiselect from "vue-select";
+import {BFormInput, BTable} from "bootstrap-vue";
 
 export default {
     name: "Svedenia",
@@ -142,6 +143,8 @@ export default {
         }
     },
     components: {
+        BFormInput,
+        BTable,
         "v-select": Multiselect
     },
     methods: {

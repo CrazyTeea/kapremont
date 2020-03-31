@@ -128,7 +128,25 @@
 
 <script>
 import Axios from "axios";
+import {
+    BCard,
+    BCardBody,
+    BCardHeader,BIcon,
+    BPagination, BTableSimple, BTbody, BTh, BThead, BTr
+} from "bootstrap-vue";
 export default {
+    components:{
+        BCard,
+        BCardHeader,
+        BCardBody,
+        BTableSimple,
+        BThead,
+        BTr,
+        BTh,
+        BTbody,
+        BPagination,
+        BIcon
+    },
     data() {
         return {
             programm: {},

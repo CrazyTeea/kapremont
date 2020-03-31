@@ -114,8 +114,22 @@
 
 <script>
 import Axios from "axios";
+import {BFormInput, BTableSimple, BTbody, BTd, BTfoot, BTh, BThead, BTr, VBToggle} from "bootstrap-vue";
 
 export default {
+    directives:{
+        'b-toggle':VBToggle
+    },
+    components:{
+        BFormInput,
+        BTableSimple,
+        BThead,
+        BTr,
+        BTh,
+        BTd,
+        BTbody,
+        BTfoot,
+    },
     data() {
         return {
             csrf: document.getElementsByName("csrf-token")[0].content,

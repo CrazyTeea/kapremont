@@ -112,8 +112,47 @@
 
 <script>
 import Axios from "axios";
-
+import {
+    BCard,
+    BCardHeader,
+    BInputGroup,
+    BFormInput,
+    BInputGroupAppend,
+    BCollapse,
+    BCardBody,
+    BButton,
+    BFormSelect,
+    BTableSimple,
+    BThead,
+    BTr,
+    BTh,
+    BTbody,
+    BPagination,
+    BIcon,
+    VBToggle
+} from 'bootstrap-vue'
 export default {
+    directives:{
+        'b-toggle':VBToggle
+    },
+    components:{
+        BCollapse,
+        BCard,
+        BCardHeader,
+        BCardBody,
+        BInputGroup,
+        BFormInput,
+        BInputGroupAppend,
+        BButton,
+        BFormSelect,
+        BTableSimple,
+        BThead,
+        BTr,
+        BTh,
+        BTbody,
+        BPagination,
+        BIcon
+    },
     data() {
         return {
             filters: {

@@ -184,8 +184,34 @@
 import { userPanel } from "../../../organisms";
 import { mapGetters, mapActions } from "vuex";
 import Axios from "axios";
+import {
+    BButton,
+    BCard,
+    BCardBody,
+    BCardHeader,
+    BPagination,
+    BModal,
+    BTable,
+    BCardText,
+    VBToggle,
+    BIconGearWideConnected
+} from "bootstrap-vue";
 export default {
-    name: "ProgramView",
+    directives:{
+        'b-toggle':VBToggle
+    },
+    components:{
+        BCard,
+        BCardHeader,
+        BCardBody,
+        BButton,
+        BPagination,
+        BModal,
+        BTable,
+        BCardText,
+        "v-user-panel": userPanel,
+        BIconGearWideConnected,
+    },
     data() {
         return {
             canAxios: false,
@@ -210,9 +236,6 @@ export default {
                 perPage: 5
             }
         };
-    },
-    components: {
-        "v-user-panel": userPanel
     },
     methods: {
         ...mapActions(["requestPageData", "requestUser"]),
