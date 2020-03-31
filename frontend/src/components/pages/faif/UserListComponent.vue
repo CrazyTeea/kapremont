@@ -4,7 +4,7 @@
             <v-user-panel />
         </div>
         <div class="button-block">
-            <b-button variant="info" class="mt-3 ml-3" href="/faif/user/create" v-show="!ban">Добавить объект кап. ремонта</b-button>
+            <b-button variant="info" class="mt-3 ml-3" href="/faiv/user/create" v-show="!ban">Добавить объект кап. ремонта</b-button>
         </div>
         <div class="obj-block row container">
             <b-card no-body>
