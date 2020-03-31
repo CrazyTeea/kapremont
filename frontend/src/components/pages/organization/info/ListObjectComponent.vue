@@ -1,5 +1,16 @@
 <template>
     <div>
+        <b-breadcrumb :items="
+        [
+            {
+                text:'Список организаций',
+                href:'/organization/list'
+            },
+            {
+                text:'Список объектов',
+                href:`/organization/list/${org_id}`
+            }
+        ]"/>
         <b-card no-body>
             <b-card-header header-tag="header" class="p-1" role="tab">
                 <span> <b-icon icon="bookmark-fill" scale="1.5" class="mr-2 ml-1"></b-icon>Подробная информация</span>
@@ -131,11 +142,12 @@ import Axios from "axios";
 import {
     BCard,
     BCardBody,
-    BCardHeader,BIcon,
+    BCardHeader,BIcon, BBreadcrumb,
     BPagination, BTableSimple, BTbody, BTh, BThead, BTr
 } from "bootstrap-vue";
 export default {
     components:{
+        BBreadcrumb,
         BCard,
         BCardHeader,
         BCardBody,
