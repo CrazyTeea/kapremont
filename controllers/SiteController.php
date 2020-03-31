@@ -97,6 +97,12 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            if (Yii::$app->user->can('faiv_user')){
+                return $this->redirect(['/faiv/user']);
+            }
+            if (Yii::$app->user->can('faiv_admin')){
+                return $this->redirect(['/faiv/admin']);
+            }
             if (Yii::$app->user->can('orglist_view')){
                 return $this->redirect(['/organization/list']);
             }

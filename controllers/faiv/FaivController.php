@@ -1,10 +1,10 @@
 <?php
 
-namespace app\controllers\faif;
+namespace app\controllers\faiv;
 
 use yii\web\Controller;
 
-class FaifController extends Controller
+class FaivController extends Controller
 {
     public function actionUserView()
     {

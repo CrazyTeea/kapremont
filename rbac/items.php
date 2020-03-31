@@ -106,11 +106,27 @@ return [
     ],
     'faiv_user' => [
         'type' => 1,
+        'children' => [
+            '/faiv/faiv/user-view',
+            '/faiv/faiv/user-create-view',
+        ],
     ],
     'faiv_admin' => [
         'type' => 1,
+        'children' => [
+            '/faiv/faiv/admin-view',
+        ],
     ],
     '/app/program/export' => [
+        'type' => 2,
+    ],
+    '/faiv/faiv/user-view' => [
+        'type' => 2,
+    ],
+    '/faiv/faiv/user-create-view' => [
+        'type' => 2,
+    ],
+    '/faiv/faiv/admin-view' => [
         'type' => 2,
     ],
 ];
