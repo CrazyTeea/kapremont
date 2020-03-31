@@ -385,58 +385,60 @@
                             </b-card-body>
                         </b-collapse>
                     </b-card>
-                    <b-card no-body class="mb-1">
-                        <b-card-header header-tag="header" class="p-1" role="tab">
-                            <span class="toggle_button" v-b-toggle.accordion-3>
-                                <b-icon-gear-wide-connected />
-                                Обоснование необходимости (целесообразности) планируемых мероприятий</span
-                            >
-                        </b-card-header>
-                        <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
-                            <b-card-body>
-                                <v-necessary model-name="ProObjectsNecessary" ref="necessary" />
-                            </b-card-body>
-                        </b-collapse>
-                    </b-card>
-                    <b-card no-body class="mb-1">
-                        <b-card-header header-tag="header" class="p-1" role="tab">
-                            <span class="toggle_button" v-b-toggle.accordion-4>
-                                <b-icon-gear-wide-connected />
-                                Ожидаемые результаты</span
-                            >
-                        </b-card-header>
-                        <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel" visible>
-                            <b-card-body>
-                                <v-waited model-name="ProgObjectsWaites" ref="waited" />
-                            </b-card-body>
-                        </b-collapse>
-                    </b-card>
-                    <b-card no-body class="mb-1">
-                        <b-card-header header-tag="header" class="p-1" role="tab">
-                            <span class="toggle_button" v-b-toggle.accordion-5>
-                                <b-icon-gear-wide-connected />
-                                Прогнозируемые риски</span
-                            >
-                        </b-card-header>
-                        <b-collapse id="accordion-5" accordion="my-accordion" role="tabpanel">
-                            <b-card-body>
-                                <v-riscs model-name="ProgObjectsRiscs" ref="riscs" />
-                            </b-card-body>
-                        </b-collapse>
-                    </b-card>
-                    <b-card no-body class="mb-1">
-                        <b-card-header header-tag="header" class="p-1" role="tab">
-                            <span class="toggle_button" v-b-toggle.accordion-6>
-                                <b-icon-gear-wide-connected />
-                                Опись прилагаемых документов</span
-                            >
-                        </b-card-header>
-                        <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel">
-                            <b-card-body>
-                                <v-uploads model-name="Files" ref="files" />
-                            </b-card-body>
-                        </b-collapse>
-                    </b-card>
+                    <div class="permisions" v-can:root>
+                        <b-card no-body class="mb-1">
+                            <b-card-header header-tag="header" class="p-1" role="tab">
+                                <span class="toggle_button" v-b-toggle.accordion-3>
+                                    <b-icon-gear-wide-connected />
+                                    Обоснование необходимости (целесообразности) планируемых мероприятий</span
+                                >
+                            </b-card-header>
+                            <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
+                                <b-card-body>
+                                    <v-necessary model-name="ProObjectsNecessary" ref="necessary" />
+                                </b-card-body>
+                            </b-collapse>
+                        </b-card>
+                        <b-card no-body class="mb-1">
+                            <b-card-header header-tag="header" class="p-1" role="tab">
+                                <span class="toggle_button" v-b-toggle.accordion-4>
+                                    <b-icon-gear-wide-connected />
+                                    Ожидаемые результаты</span
+                                >
+                            </b-card-header>
+                            <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel" visible>
+                                <b-card-body>
+                                    <v-waited model-name="ProgObjectsWaites" ref="waited" />
+                                </b-card-body>
+                            </b-collapse>
+                        </b-card>
+                        <b-card no-body class="mb-1">
+                            <b-card-header header-tag="header" class="p-1" role="tab">
+                                <span class="toggle_button" v-b-toggle.accordion-5>
+                                    <b-icon-gear-wide-connected />
+                                    Прогнозируемые риски</span
+                                >
+                            </b-card-header>
+                            <b-collapse id="accordion-5" accordion="my-accordion" role="tabpanel">
+                                <b-card-body>
+                                    <v-riscs model-name="ProgObjectsRiscs" ref="riscs" />
+                                </b-card-body>
+                            </b-collapse>
+                        </b-card>
+                        <b-card no-body class="mb-1">
+                            <b-card-header header-tag="header" class="p-1" role="tab">
+                                <span class="toggle_button" v-b-toggle.accordion-6>
+                                    <b-icon-gear-wide-connected />
+                                    Опись прилагаемых документов</span
+                                >
+                            </b-card-header>
+                            <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel">
+                                <b-card-body>
+                                    <v-uploads model-name="Files" ref="files" />
+                                </b-card-body>
+                            </b-collapse>
+                        </b-card>
+                    </div>
                 </div>
             </div>
             <b-button type="submit" variant="info">Сохранить</b-button>
@@ -552,7 +554,7 @@ export default {
         },
         onSubmit(e) {
             e.preventDefault();
-            console.log(this.$route.path)
+            console.log(this.$route.path);
             let form = document.getElementById("object_form");
             let formData = new FormData(form);
 
@@ -575,7 +577,6 @@ export default {
                     }
                     this.errors = response.data;
                 }
-
             });
         },
         errorReport(message) {

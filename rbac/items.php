@@ -107,14 +107,18 @@ return [
     'faiv_user' => [
         'type' => 1,
         'children' => [
-            '/faiv/faiv/user-view',
-            '/faiv/faiv/user-create-view',
+            'dev_program',
+            '/*',
         ],
     ],
     'faiv_admin' => [
         'type' => 1,
         'children' => [
             '/faiv/faiv/admin-view',
+            '/faiv/faiv/user-view',
+            '/faiv/faiv/user-create-view',
+            '/*',
+            'dev_program',
         ],
     ],
     '/app/program/export' => [
@@ -127,6 +131,15 @@ return [
         'type' => 2,
     ],
     '/faiv/faiv/admin-view' => [
+        'type' => 2,
+    ],
+    '/app/development-programme/check-doc' => [
+        'type' => 2,
+    ],
+    '/app/program/is-approve' => [
+        'type' => 2,
+    ],
+    '/app/program-objects/create' => [
         'type' => 2,
     ],
 ];

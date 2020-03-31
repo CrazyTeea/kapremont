@@ -12,13 +12,17 @@ Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
 Vue.directive("can", {
-    bind(element, binding) {
-        let style = element.style.display 
-        element.style.display = "none";
+    bind(el, binding) {
+        // let st = element.style.display
+        // console.group('стили:')
+        // console.log(el)
+        // console.groupEnd()
+        // el.style.display = "none";
         Axios.get("/api/permissions").then(res => {
-            console.log("пермишн");
-            if (res.data === binding.arg) {
-                element.style.display = style;
+            console.log(res.data);
+            if (res.data !== binding.arg) {
+                console.log(el)
+                el.style.display = "none";
             }
         });
     }
