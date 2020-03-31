@@ -1,5 +1,12 @@
 <template>
     <div>
+        <b-breadcrumb :items="
+        [
+            {
+                text:'Список организаций',
+                href:'/organization/list'
+            }
+        ]"/>
         <b-card no-body class="mb-1">
             <b-card-header header-tag="header" class="p-1" role="tab">
                 <span class="toggle_button" v-b-toggle.accordion-3>
@@ -113,6 +120,7 @@
 <script>
 import Axios from "axios";
 import {
+    BBreadcrumb,
     BCard,
     BCardHeader,
     BInputGroup,
@@ -151,6 +159,7 @@ export default {
         BTh,
         BTbody,
         BPagination,
+        BBreadcrumb,
         BIcon
     },
     data() {
