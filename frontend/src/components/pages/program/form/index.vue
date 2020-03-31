@@ -86,7 +86,7 @@
                                         :valid-feedback="feedback('ProgramObjects', 'id_priority', ' ')"
                                         :state="feedback('ProgramObjects', 'id_priority')"
                                     >
-                                        <b-form-input style="display: none" id="type" v-model="formData.id_priority" name="ProgramObjects[id_priority]" />
+                                        <b-form-input style="display: none" id="id_priority" v-model="formData.id_priority" name="ProgramObjects[id_priority]" />
                                         <b-select
                                             v-model="formData.id_priority"
                                             :options="[
@@ -109,7 +109,6 @@
                                             :options="getRegions"
                                             :reduce="region => region.id"
                                             label="region"
-                                            id="id_region"
                                             @input="
                                                 onChangeRegion({
                                                     id: formData.id_region
@@ -137,7 +136,6 @@
                                             "
                                             :reduce="city => city.id"
                                             label="city"
-                                            id="id_city"
                                         />
                                     </b-form-group>
                                     <b-form-group
@@ -170,12 +168,12 @@
 
                                     <b-form-group
                                         label="Год проведения последнего капитального ремонта/реконструкции:"
-                                        label-for="exploit_year"
+                                        label-for="last_exploit_year"
                                         :invalid-feedback="feedback('ProgramObjects', 'last_exploit_year', 'Введите год проведения последнего капитального ремонта/реконструкции :')"
                                         :valid-feedback="feedback('ProgramObjects', 'last_exploit_year', ' ')"
                                         :state="feedback('ProgramObjects', 'last_exploit_year') && exp_year_validator"
                                     >
-                                        <b-form-input id="exploit_year" name="ProgramObjects[last_exploit_year]" type="number" v-model="formData.last_exploit_year" />
+                                        <b-form-input id="last_exploit_year" name="ProgramObjects[last_exploit_year]" type="number" v-model="formData.last_exploit_year" />
                                     </b-form-group>
 
                                     <b-form-group
@@ -384,58 +382,60 @@
                             </b-card-body>
                         </b-collapse>
                     </b-card>
-                    <b-card no-body class="mb-1">
-                        <b-card-header header-tag="header" class="p-1" role="tab">
-                            <span class="toggle_button" v-b-toggle.accordion-3>
-                                <b-icon-gear-wide-connected />
-                                Обоснование необходимости (целесообразности) планируемых мероприятий</span
-                            >
-                        </b-card-header>
-                        <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
-                            <b-card-body>
-                                <v-necessary model-name="ProObjectsNecessary" ref="necessary" />
-                            </b-card-body>
-                        </b-collapse>
-                    </b-card>
-                    <b-card no-body class="mb-1">
-                        <b-card-header header-tag="header" class="p-1" role="tab">
-                            <span class="toggle_button" v-b-toggle.accordion-4>
-                                <b-icon-gear-wide-connected />
-                                Ожидаемые результаты</span
-                            >
-                        </b-card-header>
-                        <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel" visible>
-                            <b-card-body>
-                                <v-waited model-name="ProgObjectsWaites" ref="waited" />
-                            </b-card-body>
-                        </b-collapse>
-                    </b-card>
-                    <b-card no-body class="mb-1">
-                        <b-card-header header-tag="header" class="p-1" role="tab">
-                            <span class="toggle_button" v-b-toggle.accordion-5>
-                                <b-icon-gear-wide-connected />
-                                Прогнозируемые риски</span
-                            >
-                        </b-card-header>
-                        <b-collapse id="accordion-5" accordion="my-accordion" role="tabpanel">
-                            <b-card-body>
-                                <v-riscs model-name="ProgObjectsRiscs" ref="riscs" />
-                            </b-card-body>
-                        </b-collapse>
-                    </b-card>
-                    <b-card no-body class="mb-1">
-                        <b-card-header header-tag="header" class="p-1" role="tab">
-                            <span class="toggle_button" v-b-toggle.accordion-6>
-                                <b-icon-gear-wide-connected />
-                                Опись прилагаемых документов</span
-                            >
-                        </b-card-header>
-                        <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel">
-                            <b-card-body>
-                                <v-uploads model-name="Files" ref="files" />
-                            </b-card-body>
-                        </b-collapse>
-                    </b-card>
+                    <div class="permisions" v-can:root>
+                        <b-card no-body class="mb-1">
+                            <b-card-header header-tag="header" class="p-1" role="tab">
+                                <span class="toggle_button" v-b-toggle.accordion-3>
+                                    <b-icon-gear-wide-connected />
+                                    Обоснование необходимости (целесообразности) планируемых мероприятий</span
+                                >
+                            </b-card-header>
+                            <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
+                                <b-card-body>
+                                    <v-necessary model-name="ProObjectsNecessary" ref="necessary" />
+                                </b-card-body>
+                            </b-collapse>
+                        </b-card>
+                        <b-card no-body class="mb-1">
+                            <b-card-header header-tag="header" class="p-1" role="tab">
+                                <span class="toggle_button" v-b-toggle.accordion-4>
+                                    <b-icon-gear-wide-connected />
+                                    Ожидаемые результаты</span
+                                >
+                            </b-card-header>
+                            <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel" visible>
+                                <b-card-body>
+                                    <v-waited model-name="ProgObjectsWaites" ref="waited" />
+                                </b-card-body>
+                            </b-collapse>
+                        </b-card>
+                        <b-card no-body class="mb-1">
+                            <b-card-header header-tag="header" class="p-1" role="tab">
+                                <span class="toggle_button" v-b-toggle.accordion-5>
+                                    <b-icon-gear-wide-connected />
+                                    Прогнозируемые риски</span
+                                >
+                            </b-card-header>
+                            <b-collapse id="accordion-5" accordion="my-accordion" role="tabpanel">
+                                <b-card-body>
+                                    <v-riscs model-name="ProgObjectsRiscs" ref="riscs" />
+                                </b-card-body>
+                            </b-collapse>
+                        </b-card>
+                        <b-card no-body class="mb-1">
+                            <b-card-header header-tag="header" class="p-1" role="tab">
+                                <span class="toggle_button" v-b-toggle.accordion-6>
+                                    <b-icon-gear-wide-connected />
+                                    Опись прилагаемых документов</span
+                                >
+                            </b-card-header>
+                            <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel">
+                                <b-card-body>
+                                    <v-uploads model-name="Files" ref="files" />
+                                </b-card-body>
+                            </b-collapse>
+                        </b-card>
+                    </div>
                 </div>
             </div>
             <b-button type="submit" variant="info">Сохранить</b-button>
@@ -565,7 +565,7 @@ export default {
 
         ...mapActions(["requestPageData", "requestCity"]),
         setSelected(value) {
-            formData.id_priority = value;
+            this.formData.id_priority = value;
         },
         setFloat(val, attr) {
             if (val.search(".") != -1) val.replace(".", ",");
@@ -579,6 +579,7 @@ export default {
         },
         onSubmit(e) {
             e.preventDefault();
+            console.log(this.$route.path);
             let form = document.getElementById("object_form");
             let formData = new FormData(form);
 
@@ -601,7 +602,6 @@ export default {
                     }
                     this.errors = response.data;
                 }
-
             });
         },
         errorReport(message) {

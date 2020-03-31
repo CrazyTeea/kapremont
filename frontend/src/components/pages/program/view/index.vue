@@ -1,22 +1,25 @@
 <template>
     <div id="dev_programme">
-        <b-modal centered id="modal-1" title="Внимание">
-            <p class="my-4">
-                Уважаемые пользователи! В связи с техническими работами на сервере возможность загрузки программы модернизации инфраструктуры образовательных организаций высшего образования (далее -
-                программа) в формате pdf и отправка на согласование в Минобрнауки России будет доступна с 13 марта 2020 года. Срок направления программы на согласование с Минобрнауки России будет
-                продлён до 20 марта 2020 года. Официальное письмо о продлении срока представления программы в Минобрнауки России:
-                <a href="/baner.pdf" target="_blank">MN-17_90</a> .
-            </p>
-        </b-modal>
+        <div v-can:root>
+            <!-- <b-modal centered id="modal-1" title="Внимание">
+                <p class="my-4">
+                    Уважаемые пользователи! В связи с техническими работами на сервере возможность загрузки программы модернизации инфраструктуры образовательных организаций высшего образования (далее
+                    - программа) в формате pdf и отправка на согласование в Минобрнауки России будет доступна с 13 марта 2020 года. Срок направления программы на согласование с Минобрнауки России
+                    будет продлён до 20 марта 2020 года. Официальное письмо о продлении срока представления программы в Минобрнауки России:
+                    <a href="/baner.pdf" target="_blank">MN-17_90</a> .
+                </p>
+            </b-modal> -->
+        </div>
+
         <div class="row">
-            <div class="col-12">
-                <b-modal cancel-title="Отмена" centered :visible="ban">
+            <div v-can:root class="col-12">
+                <!-- <b-modal cancel-title="Отмена" centered :visible="ban">
                     Уважаемые пользователи! Сбор данных завершён. Доступ в систему закрыт
                 </b-modal>
                 <b-modal cancel-title="Отмена" centered :visible="!programStatus && !ban">
                     Уважаемые пользователи! В связи с техническими работами на сервере возможность загрузки программы модернизации инфраструктуры образовательных организаций высшего образования в
                     формате pdf и её отправки на согласование в Минобрнауки России продлена до 23 марта 2020 года.
-                </b-modal>
+                </b-modal> -->
             </div>
             <div class="col-6">
                 <b-table
@@ -51,7 +54,7 @@
         <div class="row">
             <div class="col-6">
                 <b-button variant="info" href="object/create" v-show="!programStatus && !ban">Добавить объект кап. ремонта</b-button>
-                <b-button variant="info" href="atz" v-show="!programStatus && !ban">Добавить мероприятия по АТЗ</b-button>
+                <b-button v-can:root variant="info" href="atz" v-show="!programStatus && !ban">Добавить мероприятия по АТЗ</b-button>
             </div>
             <div class="col-6"></div>
         </div>
@@ -239,10 +242,10 @@ export default {
     },
     methods: {
         ...mapActions(["requestPageData", "requestUser"]),
-        getApprove(){
-            Axios.get('/program/is-approve').then(response=>{
-                this.programStatus = response.data.p_status !== '0' ;
-                this.ban = response.data.ban !== '0';
+        getApprove() {
+            Axios.get("/program/is-approve").then(response => {
+                this.programStatus = response.data.p_status !== "0";
+                this.ban = response.data.ban !== "0";
             });
         },
         approveModal() {
@@ -272,7 +275,7 @@ export default {
                     if (!response.data.status) {
                         this.errorReport(response.data.msg);
                     }
-                })
+                });
             }
         },
         onRowClick(item) {
@@ -282,13 +285,8 @@ export default {
         },
         rowCount(attr) {
             if (attr === "resTable" && this.reservedObjects?.items) {
-                return (
-                    this.reservedObjects.items.length > this.resTable.perPage
-                );
-            } else if (attr === "prevTable" && this.priorityObjects?.items)
-                return (
-                    this.priorityObjects.items.length > this.prevTable.perPage
-                );
+                return this.reservedObjects.items.length > this.resTable.perPage;
+            } else if (attr === "prevTable" && this.priorityObjects?.items) return this.priorityObjects.items.length > this.prevTable.perPage;
             else return false;
         },
         fileInput() {

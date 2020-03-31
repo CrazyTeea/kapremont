@@ -1,8 +1,6 @@
 <?php
 
-
 namespace app\controllers\rest;
-
 
 use app\models\Organizations;
 use app\models\User;
@@ -29,13 +27,10 @@ class OrganizationsController extends RestController
 
     public function actionCurrent()
     {
-
-
-            $user = Yii::$app->getSession()->get('user');
-            return [
-                "org" =>$user->organization,
-            ];
-
+        $user = Yii::$app->getSession()->get('user');
+        return [
+            "org" =>$user->organization,
+        ];
     }
 
     public function actionById()

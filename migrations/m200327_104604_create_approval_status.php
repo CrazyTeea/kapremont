@@ -20,7 +20,6 @@ class m200327_104604_create_approval_status extends Migration
             'label' => $this->string()
         ]);
 
-
         $statuses = [
             'not_send' => 'В обработке', 
             'recomend' => 'Рекомендуется к согласованию',
