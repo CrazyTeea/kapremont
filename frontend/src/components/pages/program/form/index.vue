@@ -1,4 +1,3 @@
-<!--suppress ALL -->
 <template>
     <div class="program_object_form">
         <b-form enctype="multipart/form-data" id="object_form" @submit="onSubmit" @reset="onReset" method="post">
@@ -455,16 +454,44 @@ import Riscs from "./Riscs.vue";
 import Waited from "./Waited.vue";
 import Uploads from "./Uploads.vue";
 import Axios from "axios";
+import {
+    BButton,
+    BCard,
+    BCardBody,
+    BCardHeader,
+    BCollapse,
+    BForm,
+    BFormGroup,
+    BFormInput,
+    BFormSelect, BIconGearWideConnected,
+    VBToggle
+} from "bootstrap-vue";
+
+
 export default {
     name: "programForm",
-    components: {
+
+    directives:{
+        'b-toggle':VBToggle
+    },
+    components:{
+        BIconGearWideConnected,
+        BCollapse,
+        BCard,
+        BCardHeader,
+        BCardBody,
+        BForm,
+        BFormGroup,
+        BFormInput,
+        BButton,
         "v-svedenia": Svedenia,
         "v-user-panel": userPanel,
         "v-select2": Multiselect,
         "v-necessary": Necessary,
         "v-waited": Waited,
         "v-riscs": Riscs,
-        "v-uploads": Uploads
+        "v-uploads": Uploads,
+        'b-select':BFormSelect
     },
     computed: {
         ...mapGetters(["getPageData", "getCities", "getRegions"]),
