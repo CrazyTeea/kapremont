@@ -42,6 +42,7 @@ return [
             '/app/program-objects/zip',
             '/app/program-objects/export',
             '/app/program/export',
+            '/app/mgsu-admin/*',
         ],
     ],
     'orglist_view' => [
@@ -140,6 +141,9 @@ return [
         'type' => 2,
     ],
     '/app/program-objects/create' => [
+        'type' => 2,
+    ],
+    '/app/mgsu-admin/*' => [
         'type' => 2,
     ],
 ];

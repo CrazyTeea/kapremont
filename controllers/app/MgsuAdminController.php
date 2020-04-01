@@ -32,6 +32,33 @@ class MgsuAdminController extends Controller
         ]);
     }
 
+    public function actionObjectsTable($offset)
+    {
+        $params = $this->getParamsObjects(json_decode(Yii::$app->request->post('form')));
+        $select = ProgramObjects::getObjectsForTable($offset, $params);
+        // echo "<pre>";
+        // print_r($select);
+
+        return json_encode($select);
+    }
+
+    public function getParamsObjects($request)
+    {
+        $where_clouse = '';
+
+        $param_status = [
+            'status' => $request->status ?? null,
+        ];
+
+        foreach($param_status as $key => $param) {
+            if($param) {
+                $where_clouse .= " and $key = $param";
+            }
+        }
+        
+        return $where_clouse;
+    }
+
     private function getParams($request) //даже не смотри сюда, тут говнокод
     {
         $where_clouse = '';

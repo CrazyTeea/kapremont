@@ -5,8 +5,10 @@ import router from "./router";
 import platform from "platform";
 import Axios from "axios";
 import { IconsPlugin } from 'bootstrap-vue';
+import BootstrapVue from 'bootstrap-vue';
 
 // Optionally install the BootstrapVue icon components plugin
+Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
 import './styles';
