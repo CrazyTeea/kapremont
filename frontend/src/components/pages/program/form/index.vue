@@ -463,7 +463,7 @@ import {
     BForm,
     BFormGroup,
     BFormInput,
-    BFormSelect, BIconGearWideConnected,
+    BFormSelect,
     VBToggle
 } from "bootstrap-vue";
 
@@ -475,7 +475,6 @@ export default {
         'b-toggle':VBToggle
     },
     components:{
-        BIconGearWideConnected,
         BCollapse,
         BCard,
         BCardHeader,
