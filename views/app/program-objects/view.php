@@ -3,7 +3,6 @@
 use yii\bootstrap4\Accordion;
 use yii\bootstrap4\Html;
 use yii\widgets\DetailView;
-use Yii;
 
 
 $weara = [
