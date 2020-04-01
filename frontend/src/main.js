@@ -4,6 +4,12 @@ import store from "./store";
 import router from "./router";
 import platform from "platform";
 import Axios from "axios";
+import { IconsPlugin } from 'bootstrap-vue';
+
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin);
+
+import './styles';
 
 Vue.directive("can", {
     bind(el, binding) {

@@ -50,7 +50,6 @@
 <script>
 import Axios from "axios";
 import {
-    BIcon,
     BButton,
     BCard,
     BCardBody,
@@ -78,7 +77,6 @@ export default {
         BListGroupItem,
         BFormGroup,
         BFormTextarea,
-        BIcon
     },
     data() {
         return {

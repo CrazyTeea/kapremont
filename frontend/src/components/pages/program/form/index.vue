@@ -86,7 +86,7 @@
                                         :valid-feedback="feedback('ProgramObjects', 'id_priority', ' ')"
                                         :state="feedback('ProgramObjects', 'id_priority')"
                                     >
-                                        <b-form-input style="display: none" id="type" v-model="formData.id_priority" name="ProgramObjects[id_priority]" />
+                                        <b-form-input style="display: none" id="id_priority" v-model="formData.id_priority" name="ProgramObjects[id_priority]" />
                                         <b-select
                                             v-model="formData.id_priority"
                                             :options="[
@@ -109,7 +109,6 @@
                                             :options="getRegions"
                                             :reduce="region => region.id"
                                             label="region"
-                                            id="id_region"
                                             @input="
                                                 onChangeRegion({
                                                     id: formData.id_region
@@ -137,7 +136,6 @@
                                             "
                                             :reduce="city => city.id"
                                             label="city"
-                                            id="id_city"
                                         />
                                     </b-form-group>
                                     <b-form-group
@@ -170,12 +168,12 @@
 
                                     <b-form-group
                                         label="Год проведения последнего капитального ремонта/реконструкции:"
-                                        label-for="exploit_year"
+                                        label-for="last_exploit_year"
                                         :invalid-feedback="feedback('ProgramObjects', 'last_exploit_year', 'Введите год проведения последнего капитального ремонта/реконструкции :')"
                                         :valid-feedback="feedback('ProgramObjects', 'last_exploit_year', ' ')"
                                         :state="feedback('ProgramObjects', 'last_exploit_year') && exp_year_validator"
                                     >
-                                        <b-form-input id="exploit_year" name="ProgramObjects[last_exploit_year]" type="number" v-model="formData.last_exploit_year" />
+                                        <b-form-input id="last_exploit_year" name="ProgramObjects[last_exploit_year]" type="number" v-model="formData.last_exploit_year" />
                                     </b-form-group>
 
                                     <b-form-group
@@ -465,7 +463,7 @@ import {
     BForm,
     BFormGroup,
     BFormInput,
-    BFormSelect, BIconGearWideConnected,
+    BFormSelect,
     VBToggle
 } from "bootstrap-vue";
 
@@ -477,7 +475,6 @@ export default {
         'b-toggle':VBToggle
     },
     components:{
-        BIconGearWideConnected,
         BCollapse,
         BCard,
         BCardHeader,
@@ -567,7 +564,7 @@ export default {
 
         ...mapActions(["requestPageData", "requestCity"]),
         setSelected(value) {
-            formData.id_priority = value;
+            this.formData.id_priority = value;
         },
         setFloat(val, attr) {
             if (val.search(".") != -1) val.replace(".", ",");
