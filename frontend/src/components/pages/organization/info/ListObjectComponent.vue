@@ -142,7 +142,7 @@ import Axios from "axios";
 import {
     BCard,
     BCardBody,
-    BCardHeader,BIcon, BBreadcrumb,
+    BCardHeader, BBreadcrumb,
     BPagination, BTableSimple, BTbody, BTh, BThead, BTr
 } from "bootstrap-vue";
 export default {
@@ -157,7 +157,6 @@ export default {
         BTh,
         BTbody,
         BPagination,
-        BIcon
     },
     data() {
         return {
@@ -214,7 +213,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .hidden-overflow {
     overflow: hidden;
     overflow-x: scroll;

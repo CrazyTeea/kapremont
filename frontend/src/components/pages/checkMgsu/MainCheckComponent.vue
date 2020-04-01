@@ -99,11 +99,11 @@
                             <label>{{ item.quantity }}</label>
                         </b-th>
                         <b-th class="normal-font-weight-for-sell center-text-in-cell">
-                            <a v-if="item.file_exist === '1'" :href="`/program/download-doc/${item.id}`" class="a-decorating"><b-icon icon="document-text" scale="2" vriant="success"></b-icon></a>
+                            <a v-if="item.file_exist === '1'" :href="`/program/download-doc/${item.id}`" class="a-decorating"><b-icon icon="file-earmark-arrow-down" scale="2" vriant="success"></b-icon></a>
                             <b-icon v-else icon="alert-circle" scale="2"></b-icon>
                         </b-th>
                         <b-th class="normal-font-weight-for-sell center-text-in-cell">
-                            <b-icon v-if="item.p_status == '1'" icon="check" variant="success" scale="2"></b-icon>
+                            <b-icon v-if="item.p_status === '1'" icon="check" variant="success" scale="2"></b-icon>
                             <b-icon v-else icon="x-octagon" variant="danger" scale="2"></b-icon>
                         </b-th>
                     </b-tr>
@@ -136,8 +136,7 @@ import {
     BTh,
     BTbody,
     BPagination,
-    BIcon,
-    VBToggle
+    VBToggle,
 } from 'bootstrap-vue'
 export default {
     directives:{
@@ -160,7 +159,6 @@ export default {
         BTbody,
         BPagination,
         BBreadcrumb,
-        BIcon
     },
     data() {
         return {

@@ -197,7 +197,6 @@ import {
     BTable,
     BCardText,
     VBToggle,
-    BIconGearWideConnected
 } from "bootstrap-vue";
 export default {
     directives:{
@@ -209,11 +208,9 @@ export default {
         BCardBody,
         BButton,
         BPagination,
-        BModal,
         BTable,
         BCardText,
         "v-user-panel": userPanel,
-        BIconGearWideConnected,
     },
     data() {
         return {

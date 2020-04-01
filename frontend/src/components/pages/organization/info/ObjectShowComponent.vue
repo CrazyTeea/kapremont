@@ -209,7 +209,7 @@ import {
     BDropdownItem,
     BTable,
     BBreadcrumb,
-    VBToggle, BIcon, BIconGearWideConnected,
+    VBToggle,
 } from 'bootstrap-vue'
 export default {
     directives:{
@@ -229,8 +229,6 @@ export default {
         BCard,
         BCardHeader,
         BCardBody,
-        BIcon,
-        BIconGearWideConnected
     },
     data() {
         return {
