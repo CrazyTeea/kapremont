@@ -1,5 +1,19 @@
 <template>
     <div>
+        <b-breadcrumb :items="
+        [
+             {
+                text:'Список организаций',
+                href:'/organization/list'
+            },
+            {
+                text:'Список объектов',
+                href:`/organization/list/${org_id}`
+            },
+            {
+                text:this.items.name,
+            },
+        ]"/>
         <h1 class="mt-3">{{ this.items.name }}</h1>
         <div class="d-flex justify-content-between align-items-center">
             <h3 class="vertcal-gorizontal-align">Текущий статус: <label :class="`text-${status.variant}`">{{ status.label }}</label></h3>
@@ -182,9 +196,41 @@
 import Axios from "axios";
 import { CommentComponent } from "../../../organisms";
 import {mapActions, mapGetters} from "vuex";
+import {
+    BCard,
+    BCardHeader,
+    BCollapse,
+    BCardBody,
+    BTableSimple,
+    BTr,
+    BTh,
+    BTbody,
+    BDropdown,
+    BDropdownItem,
+    BTable,
+    BBreadcrumb,
+    VBToggle, BIcon, BIconGearWideConnected,
+} from 'bootstrap-vue'
 export default {
+    directives:{
+        'b-toggle':VBToggle
+    },
     components: {
-        "v-comments": CommentComponent
+        "v-comments": CommentComponent,
+        BBreadcrumb,
+        BCollapse,
+        BTableSimple,
+        BTr,
+        BTh,
+        BTbody,
+        BDropdown,
+        BDropdownItem,
+        BTable,
+        BCard,
+        BCardHeader,
+        BCardBody,
+        BIcon,
+        BIconGearWideConnected
     },
     data() {
         return {

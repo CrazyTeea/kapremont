@@ -44,9 +44,23 @@
 <script>
 import {userPanel} from '../../organisms'
 import {mapActions, mapGetters} from "vuex";
+import {
+    BButton,
+    BTable,
+    BPagination,
+    VBToggle,
+} from "bootstrap-vue";
 // import b_vue from 'bootstrap-vue';
 export default {
-    //name: "mainPage",
+    directives:{
+        'b-toggle':VBToggle
+    },
+    components:{
+        "v-userPanel":userPanel,
+        BButton,
+        BPagination,
+        BTable,
+    },
     data(){
         return {
             perPage: 5,
@@ -79,9 +93,6 @@ export default {
     },
     methods:{
         ...mapActions(['requestProgram','requestOrg','requestPageData'])
-    },
-    components:{
-        "v-userPanel":userPanel,
     },
     mounted() {
         this.requestPageData({pageName:"main"});

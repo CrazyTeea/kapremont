@@ -69,9 +69,23 @@
 
 <script>
 import Axios from 'axios'
+import {BFormInput, BTableSimple, BTbody, BTfoot, BForm, BButton, BTh, BThead, BTr, VBToggle} from "bootstrap-vue";
 
 export default {
-
+    directives:{
+        'b-toggle':VBToggle
+    },
+    components:{
+        BButton,
+        BForm,
+        BFormInput,
+        BTableSimple,
+        BThead,
+        BTr,
+        BTh,
+        BTbody,
+        BTfoot,
+    },
     mounted() {
         Axios.get('/rest/system/get-page',{
             params:{

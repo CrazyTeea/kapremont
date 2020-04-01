@@ -18,16 +18,21 @@
 <script>
 import {mapActions, mapGetters} from "vuex";
 import {userPanel} from "../../../organisms";
+import {BButton, BTable, VBToggle} from "bootstrap-vue";
 export default {
 
-    name: "OrgInfo",
+    directives:{
+        'b-toggle':VBToggle
+    },
+    components:{
+        'b-button':BButton,
+        'b-table':BTable,
+        userPanel
+    },
     data(){
         return {
             canChange: window.canChange
         }  
-    },
-    components: {
-        userPanel
     },
     computed: {
         ...mapGetters(['getPageData','getUser']),

@@ -60,7 +60,32 @@
 </template>
 
 <script>
+import {
+    BFormInput,
+    BTableSimple,
+    BTbody,
+    BTd,
+    BTfoot,
+    BTh,
+    BThead,
+    BTr,
+    VBToggle
+} from "bootstrap-vue";
+
 export default {
+    directives:{
+        'b-toggle':VBToggle
+    },
+    components:{
+        BFormInput,
+        BTableSimple,
+        BThead,
+        BTr,
+        BTh,
+        BTd,
+        BTbody,
+        BTfoot,
+    },
     props:{
         modelName:String
     },

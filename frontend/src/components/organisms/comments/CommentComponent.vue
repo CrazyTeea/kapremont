@@ -49,9 +49,37 @@
 
 <script>
 import Axios from "axios";
+import {
+    BIcon,
+    BButton,
+    BCard,
+    BCardBody,
+    BCardHeader,
+    BCollapse,
+    BListGroup,
+    BListGroupItem,
+    BFormGroup,
+    BFormTextarea,
+    VBToggle
+} from "bootstrap-vue";
 export default {
     name: "CommentComponent",
     props: ["obj_id"],
+    directives:{
+        'b-toggle':VBToggle
+    },
+    components:{
+        BCollapse,
+        BCard,
+        BCardHeader,
+        BCardBody,
+        BButton,
+        BListGroup,
+        BListGroupItem,
+        BFormGroup,
+        BFormTextarea,
+        BIcon
+    },
     data() {
         return {
             newComment: "",
@@ -74,7 +102,7 @@ export default {
                 this.user_id = res.data
             })
         },
-        async refreshComments(id) {
+        async refreshComments() {
             return Axios.get(`/api/comment/obj/${this.obj_id}`).then(res => {
                 this.allComments = res.data;
             });
@@ -94,7 +122,7 @@ export default {
                 headers: {
                     "X-CSRF-Token": this.csrf
                 }
-            }).then(res => {
+            }).then(() => {
                 this.refreshComments();
                 this.newComment = "";
             });

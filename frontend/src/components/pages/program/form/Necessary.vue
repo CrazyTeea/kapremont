@@ -160,7 +160,30 @@
 </template>
 
 <script>
+import {
+    BFormInput,
+    BTableSimple,
+    BTbody,
+    BTh,
+    BThead,
+    BTr,
+    BFormCheckbox,
+    VBToggle
+} from "bootstrap-vue";
+
 export default {
+    directives:{
+        'b-toggle':VBToggle
+    },
+    components:{
+        BFormCheckbox,
+        BFormInput,
+        BTableSimple,
+        BThead,
+        BTr,
+        BTh,
+        BTbody,
+    },
     props: {
         modelName: String
     },
@@ -516,7 +539,7 @@ export default {
                 }
             ]
         };
-    }
+    },
 };
 </script>
 

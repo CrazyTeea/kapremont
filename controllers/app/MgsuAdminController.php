@@ -37,10 +37,11 @@ class MgsuAdminController extends Controller
         $where_clouse = '';
         $where_org_name = '';
         $where_files = '';
+        $status_clouse = '';
 
         $params1 =  [
             'id' => $request->id ?? null,
-            
+            'status' => $request->status ?? null,
         ];
 
         $regParams = [
@@ -51,8 +52,8 @@ class MgsuAdminController extends Controller
         $params2 = [
             'file_exist' => $request->file_exist ?? null,
             'p_status' => $request->p_status ?? null,
+          
         ];
-
 
         foreach ($params1 as $key => $param) {
             if($param) {
@@ -72,7 +73,7 @@ class MgsuAdminController extends Controller
             }
         }
 
-        return $where_clouse . $where_files . $where_org_name;
+        return $where_clouse . $where_files . $where_org_name . $status_clouse;
     }
 
     private function getOrder($request, $default = 'res.id')

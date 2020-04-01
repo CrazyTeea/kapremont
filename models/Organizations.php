@@ -72,17 +72,17 @@ class Organizations extends \yii\db\ActiveRecord
         $query = Yii::$app->db
             ->createCommand("
                 SELECT 
-                    res.id, res.name, res.region, res.quantity, pr.file_exist, pr.p_status
+                    res.id, res.name, res.region, res.quantity, pr.file_exist, pr.p_status, res.status
                 FROM
                     (SELECT 
-                        org.id, org.name, COUNT(po.id_org) AS quantity, reg.region
+                        org.id, org.name, COUNT(po.id_org) AS quantity, reg.region, po.status
                     FROM
                         organizations AS org
                     JOIN regions AS reg ON org.id_region = reg.id
                     JOIN program_objects po ON org.id = po.id_org
                     WHERE
                         org.system_status = 1
-                    GROUP BY po.id_org
+                    GROUP BY po.id_org, po.status
                     ) AS res
                         JOIN
                     program pr ON pr.id_org = res.id
@@ -102,14 +102,14 @@ class Organizations extends \yii\db\ActiveRecord
                     COUNT(res.id) as quantity
                 FROM
                     (SELECT 
-                        org.id, org.name, COUNT(po.id_org) AS quantity, reg.region
+                        org.id, org.name, COUNT(po.id_org) AS quantity, reg.region, po.status
                     FROM
                         organizations AS org
                     JOIN regions AS reg ON org.id_region = reg.id
                     JOIN program_objects po ON org.id = po.id_org
                     WHERE
                         org.system_status = 1
-                    GROUP BY po.id_org
+                    GROUP BY po.id_org, po.status
                     ) AS res
                         JOIN
                     program pr ON pr.id_org = res.id

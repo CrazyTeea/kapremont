@@ -1,5 +1,12 @@
 <template>
     <div>
+        <b-breadcrumb :items="
+        [
+            {
+                text:'Список организаций',
+                href:'/organization/list'
+            }
+        ]"/>
         <b-card no-body class="mb-1">
             <b-card-header header-tag="header" class="p-1" role="tab">
                 <span class="toggle_button" v-b-toggle.accordion-3>
@@ -58,6 +65,14 @@
                                 ></b-button>
                             </b-input-group-append>
                         </b-input-group>
+                        <b-input-group prepend="Статус" class="mb-2">
+                            <b-form-select v-model="filters.status" :options="options.status"></b-form-select>
+                            <b-input-group-append>
+                                <b-button variant="outline-secondary" @click="filters.status = null"
+                                ><b-icon icon="backspace" variant="danger" scale="1.2"></b-icon
+                                ></b-button>
+                            </b-input-group-append>
+                        </b-input-group>
                     </div>
                 </b-card-body>
             </b-collapse>
@@ -112,8 +127,49 @@
 
 <script>
 import Axios from "axios";
-
+import {
+    BBreadcrumb,
+    BCard,
+    BCardHeader,
+    BInputGroup,
+    BFormInput,
+    BInputGroupAppend,
+    BCollapse,
+    BCardBody,
+    BButton,
+    BFormSelect,
+    BTableSimple,
+    BThead,
+    BTr,
+    BTh,
+    BTbody,
+    BPagination,
+    BIcon,
+    VBToggle
+} from 'bootstrap-vue'
 export default {
+    directives:{
+        'b-toggle':VBToggle
+    },
+    components:{
+        BCollapse,
+        BCard,
+        BCardHeader,
+        BCardBody,
+        BInputGroup,
+        BFormInput,
+        BInputGroupAppend,
+        BButton,
+        BFormSelect,
+        BTableSimple,
+        BThead,
+        BTr,
+        BTh,
+        BTbody,
+        BPagination,
+        BBreadcrumb,
+        BIcon
+    },
     data() {
         return {
             filters: {
@@ -122,7 +178,8 @@ export default {
                 name: null,
                 quantity: null,
                 file_exist: null,
-                p_status: null
+                p_status: null,
+                status: null
             },
             options: {
                 quantity: [
@@ -136,6 +193,12 @@ export default {
                 p_status: [
                     { value: "1", text: "Отправлена" },
                     { value: "0", text: "Не отправлена" }
+                ],
+                status: [
+                    {value: "1", text: "В обработке"},
+                    {value: "2", text: "Рекомендуется к согласованию"},
+                    {value: "3", text: "Не рекомендуется к согласованию"},
+                    {value: "4", text: "Возвращено на доработку"},
                 ]
             },
             csrf: document.getElementsByName("csrf-token")[0].content,
@@ -153,6 +216,7 @@ export default {
             window.location = `/organization/list/${id}`;
         },
         getTable(offset = 0) {
+            console.log(this.filters)
             let form = new FormData();
             form.append('form', JSON.stringify(this.filters));
             Axios.post(`/api/mgsu/main-table/${offset}`, form, {
@@ -160,6 +224,7 @@ export default {
                     "X-CSRF-Token": this.csrf
                 }
             }).then(res => {
+                console.log(res)
                 this.items = res.data.rows;
                 this.totalRows = res.data.count.quantity;
             });
