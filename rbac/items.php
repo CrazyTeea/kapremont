@@ -146,4 +146,10 @@ return [
     '/app/mgsu-admin/*' => [
         'type' => 2,
     ],
+    'dep' => [
+        'type' => 1,
+    ],
+    'dku' => [
+        'type' => 1,
+    ],
 ];

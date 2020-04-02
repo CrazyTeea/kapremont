@@ -159,7 +159,7 @@ class UserController extends Controller
                 return $this->goHome();
             }
         }
-        $orgs = ArrayHelper::map(Organizations::findAll(['system_status'=>1]),'id','name');
+        $orgs = ArrayHelper::map(Organizations::find()->joinWith(['program'])->where([Organizations::tableName().'.system_status'=>1,'program.system_status'=>1])->all(),'id','name');
 
         return $this->render('signup',compact('model','orgs'));
     }

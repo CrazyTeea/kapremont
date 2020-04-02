@@ -48,8 +48,6 @@ class MgsuAdminController extends Controller
         $select = ProgramObjects::find()->where($params)->offset($offset)->limit(10)->all();
         $count = ProgramObjects::find()->where($params)->count();
 
-
-
         $toServ = [];
         foreach ($select as $i => $item) {
             $toServ[$i] = [
