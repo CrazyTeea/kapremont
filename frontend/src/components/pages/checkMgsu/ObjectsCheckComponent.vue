@@ -1,7 +1,5 @@
 <template>
     <div>
-        Тут объект - {{ status }}
-
         <div class="table-overflow-hidden mt-3">
             <b-table-simple bordered hover>
                 <b-thead>
@@ -37,23 +35,41 @@
                     </b-tr>
                 </b-tbody>
             </b-table-simple>
+            <b-pagination v-model="currentPage" :total-rows="totalRows[status]" :per-page="perPage" />
         </div>
     </div>
 </template>
 
 <script>
-import Axios from "axios";
+import Axios from 'axios';
+import {BTableSimple,BTr,BTh,BTbody,BPagination,BThead} from 'bootstrap-vue'
 export default {
+    components:{
+        BTableSimple,
+        BTbody,BTr,
+        BTh,
+        BPagination,
+        BThead
+    },
     props: ["status"],
     data() {
         return {
             csrf: document.getElementsByName("csrf-token")[0].content,
-            items: []
+            items: [],
+            currentPage:1,
+            totalRows:[],
+            perPage: 10
         };
     },
     async mounted() {
         await this.status;
         await this.getObjects();
+    },
+    watch:{
+        currentPage() {
+            let offset = (parseInt(this.currentPage) - 1) * 10;
+            this.getObjects(offset);
+        },
     },
     methods: {
         getPriority(num) {
@@ -75,8 +91,9 @@ export default {
                     "X-CSRF-Token": this.csrf
                 }
             }).then(res => {
-                console.log(res);
-                this.items = res.data;
+                console.log(res.data);
+                this.items = res.data.items;
+                this.totalRows[this.status] = res.data.count
             });
         }
     }

@@ -32,11 +32,14 @@
 </template>
 
 <script>
-import Axios from "axios";
 import AllOrganizations from "./AllOrganizations.vue";
 import ObjectsCheckComponent from "./ObjectsCheckComponent.vue";
+import {BBreadcrumb, BTabs, BTab} from 'bootstrap-vue'
 export default {
     components: {
+        BBreadcrumb,
+        BTabs,
+        BTab,
         "v-all-organizations": AllOrganizations,
         "v-objects": ObjectsCheckComponent
     },
