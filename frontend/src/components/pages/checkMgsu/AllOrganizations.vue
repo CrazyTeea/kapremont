@@ -46,12 +46,12 @@
                                 <b-button variant="outline-secondary" @click="filters.p_status = null"><b-icon icon="backspace" variant="danger" scale="1.2"></b-icon></b-button>
                             </b-input-group-append>
                         </b-input-group>
-                        <b-input-group prepend="Статус" class="mb-2">
+                        <!--<b-input-group prepend="Статус" class="mb-2">
                             <b-form-select v-model="filters.status" :options="options.status"></b-form-select>
                             <b-input-group-append>
                                 <b-button variant="outline-secondary" @click="filters.status = null"><b-icon icon="backspace" variant="danger" scale="1.2"></b-icon></b-button>
                             </b-input-group-append>
-                        </b-input-group>
+                        </b-input-group>-->
                     </div>
                 </b-card-body>
             </b-collapse>
