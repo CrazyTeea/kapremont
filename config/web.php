@@ -120,7 +120,10 @@ $config = [
 
                 'api/fileUpload' => '/rest/upload/upload',
                 'api/fileRemove' => '/rest/upload/delete',
+
                 'api/mgsu/main-table/<offset:\d+>' => '/app/mgsu-admin/main-table',
+                'api/mgsu/objects-table/<offset:\d+>' => '/app/mgsu-admin/objects-table',
+                
                 'api/mgsu/count' => '/app/mgsu-admin/count',
                 'api/object/get-status/<id:\d+>' => '/rest/program-objects/get-status',
                 'api/get-object/<id:\d+>' => '/rest/program-objects/by-id',

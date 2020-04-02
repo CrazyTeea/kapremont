@@ -32,15 +32,43 @@ class MgsuAdminController extends Controller
         ]);
     }
 
+    public function actionObjectsTable($offset)
+    {
+        $params = $this->getParamsObjects(json_decode(Yii::$app->request->post('form')));
+        $select = ProgramObjects::getObjectsForTable($offset, $params);
+        // echo "<pre>";
+        // print_r($select);
+
+        return json_encode($select);
+    }
+
+    public function getParamsObjects($request)
+    {
+        $where_clouse = '';
+
+        $param_status = [
+            'status' => $request->status ?? null,
+        ];
+
+        foreach($param_status as $key => $param) {
+            if($param) {
+                $where_clouse .= " and $key = $param";
+            }
+        }
+        
+        return $where_clouse;
+    }
+
     private function getParams($request) //даже не смотри сюда, тут говнокод
     {
         $where_clouse = '';
         $where_org_name = '';
         $where_files = '';
+        $status_clouse = '';
 
         $params1 =  [
             'id' => $request->id ?? null,
-            
+            'status' => $request->status ?? null,
         ];
 
         $regParams = [
@@ -51,8 +79,8 @@ class MgsuAdminController extends Controller
         $params2 = [
             'file_exist' => $request->file_exist ?? null,
             'p_status' => $request->p_status ?? null,
+          
         ];
-
 
         foreach ($params1 as $key => $param) {
             if($param) {
@@ -72,7 +100,7 @@ class MgsuAdminController extends Controller
             }
         }
 
-        return $where_clouse . $where_files . $where_org_name;
+        return $where_clouse . $where_files . $where_org_name . $status_clouse;
     }
 
     private function getOrder($request, $default = 'res.id')

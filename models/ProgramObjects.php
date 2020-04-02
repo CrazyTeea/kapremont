@@ -177,4 +177,30 @@ class ProgramObjects extends \yii\db\ActiveRecord
         return $this->hasOne(Program::class, ['id' => 'id_program']);
     }
 
+    public static function getObjectsForTable($offset, $where_clause)
+    {
+        $query = Yii::$app->db->createCommand("
+            SELECT 
+                po.id AS po_id,
+                po.name AS po_name,
+                o.id AS o_id,
+                o.name AS o_name,
+                po.type as priority,
+                po.id_priority as type
+            FROM
+                program_objects po
+                    JOIN
+                organizations o ON po.id_org = o.id
+            WHERE
+                po.system_status = 1
+                $where_clause
+            ORDER BY o.id
+            LIMIT 10
+            OFFSET $offset
+            ")
+        ->queryAll();
+
+        return $query;
+    }
+
 }

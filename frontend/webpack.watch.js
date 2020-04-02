@@ -20,10 +20,10 @@ module.exports = {
                 test: /\.js/,
                 exclude: /(node_modules|bower_components)/,
                 use: [
-                   // "source-map-loader",
+                    // "source-map-loader",
                     'babel-loader'
                 ],
-               // enforce: "pre"
+                // enforce: "pre"
             },
             {
                 test: /\.vue$/,
