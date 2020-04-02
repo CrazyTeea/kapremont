@@ -104,8 +104,6 @@
 <script>
 import Axios from "axios";
 import {
-    TabsPlugin,
-    BBreadcrumb,
     BCard,
     BCardHeader,
     BInputGroup,
@@ -143,7 +141,6 @@ export default {
         BTh,
         BTbody,
         BPagination,
-        BBreadcrumb
     },
     data() {
         return {
@@ -191,7 +188,7 @@ export default {
             window.location = `/organization/list/${id}`;
         },
         getTable(offset = 0) {
-            console.log(this.filters);
+           // console.log(this.filters);
             let form = new FormData();
             form.append("form", JSON.stringify(this.filters));
             Axios.post(`/api/mgsu/main-table/${offset}`, form, {
@@ -199,7 +196,7 @@ export default {
                     "X-CSRF-Token": this.csrf
                 }
             }).then(res => {
-                console.log(res);
+               // console.log(res);
                 this.items = res.data.rows;
                 this.totalRows = res.data.count.quantity;
             });
