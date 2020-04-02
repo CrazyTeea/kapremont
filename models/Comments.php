@@ -27,7 +27,8 @@ class Comments extends ActiveRecord
             'message',
             'id_user',
             'username' => function($model) {return $model->user->username;},
-            'created_at'
+            'created_at',
+            'user_role' => function($model){return User::getRole($model->id_user);}
         ];
     }
 
