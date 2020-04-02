@@ -12,7 +12,7 @@
         </div>
 
         <div class="row">
-            <div v-can:root class="col-12">
+            <div class="col-12">
                 <!-- <b-modal cancel-title="Отмена" centered :visible="ban">
                     Уважаемые пользователи! Сбор данных завершён. Доступ в систему закрыт
                 </b-modal>
@@ -43,7 +43,7 @@
                     small
                     bordered
                 />
-                <b-button class="btn btn-sm" style="float: right" href="/organization/info">Подробнее</b-button>
+                <b-button v-can:root,faiv_user class="btn btn-sm" style="float: right" href="/organization/info">Подробнее</b-button>
             </div>
 
             <div class="col-4 offset-2">
@@ -53,7 +53,7 @@
         <br />
         <div class="row">
             <div class="col-6">
-                <b-button variant="info" href="object/create" v-show="!programStatus && !ban">Добавить объект кап. ремонта</b-button>
+                <b-button v-can:root,faiv_user variant="info" href="object/create" v-show="!programStatus && !ban">Добавить объект кап. ремонта</b-button>
                 <b-button v-can:root variant="info" href="atz" v-show="!programStatus && !ban">Добавить мероприятия по АТЗ</b-button>
             </div>
             <div class="col-6"></div>

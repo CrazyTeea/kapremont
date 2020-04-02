@@ -1,5 +1,31 @@
 <template>
     <div>
+        <b-card no-body class="mb-1">
+            <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.accordion-3>
+                <span class="toggle_button" >
+                    <b-icon icon="filter" scale="1.5" class="mr-2 ml-1"></b-icon>
+                    Фильтры</span
+                >
+            </b-card-header>
+            <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
+                <b-card-body>
+                    <div>
+                        <b-input-group prepend="ID Организации" class="mb-2">
+                            <b-form-input type="number" aria-label="First name" v-model="filters.id_org"></b-form-input>
+                            <b-input-group-append>
+                                <b-button variant="outline-secondary" @click="filters.id = null"><b-icon icon="backspace" variant="danger" scale="1.2"></b-icon></b-button>
+                            </b-input-group-append>
+                        </b-input-group>
+                        <b-input-group prepend="ID Объекта" class="mb-2">
+                            <b-form-input type="number" aria-label="First name" v-model="filters.id"></b-form-input>
+                            <b-input-group-append>
+                                <b-button variant="outline-secondary" @click="filters.id = null"><b-icon icon="backspace" variant="danger" scale="1.2"></b-icon></b-button>
+                            </b-input-group-append>
+                        </b-input-group>
+                    </div>
+                </b-card-body>
+            </b-collapse>
+        </b-card>
         <div class="table-overflow-hidden mt-3">
             <b-table-simple bordered hover>
                 <b-thead>
@@ -42,19 +68,51 @@
 
 <script>
 import Axios from 'axios';
-import {BTableSimple,BTr,BTh,BTbody,BPagination,BThead} from 'bootstrap-vue'
+import {
+    BTableSimple,
+    BCard,
+    BCardHeader,
+    BCollapse,
+    BCardBody,
+    BInputGroup,
+    BFormInput,
+    BInputGroupAppend,
+    BButton,
+    BTr,
+    BTh,
+    BTbody,
+    BPagination,
+    BThead,
+    VBToggle
+} from 'bootstrap-vue'
 export default {
+    directives:{
+        'b-toggle':VBToggle  
+    },
     components:{
+        BButton,
+        BInputGroupAppend,
+        BFormInput,
+        BInputGroup,
+        BCardBody,
+        BCollapse,
         BTableSimple,
         BTbody,BTr,
         BTh,
         BPagination,
-        BThead
+        BThead,
+        BCard,
+        BCardHeader
     },
     props: ["status"],
     data() {
         return {
             csrf: document.getElementsByName("csrf-token")[0].content,
+            filters: {
+                status: null,
+                id_org: null,
+                id: null
+            },
             items: [],
             currentPage:1,
             totalRows:[],
@@ -70,6 +128,12 @@ export default {
             let offset = (parseInt(this.currentPage) - 1) * 10;
             this.getObjects(offset);
         },
+        filters: {
+            handler() {
+                this.getObjects();
+            },
+            deep: true
+        }
     },
     methods: {
         getPriority(num) {
@@ -85,7 +149,9 @@ export default {
         },
         async getObjects(offset = 0) {
             let form = new FormData();
-            form.append("form", JSON.stringify({ status: this.status }));
+            this.filters.status = this.status
+            // form.append("form", JSON.stringify({ status: this.status }));
+            form.append("form", JSON.stringify(this.filters));
             return Axios.post(`/api/mgsu/objects-table/${offset}`, form, {
                 headers: {
                     "X-CSRF-Token": this.csrf
