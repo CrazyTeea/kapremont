@@ -35,41 +35,51 @@ class MgsuAdminController extends Controller
     public function actionObjectsTable($offset)
     {
         $post = Json::decode(Yii::$app->request->post('form'));
-        $select = ProgramObjects::find()->where(['system_status'=>1,'status'=>$post['status']])->orderBy('id_org')->offset($offset)->limit(10)->all();
-        $count = ProgramObjects::find()->where(['system_status'=>1,'status'=>$post['status']])->orderBy('id_org')->count();
+        $post_close = $this->getParamsObjects($post);
+
+        // echo "<pre>";
+        // print_r($params);
+        $begin_clause = [
+            'system_status' => 1,
+            'status' => $post['status'],
+        ];
+        $params = array_merge($begin_clause, $post_close ?? [] );
+
+        $select = ProgramObjects::find()->where($params)->offset($offset)->limit(10)->all();
+        $count = ProgramObjects::find()->where($params)->count();
 
         $toServ = [];
-        foreach ($select as $i=> $item){
+        foreach ($select as $i => $item) {
             $toServ[$i] = [
-              'o_id'=>$item->org->id,
-              'o_name'=>$item->org->name,
-                'po_id'=>$item->id,
-                'priority'=>$item->type,
-                'type'=>$item->id_priority,
-                'po_name'=>$item->name
+                'o_id' => $item->org->id,
+                'o_name' => $item->org->name,
+                'po_id' => $item->id,
+                'priority' => $item->type,
+                'type' => $item->id_priority,
+                'po_name' => $item->name
             ];
         }
 
         return Json::encode([
-            'items'=>$toServ,
-            'count'=>$count]);
+            'items' => $toServ,
+            'count' => $count
+        ]);
     }
 
     public function getParamsObjects($request)
     {
-        $where_clouse = '';
-
         $param_status = [
-            'status' => $request->status ?? null,
+            'id_org' => $request['id_org'] ?? null,
+            'id' => $request['id'] ?? null,
         ];
 
-        foreach($param_status as $key => $param) {
-            if($param) {
-                $where_clouse .= " and $key = $param";
+        foreach ($param_status as $key => $param) {
+            if ($param != null) {
+                $where_clause[$key] = $param;
             }
         }
-        
-        return $where_clouse;
+
+        return $where_clause ?? null;
     }
 
     private function getParams($request) //даже не смотри сюда, тут говнокод
@@ -92,23 +102,23 @@ class MgsuAdminController extends Controller
         $params2 = [
             'file_exist' => $request->file_exist ?? null,
             'p_status' => $request->p_status ?? null,
-          
+
         ];
 
         foreach ($params1 as $key => $param) {
-            if($param) {
+            if ($param) {
                 $where_clouse .= " and res.$key like '$param%'";
             }
         }
 
-        foreach ($params2 as $key => $param) { 
-            if($param != null) {
+        foreach ($params2 as $key => $param) {
+            if ($param != null) {
                 $where_files .= " and pr.$key = $param";
             }
         }
 
         foreach ($regParams as $key => $param) {
-            if($param != null) {
+            if ($param != null) {
                 $where_org_name .= " and res.$key like '%$param%'";
             }
         }
@@ -121,11 +131,11 @@ class MgsuAdminController extends Controller
         $params =  [
             'order' => $request->quantity ?? null,
         ];
-        
+
         foreach ($params as $param) {
-            if($param === 'up') {
+            if ($param === 'up') {
                 $order = 'res.quantity';
-            } elseif($param === 'down') {
+            } elseif ($param === 'down') {
                 $order = 'res.quantity desc';
             }
         }

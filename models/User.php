@@ -185,6 +185,7 @@ class User extends ActiveRecord implements IdentityInterface
 
     public static function getRole($id)
     {
-        return (new PhpManager())->getRolesByUser($id);
+        $role = (new PhpManager())->getRolesByUser($id);
+        return key($role);
     }
 }
