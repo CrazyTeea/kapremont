@@ -13,7 +13,7 @@
                     <b-list-group  v-for="(comment, index) in allComments" :key="index">
                         <b-list-group-item v-if="comment.user_role == 'mgsu'" class="flex-column align-items-start bg-light mt-2">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1 font-weight-light text-warning">Минобрнауки России <label class="font-weight-bold">(эксперт)</label></h5>
+                                    <h5 class="mb-1 font-weight-bold text-warning">Минобрнауки России (эксперт)</h5>
                                     <small>{{ comment.created_at }}</small>
                                 </div>
 
