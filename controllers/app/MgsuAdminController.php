@@ -34,12 +34,25 @@ class MgsuAdminController extends Controller
 
     public function actionObjectsTable($offset)
     {
-        $params = $this->getParamsObjects(json_decode(Yii::$app->request->post('form')));
-        $select = ProgramObjects::getObjectsForTable($offset, $params);
-        // echo "<pre>";
-        // print_r($select);
+        $post = Json::decode(Yii::$app->request->post('form'));
+        $select = ProgramObjects::find()->where(['system_status'=>1,'status'=>$post['status']])->offset($offset)->limit(10)->all();
+        $count = ProgramObjects::find()->where(['system_status'=>1,'status'=>$post['status']])->count();
 
-        return json_encode($select);
+        $toServ = [];
+        foreach ($select as $i=> $item){
+            $toServ[$i] = [
+              'o_id'=>$item->org->id,
+              'o_name'=>$item->org->name,
+                'po_id'=>$item->id,
+                'priority'=>$item->type,
+                'type'=>$item->id_priority,
+                'po_name'=>$item->name
+            ];
+        }
+
+        return Json::encode([
+            'items'=>$toServ,
+            'count'=>$count]);
     }
 
     public function getParamsObjects($request)
