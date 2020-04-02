@@ -35,8 +35,8 @@ class MgsuAdminController extends Controller
     public function actionObjectsTable($offset)
     {
         $post = Json::decode(Yii::$app->request->post('form'));
-        $select = ProgramObjects::find()->where(['system_status'=>1,'status'=>$post['status']])->offset($offset)->limit(10)->all();
-        $count = ProgramObjects::find()->where(['system_status'=>1,'status'=>$post['status']])->count();
+        $select = ProgramObjects::find()->where(['system_status'=>1,'status'=>$post['status']])->orderBy('id_org')->offset($offset)->limit(10)->all();
+        $count = ProgramObjects::find()->where(['system_status'=>1,'status'=>$post['status']])->orderBy('id_org')->count();
 
         $toServ = [];
         foreach ($select as $i=> $item){
