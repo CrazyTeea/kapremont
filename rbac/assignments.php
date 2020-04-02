@@ -12450,6 +12450,6 @@ return [
     ],
     2535 => [
         'dev_program',
-        'faiv_user',
+        'faiv_admin',
     ],
 ];

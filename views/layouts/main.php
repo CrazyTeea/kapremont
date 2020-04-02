@@ -11,6 +11,7 @@ use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
 use yii\bootstrap4\Breadcrumbs;
 use app\assets\AppAsset;
+use app\models\User;
 
 AppAsset::register($this);
 
@@ -92,5 +93,8 @@ GlyphiconAsset::register($this);
 
 <?php $this->endBody() ?>
 </body>
+    <script>
+        window.Permission = <?= json_encode(User::getRole(Yii::$app->user->id)) ?>
+    </script>
 </html>
 <?php $this->endPage() ?>
