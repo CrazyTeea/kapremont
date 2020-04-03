@@ -72,22 +72,21 @@ class Organizations extends \yii\db\ActiveRecord
         $query = Yii::$app->db
             ->createCommand("
                 SELECT 
-                    res.id, res.name, res.region, res.quantity, pr.file_exist, pr.p_status, res.status
+                    res.id, res.name, res.region, res.quantity, pr.file_exist, pr.p_status
                 FROM
                     (SELECT 
-                        org.id, org.name, COUNT(po.id_org) AS quantity, reg.region, po.status
+                        org.id, org.name, COUNT(po.id_org) AS quantity, reg.region
                     FROM
                         organizations AS org
                     JOIN regions AS reg ON org.id_region = reg.id
                     JOIN program_objects po ON org.id = po.id_org
                     WHERE
                         org.system_status = 1
-                    GROUP BY po.id_org, po.status
+                    GROUP BY po.id_org
                     ) AS res
                         JOIN
                     program pr ON pr.id_org = res.id
                     where 1 $whereClouse
-                    AND res.status <> 0
                 ORDER BY $order
                 LIMIT 10
                 OFFSET $offset")
@@ -103,19 +102,18 @@ class Organizations extends \yii\db\ActiveRecord
                     COUNT(res.id) as quantity
                 FROM
                     (SELECT 
-                        org.id, org.name, COUNT(po.id_org) AS quantity, reg.region, po.status
+                        org.id, org.name, COUNT(po.id_org) AS quantity, reg.region
                     FROM
                         organizations AS org
                     JOIN regions AS reg ON org.id_region = reg.id
                     JOIN program_objects po ON org.id = po.id_org
                     WHERE
                         org.system_status = 1
-                    GROUP BY po.id_org, po.status
+                    GROUP BY po.id_org
                     ) AS res
                         JOIN
                     program pr ON pr.id_org = res.id
                 where 1 $params
-                AND res.status <> 0
                 ORDER BY res.id
             ")->queryOne();
 
