@@ -87,6 +87,7 @@ class Organizations extends \yii\db\ActiveRecord
                         JOIN
                     program pr ON pr.id_org = res.id
                     where 1 $whereClouse
+                    AND res.status <> 0
                 ORDER BY $order
                 LIMIT 10
                 OFFSET $offset")
@@ -114,6 +115,7 @@ class Organizations extends \yii\db\ActiveRecord
                         JOIN
                     program pr ON pr.id_org = res.id
                 where 1 $params
+                AND res.status <> 0
                 ORDER BY res.id
             ")->queryOne();
 

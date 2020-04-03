@@ -45,8 +45,8 @@ class MgsuAdminController extends Controller
         ];
         $params = array_merge($begin_clause, $post_close ?? [] );
 
-        $select = ProgramObjects::find()->where($params)->offset($offset)->limit(10)->all();
-        $count = ProgramObjects::find()->where($params)->count();
+        $select = ProgramObjects::find()->where($params)->andWhere(['<>','status',0])->offset($offset)->limit(10)->all();
+        $count = ProgramObjects::find()->where($params)->andWhere(['<>','status',0])->count();
 
         $toServ = [];
         foreach ($select as $i => $item) {

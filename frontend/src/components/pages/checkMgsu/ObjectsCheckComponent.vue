@@ -149,7 +149,7 @@ export default {
         },
         async getObjects(offset = 0) {
             let form = new FormData();
-            this.filters.status = this.status
+            this.filters.status = this.status;
             // form.append("form", JSON.stringify({ status: this.status }));
             form.append("form", JSON.stringify(this.filters));
             return Axios.post(`/api/mgsu/objects-table/${offset}`, form, {
