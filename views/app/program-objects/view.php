@@ -114,7 +114,9 @@ $this->params['breadcrumbs'][] = $this->title;
     ?>
 
 
-
+    <script>
+        window.object_status = <?=$model->status?>
+    </script>
 
     <div id="app"></div>
 

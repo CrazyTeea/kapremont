@@ -394,7 +394,7 @@ export default {
                 this.items = this.fromServer.object;
                 this.items.org_name = this.fromServer.organization.name;
                 this.docs = this.fromServer.docs;
-                this.org_id = JSON.parse(res.data).org_id
+                this.org_id = JSON.parse(res.data).org_id;
 
                 let c=0.0, v=0.0,b=0.0;
                 this.fromServer.svedenia.forEach((item,index)=>{
