@@ -148,8 +148,32 @@ return [
     ],
     'dep' => [
         'type' => 1,
+        'children' => [
+            'orglist_view',
+            '/app/organization/*',
+            '/api/comment/*',
+            '/app/program/index',
+            '/app/program-objects/download-doc',
+            '/app/development-programme/download-doc',
+            '/app/program-objects/zip',
+            '/app/program-objects/export',
+            '/app/program/export',
+            '/app/mgsu-admin/*',
+        ],
     ],
     'dku' => [
         'type' => 1,
+        'children' => [
+            'orglist_view',
+            '/app/organization/*',
+            '/app/program/index',
+            '/app/program-objects/download-doc',
+            '/app/development-programme/download-doc',
+            '/api/comment/*',
+            '/app/program-objects/export',
+            '/app/program/export',
+            '/app/program-objects/zip',
+            '/app/mgsu-admin/*',
+        ],
     ],
 ];

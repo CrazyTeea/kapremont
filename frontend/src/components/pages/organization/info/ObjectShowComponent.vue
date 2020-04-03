@@ -16,11 +16,26 @@
         ]"/>
         <h1 class="mt-3">{{ this.items.name }}</h1>
         <div class="d-flex justify-content-between align-items-center">
-            <h3 class="vertcal-gorizontal-align">Текущий статус: <label :class="`text-${status.variant}`">{{ status.label }}</label></h3>
-            <b-dropdown id="dropdown-left" right  text="Изменить статус" variant="info" class="m-2">
+            <h5 class="vertcal-gorizontal-align">Текущий статус МГСУ: <label :class="`text-${status.variant}`">{{ status.label }}</label></h5>
+            <h5 class="vertcal-gorizontal-align">Текущий статус ДЭП: <label :class="`text-${dep_status.color}`">{{ dep_status.label }}</label></h5>
+            <h5 class="vertcal-gorizontal-align">Текущий статус ДКУ: <label :class="`text-${dku_status.color}`">{{ dku_status.label }}</label></h5>
+
+            <b-dropdown v-can:mgsu id="dropdown-left" right  text="Изменить статус" variant="info" class="m-2">
                 <b-dropdown-item :href="`/api/set-status/recomend/${obj_id}`" variant="success">Рекомендуется к согласованию</b-dropdown-item>
                 <b-dropdown-item :href="`/api/set-status/not-recomend/${obj_id}`" variant="danger">Не рекомендуется к согласованию</b-dropdown-item>
                 <b-dropdown-item :href="`/api/set-status/to-work/${obj_id}`" variant="warning">На доработку</b-dropdown-item>
+            </b-dropdown>
+
+            <!-- <h5 class="vertcal-gorizontal-align">Текущий статус ДЭП: <label :class="`text-${dep_status.color}`">{{ dep_status.label }}</label></h5> -->
+            <b-dropdown :disabled="!show.dep" v-can:dep id="dropdown-left" right  text="Изменить статус" variant="info" class="m-2">
+                <b-dropdown-item :href="`/api/set-status/approved/dep/${obj_id}`" variant="success">Согласовано ДЭП</b-dropdown-item>
+                <b-dropdown-item :href="`/api/set-status/rejected/dep/${obj_id}`" variant="warning">Резерв</b-dropdown-item>
+            </b-dropdown>
+
+            <!-- <h5 class="vertcal-gorizontal-align">Текущий статус ДКУ: <label :class="`text-${dku_status.color}`">{{ dku_status.label }}</label></h5> -->
+            <b-dropdown :disabled="!show.dku" v-can:dku id="dropdown-left" right  text="Изменить статус" variant="info" class="m-2">
+                <b-dropdown-item :href="`/api/set-status/approved/dku/${obj_id}`" variant="success">Согласовано ДКУ</b-dropdown-item>
+                <b-dropdown-item :href="`/api/set-status/rejected/dku/${obj_id}`" variant="warning">Резерв</b-dropdown-item>
             </b-dropdown>
         </div>
         <b-table-simple bordered hover class="mt-3">
@@ -236,6 +251,18 @@ export default {
                 label: '',
                 variant: ''
             },
+            dep_status: {
+                label: null,
+                color: null
+            },
+            dku_status: {
+                label: null,
+                color: null
+            },
+            show: {
+                dep: false,
+                dku: false
+            },
             csrf: document.getElementsByName("csrf-token")[0].content,
             items: [],
             obj_id: null,
@@ -374,6 +401,41 @@ export default {
         async getStatus() {
             Axios.get(`/api/get-status/${this.obj_id}`).then((res) =>{
                 this.status.label = res.data.label;
+                
+                let dep = res.data.dep_status;
+                if(dep === 'not') {
+                    this.dep_status.label = 'В обработке'
+                    this.dep_status.color = 'secondary'
+                } else if(dep === 'approved') {
+                    this.dep_status.label = 'Согласовано ДЭП'
+                    this.dep_status.color = 'success'
+                } else if(dep === 'rejected') {
+                    this.dep_status.label = 'Резерв'
+                    this.dep_status.color = 'warning'
+                }
+
+                let dku = res.data.dku_status;
+                if(dku === 'not') {
+                    this.dku_status.label = 'В обработке'
+                    this.dku_status.color = 'secondary'
+                } else if(dku === 'approved') {
+                    this.dku_status.label = 'Согласовано ДКУ'
+                    this.dku_status.color = 'success'
+                } else if(dku === 'rejected') {
+                    this.dku_status.label = 'Резерв'
+                    this.dku_status.color = 'warning'
+                }
+
+                if(res.data.id === 2) {
+                    console.log('Показать ДЭПу')
+                    this.show.dep = true
+                }
+                if(res.data.dep_status === 'approved') {
+                    console.log('Показать ДКУу');
+                    this.show.dku = true
+                }
+
+
                 let color = '';
                 if(res.data.id == 1) {
                     color = 'secondary'
@@ -382,7 +444,7 @@ export default {
                 } else if (res.data.id == 3) {
                     color = 'danger'
                 } else if (res.data.id == 4) {
-                    color = 'warning '
+                    color = 'warning'
                 }
                 this.status.variant = color;
                 console.log(res)
