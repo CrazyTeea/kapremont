@@ -18,13 +18,15 @@ class AllController extends Controller
                 po.square,
                 po.address,
                 po.year,
-                po.wear
+                po.wear,
+                po.status
             FROM
                 program_objects AS po
                     JOIN
                 cities ON cities.id = po.id_city
             WHERE
-                po.id_org = $id")->queryAll();
+                po.id_org = $id 
+            AND po.status <> 0")->queryAll();
 
         return json_encode($query);
     }
