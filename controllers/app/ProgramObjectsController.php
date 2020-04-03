@@ -264,6 +264,7 @@ class ProgramObjectsController extends AppController
         if ($post = Yii::$app->request->post()) {
             if ($model->load($post)) {
                 $transaction = Yii::$app->getDb()->beginTransaction();
+                $model->status = 1;
                 $save &= $model->save();
                 $errors['ProgramObjects'] = $model->getErrors();
                 $model->finance_sum = $model->coFinancing = 0;

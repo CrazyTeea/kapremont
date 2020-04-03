@@ -1,19 +1,36 @@
 <?php
 
+function counter($arr,$status){
+    $c=0;
+    if ($arr)
+        foreach ($arr as $item){
+            if ($item->status == $status)
+                $c++;
+        }
+    return $c;
+}
+
 ?>
 
 
 <table>
     <thead>
     <tr>
-        <th>№</th>
-        <th>Субъект РФ</th>
-        <th>Город</th>
-        <th>Вуз</th>
-        <th>Лимиты кап. ремонт</th>
-        <th>Лимиты АТЗ</th>
-        <th>Статус Программы</th>
-        <th>Кол-во объектов</th>
+        <th rowspan="2">№</th>
+        <th rowspan="2">Субъект РФ</th>
+        <th rowspan="2">Город</th>
+        <th rowspan="2">Вуз</th>
+        <th rowspan="2">Лимиты кап. ремонт</th>
+        <th rowspan="2">Лимиты АТЗ</th>
+        <th rowspan="2">Статус Программы</th>
+        <th colspan="5">Кол-во объектов</th>
+    </tr>
+    <tr>
+        <th>Всего</th>
+        <th>В обработке</th>
+        <th>Рекомендуется к согласованию</th>
+        <th>Не рекомендуется к согласованию</th>
+        <th>Возвращено на доработку</th>
     </tr>
     </thead>
 
@@ -29,6 +46,10 @@
                 <td><?=$obj->cost?></td>
                 <td><?=$obj->p_status ? 'Отправлено' : 'Не отправлено'?></td>
                 <td><?=$obj->objectsCount?></td>
+                <td><?= counter($obj->objects,1)?></td>
+                <td><?= counter($obj->objects,2)?></td>
+                <td><?= counter($obj->objects,3)?></td>
+                <td><?= counter($obj->objects,4)?></td>
             </tr>
         <?php endforeach;?>
     </tbody>
