@@ -110,6 +110,7 @@ $config = [
                 'program/approve' => 'app/program/approve',
                 'program/is-approve' => 'app/program/is-approve',
                 'organization/export' => 'app/program/export',
+                'program-objects/export' => 'app/program-objects/export',
                 'organization/list' => 'app/organization/list',
                 'organization/list/<id:\d+>' => 'app/organization/list-object',
                 'organization/obj/<id:\d+>' => 'app/organization/object-view',

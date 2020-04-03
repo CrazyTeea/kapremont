@@ -26,8 +26,8 @@
                 <v-objects status="3" />
             </b-tab>
         </b-tabs>
-
-        <a class="btn btn-warning mt-3" href="/organization/export">Скачать выгрузку</a>
+        <a class="btn btn-warning mt-3" href="/organization/export">Статистика по статусам</a>
+        <a class="btn btn-warning mt-3" href="/program-objects/export">Статистика по бюджетам</a>
     </div>
 </template>
 
