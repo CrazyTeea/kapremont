@@ -42,11 +42,12 @@ use Yii;
  * @property int $last_exploit_year
  * @property int $status
  * @var $docList ObjectDocumentsList[]
+ * @var $org Organizations
+ * @var $city Cities
+ * @var $region Regions
  */
 class ProgramObjects extends \yii\db\ActiveRecord
 {
-
-    
 
     /**
      * {@inheritdoc}
