@@ -96,6 +96,50 @@ class OrganizationController extends AppController
         return $this->redirect(Yii::$app->request->referrer);
     }
 
+    public function actionSetApproveStatusDep($obj_id)
+    {
+        if(Yii::$app->getUser()->can('dep')) {
+            $object = ProgramObjects::findOne($obj_id);
+            $object->dep_status = ProgramObjects::APPROVE_STATUS;
+            $object->save(false);
+        }
+
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function actionSetRejectedStatusDep($obj_id)
+    {
+        if(Yii::$app->getUser()->can('dep')) {
+            $object = ProgramObjects::findOne($obj_id);
+            $object->dep_status = ProgramObjects::REJECTED_STATUS;
+            $object->save(false);
+        }
+
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function actionSetApproveStatusDku($obj_id)
+    {
+        if(Yii::$app->getUser()->can('dku')) {
+            $object = ProgramObjects::findOne($obj_id);
+            $object->dku_status = ProgramObjects::APPROVE_STATUS;
+            $object->save(false);
+        }
+
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
+    public function actionSetRejectedStatusDku($obj_id)
+    {
+        if(Yii::$app->getUser()->can('dku')) {
+            $object = ProgramObjects::findOne($obj_id);
+            $object->dku_status = ProgramObjects::REJECTED_STATUS;
+            $object->save(false);
+        }
+
+        return $this->redirect(Yii::$app->request->referrer);
+    }
+
     private function setStatus($obj_id, $status)
     {
         if(Yii::$app->getUser()->can('mgsu')) {
@@ -108,13 +152,13 @@ class OrganizationController extends AppController
 
     public function actionGetApproveStatus($obj_id)
     {
-        // $query = ProgramObjects::findOne($obj_id)->astatus; 
-        // echo "<pre>";
-        // print_r($query);
+        $query = ProgramObjects::findOne($obj_id);
         
         return json_encode([
-            'label' => ProgramObjects::findOne($obj_id)->astatus->label,
-            'id' => ProgramObjects::findOne($obj_id)->astatus->id
+            'label' => $query->astatus->label,
+            'id' => $query->astatus->id,
+            'dep_status' => $query->dep_status,
+            'dku_status' => $query->dku_status
         ]);
     }
 

@@ -3,7 +3,7 @@ import App from "./App.vue";
 import store from "./store";
 import router from "./router";
 import platform from "platform";
-import { IconsPlugin } from 'bootstrap-vue';
+import { IconsPlugin } from "bootstrap-vue";
 //import BootstrapVue from 'bootstrap-vue';
 
 // Optionally install the BootstrapVue icon components plugin
@@ -15,9 +15,18 @@ import "./styles";
 Vue.directive("can", {
     bind(el, binding) {
         const roles = binding.arg.split(",");
-        if (!roles.includes(window.Permission)) {
-            setTimeout(()=>{el.style.display = "none";}, 0.0001)
-        }
+        setTimeout(()=>{
+            if (!roles.includes(window.Permission)) {
+                console.log(window.Permission)
+                el.style.display = "none";
+            }
+        }, 1)
+        
+        // console.log(window.Permission)
+        // if (!roles.includes(window.Permission)) {
+        //     console.log(window.Permission)
+        //     setTimeout(()=>{el.style.display = "none";}, 0.0001)
+        // }
     }
 });
 

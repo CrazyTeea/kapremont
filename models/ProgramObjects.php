@@ -48,6 +48,9 @@ use Yii;
  */
 class ProgramObjects extends \yii\db\ActiveRecord
 {
+    public const APPROVE_STATUS = 'approved';
+    public const REJECTED_STATUS = 'rejected';
+    
 
     /**
      * {@inheritdoc}
