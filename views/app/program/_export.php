@@ -1,11 +1,18 @@
 <?php
 
-function counter($arr,$status){
+function counter($arr,$status,$type = [0,1]){
     $c=0;
     if ($arr)
         foreach ($arr as $item){
             if ($item->status == $status)
-                $c++;
+                if (is_array($type)){
+                    if (in_array($item->type,$type))
+                        $c++;
+                }else{
+                    if ($item->type == $type)
+                        $c++;
+                }
+
         }
     return $c;
 }
@@ -22,7 +29,6 @@ function counter($arr,$status){
         <th>Вуз</th>
         <th>Лимиты кап. ремонт</th>
         <th>Лимиты АТЗ</th>
-        <th>Статус Программы</th>
         <th>Рекомендовано к утверждению по приоритетным объектам кап. Ремонт</th>
         <th>Рекомендовано к утверждению по  резервным объектам кап. Ремонт</th>
         <th>ИТОГО рекомендовано к утверждению</th>
@@ -35,16 +41,15 @@ function counter($arr,$status){
         foreach ($objs as $i => $obj):?>
             <tr>
                 <td><?=$i+1?></td>
-                <td><?=(is_array($obj->objects2) and isset($obj->objects2[0])) ? $obj->objects2[0]->region->region : ''?></td>
-                <td><?=(is_array($obj->objects2) and isset($obj->objects2[0])) ? $obj->objects2[0]->city->city : ''?></td>
+                <td><?=(is_array($obj->objects) and isset($obj->objects[0])) ? $obj->objects[0]->region->region : ''?></td>
+                <td><?=(is_array($obj->objects) and isset($obj->objects[0])) ? $obj->objects[0]->city->city : ''?></td>
                 <td><?=$obj->org->name?></td>
                 <td><?=$obj->finance_events?></td>
                 <td><?=$obj->cost?></td>
-                <td><?=$obj->p_status ? 'Отправлено' : 'Не отправлено'?></td>
-                <td><?=$obj->objectsCountPr?></td>
-                <td><?= $obj->objectsCountRe?></td>
-                <td><?= $obj->objectsCount?></td>
-                <td><?= $obj->finance_events - $obj->objectsCount?></td>
+                <td><?= counter($obj->objects,2,0)?></td>
+                <td><?= counter($obj->objects,2,1)?></td>
+                <td><?= $o = counter($obj->objects,2)?></td>
+                <td><?= $obj->finance_events - $o?></td>
             </tr>
         <?php endforeach;?>
     </tbody>
