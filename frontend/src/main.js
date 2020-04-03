@@ -17,10 +17,10 @@ Vue.directive("can", {
         const roles = binding.arg.split(",");
         setTimeout(()=>{
             if (!roles.includes(window.Permission)) {
-                console.log(window.Permission)
+                console.log(window.Permission);
                 el.style.display = "none";
             }
-        }, 1)
+        }, 1);
         
         // console.log(window.Permission)
         // if (!roles.includes(window.Permission)) {
