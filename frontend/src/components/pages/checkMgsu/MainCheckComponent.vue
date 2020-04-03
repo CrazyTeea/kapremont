@@ -25,6 +25,12 @@
             <b-tab title-link-class="text-danger" title="Не рекомендуется к согласованию">
                 <v-objects status="3" />
             </b-tab>
+            <b-tab title-link-class="text-danger" title="Не рекомендуется к согласованию">
+                <v-objects status="3" />
+            </b-tab>
+            <b-tab title-link-class="text-danger" title="Не рекомендуется к согласованию">
+                <v-objects status="3" />
+            </b-tab>
         </b-tabs>
 
         <a class="btn btn-warning mt-3" href="/organization/export">Скачать выгрузку</a>
