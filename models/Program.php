@@ -23,18 +23,6 @@ class Program extends ActiveRecord
     public function getObjects(){
         return $this->hasMany(ProgramObjects::class,['id_program'=>'id'])->andOnCondition([ProgramObjects::tableName().'.system_status'=>1]);
     }
-    public function getObjects2(){
-        return $this->hasMany(ProgramObjects::class,['id_program'=>'id'])->andOnCondition([ProgramObjects::tableName().'.system_status'=>1])->andOnCondition(['<>','status',0]);
-    }
-    public function getObjectsCount(){
-        return $this->hasMany(ProgramObjects::class,['id_program'=>'id'])->andOnCondition([ProgramObjects::tableName().'.system_status'=>1])->count();
-    }
-    public function getObjectsCountPr(){
-        return $this->hasMany(ProgramObjects::class,['id_program'=>'id'])->andOnCondition([ProgramObjects::tableName().'.system_status'=>1,'type'=>0])->andOnCondition(['<>','status',0])->count();
-    }
-    public function getObjectsCountRe(){
-        return $this->hasMany(ProgramObjects::class,['id_program'=>'id'])->andOnCondition([ProgramObjects::tableName().'.system_status'=>1,'type'=>1])->andOnCondition(['<>','status',0])->count();
-    }
     public function getOrg(){
         return $this->hasOne(Organizations::class,['id'=>'id_org']);
     }
