@@ -10,7 +10,7 @@ import { IconsPlugin } from "bootstrap-vue";
 //Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 
-import "./styles";
+//import "./styles";
 
 Vue.directive("can", {
     bind(el, binding) {
