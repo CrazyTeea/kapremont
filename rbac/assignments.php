@@ -12452,4 +12452,10 @@ return [
         'dev_program',
         'faiv_admin',
     ],
+    3116 => [
+        'dep',
+    ],
+    3117 => [
+        'dku',
+    ],
 ];
