@@ -20,20 +20,20 @@
             <h5 class="vertcal-gorizontal-align">Текущий статус ДЭП: <label :class="`text-${dep_status.color}`">{{ dep_status.label }}</label></h5>
             <h5 class="vertcal-gorizontal-align">Текущий статус ДКУ: <label :class="`text-${dku_status.color}`">{{ dku_status.label }}</label></h5>
 
-            <b-dropdown v-can:mgsu id="dropdown-left" right  text="Изменить статус" variant="info" class="m-2">
+            <b-dropdown v-can:mgsu right  text="Изменить статус" variant="info" class="m-2">
                 <b-dropdown-item :href="`/api/set-status/recomend/${obj_id}`" variant="success">Рекомендуется к согласованию</b-dropdown-item>
                 <b-dropdown-item :href="`/api/set-status/not-recomend/${obj_id}`" variant="danger">Не рекомендуется к согласованию</b-dropdown-item>
                 <b-dropdown-item :href="`/api/set-status/to-work/${obj_id}`" variant="warning">На доработку</b-dropdown-item>
             </b-dropdown>
 
             <!-- <h5 class="vertcal-gorizontal-align">Текущий статус ДЭП: <label :class="`text-${dep_status.color}`">{{ dep_status.label }}</label></h5> -->
-            <b-dropdown :disabled="!show.dep" v-can:dep id="dropdown-left" right  text="Изменить статус" variant="info" class="m-2">
+            <b-dropdown :disabled="!show.dep" v-can:dep right  text="Изменить статус" variant="info" class="m-2">
                 <b-dropdown-item :href="`/api/set-status/approved/dep/${obj_id}`" variant="success">Согласовано ДЭП</b-dropdown-item>
                 <b-dropdown-item :href="`/api/set-status/rejected/dep/${obj_id}`" variant="warning">Резерв</b-dropdown-item>
             </b-dropdown>
 
             <!-- <h5 class="vertcal-gorizontal-align">Текущий статус ДКУ: <label :class="`text-${dku_status.color}`">{{ dku_status.label }}</label></h5> -->
-            <b-dropdown :disabled="!show.dku" v-can:dku id="dropdown-left" right  text="Изменить статус" variant="info" class="m-2">
+            <b-dropdown :disabled="!show.dku" v-can:dku right  text="Изменить статус" variant="info" class="m-2">
                 <b-dropdown-item :href="`/api/set-status/approved/dku/${obj_id}`" variant="success">Согласовано ДКУ</b-dropdown-item>
                 <b-dropdown-item :href="`/api/set-status/rejected/dku/${obj_id}`" variant="warning">Резерв</b-dropdown-item>
             </b-dropdown>
@@ -404,30 +404,30 @@ export default {
                 
                 let dep = res.data.dep_status;
                 if(dep === 'not') {
-                    this.dep_status.label = 'В обработке'
+                    this.dep_status.label = 'В обработке';
                     this.dep_status.color = 'secondary'
                 } else if(dep === 'approved') {
-                    this.dep_status.label = 'Согласовано ДЭП'
+                    this.dep_status.label = 'Согласовано ДЭП';
                     this.dep_status.color = 'success'
                 } else if(dep === 'rejected') {
-                    this.dep_status.label = 'Резерв'
+                    this.dep_status.label = 'Резерв';
                     this.dep_status.color = 'warning'
                 }
 
                 let dku = res.data.dku_status;
                 if(dku === 'not') {
-                    this.dku_status.label = 'В обработке'
+                    this.dku_status.label = 'В обработке';
                     this.dku_status.color = 'secondary'
                 } else if(dku === 'approved') {
-                    this.dku_status.label = 'Согласовано ДКУ'
+                    this.dku_status.label = 'Согласовано ДКУ';
                     this.dku_status.color = 'success'
                 } else if(dku === 'rejected') {
-                    this.dku_status.label = 'Резерв'
+                    this.dku_status.label = 'Резерв';
                     this.dku_status.color = 'warning'
                 }
 
                 if(res.data.id === 2) {
-                    console.log('Показать ДЭПу')
+                    console.log('Показать ДЭПу');
                     this.show.dep = true
                 }
                 if(res.data.dep_status === 'approved') {
