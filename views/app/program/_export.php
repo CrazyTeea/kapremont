@@ -17,6 +17,34 @@ function counter($arr,$status,$type = [0,1]){
     return $c;
 }
 
+
+$html = '';
+$i_f = $i_c = $i_c1 = 0;
+foreach ($objs as $i => $obj){
+    $k = $i+1;
+    $c0 = counter($obj->objects,2,0);
+    $c1 = counter($obj->objects,2,1);
+    $c12 = counter($obj->objects,2);
+    $o = $obj->finance_events - $c12;
+    $i_f += $obj->finance_events;
+    $i_c += $obj->cost;
+    $html.=" <tr>
+        <td>$k</td>";
+    if (is_array($obj->objects) and isset($obj->objects[0])){
+        $html.="<td>{$obj->objects[0]->region->region}</td>
+        <td> {$obj->objects[0]->city->city}</td>";
+    }
+    $html.="<td>{$obj->org->name}</td>
+        <td>$obj->finance_events</td>
+        <td>$obj->cost</td>
+        <td>$c0</td>
+        <td>$c1</td>
+        <td>$c12</td>
+        <td>$o</td>
+    </tr>";
+}
+
+
 ?>
 
 
@@ -37,21 +65,21 @@ function counter($arr,$status,$type = [0,1]){
     </thead>
 
     <tbody>
-    <?php /** @var \app\models\ProgramObjects[] $objs */
-        foreach ($objs as $i => $obj):?>
-            <tr>
-                <td><?=$i+1?></td>
-                <td><?=(is_array($obj->objects) and isset($obj->objects[0])) ? $obj->objects[0]->region->region : ''?></td>
-                <td><?=(is_array($obj->objects) and isset($obj->objects[0])) ? $obj->objects[0]->city->city : ''?></td>
-                <td><?=$obj->org->name?></td>
-                <td><?=$obj->finance_events?></td>
-                <td><?=$obj->cost?></td>
-                <td><?= counter($obj->objects,2,0)?></td>
-                <td><?= counter($obj->objects,2,1)?></td>
-                <td><?= $o = counter($obj->objects,2)?></td>
-                <td><?= $obj->finance_events - $o?></td>
-            </tr>
-        <?php endforeach;?>
+    <tr>
+        <td>Итого</td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td><?=$i_f?></td>
+        <td><?=$i_c?></td>
+        <td><?=$i_c1?></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+        <td></td>
+    </tr>
+        <?=$html?>
     </tbody>
 
 </table>
