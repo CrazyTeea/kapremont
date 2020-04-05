@@ -20,20 +20,20 @@
             <h5 class="vertcal-gorizontal-align">Текущий статус ДЭП: <label :class="`text-${dep_status.color}`">{{ dep_status.label }}</label></h5>
             <h5 class="vertcal-gorizontal-align">Текущий статус ДКУ: <label :class="`text-${dku_status.color}`">{{ dku_status.label }}</label></h5>
 
-            <b-dropdown v-can:mgsu right id="action" text="Изменить статус" variant="info" class="m-2">
+            <b-dropdown v-can:mgsu right text="Изменить статус" id="action" variant="info" class="m-2">
                 <b-dropdown-item :href="`/api/set-status/recomend/${obj_id}`" variant="success">Рекомендуется к согласованию</b-dropdown-item>
                 <b-dropdown-item :href="`/api/set-status/not-recomend/${obj_id}`" variant="danger">Не рекомендуется к согласованию</b-dropdown-item>
                 <b-dropdown-item :href="`/api/set-status/to-work/${obj_id}`" variant="warning">На доработку</b-dropdown-item>
             </b-dropdown>
 
             <!-- <h5 class="vertcal-gorizontal-align">Текущий статус ДЭП: <label :class="`text-${dep_status.color}`">{{ dep_status.label }}</label></h5> -->
-            <b-dropdown :disabled="!show.dep" id="action" v-can:dep right  text="Изменить статус" variant="info" class="m-2">
+            <b-dropdown :disabled="!show.dep" v-can:dep right id="action"  text="Изменить статус" variant="info" class="m-2">
                 <b-dropdown-item :href="`/api/set-status/approved/dep/${obj_id}`" variant="success">Согласовано ДЭП</b-dropdown-item>
                 <b-dropdown-item :href="`/api/set-status/rejected/dep/${obj_id}`" variant="warning">Резерв</b-dropdown-item>
             </b-dropdown>
 
             <!-- <h5 class="vertcal-gorizontal-align">Текущий статус ДКУ: <label :class="`text-${dku_status.color}`">{{ dku_status.label }}</label></h5> -->
-            <b-dropdown :disabled="!show.dku" id="action"    v-can:dku right  text="Изменить статус" variant="info" class="m-2">
+            <b-dropdown :disabled="!show.dku"  v-can:dku right id="action"  text="Изменить статус" variant="info" class="m-2">
                 <b-dropdown-item :href="`/api/set-status/approved/dku/${obj_id}`" variant="success">Согласовано ДКУ</b-dropdown-item>
                 <b-dropdown-item :href="`/api/set-status/rejected/dku/${obj_id}`" variant="warning">Резерв</b-dropdown-item>
             </b-dropdown>
@@ -391,7 +391,7 @@ export default {
         await this.getObject();
 
         let actionElement = document.querySelector('#action');
-        document.querySelector('#action').addEventListener('click', event => {this.actionHendler(event)})
+        actionElement?.addEventListener('click', event => {this.actionHendler(event)})
     },
     methods: {
         actionHendler(event) {
