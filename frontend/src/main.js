@@ -20,9 +20,11 @@ Vue.directive("can", {
                 // console.log(node.child);
                 el.style.display = 'none';
                 node.elm.parentElement.removeChild(node.elm);
-                let e = document.getElementById(node.child.controlledBy);
-                if(e)
-                    e.innerHTML = null;
+                if (node.child) {
+                    let e = document.getElementById(node.child.controlledBy);
+                    if (e)
+                        e.innerHTML = null;
+                }
 
             }
         }, 1);
