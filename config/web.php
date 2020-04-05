@@ -121,6 +121,8 @@ $config = [
                 'organization/obj/<id:\d+>' => 'app/organization/object-view',
                 'organization/info' => 'app/organization/info',
                 'organization/update/<id:\d+>' => 'app/organization/update',
+                'organization/user-info/<id_org:\d+>'=>'app/organization/user-info',
+                'api/user_info_roles' =>'api/user-info/roles',
                 'program/atz' => 'app/atz/index',
                 'check' => 'app/mgsu-admin/view',
 

@@ -86,6 +86,11 @@ const routes = [
         path: "/program/object/view/:id",
         name: "ObjectsForKrestiane",
         component: ObjectsForKrestiane
+    },
+    {
+        path: "/organization/user-info/:id_org",
+        name: "user-info",
+        component: ()=>import('./components/pages').then(module=>module.userInfo),
     }
 ];
 

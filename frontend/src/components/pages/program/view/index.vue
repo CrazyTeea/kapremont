@@ -13,6 +13,11 @@
 
         <div class="row">
             <div class="col-12">
+                <b-alert v-show="!user_status" show variant="warning" >
+                    Уважаемые пользователи! Просим Вас <a :href="`/organization/user-info/${id_org}`">заполнить форму</a>, предоставив контактные данные сотрудников организации.
+                </b-alert>
+            </div>
+            <div class="col-12">
                 <!-- <b-modal cancel-title="Отмена" centered :visible="ban">
                     Уважаемые пользователи! Сбор данных завершён. Доступ в систему закрыт
                 </b-modal>
@@ -43,7 +48,8 @@
                     small
                     bordered
                 />
-                <b-button v-can:root,faiv_user class="btn btn-sm" style="float: right" href="/organization/info">Подробнее</b-button>
+
+                <b-button class="btn btn-sm" style="float: right" href="/organization/info">Подробнее</b-button>
             </div>
 
             <div class="col-4 offset-2">
@@ -53,8 +59,8 @@
         <br />
         <div class="row">
             <div class="col-6">
-                <b-button v-can:root,faiv_user variant="info" href="object/create" v-show="!programStatus && !ban">Добавить объект кап. ремонта</b-button>
-                <b-button v-can:root variant="info" href="atz" v-show="!programStatus && !ban">Добавить мероприятия по АТЗ</b-button>
+                <b-button v-can:root,faiv_user variant="info" href="object/create" v-show="!programStatus && !ban && user_status">Добавить объект кап. ремонта</b-button>
+                <b-button v-can:root variant="info" href="atz" v-show="!programStatus && !ban && user_status">Добавить мероприятия по АТЗ</b-button>
             </div>
             <div class="col-6"></div>
         </div>
@@ -171,13 +177,13 @@
         <div class="row justify-content-end">
             <div>
                 <a href="/program/export" @click="setSpinner()" class="btn btn-secondary btn-sm" v-show="!programStatus && !ban">Выгрузить программу</a>
-                <label v-show="!programStatus" for="file_input_pdf_main" v-if="buttons.upload" class="btn btn-info btn-sm mt-2">Загрузить PDF</label>
-                <input v-show="!programStatus" type="file" id="file_input_pdf_main" class="hidden-file-input" @input="fileInput()" />
+                <label v-show="!programStatus && !ban && user_status" for="file_input_pdf_main" v-if="buttons.upload" class="btn btn-info btn-sm mt-2">Загрузить PDF</label>
+                <input v-show="!programStatus && !ban && user_status" type="file" id="file_input_pdf_main" class="hidden-file-input" @input="fileInput()" />
                 <!-- <b-button class="btn btn-sm btn-info" for="file_input_pdf_main">Загрузить PDF</b-button> -->
-                <b-button v-show="!programStatus" v-if="buttons.delete" class="btn btn-sm btn-danger" @click="deleteFileFromYii()">Удалить PDF</b-button>
+                <b-button v-show="!programStatus" v-if="buttons.delete && user_status" class="btn btn-sm btn-danger" @click="deleteFileFromYii()">Удалить PDF</b-button>
 
                 <a :href="'/program/download-doc/' + id_org" v-if="buttons.save" class="btn btn-success btn-sm">Скачать PDF</a>
-                <b-button class="btn btn-sm" @click="approveModal" v-show="!programStatus && !ban">Отправить на согласование</b-button>
+                <b-button class="btn btn-sm" @click="approveModal" v-show="!programStatus && !ban && user_status">Отправить на согласование</b-button>
             </div>
         </div>
     </div>
@@ -193,7 +199,7 @@ import {
     BCardBody,
     BCardHeader,
     BPagination,
-    BModal,
+    BAlert,
     BTable,
     BCardText,
     VBToggle,
@@ -203,6 +209,7 @@ export default {
         'b-toggle':VBToggle
     },
     components:{
+        BAlert,
         BCard,
         BCardHeader,
         BCardBody,
@@ -216,6 +223,7 @@ export default {
         return {
             canAxios: false,
             ban: false,
+            user_status:false,
             programStatus: null,
             bannerInfo: [],
             loadProgress: null,
@@ -243,6 +251,8 @@ export default {
             Axios.get("/program/is-approve").then(response => {
                 this.programStatus = response.data.p_status !== "0";
                 this.ban = response.data.ban !== "0";
+                this.user_status = response.data.user_status !== "0";
+                console.log(this.user_status);
             });
         },
         approveModal() {

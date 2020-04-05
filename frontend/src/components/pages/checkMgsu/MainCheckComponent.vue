@@ -26,7 +26,7 @@
                 <v-objects status="3" />
             </b-tab>
 
-                <b-tab v-can:dku,dep,root title-link-class="text-danger" title="Согласовано ДЫП">
+                <b-tab v-can:dku,dep,root title-link-class="text-danger" title="Согласовано ДЕП">
                     <v-objects status="2" dep_status="approved"/>
                 </b-tab>
                 <b-tab v-can:dku,dep,root title-link-class="text-danger" title="Согласовано ДКУ">
