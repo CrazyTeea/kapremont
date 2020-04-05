@@ -96,5 +96,9 @@ GlyphiconAsset::register($this);
     <script>
         window.Permission = <?= json_encode(User::getRole(Yii::$app->user->id)) ?>
     </script>
+
+    <script>
+        window.currentUser = <?= json_encode(Yii::$app->user->id) ?>
+    </script>
 </html>
 <?php $this->endPage() ?>
