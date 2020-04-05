@@ -57,6 +57,9 @@ class Organizations extends \yii\db\ActiveRecord
     public function getOrgInfo(){
         return $this->hasOne(OrgInfo::className(),['id_org'=>'id']);
     }
+    public function getUserInfo(){
+        return $this->hasMany(UserInfo::class,['id_org'=>'id']);
+    }
 
 
     public function getProgramObjects()

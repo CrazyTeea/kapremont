@@ -22,13 +22,10 @@ class ProgramController extends AppController
     }
 
     public function actionIsApprove(){
-        $program = Yii::$app->session->get('program');
-        if (!$program)
-            $program = Program::find()->where(['id_org' => Yii::$app->session->get('user')->id_org])->one();
 
         $id_org = Yii::$app->session->get('user')->id_org;
 
-        $gg = Yii::$app->db->createCommand("SELECT p_status,ban FROM program where id_org = {$id_org} ")->queryOne();
+        $gg = Yii::$app->db->createCommand("SELECT p_status,ban,user_status FROM program where id_org = {$id_org} ")->queryOne();
 
 
         return Json::encode($gg);

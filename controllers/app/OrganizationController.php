@@ -6,10 +6,13 @@ namespace app\controllers\app;
 use app\models\ApproveStatus;
 use app\models\Organizations;
 use app\models\OrgInfo;
+use app\models\ProgObjectsEvents;
 use app\models\Program;
 use app\models\ProgramObjects;
 use app\models\User;
+use app\models\UserInfo;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
 
 class OrganizationController extends AppController
@@ -18,6 +21,32 @@ class OrganizationController extends AppController
     {
         $canChange = !Program::findOne(['id_org' => Yii::$app->session->get('user')->id_org])->p_status;
         return $this->render('info', compact('canChange'));
+    }
+    public function actionUserInfo($id_org){
+        $models = UserInfo::findAll(['id_org'=>$id_org]);
+        if ($post = Yii::$app->request->post()){
+
+            $oldIds = ArrayHelper::map($models,'id','id');
+            $models = UserInfo::createMultiple(UserInfo::className(), $models);
+            UserInfo::loadMultiple($models, Yii::$app->request->post());
+            $deletedIDs = array_diff($oldIds, array_filter(ArrayHelper::map($models, 'id', 'id')));
+            if (!empty($deletedIDs))
+                UserInfo::deleteAll(['id' => $deletedIDs]);
+            $save = true;
+            foreach ($models as $model){
+                $model->id_org = $id_org;
+                $save &= $model->save();
+            }
+
+            if (isset($post['user_status'])) {
+                $program = Program::findOne(['id_org' => $id_org]);
+                $program->user_status = 1;
+                $save &= $program->save();
+            }
+
+            return Json::encode(['success'=>$save]);
+        }
+        return $this->render('userInfo',compact('models'));
     }
 
     public function actionUpdate($id)
@@ -153,7 +182,7 @@ class OrganizationController extends AppController
     public function actionGetApproveStatus($obj_id)
     {
         $query = ProgramObjects::findOne($obj_id);
-        
+
         return json_encode([
             'label' => $query->astatus->label,
             'id' => $query->astatus->id,
