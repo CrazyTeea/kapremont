@@ -104,19 +104,22 @@ export default {
         BCard,
         BCardHeader
     },
-    props: ["status"],
+    props: ["status","dep_status","dku_status","or_where"],
     data() {
         return {
             csrf: document.getElementsByName("csrf-token")[0].content,
             filters: {
                 status: null,
                 id_org: null,
-                id: null
+                id: null,
+                dep_status:null,
+                dku_status:null,
+                or_where:null,
             },
             items: [],
             currentPage:1,
             totalRows:[],
-            perPage: 10
+            perPage: 10,
         };
     },
     async mounted() {
@@ -150,6 +153,9 @@ export default {
         async getObjects(offset = 0) {
             let form = new FormData();
             this.filters.status = this.status;
+            this.filters.dep_status = this.dep_status;
+            this.filters.dku_status = this.dku_status;
+            this.filters.or_where = this.or_where;
             // form.append("form", JSON.stringify({ status: this.status }));
             form.append("form", JSON.stringify(this.filters));
             return Axios.post(`/api/mgsu/objects-table/${offset}`, form, {

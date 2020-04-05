@@ -25,6 +25,18 @@
             <b-tab title-link-class="text-danger" title="Не рекомендуется к согласованию">
                 <v-objects status="3" />
             </b-tab>
+
+                <b-tab v-can:dku,dep,root title-link-class="text-danger" title="Согласовано ДЫП">
+                    <v-objects status="2" dep_status="approved"/>
+                </b-tab>
+                <b-tab v-can:dku,dep,root title-link-class="text-danger" title="Согласовано ДКУ">
+                    <v-objects status="2" dep_status="approved" dku_status="approved"/>
+                </b-tab>
+                <b-tab v-can:dku,dep,root title-link-class="text-danger" title="Резерв">
+                    <v-objects status="2" dep_status="rejected" dku_status="rejected" or_where="true" />
+                </b-tab>
+
+
             <!-- <b-tab title-link-class="text-danger" title="Не рекомендуется к согласованию">
                 <v-objects status="3" />
             </b-tab>
@@ -50,10 +62,17 @@ export default {
         "v-objects": ObjectsCheckComponent
     },
     data() {
-        return {};
+        return {
+            tab_show:window.show_comp
+        };
     },
     methods: {},
-    watch: {}
+    watch: {
+
+    },
+    mounted() {
+        console.log(this.tab_show);
+    }
 };
 </script>
 

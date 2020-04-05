@@ -13,12 +13,17 @@ Vue.use(IconsPlugin);
 //import "./styles";
 
 Vue.directive("can", {
-    bind(el, binding) {
+    bind(el, binding,node) {
         const roles = binding.arg.split(",");
         setTimeout(()=>{
             if (!roles.includes(window.Permission)) {
-                console.log(window.Permission);
-                el.style.display = "none";
+                console.log(node.child);
+                el.style.display = 'none';
+                node.elm.parentElement.removeChild(node.elm);
+                let e = document.getElementById(node.child.controlledBy);
+                if(e)
+                    e.innerHTML = null;
+
             }
         }, 1);
         
