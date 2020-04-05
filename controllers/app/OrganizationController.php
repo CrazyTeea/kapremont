@@ -4,6 +4,7 @@
 namespace app\controllers\app;
 
 use app\models\ApproveStatus;
+use app\models\Comments;
 use app\models\Organizations;
 use app\models\OrgInfo;
 use app\models\ProgObjectsEvents;
@@ -104,6 +105,16 @@ class OrganizationController extends AppController
         return $this->render('ObjectView');
     }
 
+    public function commentPermision($obj_id)
+    {
+        $comment = Comments::find()->where(['id_user' => Yii::$app->user->id, 'id_obj' =>$obj_id])->one();
+        if($comment) {
+            return true;
+        }
+
+        return false;
+    }
+
     public function actionSetRecomendStatus($obj_id)
     {
         $this->setStatus($obj_id, ApproveStatus::STATUS_RECOMEND);
@@ -127,7 +138,7 @@ class OrganizationController extends AppController
 
     public function actionSetApproveStatusDep($obj_id)
     {
-        if(Yii::$app->getUser()->can('dep')) {
+        if(Yii::$app->getUser()->can('dep') && $this->commentPermision($obj_id)) {
             $object = ProgramObjects::findOne($obj_id);
             $object->dep_status = ProgramObjects::APPROVE_STATUS;
             $object->save(false);
@@ -138,7 +149,7 @@ class OrganizationController extends AppController
 
     public function actionSetRejectedStatusDep($obj_id)
     {
-        if(Yii::$app->getUser()->can('dep')) {
+        if(Yii::$app->getUser()->can('dep') && $this->commentPermision($obj_id)) {
             $object = ProgramObjects::findOne($obj_id);
             $object->dep_status = ProgramObjects::REJECTED_STATUS;
             $object->save(false);
@@ -149,7 +160,7 @@ class OrganizationController extends AppController
 
     public function actionSetApproveStatusDku($obj_id)
     {
-        if(Yii::$app->getUser()->can('dku')) {
+        if(Yii::$app->getUser()->can('dku') && $this->commentPermision($obj_id)) {
             $object = ProgramObjects::findOne($obj_id);
             $object->dku_status = ProgramObjects::APPROVE_STATUS;
             $object->save(false);
@@ -160,7 +171,7 @@ class OrganizationController extends AppController
 
     public function actionSetRejectedStatusDku($obj_id)
     {
-        if(Yii::$app->getUser()->can('dku')) {
+        if(Yii::$app->getUser()->can('dku') && $this->commentPermision($obj_id)) {
             $object = ProgramObjects::findOne($obj_id);
             $object->dku_status = ProgramObjects::REJECTED_STATUS;
             $object->save(false);
@@ -171,7 +182,8 @@ class OrganizationController extends AppController
 
     private function setStatus($obj_id, $status)
     {
-        if(Yii::$app->getUser()->can('mgsu')) {
+        
+        if(Yii::$app->getUser()->can('mgsu') && $this->commentPermision($obj_id)) {
             $object = ProgramObjects::findOne($obj_id);
             $object->status = $status;
             $object->save(false);

@@ -26,13 +26,13 @@
                 <v-objects status="3" />
             </b-tab>
 
-                <b-tab v-can:dku,dep,root title-link-class="text-danger" title="Согласовано ДЕП">
+                <b-tab title-link-class="text-success" title="Согласовано ДЕП">
                     <v-objects status="2" dep_status="approved"/>
                 </b-tab>
-                <b-tab v-can:dku,dep,root title-link-class="text-danger" title="Согласовано ДКУ">
+                <b-tab title-link-class="text-success" title="Согласовано ДКУ">
                     <v-objects status="2" dep_status="approved" dku_status="approved"/>
                 </b-tab>
-                <b-tab v-can:dku,dep,root title-link-class="text-danger" title="Резерв">
+                <b-tab title-link-class="text-warning" title="Резерв">
                     <v-objects status="2" dep_status="rejected" dku_status="rejected" or_where="true" />
                 </b-tab>
 
@@ -71,7 +71,6 @@ export default {
 
     },
     mounted() {
-        console.log(this.tab_show);
     }
 };
 </script>

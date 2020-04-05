@@ -455,6 +455,7 @@ import Waited from "./Waited.vue";
 import Uploads from "./Uploads.vue";
 import Axios from "axios";
 import {
+    BAlert,
     BButton,
     BCard,
     BCardBody,
@@ -475,6 +476,7 @@ export default {
         'b-toggle':VBToggle
     },
     components:{
+        BAlert,
         BCollapse,
         BCard,
         BCardHeader,
@@ -515,7 +517,6 @@ export default {
     data() {
         return {
             bannerInfo: [],
-
             csrf: document.getElementsByName("csrf-token")[0].content,
             formData: {
                 last_exploit_year: window.MODEL.base?.last_exploit_year || null,
@@ -578,7 +579,6 @@ export default {
         },
         onSubmit(e) {
             e.preventDefault();
-            console.log(this.$route.path);
             let form = document.getElementById("object_form");
             let formData = new FormData(form);
 

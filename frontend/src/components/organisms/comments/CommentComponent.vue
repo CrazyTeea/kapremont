@@ -13,7 +13,7 @@
                     <b-list-group  v-for="(comment, index) in allComments" :key="index">
                         <b-list-group-item v-if="comment.user_role == 'mgsu'" class="flex-column align-items-start bg-light mt-2">
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1 font-weight-bold text-warning">Минобрнауки России (эксперт)</h5>
+                                    <h5 :id="`user_${comment.id_user}`" class="mb-1 font-weight-bold text-warning">Минобрнауки России (эксперт)</h5>
                                     <small>{{ comment.created_at }}</small>
                                 </div>
 
@@ -27,7 +27,7 @@
                         <b-list-group-item v-else class="flex-column align-items-start mt-2">
                             <div>
                                 <div class="d-flex w-100 justify-content-between">
-                                    <h5 class="mb-1 font-weight-light">{{ comment.username }}</h5>
+                                    <h5 :id="`user_${comment.id_user}`" class="mb-1 font-weight-light">{{ comment.username }}</h5>
                                     <small>{{ comment.created_at }}</small>
                                 </div>
 

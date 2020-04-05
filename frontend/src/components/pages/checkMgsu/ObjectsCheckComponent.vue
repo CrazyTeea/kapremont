@@ -163,7 +163,6 @@ export default {
                     "X-CSRF-Token": this.csrf
                 }
             }).then(res => {
-                console.log(res.data);
                 this.items = res.data.items;
                 this.totalRows[this.status] = res.data.count
             });

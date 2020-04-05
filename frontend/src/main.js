@@ -17,7 +17,7 @@ Vue.directive("can", {
         const roles = binding.arg.split(",");
         setTimeout(()=>{
             if (!roles.includes(window.Permission)) {
-                console.log(node.child);
+                // console.log(node.child);
                 el.style.display = 'none';
                 node.elm.parentElement.removeChild(node.elm);
                 let e = document.getElementById(node.child.controlledBy);
