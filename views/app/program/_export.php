@@ -58,7 +58,7 @@ foreach ($objs as $i => $obj){
 <table>
     <thead>
     <tr>
-        <td colspan="10" ><?=date('r')?></td>
+        <td colspan="10" > Статистика по бюджетам (Организация) от <?=date('r')?></td>
     </tr>
     <tr>
         <th>№</th>

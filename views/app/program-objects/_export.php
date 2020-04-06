@@ -7,7 +7,7 @@ use app\models\ProgramObjects;
 <table>
     <thead>
     <tr>
-        <td colspan="9" ><?=date('r')?></td>
+        <td colspan="9" >Статистика по бюджетам от <?=date('r')?></td>
     </tr>
     <tr>
         <th>№</th>
