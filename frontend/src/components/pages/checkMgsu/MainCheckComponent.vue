@@ -19,17 +19,17 @@
             <b-tab title-link-class="text-warning" title="Возвращено на доработку">
                 <v-objects status="4" />
             </b-tab>
-            <b-tab title-link-class="text-success" title="Рекомендуется к согласованию">
+            <b-tab title-link-class="text-success" title="Рассмотрено">
                 <v-objects status="2" />
             </b-tab>
             <b-tab title-link-class="text-danger" title="Не рекомендуется к согласованию">
                 <v-objects status="3" />
             </b-tab>
 
-            <b-tab title-link-class="text-success" title="Согласовано ДЭП">
+            <b-tab title-link-class="text-success" title="Рассмотрено ДЭП">
                 <v-objects status="2" dep_status="approved"/>
             </b-tab>
-            <b-tab title-link-class="text-success" title="Согласовано ДКУ">
+            <b-tab title-link-class="text-success" title="Рассмотрено ДКУ">
                 <v-objects status="2" dep_status="approved" dku_status="approved"/>
             </b-tab>
             <b-tab title-link-class="text-warning" title="Резерв">
