@@ -33,7 +33,10 @@ foreach ($objs as $i => $obj){
     if (is_array($obj->objects) and isset($obj->objects[0])){
         $html.="<td>{$obj->objects[0]->region->region}</td>
         <td> {$obj->objects[0]->city->city}</td>";
+    }else{
+        $html.='<td></td><td></td>';
     }
+
     $html.="<td>{$obj->org->name}</td>
         <td>$obj->finance_events</td>
         <td>$obj->cost</td>
