@@ -13,37 +13,30 @@
             <b-tab title-link-class="text-info" title="Организации">
                 <v-all-organizations />
             </b-tab>
-            <b-tab title-link-class="text-secondary" title="В обработке">
+            <b-tab v-can:root,mgsu,dep,dku title-link-class="text-secondary" title="В обработке">
                 <v-objects status="1" />
             </b-tab>
-            <b-tab title-link-class="text-warning" title="Возвращено на доработку">
+            <b-tab v-can:root,mgsu,dep,dku title-link-class="text-warning" title="Возвращено на доработку">
                 <v-objects status="4" />
             </b-tab>
-            <b-tab title-link-class="text-success" title="Рекомендуется к согласованию">
+            <b-tab v-can:root,mgsu,dep,dku title-link-class="text-success" title="Рекомендуется к согласованию">
                 <v-objects status="2" />
             </b-tab>
-            <b-tab title-link-class="text-danger" title="Не рекомендуется к согласованию">
+            <b-tab v-can:root,mgsu,dep,dku title-link-class="text-danger" title="Не рекомендуется к согласованию">
                 <v-objects status="3" />
             </b-tab>
 
-                <b-tab title-link-class="text-success" title="Согласовано ДЕП">
-                    <v-objects status="2" dep_status="approved"/>
-                </b-tab>
-                <b-tab title-link-class="text-success" title="Согласовано ДКУ">
-                    <v-objects status="2" dep_status="approved" dku_status="approved"/>
-                </b-tab>
-                <b-tab title-link-class="text-warning" title="Резерв">
-                    <v-objects status="2" dep_status="rejected" dku_status="rejected" or_where="true" />
-                </b-tab>
-
-
-            <!-- <b-tab title-link-class="text-danger" title="Не рекомендуется к согласованию">
-                <v-objects status="3" />
+            <b-tab v-can:root,mgsu,dep,dku title-link-class="text-success" title="Согласовано ДЕП">
+                <v-objects status="2" dep_status="approved"/>
             </b-tab>
-            <b-tab title-link-class="text-danger" title="Не рекомендуется к согласованию">
-                <v-objects status="3" />
-            </b-tab> -->
+            <b-tab v-can:root,mgsu,dep,dku title-link-class="text-success" title="Согласовано ДКУ">
+                <v-objects status="2" dep_status="approved" dku_status="approved"/>
+            </b-tab>
+            <b-tab v-can:root,mgsu,dep,dku title-link-class="text-warning" title="Резерв">
+                <v-objects status="2" dep_status="rejected" dku_status="rejected" or_where="true" />
+            </b-tab>
         </b-tabs>
+        
         <a class="btn btn-warning mt-3" href="/organization/export">Статистика по статусам</a>
         <a class="btn btn-warning mt-3" href="/program-objects/export">Статистика по бюджетам</a>
     </div>

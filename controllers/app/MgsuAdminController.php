@@ -6,6 +6,7 @@ use app\models\Atz;
 use app\models\Organizations;
 use app\models\Program;
 use app\models\ProgramObjects;
+use app\models\User;
 use Yii;
 use yii\helpers\Json;
 use yii\web\Controller;
@@ -19,8 +20,15 @@ class MgsuAdminController extends Controller
 
     public function actionMainTable($offset)
     {
+
+        if(Yii::$app->user->can('faiv_admin')) {
+            $ids_user  = User::getUsersByRole('faiv_user');
+            
+        }
+
         $params = $this->getParams(json_decode(Yii::$app->request->post('form')));
         $order = $this->getOrder(json_decode(Yii::$app->request->post('form')));
+
         $select = Organizations::getMainCheckTable($offset, $params, $order);
         $count = Organizations::getMainCheckTableCount($params);
         // echo "<pre>";
