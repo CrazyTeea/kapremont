@@ -1,7 +1,7 @@
 <template>
     <div>
         <b-breadcrumb
-            :items="[
+                :items="[
                 {
                     text: 'Список организаций',
                     href: '/organization/list'
@@ -26,15 +26,15 @@
                 <v-objects status="3" />
             </b-tab>
 
-                <b-tab title-link-class="text-success" title="Согласовано ДЕП">
-                    <v-objects status="2" dep_status="approved"/>
-                </b-tab>
-                <b-tab title-link-class="text-success" title="Согласовано ДКУ">
-                    <v-objects status="2" dep_status="approved" dku_status="approved"/>
-                </b-tab>
-                <b-tab title-link-class="text-warning" title="Резерв">
-                    <v-objects status="2" dep_status="rejected" dku_status="rejected" or_where="true" />
-                </b-tab>
+            <b-tab title-link-class="text-success" title="Согласовано ДЭП">
+                <v-objects status="2" dep_status="approved"/>
+            </b-tab>
+            <b-tab title-link-class="text-success" title="Согласовано ДКУ">
+                <v-objects status="2" dep_status="approved" dku_status="approved"/>
+            </b-tab>
+            <b-tab title-link-class="text-warning" title="Резерв">
+                <v-objects status="2" dep_status="rejected" dku_status="rejected" or_where="true" />
+            </b-tab>
 
 
             <!-- <b-tab title-link-class="text-danger" title="Не рекомендуется к согласованию">
@@ -50,29 +50,29 @@
 </template>
 
 <script>
-import AllOrganizations from "./AllOrganizations.vue";
-import ObjectsCheckComponent from "./ObjectsCheckComponent.vue";
-import {BBreadcrumb, BTabs, BTab} from 'bootstrap-vue'
-export default {
-    components: {
-        BBreadcrumb,
-        BTabs,
-        BTab,
-        "v-all-organizations": AllOrganizations,
-        "v-objects": ObjectsCheckComponent
-    },
-    data() {
-        return {
-            tab_show:window.show_comp
-        };
-    },
-    methods: {},
-    watch: {
+    import AllOrganizations from "./AllOrganizations.vue";
+    import ObjectsCheckComponent from "./ObjectsCheckComponent.vue";
+    import {BBreadcrumb, BTabs, BTab} from 'bootstrap-vue'
+    export default {
+        components: {
+            BBreadcrumb,
+            BTabs,
+            BTab,
+            "v-all-organizations": AllOrganizations,
+            "v-objects": ObjectsCheckComponent
+        },
+        data() {
+            return {
+                tab_show:window.show_comp
+            };
+        },
+        methods: {},
+        watch: {
 
-    },
-    mounted() {
-    }
-};
+        },
+        mounted() {
+        }
+    };
 </script>
 
 <style></style>
