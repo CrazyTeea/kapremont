@@ -17,7 +17,6 @@ mix.js('src/main.js', '../web/vue/')
     .browserSync({
         proxy:'http://localhost:8080'
     })
-    .extract(['vue','vuex'])
     .sourceMaps(false);
 mix.webpackConfig({
     output: {

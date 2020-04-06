@@ -1,6 +1,4 @@
 {
     "/main.js": "/main.js",
-    "/index.css": "/index.css",
-    "/manifest.js": "/manifest.js",
-    "/vendor.js": "/vendor.js"
+    "/index.css": "/index.css"
 }
