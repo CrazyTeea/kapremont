@@ -47,7 +47,7 @@ class ProgramController extends AppController
         $path = Yii::getAlias( '@webroot' ) . "/uploads/$param";
         if (!file_exists($path))
             FileHelper::createDirectory($path);
-        $writer->save("$path/export.xls");
+        $writer->save("$path/$param.xls");
         Yii::$app->response->sendFile("$path/$param.xls")->send();
         if (file_exists("$path/$param.xls"))
             unlink("$path/$param.xls");

@@ -44,8 +44,8 @@
                 <v-objects status="3" />
             </b-tab> -->
         </b-tabs>
-        <a class="btn btn-warning mt-3" href="/organization/export/1">Статистика по статусам</a>
-        <a class="btn btn-warning mt-3" href="/organization/export/2">Статистика по бюджетам (Организация)</a>
+        <a class="btn btn-warning mt-3" href="/organization/export/2">Статистика по статусам</a>
+        <a class="btn btn-warning mt-3" href="/organization/export/1">Статистика по бюджетам (Организация)</a>
         <a class="btn btn-warning mt-3" href="/program-objects/export">Статистика по бюджетам (объект)</a>
     </div>
 </template>

@@ -7,6 +7,9 @@ use app\models\ProgramObjects;
 <table>
     <thead>
     <tr>
+        <td colspan="9" ><?=date('r')?></td>
+    </tr>
+    <tr>
         <th>№</th>
         <th>Вуз</th>
         <th>Наименование</th>
