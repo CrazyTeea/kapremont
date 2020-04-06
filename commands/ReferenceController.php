@@ -113,14 +113,7 @@ class ReferenceController extends Controller
         $err = 0;
         while (( $row = fgetcsv( $csv, 3463, ';' ) ) != false) {
             $founder = Founders::findOne($row[2]);
-            $org = Organizations::findOne($row[0]);
-            if ($org){
-                $org->id_founder = $row[2];
-                if (!$org->save()){
-                    $err++;
-                    print_r($org->errors);
-                }
-            }
+
             if (!$founder){
                 $founder = new Founders();
                 $founder->id = $row[2];
@@ -129,6 +122,14 @@ class ReferenceController extends Controller
             if (!$founder->save()){
                 $err++;
                 print_r($founder->getErrors());
+            }
+            $org = Organizations::findOne($row[0]);
+            if ($org){
+                $org->id_founder = $row[2];
+                if (!$org->save()){
+                    $err++;
+                    print_r($org->errors);
+                }
             }
         }
         if ($err>0)
