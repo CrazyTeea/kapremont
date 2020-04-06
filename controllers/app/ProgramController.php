@@ -6,6 +6,7 @@ namespace app\controllers\app;
 
 use app\models\Program;
 use app\models\ProgramObjects;
+use app\models\User;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Reader\Html;
 use Yii;
@@ -15,7 +16,8 @@ use yii\helpers\Json;
 class ProgramController extends AppController
 {
     public function actionIndex(){
-        if (Yii::$app->user->can('orglist_view')){
+        $user = User::findOne(Yii::$app->user->id);
+        if (($user->username == 'admin@admin.ru' ) || Yii::$app->user->can('orglist_view')){
             return $this->redirect(['/organization/list']);
         }
         return $this->render('index');
