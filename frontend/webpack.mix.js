@@ -17,7 +17,7 @@ mix.js('src/main.js', '../web/vue/')
     .browserSync({
         proxy:'http://localhost:8080'
     })
-    .sourceMaps();
+    .sourceMaps(false);
 mix.webpackConfig({
     output: {
         publicPath: '/vue/',
