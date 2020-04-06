@@ -7,6 +7,9 @@ use app\models\ProgramObjects;
 <table>
     <thead>
     <tr>
+        <td colspan="9" ><?=date('r')?></td>
+    </tr>
+    <tr>
         <th>№</th>
         <th>Вуз</th>
         <th>Наименование</th>
@@ -21,18 +24,18 @@ use app\models\ProgramObjects;
 
     <tbody>
     <?php foreach ($objs as $i => $obj):?>
-            <tr>
-                <td><?=$i+1?></td>
-                <td><?=$obj->org->name?></td>
-                <td><?=$obj->name?></td>
-                <td><?=$obj->assignment?></td>
-                <td><?=$obj->region->region?></td>
-                <td><?=$obj->city->city?></td>
-                <td><?=$obj->address?></td>
-                <td><?=$obj->id_priority?></td>
-                <td><?=$obj->program->finance_volume?></td>
-            </tr>
-        <?php endforeach;?>
+        <tr>
+            <td><?=$i+1?></td>
+            <td><?=$obj->org->name?></td>
+            <td><?=$obj->name?></td>
+            <td><?=$obj->assignment?></td>
+            <td><?=$obj->region->region?></td>
+            <td><?=$obj->city->city?></td>
+            <td><?=$obj->address?></td>
+            <td><?=$obj->id_priority?></td>
+            <td><?=$obj->program->finance_volume?></td>
+        </tr>
+    <?php endforeach;?>
     </tbody>
 
 </table>
