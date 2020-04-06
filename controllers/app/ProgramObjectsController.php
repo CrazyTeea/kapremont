@@ -248,6 +248,12 @@ class ProgramObjectsController extends AppController
     }
 
 
+    /**
+     * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
+     * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+     * @throws \yii\base\Exception
+     * Статистика по бюджетам (объект)
+     */
     public function actionExport(){
         $objs = ProgramObjects::find()->where(['system_status'=>1])->andWhere(['<>','status',0])->all();
         $html = $this->renderPartial('_export',compact('objs'));

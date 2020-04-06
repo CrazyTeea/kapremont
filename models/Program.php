@@ -23,6 +23,11 @@ class Program extends ActiveRecord
     public function getObjects(){
         return $this->hasMany(ProgramObjects::class,['id_program'=>'id'])->andOnCondition([ProgramObjects::tableName().'.system_status'=>1]);
     }
+    public function getObjectsValid(){
+        return $this->hasMany(ProgramObjects::class,['id_program'=>'id'])
+            ->andOnCondition([ProgramObjects::tableName().'.system_status'=>1])
+            ->andOnCondition(['<>','status',0]);
+    }
     public function getOrg(){
         return $this->hasOne(Organizations::class,['id'=>'id_org']);
     }
