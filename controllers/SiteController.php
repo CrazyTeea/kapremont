@@ -97,7 +97,7 @@ class SiteController extends Controller
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            if (($model->username == 'admin@admin.ru' ) || Yii::$app->user->can('orglist_view')){
+            if (($model->username == 'admin@admin.ru' ) || Yii::$app->user->can('orglist_view') || Yii::$app->user->can('faiv_admin')){
                 return $this->redirect(['/organization/list']);
             }
             return $this->goBack();

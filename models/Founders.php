@@ -15,4 +15,9 @@ class Founders extends ActiveRecord
            ['name','string'],
        ];
     }
+
+    public function getFaiv()
+    {
+        return $this->hasMany(FaivUsers::class, ['id' => 'id_founder']);
+    }
 }
