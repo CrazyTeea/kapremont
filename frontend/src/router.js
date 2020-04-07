@@ -4,6 +4,7 @@ import Atz from "./components/pages/program/atz/index.vue";
 import ListObject from "./components/pages/organization/info/ListObjectComponent.vue";
 import ObjView from "./components/pages/organization/info/ObjectShowComponent.vue";
 import ObjectsForKrestiane from "./components/pages/program/ObjectView/ViewComponent.vue";
+import FaivAdminComponent from "./components/pages/FaivAdmin/FaivAdminComponent.vue"
 
 Vue.use(VueRouter);
 
@@ -91,6 +92,11 @@ const routes = [
         path: "/organization/user-info/:id_org",
         name: "user-info",
         component: ()=>import('./components/pages').then(module=>module.userInfo),
+    },
+    {
+        path: "/admin/faiv",
+        name: FaivAdminComponent,
+        component: FaivAdminComponent
     }
 ];
 

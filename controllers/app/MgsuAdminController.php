@@ -3,6 +3,8 @@
 namespace app\controllers\app;
 
 use app\models\Atz;
+use app\models\FaivUsers;
+use app\models\Founders;
 use app\models\Organizations;
 use app\models\Program;
 use app\models\ProgramObjects;
@@ -22,8 +24,19 @@ class MgsuAdminController extends Controller
     {
 
         if(Yii::$app->user->can('faiv_admin')) {
-            $ids_user  = User::getUsersByRole('faiv_user');
+            $id_founder = FaivUsers::find()->where(['id_user' => Yii::$app->user->id])->one()->id_founder;
+
+            $params = $this->getParams(json_decode(Yii::$app->request->post('form')));
+            $order = $this->getOrder(json_decode(Yii::$app->request->post('form')));
             
+            $select = Organizations::getMainCheckTable($offset, $params, $order, " and id_founder = $id_founder");
+            $count = Organizations::getMainCheckTableCount($params, " and id_founder = $id_founder");
+
+
+            return Json::encode([
+                'rows' => $select,
+                'count' => $count
+            ]);
         }
 
         $params = $this->getParams(json_decode(Yii::$app->request->post('form')));

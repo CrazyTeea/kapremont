@@ -193,4 +193,9 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return (new PhpManager())->getUserIdsByRole($role);
     }
+
+    public function getFaiv()
+    {
+        return $this->hasMany(FaivUsers::class, ['id' => 'id_user']);
+    }
 }

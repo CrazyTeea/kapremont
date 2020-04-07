@@ -19,21 +19,28 @@ function counter($arr,$status,$type = [0,1]){
 
 
 $html = '';
-$i_f = $i_c = $i_c1 = 0;
+$i_c1 = $i_c2= $i_c3 = $i_c4= $i_c5= $i_c6 = 0;
 foreach ($objs as $i => $obj){
     $k = $i+1;
     $c0 = counter($obj->objects,2,0);
     $c1 = counter($obj->objects,2,1);
     $c12 = counter($obj->objects,2);
     $o = $obj->finance_events - $c12;
-    $i_f += $obj->finance_events;
-    $i_c += $obj->cost;
+    $i_c1 += $obj->finance_events;
+    $i_c2 += $obj->cost;
+    $i_c3 += $c0;
+    $i_c4 += $c1;
+    $i_c5 += $c12;
+    $i_c6 += $o;
     $html.=" <tr>
         <td>$k</td>";
     if (is_array($obj->objects) and isset($obj->objects[0])){
         $html.="<td>{$obj->objects[0]->region->region}</td>
         <td> {$obj->objects[0]->city->city}</td>";
+    }else{
+        $html.='<td></td><td></td>';
     }
+
     $html.="<td>{$obj->org->name}</td>
         <td>$obj->finance_events</td>
         <td>$obj->cost</td>
@@ -50,6 +57,9 @@ foreach ($objs as $i => $obj){
 
 <table>
     <thead>
+    <tr>
+        <td colspan="10" ><?=date('r')?></td>
+    </tr>
     <tr>
         <th>№</th>
         <th>Субъект РФ</th>
@@ -70,14 +80,13 @@ foreach ($objs as $i => $obj){
         <td></td>
         <td></td>
         <td></td>
-        <td><?=$i_f?></td>
-        <td><?=$i_c?></td>
         <td><?=$i_c1?></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td><?=$i_c2?></td>
+        <td><?=$i_c3?></td>
+        <td><?=$i_c4?></td>
+        <td><?=$i_c5?></td>
+        <td><?=$i_c5?></td>
+
     </tr>
         <?=$html?>
     </tbody>

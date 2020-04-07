@@ -70,7 +70,7 @@ class Organizations extends \yii\db\ActiveRecord
         return $this->hasOne(Program::class,['id_org'=>'id']);
     }
 
-    public static function getMainCheckTable($offset, $whereClouse, $order)
+    public static function getMainCheckTable($offset, $whereClouse, $order, $faiv = null)
     {
         $query = Yii::$app->db
             ->createCommand("
@@ -84,10 +84,10 @@ class Organizations extends \yii\db\ActiveRecord
                     JOIN regions AS reg ON org.id_region = reg.id
                     JOIN program_objects po ON org.id = po.id_org
                     WHERE
-                        org.system_status = 1
+                        org.system_status = 1 $faiv
                     GROUP BY po.id_org
                     ) AS res
-                        JOIN
+                        LEFT JOIN
                     program pr ON pr.id_org = res.id
                     where 1 $whereClouse
                 ORDER BY $order
@@ -98,7 +98,7 @@ class Organizations extends \yii\db\ActiveRecord
         return $query;
     }
 
-    public static function getMainCheckTableCount($params)
+    public static function getMainCheckTableCount($params, $faiv = null)
     {
         $count = Yii::$app->db->createCommand("
             SELECT 
@@ -111,10 +111,10 @@ class Organizations extends \yii\db\ActiveRecord
                     JOIN regions AS reg ON org.id_region = reg.id
                     JOIN program_objects po ON org.id = po.id_org
                     WHERE
-                        org.system_status = 1
+                        org.system_status = 1 $faiv
                     GROUP BY po.id_org
                     ) AS res
-                        JOIN
+                        LEFT JOIN
                     program pr ON pr.id_org = res.id
                 where 1 $params
                 ORDER BY res.id

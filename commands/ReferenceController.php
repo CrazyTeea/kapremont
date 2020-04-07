@@ -3,21 +3,32 @@
 
 namespace app\commands;
 
+use app\models\Founders;
 use app\models\Organizations;
 use app\models\Regions;
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Parser;
 use Lcobucci\JWT\Signer\Hmac\Sha256;
 use Lcobucci\JWT\Signer\Key;
+use Yii;
 use yii\console\Controller;
 
 
 class ReferenceController extends Controller
 {
     static $jwt_key = 'example_key233';
+
+    /**
+     * @return string
+     * @throws \yii\db\Exception
+     */
     public function actionIndex(){
-        if ($this->actionOrgs() and $this->actionRegions())
+        $transaction = Yii::$app->db->beginTransaction();
+        if ($this->actionOrgs() and $this->actionRegions() and $this->actionFounders()) {
+            $transaction->commit();
             return "success";
+        }
+        $transaction->rollBack();
         return "error";
     }
     public function actionOrgs(){
@@ -35,7 +46,7 @@ class ReferenceController extends Controller
             $data_reference = $token->getClaims();
             foreach ($data_reference AS $key => $data) {
                 $row_org = Organizations::findOne( $data->getValue()->id );
-                if ( empty( $row_org ) ) {
+                if (!$row_org) {
                     $row_org = new Organizations();
                     $row_org->id = $data->getValue()->id;
                 }
@@ -91,6 +102,39 @@ class ReferenceController extends Controller
         }else{
             return false;
         }
+
+    }
+    public function actionFounders(){
+        echo "Выполняется синхронизация фаундеров\n";
+
+        $csvP = Yii::getAlias( '@webroot' ) . "/parce/founders.csv";
+
+        $csv = fopen( $csvP, 'r' );
+        $err = 0;
+        while (( $row = fgetcsv( $csv, 3463, ';' ) ) != false) {
+            $founder = Founders::findOne($row[2]);
+
+            if (!$founder){
+                $founder = new Founders();
+                $founder->id = $row[2];
+            }
+            $founder->name = $row[3];
+            if (!$founder->save()){
+                $err++;
+                print_r($founder->getErrors());
+            }
+            $org = Organizations::findOne($row[0]);
+            if ($org){
+                $org->id_founder = $row[2];
+                if (!$org->save()){
+                    $err++;
+                    print_r($org->errors);
+                }
+            }
+        }
+        if ($err>0)
+            return false;
+        return true;
 
     }
 
