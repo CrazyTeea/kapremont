@@ -3,9 +3,12 @@
 namespace app\controllers\app;
 
 use app\models\Atz;
+use app\models\FaivUsers;
+use app\models\Founders;
 use app\models\Organizations;
 use app\models\Program;
 use app\models\ProgramObjects;
+use app\models\User;
 use Yii;
 use yii\helpers\Json;
 use yii\web\Controller;
@@ -19,8 +22,26 @@ class MgsuAdminController extends Controller
 
     public function actionMainTable($offset)
     {
+
+        if(Yii::$app->user->can('faiv_admin')) {
+            $id_founder = FaivUsers::find()->where(['id_user' => Yii::$app->user->id])->one()->id_founder;
+
+            $params = $this->getParams(json_decode(Yii::$app->request->post('form')));
+            $order = $this->getOrder(json_decode(Yii::$app->request->post('form')));
+            
+            $select = Organizations::getMainCheckTable($offset, $params, $order, " and id_founder = $id_founder");
+            $count = Organizations::getMainCheckTableCount($params, " and id_founder = $id_founder");
+
+
+            return Json::encode([
+                'rows' => $select,
+                'count' => $count
+            ]);
+        }
+
         $params = $this->getParams(json_decode(Yii::$app->request->post('form')));
         $order = $this->getOrder(json_decode(Yii::$app->request->post('form')));
+
         $select = Organizations::getMainCheckTable($offset, $params, $order);
         $count = Organizations::getMainCheckTableCount($params);
         // echo "<pre>";

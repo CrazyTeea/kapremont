@@ -12445,9 +12445,6 @@ return [
     3114 => [
         'mgsu',
     ],
-    111555 => [
-        'faiv_user',
-    ],
     2535 => [
         'dev_program',
         'faiv_admin',
@@ -12455,7 +12452,10 @@ return [
     3116 => [
         'dep',
     ],
+    111555 => [
+        'faiv_admin',
+    ],
     3117 => [
-        'dku',
+        'faiv_admin',
     ],
 ];

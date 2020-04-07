@@ -91,6 +91,9 @@ $config = [
                 'api/set-status/to-work/<obj_id:\d+>' => '/app/organization/set-to-work-status',
                 'api/get-status/<obj_id:\d+>' => 'app/organization/get-approve-status',
 
+                'admin/faiv' => 'app/faiv-admin/faiv',
+                'faiv-admin/get/users/<offset:\d+>' => 'app/faiv-admin/get-users',
+
                 'api/permissions' => 'api/permission/permissions',
                 'api/comment/obj/<id:\d+>' => 'api/comment/obj',
                 'program' => 'app/program',
