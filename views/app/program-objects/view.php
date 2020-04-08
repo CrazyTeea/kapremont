@@ -81,7 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <br>
                 <?php
                 $class = '';
-                switch ($model->status){
+                switch ($model->dep_status){
                     case 'not':{
                         $class = 'secondary';
                         break;
@@ -95,7 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 }
                 $status = ($model->dep_status) ? $ext_status[$model->dep_status] : '';
-                echo "<label class='text-$class'>$status</label> "
+                echo "<label class='te'>$status</label> "
                 ?>
             </h5>
         </div>
@@ -105,7 +105,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 <br>
                 <?php
                 $class = '';
-                switch ($model->status){
+                switch ($model->dku_status){
                     case 'not':{
                         $class = 'secondary';
                         break;
