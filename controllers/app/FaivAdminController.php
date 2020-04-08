@@ -5,6 +5,7 @@ namespace app\controllers\app;
 use app\models\User;
 use Yii;
 use yii\web\Controller;
+use app\facades\FilterBuilder;
 
 class FaivAdminController extends Controller
 {
@@ -16,7 +17,7 @@ class FaivAdminController extends Controller
     public function actionGetUsers($offset = 0)
     {
         $params = $this->getFilters(json_decode(Yii::$app->request->post('filters')));
-        $query =  User::find()->where($params)->limit(20)->all();
+        $query = User::find()->where($params)->limit(10)->all();
         foreach ($query as $key => $user) {
             $responce[$key] = [
                 'id' => $user->id,
@@ -25,10 +26,29 @@ class FaivAdminController extends Controller
             ];
         }
 
-        // echo "<pre>";
-        // print_r($responce);
-
         return json_encode($responce);
+    }
+
+    public function actionTest()
+    {
+        //http://localhost:3000/app/faiv-admin/test
+        $request = (object) [
+            'id' => 1,
+            'username' => 'test'
+        ];
+
+        $filters = (new FilterBuilder($request))->whereLike('id')->get();
+        // $query = User::find()->where($filters)->limit(10)->all();
+
+        echo "<pre>";
+        print_r($filters);
+
+        $filt = $this->getFilters($request);
+        // $query = User::find()->where($filt)->limit(10)->all();
+
+
+        echo "<pre>";
+        print_r($filt);
     }
 
     private function getFilters($request)
@@ -39,12 +59,13 @@ class FaivAdminController extends Controller
             'username' => $request->username ?? null
         ];
 
+
         foreach ($params as $key => $param) {
             if($param != null) {
-                $filters [$key] = $param;
+                $filters [] = "'like', $key, '%$param%', false";
             }
         }
 
         return $filters ?? [];
-    }
+    } 
 }
