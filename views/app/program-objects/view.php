@@ -51,9 +51,32 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-4">
             <h5>Текущий статус эксперта МОН:
                 <br>
-                <label>
-                    <?= ($model->status) ? \app\models\ApproveStatus::findOne($model->status)->label : 'Черновик'?>
-                </label>
+
+                <?php
+
+                $class = '';
+                switch ($model->status){
+                    case 1:{
+                        $class = 'secondary';
+                        break;
+                    }
+                    case 2:{
+                        $class = 'success';
+                        break;
+                    }
+                    case 3:{
+                        $class = 'danger';
+                        break;
+                    }
+                    default:{
+                        $class = 'warning';
+                    }
+                }
+                $status = ($model->status) ? \app\models\ApproveStatus::findOne($model->status)->label : 'Черновик';
+                return "<label class='text-$class'>$status</label> "
+                ?>
+
+
             </h5>
         </div>
         <div class="col-4">
