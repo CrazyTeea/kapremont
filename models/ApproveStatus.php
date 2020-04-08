@@ -4,6 +4,14 @@ namespace app\models;
 
 use yii\db\ActiveRecord;
 
+/***
+ * Class ApproveStatus
+ * @package app\models
+ * @property integer $id
+ * @property string $status
+ * @property string $label
+ */
+
 class ApproveStatus extends ActiveRecord
 {
     const STATUS_RECOMEND = 2;

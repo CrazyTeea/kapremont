@@ -13,8 +13,15 @@ $weara = [
     'Более 90%'
 ];
 
+$ext_status=[
+        'not'=>'в обработке',
+    'approved'=>'Согласовано',
+    'rejected'=>'Резерв'
+];
+
 /* @var $this yii\web\View */
 /* @var $model app\models\ProgramObjects */
+/* @var $canChange boolean */
 
 $this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Программа модернизации', 'url' => ['/program/view']];
@@ -25,22 +32,26 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?php if ($canChange): 
-        if(Yii::$app->user->can('root') || Yii::$app->user->can('faiv_user')) {
-        ?>
-        
-            <p>
-                <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-                <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
-                    'class' => 'btn btn-danger',
-                    'data' => [
-                        'confirm' => 'Вы уверены?',
-                        'method' => 'post',
-                    ],
-                ]) ?>
-            </p>
-        
-    <?php } endif; ?>
+    <?php if ($canChange and (Yii::$app->user->can('root') or Yii::$app->user->can('faiv_user'))):?>
+
+        <p>
+            <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => 'Вы уверены?',
+                    'method' => 'post',
+                ],
+            ]) ?>
+        </p>
+
+    <?php endif; ?>
+
+    <div class="row">
+        <div class="col-4">Текущий статус эксперта МОН:<?= ($model->status) ? \app\models\ApproveStatus::findOne($model->status)->label : 'Черновик'?></div>
+        <div class="col-4">Текущий статус ДЭП: <?= ($model->dep_status) ? $ext_status[$model->dep_status] : ''?></div>
+        <div class="col-4">Текущий статус ДКУ: <?= ($model->dku_status) ? $ext_status[$model->dku_status] : ''?></div>
+    </div>
 
     <?= DetailView::widget([
         'model' => $model,
@@ -66,8 +77,8 @@ $this->params['breadcrumbs'][] = $this->title;
     ]) ?>
 
     <?php
-        if(Yii::$app->user->can('root')) {
-            echo Accordion::widget([
+    if(Yii::$app->user->can('root')) {
+        echo Accordion::widget([
             'encodeLabels'=>true,
             'itemToggleOptions'=>[
                 'class'=>['btn', 'btn-default'],
@@ -97,7 +108,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ]
         ]);
     } else {
-            echo Accordion::widget([
+        echo Accordion::widget([
             'encodeLabels'=>true,
             'itemToggleOptions'=>[
                 'class'=>['btn', 'btn-default'],
