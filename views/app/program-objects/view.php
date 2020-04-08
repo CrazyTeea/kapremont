@@ -95,7 +95,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 }
                 $status = ($model->dep_status) ? $ext_status[$model->dep_status] : '';
-                echo "<label class='te'>$status</label> "
+                echo "<label class='text-$class'>$status</label> "
                 ?>
             </h5>
         </div>
