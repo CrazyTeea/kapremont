@@ -50,6 +50,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <div class="row">
         <div class="col-4">
             <h5>Текущий статус эксперта МОН:
+                <br>
                 <label>
                     <?= ($model->status) ? \app\models\ApproveStatus::findOne($model->status)->label : 'Черновик'?>
                 </label>
@@ -57,6 +58,7 @@ $this->params['breadcrumbs'][] = $this->title;
         </div>
         <div class="col-4">
             <h5>Текущий статус ДЭП:
+                <br>
                 <label>
                     <?= ($model->dep_status) ? $ext_status[$model->dep_status] : ''?>
                 </label>
@@ -65,6 +67,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-4">
             <h5>
                 Текущий статус ДКУ:
+                <br>
                 <label>
                     <?= ($model->dku_status) ? $ext_status[$model->dku_status] : ''?>
                 </label>
