@@ -16,7 +16,7 @@
         ]"/>
         <h1 class="mt-3">{{ this.items.name }}</h1>
         <div class="d-flex justify-content-between align-items-center">
-            <h5 class="vertcal-gorizontal-align">Текущий статус МГСУ: <label :class="`text-${status.variant}`">{{ status.label }}</label></h5>
+            <h5 class="vertcal-gorizontal-align">Текущий статус эксперта МОН: <label :class="`text-${status.variant}`">{{ status.label }}</label></h5>
             <h5 class="vertcal-gorizontal-align">Текущий статус ДЭП: <label :class="`text-${dep_status.color}`">{{ dep_status.label }}</label></h5>
             <h5 class="vertcal-gorizontal-align">Текущий статус ДКУ: <label :class="`text-${dku_status.color}`">{{ dku_status.label }}</label></h5>
 

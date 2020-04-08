@@ -6,7 +6,7 @@
                 Комментарии
             </span>
         </b-card-header>
-        <b-collapse id="accordion1" accordion="my-accordion" role="tabpanel" visible>
+        <b-collapse id="accordion1" accordion="my-accordion" role="tabpanel">
             <b-card-body>
                 <div>
                     <div v-if="allComments.length">
@@ -56,7 +56,13 @@
                         <b-form-textarea v-model="newComment" placeholder="Новый комментарий..." rows="2" max-rows="6" maxlength="255"></b-form-textarea>
                     </b-form-group>
                     <div class="d-flex justify-content-end">
-                        <b-button variant="outline-primary" @click="addNewComment()">Добавить</b-button>
+                            <b-form-file
+                                v-model="file"
+                                :state="Boolean(file)"
+                                placeholder="Choose a file or drop it here..."
+                                drop-placeholder="Drop file here..."
+                            ></b-form-file>
+                        <b-button size="sm" variant="outline-primary" @click="addNewComment()">Добавить</b-button>
                     </div>
                 </div>
             </b-card-body>
@@ -67,6 +73,7 @@
 <script>
 import Axios from "axios";
 import {
+    BFormFile,
     BButton,
     BCard,
     BCardBody,
@@ -85,6 +92,7 @@ export default {
         'b-toggle':VBToggle
     },
     components:{
+        BFormFile,
         BCollapse,
         BCard,
         BCardHeader,
@@ -97,6 +105,7 @@ export default {
     },
     data() {
         return {
+            file: null,
             newComment: "",
             allComments: []
         };

@@ -83,7 +83,7 @@ foreach ($objs as $item){
 <table>
     <thead>
     <tr>
-        <td colspan="14" ><?=date('r')?></td>
+        <td colspan="14" > Статистика по статусам от <?=date('r')?></td>
     </tr>
     <tr>
         <th>№</th>

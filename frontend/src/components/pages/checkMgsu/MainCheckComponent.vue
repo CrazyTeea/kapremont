@@ -19,7 +19,7 @@
             <b-tab v-can:root,mgsu,dep,dku title-link-class="text-warning" title="Возвращено на доработку">
                 <v-objects status="4" />
             </b-tab>
-            <b-tab v-can:root,mgsu,dep,dku title-link-class="text-success" title="Рассмотрено">
+            <b-tab v-can:root,mgsu,dep,dku title-link-class="text-success" title="Рекомендуется к согласованию">
                 <v-objects status="2" />
             </b-tab>
             <b-tab v-can:root,mgsu,dep,dku title-link-class="text-danger" title="Не рекомендуется к согласованию">
@@ -29,9 +29,9 @@
             <b-tab v-can:root,mgsu,dep,dku title-link-class="text-success" title="Рассмотрено ДЭП">
                 <v-objects status="2" dep_status="approved" />
             </b-tab>
-            <b-tab v-can:root,mgsu,dep,dku title-link-class="text-success" title="Рассмотрено ДКУ">
+            <!--<b-tab v-can:root,mgsu,dep,dku title-link-class="text-success" title="Рассмотрено ДКУ">
                 <v-objects status="2" dep_status="approved" dku_status="approved" />
-            </b-tab>
+            </b-tab>-->
             <b-tab v-can:root,mgsu,dep,dku title-link-class="text-warning" title="Резерв">
                 <v-objects status="2" dep_status="rejected" dku_status="rejected" or_where="true" />
             </b-tab>
