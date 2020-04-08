@@ -73,7 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 }
                 $status = ($model->status) ? \app\models\ApproveStatus::findOne($model->status)->label : 'Черновик';
-                return "<label class='text-$class'>$status</label> "
+                echo "<label class='text-$class'>$status</label> "
                 ?>
 
 
