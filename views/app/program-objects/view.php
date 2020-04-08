@@ -51,9 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <div class="col-4">
             <h5>Текущий статус эксперта МОН:
                 <br>
-
                 <?php
-
                 $class = '';
                 switch ($model->status){
                     case 1:{
@@ -76,24 +74,53 @@ $this->params['breadcrumbs'][] = $this->title;
                 echo "<label class='text-$class'>$status</label> "
                 ?>
 
-
             </h5>
         </div>
         <div class="col-4">
             <h5>Текущий статус ДЭП:
                 <br>
-                <label>
-                    <?= ($model->dep_status) ? $ext_status[$model->dep_status] : ''?>
-                </label>
+                <?php
+                $class = '';
+                switch ($model->status){
+                    case 'not':{
+                        $class = 'secondary';
+                        break;
+                    }
+                    case 'approved':{
+                        $class = 'success';
+                        break;
+                    }
+                    default:{
+                        $class = 'warning';
+                    }
+                }
+                $status = ($model->dep_status) ? $ext_status[$model->dep_status] : '';
+                echo "<label class='text-$class'>$status</label> "
+                ?>
             </h5>
         </div>
         <div class="col-4">
             <h5>
                 Текущий статус ДКУ:
                 <br>
-                <label>
-                    <?= ($model->dku_status) ? $ext_status[$model->dku_status] : ''?>
-                </label>
+                <?php
+                $class = '';
+                switch ($model->status){
+                    case 'not':{
+                        $class = 'secondary';
+                        break;
+                    }
+                    case 'approved':{
+                        $class = 'success';
+                        break;
+                    }
+                    default:{
+                        $class = 'warning';
+                    }
+                }
+                $status = ($model->dku_status) ? $ext_status[$model->dku_status] : '';
+                echo "<label class='text-$class'>$status</label> "
+                ?>
             </h5>
         </div>
     </div>
