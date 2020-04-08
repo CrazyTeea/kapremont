@@ -19,7 +19,7 @@
             <b-tab v-can:root,mgsu,dep,dku title-link-class="text-warning" title="Возвращено на доработку">
                 <v-objects status="4" />
             </b-tab>
-            <b-tab v-can:root,mgsu,dep,dku title-link-class="text-success" title="Рассмотрено">
+            <b-tab v-can:root,mgsu,dep,dku title-link-class="text-success" title="Рекомендуется к согласованию">
                 <v-objects status="2" />
             </b-tab>
             <b-tab v-can:root,mgsu,dep,dku title-link-class="text-danger" title="Не рекомендуется к согласованию">
