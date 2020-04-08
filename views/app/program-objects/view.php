@@ -48,9 +48,28 @@ $this->params['breadcrumbs'][] = $this->title;
     <?php endif; ?>
 
     <div class="row">
-        <div class="col-4">Текущий статус эксперта МОН:<?= ($model->status) ? \app\models\ApproveStatus::findOne($model->status)->label : 'Черновик'?></div>
-        <div class="col-4">Текущий статус ДЭП: <?= ($model->dep_status) ? $ext_status[$model->dep_status] : ''?></div>
-        <div class="col-4">Текущий статус ДКУ: <?= ($model->dku_status) ? $ext_status[$model->dku_status] : ''?></div>
+        <div class="col-4">
+            <h5>Текущий статус эксперта МОН:
+                <label>
+                    <?= ($model->status) ? \app\models\ApproveStatus::findOne($model->status)->label : 'Черновик'?>
+                </label>
+            </h5>
+        </div>
+        <div class="col-4">
+            <h5>Текущий статус ДЭП:
+                <label>
+                    <?= ($model->dep_status) ? $ext_status[$model->dep_status] : ''?>
+                </label>
+            </h5>
+        </div>
+        <div class="col-4">
+            <h5>
+                Текущий статус ДКУ:
+                <label>
+                    <?= ($model->dku_status) ? $ext_status[$model->dku_status] : ''?>
+                </label>
+            </h5>
+        </div>
     </div>
 
     <?= DetailView::widget([
