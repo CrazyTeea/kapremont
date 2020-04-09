@@ -114,7 +114,8 @@
 
 <script>
 import Axios from "axios";
-import {BFormInput, BTableSimple, BTbody, BTd, BTfoot, BTh, BThead, BTr, VBToggle} from "bootstrap-vue";
+import {BFormInput, BTableSimple,
+    BTbody, BTd, BTfoot, BTh, BThead, BTr, VBToggle} from "bootstrap-vue";
 
 export default {
     directives:{
