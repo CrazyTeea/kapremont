@@ -38,10 +38,8 @@ class UploadController extends Controller
         }
     }
 
-    public function actionDelete()
+    public function actionDownload($name)
     {
-        $upload = new UploadForm();
-        $path = $this->path .  $upload->pdfFile->baseName . '.pdf';
-        FileHelper::removeDirectory($path);
+        return Yii::$app->response->sendFile('uploads/comments/' . $name);
     }
 }

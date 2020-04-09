@@ -94,6 +94,11 @@ $config = [
                 'admin/faiv' => 'app/faiv-admin/faiv',
                 'faiv-admin/get/users/<offset:\d+>' => 'app/faiv-admin/get-users',
 
+
+                'api/v2/comments/all/<id_obj:\d+>' => 'api/com/get-comments',
+                'api/v2/comments/save' => 'api/com/save-comment',
+                'api/v2/comments/<id_comment:\d+>/delete' => 'api/com/delete-comment',
+
                 'api/permissions' => 'api/permission/permissions',
                 'api/comment/obj/<id:\d+>' => 'api/comment/obj',
                 'program' => 'app/program',
@@ -130,7 +135,8 @@ $config = [
                 'check' => 'app/mgsu-admin/view',
 
                 'api/fileUpload/<id_obj:\d+>/<id_comment:\d+>' => '/rest/upload/upload',
-                'api/fileRemove' => '/rest/upload/delete',
+
+                'api/file/download/<name:.+>' => 'rest/upload/download',
 
                 'api/mgsu/main-table/<offset:\d+>' => '/app/mgsu-admin/main-table',
                 'api/mgsu/objects-table/<offset:\d+>' => '/app/mgsu-admin/objects-table',

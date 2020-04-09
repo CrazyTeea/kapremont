@@ -13,7 +13,8 @@ $config = [
         '@npm'   => '@vendor/npm-asset',
         '@tests' => '@app/tests',
         '@mdm/admin' => '@app/widgets/yii2-admin',
-        '@webroot' => '@app/web'
+        '@webroot' => '@app/web',
+        '@comments' => '@app/uploads/comments'
     ],
     'components' => [
         'cache' => [
