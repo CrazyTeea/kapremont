@@ -41,6 +41,8 @@ use Yii;
  * @property string|null $osn_isp_zdan
  * @property int $last_exploit_year
  * @property int $status
+ * @property string $dku_status
+ * @property string $dep_status
  * @var $docList ObjectDocumentsList[]
  * @var $org Organizations
  * @var $city Cities
