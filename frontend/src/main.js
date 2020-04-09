@@ -3,11 +3,11 @@ import App from "./App.vue";
 import store from "./store";
 import router from "./router";
 import platform from "platform";
-import { IconsPlugin } from "bootstrap-vue";
+import { IconsPlugin, ModalPlugin } from "bootstrap-vue";
 //import BootstrapVue from 'bootstrap-vue';
 
 // Optionally install the BootstrapVue icon components plugin
-//Vue.use(BootstrapVue);
+Vue.use(ModalPlugin);
 Vue.use(IconsPlugin);
 
 //import "./styles";
@@ -19,8 +19,7 @@ Vue.directive("can", {
             if (!roles.includes(window.Permission)) {
                 // console.log(node.child);
                 el.style.display = 'none';
-                console.log(el.childNodes.innerHTML)
-                el.childNodes.innerHTML = ''
+                el.childNodes.innerHTML = '';
                 node.elm.parentElement.removeChild(node.elm);
                 if (node.child) {
                     let e = document.getElementById(node.child.controlledBy);
