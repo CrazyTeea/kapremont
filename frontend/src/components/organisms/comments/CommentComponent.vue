@@ -57,12 +57,14 @@
                     </b-form-group>
                     <div class="d-flex justify-content-end">
                             <b-form-file
-                                v-model="file"
-                                :state="Boolean(file)"
-                                placeholder="Choose a file or drop it here..."
-                                drop-placeholder="Drop file here..."
+                                multiple
+                                class="col-6 mr-3"
+                                v-model="files"
+                                placeholder="Файл..."
+                                browse-text="Выбрать"
+                                accept=".jpg, .jpeg, .doc, .doch, .xls, .pdf, .png"
                             ></b-form-file>
-                        <b-button size="sm" variant="outline-primary" @click="addNewComment()">Добавить</b-button>
+                        <b-button size="sm" variant="outline-primary" @click="sendFile(56)">Добавить</b-button>
                     </div>
                 </div>
             </b-card-body>
@@ -103,9 +105,22 @@ export default {
         BFormGroup,
         BFormTextarea,
     },
+    watch: {
+        files(){
+            if(this.files) {
+                for(let file of this.files) {
+                    if(!this.types.includes(file.type)) {
+                        this.files = null
+                    }
+                }
+            }
+        }
+    },
     data() {
         return {
-            file: null,
+            csrf: document.getElementsByName("csrf-token")[0].content,
+            types: ['application/pdf', 'application/doc', 'application/doch', 'image/jpeg', 'image/jpg', 'image/png'],
+            files: null,
             newComment: "",
             allComments: []
         };
@@ -138,7 +153,7 @@ export default {
         },
         addNewComment() {
             this.refreshComments();
-            let data = new FormData();
+            let data = new FormData()
             data.append("id_obj", this.obj_id);
             data.append("message", this.newComment);
             data.append("id_user", this.user_id);
@@ -150,6 +165,17 @@ export default {
                 this.refreshComments();
                 this.newComment = "";
             });
+        },
+        async sendFile(id_comment) {
+            console.log(this.files[0])
+            let form = new FormData();
+            form.append('file', this.files[0])
+            await Axios.post(`/api/fileUpload/${this.obj_id}/${id_comment}`, form, {
+                headers: {
+                    "X-CSRF-Token": this.csrf,
+                    "Content-Type": "multipart/form-data;"
+                },
+            })
         }
     }
 };

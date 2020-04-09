@@ -129,7 +129,7 @@ $config = [
                 'program/atz' => 'app/atz/index',
                 'check' => 'app/mgsu-admin/view',
 
-                'api/fileUpload' => '/rest/upload/upload',
+                'api/fileUpload/<id_obj:\d+>/<id_comment:\d+>' => '/rest/upload/upload',
                 'api/fileRemove' => '/rest/upload/delete',
 
                 'api/mgsu/main-table/<offset:\d+>' => '/app/mgsu-admin/main-table',
