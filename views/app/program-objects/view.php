@@ -1,5 +1,6 @@
 <?php
 
+use app\models\ApproveStatus;
 use yii\bootstrap4\Accordion;
 use yii\bootstrap4\Html;
 use yii\widgets\DetailView;
@@ -70,7 +71,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         $class = 'warning';
                     }
                 }
-                $status = ($model->status) ? \app\models\ApproveStatus::findOne($model->status)->label : 'Черновик';
+                $status = ($model->status) ? ApproveStatus::findOne($model->status)->label : 'Черновик';
                 echo "<label class='text-$class'>$status</label> "
                 ?>
 
@@ -198,7 +199,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <script>
-        window.object_status = <?=$model->status?>
+        window.object_status = <?=$model->status?>;
     </script>
 
     <div id="app"></div>
