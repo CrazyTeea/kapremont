@@ -61,7 +61,6 @@ class Organizations extends \yii\db\ActiveRecord
         return $this->hasMany(UserInfo::class,['id_org'=>'id']);
     }
 
-
     public function getProgramObjects()
     {
         return $this->hasMany(ProgramObjects::class, ['id_org' => 'id']);

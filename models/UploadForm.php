@@ -7,12 +7,12 @@ use yii\web\UploadedFile;
 
 class UploadForm extends Model
 {
-    public $pdfFile;
+    public $file;
 
     public function rules()
     {
         return[
-            [['pdfFile'], 'file', 'skipOnEmpty' => false, 'extensions' => 'pdf'],
+            [['pdfFile'], 'file', 'skipOnEmpty' => false],
         ];
     }
 }
