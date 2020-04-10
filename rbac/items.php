@@ -43,6 +43,8 @@ return [
             '/app/program-objects/export',
             '/app/program/export',
             '/app/mgsu-admin/*',
+            '/api/com/*',
+            '/rest/upload/*',
         ],
     ],
     'orglist_view' => [
@@ -120,6 +122,8 @@ return [
             '/faiv/faiv/user-create-view',
             '/*',
             'dev_program',
+            '/api/com/*',
+            '/rest/upload/*',
         ],
     ],
     '/app/program/export' => [
@@ -159,6 +163,8 @@ return [
             '/app/program-objects/export',
             '/app/program/export',
             '/app/mgsu-admin/*',
+            '/api/com/*',
+            '/rest/upload/*',
         ],
     ],
     'dku' => [
@@ -174,6 +180,14 @@ return [
             '/app/program/export',
             '/app/program-objects/zip',
             '/app/mgsu-admin/*',
+            '/api/com/*',
+            '/rest/upload/*',
         ],
+    ],
+    '/api/com/*' => [
+        'type' => 2,
+    ],
+    '/rest/upload/*' => [
+        'type' => 2,
     ],
 ];

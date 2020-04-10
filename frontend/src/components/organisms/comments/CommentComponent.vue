@@ -6,7 +6,7 @@
                 Комментарии
             </span>
         </b-card-header>
-        <b-collapse id="accordion1" accordion="my-accordion" role="tabpanel" visible>
+        <b-collapse id="accordion1" accordion="my-accordion" role="tabpanel">
             <b-card-body>
                 <div>
                     <div v-if="allComments.length">
@@ -18,6 +18,15 @@
                                 </div>
 
                                 <p class="mb-1 font-italic">{{ comment.message }}</p>
+
+                                <div v-if="comment.files.length" class="mt-2">
+                                    <div class="font-weight-bold">
+                                        Прикрепленные файлы:
+                                    </div>
+                                    <div v-for="(file, index) in comment.files" :key="index" class="ml-3">
+                                        <a  @click="downloadFile(`${file.id_obj}_${file.id}`,`${file.file_name}.${file.file_ext}`)" :href="`#${file.id_obj}_${file.id}`"> {{ `${file.file_name}.${file.file_ext}` }} </a>
+                                    </div>
+                                </div>    
 
                                 <small></small>
                                 <div class="d-flex justify-content-end" v-if="user_id === comment.id_user">
@@ -32,6 +41,16 @@
                                 </div>
 
                                 <p class="mb-1">{{ comment.message }}</p>
+
+                                <div v-if="comment.files.length" class="mt-2">
+                                    <div class="font-weight-bold">
+                                        Прикрепленные файлы:
+                                    </div>
+                                    <div v-for="(file, index) in comment.files" :key="index" class="ml-3">
+                                        <a class="text-decorate" @click="downloadFile(`${file.id_obj}_${file.id}`,`${file.file_name}.${file.file_ext}`)" :href="`#${file.id_obj}_${file.id}`"> {{ `${file.file_name}.${file.file_ext}` }} </a>
+                                    </div>
+                                </div>
+                            
 
                                 <small></small>
                                 <div class="d-flex justify-content-end" v-if="user_id === comment.id_user">
@@ -56,7 +75,18 @@
                         <b-form-textarea v-model="newComment" placeholder="Новый комментарий..." rows="2" max-rows="6" maxlength="255"></b-form-textarea>
                     </b-form-group>
                     <div class="d-flex justify-content-end">
-                        <b-button variant="outline-primary" @click="addNewComment()">Добавить</b-button>
+                            <b-form-file
+                                multiple
+                                class="col-6 mr-3"
+                                v-model="files"
+                                placeholder="Файл..."
+                                browse-text="Выбрать"
+                                accept=".jpg, .jpeg, .doc, .doch, .xls, .pdf, .png"
+                            ></b-form-file>
+                        <b-button :disabled="sending" variant="outline-primary" @click="addNewComment()">
+                            <b-spinner v-if="sending" small></b-spinner>
+                            <span v-else>Добавить</span>
+                        </b-button>
                     </div>
                 </div>
             </b-card-body>
@@ -67,6 +97,8 @@
 <script>
 import Axios from "axios";
 import {
+    BSpinner,
+    BFormFile,
     BButton,
     BCard,
     BCardBody,
@@ -85,6 +117,8 @@ export default {
         'b-toggle':VBToggle
     },
     components:{
+        BSpinner,
+        BFormFile,
         BCollapse,
         BCard,
         BCardHeader,
@@ -95,8 +129,23 @@ export default {
         BFormGroup,
         BFormTextarea,
     },
+    watch: {
+        files(){
+            if(this.files) {
+                for(let file of this.files) {
+                    if(!this.types.includes(file.type)) {
+                        this.files = null
+                    }
+                }
+            }
+        }
+    },
     data() {
         return {
+            csrf: document.getElementsByName("csrf-token")[0].content,
+            types: ['application/pdf', 'application/doc', 'application/doch', 'image/jpeg', 'image/jpg', 'image/png'],
+            files: null,
+            sending: false,
             newComment: "",
             allComments: []
         };
@@ -112,38 +161,88 @@ export default {
         await this.refreshComments();
     },
     methods: {
+        downloadFile(folder,name){
+
+          Axios.get(`/api/file/download/${folder}`,{
+              params:{
+                  fileName:name,
+              },
+              headers:{
+                  'Content-Type': 'application/json'
+              },
+              responseType: 'arraybuffer',
+          }).then(response=>{
+              console.log(response.data);
+              const type = response.headers['content-type'];
+              const blob = new Blob([response.data], { type: type, });
+              const link = document.createElement('a');
+              link.href = window.URL.createObjectURL(blob);
+              link.download = name;
+              link.click()
+          })
+        },
         async getUser() {
             return Axios.get('/api/comment/user').then((res) => {
                 this.user_id = res.data
             })
         },
         async refreshComments() {
-            return Axios.get(`/api/comment/obj/${this.obj_id}`).then(res => {
+            return Axios.get(`/api/v2/comments/all/${this.obj_id}`).then(res => {
+                console.log(res.data);
                 this.allComments = res.data;
             });
         },
         async deleteComment(id) {
-            return Axios.delete(`/api/comment/${id}`).then(() => {
-                this.refreshComments();
-            });
-        },
-        addNewComment() {
-            this.refreshComments();
-            let data = new FormData();
-            data.append("id_obj", this.obj_id);
-            data.append("message", this.newComment);
-            data.append("id_user", this.user_id);
-            Axios.post("/api/comment", data, {
+            return Axios.post(`/api/v2/comments/${id}/delete`, null, {
                 headers: {
                     "X-CSRF-Token": this.csrf
                 }
             }).then(() => {
                 this.refreshComments();
-                this.newComment = "";
             });
+        },
+        async addNewComment() {
+            this.sending = true;
+            this.refreshComments();
+            let data = new FormData();
+            data.append("id_obj", this.obj_id);
+            data.append("message", this.newComment);
+            data.append("id_user", this.user_id);
+            Axios.post("/api/v2/comments/save", data, {
+                headers: {
+                    "X-CSRF-Token": this.csrf
+                }
+            }).then(async (res) => {
+                let id_comment = res.data;
+                if(this.files) {
+                    console.log('in files');
+                    for (let file of this.files) {
+                        await this.sendFile(file, id_comment)
+                    }
+                }
+                this.refreshComments();
+                this.sending = false;
+                this.newComment = "";
+                this.files = null;
+            });
+        },
+        async sendFile(file, id_comment) {
+            console.log('here');
+            let form = new FormData();
+            form.append('file', file);
+            return Axios.post(`/api/fileUpload/${this.obj_id}/${id_comment}`, form, {
+                headers: {
+                    "X-CSRF-Token": this.csrf,
+                    "Content-Type": "multipart/form-data;"
+                },
+            })
         }
     }
 };
 </script>
 
-<style></style>
+<style>
+.text-decorate {
+    color: #000 !important;
+}
+</style>
