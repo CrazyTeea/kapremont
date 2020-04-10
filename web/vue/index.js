@@ -2296,17 +2296,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "CommentComponent",
   props: ["obj_id"],
   directives: {
-    'b-toggle': bootstrap_vue__WEBPACK_IMPORTED_MODULE_13__["VBToggle"]
+    "b-toggle": bootstrap_vue__WEBPACK_IMPORTED_MODULE_13__["VBToggle"]
   },
   components: {
     BSpinner: bootstrap_vue__WEBPACK_IMPORTED_MODULE_13__["BSpinner"],
@@ -2356,7 +2352,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       csrf: document.getElementsByName("csrf-token")[0].content,
-      types: ['application/pdf', 'application/doc', 'application/doch', 'image/jpeg', 'image/jpg', 'image/png'],
+      types: ["application/pdf", "application/doc", "application/doch", "image/jpeg", "image/jpg", "image/png"],
       files: null,
       sending: false,
       newComment: "",
@@ -2402,16 +2398,16 @@ __webpack_require__.r(__webpack_exports__);
           fileName: name
         },
         headers: {
-          'Content-Type': 'application/json'
+          "Content-Type": "application/json"
         },
-        responseType: 'arraybuffer'
+        responseType: "arraybuffer"
       }).then(function (response) {
         console.log(response.data);
-        var type = response.headers['content-type'];
+        var type = response.headers["content-type"];
         var blob = new Blob([response.data], {
           type: type
         });
-        var link = document.createElement('a');
+        var link = document.createElement("a");
         link.href = window.URL.createObjectURL(blob);
         link.download = name;
         link.click();
@@ -2425,7 +2421,7 @@ __webpack_require__.r(__webpack_exports__);
           while (1) {
             switch (_context2.prev = _context2.next) {
               case 0:
-                return _context2.abrupt("return", axios__WEBPACK_IMPORTED_MODULE_12___default.a.get('/api/comment/user').then(function (res) {
+                return _context2.abrupt("return", axios__WEBPACK_IMPORTED_MODULE_12___default.a.get("/api/comment/user").then(function (res) {
                   _this2.user_id = res.data;
                 }));
 
@@ -2485,136 +2481,59 @@ __webpack_require__.r(__webpack_exports__);
     addNewComment: function addNewComment() {
       var _this5 = this;
 
-      return Object(C_Users_Desktop_php_kap_stroi_frontend_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_11__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
-        var data;
-        return regeneratorRuntime.wrap(function _callee6$(_context6) {
+      return Object(C_Users_Desktop_php_kap_stroi_frontend_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_11__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee5() {
+        return regeneratorRuntime.wrap(function _callee5$(_context5) {
           while (1) {
-            switch (_context6.prev = _context6.next) {
+            switch (_context5.prev = _context5.next) {
               case 0:
-                _this5.sending = true;
+                if (_this5.newComment.length == 0) {
+                  console.log('попадает');
+                } // this.sending = true;
+                // this.refreshComments();
+                // let data = new FormData();
+                // data.append("id_obj", this.obj_id);
+                // data.append("message", this.newComment);
+                // data.append("id_user", this.user_id);
+                // Axios.post("/api/v2/comments/save", data, {
+                //     headers: {
+                //         "X-CSRF-Token": this.csrf
+                //     }
+                // }).then(async (res) => {
+                //     let id_comment = res.data;
+                //     if (this.files) {
+                //         console.log("in files");
+                //         for (let file of this.files) {
+                //             await this.sendFile(file, id_comment);
+                //         }
+                //     }
+                //     this.refreshComments();
+                //     this.sending = false;
+                //     this.newComment = "";
+                //     this.files = null;
+                // });
 
-                _this5.refreshComments();
 
-                data = new FormData();
-                data.append("id_obj", _this5.obj_id);
-                data.append("message", _this5.newComment);
-                data.append("id_user", _this5.user_id);
-                axios__WEBPACK_IMPORTED_MODULE_12___default.a.post("/api/v2/comments/save", data, {
-                  headers: {
-                    "X-CSRF-Token": _this5.csrf
-                  }
-                }).then( /*#__PURE__*/function () {
-                  var _ref = Object(C_Users_Desktop_php_kap_stroi_frontend_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_11__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee5(res) {
-                    var id_comment, _iteratorNormalCompletion2, _didIteratorError2, _iteratorError2, _iterator2, _step2, file;
-
-                    return regeneratorRuntime.wrap(function _callee5$(_context5) {
-                      while (1) {
-                        switch (_context5.prev = _context5.next) {
-                          case 0:
-                            id_comment = res.data;
-
-                            if (!_this5.files) {
-                              _context5.next = 29;
-                              break;
-                            }
-
-                            console.log('in files');
-                            _iteratorNormalCompletion2 = true;
-                            _didIteratorError2 = false;
-                            _iteratorError2 = undefined;
-                            _context5.prev = 6;
-                            _iterator2 = _this5.files[Symbol.iterator]();
-
-                          case 8:
-                            if (_iteratorNormalCompletion2 = (_step2 = _iterator2.next()).done) {
-                              _context5.next = 15;
-                              break;
-                            }
-
-                            file = _step2.value;
-                            _context5.next = 12;
-                            return _this5.sendFile(file, id_comment);
-
-                          case 12:
-                            _iteratorNormalCompletion2 = true;
-                            _context5.next = 8;
-                            break;
-
-                          case 15:
-                            _context5.next = 21;
-                            break;
-
-                          case 17:
-                            _context5.prev = 17;
-                            _context5.t0 = _context5["catch"](6);
-                            _didIteratorError2 = true;
-                            _iteratorError2 = _context5.t0;
-
-                          case 21:
-                            _context5.prev = 21;
-                            _context5.prev = 22;
-
-                            if (!_iteratorNormalCompletion2 && _iterator2.return != null) {
-                              _iterator2.return();
-                            }
-
-                          case 24:
-                            _context5.prev = 24;
-
-                            if (!_didIteratorError2) {
-                              _context5.next = 27;
-                              break;
-                            }
-
-                            throw _iteratorError2;
-
-                          case 27:
-                            return _context5.finish(24);
-
-                          case 28:
-                            return _context5.finish(21);
-
-                          case 29:
-                            _this5.refreshComments();
-
-                            _this5.sending = false;
-                            _this5.newComment = "";
-                            _this5.files = null;
-
-                          case 33:
-                          case "end":
-                            return _context5.stop();
-                        }
-                      }
-                    }, _callee5, null, [[6, 17, 21, 29], [22,, 24, 28]]);
-                  }));
-
-                  return function (_x) {
-                    return _ref.apply(this, arguments);
-                  };
-                }());
-
-              case 7:
+              case 1:
               case "end":
-                return _context6.stop();
+                return _context5.stop();
             }
           }
-        }, _callee6);
+        }, _callee5);
       }))();
     },
     sendFile: function sendFile(file, id_comment) {
       var _this6 = this;
 
-      return Object(C_Users_Desktop_php_kap_stroi_frontend_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_11__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee7() {
+      return Object(C_Users_Desktop_php_kap_stroi_frontend_node_modules_vue_babel_preset_app_node_modules_babel_runtime_helpers_esm_asyncToGenerator__WEBPACK_IMPORTED_MODULE_11__["default"])( /*#__PURE__*/regeneratorRuntime.mark(function _callee6() {
         var form;
-        return regeneratorRuntime.wrap(function _callee7$(_context7) {
+        return regeneratorRuntime.wrap(function _callee6$(_context6) {
           while (1) {
-            switch (_context7.prev = _context7.next) {
+            switch (_context6.prev = _context6.next) {
               case 0:
-                console.log('here');
+                console.log("here");
                 form = new FormData();
-                form.append('file', file);
-                return _context7.abrupt("return", axios__WEBPACK_IMPORTED_MODULE_12___default.a.post("/api/fileUpload/".concat(_this6.obj_id, "/").concat(id_comment), form, {
+                form.append("file", file);
+                return _context6.abrupt("return", axios__WEBPACK_IMPORTED_MODULE_12___default.a.post("/api/fileUpload/".concat(_this6.obj_id, "/").concat(id_comment), form, {
                   headers: {
                     "X-CSRF-Token": _this6.csrf,
                     "Content-Type": "multipart/form-data;"
@@ -2623,10 +2542,10 @@ __webpack_require__.r(__webpack_exports__);
 
               case 4:
               case "end":
-                return _context7.stop();
+                return _context6.stop();
             }
           }
-        }, _callee7);
+        }, _callee6);
       }))();
     }
   }
@@ -55828,13 +55747,13 @@ var render = function() {
                                                     },
                                                     [
                                                       _vm._v(
-                                                        " " +
+                                                        "\n                                        " +
                                                           _vm._s(
                                                             file.file_name +
                                                               "." +
                                                               file.file_ext
                                                           ) +
-                                                          " "
+                                                          "\n                                    "
                                                       )
                                                     ]
                                                   )
@@ -55929,7 +55848,7 @@ var render = function() {
                                                 },
                                                 [
                                                   _vm._v(
-                                                    "\n                                    Прикрепленные файлы:\n                                "
+                                                    "\n                                        Прикрепленные файлы:\n                                    "
                                                   )
                                                 ]
                                               ),
@@ -55974,13 +55893,13 @@ var render = function() {
                                                       },
                                                       [
                                                         _vm._v(
-                                                          " " +
+                                                          "\n                                            " +
                                                             _vm._s(
                                                               file.file_name +
                                                                 "." +
                                                                 file.file_ext
                                                             ) +
-                                                            " "
+                                                            "\n                                        "
                                                         )
                                                       ]
                                                     )
