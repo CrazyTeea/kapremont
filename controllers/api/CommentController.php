@@ -28,6 +28,7 @@ class CommentController extends ActiveController implements UrlRuleInterface
     //     ]);
     // }
 
+
     public function actionObj($id)
     {
         return $this->modelClass::find()->where(['id_obj' => $id])->all();

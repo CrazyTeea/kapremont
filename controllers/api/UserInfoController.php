@@ -20,10 +20,13 @@ class UserInfoController extends Controller
         $toServ = [];
         foreach ($users AS $user){
             $toServ[]=[
-                'fio'=>$user->name,
+                'name'=>$user->name,
                 'role'=>$user->userRole->role,
+                'position'=>$user->position,
+                'phone'=>$user->phone,
+                'email'=>$user->email
             ];
         }
-        return Json::encode($users);
+        return Json::encode($toServ);
     }
 }

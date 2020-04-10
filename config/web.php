@@ -94,6 +94,11 @@ $config = [
                 'admin/faiv' => 'app/faiv-admin/faiv',
                 'faiv-admin/get/users/<offset:\d+>' => 'app/faiv-admin/get-users',
 
+
+                'api/v2/comments/all/<id_obj:\d+>' => 'api/com/get-comments',
+                'api/v2/comments/save' => 'api/com/save-comment',
+                'api/v2/comments/<id_comment:\d+>/delete' => 'api/com/delete-comment',
+
                 'api/permissions' => 'api/permission/permissions',
                 'api/comment/obj/<id:\d+>' => 'api/comment/obj',
                 'program' => 'app/program',
@@ -129,8 +134,9 @@ $config = [
                 'program/atz' => 'app/atz/index',
                 'check' => 'app/mgsu-admin/view',
 
-                'api/fileUpload' => '/rest/upload/upload',
-                'api/fileRemove' => '/rest/upload/delete',
+                'api/fileUpload/<id_obj:\d+>/<id_comment:\d+>' => '/rest/upload/upload',
+
+                'api/file/download/<name:.+>' => 'rest/upload/download',
 
                 'api/getUsersInfo/<id_org:\d+>'=>'api/user-info/users',
 
