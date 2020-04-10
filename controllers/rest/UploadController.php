@@ -5,7 +5,6 @@ namespace app\controllers\rest;
 use app\models\FileComment;
 use yii\web\Controller;
 use app\models\UploadForm;
-use Codeception\Command\Console;
 use Yii;
 use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
@@ -46,5 +45,10 @@ class UploadController extends Controller
         $fileName = Yii::$app->request->get('fileName');
         $path= "uploads/comments/$name/$fileName";
         return Yii::$app->response->sendFile($path)->send();
+    }
+
+    public function actionTest()
+    {// Url::rest/upload/test
+        //
     }
 }

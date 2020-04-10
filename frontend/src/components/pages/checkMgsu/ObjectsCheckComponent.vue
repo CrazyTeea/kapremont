@@ -2,7 +2,7 @@
     <div>
         <b-card no-body class="mb-1">
             <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.accordion-3>
-                <span class="toggle_button" >
+                <span class="toggle_button">
                     <b-icon icon="filter" scale="1.5" class="mr-2 ml-1"></b-icon>
                     Фильтры</span
                 >
@@ -56,7 +56,12 @@
                             <label class="cursor-pointer">{{ item.type }}</label>
                         </b-th>
                         <b-th class="normal-font-weight-for-sell center-text-in-cell">
-                            <label class="cursor-pointer">{{ item.po_name }}</label>
+                            <div class="d-flex justify-content-between">
+                                <label class="cursor-pointer">{{ item.po_name }}</label>
+                                <div>
+                                    <b-badge v-if="item.last_comment_role == 'root'" variant="warning">!</b-badge>
+                                </div>
+                            </div>
                         </b-th>
                     </b-tr>
                 </b-tbody>
@@ -67,29 +72,14 @@
 </template>
 
 <script>
-import Axios from 'axios';
-import {
-    BTableSimple,
-    BCard,
-    BCardHeader,
-    BCollapse,
-    BCardBody,
-    BInputGroup,
-    BFormInput,
-    BInputGroupAppend,
-    BButton,
-    BTr,
-    BTh,
-    BTbody,
-    BPagination,
-    BThead,
-    VBToggle
-} from 'bootstrap-vue'
+import Axios from "axios";
+import { BBadge, BTableSimple, BCard, BCardHeader, BCollapse, BCardBody, BInputGroup, BFormInput, BInputGroupAppend, BButton, BTr, BTh, BTbody, BPagination, BThead, VBToggle } from "bootstrap-vue";
 export default {
-    directives:{
-        'b-toggle':VBToggle  
+    directives: {
+        "b-toggle": VBToggle
     },
-    components:{
+    components: {
+        BBadge,
         BButton,
         BInputGroupAppend,
         BFormInput,
@@ -97,14 +87,15 @@ export default {
         BCardBody,
         BCollapse,
         BTableSimple,
-        BTbody,BTr,
+        BTbody,
+        BTr,
         BTh,
         BPagination,
         BThead,
         BCard,
         BCardHeader
     },
-    props: ["status","dep_status","dku_status","or_where"],
+    props: ["status", "dep_status", "dku_status", "or_where"],
     data() {
         return {
             csrf: document.getElementsByName("csrf-token")[0].content,
@@ -112,21 +103,21 @@ export default {
                 status: null,
                 id_org: null,
                 id: null,
-                dep_status:null,
-                dku_status:null,
-                or_where:null,
+                dep_status: null,
+                dku_status: null,
+                or_where: null
             },
             items: [],
-            currentPage:1,
-            totalRows:[],
-            perPage: 10,
+            currentPage: 1,
+            totalRows: [],
+            perPage: 10
         };
     },
     async mounted() {
         await this.status;
         await this.getObjects();
     },
-    watch:{
+    watch: {
         currentPage() {
             let offset = (parseInt(this.currentPage) - 1) * 10;
             this.getObjects(offset);
@@ -141,10 +132,10 @@ export default {
     methods: {
         getPriority(num) {
             let id = parseInt(num);
-            if(id == 0) {
-                return "Приоритетный"
+            if (id == 0) {
+                return "Приоритетный";
             } else {
-                return "Резервный"
+                return "Резервный";
             }
         },
         goTo(id_obj) {
@@ -162,9 +153,10 @@ export default {
                 headers: {
                     "X-CSRF-Token": this.csrf
                 }
-            }).then(res => {
+            }).then((res) => {
+                console.log();
                 this.items = res.data.items;
-                this.totalRows[this.status] = res.data.count
+                this.totalRows[this.status] = res.data.count;
             });
         }
     }
