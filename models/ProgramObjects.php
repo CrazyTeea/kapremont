@@ -183,6 +183,16 @@ class ProgramObjects extends \yii\db\ActiveRecord
         return $this->hasOne(Program::class, ['id' => 'id_program']);
     }
 
+    public function getComments()
+    {
+        return $this->hasMany(Comments::class, ['id_obj' => 'id']);
+    }
+
+    public function getLastcomment()
+    {
+        return $this->hasOne(Comments::class, ['id_obj' => 'id'])->orderBy('id desc')->limit(1);
+    }
+
     public static function getObjectsForTable($offset, $where_clause)
     {
         $query = Yii::$app->db->createCommand("

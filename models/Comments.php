@@ -36,4 +36,9 @@ class Comments extends ActiveRecord
     {
         return $this->hasOne(User::class, ['id' => 'id_user']);
     }
+
+    public function getProgramm()
+    {
+        return $this->hasOne(ProgramObjects::class, ['id' => 'id_obj']);
+    }
 }

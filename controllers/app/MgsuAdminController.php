@@ -3,6 +3,7 @@
 namespace app\controllers\app;
 
 use app\models\Atz;
+use app\models\Comments;
 use app\models\FaivUsers;
 use app\models\Founders;
 use app\models\Organizations;
@@ -25,13 +26,10 @@ class MgsuAdminController extends Controller
 
         if(Yii::$app->user->can('faiv_admin')) {
             $id_founder = FaivUsers::find()->where(['id_user' => Yii::$app->user->id])->one()->id_founder;
-
             $params = $this->getParams(json_decode(Yii::$app->request->post('form')));
             $order = $this->getOrder(json_decode(Yii::$app->request->post('form')));
-            
             $select = Organizations::getMainCheckTable($offset, $params, $order, " and id_founder = $id_founder");
             $count = Organizations::getMainCheckTableCount($params, " and id_founder = $id_founder");
-
 
             return Json::encode([
                 'rows' => $select,
@@ -41,11 +39,8 @@ class MgsuAdminController extends Controller
 
         $params = $this->getParams(json_decode(Yii::$app->request->post('form')));
         $order = $this->getOrder(json_decode(Yii::$app->request->post('form')));
-
         $select = Organizations::getMainCheckTable($offset, $params, $order);
         $count = Organizations::getMainCheckTableCount($params);
-        // echo "<pre>";
-        // print_r($order);
 
         return Json::encode([
             'rows' => $select,
@@ -95,7 +90,8 @@ class MgsuAdminController extends Controller
                 'po_id' => $item->id,
                 'priority' => $item->type,
                 'type' => $item->id_priority,
-                'po_name' => $item->name
+                'po_name' => $item->name,
+                'last_comment_role' => $item->lastcomment ? $item->lastcomment->user_role : null
             ];
         }
 
