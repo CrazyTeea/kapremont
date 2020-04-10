@@ -8,15 +8,19 @@ use app\models\ObjectDocumentsTypes;
 use app\models\ProgObjectsEvents;
 use app\models\ProgObjectsRiscs;
 use app\models\ProgObjectsWaites;
+use app\models\Program;
 use app\models\ProObjectsNecessary;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Reader\Html;
 use Yii;
 use app\models\ProgramObjects;
-use yii\base\Model;
 use yii\helpers\ArrayHelper;
+use yii\helpers\FileHelper;
 use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
+use ZipArchive;
 
 /**
  * ProgramObjectsController implements the CRUD actions for ProgramObjects model.
@@ -48,6 +52,35 @@ class ProgramObjectsController extends AppController
     }
 
     /**
+     * @param $id
+     * @return string|\yii\web\Response
+     * @throws NotFoundHttpException
+     * @throws \yii\base\Exception
+     */
+    public function actionZip($id){
+        $model = $this->findModel($id);
+        $zip = new ZipArchive();
+        $path = Yii::getAlias( '@webroot' ) . "/uploads/$id/";
+        if (!file_exists($path))
+            FileHelper::createDirectory($path);
+        $zip->open("{$path}files.zip",ZipArchive::CREATE);
+        foreach ($model->docList as $doc){
+            $path = Yii::getAlias( '@webroot' ) . "/uploads/$id/{$doc->file->name}.{$doc->file->ext}";
+            if (file_exists($path)){
+                $zip->addFile($path,"{$doc->file->name}.{$doc->file->ext}");
+            }
+        }
+        $zip->close();
+        $path = Yii::getAlias( '@webroot' ) . "/uploads/$id/files.zip";
+        if (file_exists($path)) {
+            Yii::$app->response->sendFile($path)->send();
+            unlink($path);
+        }
+
+        return "Что не так с файлами, обратитесь в тех поддержку. ID объекта $id";
+    }
+
+    /**
      * Displays a single ProgramObjects model.
      * @param integer $id
      * @return mixed
@@ -56,9 +89,13 @@ class ProgramObjectsController extends AppController
     public function actionView($id)
     {
         $model = $this->findModel($id);
+        $program = Program::findOne($model->id_program);
+        $canChange = !$program->ban;
+        $canChange &=  (!$program->p_status or !$model->status || $model->status == 4);
         $docList = ObjectDocumentsList::findAll(['system_status'=>1,'id_object'=>$id]);
-        return $this->render('view',compact('model','docList'));
+        return $this->render('view',compact('model','docList','canChange'));
     }
+
     public function actionDownloadDoc($id_obj){
         $get= Yii::$app->request->get();
         $file = Files::findOne($get['id']);
@@ -90,10 +127,8 @@ class ProgramObjectsController extends AppController
         $model->id_program = $program->id;
         if ($post = Yii::$app->request->post()) {
             if ($model->load($post)) {
-                if ($model->id_priority == 4)
-                    $model->type = 1;
-                else $model->type = 0;
                 $transaction = Yii::$app->getDb()->beginTransaction();
+                $model->status = 0;
                 $save &= $model->save();
                 $errors['ProgramObjects'] = $model->getErrors();
                 if ($save) {
@@ -174,7 +209,7 @@ class ProgramObjectsController extends AppController
                             $pr->id_object = $model->id;
                             $pr->element = $index;
                         }
-                        $pr->aim = $item->aim ? : $index;
+                        $pr->aim = $item->aim ? : '';
                         $pr->plan = $item->plan;
                         $pr->changes = $item->changes ? : '';
                         $save &= $pr->save();
@@ -212,6 +247,29 @@ class ProgramObjectsController extends AppController
         return $this->render('create',compact('model','progObjectsEvents','progObjectsWaites','progObjectsRiscs','proObjectsNecessary'));
     }
 
+
+    /**
+     * @throws \PhpOffice\PhpSpreadsheet\Reader\Exception
+     * @throws \PhpOffice\PhpSpreadsheet\Writer\Exception
+     * @throws \yii\base\Exception
+     * Статистика по бюджетам (объект)
+     */
+    public function actionExport(){
+        $objs = ProgramObjects::find()->where(['system_status'=>1])->andWhere(['<>','status',0])->all();
+        $html = $this->renderPartial('_export',compact('objs'));
+        $reader = new HTML();
+        $spreadsheet = $reader->loadFromString($html);
+        $writer = IOFactory::createWriter($spreadsheet,'Xls');
+
+        $path = Yii::getAlias( '@webroot' ) . "/uploads/export";
+        if (!file_exists($path))
+            FileHelper::createDirectory($path);
+        $writer->save("$path/export.xls");
+        Yii::$app->response->sendFile("$path/export.xls")->send();
+        if (file_exists("$path/export.xls"))
+            unlink("$path/export.xls");
+    }
+
     /**
      * Updates an existing ProgramObjects model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -231,17 +289,19 @@ class ProgramObjectsController extends AppController
         //
         if ($post = Yii::$app->request->post()) {
             if ($model->load($post)) {
-                if ($model->id_priority == 4)
-                    $model->type = 1;
-                else $model->type = 0;
                 $transaction = Yii::$app->getDb()->beginTransaction();
+                $model->status = 1;
                 $save &= $model->save();
                 $errors['ProgramObjects'] = $model->getErrors();
                 $model->finance_sum = $model->coFinancing = 0;
                 if ($save) {
+                    $deletedIDs = null;
+                    $oldIds = ArrayHelper::map($progObjectsEvents,'id','id');
                     $progObjectsEvents = ProgObjectsEvents::createMultiple(ProgObjectsEvents::className(), $progObjectsEvents);
                     ProgObjectsEvents::loadMultiple($progObjectsEvents, Yii::$app->request->post());
-
+                    $deletedIDs = array_diff($oldIds, array_filter(ArrayHelper::map($progObjectsEvents, 'id', 'id')));
+                    if (! empty($deletedIDs))
+                        ProgObjectsEvents::deleteAll(['id' => $deletedIDs]);
                     foreach ($progObjectsEvents as $index => $item) {
                         $pr = ProgObjectsEvents::findOne(['id_object' => $model->id, 'step' => $index]);
                         if (!$pr) {
@@ -262,26 +322,29 @@ class ProgramObjectsController extends AppController
                         $errors['ProgObjectsEvents'][] = $pr->getErrors();
                     }
                     $save &= $model->save(false);
-                   // $deletedIDs = null;
-                    //$oldIds = ArrayHelper::map($proObjectsNecessary,'id','id');
+                    $deletedIDs = null;
+                    $oldIds = ArrayHelper::map($proObjectsNecessary,'id','id');
                     $proObjectsNecessary = ProObjectsNecessary::createMultiple(ProObjectsNecessary::className(), $proObjectsNecessary);
                     ProObjectsNecessary::loadMultiple($proObjectsNecessary, Yii::$app->request->post());
-                    if (  is_array(Yii::$app->request->post('ProObjectsNecessary'))){
-                    foreach (Yii::$app->request->post('ProObjectsNecessary') as $index => $item) {
-                        if (!ArrayHelper::keyExists($index, $proObjectsNecessary)) {
-                            $proObjectsNecessary[$index] = new ProObjectsNecessary();
+                    $deletedIDs = array_diff($oldIds, array_filter(ArrayHelper::map($proObjectsNecessary, 'id', 'id')));
+                    if (! empty($deletedIDs))
+                        ProObjectsNecessary::deleteAll(['id' => $deletedIDs]);
+
+
+                    if (  is_array(Yii::$app->request->post('ProObjectsNecessary'))) {
+                        foreach (Yii::$app->request->post('ProObjectsNecessary') as $index => $item) {
+                            if (!ArrayHelper::keyExists($index, $proObjectsNecessary)) {
+                                $proObjectsNecessary[$index] = new ProObjectsNecessary();
+                            }
+                            $proObjectsNecessary[$index]['nalichie'] = isset($item['nalichie']) ? $item['nalichie'] : 0;
+                            $proObjectsNecessary[$index]['material'] = isset($item['material']) ? $item['material'] : '';
+                            $proObjectsNecessary[$index]['srok_eks'] = isset($item['srok_eks']) ? $item['srok_eks'] : '';
+                            $proObjectsNecessary[$index]['kap_remont'] = isset($item['kap_remont']) ? $item['kap_remont'] : 0;
+                            $proObjectsNecessary[$index]['obosnovanie'] = isset($item['obosnovanie']) ? $item['obosnovanie'] : '';;
+                            $proObjectsNecessary[$index]['element'] = isset($item['element']) ? $item['element'] : '';
                         }
-                        $proObjectsNecessary[$index]['nalichie'] = isset($item['nalichie']) ? $item['nalichie'] : 0;
-                        $proObjectsNecessary[$index]['material'] = isset($item['material']) ? $item['material'] : '';
-                        $proObjectsNecessary[$index]['srok_eks'] = isset($item['srok_eks']) ? $item['srok_eks'] : '';
-                        $proObjectsNecessary[$index]['kap_remont'] = isset($item['kap_remont']) ? $item['kap_remont'] : 0;
-                        $proObjectsNecessary[$index]['obosnovanie'] = isset($item['obosnovanie']) ? $item['obosnovanie'] : '';;
-                        $proObjectsNecessary[$index]['element'] = isset($item['element']) ? $item['element'] : '';
                     }
-                }
-                   // $deletedIDs = array_diff($oldIds, array_filter(ArrayHelper::map($proObjectsNecessary, 'id', 'id')));
-                   // if (! empty($deletedIDs))
-                   //     ProObjectsNecessary::deleteAll(['id' => $deletedIDs]);
+
 
                     foreach ($proObjectsNecessary as $index => $item) {
 
@@ -315,7 +378,7 @@ class ProgramObjectsController extends AppController
                             $pr->id_object = $id;
                             $pr->element = $index;
                         }
-                        $pr->aim = $item->aim ? : $index;
+                        $pr->aim = $item->aim ? : '';
                         $pr->plan = $item->plan;
                         $pr->changes = $item->changes ? : '';
                         $save &= $pr->save();
@@ -353,7 +416,8 @@ class ProgramObjectsController extends AppController
         return $this->render('update',compact('model','progObjectsEvents','progObjectsWaites','progObjectsRiscs','proObjectsNecessary'));
     }
 
-    public function actionAddDocs($id){
+    public function actionAddDocs($id)
+    {
         $model = $this->findModel($id);
         if($model) {
             if (Yii::$app->request->post())
@@ -443,7 +507,8 @@ class ProgramObjectsController extends AppController
          return Json::encode($kek);
     }
 
-    public function actionDelete($id){
+    public function actionDelete($id)
+    {
         $model = $this->findModel($id);
         $model->system_status = 0;
         $model->save(false);
@@ -464,4 +529,6 @@ class ProgramObjectsController extends AppController
         $files = Files::find()->where(['files.id'=>1])->select(['name'])->joinWith(['docList'])->one();
         var_dump($files);
     }
+
+
 }

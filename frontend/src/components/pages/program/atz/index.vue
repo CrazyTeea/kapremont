@@ -39,12 +39,6 @@
                         </b-th>
                         <b-th class="vertical-align-for-table-cell normal-font-weight-for-cell">
                             <label>{{ cost_o(index) }}</label>
-                            <!-- <b-form-input
-                                v-model="item.cost_o"
-                                placeholder="Цена"
-                                min="0"
-                                type="number"
-                            ></b-form-input> -->
                         </b-th>
                     </b-tr>
                 </b-tbody>
@@ -75,9 +69,23 @@
 
 <script>
 import Axios from 'axios'
+import {BFormInput, BTableSimple, BTbody, BTfoot, BForm, BButton, BTh, BThead, BTr, VBToggle} from "bootstrap-vue";
 
 export default {
-
+    directives:{
+        'b-toggle':VBToggle
+    },
+    components:{
+        BButton,
+        BForm,
+        BFormInput,
+        BTableSimple,
+        BThead,
+        BTr,
+        BTh,
+        BTbody,
+        BTfoot,
+    },
     mounted() {
         Axios.get('/rest/system/get-page',{
             params:{
@@ -117,7 +125,7 @@ export default {
                 let b = parseFloat(this.items[index].cost_v) || 0 ;
                 this.items[index].cost_o = a + b;
                 return a + b
-                }
+            }
         },
         cost_b_full() {
             var sum = 0;
@@ -154,16 +162,16 @@ export default {
         },
         sendInfo() {
             let formData = new FormData(document.getElementById('atz_form'));
-             Axios.post(this.$route.path,formData,{
-                 headers:
+            Axios.post(this.$route.path,formData,{
+                headers:
                      {
                          'X-CSRF-Token':this.csrf,
                          'Content-Type': 'application/x-www-form-urlencoded'
                      },
-             }).then((res) => {
-                 if (!!res.data)
-                     location.reload();
-             })
+            }).then((res) => {
+                if (res.data)
+                    location.reload();
+            })
         }
 
     },

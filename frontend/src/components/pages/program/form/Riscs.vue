@@ -60,11 +60,39 @@
 </template>
 
 <script>
+import {
+    BFormInput,
+    BTableSimple,
+    BTbody,
+    BTd,
+    BTfoot,
+    BTh,
+    BThead,
+    BTr,
+    VBToggle
+} from "bootstrap-vue";
+
 export default {
+    directives:{
+        'b-toggle':VBToggle
+    },
+    components:{
+        BFormInput,
+        BTableSimple,
+        BThead,
+        BTr,
+        BTh,
+        BTd,
+        BTbody,
+        BTfoot,
+    },
     props:{
-      modelName:String
+        modelName:String
     },
     mounted() {
+        if(window.MODEL.riscs[0]) {
+            this.items.pop()
+        }
         window.MODEL.riscs.forEach((item,index)=> {
             if (!index)
                 this.items[0] = {
@@ -93,10 +121,10 @@ export default {
     methods: {
         addNewRow: function() {
             this.items.push({
-                    types: null,
-                    poison: null,
-                    protect: null
-                })
+                types: null,
+                poison: null,
+                protect: null
+            })
         },
         deleteLastRow: function() {
             this.items.pop()

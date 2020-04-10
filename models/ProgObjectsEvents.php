@@ -39,6 +39,9 @@ class ProgObjectsEvents extends BaseMultiModel
             [['cost_real', 'sum_bud_fin', 'fin_vnebud_ist'], 'number'],
         ];
     }
+    public function getObject(){
+        return $this->hasOne(ProgramObjects::class,['id'=>'id_object']);
+    }
 
     /**
      * {@inheritdoc}

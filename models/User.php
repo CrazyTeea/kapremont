@@ -7,6 +7,7 @@ use Yii;
 use yii\base\NotSupportedException;
 use yii\behaviors\TimestampBehavior;
 use yii\db\ActiveRecord;
+use yii\rbac\PhpManager;
 use yii\web\IdentityInterface;
 
 /***
@@ -177,7 +178,24 @@ class User extends ActiveRecord implements IdentityInterface
         $this->password_reset_token = null;
     }
 
-    public function getOrganization(){
+    public function getOrganization()
+    {
         return $this->hasOne(Organizations::className(),['id'=>'id_org']);
+    }
+
+    public static function getRole($id)
+    {
+        $role = (new PhpManager())->getRolesByUser($id);
+        return key($role);
+    }
+
+    public static function getUsersByRole($role)
+    {
+        return (new PhpManager())->getUserIdsByRole($role);
+    }
+
+    public function getFaiv()
+    {
+        return $this->hasMany(FaivUsers::class, ['id' => 'id_user']);
     }
 }

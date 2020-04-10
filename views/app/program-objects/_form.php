@@ -1,7 +1,6 @@
 <?php
 
-use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\helpers\Json;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\ProgramObjects */
@@ -12,12 +11,12 @@ use yii\widgets\ActiveForm;
 
     <script>
         window.MODEL = {
-            base:<?=\yii\helpers\Json::encode($model)?>,
-            svedenia:<?=\yii\helpers\Json::encode($progObjectsEvents)?>,
-            necessary:<?=\yii\helpers\Json::encode($proObjectsNecessary)?>,
-            waited:<?=\yii\helpers\Json::encode($progObjectsWaites)?>,
-            riscs:<?=\yii\helpers\Json::encode($progObjectsRiscs)?>,
+            base:<?=Json::encode($model)?>,
+            svedenia:<?=Json::encode($progObjectsEvents)?>,
+            necessary:<?=Json::encode($proObjectsNecessary)?>,
+            waited:<?=Json::encode($progObjectsWaites)?>,
+            riscs:<?=Json::encode($progObjectsRiscs)?>,
         };
     </script>
-
+    <div id="app"></div>
 </div>

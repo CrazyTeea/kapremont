@@ -42,54 +42,65 @@
 </template>
 
 <script>
-    import {userPanel} from '../../organisms'
-    import {mapActions, mapGetters} from "vuex";
-    // import b_vue from 'bootstrap-vue';
-    export default {
-        //name: "mainPage",
-        data(){
-            return {
-                perPage: 5,
-                currentPage:1
-            }
-        },
-        computed:{
-            ...mapGetters(['getUser','getOrg','getRegion','getPageData']),
-            rows() {
-                if(this.getPageData && this.getPageData.items)
-                    return this.getPageData.items.length;
-                return 0;
-            },
-            items(){
-                if(this.getPageData && this.getPageData.items)
-                    return this.getPageData.items;
-                return [];
-            },
-            fields(){
-                if(this.getPageData && this.getPageData.fields)
-                    return this.getPageData.fields;
-                return [];
-            }
-
-        },
-        watch:{
-          getUser:function () {
-              this.requestOrg({id:this.getUser.organization.id});
-          }
-        },
-        methods:{
-            ...mapActions(['requestProgram','requestOrg','requestPageData'])
-        },
-        components:{
-            "v-userPanel":userPanel,
-        },
-        mounted() {
-            this.requestPageData({pageName:"main"});
-            //this.requestProgram();
-
-
+import {userPanel} from '../../organisms'
+import {mapActions, mapGetters} from "vuex";
+import {
+    BButton,
+    BTable,
+    BPagination,
+    VBToggle,
+} from "bootstrap-vue";
+// import b_vue from 'bootstrap-vue';
+export default {
+    directives:{
+        'b-toggle':VBToggle
+    },
+    components:{
+        "v-userPanel":userPanel,
+        BButton,
+        BPagination,
+        BTable,
+    },
+    data(){
+        return {
+            perPage: 5,
+            currentPage:1
         }
+    },
+    computed:{
+        ...mapGetters(['getUser','getOrg','getRegion','getPageData']),
+        rows() {
+            if(this.getPageData && this.getPageData.items)
+                return this.getPageData.items.length;
+            return 0;
+        },
+        items(){
+            if(this.getPageData && this.getPageData.items)
+                return this.getPageData.items;
+            return [];
+        },
+        fields(){
+            if(this.getPageData && this.getPageData.fields)
+                return this.getPageData.fields;
+            return [];
+        }
+
+    },
+    watch:{
+        getUser:function () {
+            this.requestOrg({id:this.getUser.organization.id});
+        }
+    },
+    methods:{
+        ...mapActions(['requestProgram','requestOrg','requestPageData'])
+    },
+    mounted() {
+        this.requestPageData({pageName:"main"});
+        //this.requestProgram();
+
+
     }
+}
 </script>
 
 <style scoped>

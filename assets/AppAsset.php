@@ -17,17 +17,20 @@ use yii\web\AssetBundle;
  */
 class AppAsset extends AssetBundle
 {
+
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'css/site.css',
-        'vue/styles.css'
+        'vue/index.css',
+        'css/site.css'
     ];
     public $js = [
-        'vue/index.js'
+        'vue/main.js',
     ];
+
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap4\BootstrapAsset',
     ];
 }
+

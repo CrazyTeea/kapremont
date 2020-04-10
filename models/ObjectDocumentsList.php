@@ -57,14 +57,20 @@ class ObjectDocumentsList extends \yii\db\ActiveRecord
     }
 
     public function add(UploadedFile $uploadedFile, $id_object, $id_type, $label, $status = 1){
+        $ifDoc = self::findOne(['id_object'=>$id_object,'id_type'=>$id_type,'system_status'=>1]);
+        if (!$ifDoc) {
+            $file = new Files();
+            $this->id_file = $file->upload($uploadedFile, "/$id_object");
+            $this->id_object = $id_object;
+            $this->id_type = $id_type;
+            $this->label = $label;
+            $this->system_status = $status;
+            return $this->id_file and $this->save();
+        }
         $file = new Files();
-        $this->id_file = $file->upload($uploadedFile,"/$id_object");
-        $this->id_object = $id_object;
-        $this->id_type = $id_type;
-        $this->label = $label;
-        $this->system_status = $status;
+        $ifDoc->id_file = $file->upload($uploadedFile, "/$id_object");
+        return $ifDoc->id_file and $ifDoc->save(false);
 
-        return $this->id_file and $this->save();
     }
     public function updateItem($id)
     {
@@ -81,9 +87,10 @@ class ObjectDocumentsList extends \yii\db\ActiveRecord
         return $this->hasMany(Files::class, ['id' => 'id_file']);
     }
 
-    public function getObjects()
+
+    public function getObject()
     {
-        return $this->hasMany(ProgramObjects::class, ['id' => 'id_object']);
+        return $this->hasOne(ProgramObjects::class, ['id_object' => 'id']);
     }
 
 }

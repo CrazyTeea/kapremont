@@ -1,0 +1,27 @@
+<?php
+
+return [
+    'program' => 'app/program',
+    '' => 'app/program',
+    'login' => 'site/login',
+    'error/browser' => 'app/error/browser',
+    'program/view' => 'app/development-programme',
+    'program/add-doc/<id:\d+>' => 'app/development-programme/add-doc',
+    'program/delete-doc/<id:\d+>' => 'app/development-programme/delete-doc',
+    'program/check-doc/<id:\d+>' => 'app/development-programme/check-doc',
+    'program/download-doc/<id:\d+>' => 'app/development-programme/download-doc',
+    'program/object/create' => 'app/program-objects/create',
+    'program/object/view/<id:\d+>' => 'app/program-objects/view',
+    'program/object/update/<id:\d+>' => 'app/program-objects/update',
+    'program/object/add-docs/<id:\d+>' => 'app/program-objects/add-docs',
+    'program/object/download-doc/<id_obj:\d+>' => 'app/program-objects/download-doc',
+    'program/object/delete-docs/<id:\d+>' => 'app/program-objects/delete-docs',
+    'program/object/delete/<id:\d+>' => 'app/program-objects/delete',
+    'program/object/files/<id:\d+>' => 'app/program-objects/get-all-obj-files',
+    'program/export' => 'app/development-programme/export',
+    'organization/info' => 'app/organization/info',
+    'organization/update/<id:\d+>' => 'app/organization/update',
+    'program/atz' => 'app/atz/index',
+    'api/fileUpload' => '/rest/upload/upload',
+    'api/fileRemove' => '/rest/upload/delete',
+];

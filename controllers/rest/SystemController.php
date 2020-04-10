@@ -7,6 +7,8 @@ namespace app\controllers\rest;
 use app\models\Atz;
 use app\models\Cities;
 use app\models\Organizations;
+use app\models\OrgInfo;
+use app\models\ProgObjectsEvents;
 use app\models\Program;
 use app\models\ProgramObjects;
 use app\models\Regions;
@@ -91,6 +93,7 @@ class SystemController extends RestController
                     ];
                     $ret['fieldsObjects']['fields']=[
                         ['key'=>'index','label'=>'№'],
+                        ['key'=>'type2','label'=>'Тип'],
                         ['key'=>'priority','label'=>'Приоритет'],
                         ['key'=>'region','label'=>"Субъект РФ"],
                         ['key'=>'name','label'=>"Наименование объекта, требующего кап. ремонт"],
@@ -100,7 +103,7 @@ class SystemController extends RestController
                         ['key'=>'year','label'=>"Год постройки"],
                         ['key'=>'wear2','label'=>"Износ здания (%)"],
                         ['key'=>'regulationT','label'=>"Предписание надзорных органов: МЧС, Роспотребнадзор и т.д. (при наличии)"],
-                        ['key'=>'event_type','label'=>"Вид планируемого мероприятия"],//co-financing
+                        ['key'=>'event_typeT','label'=>"Вид планируемого мероприятия"],//co-financing
                         ['key'=>'finance_sum','label'=>"Сумма бюджетного финансирования на проведение кап.ремонта (тыс. руб)"],
                         ['key'=>'coFinancing','label'=>"Софинансирование из внебюджетных источников (тыс. руб)"],
                         ['key'=>'note','label'=>"Примечание"],
@@ -122,7 +125,7 @@ class SystemController extends RestController
                         ['id'=>6,'target'=>'Иное:','indicator'=>'','unit'=>''],
                     ];
 
-                    $progObj = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>0])->joinWith(['region'])->all();
+                    $progObj = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>0])->joinWith(['region'])->orderBy(['created_at'=>SORT_ASC])->all();
                     $flag = false;
                     $prior = [
                         1=>'1',
@@ -137,21 +140,38 @@ class SystemController extends RestController
                         'От 70% до 90%',
                         'Более 90%'
                     ];
+                    $r = [
+                      'Комплексный',
+                      'Выборочный'
+                    ];
+                    $s_sum = 0; $sum_sum = 0;
                     foreach ($progObj as $index=>$item) {
                         $i = $index+1;
-                            $ret['priorityObjects']['items'][$index] = ArrayHelper::merge([
-                                'regulationT'=>($item->exist_pred_nadz_orgs) ? $item->regulation : '',
-                                'index'=>$i,
-                                'priority'=> $prior[$item->id_priority ? : 1],
-                                'region' => $item->region ? $item->region->region : '',
-                                'wear2'=> (!is_null($item->wear) and $item->wear < 5 )? $wear[$item->wear] : ''
-                            ],$item
-                            );
+                        $s_sum += floatval($item->square_kap );
+                        $sum_sum += floatval($item->finance_sum);
+                        $ret['priorityObjects']['items'][$index] = ArrayHelper::merge([
+                            'type2'=>'Приоритетный',
+                            'event_typeT'=>(isset($item->type_remont) ? $r[$item->type_remont] : ''),
+                            'regulationT'=>($item->exist_pred_nadz_orgs) ? $item->regulation : '',
+                            'index'=>$i,
+                            'priority'=> $prior[$item->id_priority ? : 1],
+                            'region' => $item->region ? $item->region->region : '',
+                            'wear2'=> (!is_null($item->wear) and $item->wear < 5 )? $wear[$item->wear] : ''
+                        ],$item
+                        );
                     }
+                    if (isset($ret['priorityObjects']['items'])) {
+                        array_push($ret['priorityObjects']['items'], ['assignment' => 'итого', 'square_kap' => number_format($s_sum, 3, '.',' ') , 'finance_sum' => number_format($sum_sum, 3, '.',' ')]);
+                    }
+                    $s_sum = 0; $sum_sum = 0;
                     $progObj = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>1])->joinWith(['region'])->all();
                     foreach ($progObj as $index=>$item) {
                         $i = $index+1;
+                        $s_sum += floatval($item->square_kap );
+                        $sum_sum += floatval($item->finance_sum);
                         $ret['reservedObjects']['items'][$index] = ArrayHelper::merge([
+                            'type2'=>'Резервный',
+                            'event_typeT'=>(isset($item->type_remont) ? $r[$item->type_remont] : ''),
                             'regulationT'=>($item->exist_pred_nadz_orgs) ? $item->regulation : '',
                             'index'=>$i,
                             'priority'=> $prior[$item->id_priority ? : 1],
@@ -159,6 +179,10 @@ class SystemController extends RestController
                             'wear2'=> (!is_null($item->wear) and $item->wear < 5) ? $wear[$item->wear] : ''
                         ],$item);
                     }
+                    if (isset($ret['reservedObjects']['items'])) {
+                        array_push($ret['reservedObjects']['items'], ['assignment' => 'итого', 'square_kap' => number_format($s_sum, 3, '.',' ') , 'finance_sum' => number_format($sum_sum, 3, '.',' ')]);
+                    }
+
                     return $ret;
                 }
                 case 'objectCreate':{
@@ -209,7 +233,13 @@ class SystemController extends RestController
                         ],
                         ['id' => 5, 'label' =>
                             "Студенты всего, из них:",
-                            'value' => $org->orgInfo?$org->orgInfo->st_all: 0
+                            'value' => ($org->orgInfo) ?
+                                floatval($org->orgInfo->st_sr_pr_count) +
+                                floatval($org->orgInfo->st_bak_count) +
+                                floatval($org->orgInfo->st_spec_count) +
+                                floatval($org->orgInfo->st_mag_count) +
+                                floatval($org->orgInfo->st_asp_count)
+                                : 0
                         ],
                         ['id' => 5.1, 'label' =>
                             "Среднего профессионального образования",
@@ -253,28 +283,32 @@ class SystemController extends RestController
                         ],
                         ['id' => 8, 'label' =>
                             "Общая площадь всех зданий и сооружений",
-                            'value'=> ProgramObjects::find()->select(['square'])->where(['system_status'=>1,'id_org'=>$this->user->id_org,])->sum('square'),
+                            'value'=> ($org->orgInfo)? $org->orgInfo->square_all: 0
                         ],
                         ['id' => 9, 'label' =>
                             "Общая площадь всех зданий и сооружений, требующих капитального ремонта (на основании акта обследования или предписаний надзорных органов)",
-                            'value'=>  ProgramObjects::find()->select(['square_kap'])->where(['system_status'=>1,'id_org'=>$this->user->id_org,])->sum('square_kap'),
+                            'value'=>  ($org->orgInfo)? $org->orgInfo->square_all_kap: 0
                         ],
                         ['id' => 10, 'label' =>
                             "Общая площадь всех зданий и сооружений, находящихся в аварийном состоянии (на основании акта обследования или предписаний надзорных органов)",
-                            'value'=>  ProgramObjects::find()->select(['square_av'])->where(['system_status'=>1,'id_org'=>$this->user->id_org,])->sum('square_av')
+                            'value'=>  $org->orgInfo? $org->orgInfo->square_all_av: 0
                         ],
                         ['id' => 11, 'label' =>
                             "Общая площадь всех зданий и сооружений, требующих мероприятий по АТЗ",
-                            'value'=>  ProgramObjects::find()->select(['square_atz'])->where(['system_status'=>1,'id_org'=>$this->user->id_org,])->sum('square_atz')
+                            'value'=>  $org->orgInfo? $org->orgInfo->square_all_atz: 0
+                        ],
+                        ['id' => 12, 'label' =>
+                            "ФИО ректора",
+                            'value'=>  $org->orgInfo? $org->orgInfo->rector: ''
                         ],
                     ];
 
-
                     return $ret;
-                    break;
                 }
                 case 'atz':{
                     $program = Yii::$app->session->get('program');
+                    if (!$program)
+                        $program = Program::findOne(['id_org'=>Yii::$app->session->get('user')->id_org]);
                     $atz = Atz::findAll(['id_program'=>$program->id]);
                     return $atz;
                 }
@@ -285,15 +319,15 @@ class SystemController extends RestController
     public function actionGetUser(){
         if (!Yii::$app->getUser()->isGuest) {
 
-                //$data = (object)Json::decode($data);
-                //$user = User::find()->where(['username' => $data->login])->one();
-                $user = Yii::$app->getSession()->get('user');
-                return [
-                    'organization' => $user->organization,
-                    'fio' => $user->fio,
-                    'position' => $user->position,
-                    'isAdmin' => self::$cans[5]
-                ];
+            //$data = (object)Json::decode($data);
+            //$user = User::find()->where(['username' => $data->login])->one();
+            $user = Yii::$app->getSession()->get('user');
+            return [
+                'organization' => $user->organization,
+                'fio' => $user->fio,
+                'position' => $user->position,
+                'isAdmin' => self::$cans[5]
+            ];
 
         }
     }
