@@ -25,9 +25,9 @@ foreach ($objs as $i => $obj){
     $c0 = counter($obj->objects,2,0);
     $c1 = counter($obj->objects,2,1);
     $c12 = counter($obj->objects,2);
-    $o = $obj->finance_events - $c12;
-    $i_c1 += $obj->finance_events;
-    $i_c2 += $obj->cost;
+    $o = $obj->finance_volume - $c12;
+    $i_c1 += $obj->finance_volume;
+    $i_c2 += $obj->finance_events;
     $i_c3 += $c0;
     $i_c4 += $c1;
     $i_c5 += $c12;
@@ -42,8 +42,8 @@ foreach ($objs as $i => $obj){
     }
 
     $html.="<td>{$obj->org->name}</td>
+        <td>$obj->finance_volume</td>
         <td>$obj->finance_events</td>
-        <td>$obj->cost</td>
         <td>$c0</td>
         <td>$c1</td>
         <td>$c12</td>

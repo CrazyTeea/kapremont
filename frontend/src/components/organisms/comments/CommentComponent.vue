@@ -11,8 +11,8 @@
                 <div>
                     <div v-if="allComments.length">
                         <transition-group name="slide-fade">
-                            <b-list-group v-for="(comment, index) in allComments" :key="index">
-                                <b-list-group-item v-if="comment.user_role == 'mgsu'" class="flex-column align-items-start bg-light mt-2">
+                            <b-list-group v-for="(comment, index) in allComments" :key="`key-${index}`">
+                                <b-list-group-item v-if="comment.user_role === 'mgsu'" class="flex-column align-items-start bg-light mt-2">
                                     <div class="d-flex w-100 justify-content-between">
                                         <h5 :id="`user_${comment.id_user}`" class="mb-1 font-weight-bold text-warning">Минобрнауки России (эксперт)</h5>
                                         <small>{{ comment.created_at }}</small>
@@ -98,167 +98,169 @@
 </template>
 
 <script>
-import Axios from "axios";
-import { BAlert, BSpinner, BFormFile, BButton, BCard, BCardBody, BCardHeader, BCollapse, BListGroup, BListGroupItem, BFormGroup, BFormTextarea, VBToggle } from "bootstrap-vue";
-export default {
-    name: "CommentComponent",
-    props: ["obj_id"],
-    directives: {
-        "b-toggle": VBToggle
-    },
-    components: {
-        BAlert,
-        BSpinner,
-        BFormFile,
-        BCollapse,
-        BCard,
-        BCardHeader,
-        BCardBody,
-        BButton,
-        BListGroup,
-        BListGroupItem,
-        BFormGroup,
-        BFormTextarea
-    },
-    watch: {
-        files() {
-            if (this.files) {
-                for (let file of this.files) {
-                    if (!this.types.includes(file.type)) {
-                        this.files = null;
-                    }
-                }
-            }
-        }
-    },
-    data() {
-        return {
-            csrf: document.getElementsByName("csrf-token")[0].content,
-            types: ["application/pdf", "application/doc", "application/doch", "image/jpeg", "image/jpg", "image/png"],
-            files: null,
-            bannerInfo: [],
-            sending: false,
-            newComment: "",
-            allComments: []
-        };
-    },
-    computed: {
-        restWords() {
-            return 255 - (this.newComment.length || 0);
-        }
-    },
-    async mounted() {
-        await this.obj_id;
-        await this.getUser();
-        await this.refreshComments();
-    },
-    methods: {
-        setBanner(variant, message, timeOut = 2000) {
-            this.bannerInfo.unshift({
-                show: true,
-                variant: variant,
-                message: message
-            });
-            setTimeout(() => {
-                this.bannerInfo.pop();
-            }, timeOut);
+    import Axios from "axios";
+    import { BAlert, BSpinner,
+        BFormFile, BButton, BCard, BCardBody,
+        BCardHeader, BCollapse, BListGroup, BListGroupItem, BFormGroup, BFormTextarea, VBToggle } from "bootstrap-vue";
+    export default {
+        name: "CommentComponent",
+        props: ["obj_id"],
+        directives: {
+            "b-toggle": VBToggle
         },
-
-        downloadFile(folder, name) {
-            Axios.get(`/api/file/download/${folder}`, {
-                params: {
-                    fileName: name
-                },
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                responseType: "arraybuffer"
-            }).then((response) => {
-                console.log(response.data);
-                const type = response.headers["content-type"];
-                const blob = new Blob([response.data], { type: type });
-                const link = document.createElement("a");
-                link.href = window.URL.createObjectURL(blob);
-                link.download = name;
-                link.click();
-            });
+        components: {
+            BAlert,
+            BSpinner,
+            BFormFile,
+            BCollapse,
+            BCard,
+            BCardHeader,
+            BCardBody,
+            BButton,
+            BListGroup,
+            BListGroupItem,
+            BFormGroup,
+            BFormTextarea
         },
-        async getUser() {
-            return Axios.get("/api/comment/user").then((res) => {
-                this.user_id = res.data;
-            });
-        },
-        async refreshComments() {
-            return Axios.get(`/api/v2/comments/all/${this.obj_id}`).then((res) => {
-                console.log(res.data);
-                this.allComments = res.data;
-            });
-        },
-        async deleteComment(id) {
-            return Axios.post(`/api/v2/comments/${id}/delete`, null, {
-                headers: {
-                    "X-CSRF-Token": this.csrf
-                }
-            }).then(() => {
-                this.refreshComments();
-            });
-        },
-        async addNewComment() {
-            if (!this.newComment.length) {
-                return this.setBanner("danger", "Сначала ведите текст комментария!");
-            }
-            this.sending = true;
-            this.refreshComments();
-            let data = new FormData();
-            data.append("id_obj", this.obj_id);
-            data.append("message", this.newComment);
-            data.append("id_user", this.user_id);
-            Axios.post("/api/v2/comments/save", data, {
-                headers: {
-                    "X-CSRF-Token": this.csrf
-                }
-            }).then(async (res) => {
-                let id_comment = res.data;
+        watch: {
+            files() {
                 if (this.files) {
-                    console.log("in files");
                     for (let file of this.files) {
-                        await this.sendFile(file, id_comment);
+                        if (!this.types.includes(file.type)) {
+                            this.files = null;
+                        }
                     }
                 }
-                this.refreshComments();
-                this.sending = false;
-                this.newComment = "";
-                this.files = null;
-            });
+            }
         },
-        async sendFile(file, id_comment) {
-            console.log("here");
-            let form = new FormData();
-            form.append("file", file);
-            return Axios.post(`/api/fileUpload/${this.obj_id}/${id_comment}`, form, {
-                headers: {
-                    "X-CSRF-Token": this.csrf,
-                    "Content-Type": "multipart/form-data;"
+        data() {
+            return {
+                csrf: document.getElementsByName("csrf-token")[0].content,
+                types: ["application/pdf", "application/doc", "application/doch", "image/jpeg", "image/jpg", "image/png"],
+                files: null,
+                bannerInfo: [],
+                sending: false,
+                newComment: "",
+                allComments: []
+            };
+        },
+        computed: {
+            restWords() {
+                return 255 - (this.newComment.length || 0);
+            }
+        },
+        async mounted() {
+            await this.obj_id;
+            await this.getUser();
+            await this.refreshComments();
+        },
+        methods: {
+            setBanner(variant, message, timeOut = 2000) {
+                this.bannerInfo.unshift({
+                    show: true,
+                    variant: variant,
+                    message: message
+                });
+                setTimeout(() => {
+                    this.bannerInfo.pop();
+                }, timeOut);
+            },
+
+            downloadFile(folder, name) {
+                Axios.get(`/api/file/download/${folder}`, {
+                    params: {
+                        fileName: name
+                    },
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    responseType: "arraybuffer"
+                }).then((response) => {
+                    console.log(response.data);
+                    const type = response.headers["content-type"];
+                    const blob = new Blob([response.data], { type: type });
+                    const link = document.createElement("a");
+                    link.href = window.URL.createObjectURL(blob);
+                    link.download = name;
+                    link.click();
+                });
+            },
+            async getUser() {
+                return Axios.get("/api/comment/user").then((res) => {
+                    this.user_id = res.data;
+                });
+            },
+            async refreshComments() {
+                return Axios.get(`/api/v2/comments/all/${this.obj_id}`).then((res) => {
+                    console.log(res.data);
+                    this.allComments = res.data;
+                });
+            },
+            async deleteComment(id) {
+                return Axios.post(`/api/v2/comments/${id}/delete`, null, {
+                    headers: {
+                        "X-CSRF-Token": this.csrf
+                    }
+                }).then(() => {
+                    this.refreshComments();
+                });
+            },
+            async addNewComment() {
+                if (!this.newComment.length) {
+                    return this.setBanner("danger", "Сначала ведите текст комментария!");
                 }
-            });
+                this.sending = true;
+                this.refreshComments();
+                let data = new FormData();
+                data.append("id_obj", this.obj_id);
+                data.append("message", this.newComment);
+                data.append("id_user", this.user_id);
+                Axios.post("/api/v2/comments/save", data, {
+                    headers: {
+                        "X-CSRF-Token": this.csrf
+                    }
+                }).then(async (res) => {
+                    let id_comment = res.data;
+                    if (this.files) {
+                        console.log("in files");
+                        for (let file of this.files) {
+                            await this.sendFile(file, id_comment);
+                        }
+                    }
+                    this.refreshComments();
+                    this.sending = false;
+                    this.newComment = "";
+                    this.files = null;
+                });
+            },
+            async sendFile(file, id_comment) {
+                console.log("here");
+                let form = new FormData();
+                form.append("file", file);
+                return Axios.post(`/api/fileUpload/${this.obj_id}/${id_comment}`, form, {
+                    headers: {
+                        "X-CSRF-Token": this.csrf,
+                        "Content-Type": "multipart/form-data;"
+                    }
+                });
+            }
         }
-    }
-};
+    };
 </script>
 
 <style>
-.text-decorate {
-    color: #000 !important;
-}
+    .text-decorate {
+        color: #000 !important;
+    }
 
-.slide-fade-enter-active {
-  transition: all .3s ease;
-}
-.slide-fade-leave-active {
-  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
-}
-.slide-fade-enter, .slide-fade-leave-to {
-  transform: translateX(10px);
-  opacity: 0;
-}
+    .slide-fade-enter-active {
+        transition: all .3s ease;
+    }
+    .slide-fade-leave-active {
+        transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+    }
+    .slide-fade-enter, .slide-fade-leave-to {
+        transform: translateX(10px);
+        opacity: 0;
+    }
 </style>

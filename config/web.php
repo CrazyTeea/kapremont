@@ -138,6 +138,8 @@ $config = [
 
                 'api/file/download/<name:.+>' => 'rest/upload/download',
 
+                'api/getUsersInfo/<id_org:\d+>'=>'api/user-info/users',
+
                 'api/mgsu/main-table/<offset:\d+>' => '/app/mgsu-admin/main-table',
                 'api/mgsu/objects-table/<offset:\d+>' => '/app/mgsu-admin/objects-table',
                 
