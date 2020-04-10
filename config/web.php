@@ -132,6 +132,8 @@ $config = [
                 'api/fileUpload' => '/rest/upload/upload',
                 'api/fileRemove' => '/rest/upload/delete',
 
+                'api/getUsersInfo/<id_org:\d+>'=>'api/user-info/users',
+
                 'api/mgsu/main-table/<offset:\d+>' => '/app/mgsu-admin/main-table',
                 'api/mgsu/objects-table/<offset:\d+>' => '/app/mgsu-admin/objects-table',
                 

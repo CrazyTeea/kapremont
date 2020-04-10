@@ -37,12 +37,15 @@
                 <div class="col-6 offset-3" v-show="getUser.isAdmin && getPageData">
                     <b-button href="program/view">Заполнить программу модернизации</b-button>
                 </div>
+                <div class="col-6">
+                    <user-info-view />
+                </div>
             </div>
         </div>
 </template>
 
 <script>
-import {userPanel} from '../../organisms'
+import {userPanel,UserInfoView} from '../../organisms'
 import {mapActions, mapGetters} from "vuex";
 import {
     BButton,
@@ -60,11 +63,13 @@ export default {
         BButton,
         BPagination,
         BTable,
+        UserInfoView,
     },
     data(){
         return {
             perPage: 5,
-            currentPage:1
+            currentPage:1,
+            id_org:null
         }
     },
     computed:{
@@ -89,13 +94,18 @@ export default {
     watch:{
         getUser:function () {
             this.requestOrg({id:this.getUser.organization.id});
+            this.id_org = this.getUser.organization.id;
         }
     },
     methods:{
-        ...mapActions(['requestProgram','requestOrg','requestPageData'])
+        ...mapActions(['requestProgram','requestOrg','requestPageData','requestUser'])
     },
-    mounted() {
-        this.requestPageData({pageName:"main"});
+    async mounted() {
+        await this.requestUser();
+        await this.requestPageData({pageName:"main"});
+
+        //this.id_org = this.getUser.organization.id;
+
         //this.requestProgram();
 
 
