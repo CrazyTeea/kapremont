@@ -2,6 +2,8 @@
 
 namespace app\controllers\app;
 
+use app\facades\ProgramStatus;
+use app\models\ProgramObjects;
 use app\models\User;
 use Yii;
 
@@ -23,5 +25,15 @@ class AppController extends \yii\web\Controller
         }
         self::$cans = Yii::$app->getSession()->get('cans');
         Yii::$app->getSession()->set('user',User::findOne(Yii::$app->user->id));
+    }
+
+    public function actionTest()
+    {
+        $test = new ProgramStatus(115);
+        
+        // $test->isDep();
+
+        return $test->isDep();
+        // return ProgramObjects::find()->where(['id' => 115, 'system_status' => 1])->all();
     }
 }
