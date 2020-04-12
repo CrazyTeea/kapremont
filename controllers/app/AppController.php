@@ -29,11 +29,11 @@ class AppController extends \yii\web\Controller
 
     public function actionTest()
     {
-        $test = new ProgramStatus(115);
-        
+        $test = new ProgramStatus(38);
+        // $test->isNotApproved();
         // $test->isDep();
         
-        // return $test->isDep();
+        // return $test->isNotApproved();
 
         // ProgramObjects::updateAll(['status' => 2]);
 

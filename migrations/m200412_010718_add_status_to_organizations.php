@@ -1,6 +1,8 @@
 <?php
 
+use app\facades\ProgramStatus;
 use app\models\Organizations;
+use app\models\Program;
 use yii\db\Migration;
 
 /**
@@ -15,7 +17,14 @@ class m200412_010718_add_status_to_organizations extends Migration
     {
         $this->addColumn('organizations', 'programm_status', "ENUM('draft', 'rejected', 'in_process', 'returned', 'dep_reviewed', 'dku_reviewed')");
 
-        Organizations::updateAll(['programm_status' => 'draft']);
+        $orgs = Organizations::find()->where(['system_status' => 1])->all();
+        foreach($orgs as $org) {
+            $program = Program::find()->where(['id_org' => $org->id])->one();
+            if($program) {
+                new ProgramStatus($org->id);
+            }
+        }
+        // Organizations::updateAll(['programm_status' => 'draft']);
     }
 
     /**
