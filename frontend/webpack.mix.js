@@ -14,9 +14,7 @@ let path = require('path');
 mix.js('src/main.js', '../web/vue/')
     .sass('src/styles/index.scss', '../web/vue/')
     .setPublicPath('../web/vue')
-    .browserSync({
-        proxy:'http://localhost:8080'
-    })
+    .browserSync('http://localhost:8080')
     .sourceMaps(false);
 mix.webpackConfig({
     output: {

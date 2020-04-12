@@ -81,6 +81,9 @@ $config = [
                     'pluralize' => false
                 ],
 
+
+                'shit-table/data' => 'api/shit/data',
+
                 'api/set-status/approved/dep/<obj_id:\d+>' => '/app/organization/set-approve-status-dep',
                 'api/set-status/rejected/dep/<obj_id:\d+>' => '/app/organization/set-rejected-status-dep',
                 'api/set-status/approved/dku/<obj_id:\d+>' => '/app/organization/set-approve-status-dku',

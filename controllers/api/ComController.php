@@ -13,6 +13,7 @@ class ComController extends Controller
     public function actionGetComments($id_obj)
     {
         $comments = Comments::find()->where(['id_obj' => $id_obj])->all();
+        $responce=[];
         foreach($comments as $comment) {
                         
             $responce [] = [
