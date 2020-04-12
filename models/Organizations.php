@@ -18,6 +18,18 @@ use app\models\ProgramObjects;
  */
 class Organizations extends \yii\db\ActiveRecord
 {
+    public const PROGRAM_STATUS_DRAFT = 'draft';
+
+    public const PROGRAM_STATUS_REJECTED = 'rejected';
+
+    public const PROGRAM_STATUS_IN_PRCESS = 'in_process';
+
+    public const PROGRAM_STATUS_RETURNED = 'returned';
+
+    public const PROGRAM_STATUS_DEP_REVIEWED = 'dep_reviewed';
+
+    public const PROGRAM_STATUS_DKU_REVIEWED = 'dku_reviewed';
+
     /**
      * {@inheritdoc}
      */

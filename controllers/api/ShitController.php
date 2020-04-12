@@ -4,6 +4,7 @@
 namespace app\controllers\api;
 
 
+use app\facades\ProgramStatus;
 use app\models\Program;
 use yii\rest\Controller;
 
@@ -43,12 +44,13 @@ class ShitController extends Controller
                     $ob_fin_vol['sum']+=($item->cost_real*1);
                 }
             }
+            $status = new ProgramStatus($program->id_org);
             $ret['program'][] = [
                 'id_org'=>$program->id_org,
                 'region'=>$program->org->region->region,
                 'org_name'=>$program->org->name,
                 'pdf_export'=>$program->file_exist,
-                'program_status'=>$program->p_status,
+                'program_status'=>$status->isNotApproved() ? 'Не согласовано' : 'согласовано',
                 'obs_limits'=>round($program->finance_volume,2),
                 'obs_reserv'=>'-',
                 'pred_zakl'=>round($ob_fin_vol['sum'],2), //$program->finance_volume - $ob_fin_vol
@@ -59,14 +61,14 @@ class ShitController extends Controller
                 'abj_nappr'=>$obj_count[3],
                 'abj_prog'=>$obj_count[4],
                 'abj_dep'=>$obj_count['dep'],
-                'cost_pr'=>$obj_cost['pr'],
-                'cost_res'=>$obj_cost['res'],
-                'cost_depPr'=>$obj_cost['depPr'],
-                'cost_depRes'=>$obj_cost['depRes'],
+                'cost_pr'=>round($obj_cost['pr'],2),
+                'cost_res'=>round($obj_cost['res'],2),
+                'cost_depPr'=>round($obj_cost['depPr'],2),
+                'cost_depRes'=>round($obj_cost['depRes'],2),
                 'atz_nb'=>$program->finance_events,
                 'atz'=>0,
                 'atz_bud_fin'=>0,
-                'atz_status'=>'Не согласовано'
+                'atz_status'=>$status->isDku() ? 'Согласовано' : 'Не согласовано'
 
             ];
         }

@@ -49,6 +49,5 @@ class UploadController extends Controller
 
     public function actionTest()
     {// Url::rest/upload/test
-        //
     }
 }
