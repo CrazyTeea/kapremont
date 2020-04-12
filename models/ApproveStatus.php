@@ -14,6 +14,7 @@ use yii\db\ActiveRecord;
 
 class ApproveStatus extends ActiveRecord
 {
+    const STATUS_NOT_SEND = 1;
     const STATUS_RECOMEND = 2;
     const STATUS_NOT_RECOMEND = 3;
     const STATUS_TO_WORK = 4;

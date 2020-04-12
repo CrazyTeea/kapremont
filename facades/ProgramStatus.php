@@ -2,7 +2,9 @@
 
 namespace app\facades;
 
+use app\models\ApproveStatus;
 use app\models\Organizations;
+use app\models\Program;
 use app\models\ProgramObjects;
 
 class ProgramStatus
@@ -13,42 +15,43 @@ class ProgramStatus
     {
         $this->id_org = $id_org;
 
-        // $this->calculateStatus();
-
-
+        $this->calculateStatus();
     }
 
-    public function calculateStatus()
+    public function calculateStatus() // вычисляет нужный статус
     {
+
         if($this->isDraft()) {
-            $this->setStatus(Organizations::PROGRAM_STATUS_DRAFT);
+            return $this->setStatus(Organizations::PROGRAM_STATUS_DRAFT);
         } else if($this->isNotApproved()) {
-            $this->setStatus(Organizations::PROGRAM_STATUS_REJECTED);
+            return $this->setStatus(Organizations::PROGRAM_STATUS_REJECTED);
         } else if($this->isDep()) {
-            $this->setStatus(Organizations::PROGRAM_STATUS_DEP_REVIEWED);
-        } else if($this->isDku()) {
-            $this->setStatus(Organizations::PROGRAM_STATUS_DKU_REVIEWED);
-        }
+            if($this->isDku()) {
+                $this->setStatus(Organizations::PROGRAM_STATUS_DKU_REVIEWED);
+            } else {
+                $this->setStatus(Organizations::PROGRAM_STATUS_DEP_REVIEWED);
+            }
+        } 
     }
 
-    public function setStatus(string $status): void
+    public function setStatus(string $status): void //выставляет нужный статус
     {
-        $query = Organizations::find()->where(['id_org' => $this->id_org])->one();
+        $query = Organizations::find()->where(['id' => $this->id_org])->one();
         $query->programm_status = $status;
         $query->save(false);
     }
 
-    public function isToWork()
+    public function isToWork(): bool //возвращено на доработку
     {
         $v_obr = true;
         $na_dorabotku = false;
     
-        $objs = ProgramObjects::find()->where(['id' => $this->id_org])->all();
+        $objs = ProgramObjects::find()->where(['id_org' => $this->id_org])->all();
         foreach($objs as $obj) {
-            if($obj->astatus->id == 1) {
+            if($obj->astatus->id == ApproveStatus::STATUS_NOT_SEND) {
                 $v_obr = false;
             }
-            if($obj->astatus->id == 4) {
+            if($obj->astatus->id == ApproveStatus::STATUS_TO_WORK) {
                 $na_dorabotku = true;
             }
         }
@@ -60,13 +63,14 @@ class ProgramStatus
         return false;
     }
 
-    public function isDep() //согласовано деп
+    public function isDep(): bool //согласовано деп
     {
         $dep = true;
-        $objs = ProgramObjects::find()->where(['id' => $this->id_org, 'system_status' => 1])->all();
+        $objs = ProgramObjects::find()->where(['id_org' => $this->id_org, 'system_status' => 1])->all();
         foreach($objs as $obj) {
             if($obj->dep_status != 'approved') {
                 $dep = false;
+                break;
             }
         }
 
@@ -76,7 +80,7 @@ class ProgramStatus
     public function isDku(): bool //согласовано дку
     {
         $dku = true;
-        $objs = ProgramObjects::find()->where(['id' => $this->id_org])->all();
+        $objs = ProgramObjects::find()->where(['id_org' => $this->id_org])->all();
         foreach($objs as $obj) {
             if($obj->dku_status !== 'approved') {
                 $dku = false;
@@ -87,13 +91,22 @@ class ProgramStatus
         return $dku;
     }
 
+    public function isDepDku()
+    {
+        if($this->isDep() && $this->isDku()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public function isNotApproved(): bool //не согласовано
     {
         $isNotApproved = false;
-        $objs = ProgramObjects::find()->where(['id' => $this->id_org])->all();
+        $objs = ProgramObjects::find()->where(['id_org' => $this->id_org])->all();
 
         foreach($objs as $obj) {
-            if($obj->astatus == 'rejected' || $obj->dep_status == 'rejected') { // conditions to review
+            if($obj->astatus->id == ApproveStatus::STATUS_NOT_RECOMEND || $obj->dep_status == 'rejected') { // conditions to review
                 $isNotApproved = true;
                 break;
             }
@@ -102,9 +115,15 @@ class ProgramStatus
         return $isNotApproved;
     }
 
-    public function isDraft(): bool //черновик
+    public function isDraft() //черновик
     {
-        return true;
+        $query = Program::find()->where(['id_org' => $this->id_org, 'system_status' => 1])->one();
+
+        if($query->p_status == 0) {
+            $isDraft = true;
+        }
+
+        return $isDraft ?? false;
     }
 
     public function getProgramStatus(): string

@@ -32,8 +32,11 @@ class AppController extends \yii\web\Controller
         $test = new ProgramStatus(115);
         
         // $test->isDep();
+        
+        // return $test->isDep();
 
-        return $test->isDep();
-        // return ProgramObjects::find()->where(['id' => 115, 'system_status' => 1])->all();
+        // ProgramObjects::updateAll(['status' => 2]);
+
+        // return $this->render('index');
     }
 }
