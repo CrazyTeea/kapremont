@@ -3548,7 +3548,7 @@ __webpack_require__.r(__webpack_exports__);
                     _this3.dep_status.label = 'В обработке';
                     _this3.dep_status.color = 'secondary';
                   } else if (dep === 'approved') {
-                    _this3.dep_status.label = 'Согласовано ДЭП';
+                    _this3.dep_status.label = 'Рассмотрено ДЭП';
                     _this3.dep_status.color = 'success';
                   } else if (dep === 'rejected') {
                     _this3.dep_status.label = 'Резерв';
