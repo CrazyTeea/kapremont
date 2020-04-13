@@ -1,6 +1,5 @@
 <?php
 
-
 namespace app\controllers\app;
 
 use app\facades\ProgramStatus;
@@ -151,6 +150,7 @@ class OrganizationController extends AppController
     public function actionSetRecomendStatus($obj_id)
     {
         $this->setStatus($obj_id, ApproveStatus::STATUS_RECOMEND);
+        new ProgramStatus(ProgramObjects::find()->where(['id' => $obj_id, 'system_status' => 1])->one()->id_org);
 
         return $this->redirect(Yii::$app->request->referrer);
     }
@@ -158,6 +158,8 @@ class OrganizationController extends AppController
     public function actionSetNotRecomendStatus($obj_id)
     {
         $this->setStatus($obj_id, ApproveStatus::STATUS_NOT_RECOMEND);
+        new ProgramStatus(ProgramObjects::find()->where(['id' => $obj_id, 'system_status' => 1])->one()->id_org);
+
 
         return $this->redirect(Yii::$app->request->referrer);
     }
@@ -165,6 +167,8 @@ class OrganizationController extends AppController
     public function actionSetToWorkStatus($obj_id)
     {
         $this->setStatus($obj_id, ApproveStatus::STATUS_TO_WORK);
+        new ProgramStatus(ProgramObjects::find()->where(['id' => $obj_id, 'system_status' => 1])->one()->id_org);
+
 
         return $this->redirect(Yii::$app->request->referrer);
     }
@@ -175,6 +179,7 @@ class OrganizationController extends AppController
             $object = ProgramObjects::findOne($obj_id);
             $object->dep_status = ProgramObjects::APPROVE_STATUS;
             $object->save(false);
+            new ProgramStatus(ProgramObjects::find()->where(['id' => $obj_id, 'system_status' => 1])->one()->id_org);
         }
 
         return $this->redirect(Yii::$app->request->referrer);
@@ -186,31 +191,22 @@ class OrganizationController extends AppController
             $object = ProgramObjects::findOne($obj_id);
             $object->dep_status = ProgramObjects::REJECTED_STATUS;
             $object->save(false);
+            new ProgramStatus(ProgramObjects::find()->where(['id' => $obj_id, 'system_status' => 1])->one()->id_org);
         }
 
         return $this->redirect(Yii::$app->request->referrer);
     }
 
-    public function actionSetApproveStatusDku($obj_id)
+    public function actionSetStatusDku($org_id)
     {
-        if(Yii::$app->getUser()->can('dku') && $this->commentPermision($obj_id)) {
-            $object = ProgramObjects::findOne($obj_id);
-            $object->dku_status = ProgramObjects::APPROVE_STATUS;
-            $object->save(false);
+        if(Yii::$app->getUser()->can('dku')) {
+            $status = Yii::$app->request->post('dku_status');
+            $org = Organizations::find()->where(['id' => $org_id])->one();
+            $org->dku_status = $status;
+            $org->save(false);
+            
+            new ProgramStatus($org_id);
         }
-
-        return $this->redirect(Yii::$app->request->referrer);
-    }
-
-    public function actionSetRejectedStatusDku($obj_id)
-    {
-        if(Yii::$app->getUser()->can('dku') && $this->commentPermision($obj_id)) {
-            $object = ProgramObjects::findOne($obj_id);
-            $object->dku_status = ProgramObjects::REJECTED_STATUS;
-            $object->save(false);
-        }
-
-        return $this->redirect(Yii::$app->request->referrer);
     }
 
     private function setStatus($obj_id, $status)

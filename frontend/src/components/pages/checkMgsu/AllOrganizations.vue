@@ -50,7 +50,14 @@
                 </b-card-body>
             </b-collapse>
         </b-card>
-        <div class="table-overflow-hidden mt-3">
+
+        <div class="row mt-3">
+            <div class="col-12">
+                <b-alert v-for="(banner, index) in bannerInfo" :key="index" :show="banner.show" :variant="banner.variant" dismissible fade>{{ banner.message }}</b-alert>
+            </div>
+        </div>
+
+        <div class="table-overflow-hidden mt-1">
             <b-table-simple bordered hover>
                 <b-thead>
                     <b-tr>
@@ -60,6 +67,7 @@
                         <b-th>Объектов добавлено</b-th>
                         <b-th>Выгрузка PDF</b-th>
                         <b-th>Выгрузка отправлена</b-th>
+                        <b-th v-can:dku>Статус программы (ДКУ)</b-th>
                     </b-tr>
                 </b-thead>
                 <b-tbody>
@@ -86,6 +94,17 @@
                             <b-icon v-if="item.p_status === '1'" icon="check" variant="success" scale="2"></b-icon>
                             <b-icon v-else icon="x-octagon" variant="danger" scale="2"></b-icon>
                         </b-th>
+                        <b-th v-can:dku class="normal-font-weight-for-sell center-text-in-cell">
+                            <b-form-select
+                                @input="setDepStatus(item)"
+                                v-model="item.dku_status"
+                                :options="[
+                                    {value: 'not', text: 'В обработке'},
+                                    {value: 'approved', text: 'Согласовано ДКУ'},
+                                    {value: 'rejected', text: 'Резерв'}
+                                ]"
+                            ></b-form-select>
+                        </b-th>
                     </b-tr>
                 </b-tbody>
             </b-table-simple>
@@ -98,6 +117,7 @@
 <script>
 import Axios from "axios";
 import {
+    BAlert,
     BCard,
     BCardHeader,
     BInputGroup,
@@ -120,6 +140,7 @@ export default {
         "b-toggle": VBToggle
     },
     components: {
+        BAlert,
         BCollapse,
         BCard,
         BCardHeader,
@@ -138,6 +159,8 @@ export default {
     },
     data() {
         return {
+            bannerInfo: [],
+            selected:null,
             filters: {
                 id: null,
                 region: null,
@@ -177,6 +200,16 @@ export default {
         this.getTable();
     },
     methods: {
+        setBanner(variant, message, timeout = 2500) {
+            this.bannerInfo.unshift({
+                show: true,
+                variant: variant,
+                message: message
+            });
+            setTimeout(() => {
+                this.bannerInfo.pop();
+            }, timeout);
+        },
         goToRef(id) {
             window.location = `/organization/list/${id}`;
         },
@@ -188,9 +221,23 @@ export default {
                     "X-CSRF-Token": this.csrf
                 }
             }).then(res => {
+                console.log(res.data)
                 this.items = res.data.rows;
                 this.totalRows = res.data.count.quantity;
             });
+        },
+        setDepStatus(item) {
+            console.log(item)
+            let form = new FormData();
+            form.append('dku_status', item.dku_status)
+            Axios.post(`/api/set-status/dku/${item.id}`, form, {
+                headers: {
+                    "X-CSRF-Token": this.csrf
+                }
+            }).then(res => {
+                this.getTable()
+                this.setBanner('success', `Статус успешно изменен: ${item.name}`, 3200)
+            })
         }
     },
     watch: {

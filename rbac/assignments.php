@@ -12031,9 +12031,6 @@ return [
         'root',
         'dev_program',
     ],
-    2994 => [
-        'mgsu',
-    ],
     2995 => [
         'root',
         'dev_program',
@@ -12457,5 +12454,8 @@ return [
     ],
     3117 => [
         'faiv_admin',
+    ],
+    2994 => [
+        'dku',
     ],
 ];
