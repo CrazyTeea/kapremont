@@ -10,7 +10,7 @@
         />
 
         <b-tabs content-class="mt-3">
-            <b-tab lazy title-link-class="text-info" title="Свободная таблица">
+            <b-tab lazy title-link-class="text-info" title="Сводная таблица">
                 <shit-table />
             </b-tab>
             <b-tab lazy title-link-class="text-info" title="Организации">
