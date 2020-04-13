@@ -45,6 +45,7 @@ return [
             '/app/mgsu-admin/*',
             '/api/com/*',
             '/rest/upload/*',
+            '/api/shit/data',
         ],
     ],
     'orglist_view' => [
@@ -112,6 +113,7 @@ return [
         'children' => [
             'dev_program',
             '/*',
+            '/api/shit/data',
         ],
     ],
     'faiv_admin' => [
@@ -124,6 +126,7 @@ return [
             'dev_program',
             '/api/com/*',
             '/rest/upload/*',
+            '/api/shit/data',
         ],
     ],
     '/app/program/export' => [
@@ -188,6 +191,9 @@ return [
         'type' => 2,
     ],
     '/rest/upload/*' => [
+        'type' => 2,
+    ],
+    '/api/shit/data' => [
         'type' => 2,
     ],
 ];
