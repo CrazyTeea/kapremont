@@ -1,5 +1,10 @@
 <template>
     <div style="height: 550px; overflow: auto" id="org-shit-table">
+        <div v-if="!items.length" class="text-center">
+            Данные загружаются, подождите
+            <b-spinner  variant="primary" />
+        </div>
+
         <b-table
                 select-mode="single"
                 selectable
@@ -17,12 +22,13 @@
 </template>
 
 <script>
-    import {BTable,BIcon} from 'bootstrap-vue';
+    import {BTable,BIcon,BSpinner} from 'bootstrap-vue';
     import Axios from 'axios'
     export default {
         components:{
           BTable,
-            BIcon
+            BIcon,
+            BSpinner
         },
         async mounted() {
             await this.getObjects();
