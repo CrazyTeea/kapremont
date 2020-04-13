@@ -70,33 +70,42 @@ class OrganizationController extends AppController
 
     public function actionTableList($id)
     {
-        $query = Yii::$app->db->createCommand("
-            SELECT 
-                po.id,
-                po.type,
-                po.id_priority,
-                cities.city,
-                po.name,
-                po.assignment,
-                po.square_kap,
-                po.address,
-                po.year,
-                po.wear,
-                po.regulation,
-                po.finance_sum,
-                po.coFinancing,
-                po.system_status
-            FROM
-                program_objects AS po
-                    JOIN
-                cities ON cities.id = po.id_city
-            WHERE
-                po.id_org = $id AND po.system_status = 1")->queryAll();
+        $objects = ProgramObjects::find()->select('id, type, id_priority, name, finance_sum, coFinancing, status, dep_status')->where(['id_org' => $id, 'system_status' => 1])->all();
+        $countAll = 0;
+        $vObr = 0;
+        $recomend = 0;
+        $notRecomend = 0;
+        $naDorab = 0;
+        foreach($objects as $key => $object) {
+        
+            $countAll += 1;
+            if($object->status == 1) {
+                $vObr += 1;
+            }
+            if($object->status == 2) {
+                $recomend += 1;
+            }
+            if($object->status == 3) {
+                $notRecomend += 1;
+            }
+            if($object->status == 4) {
+                $naDorab += 1;
+            }
 
+            $objects[$key]['status'] = $object->astatus->label;
+        }
         $programm = Program::find()->select(['finance_volume', 'finance_events', 'cost'])->where(['id_org' => $id, 'system_status' => Program::ACTIVE])->one();
+
         return Json::encode([
-            'objects' => $query,
-            'programm' => $programm
+            'objects' => $objects,
+            'programm' => $programm,
+            'info' => [ 
+                'countAll' => $countAll,
+                'vObr' => $vObr, 
+                'recomend' => $recomend,
+                'notRecomend' => $notRecomend,
+                'naDorab' => $naDorab
+                ]
         ]);
     }
 
