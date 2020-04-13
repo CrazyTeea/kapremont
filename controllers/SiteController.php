@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\ChangePasswordForm;
+use app\models\forms\UserRecover;
 use app\models\Program;
 use app\models\ProgramObjects;
 use app\models\User;
@@ -62,6 +63,20 @@ class SiteController extends Controller
             ],
         ];
     }
+
+    /**
+     * @return string|Response
+     * @throws \yii\base\Exception
+     */
+    public function actionUserRecover(){
+        $model = new UserRecover();
+        if ($post = Yii::$app->request->post()){
+            if ($model->load($post) and $model->resetFromIasmon())
+                return $this->redirect(['login']);
+        }
+        return $this->render('userRecover',compact('model'));
+    }
+
     public function actionChangePassword()
     {
         $model = new ChangePasswordForm();
