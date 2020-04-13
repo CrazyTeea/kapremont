@@ -38,6 +38,9 @@
                 <b-dropdown-item :href="`/api/set-status/rejected/dku/${obj_id}`" variant="warning">Резерв</b-dropdown-item>
             </b-dropdown>
         </div>
+
+        <v-comments :obj_id="obj_id" />
+
         <div class="mt-3">
                 <div class="row">
                     <div class="col-12">
@@ -210,7 +213,7 @@
                 </div>
             </b-card-body>
         </b-card>
-        <v-comments :obj_id="obj_id" />
+
     </div>
 </template>
 
