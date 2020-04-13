@@ -16,7 +16,20 @@
                 <span> <b-icon icon="bookmark-fill" scale="1.5" class="mr-2 ml-1"></b-icon>Подробная информация</span>
             </b-card-header>
             <b-card-body>
-                <b-table-simple bordered hover>
+                <b-table-simple bordered small>
+                    <b-thead>
+                        <b-tr>
+                            <b-th>{{organization? organization.id : ''}}</b-th>
+                            <b-th>{{organization? organization.name : ''}}</b-th>
+                            <b-th v-if="organization">
+                                <a style="display: block" v-if="organization.file" :href="`/program/download-doc/${organization.id}`">
+                                    <b-icon icon="file-earmark-arrow-down" variant="success"/>
+                                </a>
+                            </b-th>
+                        </b-tr>
+                    </b-thead>
+                </b-table-simple>
+                <!--<b-table-simple bordered hover>
                     <b-thead>
                         <b-tr>
                             <b-th
@@ -48,15 +61,66 @@
                             </b-th>
                         </b-tr>
                     </b-tbody>
+                </b-table-simple>-->
+            </b-card-body>
+        </b-card>
+
+        <b-card no-body class="mt-3">
+            <b-card-header header-tag="header" class="p-1" role="tab">
+                <span> <b-icon icon="bookmark-fill" scale="1.5" class="mr-2 ml-1"></b-icon>Информация</span>
+            </b-card-header>
+            <b-card-body>
+                <b-table-simple bordered hover>
+                    <b-thead>
+                        <b-tr>
+                            <b-th>Объем бюджетного финансирования кап.ремонт</b-th>
+                            <b-th>Объекты: всего/в обработке / возвращено на доработку/не рекомендуется к согласованию/ рекомендуется к согласованию</b-th>
+                            <b-th>Объем бюджетного финансирования по приоритетным объектам рекомендованным к согласованию</b-th>
+                            <b-th>Объем бюджетного финансирования по резервным объектам рекомендованным к согласованию</b-th>
+                            <b-th>Объем бюджетного финансирования по объектам рассмотренным ДЭП</b-th>
+                            <b-th>Объем бюджетного финансирования по объектам рассмотренным ДЭП (в резерв)</b-th>
+                            <b-th>Статус программы (ДЭП) </b-th>
+                        </b-tr>
+                    </b-thead>
+                    <b-tbody>
+                        <b-tr>
+                            <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
+                                <label class="cursor-pointer">{{ info.budjet ? info.budjet.toFixed(3) : 0 }}</label>
+                            </b-th>
+                            <b-th  class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
+                                <label class="cursor-pointer">{{ infoFromServ ? infoFromServ.countAll : 0 }}</label>
+                                <label class="cursor-pointer">/ {{ infoFromServ ? infoFromServ.vObr : 0 }}</label>
+                                <label class="cursor-pointer">/ {{ infoFromServ ? infoFromServ.naDorab : 0 }}</label>
+                                <label class="cursor-pointer">/ {{ infoFromServ ? infoFromServ.notRecomend : 0 }}</label>
+                                <label class="cursor-pointer">/ {{ infoFromServ ? infoFromServ.recomend : 0 }}</label>
+                            </b-th>
+                            <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
+                                <label class="cursor-pointer">{{ infoFromServ ? infoFromServ.pr : 0 }}</label>
+                            </b-th>
+                            <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
+                                <label class="cursor-pointer">{{ infoFromServ ? infoFromServ.res : 0 }}</label>
+                            </b-th>
+                            <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
+                                <label class="cursor-pointer">{{ infoFromServ ? infoFromServ.dep : 0 }}</label>
+                            </b-th>
+                            <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
+                                <label class="cursor-pointer">{{ infoFromServ ? infoFromServ.depr : 0 }}</label>
+                            </b-th>
+                            <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
+                                <label class="cursor-pointer">{{ infoFromServ ? infoFromServ.st : 'Не согласовано' }}</label>
+                            </b-th>
+                        </b-tr>
+                    </b-tbody>
                 </b-table-simple>
             </b-card-body>
         </b-card>
+
 
         <b-card no-body class="mt-4">
             <b-card-header header-tag="header" class="p-1" role="tab">
                 <span>
                     <b-icon icon="gear-wide-connected" scale="1.5" class="mr-2 ml-1"></b-icon>Объекты требующие
-                    капитального ремонта
+                    капитального ремонта (Приоритетные)
                 </span>
             </b-card-header>
             <b-card-body class="hidden-overflow">
@@ -64,69 +128,112 @@
                     <b-thead>
                         <b-tr>
                             <b-th>№</b-th>
-                            <b-th>Тип</b-th>
-                            <b-th>Приоритет</b-th>
-                            <b-th>Субъект РФ</b-th>
-                            <b-th>Наименование объекта, требующего кап. ремонта</b-th>
-                            <b-th>Назначение</b-th>
-                            <b-th>Площадь кап. ремонта (кв.м)</b-th>
-                            <b-th>Адрес объекта</b-th>
-                            <b-th>Год постройки</b-th>
-                            <b-th>Износ здания</b-th>
-                            <b-th>Предписания надзорных органов: МЧС, Роспотребнадзор и т.д. (при наличии)</b-th>
-                            <b-th>Вид планируемого мероприятия</b-th>
-                            <b-th>Сумма бюджетного финансирования на проведение кап.ремонта (тыс. руб)</b-th>
-                            <b-th>Софинансирование из внебюджетных источников (тыс. руб)</b-th>
-                            <b-th>Примечание</b-th>
+                            <b-th>Объекты</b-th>
+                            <b-th>Уровень приоритета</b-th>
+                            <b-th>ID Объекта</b-th>
+                            <b-th>Сумма бюджетного финансирования на проведение капитального ремонта (тыс. руб.) согласно программы ВУЗа</b-th>
+                            <b-th>Сумма внебюджетного финансирования на проведение капитального ремонта (тыс. руб.) согласно программы ВУЗа</b-th>
+                            <b-th>Статус МГСУ</b-th>
+                            <b-th>Статус ДЕП</b-th>
                         </b-tr>
                     </b-thead>
                     <b-tbody>
-                        <b-tr v-for="(item, index) in items" :key="index" @click="goToObj(item.id)">
+                        <b-tr v-for="(item, index) in prioritet_object" :key="index" @click="goToObj(item.id)">
                             <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
                                 <label class="cursor-pointer">{{ index + 1 }}</label>
                             </b-th>
-                            <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
-                                <label class="cursor-pointer">{{ item.type == '1' ? 'Резервный' : 'Приоритетный' }}</label>
-                            </b-th>
-                            <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
-                                <label class="cursor-pointer">{{ item.id_priority }}</label>
-                            </b-th>
-                            <b-th class="normal-font-weight-for-sell cursor-pointer center-text-in-cell">
-                                <label class="cursor-pointer">{{ item.city }}</label>
-                            </b-th>
+
                             <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
                                 <label class="cursor-pointer">{{ item.name }}</label>
                             </b-th>
+
                             <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
-                                <label class="cursor-pointer">{{ item.assignment }}</label>
+                                <label class="cursor-pointer">{{ item.id_priority }}</label>
                             </b-th>
+
                             <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
-                                <label class="cursor-pointer">{{ item.square_kap }}</label>
-                            </b-th>
-                            <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
-                                <label class="cursor-pointer">{{ item.address }}</label>
-                            </b-th>
-                            <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
-                                <label class="cursor-pointer">{{ item.year }}</label>
-                            </b-th>
-                            <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
-                                <label class="cursor-pointer">{{ getIznos(item.wear) }}</label>
-                            </b-th>
-                            <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
-                                <label class="cursor-pointer">{{ item.regulation }}</label>
-                            </b-th>
-                            <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
-                                <label class="cursor-pointer"></label>
+                                <label class="cursor-pointer">{{ item.id }}</label>
                             </b-th>
                             <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
                                 <label class="cursor-pointer">{{ item.finance_sum }}</label>
                             </b-th>
-                            <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
+
+
+                            <b-th class="normal-font-weight-for-sell cursor-pointer center-text-in-cell">
                                 <label class="cursor-pointer">{{ item.coFinancing }}</label>
                             </b-th>
+
                             <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
-                                <label class="cursor-pointer">нет</label>
+                                <label class="cursor-pointer">{{ item.status }}</label>
                             </b-th>
+
+                             <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
+                                <label class="cursor-pointer">{{ getDepStatus(item.dep_status) }}</label>
+                            </b-th>                           
+
+                        </b-tr>
+                    </b-tbody>
+                </b-table-simple>
+
+                <b-pagination v-show="currentPage" :per-page="perPage" v-model="currentPage" />
+            </b-card-body>
+        </b-card>
+
+        <b-card no-body class="mt-4">
+            <b-card-header header-tag="header" class="p-1" role="tab">
+                <span>
+                    <b-icon icon="gear-wide-connected" scale="1.5" class="mr-2 ml-1"></b-icon>Объекты требующие
+                    капитального ремонта (Резервные)
+                </span>
+            </b-card-header>
+            <b-card-body class="hidden-overflow">
+                <b-table-simple bordered hover>
+                    <b-thead>
+                        <b-tr>
+                            <b-th>№</b-th>
+                            <b-th>Объекты</b-th>
+                            <b-th>Уровень приоритета</b-th>
+                            <b-th>ID Объекта</b-th>
+                            <b-th>Сумма бюджетного финансирования на проведение капитального ремонта (тыс. руб.) согласно программы ВУЗа</b-th>
+                            <b-th>Сумма внебюджетного финансирования на проведение капитального ремонта (тыс. руб.) согласно программы ВУЗа</b-th>
+                            <b-th>Статус МГСУ</b-th>
+                            <b-th>Статус ДЕП</b-th>
+                        </b-tr>
+                    </b-thead>
+                    <b-tbody>
+                        <b-tr v-for="(item, index) in rezerv_object" :key="index" @click="goToObj(item.id)">
+                            <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
+                                <label class="cursor-pointer">{{ index + 1 }}</label>
+                            </b-th>
+
+                            <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
+                                <label class="cursor-pointer">{{ item.name }}</label>
+                            </b-th>
+
+                            <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
+                                <label class="cursor-pointer">{{ item.id_priority }}</label>
+                            </b-th>
+
+                            <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
+                                <label class="cursor-pointer">{{ item.id }}</label>
+                            </b-th>
+                            <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
+                                <label class="cursor-pointer">{{ item.finance_sum }}</label>
+                            </b-th>
+
+
+                            <b-th class="normal-font-weight-for-sell cursor-pointer center-text-in-cell">
+                                <label class="cursor-pointer">{{ item.coFinancing }}</label>
+                            </b-th>
+
+                            <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
+                                <label class="cursor-pointer">{{ item.status }}</label>
+                            </b-th>
+
+                             <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
+                                <label class="cursor-pointer">{{ getDepStatus(item.dep_status) }}</label>
+                            </b-th>                           
+
                         </b-tr>
                     </b-tbody>
                 </b-table-simple>
@@ -165,7 +272,14 @@ export default {
             perPage: 5,
             csrf: document.getElementsByName("csrf-token")[0].content,
             org_id: null,
-            items: []
+            items: [],
+            organization:{},
+            prioritet_object: [],
+            rezerv_object: [],
+            info: {
+                budjet: null,
+            }, 
+            infoFromServ: null
         };
     },
     async mounted() {
@@ -188,9 +302,38 @@ export default {
                     "X-CSRF-Token": this.csrf
                 }
             }).then(res => {
+
+                this.prioritet_object = res.data.objects.filter(obj => {
+                    return obj.type == '0'
+                });
+                this.rezerv_object = res.data.objects.filter(obj => {
+                    return obj.type == '1'
+                });
+
+                let budjet = 0;
+
+                res.data.objects.forEach(element => {
+                    budjet += parseFloat(element.finance_sum)
+                });
+
+                this.info.budjet = budjet;
+                
+                this.infoFromServ = res.data.info;
+                this.organization = res.data.organization;
+
                 this.items = res.data.objects;
+                console.log(this.items);
                 this.programm = res.data.programm;
             });
+        },
+        getDepStatus(str) {
+            if (str === 'not') {
+                return "В обработке";
+            } else if (str === 'approved') {
+                return "Рассмотрено Деп";
+            } else if (str === 2) {
+                return "Резерв";
+            }
         },
         getIznos(iznos) {
             let izn = parseInt(iznos);

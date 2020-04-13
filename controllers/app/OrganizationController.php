@@ -3,6 +3,7 @@
 
 namespace app\controllers\app;
 
+use app\facades\ProgramStatus;
 use app\models\ApproveStatus;
 use app\models\Comments;
 use app\models\Organizations;
@@ -70,33 +71,65 @@ class OrganizationController extends AppController
 
     public function actionTableList($id)
     {
-        $query = Yii::$app->db->createCommand("
-            SELECT 
-                po.id,
-                po.type,
-                po.id_priority,
-                cities.city,
-                po.name,
-                po.assignment,
-                po.square_kap,
-                po.address,
-                po.year,
-                po.wear,
-                po.regulation,
-                po.finance_sum,
-                po.coFinancing,
-                po.system_status
-            FROM
-                program_objects AS po
-                    JOIN
-                cities ON cities.id = po.id_city
-            WHERE
-                po.id_org = $id AND po.system_status = 1")->queryAll();
+        $objects = ProgramObjects::find()->where(['id_org' => $id, 'system_status' => 1])->all();
+        $countAll = 0;
+        $vObr = 0;
+        $recomend = 0;
+        $notRecomend = 0;
+        $naDorab = 0;
 
-        $programm = Program::find()->select(['finance_volume', 'finance_events', 'cost'])->where(['id_org' => $id, 'system_status' => Program::ACTIVE])->one();
+        $sved = [0,0,0,0];
+
+        foreach($objects as $key => $object) {
+
+            $countAll += 1;
+            if($object->status == 1) {
+                $vObr += 1;
+            }
+            if($object->status == 2) {
+                $recomend += 1;
+            }
+            if($object->status == 3) {
+                $notRecomend += 1;
+            }
+            if($object->status == 4) {
+                $naDorab += 1;
+            }
+
+            foreach ($object->svedenia as $kek){
+                if (!$object->type and $object->status == 2)
+                    $sved[0]++;
+                elseif($object->type and $object->status == 2)
+                    $sved[1]++;
+                if ($object->dep_status == 'approved')
+                    $sved[2]++;
+                elseif($object->dep_status == 'rejected')
+                    $sved[3]++;
+            }
+
+            $objects[$key]['status'] = $object->astatus->label;
+        }
+        $programm = Program::find()->where(['id_org' => $id, 'system_status' => Program::ACTIVE])->one();
+
         return Json::encode([
-            'objects' => $query,
-            'programm' => $programm
+            'objects' => $objects,
+            'programm' => $programm,
+            'organization'=>[
+                'id'=>$programm->org->id,
+                'name'=>$programm->org->name,
+                'file'=>$programm->file_exist],
+            'info' => [
+                'countAll' => $countAll,
+                'vObr' => $vObr,
+                'recomend' => $recomend,
+                'notRecomend' => $notRecomend,
+                'naDorab' => $naDorab,
+                'pr'=>$sved[0],
+                'res'=>$sved[1],
+                'dep'=>$sved[2],
+                'depr'=>$sved[3],
+                'st'=>(new ProgramStatus($id))->isDep() ? 'Согласовано' : 'Не согласовано'
+            ]
         ]);
     }
 
@@ -182,13 +215,14 @@ class OrganizationController extends AppController
 
     private function setStatus($obj_id, $status)
     {
-        
+
         if(Yii::$app->getUser()->can('mgsu') && $this->commentPermision($obj_id)) {
             $object = ProgramObjects::findOne($obj_id);
             $object->status = $status;
             $object->save(false);
             return true;
         }
+        return false;
     }
 
     public function actionGetApproveStatus($obj_id)

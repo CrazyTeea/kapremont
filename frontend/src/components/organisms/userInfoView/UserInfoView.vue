@@ -4,7 +4,6 @@
             <b-table id="user-ifo-table" stacked :fields="fields" :current-page="curPage" :items="items" :per-page="perPage"/>
             <b-pagination v-model="curPage" :total-rows="count" :per-page="perPage" aria-controls="user-ifo-table"/>
         </b-card>
-
     </div>
 </template>
 

@@ -19,19 +19,18 @@ use yii\db\ActiveRecord;
  */
 class Program extends ActiveRecord
 {
+    public const ACTIVE = 1;
 
-    public function getObjects(){
+    public function getObjects()
+    {
         return $this->hasMany(ProgramObjects::class,['id_program'=>'id'])->andOnCondition([ProgramObjects::tableName().'.system_status'=>1]);
     }
 
-    public function getOrg(){
+    public function getOrg()
+    {
         return $this->hasOne(Organizations::class,['id'=>'id_org']);
     }
 
-    public const ACTIVE = 1;
-    /**
-     * {@inheritdoc}
-     */
     public static function tableName()
     {
         return 'program';

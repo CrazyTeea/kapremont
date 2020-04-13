@@ -268,7 +268,7 @@ export default {
                 .then(value => {
                     this.canAxios = value;
                     // console.log(value);
-                    // this.setApprove();
+                     this.setApprove();
                 });
         },
         setApprove() {

@@ -4,6 +4,7 @@
 namespace app\controllers\app;
 
 
+use app\facades\ProgramStatus;
 use app\models\Program;
 use app\models\ProgramObjects;
 use app\models\User;
@@ -63,6 +64,8 @@ class ProgramController extends AppController
                 $program = Program::findOne(['id_org' => Yii::$app->session->get('user')->id_org]);
             if ($program->file_exist) {
                 Yii::$app->db->createCommand("UPDATE program set p_status = 1 where id_org = {$id_org} ")->execute();
+                $status = new ProgramStatus($program->id_org);
+
                 $status = true;
             } else  $errrMsg = 'Файл должен быть загружен';
             $program = Program::findOne(['id_org' => Yii::$app->session->get('user')->id_org]);
