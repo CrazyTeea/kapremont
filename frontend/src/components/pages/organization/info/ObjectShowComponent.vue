@@ -28,7 +28,7 @@
 
             <!-- <h5 class="vertical-horizontal-align">Текущий статус ДЭП: <label :class="`text-${dep_status.color}`">{{ dep_status.label }}</label></h5> -->
             <b-dropdown :disabled="!show.dep" v-can:dep right id="action"  text="Изменить статус" variant="info" class="m-2">
-                <b-dropdown-item :href="`/api/set-status/approved/dep/${obj_id}`" variant="success">Согласовано ДЭП</b-dropdown-item>
+                <b-dropdown-item :href="`/api/set-status/approved/dep/${obj_id}`" variant="success">Рассмотрено ДЭП</b-dropdown-item>
                 <b-dropdown-item :href="`/api/set-status/rejected/dep/${obj_id}`" variant="warning">Резерв</b-dropdown-item>
             </b-dropdown>
 
@@ -438,7 +438,7 @@ export default {
                     this.dep_status.label = 'В обработке';
                     this.dep_status.color = 'secondary'
                 } else if(dep === 'approved') {
-                    this.dep_status.label = 'Согласовано ДЭП';
+                    this.dep_status.label = 'Рассмотрено ДЭП';
                     this.dep_status.color = 'success'
                 } else if(dep === 'rejected') {
                     this.dep_status.label = 'Резерв';

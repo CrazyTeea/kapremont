@@ -128,7 +128,7 @@ class OrganizationController extends AppController
                 'res'=>$sved[1],
                 'dep'=>$sved[2],
                 'depr'=>$sved[3],
-                'st'=>(new ProgramStatus($id))->isDep() ? 'Согласовано' : 'Не согласовано'
+                'st'=>(new ProgramStatus($id))->isDep() ? 'Рассмотрено' : 'Не рассмотрено'
             ]
         ]);
     }

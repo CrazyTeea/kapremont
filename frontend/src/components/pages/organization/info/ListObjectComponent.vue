@@ -107,7 +107,7 @@
                                 <label class="cursor-pointer">{{ infoFromServ ? infoFromServ.depr : 0 }}</label>
                             </b-th>
                             <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
-                                <label class="cursor-pointer">{{ infoFromServ ? infoFromServ.st : 'Не согласовано' }}</label>
+                                <label class="cursor-pointer">{{ infoFromServ ? infoFromServ.st : 'Не рассмотрено' }}</label>
                             </b-th>
                         </b-tr>
                     </b-tbody>
