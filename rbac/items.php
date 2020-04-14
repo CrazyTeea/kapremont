@@ -115,6 +115,7 @@ return [
             'dev_program',
             '/*',
             '/api/shit/data',
+            '/api/user-info/*',
         ],
     ],
     'faiv_admin' => [
@@ -128,6 +129,7 @@ return [
             '/api/com/*',
             '/rest/upload/*',
             '/api/shit/data',
+            '/api/user-info/*',
         ],
     ],
     '/app/program/export' => [
@@ -169,6 +171,7 @@ return [
             '/app/mgsu-admin/*',
             '/api/com/*',
             '/rest/upload/*',
+            '/api/user-info/*',
         ],
     ],
     'dku' => [
