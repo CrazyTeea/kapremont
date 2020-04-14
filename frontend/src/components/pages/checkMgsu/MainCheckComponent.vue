@@ -13,10 +13,7 @@
             <b-tab v-can:root,mgsu,dep lazy title-link-class="text-info" title="Сводная таблица">
                 <shit-table />
             </b-tab>
-            <b-tab active v-can:dku lazy title-link-class="text-info" title="Организации">
-                <v-all-organizations />
-            </b-tab>
-            <b-tab v-can:root,mgsu,dep lazy title-link-class="text-info" title="Организации">
+            <b-tab lazy title-link-class="text-info" title="Организации" active>
                 <v-all-organizations />
             </b-tab>
             <b-tab lazy v-can:root,mgsu,dep title-link-class="text-secondary" title="В обработке">
