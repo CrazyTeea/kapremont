@@ -24,7 +24,7 @@ Vue.directive("can", {
                 if (node.child) {
                     let e = document.getElementById(node.child.controlledBy);
                     if (e)
-                        e.innerHTML = null;
+                        e.parentElement.removeChild(e);
                 }
 
             }
