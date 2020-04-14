@@ -46,6 +46,7 @@ return [
             '/api/com/*',
             '/rest/upload/*',
             '/api/shit/data',
+            '/api/user-info/*',
         ],
     ],
     'orglist_view' => [
@@ -194,6 +195,9 @@ return [
         'type' => 2,
     ],
     '/api/shit/data' => [
+        'type' => 2,
+    ],
+    '/api/user-info/*' => [
         'type' => 2,
     ],
 ];
