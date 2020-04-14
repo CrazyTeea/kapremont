@@ -29,7 +29,7 @@
                         </b-tr>
                     </b-thead>
                 </b-table-simple>
-                <!--<b-table-simple bordered hover>
+                <b-table-simple bordered hover>
                     <b-thead>
                         <b-tr>
                             <b-th
@@ -61,7 +61,7 @@
                             </b-th>
                         </b-tr>
                     </b-tbody>
-                </b-table-simple>-->
+                </b-table-simple>
             </b-card-body>
         </b-card>
 
