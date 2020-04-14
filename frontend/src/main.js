@@ -42,13 +42,15 @@ const browser = [
     { name: "Chrome", version: 79 },
     { name: "Opera", version: 66 },
     { name: "Microsoft Edge", version: 0 },
-    { name: "Safari", version: 12 }
+    { name: "Safari", version: 12 },
+    { name: "Firefox", version: 75 }
 ];
 
 //Vue.config.productionTip = false;
 router.beforeEach((to, from, next) => {
     if (to.path !== "/error/browser") {
         let access = false;
+        console.log(platform);
         browser.forEach(item => {
             if (item.name === platform.name) {
                 if (platform.hasOwnProperty("version")) {
