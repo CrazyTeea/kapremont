@@ -17,6 +17,7 @@
             BCard,
             BPagination
         },
+        props:['id_org'],
         data(){
             return {
                 curPage:1,
@@ -39,7 +40,8 @@
         },
         watch:{
             getUser:function () {
-                Axios.get(`/api/getUsersInfo/${this.getUser.organization.id}`).then(res=>{
+                let org_id = this.id_org || this.getUser.organization.id;
+                Axios.get(`/api/getUsersInfo/${org_id}`).then(res => {
                     this.items = res.data
                 })
             }
