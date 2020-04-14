@@ -6,6 +6,7 @@
         </div>
 
         <b-table
+                sticky-header
                 select-mode="single"
                 selectable
                 @row-selected="toObjects"
