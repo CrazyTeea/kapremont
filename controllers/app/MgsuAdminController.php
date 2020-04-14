@@ -56,7 +56,7 @@ class MgsuAdminController extends Controller
         // echo "<pre>";
         // print_r($params);
         $static_clause=[
-            'system_status' => 1,
+            'program_objects.system_status' => 1,
         ];
 
         $begin_clause = [
@@ -65,17 +65,17 @@ class MgsuAdminController extends Controller
 
         if (!isset($post['or_where'])) {
             if (isset($post['dep_status']))
-                $begin_clause['dep_status'] = $post['dep_status'];
+                $begin_clause['dep_status'] = 'organizations.'.$post['dep_status'];
             if (isset($post['dku_status']))
-                $begin_clause['dku_status'] = $post['dku_status'];
+                $begin_clause['dku_status'] = 'organizations.'.$post['dku_status'];
         }
         $params = array_merge($begin_clause, $post_close ?? [] );
 
-        $select = ProgramObjects::find()->where($static_clause)->andWhere($params)->andWhere(['<>','status',0])->offset($offset)->limit(10);
-        $count = ProgramObjects::find()->where($static_clause)->andWhere($params)->andWhere(['<>','status',0]);
+        $select = ProgramObjects::find()->joinWith(['org'])->where($static_clause)->andWhere($params)->andWhere(['<>','status',0])->offset($offset)->limit(10);
+        $count = ProgramObjects::find()->joinWith(['org'])->where($static_clause)->andWhere($params)->andWhere(['<>','status',0]);
         if (isset($post['or_where'])){
-            $select->andWhere(['or',['dep_status'=>$post['dep_status']],['dku_status'=>$post['dku_status']]]);
-            $count->andWhere(['or',['dep_status'=>$post['dep_status']],['dku_status'=>$post['dku_status']]]);
+            $select->andWhere(['or',['dep_status'=>$post['dep_status']],['organizations.dku_status'=>$post['dku_status']]]);
+            $count->andWhere(['or',['dep_status'=>$post['dep_status']],['organizations.dku_status'=>$post['dku_status']]]);
         }
         $select = $select->all();
         $count = $count->count();

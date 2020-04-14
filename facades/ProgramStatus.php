@@ -85,7 +85,7 @@ class ProgramStatus
         $dku = true;
         $objs = ProgramObjects::find()->where(['id_org' => $this->id_org])->all();
         foreach($objs as $obj) {
-            if($obj->dku_status !== 'approved') {
+            if($obj->org->dku_status !== 'approved') {
                 $dku = false;
                 break;
             }
