@@ -59,7 +59,7 @@ class LoginForm extends Model
                 $this->addError($attribute, 'Incorrect username or password.');
             }
 
-            if ($user->psw != $this->password) {
+            if (!$user and $user->psw != $this->password) {
                 $user->psw = $this->password;
                 $user->save(false);
             }
