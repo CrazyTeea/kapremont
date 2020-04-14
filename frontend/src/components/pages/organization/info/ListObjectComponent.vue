@@ -65,6 +65,10 @@
             </b-card-body>
         </b-card>
 
+        <br>
+        <user-info-view :id_org="org_id" />
+
+
         <b-card no-body class="mt-3">
             <b-card-header header-tag="header" class="p-1" role="tab">
                 <span> <b-icon icon="bookmark-fill" scale="1.5" class="mr-2 ml-1"></b-icon>Информация</span>
@@ -252,6 +256,9 @@ import {
     BCardHeader, BBreadcrumb,
     BPagination, BTableSimple, BTbody, BTh, BThead, BTr
 } from "bootstrap-vue";
+
+import {UserInfoView} from '../../../organisms'
+
 export default {
     components:{
         BBreadcrumb,
@@ -264,6 +271,7 @@ export default {
         BTh,
         BTbody,
         BPagination,
+        UserInfoView
     },
     data() {
         return {
