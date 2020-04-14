@@ -18,18 +18,31 @@
                     </a>
                 </div>
             </template>
+            <template v-slot:cell(abj_obr)="data">
+                <span class="text-secondary">{{data.item.abj_obr}}</span>
+            </template>
+            <template v-slot:cell(abj_prog)="data">
+                <span class="text-warning">{{data.item.abj_prog}}</span>
+            </template>
+            <template v-slot:cell(abj_nappr)="data">
+                <span class="text-danger">{{data.item.abj_nappr}}</span>
+            </template>
+            <template v-slot:cell(abj_appr)="data">
+                <span class="text-success">{{data.item.abj_appr}}</span>
+            </template>
         </b-table>
     </div>
 </template>
 
 <script>
-    import {BTable,BIcon,BSpinner} from 'bootstrap-vue';
+    import {BTable,BIcon,BSpinner,BTd} from 'bootstrap-vue';
     import Axios from 'axios'
     export default {
         components:{
           BTable,
             BIcon,
-            BSpinner
+            BSpinner,
+            BTd
         },
         async mounted() {
             await this.getObjects();
