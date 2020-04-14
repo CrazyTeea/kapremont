@@ -65,6 +65,7 @@ foreach ($objs as $item){
     $newArr[] = [
         'region'=>$region,
         'city'=>$city,
+        'org_id'=>$item->id_org,
         'org'=>$item->org->name,
         'kap'=>$kap,
         'atz'=>$atz,
@@ -93,6 +94,7 @@ foreach ($objs as $item){
         <th>№</th>
         <th>Субъект РФ</th>
         <th>Город</th>
+        <th>Id организации</th>
         <th>Вуз</th>
         <th>Лимиты кап. ремонт</th>
         <th>Лимиты АТЗ</th>
@@ -113,6 +115,7 @@ foreach ($objs as $item){
         <td></td>
         <td></td>
         <td></td>
+        <td></td>
         <td><?=$kapc?></td>
         <td><?=$atzc?></td>
         <td><?=$allc?></td>
@@ -129,6 +132,7 @@ foreach ($objs as $item){
                 <td><?=$i+1?></td>
                 <td><?=$obj['region']?></td>
                 <td><?=$obj['city']?></td>
+                <td><?=$obj['org_id']?></td>
                 <td><?=$obj['org']?></td>
                 <td><?=$obj['kap']?></td>
                 <td><?=$obj['atz']?></td>

@@ -41,7 +41,9 @@ foreach ($objs as $i => $obj){
         $html.='<td></td><td></td>';
     }
 
-    $html.="<td>{$obj->org->name}</td>
+    $html.="
+<td>{$obj->org->id}</td>
+<td>{$obj->org->name}</td>
         <td>$obj->finance_volume</td>
         <td>$obj->finance_events</td>
         <td>$c0</td>
@@ -64,6 +66,7 @@ foreach ($objs as $i => $obj){
         <th>№</th>
         <th>Субъект РФ</th>
         <th>Город</th>
+        <th>Id организации</th>
         <th>Вуз</th>
         <th>Лимиты кап. ремонт</th>
         <th>Лимиты АТЗ</th>
@@ -77,6 +80,7 @@ foreach ($objs as $i => $obj){
     <tbody>
     <tr>
         <td>Итого</td>
+        <td></td>
         <td></td>
         <td></td>
         <td></td>
