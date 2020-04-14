@@ -11,8 +11,9 @@ use app\models\ProgramObjects;
     </tr>
     <tr>
         <th>№</th>
-        <th>ID объекта</th>
+        <th>ID ораганизации</th>
         <th>Вуз</th>
+        <th>ID объекта</th>
         <th>Наименование</th>
         <th>Назначение</th>
         <th>Субъект РФ</th>
@@ -27,8 +28,9 @@ use app\models\ProgramObjects;
     <?php foreach ($objs as $i => $obj):?>
         <tr>
             <td><?=$i+1?></td>
-            <td><?=$obj->id?></td>
+            <td><?=$obj->id_org?></td>
             <td><?=$obj->org->name?></td>
+            <td><?=$obj->id?></td>
             <td><?=$obj->name?></td>
             <td><?=$obj->assignment?></td>
             <td><?=$obj->region->region?></td>
