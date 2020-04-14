@@ -96,13 +96,13 @@ class OrganizationController extends AppController
             }
 
             foreach ($object->svedenia as $kek){
-                if (!$object->type and $object->status == 2)
+                if (!$object->type and $kek->is_nessesary and $object->status == 2)
                     $sved[0]++;
-                elseif($object->type and $object->status == 2)
+                if($object->type and $kek->is_nessesary and $object->status == 2)
                     $sved[1]++;
                 if ($object->dep_status == 'approved')
                     $sved[2]++;
-                elseif($object->dep_status == 'rejected')
+                if($object->dep_status == 'rejected')
                     $sved[3]++;
             }
 

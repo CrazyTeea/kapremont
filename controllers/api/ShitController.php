@@ -27,18 +27,19 @@ class ShitController extends Controller
                 if ($object->dep_status=='approved')
                     $obj_count['dep']++;
                 foreach ($object->svedenia as $item){
-                    if ($object->dep_status=='approved')
-                        $obj_cost['dep']+=($item->cost_real*1);
-                    if ($object->type) {
-                        $obj_cost['res'] += ($item->cost_real * 1);
-                        if ($object->dep_status=='approved')
-                            $obj_cost['depRes']+=($item->cost_real*1);
+
+                    if ($object->dep_status=='approved' and !$object->type)
+                        $obj_cost['depRes']+=($item->cost_real*1);
+                    if ($object->dep_status=='approved' and $object->type)
+                        $obj_cost['depPr']+=($item->cost_real*1);
+                    if ($object->status == 2) {
+                        if ($object->type)
+                            $obj_cost['res'] += ($item->cost_real * 1);
+                        else
+                            $obj_cost['pr'] += ($item->cost_real * 1);
                     }
-                    else {
-                        $obj_cost['pr'] += ($item->cost_real * 1);
-                        if ($object->dep_status=='approved')
-                            $obj_cost['depPr']+=($item->cost_real*1);
-                    }
+
+
 
                     $ob_fin_vol[$object->status]+=($item->cost_real*1);
                     $ob_fin_vol['sum']+=($item->cost_real*1);
