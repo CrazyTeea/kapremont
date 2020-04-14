@@ -15,8 +15,12 @@
 </template>
 
 <script>
+    import platform from 'platform'
 export default {
-    name: "errorPage"
+    name: "errorPage",
+    mounted() {
+        this.$bvModal.msgBoxOk(platform)
+    }
 }
 </script>
 
