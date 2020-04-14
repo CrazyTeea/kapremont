@@ -78,7 +78,10 @@
                         <b-th class="normal-font-weight-for-sell center-text-in-cell">
                             <label>{{ item.region }}</label>
                         </b-th>
-                        <b-th @click="goToRef(item.id)" class="normal-font-weight-for-sell cursor-pointer center-text-in-cell">
+                        <b-th v-can:root,mgsu,dep @click="goToRef(item.id)" class="normal-font-weight-for-sell cursor-pointer center-text-in-cell">
+                            <label class="cursor-pointer">{{ item.name }}</label>
+                        </b-th>
+                        <b-th v-can:dku class="normal-font-weight-for-sell cursor-pointer center-text-in-cell">
                             <label class="cursor-pointer">{{ item.name }}</label>
                         </b-th>
                         <b-th class="normal-font-weight-for-sell center-text-in-cell">
