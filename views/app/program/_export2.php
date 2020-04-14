@@ -20,7 +20,11 @@ function counter($arr,$atr, $status,$all = false){
                     $co++;
             }else
             {
-                if ($item->$atr==$status)
+                if ($atr=='dku_status'){
+                    if ($item->org->$atr==$status)
+                        $co++;
+                }
+                elseif ($item->$atr==$status)
                     $co++;
             }
 
