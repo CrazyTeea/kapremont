@@ -42,7 +42,7 @@ const browser = [
     { name: "Chrome", version: 79 },
     { name: "Opera", version: 66 },
     { name: "Microsoft Edge", version: 0 },
-    { name: "Safari", version: 12 },
+    { name: "Safari", version: 11 },
     { name: "Firefox", version: 75 }
 ];
 

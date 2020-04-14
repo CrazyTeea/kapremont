@@ -15,13 +15,9 @@
 </template>
 
 <script>
-    import platform from 'platform'
-export default {
-    name: "errorPage",
-    mounted() {
-        this.$bvModal.msgBoxOk(platform.name+platform.version)
+    export default {
+        name: "errorPage",
     }
-}
 </script>
 
 <style scoped>
