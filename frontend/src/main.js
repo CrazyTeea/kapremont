@@ -29,7 +29,7 @@ Vue.directive("can", {
 
             }
         }, 1);
-        
+
         // console.log(window.Permission)
         // if (!roles.includes(window.Permission)) {
         //     console.log(window.Permission)
