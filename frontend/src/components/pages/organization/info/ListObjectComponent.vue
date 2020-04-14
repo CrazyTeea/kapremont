@@ -89,10 +89,10 @@
                             </b-th>
                             <b-th  class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
                                 <label class="cursor-pointer">{{ infoFromServ ? infoFromServ.countAll : 0 }}</label>
-                                <label class="cursor-pointer">/ {{ infoFromServ ? infoFromServ.vObr : 0 }}</label>
-                                <label class="cursor-pointer">/ {{ infoFromServ ? infoFromServ.naDorab : 0 }}</label>
-                                <label class="cursor-pointer">/ {{ infoFromServ ? infoFromServ.notRecomend : 0 }}</label>
-                                <label class="cursor-pointer">/ {{ infoFromServ ? infoFromServ.recomend : 0 }}</label>
+                                <label class="cursor-pointer text-secondary">/ {{ infoFromServ ? infoFromServ.vObr : 0 }}</label>
+                                <label class="cursor-pointer text-warning">/ {{ infoFromServ ? infoFromServ.naDorab : 0 }}</label>
+                                <label class="cursor-pointer text-danger">/ {{ infoFromServ ? infoFromServ.notRecomend : 0 }}</label>
+                                <label class="cursor-pointer text-success">/ {{ infoFromServ ? infoFromServ.recomend : 0 }}</label>
                             </b-th>
                             <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
                                 <label class="cursor-pointer">{{ infoFromServ ? infoFromServ.pr : 0 }}</label>
