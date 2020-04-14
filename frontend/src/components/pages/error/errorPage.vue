@@ -19,7 +19,7 @@
 export default {
     name: "errorPage",
     mounted() {
-        this.$bvModal.msgBoxOk(platform)
+        this.$bvModal.msgBoxOk(platform.name)
     }
 }
 </script>
