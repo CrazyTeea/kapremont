@@ -1,5 +1,5 @@
 <template>
-    <div style="height: 550px; overflow: auto" id="org-shit-table">
+    <div style="height: 550px;" id="org-shit-table">
         <div v-if="!items.length" class="text-center">
             Данные загружаются, подождите
             <b-spinner  variant="primary" />
@@ -10,7 +10,7 @@
                 select-mode="single"
                 selectable
                 @row-selected="toObjects"
-                hover style="font-size: 10px" small bordered :items="items" :fields="fields" >
+                hover style="font-size: 10px; min-height: 100%" small bordered :items="items" :fields="fields" >
             <template  v-slot:cell(pdf_export)="data">
                 <div id="icon">
                     <a style="display: block" v-if="data.item.pdf_export" :href="`/program/download-doc/${data.item.id_org}`">
