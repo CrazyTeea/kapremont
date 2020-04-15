@@ -45,7 +45,15 @@ class ShitController extends Controller
                     $ob_fin_vol['sum']+=($item->cost_real*1);
                 }
             }
+
             $status = new ProgramStatus($program->id_org);
+
+            $dku_status = [
+                'not' => 'В обработке',
+                'approved' => 'Сошласовано ДКУ',
+                'rejected' => 'Резерв'
+            ];
+
             $ret['program'][] = [
                 'id_org'=>$program->id_org,
                 'region'=>$program->org->region->region,
@@ -69,8 +77,7 @@ class ShitController extends Controller
                 'atz_nb'=>$program->finance_events,
                 'atz'=>0,
                 'atz_bud_fin'=>0,
-                'atz_status'=>$status->isDku() ? 'Согласовано' : 'Не согласовано'
-
+                'dku_status'=> $dku_status[$program->org->dku_status]
             ];
         }
 
