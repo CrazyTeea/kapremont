@@ -82,7 +82,7 @@ class ShitController extends Controller
                 'dep_status' => $dep_status[$program->org->dep_status],
                 'atz_nb'=>0,
                 'atz'=>$program->finance_events,
-                'atz_bud_fin'=>0,
+                'atz_bud_fin'=>$program->dku_atz,
                 'dku_status'=> $dku_status[$program->org->dku_status]
             ];
         }

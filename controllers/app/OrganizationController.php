@@ -200,10 +200,17 @@ class OrganizationController extends AppController
     public function actionSetStatusDku($org_id)
     {
         if(Yii::$app->getUser()->can('dku')) {
-            $status = Yii::$app->request->post('dku_status');
-            $org = Organizations::find()->where(['id' => $org_id])->one();
-            $org->dku_status = $status;
-            $org->save(false);
+            $post= Yii::$app->request->post();
+            if (isset($post['dku_status'])) {
+                $org = Organizations::find()->where(['id' => $org_id])->one();
+                $org->dku_status = $post['dku_status'];
+                $org->save(false);
+            }
+            if (isset($post['dku_atz'])) {
+                $pr = Program::find()->where(['id_org' => $org_id])->one();
+                $pr->dku_atz = $post['dku_atz'];
+                $pr->save(false);
+            }
             
             new ProgramStatus($org_id);
         }

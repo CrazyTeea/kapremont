@@ -69,6 +69,7 @@
                         <b-th>Выгрузка отправлена</b-th>
                         <b-th v-can:dku>Статус программы (ДКУ)</b-th>
                         <b-th v-can:dep>Статус программы (ДЭП)</b-th>
+                        <b-th v-can:dku>Согласованный объем бюджетного финансирования АТЗ</b-th>
                     </b-tr>
                 </b-thead>
                 <b-tbody>
@@ -119,6 +120,13 @@
                                     {value: 'rejected', text: 'Резерв'}
                                 ]"
                             ></b-form-select>
+                        </b-th>
+                        <b-th v-can:dku class="normal-font-weight-for-sell center-text-in-cell">
+                            <b-form-input
+                                    @input="setDkuAtz(item)"
+                                    v-model="item.dku_atz"
+
+                            ></b-form-input>
                         </b-th>
                     </b-tr>
                 </b-tbody>
@@ -243,6 +251,20 @@ export default {
                 this.items = res.data.rows;
                 this.totalRows = res.data.count.quantity;
             });
+        },
+        setDkuAtz(item) {
+            let form = new FormData();
+            form.append('dku_atz', item.dku_atz)
+            Axios.post(`/api/set-status/dku/${item.id}`, form, {
+                headers: {
+                    "X-CSRF-Token": this.csrf
+                }
+            }).then(res => {
+                this.getTable()
+                this.setBanner('success', `Данные внесены успешно: ${item.name}`, 3200)
+            }).catch(() => {
+                this.setBanner("danger", "Что-то пошло не так! Обратитесь в служюу поддержки.")
+            })
         },
         setDkuStatus(item) {
             let form = new FormData();
