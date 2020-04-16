@@ -68,6 +68,7 @@
                         <b-th>Выгрузка PDF</b-th>
                         <b-th>Выгрузка отправлена</b-th>
                         <b-th v-can:dku>Статус программы (ДКУ)</b-th>
+                        <b-th v-can:dep>Статус программы (ДЭП)</b-th>
                     </b-tr>
                 </b-thead>
                 <b-tbody>
@@ -99,8 +100,19 @@
                         </b-th>
                         <b-th v-can:dku class="normal-font-weight-for-sell center-text-in-cell">
                             <b-form-select
-                                @input="setDepStatus(item)"
+                                @input="setDkuStatus(item)"
                                 v-model="item.dku_status"
+                                :options="[
+                                    {value: 'not', text: 'В обработке'},
+                                    {value: 'approved', text: 'Согласовано ДКУ'},
+                                    {value: 'rejected', text: 'Резерв'}
+                                ]"
+                            ></b-form-select>
+                        </b-th>
+                        <b-th v-can:dep class="normal-font-weight-for-sell center-text-in-cell">
+                            <b-form-select
+                                @input="setDepStatus(item)"
+                                v-model="item.dep_status"
                                 :options="[
                                     {value: 'not', text: 'В обработке'},
                                     {value: 'approved', text: 'Согласовано ДКУ'},
@@ -139,6 +151,7 @@ import {
     VBToggle
 } from "bootstrap-vue";
 export default {
+    props: ['state'],
     directives: {
         "b-toggle": VBToggle
     },
@@ -165,6 +178,7 @@ export default {
             bannerInfo: [],
             selected:null,
             filters: {
+                state: null,
                 id: null,
                 region: null,
                 name: null,
@@ -200,6 +214,7 @@ export default {
         };
     },
     async mounted() {
+        this.filters.state = this.state;
         this.getTable();
     },
     methods: {
@@ -229,8 +244,7 @@ export default {
                 this.totalRows = res.data.count.quantity;
             });
         },
-        setDepStatus(item) {
-            console.log(item)
+        setDkuStatus(item) {
             let form = new FormData();
             form.append('dku_status', item.dku_status)
             Axios.post(`/api/set-status/dku/${item.id}`, form, {
@@ -240,6 +254,22 @@ export default {
             }).then(res => {
                 this.getTable()
                 this.setBanner('success', `Статус успешно изменен: ${item.name}`, 3200)
+            }).catch(() => {
+                this.setBanner("danger", "Что-то пошло не так! Обратитесь в служюу поддержки.")
+            })
+        },
+        setDepStatus(item) {
+            let form = new FormData();
+            form.append('dep_status', item.dep_status)
+            Axios.post(`/api/set-status/dep/${item.id}`, form, {
+                headers: {
+                    "X-CSRF-Token": this.csrf
+                }
+            }).then(res => {
+                this.getTable()
+                this.setBanner('success', `Статус успешно изменен: ${item.name}`, 3200)
+            }).catch(() => {
+                this.setBanner("danger", "Что-то пошло не так! Обратитесь в служюу поддержки.")
             })
         }
     },
