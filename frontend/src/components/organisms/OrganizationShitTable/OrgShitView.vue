@@ -13,7 +13,7 @@
                     </a>
                 </div>
             </template>
-            <template v-slot:cell(abj_obr)="data">
+            <!--<template v-slot:cell(abj_obr)="data">
                 <span class="text-secondary">{{ data.item.abj_obr }}</span>
             </template>
             <template v-slot:cell(abj_prog)="data">
@@ -24,7 +24,7 @@
             </template>
             <template v-slot:cell(abj_appr)="data">
                 <span class="text-success">{{ data.item.abj_appr }}</span>
-            </template>
+            </template>-->
         </b-table>
     </div>
 </template>
@@ -45,30 +45,30 @@ export default {
     data() {
         return {
             fields: [
-                { key: "id_org", label: "ID ВУЗа" },
-                { key: "region", label: "Субъект" },
-                { key: "org_name", label: "Наименование ВУЗа" },
-                { key: "pdf_export", label: "Выгрузка PDF" },
-                { key: "program_status", label: "Статус программы" },
-                { key: "obs_limits", label: "Общие лимиты" },
-                { key: "obs_reserv", label: "Общий резерв (рассчитывается, когда ДЭП и ДКУ присвоили статус рассмотрено)" },
-                { key: "pred_zakl", label: "Предварительное отклонение от лимитов" },
-                { key: "kap_rem", label: "Объем бюджетного финансирования кап.ремонт по программе" },
-                { key: "obj_all", label: "Объектов всего" },
-                { key: "abj_obr", label: "Объектов в обработке" },
-                { key: "abj_prog", label: "Объектов на доработке" },
-                { key: "abj_nappr", label: "Объектов не рекомендовано к согласованию" },
-                { key: "abj_appr", label: "Объектов рекомендовано к согласованию" },
-                { key: "abj_dep", label: "Объектов рассмотрено ДЭП" },
-                { key: "cost_pr", label: "Объем бюджетного финансирования по приоритетным объектам рекомендованным к согласованию" },
-                { key: "cost_res", label: "Объем бюджетного финансирования по резервным объектам рекомендованным к согласованию" },
-                { key: "cost_depPr", label: "Объем бюджетного финансирования по объектам рассмотренным ДЭП" },
-                { key: "cost_depRes", label: "Объем бюджетного финансирования по объектам рассмотренным ДЭП(резерв)" },
-                { key: "dep_status", label: "Статус программы (ДЭП)" },
-                { key: "atz_nb", label: "Объем бюджетного финансирования АТЗ, не более" },
-                { key: "atz", label: "Объем бюджетного финансирования АТЗ по программе" },
-                { key: "atz_bud_fin", label: "Согласованный объем бюджетного финансирования АТЗ" },
-                { key: "dku_status", label: "Статус программы (ДКУ)" }
+                { key: "id_org", label: "ID ВУЗа" ,sortable:true},
+                { key: "region", label: "Субъект",sortable:true },
+                { key: "org_name", label: "Наименование ВУЗа" ,sortable:true},
+                { key: "pdf_export", label: "Выгрузка PDF",sortable:true },
+                { key: "program_status", label: "Статус программы" ,sortable:true},
+                { key: "obs_limits", label: "Общие лимиты",sortable:true },
+                { key: "obs_reserv", label: "Общий резерв (рассчитывается, когда ДЭП и ДКУ присвоили статус рассмотрено)",sortable:true },
+                { key: "pred_zakl", label: "Предварительное отклонение от лимитов",sortable:true },
+                { key: "kap_rem", label: "Объем бюджетного финансирования кап.ремонт по программе",sortable:true },
+                { key: "obj_all", label: "Объектов всего",sortable:true },
+                { key: "abj_obr", label: "Объектов в обработке" ,sortable:true,variant:'secondary'},
+                { key: "abj_prog", label: "Объектов на доработке",sortable:true ,variant: 'warning'},
+                { key: "abj_nappr", label: "Объектов не рекомендовано к согласованию",sortable:true,variant: 'danger'},
+                { key: "abj_appr", label: "Объектов рекомендовано к согласованию",sortable:true,variant: 'success' },
+                { key: "abj_dep", label: "Объектов рассмотрено ДЭП" ,sortable:true},
+                { key: "cost_pr", label: "Объем бюджетного финансирования по приоритетным объектам рекомендованным к согласованию" ,sortable:true},
+                { key: "cost_res", label: "Объем бюджетного финансирования по резервным объектам рекомендованным к согласованию",sortable:true },
+                { key: "cost_depPr", label: "Объем бюджетного финансирования по объектам рассмотренным ДЭП" ,sortable:true},
+                { key: "cost_depRes", label: "Объем бюджетного финансирования по объектам рассмотренным ДЭП(резерв)" ,sortable:true},
+                { key: "dep_status", label: "Статус программы (ДЭП)" ,sortable:true},
+                { key: "atz_nb", label: "Объем бюджетного финансирования АТЗ, не более",sortable:true },
+                { key: "atz", label: "Объем бюджетного финансирования АТЗ по программе",sortable:true },
+                { key: "atz_bud_fin", label: "Согласованный объем бюджетного финансирования АТЗ" ,sortable:true},
+                { key: "dku_status", label: "Статус программы (ДКУ)" ,sortable:true}
             ],
             items: []
         };
@@ -76,7 +76,26 @@ export default {
     methods: {
         getObjects() {
             Axios.get("/shit-table/data").then(response => {
-                this.items = response.data.program;
+                let pred_zakl =0 ;
+                let abj_dep = 0;
+                let atz = 0;
+                let atz_bud_fin=0;
+                response.data.program.forEach(item=>
+                {
+                    pred_zakl+=item.pred_zakl;
+                    abj_dep+=item.abj_dep;
+                    atz += item.atz;
+                    atz_bud_fin += item.atz_bud_fin;
+                });
+                console.log(pred_zakl);
+                this.items.push({
+                    obs_limits:'ИТОГО',
+                    pred_zakl:pred_zakl.toFixed(3),
+                    abj_dep:abj_dep.toFixed(3),
+                    atz:atz.toFixed(3),
+                    atz_bud_fin:atz_bud_fin.toFixed(3)
+                })
+                this.items.push(...response.data.program);
             });
         },
         toObjects(item) {
