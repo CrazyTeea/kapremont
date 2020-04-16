@@ -69,6 +69,7 @@ export default {
                 { key: "atz", label: "Объем бюджетного финансирования АТЗ по программе",sortable:true },
                 { key: "atz_bud_fin", label: "Согласованный объем бюджетного финансирования АТЗ" ,sortable:true},
                 { key: "dku_status", label: "Статус программы (ДКУ)" ,sortable:true}
+
             ],
             items: []
         };
