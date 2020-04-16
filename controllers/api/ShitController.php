@@ -19,7 +19,7 @@ class ShitController extends Controller
 
         $ret = [];
         foreach ($programs as $program){
-            $ob_fin_vol = [0,0,0,0,0,'sum'=>0];
+            $ob_fin_vol = [0,0,0,0,0];
             $obj_cost = ['pr'=>0,'res'=>0,'depRes'=>0,'depPr'=>0];
             $obj_count = [0,0,0,0,0,'dep'=>0];
             foreach ($program->objects as $object){
@@ -39,10 +39,7 @@ class ShitController extends Controller
                             $obj_cost['pr'] += ($item->cost_real * 1);
                     }
 
-
-
                     $ob_fin_vol[$object->status]+=($item->cost_real*1);
-                    $ob_fin_vol['sum']+=($item->cost_real*1);
                 }
             }
 
@@ -68,7 +65,9 @@ class ShitController extends Controller
                 'program_status'=>$status->isNotApproved() ? 'Не согласовано' : 'согласовано',
                 'obs_limits'=>round($program->finance_volume,2),
                 'obs_reserv'=>'-',
-                'pred_zakl'=>round($ob_fin_vol['sum'],2), //$program->finance_volume - $ob_fin_vol
+                'pred_zakl'=>round($program->finance_volume,2) -
+                    round($program->cost,2) + round($program->finance_events,2)
+                , //$program->finance_volume - $ob_fin_vol
                 'kap_rem'=>round($program->cost,2),
                 'obj_all'=>count($program->objects),
                 'abj_obr'=>$obj_count[1],
@@ -81,8 +80,8 @@ class ShitController extends Controller
                 'cost_depPr'=>round($obj_cost['depPr'],2),
                 'cost_depRes'=>round($obj_cost['depRes'],2),
                 'dep_status' => $dep_status[$program->org->dep_status],
-                'atz_nb'=>$program->finance_events,
-                'atz'=>0,
+                'atz_nb'=>0,
+                'atz'=>$program->finance_events,
                 'atz_bud_fin'=>0,
                 'dku_status'=> $dku_status[$program->org->dku_status]
             ];
