@@ -91,7 +91,7 @@ export default {
                 console.log(pred_zakl);
                 this.items.push({
                     obs_limits:'ИТОГО',
-                    pred_zakl:pred_zakl.toFixed(3),
+                    pred_zakl:pred_zakl.toFixed(3)/1000,
                     abj_dep:abj_dep.toFixed(3),
                     atz:atz.toFixed(3),
                     atz_bud_fin:atz_bud_fin.toFixed(3)
