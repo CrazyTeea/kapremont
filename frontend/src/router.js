@@ -61,6 +61,14 @@ const routes = [
             })
     },
     {
+        path: "/error/status907",
+        name: "error907",
+        component: () =>
+            import("./components/pages").then(module => {
+                return module.status907;
+            })
+    },
+    {
         path: "/program/atz",
         name: "atz",
         component: Atz

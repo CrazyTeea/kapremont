@@ -16,6 +16,7 @@ use yii\db\ActiveRecord;
  * @property int|null $id_org
  * @property int $file_exist
  * @property int $p_status
+ * @property int $status907
  */
 class Program extends ActiveRecord
 {

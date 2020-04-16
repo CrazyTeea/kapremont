@@ -5,6 +5,8 @@ namespace app\commands;
 
 use app\models\Founders;
 use app\models\Organizations;
+use app\models\Program;
+use app\models\ProgramObjects;
 use app\models\Regions;
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Parser;
@@ -17,6 +19,56 @@ use yii\console\Controller;
 class ReferenceController extends Controller
 {
     static $jwt_key = 'example_key233';
+
+
+    public function actionStatus907(){
+        $ids = [16,
+            2,
+            6,
+            8,
+            12,
+            17,
+            26,
+            33,
+            41,
+            51,
+            80,
+            87,
+            93,
+            466,
+            115,
+            119,
+            123,
+            129,
+            135,
+            138,
+            146,
+            158,
+            159,
+            150,
+            210,
+            214,
+            221,
+            228,
+            240,
+            243,
+            245,
+            237,
+            249];
+
+        $programs = Program::findAll(['id_org'=>$ids]);
+        foreach ($programs as $program) {
+            $program->status907 = 1;
+            $program->save(false);
+        }
+        $program_objects = ProgramObjects::findAll(['id_org'=>$ids]);
+        foreach ($program_objects as $object){
+            $object->system_status = 0;
+            $object->save(false);
+        }
+
+    }
+
 
     /**
      * @return string
