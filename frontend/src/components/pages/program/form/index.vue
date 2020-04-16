@@ -57,10 +57,11 @@
                                 Характеристика объекта
                             </span>
                         </b-card-header>
-                        <b-collapse id="accordion-1" accordion="my-accordion" role="tabpanel">
+                        <b-collapse id="accordion-1" accordion="my-accordion" role="tabpanel" visible>
                             <b-card-body>
                                 <b-form-group>
                                     <b-form-group
+                                        v-can:root
                                         label="Тип объекта"
                                         label-for="type"
                                         :invalid-feedback="feedback('ProgramObjects', 'type', 'Тип объекта должен быть заполнен')"
@@ -403,7 +404,7 @@
                                     Ожидаемые результаты</span
                                 >
                             </b-card-header>
-                            <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel" visible>
+                            <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
                                 <b-card-body>
                                     <v-waited model-name="ProgObjectsWaites" ref="waited" />
                                 </b-card-body>
@@ -590,6 +591,7 @@ export default {
             }).then(response => {
                 if (response.data.ProgramObjects) {
                     let obj = response.data.ProgramObjects;
+                    console.log(response.data)
                     for (let item in obj) {
                         this.setBanner("danger", obj[item][0]);
 

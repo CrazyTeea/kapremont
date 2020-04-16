@@ -74,11 +74,12 @@ class ProgramObjects extends \yii\db\ActiveRecord
             [['created_at', 'updated_at'], 'safe'],
             [['exist_pred_nadz_orgs', 'prav_sob', 'kad_number', 'osn_isp_zdan','podrobnosti'], 'string', 'max' => 5000],
             [[
-                'id_org', 'id_program', 'year', 'id_region', 'id_city', 'type', 'exploit_year',
+                'id_org', 'id_program', 'year', 'id_region', 'id_city', 'exploit_year',
                 'name', 'assignment', 'note', 'square', 'wear', 'address','type_remont',
                 'square_kap', 'isp_v_ust_dey', 'n_isp_v_ust_dey', 'square_ar','exist_pred_nadz_orgs', 'kad_number', 'osn_isp_zdan','last_exploit_year'
             ],'required'],
-            [['status'], 'default', 'value' => 1]
+            [['status'], 'default', 'value' => 1],
+            [['type'], 'default', 'value' => 0] 
         ];
     }
 
