@@ -84,15 +84,14 @@ router.beforeEach((to, from, next) => {
             next({ name: "error" });
         }
     }
-    if (to.path !== '/error/status907'){
-        let access = false;
+    if (to.path !== '/error/status907' && to.path!=='/login'){
+        let access = null;
         let user = null;
 
-        getUser().then(value => access=value);
+        getUser().then(value=>{if (!value) next({name:'error907'});});
 
-        if (!access){
-            next({name:'error907'});
-        }
+
+
     }
     next();
 });
