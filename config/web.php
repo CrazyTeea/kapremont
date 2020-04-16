@@ -86,6 +86,7 @@ $config = [
 
                 'api/set-status/approved/dep/<obj_id:\d+>' => '/app/organization/set-approve-status-dep',
                 'api/set-status/rejected/dep/<obj_id:\d+>' => '/app/organization/set-rejected-status-dep',
+                'api/set-status/dep/<org_id:\d+>' => '/app/organization/set-status-dep',
                 'api/set-status/dku/<org_id:\d+>' => '/app/organization/set-status-dku',
 
                 'api/set-status/recomend/<obj_id:\d+>' => '/app/organization/set-recomend-status',

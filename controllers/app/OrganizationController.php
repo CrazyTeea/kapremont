@@ -209,6 +209,18 @@ class OrganizationController extends AppController
         }
     }
 
+    public function actionSetStatusDep($org_id)
+    {
+        if(Yii::$app->getUser()->can('dep')) {
+            $status = Yii::$app->request->post('dep_status');
+            $org = Organizations::find()->where(['id' => $org_id])->one();
+            $org->dep_status = $status;
+            $org->save(false);
+
+            //new ProgramStatus($org_id);
+        }
+    }
+
     private function setStatus($obj_id, $status)
     {
 

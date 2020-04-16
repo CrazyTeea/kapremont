@@ -50,7 +50,13 @@ class ShitController extends Controller
 
             $dku_status = [
                 'not' => 'В обработке',
-                'approved' => 'Сошласовано ДКУ',
+                'approved' => 'Согласовано ДКУ',
+                'rejected' => 'Резерв'
+            ];
+
+            $dep_status = [
+                'not' => 'В обработке',
+                'approved' => 'Согласовано ДЕП',
                 'rejected' => 'Резерв'
             ];
 
@@ -74,6 +80,7 @@ class ShitController extends Controller
                 'cost_res'=>round($obj_cost['res'],2),
                 'cost_depPr'=>round($obj_cost['depPr'],2),
                 'cost_depRes'=>round($obj_cost['depRes'],2),
+                'dep_status' => $dep_status[$program->org->dep_status],
                 'atz_nb'=>$program->finance_events,
                 'atz'=>0,
                 'atz_bud_fin'=>0,
