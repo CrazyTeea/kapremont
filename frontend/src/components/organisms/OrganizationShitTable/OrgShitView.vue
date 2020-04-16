@@ -83,10 +83,10 @@ export default {
                 let atz_bud_fin=0;
                 response.data.program.forEach(item=>
                 {
-                    pred_zakl+=item.pred_zakl;
-                    abj_dep+=item.abj_dep;
-                    atz += item.atz;
-                    atz_bud_fin += item.atz_bud_fin;
+                    pred_zakl+= parseFloat(item.pred_zakl);
+                    abj_dep+= parseFloat(item.abj_dep);
+                    atz += parseFloat(item.atz);
+                    atz_bud_fin += parseFloat(item.atz_bud_fin);
                 });
                 console.log(pred_zakl);
                 this.items.push({
