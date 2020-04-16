@@ -15,7 +15,7 @@ class ShitController extends Controller
      */
     public function actionData(){
 
-        $programs = Program::find()->where(['system_status'=>1])->orderBy('id_org')->limit(5)->all();
+        $programs = Program::find()->where(['system_status'=>1])->orderBy('id_org')->all();
 
         $ret = [];
         foreach ($programs as $program){
