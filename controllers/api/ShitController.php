@@ -15,7 +15,7 @@ class ShitController extends Controller
      */
     public function actionData(){
 
-        $programs = Program::find()->where(['system_status'=>1])->orderBy('id_org')->all();
+        $programs = Program::find()->where(['system_status'=>1])->orderBy('id_org')->limit(5)->all();
 
         $ret = [];
         foreach ($programs as $program){
@@ -62,7 +62,7 @@ class ShitController extends Controller
                 'region'=>$program->org->region->region,
                 'org_name'=>$program->org->name,
                 'pdf_export'=>$program->file_exist,
-                'program_status'=>$status->isNotApproved() ? 'Не согласовано' : 'согласовано',
+                'program_status'=>$status->isDku() ? 'Согласовано' : 'Не согласовано',
                 'obs_limits'=>round($program->finance_volume,2),
                 'obs_reserv'=>'-',
                 'pred_zakl'=>round($program->finance_volume,2) -
