@@ -66,32 +66,24 @@ class ProgramStatus
         return false;
     }
 
-    public function isDep(): bool //согласовано деп
+    public function isDep(): bool //согласовано деп (опирается на организации)
     {
-        $dep = true;
-        $objs = ProgramObjects::find()->where(['id_org' => $this->id_org, 'system_status' => 1])->all();
-        foreach($objs as $obj) {
-            if($obj->dep_status != 'approved') {
-                $dep = false;
-                break;
-            }
+        $org = Organizations::find()->where(['id' => $this->id_org])->one();
+        if($org->dep_status === 'approved') {
+            return true;
         }
 
-        return $dep;
+        return false;
     }
 
-    public function isDku(): bool //согласовано дку
+    public function isDku(): bool //согласовано дку(опирается на организации)
     {
-        $dku = true;
-        $objs = ProgramObjects::find()->where(['id_org' => $this->id_org])->all();
-        foreach($objs as $obj) {
-            if($obj->org->dku_status !== 'approved') {
-                $dku = false;
-                break;
-            }
+        $org = Organizations::find()->where(['id' => $this->id_org])->one();
+        if($org->dku_status === 'approved') {
+            return true;
         }
 
-        return $dku;
+        return false;
     }
 
     public function isDepDku()
