@@ -116,6 +116,7 @@ return [
             '/*',
             '/api/shit/data',
             '/api/user-info/*',
+            '/app/program/is-approve',
         ],
     ],
     'faiv_admin' => [
@@ -172,6 +173,7 @@ return [
             '/api/com/*',
             '/rest/upload/*',
             '/api/user-info/*',
+            '/app/program/is-approve',
         ],
     ],
     'dku' => [
@@ -189,6 +191,7 @@ return [
             '/app/mgsu-admin/*',
             '/api/com/*',
             '/rest/upload/*',
+            '/app/program/is-approve',
         ],
     ],
     '/api/com/*' => [
