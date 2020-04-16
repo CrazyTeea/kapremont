@@ -4,6 +4,7 @@ import store from "./store";
 import router from "./router";
 import platform from "platform";
 import { IconsPlugin, ModalPlugin } from "bootstrap-vue";
+import Axios from "axios";
 //import BootstrapVue from 'bootstrap-vue';
 
 // Optionally install the BootstrapVue icon components plugin
@@ -47,6 +48,26 @@ const browser = [
 ];
 
 //Vue.config.productionTip = false;
+
+async function getUser(){
+    let user = null;
+    let a = Axios.post("/rest/system/get-user")
+        .then(response => {
+            user = response.data;
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    let u = await a;
+    let access = null;
+    let b = Axios.get(`/program/is-approve/${user.organization.id}`).then(response => {
+        access = response.data.status907 === "0";
+        // console.log(this.user_status);
+    });
+    let i =  await b;
+    return access;
+}
+
 router.beforeEach((to, from, next) => {
     if (to.path !== "/error/browser") {
         let access = false;
@@ -61,6 +82,16 @@ router.beforeEach((to, from, next) => {
         });
         if (!access) {
             next({ name: "error" });
+        }
+    }
+    if (to.path !== '/error/status907'){
+        let access = false;
+        let user = null;
+
+        getUser().then(value => access=value);
+
+        if (!access){
+            next({name:'error907'});
         }
     }
     next();

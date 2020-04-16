@@ -6,7 +6,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
     actions: {
         requestUser(ctx) {
-            return Axios.post("/rest/system/get-user")
+            Axios.post("/rest/system/get-user")
                 .then(response => {
                     ctx.commit("updateUser", response.data);
                 })

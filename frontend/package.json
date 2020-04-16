@@ -41,7 +41,7 @@
     "webpack-cli": "^3.3.11"
   },
   "jshintConfig": {
-    "esversion": 6
+    "esversion": 8
   },
   "browserslist": [
     "> 1%",
