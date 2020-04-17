@@ -23,12 +23,13 @@ class MgsuAdminController extends Controller
 
     public function actionMainTable($offset)
     {
+        $isOther = json_decode(Yii::$app->request->post('form'))->state;
 
         if(Yii::$app->user->can('faiv_admin')) {
             $id_founder = FaivUsers::find()->where(['id_user' => Yii::$app->user->id])->one()->id_founder;
             $params = $this->getParams(json_decode(Yii::$app->request->post('form')));
             $order = $this->getOrder(json_decode(Yii::$app->request->post('form')));
-            $select = Organizations::getMainCheckTable($offset, $params, $order, " and id_founder = $id_founder");
+            $select = Organizations::getMainCheckTable($offset, $params, $order, $isOther, " and id_founder = $id_founder");
             $count = Organizations::getMainCheckTableCount($params, " and id_founder = $id_founder");
 
             return Json::encode([
@@ -39,7 +40,7 @@ class MgsuAdminController extends Controller
 
         $params = $this->getParams(json_decode(Yii::$app->request->post('form')));
         $order = $this->getOrder(json_decode(Yii::$app->request->post('form')));
-        $select = Organizations::getMainCheckTable($offset, $params, $order);
+        $select = Organizations::getMainCheckTable($offset, $params, $order, $isOther);
         $count = Organizations::getMainCheckTableCount($params);
 
         return Json::encode([
