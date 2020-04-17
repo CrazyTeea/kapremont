@@ -30,7 +30,7 @@ class MgsuAdminController extends Controller
             $params = $this->getParams(json_decode(Yii::$app->request->post('form')));
             $order = $this->getOrder(json_decode(Yii::$app->request->post('form')));
             $select = Organizations::getMainCheckTable($offset, $params, $order, $isOther, " and id_founder = $id_founder");
-            $count = Organizations::getMainCheckTableCount($params, " and id_founder = $id_founder");
+            $count = Organizations::getMainCheckTableCount($params, $isOther," and id_founder = $id_founder");
 
             return Json::encode([
                 'rows' => $select,
@@ -41,7 +41,7 @@ class MgsuAdminController extends Controller
         $params = $this->getParams(json_decode(Yii::$app->request->post('form')));
         $order = $this->getOrder(json_decode(Yii::$app->request->post('form')));
         $select = Organizations::getMainCheckTable($offset, $params, $order, $isOther);
-        $count = Organizations::getMainCheckTableCount($params);
+        $count = Organizations::getMainCheckTableCount($params, $isOther);
 
         return Json::encode([
             'rows' => $select,
