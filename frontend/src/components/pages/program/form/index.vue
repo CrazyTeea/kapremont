@@ -591,7 +591,6 @@ export default {
             }).then(response => {
                 if (response.data.ProgramObjects) {
                     let obj = response.data.ProgramObjects;
-                    console.log(response.data)
                     for (let item in obj) {
                         this.setBanner("danger", obj[item][0]);
 

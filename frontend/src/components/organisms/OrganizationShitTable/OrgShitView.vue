@@ -93,7 +93,6 @@ export default {
                     atz += parseFloat(item.atz);
                     atz_bud_fin += parseFloat(item.atz_bud_fin);
                 });
-                console.log(pred_zakl);
                 this.items.push({
                     obs_limits:'ИТОГО',
                     pred_zakl:pred_zakl,
@@ -105,7 +104,6 @@ export default {
             });
         },
         toObjects(item) {
-            //console.log(item);
             window.location = `/organization/list/${item[0].id_org}`;
         }
     }

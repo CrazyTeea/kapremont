@@ -176,7 +176,6 @@
                     },
                     responseType: "arraybuffer"
                 }).then((response) => {
-                    console.log(response.data);
                     const type = response.headers["content-type"];
                     const blob = new Blob([response.data], { type: type });
                     const link = document.createElement("a");
@@ -192,7 +191,6 @@
             },
             async refreshComments() {
                 return Axios.get(`/api/v2/comments/all/${this.obj_id}`).then((res) => {
-                    console.log(res.data);
                     this.allComments = res.data;
                 });
             },
@@ -222,7 +220,6 @@
                 }).then(async (res) => {
                     let id_comment = res.data;
                     if (this.files) {
-                        console.log("in files");
                         for (let file of this.files) {
                             await this.sendFile(file, id_comment);
                         }
@@ -234,7 +231,6 @@
                 });
             },
             async sendFile(file, id_comment) {
-                console.log("here");
                 let form = new FormData();
                 form.append("file", file);
                 return Axios.post(`/api/fileUpload/${this.obj_id}/${id_comment}`, form, {
