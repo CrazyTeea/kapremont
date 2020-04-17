@@ -6,6 +6,8 @@ namespace app\controllers\api;
 
 use app\facades\ProgramStatus;
 use app\models\Program;
+use Yii;
+use yii\helpers\Json;
 use yii\rest\Controller;
 
 class ShitController extends Controller
@@ -15,7 +17,31 @@ class ShitController extends Controller
      */
     public function actionData(){
 
-        $programs = Program::find()->where(['system_status'=>1])->orderBy('id_org')->all();
+        $get = Json::decode(Yii::$app->request->get('filter'));
+
+
+        $programs = Program::find()->where(['program.system_status'=>1])->orderBy('program.id_org');
+
+        if (isset($get['id_org']) and $get['id_org'])
+            $programs->andWhere(['program.id_org'=>$get['id_org']]);
+
+
+        if (isset($get['region']) and $get['region']!='')
+            $programs->joinWith(['objects'=>
+                function($query) use ($get){
+                    return $query->joinWith(['region'])
+                        ->andWhere(['like','regions.region',$get['region']]);
+            }]);
+
+        if (isset($get['org_name']) and $get['org_name']!='')
+            $programs->joinWith(['org'])->andWhere(['like','organizations.name',$get['org_name']]);
+
+        if (isset($get['file_exist']))
+            $programs->andWhere(['file_exist'=>$get['file_exist']]);
+
+
+        $programs = $programs->all();
+
 
         $ret = [];
         foreach ($programs as $program){
@@ -85,7 +111,9 @@ class ShitController extends Controller
                 'atz_bud_fin'=>$program->dku_atz,
                 'dku_status'=> $dku_status[$program->org->dku_status]
             ];
+
         }
+
 
         return $ret;
     }
