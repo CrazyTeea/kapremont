@@ -42,7 +42,7 @@
                 <v-objects status="2" dep_status="rejected" dku_status="rejected" or_where="true" />
             </b-tab>
 
-            <b-tab lazy v-can:root,mgsu,dep title-link-class="text-info" title="Организации иных ФОИВ" active>
+            <b-tab lazy v-can:root,mgsu,dep title-link-class="text-info" title="Организации иных ФОИВ">
                 <v-all-organizations state="other" />
             </b-tab>
         </b-tabs>
