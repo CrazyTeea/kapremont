@@ -17,6 +17,7 @@ use yii\db\ActiveRecord;
  * @property int $file_exist
  * @property int $p_status
  * @property int $status907
+ * @property int $dku_atz
  */
 class Program extends ActiveRecord
 {
