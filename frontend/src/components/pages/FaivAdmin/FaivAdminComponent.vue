@@ -120,7 +120,6 @@ export default {
     },
     async mounted(){
         await this.getTable()
-        console.log('FaivAdmin')
     },
     methods: {
         showInfo() {
@@ -141,7 +140,6 @@ export default {
                     },
             }).then( res => {
                 this.users = res.data
-                console.log(res)
             })
         }
     },

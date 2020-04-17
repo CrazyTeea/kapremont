@@ -22,7 +22,6 @@ export default {
         this.obj_id = this.$route.params.id;
         await this.requestUser();
         this.user_id = this.getUser.organization.id;
-        console.log(this.object_status);
     },
     computed: {
         ...mapGetters(["getUser"])

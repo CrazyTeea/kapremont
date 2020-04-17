@@ -18,7 +18,6 @@ Vue.directive("can", {
         const roles = binding.arg.split(",");
         setTimeout(()=>{
             if (!roles.includes(window.Permission)) {
-                // console.log(node.child);
                 el.style.display = 'none';
                 el.childNodes.innerHTML = '';
                 node.elm.parentElement.removeChild(node.elm);
@@ -30,12 +29,6 @@ Vue.directive("can", {
 
             }
         }, 1);
-
-        // console.log(window.Permission)
-        // if (!roles.includes(window.Permission)) {
-        //     console.log(window.Permission)
-        //     setTimeout(()=>{el.style.display = "none";}, 0.0001)
-        // }
     }
 });
 
@@ -62,7 +55,6 @@ async function getUser(){
     let access = null;
     let b = Axios.get(`/program/is-approve/${user.organization.id}`).then(response => {
         access = response.data.status907 === "0";
-        // console.log(this.user_status);
     });
     let i =  await b;
     return access;
@@ -71,7 +63,6 @@ async function getUser(){
 router.beforeEach((to, from, next) => {
     if (to.path !== "/error/browser") {
         let access = false;
-        console.log(platform);
         browser.forEach(item => {
             if (item.name === platform.name) {
                 if (platform.hasOwnProperty("version")) {

@@ -328,9 +328,7 @@ export default {
                 
                 this.infoFromServ = res.data.info;
                 this.organization = res.data.organization;
-
                 this.items = res.data.objects;
-                console.log(this.items);
                 this.programm = res.data.programm;
             });
         },

@@ -30,6 +30,8 @@ class Organizations extends \yii\db\ActiveRecord
 
     public const PROGRAM_STATUS_DKU_REVIEWED = 'dku_reviewed';
 
+    public $quantity;
+
     /**
      * {@inheritdoc}
      */
@@ -81,8 +83,30 @@ class Organizations extends \yii\db\ActiveRecord
         return $this->hasOne(Program::class,['id_org'=>'id']);
     }
 
-    public static function getMainCheckTable($offset, $whereClouse, $order, $faiv = null)
+    private static function CalculateState($orgs){
+        $state = null;
+        if($orgs === 'other') {
+            $rolesId = array_merge(User::getUsersByRole('faiv_admin'), User::getUsersByRole('faiv_user')) ;
+            $users = User::find()->where(['id'=> $rolesId])->all();
+            foreach($users as $user) {
+                $orgIds[] = $user->id_org;
+            }
+            $array = implode(', ', array_unique($orgIds));
+            if($array) {
+                $state = "and org.id in ($array)";
+            } else {
+                $state = null;
+            }
+        } else {
+            $state = null;
+        }
+        return $state;
+    }
+
+    public static function getMainCheckTable($offset, $whereClouse, $order, $orgs, $faiv = null)
     {
+        $state = self::CalculateState($orgs);
+
         $query = Yii::$app->db
             ->createCommand("
                 SELECT 
@@ -95,7 +119,7 @@ class Organizations extends \yii\db\ActiveRecord
                     JOIN regions AS reg ON org.id_region = reg.id
                     JOIN program_objects po ON org.id = po.id_org
                     WHERE
-                        org.system_status = 1 $faiv
+                        org.system_status = 1 $faiv $state
                     GROUP BY po.id_org
                     ) AS res
                         LEFT JOIN
@@ -109,20 +133,23 @@ class Organizations extends \yii\db\ActiveRecord
         return $query;
     }
 
-    public static function getMainCheckTableCount($params, $faiv = null)
+    public static function getMainCheckTableCount($params,$orgs, $faiv = null)
     {
+
+        $state = self::CalculateState($orgs);
+
         $count = Yii::$app->db->createCommand("
             SELECT 
                     COUNT(res.id) as quantity
                 FROM
                     (SELECT 
-                        org.id, org.name, COUNT(po.id_org) AS quantity, reg.region
+                        org.id
                     FROM
                         organizations AS org
                     JOIN regions AS reg ON org.id_region = reg.id
                     JOIN program_objects po ON org.id = po.id_org
                     WHERE
-                        org.system_status = 1 $faiv
+                        org.system_status = 1 $faiv $state
                     GROUP BY po.id_org
                     ) AS res
                         LEFT JOIN

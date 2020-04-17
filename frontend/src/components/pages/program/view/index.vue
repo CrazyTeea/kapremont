@@ -252,7 +252,6 @@ export default {
                 this.programStatus = response.data.p_status !== "0";
                 this.ban = response.data.ban !== "0";
                 this.user_status = response.data.user_status !== "0";
-                // console.log(this.user_status);
             });
         },
         approveModal() {
@@ -267,7 +266,6 @@ export default {
                 })
                 .then(value => {
                     this.canAxios = value;
-                    // console.log(value);
                      this.setApprove();
                 });
         },

@@ -234,13 +234,6 @@ export default {
         }
     },
     methods: {
-        // dubug() {
-        //     console.log("Файлы в буфере:");
-        //     console.log(this.selectedFiles);
-
-        //     console.log("Итемы:");
-        //     console.log(this.items);
-        // },
         async getLoadedFiles(id) {
             await Axios.get(`/program/object/files/${id}`).then(res => {
                 if (res.data?.length) {
