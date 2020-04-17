@@ -140,10 +140,10 @@ class Organizations extends \yii\db\ActiveRecord
 
         $count = Yii::$app->db->createCommand("
             SELECT 
-                    COUNT(res.id) as quantity
+                    COUNT(res.id) as quantity, res.region, res.name
                 FROM
                     (SELECT 
-                        org.id
+                        org.id, reg.region, org.name
                     FROM
                         organizations AS org
                     JOIN regions AS reg ON org.id_region = reg.id
