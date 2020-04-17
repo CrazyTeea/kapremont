@@ -88,7 +88,7 @@
 </template>
 
 <script>
-    import { BTable, BCard,BCardBody,BCardHeader,BInputGroupAppend,BInputGroup,BFormSelect,
+    import { BTable, BCard,BCardBody,BCardHeader,BInputGroupAppend,BInputGroup,BFormSelect,BButton,
         BCollapse,VBToggle, BFormInput, BIcon,BTr,BTh, BSpinner } from "bootstrap-vue";
     import Axios from "axios";
     export default {
@@ -108,7 +108,8 @@
             BCollapse,
             BInputGroupAppend,
             BInputGroup,
-            BFormSelect
+            BFormSelect,
+            BButton
         },
         async mounted() {
             await this.getObjects();
