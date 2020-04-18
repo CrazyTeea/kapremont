@@ -160,21 +160,21 @@
                     }
                 }).then(response => {
                     let pred_zakl =0 ;
-                    let abj_dep = 0;
+                    let atz_nb = 0;
                     let atz = 0;
                     let atz_bud_fin=0;
                     this.items = [];
                     if (response.data.program) {
                         response.data.program.forEach(item => {
                             pred_zakl += parseFloat(item.pred_zakl);
-                            abj_dep += parseFloat(item.abj_dep);
+                            atz_nb += parseFloat(item.atz_nb);
                             atz += parseFloat(item.atz);
                             atz_bud_fin += parseFloat(item.atz_bud_fin);
                         });
                         this.items.push({
                             obs_limits: 'ИТОГО',
                             pred_zakl: pred_zakl,
-                            abj_dep: abj_dep.toFixed(3),
+                            atz_nb: atz_nb.toFixed(3),
                             atz: atz.toFixed(3),
                             atz_bud_fin: atz_bud_fin.toFixed(3)
                         })
