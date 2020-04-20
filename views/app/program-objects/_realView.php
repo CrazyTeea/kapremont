@@ -1,4 +1,13 @@
 <?php
+
+$u_b_f = 0;
+
+foreach ($model->svedenia as $item){
+    if ($item->is_nessesary)
+        $u_b_f+=floatval($item->cost_real);
+}
+
+
 ?>
 
 <table class="table-bordered table">
@@ -16,7 +25,7 @@
     </tr>
     <tr>
         <td>Утвержденное бюджетное финансирование работ по объекту</td>
-        <td>0</td>
+        <td><?=$u_b_f?></td>
     </tr>
     <tr>
         <td>Сумма освоенных бюджетных средств</td>
