@@ -26,6 +26,15 @@
                         <b-form-input placeholder="Название..." id="name" name="ProgramObjects[name]" v-model="formData.name" />
                     </b-form-group>
                     <b-form-group
+                            label="раткое описание планируемых работ по объекту"
+                            label-for="object_opis"
+                            :invalid-feedback="feedback('ProgramObjects', 'object_opis', 'Краткое описание планируемых работ по объекту должно быть заполнено')"
+                            :valid-feedback="feedback('ProgramObjects', 'object_opis', ' ')"
+                            :state="feedback('ProgramObjects', 'object_opis')"
+                    >
+                        <b-form-input placeholder="раткое описание планируемых работ по объекту..." id="object_opis" name="ProgramObjects[object_opis]" v-model="formData.object_opis" />
+                    </b-form-group>
+                    <b-form-group
                         label="Адрес объекта"
                         label-for="address"
                         :invalid-feedback="feedback('ProgramObjects', 'address', 'адрес объекта должно быть заполнено')"
@@ -520,6 +529,7 @@ export default {
             bannerInfo: [],
             csrf: document.getElementsByName("csrf-token")[0].content,
             formData: {
+                object_opis: window.MODEL.base?.object_opis || null,
                 last_exploit_year: window.MODEL.base?.last_exploit_year || null,
                 type_remont: window.MODEL.base?.type_remont || 0,
                 address: window.MODEL.base?.address || null,
