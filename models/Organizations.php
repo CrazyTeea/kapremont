@@ -110,7 +110,7 @@ class Organizations extends \yii\db\ActiveRecord
         $query = Yii::$app->db
             ->createCommand("
                 SELECT 
-                    res.id, res.name, res.region, res.quantity, res.dep_status, res.dku_status, pr.file_exist, pr.p_status,pr.dku_atz
+                    res.id, res.name, res.region, res.quantity, res.dep_status, res.dku_status, pr.file_exist, pr.p_status,pr.dku_atz,pr.status907
                 FROM
                     (SELECT 
                         org.id, org.name, COUNT(po.id_org) AS quantity, reg.region, org.dep_status, org.dku_status
@@ -122,9 +122,9 @@ class Organizations extends \yii\db\ActiveRecord
                         org.system_status = 1 $faiv $state
                     GROUP BY po.id_org
                     ) AS res
-                        LEFT JOIN
+                        JOIN
                     program pr ON pr.id_org = res.id
-                    where 1 $whereClouse
+                    where 1 and pr.status907=0 $whereClouse
                 ORDER BY $order
                 LIMIT 10
                 OFFSET $offset")
@@ -140,7 +140,7 @@ class Organizations extends \yii\db\ActiveRecord
 
         $count = Yii::$app->db->createCommand("
             SELECT 
-                    COUNT(res.id) as quantity, res.region, res.name
+                    COUNT(res.id) as quantity, res.region, res.name ,pr.status907
                 FROM
                     (SELECT 
                         org.id, reg.region, org.name
@@ -152,9 +152,9 @@ class Organizations extends \yii\db\ActiveRecord
                         org.system_status = 1 $faiv $state
                     GROUP BY po.id_org
                     ) AS res
-                        LEFT JOIN
+                        JOIN
                     program pr ON pr.id_org = res.id
-                where 1 $params
+                where 1 and pr.status907=0 $params
                 ORDER BY res.id
             ")->queryOne();
 
