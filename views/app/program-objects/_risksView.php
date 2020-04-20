@@ -10,11 +10,12 @@
     </tr>
     </thead>
     <tbody>
-    <?php foreach ($model->risks as $item) ?>
+    <?php foreach ($model->risks as $item): ?>
     <tr>
         <td><?=$item->types?></td>
         <td><?=$item->poison?></td>
         <td><?=$item->protect?></td>
     </tr>
+    <?php endforeach;?>
     </tbody>
 </table>
