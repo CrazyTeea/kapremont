@@ -43,6 +43,7 @@ use Yii;
  * @property int $status
  * @property string $dku_status
  * @property string $dep_status
+ * @property string $object_opis
  * @var $docList ObjectDocumentsList[]
  * @var $org Organizations
  * @var $city Cities
@@ -72,7 +73,7 @@ class ProgramObjects extends \yii\db\ActiveRecord
             [['name', 'assignment', 'regulation', 'event_type', 'note', 'address','prav_oper_upr'], 'string','max'=>5000],
             [['square', 'wear', 'finance_sum', 'coFinancing', 'square_kap', 'isp_v_ust_dey', 'n_isp_v_ust_dey', 'square_ar', 'square_av', 'square_atz'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
-            [['exist_pred_nadz_orgs', 'prav_sob', 'kad_number', 'osn_isp_zdan','podrobnosti'], 'string', 'max' => 5000],
+            [['exist_pred_nadz_orgs', 'prav_sob', 'kad_number', 'osn_isp_zdan','podrobnosti','object_opis'], 'string', 'max' => 5000],
             [[
                 'id_org', 'id_program', 'year', 'id_region', 'id_city', 'exploit_year',
                 'name', 'assignment', 'note', 'square', 'wear', 'address','type_remont',
@@ -105,6 +106,7 @@ class ProgramObjects extends \yii\db\ActiveRecord
             'note' => 'Примечание',
             'id_region' => 'Регион',
             'id_city' => 'Город',
+            'object_opis'=>'Краткое описание планируемых работ по объекту',
             'address' => 'Полный адрес объекта',
             'exist_pred_nadz_orgs' => 'Наличие предписаний надзорных органов:',
             'type' => 'Тип объекта',

@@ -159,6 +159,10 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'items'=>[
                 [
+                    'label'=>'Реализация мероприятий',
+                    'content'=>$this->render('_realView',compact('model'))
+                ],
+                [
                     'label'=>'Сведения о планируемых мероприятиях',
                     'content'=>$this->render('_svediniaView',compact('model'))
                 ],
