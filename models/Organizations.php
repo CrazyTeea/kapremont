@@ -154,7 +154,7 @@ class Organizations extends \yii\db\ActiveRecord
                     ) AS res
                         JOIN
                     program pr ON pr.id_org = res.id
-                where 1 and pr.status907=1 $params
+                where 1 and pr.status907=0 $params
                 ORDER BY res.id
             ")->queryOne();
 
