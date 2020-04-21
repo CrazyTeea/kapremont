@@ -47,6 +47,7 @@ return [
             '/rest/upload/*',
             '/api/shit/data',
             '/api/user-info/*',
+            '/app/program/is-approve',
         ],
     ],
     'orglist_view' => [
@@ -131,6 +132,7 @@ return [
             '/rest/upload/*',
             '/api/shit/data',
             '/api/user-info/*',
+            '/app/program-objects/create',
         ],
     ],
     '/app/program/export' => [
