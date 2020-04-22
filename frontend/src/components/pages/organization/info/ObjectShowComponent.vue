@@ -135,6 +135,86 @@
 
         <b-card no-body class="mb-1">
             <b-card-header header-tag="header" class="p-1" role="tab">
+                            <span class="toggle_button" v-b-toggle.accordion-s>
+                                <b-icon-gear-wide-connected />
+                                Сведения два
+                            </span>
+            </b-card-header>
+            <b-collapse id="accordion-s" accordion="my-accordion" role="tabpanel">
+                <b-card-body style="overflow: auto">
+                    <b-table-simple bordered>
+                        <b-thead>
+                            <b-tr>
+                                <b-th></b-th>
+                                <b-th>Этап</b-th>
+                                <b-th>Дата начала (план.)</b-th>
+                                <b-th>Дата окончания (план.)</b-th>
+                                <b-th>Фактическая Стоимость реализации (тыс.руб.)</b-th>
+                                <b-th>Фактическая Сумма бюджетного финансирования на проведение капитального ремонта (тыс. руб.)</b-th>
+                                <b-th>Фактическое Софинансирование из внебюджетных источников (тыс. руб.)</b-th>
+                                <b-th>Отметка о завершении этапа </b-th>
+                                <b-th>Комментарий (текстовое поле Заполняет ВУЗ)</b-th>
+                                <b-th>Отметка Эксперта МОН (МГСУ) Принято / не принято</b-th>
+                                <b-th>Комментарий эксперта МОН )</b-th>
+                            </b-tr>
+                        </b-thead>
+                        <b-tbody>
+                            <b-tr v-for="(item,index) in svedenia2" :key="index">
+                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    {{item.step + 1}}
+                                </b-td>
+                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-form-input v-if="item.canDelete" v-model="svedenia2[index].step_name" />
+                                    <span v-else>{{item.step_name}}</span>
+                                </b-td>
+                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-form-input type="date" v-model="svedenia2[index].date_event_start" />
+                                </b-td>
+                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-form-input type="date" v-model="svedenia2[index].date_event_end" />
+                                </b-td>
+                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-form-input type="number" step=".01"  v-model="svedenia2[index].cost_real" />
+                                </b-td>
+                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-form-input type="number" step=".01"  v-model="svedenia2[index].sum_bud_fin" />
+                                </b-td>
+                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-form-input type="number" step=".01"  v-model="svedenia2[index].fin_vnebud_ist" />
+                                </b-td>
+                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-form-checkbox v-model="svedenia2[index].done" />
+                                </b-td>
+                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-form-input v-model="svedenia2[index].comment" />
+                                </b-td>
+                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-form-checkbox v-model="svedenia2[index].doneExpert" />
+                                </b-td>
+                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-form-input v-model="svedenia2[index].commentExpert" />
+                                </b-td>
+                                <div v-else>
+                                    <b-td>
+                                        <b-button variant="danger" @click="deleteRow(index)">Удалить</b-button>
+                                    </b-td>
+                                    <b-td >
+                                        <b-button variant="info" @click="addRow(index)">Добавить</b-button>
+                                    </b-td>
+                                </div>
+
+                            </b-tr>
+
+                        </b-tbody>
+
+                    </b-table-simple>
+                    <b-button @click="sendData">Сохранить</b-button>
+                </b-card-body>
+            </b-collapse>
+        </b-card>
+
+        <b-card no-body class="mb-1">
+            <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-2>
                                 <b-icon-gear-wide-connected />
                                 Сведения о планируемых мероприятиях</span
@@ -230,11 +310,16 @@ import {
     BTableSimple,
     BTr,
     BTh,
+    BTd,
+    BButton,
+    BFormInput,
+    BThead,
     BTbody,
     BDropdown,
     BDropdownItem,
     BTable,
     BBreadcrumb,
+    BFormCheckbox,
     VBToggle,
 } from 'bootstrap-vue'
 export default {
@@ -249,13 +334,18 @@ export default {
         BTableSimple,
         BTr,
         BTh,
+        BThead,
         BTbody,
         BDropdown,
         BDropdownItem,
         BTable,
         BCard,
+        BButton,
         BCardHeader,
+        BFormCheckbox,
         BCardBody,
+        BTd,
+        BFormInput
     },
     data() {
         return {
@@ -283,6 +373,323 @@ export default {
             user_id: null,
             docs: [],
             fromServer:{},
+            svedenia2:[
+
+                    {
+                        canDelete:false,
+                        step:0,
+                        id_event:null,
+                        step_name:'Проведение тендера и заключение договора на выполнение обследования',
+                        date_event_start: null,
+                        date_event_end: null,
+                        cost_real:null,
+                        sum_bud_fin:null,
+                        fin_vnebud_ist:null,
+                        is_nessesary: null,
+                        done:false,
+                        doneExpert:false,
+                        comment:'',
+                        commentExpert:'',
+                        parent:true
+                    },
+                {
+                    canDelete:false,
+                    step:0.1,
+                    id_event:null,
+                    step_name:'Внесение пользователем закупки на обследование объекта в план закупок ',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:false
+                },
+                {
+                    canDelete:false,
+                    step:0.2,
+                    id_event:null,
+                    step_name:'Объявление пользователем аукциона на обследование объекта',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:false
+                },
+                {
+                    canDelete:false,
+                    step:0.3,
+                    id_event:null,
+                    step_name:'Определение подрядчика по результату аукциона',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:false
+                },
+                {
+                    canDelete:false,
+                    step:0.4,
+                    id_event:null,
+                    step_name:'Заключение договора с подрядчиком',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:false
+                },
+                {
+                    canDelete:false,
+                    button:true,
+                    button_name:'Добавить'
+                },
+                {
+                    canDelete:false,
+                    step:1,
+                    id_event:null,
+                    step_name:'Выполнение обследования, подготовка и утверждение дефектного акта (дефектной ведомости). ',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:true
+                },
+                {
+                    canDelete:false,
+                    button:true,
+                    button_name:'Добавить'
+                },
+                {
+                    canDelete:false,
+                    step:2,
+                    id_event:null,
+                    step_name:'Утверждение задания на проектирование ',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:true
+                },
+                {
+                    canDelete:false,
+                    button:true,
+                    button_name:'Добавить'
+                },
+                {
+                    canDelete:false,
+                    step:3,
+                    id_event:null,
+                    step_name:'Проведение тендера и заключение договора на подготовку проектно-сметной документации.',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:true
+                },
+                {
+                    canDelete:false,
+                    step:3.1,
+                    id_event:null,
+                    step_name:'Внесение пользователем закупки на обследование объекта в план закупок ',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:false
+                },
+                {
+                    canDelete:false,
+                    step:3.2,
+                    id_event:null,
+                    step_name:'Объявление пользователем аукциона на обследование объекта',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:false
+                },
+                {
+                    canDelete:false,
+                    step:3.3,
+                    id_event:null,
+                    step_name:'Определение подрядчика по результату аукциона',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:false
+                },
+                {
+                    canDelete:false,
+                    step:3.4,
+                    id_event:null,
+                    step_name:'Заключение договора с подрядчиком',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:false
+                },
+                {
+                    canDelete:false,
+                    button:true,
+                    button_name:'Добавить'
+                },
+                {
+                    canDelete:false,
+                    step:4,
+                    id_event:null,
+                    step_name:'Подготовка проектно-сметной документации.',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:true
+                },
+                {
+                    canDelete:false,
+                    button:true,
+                    button_name:'Добавить'
+                },
+                {
+                    canDelete:false,
+                    step:5,
+                    id_event:null,
+                    step_name:'Прохождение экспертизы проектно-сметной документации.',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:true
+                },
+                {
+                    canDelete:false,
+                    button:true,
+                    button_name:'Добавить'
+                },
+                {
+                    canDelete:false,
+                    step:6,
+                    id_event:null,
+                    step_name:'Проведение тендера и заключение договора на выполнение строительно-монтажных работ.',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:true
+                },
+                {
+                    canDelete:false,
+                    button:true,
+                    button_name:'Добавить'
+                },
+                {
+                    canDelete:false,
+                    step:8,
+                    id_event:null,
+                    step_name:'Выполнение строительно-монтажных работ.',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:true
+                },
+                {
+                    canDelete:false,
+                    button:true,
+                    button_name:'Добавить'
+                }
+
+
+            ],
             svedenia: {
                 labels: [
                     'Проведение тендера и заключение договора на выполнение обследования',
@@ -397,6 +804,38 @@ export default {
         actionElement?.addEventListener('click', event => {this.actionHendler(event)})
     },
     methods: {
+        ...mapActions(['requestUser']),
+        sendData(event){
+          let data = JSON.stringify(this.svedenia2);
+          Axios.post(`/program/object/send-event/${this.obj_id}`,data,{
+              headers: {
+                  "X-CSRF-Token": this.csrf
+              }
+          }).then(response=>console.log(response.data))
+        },
+        addRow(index){
+            this.svedenia2.splice(index,0,{
+                step:this.svedenia2[index-1].step+0.1 ,
+                id_event:null,
+                step_name:'',
+                date_event_start: null,
+                date_event_end: null,
+                cost_real:null,
+                sum_bud_fin:null,
+                fin_vnebud_ist:null,
+                is_nessesary: null,
+                done:false,
+                doneExpert:false,
+                comment:'',
+                commentExpert:'',
+                parent:false,
+                canDelete:true,
+            });
+        },
+        deleteRow(index){
+            if (this.svedenia2[index-1].canDelete)
+                this.svedenia2.splice(index-1,1);
+        },
         actionHendler(event) {
             event.preventDefault();
             if(document.querySelector(`#user_${window.currentUser}`)) {
@@ -418,7 +857,6 @@ export default {
         resetBanners() {
             this.bannerInfo.pop();
         },
-        ...mapActions(['requestUser']),
         getEl(arr,index){
             let el = null;
             arr.forEach(item=>{
@@ -481,6 +919,7 @@ export default {
         getObject(){
             Axios.get(`/api/get-object/${this.obj_id}`).then(res=>{
                 this.fromServer = JSON.parse(res.data);
+                console.log(this.fromServer);
                 this.items = this.fromServer.object;
                 this.items.org_name = this.fromServer.organization.name;
                 this.docs = this.fromServer.docs;
@@ -494,12 +933,13 @@ export default {
                     this.svedenia.items.push({
                         index:index+1,
                         step:this.svedenia.labels[index],
-                        is_nessesary:item.is_nessesary ? 'Да' : 'Нет',
-                        date_event_start:item.date_event_start,
-                        date_event_end:item.date_event_end,
-                        cost_real:item.cost_real,
-                        sum_bud_fin:item.sum_bud_fin,
-                        fin_vnebud_ist:item.fin_vnebud_ist,
+                        id:item.id,
+                        is_nessesary:item.item.is_nessesary ? 'Да' : 'Нет',
+                        date_event_start:item.item.date_event_start,
+                        date_event_end:item.item.date_event_end,
+                        cost_real:item.item.cost_real,
+                        sum_bud_fin:item.item.sum_bud_fin,
+                        fin_vnebud_ist:item.item.fin_vnebud_ist,
                     })
                 });
                 this.svedenia.items.push({

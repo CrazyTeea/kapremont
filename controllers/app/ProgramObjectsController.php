@@ -80,6 +80,10 @@ class ProgramObjectsController extends AppController
         return "Что не так с файлами, обратитесь в тех поддержку. ID объекта $id";
     }
 
+    public function actionSendEvent($id){
+        return Json::encode(Yii::$app->response->post(),$id);
+    }
+
     /**
      * Displays a single ProgramObjects model.
      * @param integer $id
