@@ -54,7 +54,7 @@ async function getUser(){
     let u = await a;
     let access = null;
     let b = Axios.get(`/program/is-approve/${user.organization.id}`).then(response => {
-        access = response.data.status907 === "0";
+        access = response.data.status907 == "0";
     });
     let i =  await b;
     return access;
