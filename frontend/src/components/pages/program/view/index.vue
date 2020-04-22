@@ -249,9 +249,9 @@ export default {
         ...mapActions(["requestPageData", "requestUser"]),
         getApprove() {
             Axios.get("/program/is-approve").then(response => {
-                this.programStatus = response.data.p_status !== "0";
-                this.ban = response.data.ban !== "0";
-                this.user_status = response.data.user_status !== "0";
+                this.programStatus = response.data.p_status !== 0;
+                this.ban = response.data.ban !== 0;
+                this.user_status = response.data.user_status !== 0;
             });
         },
         approveModal() {
