@@ -9,6 +9,7 @@ use app\models\ProgObjectsEvents;
 use app\models\ProgObjectsRiscs;
 use app\models\ProgObjectsWaites;
 use app\models\Program;
+use app\models\ProgramObjectsEvents2;
 use app\models\ProObjectsNecessary;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Reader\Html;
@@ -81,7 +82,35 @@ class ProgramObjectsController extends AppController
     }
 
     public function actionSendEvent($id){
-        return Json::encode(Yii::$app->response->post(),$id);
+        $post = Yii::$app->request->post();
+        $event = null;
+        if (isset($post['parent']) and filter_var($post['parent'],FILTER_VALIDATE_BOOLEAN)) {
+            $event = ProgObjectsEvents::findOne(['id_object' => $id, 'step' => $post['step']]);
+            if (!$event) {
+                $event = new ProgObjectsEvents();
+                $event->id_object = $id;
+                $event->step = $post['step'];
+            }
+        }
+        else if(isset($post['id_event']) and $post['id_event']) {
+            $event = ProgramObjectsEvents2::findOne(['id_event' => $post['id_event'], 'step' => $post['step']]);
+            if (!$event) {
+                $event = new ProgramObjectsEvents2();
+                $event->id_event = $post['id_event'];
+                $event->step = $post['step'];
+            }
+        }
+
+        $event->date_event_start = $post['date_event_start'];
+        $event->date_event_end = $post['date_event_end'];
+        $event->cost_real = $post['cost_real'];
+        $event->sum_bud_fin = $post['sum_bud_fin'];
+        $event->fin_vnebud_ist = $post['fin_vnebud_ist'];
+        $event->done = $post['done'];
+        $event->doneExpert = $post['doneExpert'];
+        $event->comment = $post['comment'];
+        $event->commentExpert = $post['commentExpert'];
+        return Json::encode(['success'=>$event->save(),'errors'=>$event->getErrors()]);
     }
 
     /**

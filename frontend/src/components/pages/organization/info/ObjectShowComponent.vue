@@ -142,7 +142,7 @@
             </b-card-header>
             <b-collapse id="accordion-s" accordion="my-accordion" role="tabpanel">
                 <b-card-body style="overflow: auto">
-                    <b-table-simple bordered>
+                    <b-table-simple small sticky-header bordered style="min-height: 1000px">
                         <b-thead>
                             <b-tr>
                                 <b-th></b-th>
@@ -159,9 +159,9 @@
                             </b-tr>
                         </b-thead>
                         <b-tbody>
-                            <b-tr v-for="(item,index) in svedenia2" :key="index">
+                            <b-tr  v-for="(item,index) in svedenia2" :key="index" @change="sendData(item)">
                                 <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                    {{item.step + 1}}
+                                    {{item.step + 1}} {{item.id_event}}
                                 </b-td>
                                 <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
                                     <b-form-input v-if="item.canDelete" v-model="svedenia2[index].step_name" />
@@ -208,7 +208,6 @@
                         </b-tbody>
 
                     </b-table-simple>
-                    <b-button @click="sendData">Сохранить</b-button>
                 </b-card-body>
             </b-collapse>
         </b-card>
@@ -805,8 +804,11 @@ export default {
     },
     methods: {
         ...mapActions(['requestUser']),
-        sendData(event){
-          let data = JSON.stringify(this.svedenia2);
+        sendData(item){
+            let data = new FormData();
+            Object.keys(item).forEach(key=>{
+                data.append(key,item[key]);
+            })
           Axios.post(`/program/object/send-event/${this.obj_id}`,data,{
               headers: {
                   "X-CSRF-Token": this.csrf
@@ -916,6 +918,7 @@ export default {
                 this.status.variant = color;
             })
         },
+        isFloat(x) { return !!(x % 1); },
         getObject(){
             Axios.get(`/api/get-object/${this.obj_id}`).then(res=>{
                 this.fromServer = JSON.parse(res.data);
@@ -930,10 +933,20 @@ export default {
                     c+=Number(item.cost_real);
                     v+=Number(item.sum_bud_fin);
                     b+=Number(item.fin_vnebud_ist);
+                    this.svedenia2.forEach(item2=>{
+                        if (item2.step == item.item.step) {
+                            item2.date_event_start = item.item.date_event_start;
+                            item2.date_event_end = item.item.date_event_end;
+                            item2.cost_real = item.item.cost_real;
+                            item2.sum_bud_fin = item.item.sum_bud_fin;
+                            item2.fin_vnebud_ist = item.item.fin_vnebud_ist;
+                            item2.id_event = item.item.id;
+                        }
+
+                    });
                     this.svedenia.items.push({
                         index:index+1,
                         step:this.svedenia.labels[index],
-                        id:item.id,
                         is_nessesary:item.item.is_nessesary ? 'Да' : 'Нет',
                         date_event_start:item.item.date_event_start,
                         date_event_end:item.item.date_event_end,
@@ -942,6 +955,8 @@ export default {
                         fin_vnebud_ist:item.item.fin_vnebud_ist,
                     })
                 });
+
+
                 this.svedenia.items.push({
                     step:'Готово',
                     cost_real:c.toFixed(3),
