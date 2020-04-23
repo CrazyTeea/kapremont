@@ -5,6 +5,7 @@ import ListObject from "./components/pages/organization/info/ListObjectComponent
 import ObjView from "./components/pages/organization/info/ObjectShowComponent.vue";
 import ObjectsForKrestiane from "./components/pages/program/ObjectView/ViewComponent.vue";
 import FaivAdminComponent from "./components/pages/FaivAdmin/FaivAdminComponent.vue"
+import StatusView from "./components/pages/program/view/status.vue"
 
 Vue.use(VueRouter);
 
@@ -29,6 +30,10 @@ const routes = [
             import("./components/pages").then(module => {
                 return module.devView;
             })
+    },
+    {
+        path: "/program/org",
+        component: StatusView
     },
     {
         path: "/program/object/create",

@@ -9,6 +9,7 @@ use app\models\ProgObjectsEvents;
 use app\models\ProgObjectsRiscs;
 use app\models\ProgObjectsWaites;
 use app\models\Program;
+use app\models\ProgramObjectsEvents2;
 use app\models\ProObjectsNecessary;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Reader\Html;
@@ -78,6 +79,30 @@ class ProgramObjectsController extends AppController
         }
 
         return "Что не так с файлами, обратитесь в тех поддержку. ID объекта $id";
+    }
+
+    public function actionSendEvent($id){
+        $post = Yii::$app->request->post();
+        $event = null;
+        if (isset($post['parent']) and filter_var($post['parent'],FILTER_VALIDATE_BOOLEAN)) {
+            $event = ProgObjectsEvents::findOne(['id_object' => $id, 'step' => $post['step']]);
+            if (!$event) {
+                $event = new ProgObjectsEvents();
+                $event->id_object = $id;
+                $event->step = $post['step'];
+            }
+        }
+
+        $event->date_event_start = $post['date_event_start'];
+        $event->date_event_end = $post['date_event_end'];
+        $event->cost_real = floatval($post['cost_real']);
+        $event->sum_bud_fin = floatval($post['sum_bud_fin']);
+        $event->fin_vnebud_ist = floatval($post['fin_vnebud_ist']);
+        $event->done = $post['done'];
+        $event->doneExpert = $post['doneExpert'];
+        $event->comment = $post['comment'];
+        $event->commentExpert = $post['commentExpert'];
+        return Json::encode(['success'=>$event->save(),'errors'=>$event->getErrors()]);
     }
 
     /**
@@ -528,6 +553,36 @@ class ProgramObjectsController extends AppController
     {
         $files = Files::find()->where(['files.id'=>1])->select(['name'])->joinWith(['docList'])->one();
         var_dump($files);
+    }
+
+    public function actionStatusRealize($id_org)
+    {
+        $select = ProgramObjects::find()->where(['system_status'=>1, 'id_org' => $id_org, 'status' => 5])->joinWith(['region'])->orderBy(['created_at'=>SORT_ASC])->all();
+        
+        foreach($select as $query) {
+            $toServe[] = [
+                'id' => $query->id,
+                'type' => $query->type,
+                'id_priority' => $query->id_priority,
+                'region' => $query->region->region,
+                'name' => $query->name,
+                'assignment' => $query->assignment,
+                'square' => $query->square,
+                'address' => $query->address,
+                'year' => $query->year,
+                'wear' => $query->wear,
+                'podrobnosti' => $query->podrobnosti,
+                'type_remont' => $query->type_remont,
+                'finance' => $query->finance_sum,
+                'coFinanse' => $query->coFinancing,
+                'note' => $query->note
+            ];
+        }
+
+        
+        // echo "<pre>";
+        // print_r($toServe);
+        return json_encode($toServe);
     }
 
 

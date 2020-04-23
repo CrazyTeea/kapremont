@@ -27,6 +27,10 @@ class ProgObjectsEvents extends BaseMultiModel
         return 'prog_objects_events';
     }
 
+    public function getSvedenia2(){
+        return $this->hasMany(ProgramObjectsEvents2::class,['id_event'=>'id']);
+    }
+
     /**
      * {@inheritdoc}
      */

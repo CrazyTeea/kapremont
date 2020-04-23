@@ -212,4 +212,9 @@ class DevelopmentProgrammeController extends AppController
         return $this->render('index');
     }
 
+    public function actionStatusRealize()
+    {
+        return $this->render('status');
+    }
+
 }

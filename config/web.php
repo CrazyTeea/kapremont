@@ -109,7 +109,11 @@ $config = [
                 'login' => 'site/login',
                 'error/browser' => 'app/error/browser',
                 'error/status907' => 'app/error/status907',
+
                 'program/view' => 'app/development-programme',
+                'program/org' => 'app/development-programme/status-realize',
+                'api/get/program-objects/realized/<id_org:\d+>' => 'app/program-objects/status-realize',
+
                 'program/add-doc/<id:\d+>' => 'app/development-programme/add-doc',
                 'program/delete-doc/<id:\d+>' => 'app/development-programme/delete-doc',
                 'program/check-doc/<id:\d+>' => 'app/development-programme/check-doc',
@@ -123,6 +127,7 @@ $config = [
                 'program/object/delete/<id:\d+>' => 'app/program-objects/delete',
                 'program/object/files/<id:\d+>' => 'app/program-objects/get-all-obj-files',
                 'program/object/zip/<id:\d+>' => 'app/program-objects/zip',
+                'program/object/send-event/<id:\d+>' => 'app/program-objects/send-event',
                 'program/export' => 'app/development-programme/export',
                 'program/approve' => 'app/program/approve',
                 'program/is-approve' => 'app/program/is-approve',

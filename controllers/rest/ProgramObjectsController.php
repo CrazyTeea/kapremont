@@ -21,10 +21,22 @@ class ProgramObjectsController extends RestController
                     'label'=>$item->type->label
                 ];
             }
+            $svedenia = [];
+
+            if ($model->svedenia){
+                foreach ($model->svedenia as $item){
+                    $svedenia[] = [
+                        'item'=>$item,
+                        'svedenia2'=>$item->svedenia2
+                    ];
+                }
+            }
+
+
             return Json::encode([
                 'object' =>$model,
                 'organization'=>$model->org,
-                'svedenia'=>$model->svedenia,
+                'svedenia'=>$svedenia,
                 'necessary'=>$model->necessary,
                 'waited'=>$model->waites,
                 'risks'=>$model->risks,
