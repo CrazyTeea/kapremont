@@ -92,14 +92,6 @@ class ProgramObjectsController extends AppController
                 $event->step = $post['step'];
             }
         }
-        else if(isset($post['id_event']) and $post['id_event']) {
-            $event = ProgramObjectsEvents2::findOne(['id_event' => $post['id_event'], 'step' => $post['step']]);
-            if (!$event) {
-                $event = new ProgramObjectsEvents2();
-                $event->id_event = $post['id_event'];
-                $event->step = $post['step'];
-            }
-        }
 
         $event->date_event_start = $post['date_event_start'];
         $event->date_event_end = $post['date_event_end'];
@@ -561,6 +553,36 @@ class ProgramObjectsController extends AppController
     {
         $files = Files::find()->where(['files.id'=>1])->select(['name'])->joinWith(['docList'])->one();
         var_dump($files);
+    }
+
+    public function actionStatusRealize($id_org)
+    {
+        $select = ProgramObjects::find()->where(['system_status'=>1, 'id_org' => $id_org, 'status' => 5])->joinWith(['region'])->orderBy(['created_at'=>SORT_ASC])->all();
+        
+        foreach($select as $query) {
+            $toServe[] = [
+                'id' => $query->id,
+                'type' => $query->type,
+                'id_priority' => $query->id_priority,
+                'region' => $query->region->region,
+                'name' => $query->name,
+                'assignment' => $query->assignment,
+                'square' => $query->square,
+                'address' => $query->address,
+                'year' => $query->year,
+                'wear' => $query->wear,
+                'podrobnosti' => $query->podrobnosti,
+                'type_remont' => $query->type_remont,
+                'finance' => $query->finance_sum,
+                'coFinanse' => $query->coFinancing,
+                'note' => $query->note
+            ];
+        }
+
+        
+        // echo "<pre>";
+        // print_r($toServe);
+        return json_encode($toServe);
     }
 
 

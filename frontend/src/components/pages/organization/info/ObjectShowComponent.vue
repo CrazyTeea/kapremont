@@ -204,7 +204,7 @@
                         <b-tbody>
                             <b-tr  v-for="(item,index) in svedenia2" :key="index" @change="sendData(item)">
                                 <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                    {{item.step + 1}} {{item.id_event}}
+                                    {{item.step + 1}}
                                 </b-td>
                                 <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
                                     <b-form-input v-if="item.canDelete" v-model="svedenia2[index].step_name" />
@@ -1041,11 +1041,6 @@ export default {
                             item2.sum_bud_fin = item.item.sum_bud_fin;
                             item2.fin_vnebud_ist = item.item.fin_vnebud_ist;
                             item2.id_event = item.item.id;
-
-                            item2.svedenia2.forEach(kek=>{
-                                let el = this.svedenia2.find(l => l.step == kek.step)
-
-                            })
 
                         }
 

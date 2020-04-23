@@ -27,7 +27,7 @@
                     ></b-pagination>
                     <div style="float: right"  v-show="getUser.isAdmin && getPageData">
                         <b-button href="/program/view">Заполнить программу модернизации</b-button>
-                        <b-button class="btn-info mt-2" href="/program/view">Приступить к реализации программы модернизации</b-button>
+                       <!-- <b-button class="btn-info mt-2" href="/program/view">Приступить к реализации программы модернизации</b-button>-->
                     </div>
                 </div>
                 <div class="col-2"></div>

@@ -109,7 +109,11 @@ $config = [
                 'login' => 'site/login',
                 'error/browser' => 'app/error/browser',
                 'error/status907' => 'app/error/status907',
+
                 'program/view' => 'app/development-programme',
+                'program/org' => 'app/development-programme/status-realize',
+                'api/get/program-objects/realized/<id_org:\d+>' => 'app/program-objects/status-realize',
+
                 'program/add-doc/<id:\d+>' => 'app/development-programme/add-doc',
                 'program/delete-doc/<id:\d+>' => 'app/development-programme/delete-doc',
                 'program/check-doc/<id:\d+>' => 'app/development-programme/check-doc',
