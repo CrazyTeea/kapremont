@@ -563,5 +563,35 @@ class ProgramObjectsController extends AppController
         var_dump($files);
     }
 
+    public function actionStatusRealize($id_org)
+    {
+        $select = ProgramObjects::find()->where(['system_status'=>1, 'id_org' => $id_org, 'status' => 5])->joinWith(['region'])->orderBy(['created_at'=>SORT_ASC])->all();
+        
+        foreach($select as $query) {
+            $toServe[] = [
+                'id' => $query->id,
+                'type' => $query->type,
+                'id_priority' => $query->id_priority,
+                'region' => $query->region->region,
+                'name' => $query->name,
+                'assignment' => $query->assignment,
+                'square' => $query->square,
+                'address' => $query->address,
+                'year' => $query->year,
+                'wear' => $query->wear,
+                'podrobnosti' => $query->podrobnosti,
+                'type_remont' => $query->type_remont,
+                'finance' => $query->finance_sum,
+                'coFinanse' => $query->coFinancing,
+                'note' => $query->note
+            ];
+        }
+
+        
+        // echo "<pre>";
+        // print_r($toServe);
+        return json_encode($toServe);
+    }
+
 
 }

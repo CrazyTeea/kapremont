@@ -25,9 +25,10 @@
                             :per-page="perPage"
                             aria-controls="my-table"
                     ></b-pagination>
-                    <div style="float: right"  v-show="getUser.isAdmin && getPageData">
-                        <b-button href="program/view">Заполнить программу модернизации</b-button>
-                    </div>
+                <div class="" v-show="getUser.isAdmin && getPageData">
+                    <b-button href="program/view">Заполнить программу модернизации</b-button>
+                    <b-button class="btn-info mt-2" :href="`/program/org/${id_org}`">Приступить к реализации программы модернизации</b-button>
+                </div>
                 </div>
                 <div class="col-2"></div>
 
