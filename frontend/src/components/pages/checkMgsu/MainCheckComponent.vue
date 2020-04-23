@@ -33,6 +33,9 @@
             <b-tab lazy v-can:root,mgsu,dep title-link-class="text-danger" title="Не рекомендуется к согласованию">
                 <v-objects status="3" />
             </b-tab>
+            <b-tab lazy v-can:root,mgsu,dep title-link-class="text-success" title="Объекты на реализации">
+                <v-objects status="5"/>
+            </b-tab>
 
             <b-tab lazy v-can:root,mgsu,dep title-link-class="text-success" title="Рассмотрено ДЭП">
                 <v-objects status="2" dep_status="approved" />
@@ -45,6 +48,8 @@
             <b-tab lazy v-can:root,mgsu,dep title-link-class="text-info" title="Организации иных ФОИВ">
                 <v-all-organizations state="other" />
             </b-tab>
+
+
         </b-tabs>
         <a v-can:root,mgsu,dep class="btn btn-warning mt-3" href="/organization/export/2">Статистика по статусам</a>
         <a v-can:root,mgsu,dep class="btn btn-warning mt-3" href="/organization/export/1">Статистика по бюджетам (Организация)</a>

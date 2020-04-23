@@ -33,6 +33,7 @@
             <a :href="`/program/object/update/${this.items.id}`" class="btn btn-primary">Редактировать </a>
             <a v-if="!this.items.status" :href="`/program/object/delete/${this.items.id}`" class="btn btn-danger">Удалить </a>
         </div>
+        <a v-if="this.real" :href="`/program/object/set-real/${this.items.id}`" class="btn btn-success">Приступить к реалзации </a>
         <div class="d-flex justify-content-between align-items-center">
             <h5 class="vertical-horizontal-align">Текущий статус эксперта МОН: <label :class="`text-${status.variant}`">{{ status.label }}</label></h5>
             <h5 class="vertical-horizontal-align">Текущий статус ДЭП: <label :class="`text-${dep_status.color}`">{{ dep_status.label }}</label></h5>
@@ -551,6 +552,7 @@ export default {
             },
             csrf: document.getElementsByName("csrf-token")[0].content,
             items: [],
+            real:false,
             obj_id: null,
             org_id: null,
             user_id: null,
@@ -972,6 +974,7 @@ export default {
             }
         };
 
+
     },
     computed: {
         ...mapGetters(['getUser']),
@@ -1158,6 +1161,9 @@ export default {
                     color = 'warning'
                 }
                 this.status.variant = color;
+
+                this.real = res.data.id == 5 && dep=='approved' && dku=='approved';
+
             })
         },
         isFloat(x) { return !!(x % 1); },
