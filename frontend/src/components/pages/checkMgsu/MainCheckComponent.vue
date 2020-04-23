@@ -46,7 +46,7 @@
                 <v-all-organizations state="other" />
             </b-tab>
 
-            <b-tab lazy v-can:root,mgsu,dep title-link-class="text-info" title="Объекты на реализации">
+            <b-tab lazy v-can:root,mgsu,dep title-link-class="text-dark" title="Объекты на реализации">
                 <v-objects status="5"/>
             </b-tab>
 
