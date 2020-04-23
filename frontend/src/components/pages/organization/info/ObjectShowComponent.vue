@@ -137,12 +137,55 @@
             <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-s>
                                 <b-icon-gear-wide-connected />
-                                Сведения два
+                                План график
                             </span>
             </b-card-header>
-            <b-collapse id="accordion-s" accordion="my-accordion" role="tabpanel">
+            <b-collapse id="accordion-s" accordion="my-accordion" role="tabpanel" visible>
                 <b-card-body style="overflow: auto">
-                    <b-table-simple small sticky-header bordered style="min-height: 1000px">
+                    <div class="wraper-for-chart" style="overflow-x: scroll">
+                        <div class="chart-wrapper">
+                            <div class="charter1"></div>
+                            <div class="charter2"></div>
+                            <ul class="labels-for-chart">
+                                <li>Проведение тендера и заключение договора на выполнение обследования</li>
+                                <li>Выполнение обследования, подготовка и утверждение дефектного акта (дефектной ведомости)</li>
+                                <li>Утверждение задания на проектирование</li>
+                                <li>Проведение тендера и заключение договора на подготовку проектно-сметной документации</li>
+                                <li>Подготовка проектно-сметной документации</li>
+                                <li>Прохождение экспертизы проектно-сметной документации</li>
+                                <li>Проведение тендера и заключение договора на выполнение строительно-монтажных работ</li>
+                                <li>Выполнение строительно-монтажных работ</li>
+                            </ul>
+                            <ul class="chart-values">
+                                <li>январь</li>
+                                <li>февраль</li>
+                                <li>март</li>
+                                <li>апрель</li>
+                                <li>май</li>
+                                <li>июнь</li>
+                                <li>июль</li>
+                                <li>август</li>
+                                <li>сентябрь</li>
+                                <li>октябрь</li>
+                                <li>ноябрь</li>
+                                <li>декабрь</li>
+                            </ul>
+                            <ul class="chart-bars">
+                                <li data-duration="январь-февраль½" data-color="#b03532"></li>
+                                <li data-duration="февраль-июнь" data-color="#33a8a5"></li>
+                                <li data-duration="июнь-июль½" data-color="#30997a"></li>
+                                <li data-duration="июль½-август" data-color="#6a478f"></li>
+                                <li data-duration="август-октябрь" data-color="#da6f2b"></li>
+                                <li data-duration="октябрь-ноябрь" data-color="#3d8bb1"></li>
+                                <li data-duration="октябрь-декабрь½" data-color="#e03f3f"></li>
+                                <li data-duration="декабрь½-декабрь" data-color="#59a627"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+
+
+                    <b-table-simple class="mt-3" small sticky-header bordered style="min-height: 1000px">
                         <b-thead>
                             <b-tr>
                                 <b-th></b-th>
@@ -373,24 +416,23 @@ export default {
             docs: [],
             fromServer:{},
             svedenia2:[
-
-                    {
-                        canDelete:false,
-                        step:0,
-                        id_event:null,
-                        step_name:'Проведение тендера и заключение договора на выполнение обследования',
-                        date_event_start: null,
-                        date_event_end: null,
-                        cost_real:null,
-                        sum_bud_fin:null,
-                        fin_vnebud_ist:null,
-                        is_nessesary: null,
-                        done:false,
-                        doneExpert:false,
-                        comment:'',
-                        commentExpert:'',
-                        parent:true
-                    },
+                {
+                    canDelete:false,
+                    step:0,
+                    id_event:null,
+                    step_name:'Проведение тендера и заключение договора на выполнение обследования',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:true
+                },
                 {
                     canDelete:false,
                     step:0.1,
@@ -798,11 +840,69 @@ export default {
         await this.getStatus();
         this.user_id = this.getUser.organization.id;
         await this.getObject();
+        
+        await this.setChart()
+    
+        await window.addEventListener("load", this.createChart);
+        await window.addEventListener("resize", this.createChart);
 
         let actionElement = document.querySelector('#action');
         actionElement?.addEventListener('click', event => {this.actionHendler(event)})
     },
     methods: {
+        async setChart() {
+            console.log(this.svedenia.items)
+            // console.group('Svedenia: ')
+
+            const beginDate = [];
+
+            this.svedenia.items.forEach( item => {
+                beginDate.push(item.date_event_start)
+            })
+
+            console.log(beginDate)
+        },
+        createChart(e) {
+            const days = document.querySelectorAll(".chart-values li");
+            const tasks = document.querySelectorAll(".chart-bars li");
+            const daysArray = [...days];
+
+
+            tasks.forEach(el => {
+                const duration = el.dataset.duration.split("-");
+                const startDay = duration[0];
+
+                const endDay = duration[1];
+                let left = 0,
+                width = 0;
+
+                if (startDay.endsWith("½")) {
+                    const filteredArray = daysArray.filter(day => day.textContent == startDay.slice(0, -1));
+                    left = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth / 2;
+                } else {
+                    const filteredArray = daysArray.filter(day => day.textContent == startDay);
+                    left = filteredArray[0].offsetLeft;
+                }
+
+                if (endDay.endsWith("½")) {
+                    const filteredArray = daysArray.filter(day => day.textContent == endDay.slice(0, -1));
+                    width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth / 2 - left;
+                } else {
+                    const filteredArray = daysArray.filter(day => day.textContent == endDay);
+                    width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth - left;
+                }
+
+                // apply css
+                el.style.left = `${left - 40}px`;
+                el.style.width = `${width}px`;
+                el.style.height = '20px';
+                if (e.type == "load") {
+                    el.style.backgroundColor = el.dataset.color;
+                    el.style.opacity = 1;
+                }
+            });
+
+        },
         ...mapActions(['requestUser']),
         sendData(item){
             let data = new FormData();
@@ -922,7 +1022,7 @@ export default {
         getObject(){
             Axios.get(`/api/get-object/${this.obj_id}`).then(res=>{
                 this.fromServer = JSON.parse(res.data);
-                console.log(this.fromServer);
+                // console.log(this.fromServer.svedenia);
                 this.items = this.fromServer.object;
                 this.items.org_name = this.fromServer.organization.name;
                 this.docs = this.fromServer.docs;
@@ -944,6 +1044,7 @@ export default {
                         }
 
                     });
+
                     this.svedenia.items.push({
                         index:index+1,
                         step:this.svedenia.labels[index],
@@ -954,6 +1055,8 @@ export default {
                         sum_bud_fin:item.item.sum_bud_fin,
                         fin_vnebud_ist:item.item.fin_vnebud_ist,
                     })
+
+                    
                 });
 
 
@@ -1085,4 +1188,90 @@ export default {
     vertical-align: middle !important;
     text-align: center;
 }
+
+:root {
+    --divider: lightgrey;
+}
+.labels-for-chart {
+    z-index: 1;
+    width: 1090px;
+    margin-left: 5px;
+    position: absolute;
+    top: 87px;
+    left: 5px;
+}
+.labels-for-chart > li {
+    margin-top: 10px;
+    border-bottom: 1px solid grey;
+}
+.charter1 {
+    z-index: 1;
+    position: absolute;
+    top: 52px;
+    left: 5px;
+    height: 320px;
+    width: 600px;
+    background-color: white; 
+}
+.charter2 {
+    z-index: 1;
+    position: absolute;
+    top: 52px;
+    left: 530px;
+    height: 320px;
+    width: 200px;
+    background: linear-gradient(to right, white 60%, transparent 100%); 
+}
+ul {
+    padding-inline-start: 0px !important;
+    list-style: none;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+body {
+    background: var(--body);
+    font-size: 16px;
+    font-family: sans-serif;
+}
+.chart-wrapper {
+    max-width: 1000px;
+    padding: 0 10px;
+    margin: 0 auto;
+    margin-left: 700px;
+}
+.chart-wrapper .chart-values {
+    position: relative;
+    display: flex;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+.chart-wrapper .chart-values li {
+    flex: 1;
+    min-width: 80px;
+    text-align: center;
+}
+.chart-wrapper .chart-values li:not(:last-child) {
+    position: relative;
+}
+.chart-wrapper .chart-values li:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    height: 300px;
+    border-right: 1px solid var(--divider);
+}
+.chart-wrapper .chart-bars li {
+    position: relative;
+    color: var(--white);
+    margin-bottom: 15px;
+    font-size: 16px;
+    border-radius: 20px;
+    padding: 10px 20px;
+    width: 0;
+    opacity: 0;
+    transition: all 0.65s linear 0.2s;
+}
+
 </style>
