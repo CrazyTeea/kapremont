@@ -84,6 +84,7 @@ class ProgramObjectsController extends AppController
     public function actionSendEvent($id){
         $post = Yii::$app->request->post();
         $event = null;
+        $model_name='';
         if (isset($post['parent']) and filter_var($post['parent'],FILTER_VALIDATE_BOOLEAN)) {
             $event = ProgObjectsEvents::findOne(['id_object' => $id, 'step' => $post['step']]);
             if (!$event) {
@@ -91,18 +92,28 @@ class ProgramObjectsController extends AppController
                 $event->id_object = $id;
                 $event->step = $post['step'];
             }
-        }
+            $model_name=ProgObjectsEvents::class;
+        }else if (isset($post['parent']) and !filter_var($post['parent'],FILTER_VALIDATE_BOOLEAN)){
+            $event = ProgramObjectsEvents2::findOne(['id_object' => $id, 'step' => $post['step']]);
+            if (!$event) {
+                $event = new ProgramObjectsEvents2();
+                $event->id_object = $id;
+                $event->id_event = $post['id_event'];
+                $event->step = floatval($post['step']);
+            }
+            $model_name=ProgramObjectsEvents2::class;
+        }else return Json::encode(['success'=>false,'errors'=>['global'=>'Не предвиденная ошибка']]);
 
         $event->date_event_start = $post['date_event_start'];
         $event->date_event_end = $post['date_event_end'];
         $event->cost_real = floatval($post['cost_real']);
         $event->sum_bud_fin = floatval($post['sum_bud_fin']);
         $event->fin_vnebud_ist = floatval($post['fin_vnebud_ist']);
-        $event->done = $post['done'];
-        $event->doneExpert = $post['doneExpert'];
+        $event->done = filter_var($post['done'],FILTER_VALIDATE_BOOLEAN);
+        $event->doneExpert = filter_var($post['doneExpert'],FILTER_VALIDATE_BOOLEAN);
         $event->comment = $post['comment'];
         $event->commentExpert = $post['commentExpert'];
-        return Json::encode(['success'=>$event->save(),'errors'=>$event->getErrors()]);
+        return Json::encode(['success'=>$event->save(),'model'=>$model_name,'errors'=>$event->getErrors()]);
     }
 
     /**

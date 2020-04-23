@@ -9,6 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property int|null $id_event
+ * @property int|null $id_object
  * @property int|null $step
  * @property string|null $step_name
  * @property string|null $date_event_start
@@ -38,10 +39,10 @@ class ProgramObjectsEvents2 extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_event', 'step', 'is_nessesary', 'done', 'doneExpert'], 'integer'],
+            [['is_nessesary','id_object'], 'integer'],
             [['step_name', 'comment', 'commentExpert'], 'string'],
-            [['date_event_start', 'date_event_end'], 'safe'],
-            [['cost_real', 'sum_bud_fin', 'fin_vnebud_ist'], 'number'],
+            [['date_event_start','id_event',  'done', 'doneExpert', 'date_event_end'], 'safe'],
+            [['step', 'cost_real', 'sum_bud_fin', 'fin_vnebud_ist'], 'number'],
         ];
     }
 

@@ -172,6 +172,9 @@ class ProgramObjects extends \yii\db\ActiveRecord
     public function getSvedenia(){
         return $this->hasMany(ProgObjectsEvents::class,['id_object'=>'id']);
     }
+    public function getSvedenia2(){
+        return $this->hasMany(ProgramObjectsEvents2::class,['id_object'=>'id']);
+    }
 
     public function getAstatus()
     {
