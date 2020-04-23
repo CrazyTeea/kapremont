@@ -63,6 +63,7 @@ class m200423_145502_update_roles extends Migration
                 $rbac->assign($rbac->getPermission('dev_program'),$user->id);
                 print_r($role);
                 echo "\n";
+                //ss
             }
         }
     }
