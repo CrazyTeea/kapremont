@@ -98,8 +98,8 @@ const routes = [
     },
     {
         path: "/program/object/view/:id",
-        name: "ObjectsForKrestiane",
-        component: ObjectsForKrestiane
+        name: "ObjView",
+        component: ObjView
     },
     {
         path: "/organization/user-info/:id_org",

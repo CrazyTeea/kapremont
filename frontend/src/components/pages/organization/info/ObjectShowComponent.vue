@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-breadcrumb :items="
+        <b-breadcrumb v-can:root,mgsu,dep :items="
         [
              {
                 text:'Список организаций',
@@ -14,7 +14,25 @@
                 text:this.items.name,
             },
         ]"/>
+        <b-breadcrumb v-can:user :items="
+        [
+             {
+                text:'Главная',
+                href:'/'
+            },
+            {
+                text:'Программа модернизации',
+                href:`/program/view`
+            },
+            {
+                text:this.items.name,
+            },
+        ]"/>
         <h1 class="mt-3">{{ this.items.name }}</h1>
+        <div v-if="canChange">
+            <a :href="`/program/object/update/${this.items.id}`" class="btn btn-primary">Редактировать </a>
+            <a v-if="!this.items.status" :href="`/program/object/delete/${this.items.id}`" class="btn btn-danger">Удалить </a>
+        </div>
         <div class="d-flex justify-content-between align-items-center">
             <h5 class="vertical-horizontal-align">Текущий статус эксперта МОН: <label :class="`text-${status.variant}`">{{ status.label }}</label></h5>
             <h5 class="vertical-horizontal-align">Текущий статус ДЭП: <label :class="`text-${dep_status.color}`">{{ dep_status.label }}</label></h5>
@@ -39,7 +57,7 @@
             </b-dropdown>
         </div>
 
-        <v-comments :obj_id="obj_id" />
+        <v-comments v-if="this.items.status != 5" :obj_id="obj_id" />
 
         <div class="mt-3">
                 <div class="row">
@@ -133,208 +151,330 @@
             </b-tbody>
         </b-table-simple>
 
-        <b-card no-body class="mb-1">
-            <b-card-header header-tag="header" class="p-1" role="tab">
+
+
+        <div v-if="this.items.status == 5">
+            <b-card no-body class="mb-1">
+                <b-card-header header-tag="header" class="p-1" role="tab">
+                            <span class="toggle_button" v-b-toggle.accordion-real>
+                                <b-icon-gear-wide-connected />
+                                Реализация мероприятий</span
+                            >
+                </b-card-header>
+                <b-collapse id="accordion-real" accordion="my-accordion2" role="tabpanel">
+                    <b-card-body>
+
+                    </b-card-body>
+                </b-collapse>
+            </b-card>
+            <b-card no-body class="mb-1">
+                <b-card-header header-tag="header" class="p-1" role="tab">
+                            <span class="toggle_button" v-b-toggle.accordion-plan>
+                                <b-icon-gear-wide-connected />
+                                План-график мероприятий</span
+                            >
+                </b-card-header>
+                <b-collapse id="accordion-plan" accordion="my-accordion2" role="tabpanel">
+                    <b-card-body>
+                        <b-table-simple class="mt-3" small sticky-header bordered style="min-height: 1000px">
+                            <b-thead>
+                                <b-tr>
+                                    <b-th></b-th>
+                                    <b-th>Этап</b-th>
+                                    <b-th>Дата начала (план.)</b-th>
+                                    <b-th>Дата окончания (план.)</b-th>
+                                    <b-th>Фактическая Стоимость реализации (тыс.руб.)</b-th>
+                                    <b-th>Фактическая Сумма бюджетного финансирования на проведение капитального ремонта (тыс. руб.)</b-th>
+                                    <b-th>Фактическое Софинансирование из внебюджетных источников (тыс. руб.)</b-th>
+                                    <b-th>Отметка о завершении этапа </b-th>
+                                    <b-th>Комментарий (текстовое поле Заполняет ВУЗ)</b-th>
+                                    <b-th>Отметка Эксперта МОН (МГСУ) Принято / не принято</b-th>
+                                    <b-th>Комментарий эксперта МОН )</b-th>
+                                </b-tr>
+                            </b-thead>
+                            <b-tbody>
+                                <b-tr  v-for="(item,index) in svedenia2" :key="index" @change="sendData(item)">
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        {{item.step + 1}}
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <b-form-input v-if="item.canDelete" v-model="svedenia2[index].step_name" />
+                                        <span v-else>{{item.step_name}}</span>
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <b-form-input type="date" v-model="svedenia2[index].date_event_start" />
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <b-form-input type="date" v-model="svedenia2[index].date_event_end" />
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <b-form-input type="number" step=".01"  v-model="svedenia2[index].cost_real" />
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <b-form-input type="number" step=".01"  v-model="svedenia2[index].sum_bud_fin" />
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <b-form-input type="number" step=".01"  v-model="svedenia2[index].fin_vnebud_ist" />
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <b-form-checkbox v-model="svedenia2[index].done" />
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <b-form-input v-model="svedenia2[index].comment" />
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <b-form-checkbox v-model="svedenia2[index].doneExpert" />
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <b-form-input v-model="svedenia2[index].commentExpert" />
+                                    </b-td>
+                                    <div v-else>
+                                        <b-td>
+                                            <b-button variant="danger" @click="deleteRow(index)">Удалить</b-button>
+                                        </b-td>
+                                        <b-td >
+                                            <b-button variant="info" @click="addRow(index)">Добавить</b-button>
+                                        </b-td>
+                                    </div>
+
+                                </b-tr>
+
+                            </b-tbody>
+
+                        </b-table-simple>
+                    </b-card-body>
+                </b-collapse>
+            </b-card>
+            <v-comments :obj_id="obj_id" />
+            <b-card no-body class="mb-1">
+                <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-s>
                                 <b-icon-gear-wide-connected />
-                                План график
+                                График мероприятий
                             </span>
-            </b-card-header>
-            <b-collapse id="accordion-s" accordion="my-accordion" role="tabpanel" visible>
-                <b-card-body style="overflow: auto">
-                    <div class="wraper-for-chart" style="overflow-x: scroll">
-                        <div class="chart-wrapper">
-                            <div class="charter1"></div>
-                            <div class="charter2"></div>
-                            <ul class="labels-for-chart">
-                                <li>Проведение тендера и заключение договора на выполнение обследования</li>
-                                <li>Выполнение обследования, подготовка и утверждение дефектного акта (дефектной ведомости)</li>
-                                <li>Утверждение задания на проектирование</li>
-                                <li>Проведение тендера и заключение договора на подготовку проектно-сметной документации</li>
-                                <li>Подготовка проектно-сметной документации</li>
-                                <li>Прохождение экспертизы проектно-сметной документации</li>
-                                <li>Проведение тендера и заключение договора на выполнение строительно-монтажных работ</li>
-                                <li>Выполнение строительно-монтажных работ</li>
-                            </ul>
-                            <ul class="chart-values">
-                                <li>январь</li>
-                                <li>февраль</li>
-                                <li>март</li>
-                                <li>апрель</li>
-                                <li>май</li>
-                                <li>июнь</li>
-                                <li>июль</li>
-                                <li>август</li>
-                                <li>сентябрь</li>
-                                <li>октябрь</li>
-                                <li>ноябрь</li>
-                                <li>декабрь</li>
-                            </ul>
-                            <ul class="chart-bars">
-                                <li data-duration="январь-февраль½" data-color="#b03532"></li>
-                                <li data-duration="февраль-июнь" data-color="#33a8a5"></li>
-                                <li data-duration="июнь-июль½" data-color="#30997a"></li>
-                                <li data-duration="июль½-август" data-color="#6a478f"></li>
-                                <li data-duration="август-октябрь" data-color="#da6f2b"></li>
-                                <li data-duration="октябрь-ноябрь" data-color="#3d8bb1"></li>
-                                <li data-duration="октябрь-декабрь½" data-color="#e03f3f"></li>
-                                <li data-duration="декабрь½-декабрь" data-color="#59a627"></li>
-                            </ul>
+                </b-card-header>
+                <b-collapse id="accordion-s" accordion="my-accordion2" role="tabpanel" visible>
+                    <b-card-body style="overflow: auto">
+                        <div class="wraper-for-chart" style="overflow-x: scroll">
+                            <div class="chart-wrapper">
+                                <div class="charter1"></div>
+                                <div class="charter2"></div>
+                                <ul class="labels-for-chart">
+                                    <li>Проведение тендера и заключение договора на выполнение обследования</li>
+                                    <li>Выполнение обследования, подготовка и утверждение дефектного акта (дефектной ведомости)</li>
+                                    <li>Утверждение задания на проектирование</li>
+                                    <li>Проведение тендера и заключение договора на подготовку проектно-сметной документации</li>
+                                    <li>Подготовка проектно-сметной документации</li>
+                                    <li>Прохождение экспертизы проектно-сметной документации</li>
+                                    <li>Проведение тендера и заключение договора на выполнение строительно-монтажных работ</li>
+                                    <li>Выполнение строительно-монтажных работ</li>
+                                </ul>
+                                <ul class="chart-values">
+                                    <li>январь</li>
+                                    <li>февраль</li>
+                                    <li>март</li>
+                                    <li>апрель</li>
+                                    <li>май</li>
+                                    <li>июнь</li>
+                                    <li>июль</li>
+                                    <li>август</li>
+                                    <li>сентябрь</li>
+                                    <li>октябрь</li>
+                                    <li>ноябрь</li>
+                                    <li>декабрь</li>
+                                </ul>
+                                <ul class="chart-bars">
+                                    <li data-duration="январь-февраль½" data-color="#b03532"></li>
+                                    <li data-duration="февраль-июнь" data-color="#33a8a5"></li>
+                                    <li data-duration="июнь-июль½" data-color="#30997a"></li>
+                                    <li data-duration="июль½-август" data-color="#6a478f"></li>
+                                    <li data-duration="август-октябрь" data-color="#da6f2b"></li>
+                                    <li data-duration="октябрь-ноябрь" data-color="#3d8bb1"></li>
+                                    <li data-duration="октябрь-декабрь½" data-color="#e03f3f"></li>
+                                    <li data-duration="декабрь½-декабрь" data-color="#59a627"></li>
+                                </ul>
+                            </div>
                         </div>
-                    </div>
-                    
 
-
-                    <b-table-simple class="mt-3" small sticky-header bordered style="min-height: 1000px">
-                        <b-thead>
-                            <b-tr>
-                                <b-th></b-th>
-                                <b-th>Этап</b-th>
-                                <b-th>Дата начала (план.)</b-th>
-                                <b-th>Дата окончания (план.)</b-th>
-                                <b-th>Фактическая Стоимость реализации (тыс.руб.)</b-th>
-                                <b-th>Фактическая Сумма бюджетного финансирования на проведение капитального ремонта (тыс. руб.)</b-th>
-                                <b-th>Фактическое Софинансирование из внебюджетных источников (тыс. руб.)</b-th>
-                                <b-th>Отметка о завершении этапа </b-th>
-                                <b-th>Комментарий (текстовое поле Заполняет ВУЗ)</b-th>
-                                <b-th>Отметка Эксперта МОН (МГСУ) Принято / не принято</b-th>
-                                <b-th>Комментарий эксперта МОН )</b-th>
-                            </b-tr>
-                        </b-thead>
-                        <b-tbody>
-                            <b-tr  v-for="(item,index) in svedenia2" :key="index" @change="sendData(item)">
-                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                    {{item.step + 1}}
-                                </b-td>
-                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                    <b-form-input v-if="item.canDelete" v-model="svedenia2[index].step_name" />
-                                    <span v-else>{{item.step_name}}</span>
-                                </b-td>
-                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                    <b-form-input type="date" v-model="svedenia2[index].date_event_start" />
-                                </b-td>
-                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                    <b-form-input type="date" v-model="svedenia2[index].date_event_end" />
-                                </b-td>
-                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                    <b-form-input type="number" step=".01"  v-model="svedenia2[index].cost_real" />
-                                </b-td>
-                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                    <b-form-input type="number" step=".01"  v-model="svedenia2[index].sum_bud_fin" />
-                                </b-td>
-                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                    <b-form-input type="number" step=".01"  v-model="svedenia2[index].fin_vnebud_ist" />
-                                </b-td>
-                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                    <b-form-checkbox v-model="svedenia2[index].done" />
-                                </b-td>
-                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                    <b-form-input v-model="svedenia2[index].comment" />
-                                </b-td>
-                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                    <b-form-checkbox v-model="svedenia2[index].doneExpert" />
-                                </b-td>
-                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                    <b-form-input v-model="svedenia2[index].commentExpert" />
-                                </b-td>
-                                <div v-else>
-                                    <b-td>
-                                        <b-button variant="danger" @click="deleteRow(index)">Удалить</b-button>
-                                    </b-td>
-                                    <b-td >
-                                        <b-button variant="info" @click="addRow(index)">Добавить</b-button>
-                                    </b-td>
-                                </div>
-
-                            </b-tr>
-
-                        </b-tbody>
-
-                    </b-table-simple>
-                </b-card-body>
-            </b-collapse>
-        </b-card>
-
-        <b-card no-body class="mb-1">
-            <b-card-header header-tag="header" class="p-1" role="tab">
+                    </b-card-body>
+                </b-collapse>
+            </b-card>
+            <b-card no-body class="mb-1">
+                <b-card-header header-tag="header" class="p-1" role="tab">
+                            <span class="toggle_button" v-b-toggle.accordion-archive>
+                                <b-icon-gear-wide-connected />
+                                Архив
+                            </span>
+                </b-card-header>
+                <b-collapse id="accordion-archive" accordion="my-accordion2" role="tabpanel">
+                    <b-card-body>
+                        <b-card no-body class="mb-1">
+                            <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-2>
                                 <b-icon-gear-wide-connected />
                                 Сведения о планируемых мероприятиях</span
                             >
-            </b-card-header>
-            <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
-                <b-card-body>
-                    <b-table bordered :fields="svedenia.fields" :items="svedenia.items" />
-                </b-card-body>
-            </b-collapse>
-        </b-card>
-        <b-card no-body class="mb-1">
-            <b-card-header header-tag="header" class="p-1" role="tab">
+                            </b-card-header>
+                            <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
+                                <b-card-body>
+                                    <b-table bordered :fields="svedenia.fields" :items="svedenia.items" />
+                                </b-card-body>
+                            </b-collapse>
+                        </b-card>
+                        <b-card no-body class="mb-1">
+                            <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-3>
                                 <b-icon-gear-wide-connected />
                                 Обоснование необходимости (целесообразности) планируемых мероприятий</span
                             >
-            </b-card-header>
-            <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel" visible>
-                <b-card-body>
-                    <b-table bordered :fields="necessary.fields.one" :items="necessary.items.one" />
-                    <b-table bordered :fields="necessary.fields.two" :items="necessary.items.two" />
-                </b-card-body>
-            </b-collapse>
-        </b-card>
-        <b-card no-body class="mb-1">
-            <b-card-header header-tag="header" class="p-1" role="tab">
+                            </b-card-header>
+                            <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
+                                <b-card-body>
+                                    <b-table bordered :fields="necessary.fields.one" :items="necessary.items.one" />
+                                    <b-table bordered :fields="necessary.fields.two" :items="necessary.items.two" />
+                                </b-card-body>
+                            </b-collapse>
+                        </b-card>
+                        <b-card no-body class="mb-1">
+                            <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-4>
                                 <b-icon-gear-wide-connected />
                                 Ожидаемые результаты</span
                             >
-            </b-card-header>
-            <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
-                <b-card-body>
-                    <b-table bordered :fields="waited.fields" :items="waited.items" />
-                </b-card-body>
-            </b-collapse>
-        </b-card>
-        <b-card no-body class="mb-1">
-            <b-card-header header-tag="header" class="p-1" role="tab">
+                            </b-card-header>
+                            <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
+                                <b-card-body>
+                                    <b-table bordered :fields="waited.fields" :items="waited.items" />
+                                </b-card-body>
+                            </b-collapse>
+                        </b-card>
+                        <b-card no-body class="mb-1">
+                            <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-5>
                                 <b-icon-gear-wide-connected />
                                 Прогнозируемые риски</span
                             >
-            </b-card-header>
-            <b-collapse id="accordion-5" accordion="my-accordion" role="tabpanel">
+                            </b-card-header>
+                            <b-collapse id="accordion-5" accordion="my-accordion" role="tabpanel">
+                                <b-card-body>
+                                    <b-table bordered :fields="risks.fields" :items="risks.items" />
+                                </b-card-body>
+                            </b-collapse>
+                        </b-card>
+
+                        <b-card no-body>
+                            <b-card-header header-tag="header" class="p-1" role="tab">
+                                <span> <b-icon icon="document-text" scale="1.5" class="mr-2 ml-1"></b-icon>Загруженные документы</span>
+                            </b-card-header>
+                            <b-card-body>
+                                <div  v-if="docs.length">
+                                    <table class="table table-bordered">
+                                        <thead>
+                                        <tr>
+                                            <th>Наименование</th>
+                                            <th>Файл</th>
+                                        </tr>
+                                        </thead>
+
+                                        <tr v-for="(doc, index) in docs" :key="index">
+                                            <td>{{doc.label}}</td>
+                                            <td><a :href="`/program/object/download-doc/${obj_id}?id=${doc.id}`">{{doc.name }}.pdf</a></td>
+                                        </tr>
+                                    </table>
+                                    <a class="btn btn-danger" target="_blank" :href="`/program/object/zip/${obj_id}`">Скачать архивом</a>
+                                </div>
+                                <div v-else>
+                                    <label>Документы отсутствуют</label>
+                                </div>
+                            </b-card-body>
+                        </b-card>
+                    </b-card-body>
+                </b-collapse>
+            </b-card>
+        </div>
+        <div v-else>
+            <b-card no-body class="mb-1">
+                <b-card-header header-tag="header" class="p-1" role="tab">
+                            <span class="toggle_button" v-b-toggle.accordion-2>
+                                <b-icon-gear-wide-connected />
+                                Сведения о планируемых мероприятиях</span
+                            >
+                </b-card-header>
+                <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
+                    <b-card-body>
+                        <b-table bordered :fields="svedenia.fields" :items="svedenia.items" />
+                    </b-card-body>
+                </b-collapse>
+            </b-card>
+            <b-card no-body class="mb-1">
+                <b-card-header header-tag="header" class="p-1" role="tab">
+                            <span class="toggle_button" v-b-toggle.accordion-3>
+                                <b-icon-gear-wide-connected />
+                                Обоснование необходимости (целесообразности) планируемых мероприятий</span
+                            >
+                </b-card-header>
+                <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel" >
+                    <b-card-body>
+                        <b-table bordered :fields="necessary.fields.one" :items="necessary.items.one" />
+                        <b-table bordered :fields="necessary.fields.two" :items="necessary.items.two" />
+                    </b-card-body>
+                </b-collapse>
+            </b-card>
+            <b-card no-body class="mb-1">
+                <b-card-header header-tag="header" class="p-1" role="tab">
+                            <span class="toggle_button" v-b-toggle.accordion-4>
+                                <b-icon-gear-wide-connected />
+                                Ожидаемые результаты</span
+                            >
+                </b-card-header>
+                <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
+                    <b-card-body>
+                        <b-table bordered :fields="waited.fields" :items="waited.items" />
+                    </b-card-body>
+                </b-collapse>
+            </b-card>
+            <b-card no-body class="mb-1">
+                <b-card-header header-tag="header" class="p-1" role="tab">
+                            <span class="toggle_button" v-b-toggle.accordion-5>
+                                <b-icon-gear-wide-connected />
+                                Прогнозируемые риски</span
+                            >
+                </b-card-header>
+                <b-collapse id="accordion-5" accordion="my-accordion" role="tabpanel">
+                    <b-card-body>
+                        <b-table bordered :fields="risks.fields" :items="risks.items" />
+                    </b-card-body>
+                </b-collapse>
+            </b-card>
+
+            <b-card no-body>
+                <b-card-header header-tag="header" class="p-1" role="tab">
+                    <span> <b-icon icon="document-text" scale="1.5" class="mr-2 ml-1"></b-icon>Загруженные документы</span>
+                </b-card-header>
                 <b-card-body>
-                    <b-table bordered :fields="risks.fields" :items="risks.items" />
+                    <div  v-if="docs.length">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>Наименование</th>
+                                <th>Файл</th>
+                            </tr>
+                            </thead>
+
+                            <tr v-for="(doc, index) in docs" :key="index">
+                                <td>{{doc.label}}</td>
+                                <td><a :href="`/program/object/download-doc/${obj_id}?id=${doc.id}`">{{doc.name }}.pdf</a></td>
+                            </tr>
+                        </table>
+                        <a class="btn btn-danger" target="_blank" :href="`/program/object/zip/${obj_id}`">Скачать архивом</a>
+                    </div>
+                    <div v-else>
+                        <label>Документы отсутствуют</label>
+                    </div>
                 </b-card-body>
-            </b-collapse>
-        </b-card>
+            </b-card>
+        </div>
 
-        <b-card no-body>
-            <b-card-header header-tag="header" class="p-1" role="tab">
-                <span> <b-icon icon="document-text" scale="1.5" class="mr-2 ml-1"></b-icon>Загруженные документы</span>
-            </b-card-header>
-            <b-card-body>
-                <div  v-if="docs.length">
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th>Наименование</th>
-                            <th>Файл</th>
-                        </tr>
-                        </thead>
-
-                        <tr v-for="(doc, index) in docs" :key="index">
-                            <td>{{doc.label}}</td>
-                            <td><a :href="`/program/object/download-doc/${obj_id}?id=${doc.id}`">{{doc.name }}.pdf</a></td>
-                        </tr>
-                    </table>
-                    <a class="btn btn-danger" target="_blank" :href="`/program/object/zip/${obj_id}`">Скачать архивом</a>
-                </div>
-                <div v-else>
-                    <label>Документы отсутствуют</label>
-                </div>
-            </b-card-body>
-        </b-card>
 
     </div>
 </template>
@@ -392,6 +532,7 @@ export default {
     data() {
         return {
             bannerInfo: [],
+            canChange: window.canChange || false,
             status: {
                 label: '',
                 variant: ''
@@ -830,6 +971,7 @@ export default {
                 items:[]
             }
         };
+
     },
     computed: {
         ...mapGetters(['getUser']),
@@ -1069,7 +1211,6 @@ export default {
                         }
                     });
                 });
-
 
                 this.svedenia.items.push({
                     step:'Готово',
