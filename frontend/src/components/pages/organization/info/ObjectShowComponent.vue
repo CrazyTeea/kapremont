@@ -1034,30 +1034,40 @@ export default {
                     v+=Number(item.sum_bud_fin);
                     b+=Number(item.fin_vnebud_ist);
                     this.svedenia2.forEach(item2=>{
-                        if (item2.step == item.item.step) {
-                            item2.date_event_start = item.item.date_event_start;
-                            item2.date_event_end = item.item.date_event_end;
-                            item2.cost_real = item.item.cost_real;
-                            item2.sum_bud_fin = item.item.sum_bud_fin;
-                            item2.fin_vnebud_ist = item.item.fin_vnebud_ist;
-                            item2.id_event = item.item.id;
-
+                        if (item2.step == item.step) {
+                            item2.date_event_start = item.date_event_start;
+                            item2.date_event_end = item.date_event_end;
+                            item2.cost_real = item.cost_real;
+                            item2.sum_bud_fin = item.sum_bud_fin;
+                            item2.fin_vnebud_ist = item.fin_vnebud_ist;
+                            item2.id_event = item.id;
                         }
-
                     });
-
                     this.svedenia.items.push({
                         index:index+1,
                         step:this.svedenia.labels[index],
-                        is_nessesary:item.item.is_nessesary ? 'Да' : 'Нет',
-                        date_event_start:item.item.date_event_start,
-                        date_event_end:item.item.date_event_end,
-                        cost_real:item.item.cost_real,
-                        sum_bud_fin:item.item.sum_bud_fin,
-                        fin_vnebud_ist:item.item.fin_vnebud_ist,
+                        is_nessesary:item.is_nessesary ? 'Да' : 'Нет',
+                        date_event_start:item.date_event_start,
+                        date_event_end:item.date_event_end,
+                        cost_real:item.cost_real,
+                        sum_bud_fin:item.sum_bud_fin,
+                        fin_vnebud_ist:item.fin_vnebud_ist,
                     })
-
-                    
+                });
+                this.fromServer.svedenia2.forEach((item,index)=>{
+                    c+=Number(item.cost_real);
+                    v+=Number(item.sum_bud_fin);
+                    b+=Number(item.fin_vnebud_ist);
+                    this.svedenia2.forEach(item2=>{
+                        if (this.isFloat(item2.step) && item2.step == item.step) {
+                            item2.date_event_start = item.date_event_start;
+                            item2.date_event_end = item.date_event_end;
+                            item2.cost_real = item.cost_real;
+                            item2.sum_bud_fin = item.sum_bud_fin;
+                            item2.fin_vnebud_ist = item.fin_vnebud_ist;
+                            item2.id_event = item.id_event;
+                        }
+                    });
                 });
 
 

@@ -16,6 +16,10 @@ use Yii;
  * @property float|null $sum_bud_fin
  * @property float|null $fin_vnebud_ist
  * @property boolean $is_nessesary
+ * @property int|null $done
+ * @property int|null $doneExpert
+ * @property string|null $comment
+ * @property string|null $commentExpert
  */
 class ProgObjectsEvents extends BaseMultiModel
 {
@@ -37,10 +41,10 @@ class ProgObjectsEvents extends BaseMultiModel
     public function rules()
     {
         return [
-            [['step', 'id_object'], 'required'],
-            [['step', 'id_object','is_nessesary'], 'integer'],
+            [['is_nessesary', 'done', 'doneExpert','id_object'], 'integer'],
+            [['step_name', 'comment', 'commentExpert'], 'string'],
             [['date_event_start', 'date_event_end'], 'safe'],
-            [['cost_real', 'sum_bud_fin', 'fin_vnebud_ist'], 'number'],
+            [['step', 'cost_real', 'sum_bud_fin', 'fin_vnebud_ist'], 'number'],
         ];
     }
     public function getObject(){
