@@ -135,6 +135,128 @@
 
         <b-card no-body class="mb-1">
             <b-card-header header-tag="header" class="p-1" role="tab">
+                            <span class="toggle_button" v-b-toggle.accordion-s>
+                                <b-icon-gear-wide-connected />
+                                План график
+                            </span>
+            </b-card-header>
+            <b-collapse id="accordion-s" accordion="my-accordion" role="tabpanel" visible>
+                <b-card-body style="overflow: auto">
+                    <div class="wraper-for-chart" style="overflow-x: scroll">
+                        <div class="chart-wrapper">
+                            <div class="charter1"></div>
+                            <div class="charter2"></div>
+                            <ul class="labels-for-chart">
+                                <li>Проведение тендера и заключение договора на выполнение обследования</li>
+                                <li>Выполнение обследования, подготовка и утверждение дефектного акта (дефектной ведомости)</li>
+                                <li>Утверждение задания на проектирование</li>
+                                <li>Проведение тендера и заключение договора на подготовку проектно-сметной документации</li>
+                                <li>Подготовка проектно-сметной документации</li>
+                                <li>Прохождение экспертизы проектно-сметной документации</li>
+                                <li>Проведение тендера и заключение договора на выполнение строительно-монтажных работ</li>
+                                <li>Выполнение строительно-монтажных работ</li>
+                            </ul>
+                            <ul class="chart-values">
+                                <li>январь</li>
+                                <li>февраль</li>
+                                <li>март</li>
+                                <li>апрель</li>
+                                <li>май</li>
+                                <li>июнь</li>
+                                <li>июль</li>
+                                <li>август</li>
+                                <li>сентябрь</li>
+                                <li>октябрь</li>
+                                <li>ноябрь</li>
+                                <li>декабрь</li>
+                            </ul>
+                            <ul class="chart-bars">
+                                <li data-duration="январь-февраль½" data-color="#b03532"></li>
+                                <li data-duration="февраль-июнь" data-color="#33a8a5"></li>
+                                <li data-duration="июнь-июль½" data-color="#30997a"></li>
+                                <li data-duration="июль½-август" data-color="#6a478f"></li>
+                                <li data-duration="август-октябрь" data-color="#da6f2b"></li>
+                                <li data-duration="октябрь-ноябрь" data-color="#3d8bb1"></li>
+                                <li data-duration="октябрь-декабрь½" data-color="#e03f3f"></li>
+                                <li data-duration="декабрь½-декабрь" data-color="#59a627"></li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+
+
+                    <b-table-simple class="mt-3" small sticky-header bordered style="min-height: 1000px">
+                        <b-thead>
+                            <b-tr>
+                                <b-th></b-th>
+                                <b-th>Этап</b-th>
+                                <b-th>Дата начала (план.)</b-th>
+                                <b-th>Дата окончания (план.)</b-th>
+                                <b-th>Фактическая Стоимость реализации (тыс.руб.)</b-th>
+                                <b-th>Фактическая Сумма бюджетного финансирования на проведение капитального ремонта (тыс. руб.)</b-th>
+                                <b-th>Фактическое Софинансирование из внебюджетных источников (тыс. руб.)</b-th>
+                                <b-th>Отметка о завершении этапа </b-th>
+                                <b-th>Комментарий (текстовое поле Заполняет ВУЗ)</b-th>
+                                <b-th>Отметка Эксперта МОН (МГСУ) Принято / не принято</b-th>
+                                <b-th>Комментарий эксперта МОН )</b-th>
+                            </b-tr>
+                        </b-thead>
+                        <b-tbody>
+                            <b-tr  v-for="(item,index) in svedenia2" :key="index" @change="sendData(item)">
+                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    {{item.step + 1}} {{item.id_event}}
+                                </b-td>
+                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-form-input v-if="item.canDelete" v-model="svedenia2[index].step_name" />
+                                    <span v-else>{{item.step_name}}</span>
+                                </b-td>
+                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-form-input type="date" v-model="svedenia2[index].date_event_start" />
+                                </b-td>
+                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-form-input type="date" v-model="svedenia2[index].date_event_end" />
+                                </b-td>
+                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-form-input type="number" step=".01"  v-model="svedenia2[index].cost_real" />
+                                </b-td>
+                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-form-input type="number" step=".01"  v-model="svedenia2[index].sum_bud_fin" />
+                                </b-td>
+                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-form-input type="number" step=".01"  v-model="svedenia2[index].fin_vnebud_ist" />
+                                </b-td>
+                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-form-checkbox v-model="svedenia2[index].done" />
+                                </b-td>
+                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-form-input v-model="svedenia2[index].comment" />
+                                </b-td>
+                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-form-checkbox v-model="svedenia2[index].doneExpert" />
+                                </b-td>
+                                <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-form-input v-model="svedenia2[index].commentExpert" />
+                                </b-td>
+                                <div v-else>
+                                    <b-td>
+                                        <b-button variant="danger" @click="deleteRow(index)">Удалить</b-button>
+                                    </b-td>
+                                    <b-td >
+                                        <b-button variant="info" @click="addRow(index)">Добавить</b-button>
+                                    </b-td>
+                                </div>
+
+                            </b-tr>
+
+                        </b-tbody>
+
+                    </b-table-simple>
+                </b-card-body>
+            </b-collapse>
+        </b-card>
+
+        <b-card no-body class="mb-1">
+            <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-2>
                                 <b-icon-gear-wide-connected />
                                 Сведения о планируемых мероприятиях</span
@@ -230,11 +352,16 @@ import {
     BTableSimple,
     BTr,
     BTh,
+    BTd,
+    BButton,
+    BFormInput,
+    BThead,
     BTbody,
     BDropdown,
     BDropdownItem,
     BTable,
     BBreadcrumb,
+    BFormCheckbox,
     VBToggle,
 } from 'bootstrap-vue'
 export default {
@@ -249,13 +376,18 @@ export default {
         BTableSimple,
         BTr,
         BTh,
+        BThead,
         BTbody,
         BDropdown,
         BDropdownItem,
         BTable,
         BCard,
+        BButton,
         BCardHeader,
+        BFormCheckbox,
         BCardBody,
+        BTd,
+        BFormInput
     },
     data() {
         return {
@@ -283,6 +415,322 @@ export default {
             user_id: null,
             docs: [],
             fromServer:{},
+            svedenia2:[
+                {
+                    canDelete:false,
+                    step:0,
+                    id_event:null,
+                    step_name:'Проведение тендера и заключение договора на выполнение обследования',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:true
+                },
+                {
+                    canDelete:false,
+                    step:0.1,
+                    id_event:null,
+                    step_name:'Внесение пользователем закупки на обследование объекта в план закупок ',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:false
+                },
+                {
+                    canDelete:false,
+                    step:0.2,
+                    id_event:null,
+                    step_name:'Объявление пользователем аукциона на обследование объекта',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:false
+                },
+                {
+                    canDelete:false,
+                    step:0.3,
+                    id_event:null,
+                    step_name:'Определение подрядчика по результату аукциона',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:false
+                },
+                {
+                    canDelete:false,
+                    step:0.4,
+                    id_event:null,
+                    step_name:'Заключение договора с подрядчиком',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:false
+                },
+                {
+                    canDelete:false,
+                    button:true,
+                    button_name:'Добавить'
+                },
+                {
+                    canDelete:false,
+                    step:1,
+                    id_event:null,
+                    step_name:'Выполнение обследования, подготовка и утверждение дефектного акта (дефектной ведомости). ',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:true
+                },
+                {
+                    canDelete:false,
+                    button:true,
+                    button_name:'Добавить'
+                },
+                {
+                    canDelete:false,
+                    step:2,
+                    id_event:null,
+                    step_name:'Утверждение задания на проектирование ',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:true
+                },
+                {
+                    canDelete:false,
+                    button:true,
+                    button_name:'Добавить'
+                },
+                {
+                    canDelete:false,
+                    step:3,
+                    id_event:null,
+                    step_name:'Проведение тендера и заключение договора на подготовку проектно-сметной документации.',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:true
+                },
+                {
+                    canDelete:false,
+                    step:3.1,
+                    id_event:null,
+                    step_name:'Внесение пользователем закупки на обследование объекта в план закупок ',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:false
+                },
+                {
+                    canDelete:false,
+                    step:3.2,
+                    id_event:null,
+                    step_name:'Объявление пользователем аукциона на обследование объекта',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:false
+                },
+                {
+                    canDelete:false,
+                    step:3.3,
+                    id_event:null,
+                    step_name:'Определение подрядчика по результату аукциона',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:false
+                },
+                {
+                    canDelete:false,
+                    step:3.4,
+                    id_event:null,
+                    step_name:'Заключение договора с подрядчиком',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:false
+                },
+                {
+                    canDelete:false,
+                    button:true,
+                    button_name:'Добавить'
+                },
+                {
+                    canDelete:false,
+                    step:4,
+                    id_event:null,
+                    step_name:'Подготовка проектно-сметной документации.',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:true
+                },
+                {
+                    canDelete:false,
+                    button:true,
+                    button_name:'Добавить'
+                },
+                {
+                    canDelete:false,
+                    step:5,
+                    id_event:null,
+                    step_name:'Прохождение экспертизы проектно-сметной документации.',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:true
+                },
+                {
+                    canDelete:false,
+                    button:true,
+                    button_name:'Добавить'
+                },
+                {
+                    canDelete:false,
+                    step:6,
+                    id_event:null,
+                    step_name:'Проведение тендера и заключение договора на выполнение строительно-монтажных работ.',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:true
+                },
+                {
+                    canDelete:false,
+                    button:true,
+                    button_name:'Добавить'
+                },
+                {
+                    canDelete:false,
+                    step:8,
+                    id_event:null,
+                    step_name:'Выполнение строительно-монтажных работ.',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:true
+                },
+                {
+                    canDelete:false,
+                    button:true,
+                    button_name:'Добавить'
+                }
+
+
+            ],
             svedenia: {
                 labels: [
                     'Проведение тендера и заключение договора на выполнение обследования',
@@ -392,11 +840,104 @@ export default {
         await this.getStatus();
         this.user_id = this.getUser.organization.id;
         await this.getObject();
+        
+        await this.setChart()
+    
+        await window.addEventListener("load", this.createChart);
+        await window.addEventListener("resize", this.createChart);
 
         let actionElement = document.querySelector('#action');
         actionElement?.addEventListener('click', event => {this.actionHendler(event)})
     },
     methods: {
+        async setChart() {
+            console.log(this.svedenia.items)
+            // console.group('Svedenia: ')
+
+            const beginDate = [];
+
+            this.svedenia.items.forEach( item => {
+                beginDate.push(item.date_event_start)
+            })
+
+            console.log(beginDate)
+        },
+        createChart(e) {
+            const days = document.querySelectorAll(".chart-values li");
+            const tasks = document.querySelectorAll(".chart-bars li");
+            const daysArray = [...days];
+
+
+            tasks.forEach(el => {
+                const duration = el.dataset.duration.split("-");
+                const startDay = duration[0];
+
+                const endDay = duration[1];
+                let left = 0,
+                width = 0;
+
+                if (startDay.endsWith("½")) {
+                    const filteredArray = daysArray.filter(day => day.textContent == startDay.slice(0, -1));
+                    left = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth / 2;
+                } else {
+                    const filteredArray = daysArray.filter(day => day.textContent == startDay);
+                    left = filteredArray[0].offsetLeft;
+                }
+
+                if (endDay.endsWith("½")) {
+                    const filteredArray = daysArray.filter(day => day.textContent == endDay.slice(0, -1));
+                    width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth / 2 - left;
+                } else {
+                    const filteredArray = daysArray.filter(day => day.textContent == endDay);
+                    width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth - left;
+                }
+
+                // apply css
+                el.style.left = `${left - 40}px`;
+                el.style.width = `${width}px`;
+                el.style.height = '20px';
+                if (e.type == "load") {
+                    el.style.backgroundColor = el.dataset.color;
+                    el.style.opacity = 1;
+                }
+            });
+
+        },
+        ...mapActions(['requestUser']),
+        sendData(item){
+            let data = new FormData();
+            Object.keys(item).forEach(key=>{
+                data.append(key,item[key]);
+            })
+          Axios.post(`/program/object/send-event/${this.obj_id}`,data,{
+              headers: {
+                  "X-CSRF-Token": this.csrf
+              }
+          }).then(response=>console.log(response.data))
+        },
+        addRow(index,toIndex = false){
+            this.svedenia2.splice(index,0,{
+                step:this.svedenia2[index-1].step+0.1 ,
+                id_event:null,
+                step_name:'',
+                date_event_start: null,
+                date_event_end: null,
+                cost_real:null,
+                sum_bud_fin:null,
+                fin_vnebud_ist:null,
+                is_nessesary: null,
+                done:false,
+                doneExpert:false,
+                comment:'',
+                commentExpert:'',
+                parent:false,
+                canDelete:true,
+            });
+        },
+        deleteRow(index){
+            if (this.svedenia2[index-1].canDelete)
+                this.svedenia2.splice(index-1,1);
+        },
         actionHendler(event) {
             event.preventDefault();
             if(document.querySelector(`#user_${window.currentUser}`)) {
@@ -418,7 +959,6 @@ export default {
         resetBanners() {
             this.bannerInfo.pop();
         },
-        ...mapActions(['requestUser']),
         getEl(arr,index){
             let el = null;
             arr.forEach(item=>{
@@ -478,9 +1018,11 @@ export default {
                 this.status.variant = color;
             })
         },
+        isFloat(x) { return !!(x % 1); },
         getObject(){
             Axios.get(`/api/get-object/${this.obj_id}`).then(res=>{
                 this.fromServer = JSON.parse(res.data);
+                // console.log(this.fromServer.svedenia);
                 this.items = this.fromServer.object;
                 this.items.org_name = this.fromServer.organization.name;
                 this.docs = this.fromServer.docs;
@@ -491,17 +1033,39 @@ export default {
                     c+=Number(item.cost_real);
                     v+=Number(item.sum_bud_fin);
                     b+=Number(item.fin_vnebud_ist);
+                    this.svedenia2.forEach(item2=>{
+                        if (item2.step == item.item.step) {
+                            item2.date_event_start = item.item.date_event_start;
+                            item2.date_event_end = item.item.date_event_end;
+                            item2.cost_real = item.item.cost_real;
+                            item2.sum_bud_fin = item.item.sum_bud_fin;
+                            item2.fin_vnebud_ist = item.item.fin_vnebud_ist;
+                            item2.id_event = item.item.id;
+
+                            item2.svedenia2.forEach(kek=>{
+                                let el = this.svedenia2.find(l => l.step == kek.step)
+
+                            })
+
+                        }
+
+                    });
+
                     this.svedenia.items.push({
                         index:index+1,
                         step:this.svedenia.labels[index],
-                        is_nessesary:item.is_nessesary ? 'Да' : 'Нет',
-                        date_event_start:item.date_event_start,
-                        date_event_end:item.date_event_end,
-                        cost_real:item.cost_real,
-                        sum_bud_fin:item.sum_bud_fin,
-                        fin_vnebud_ist:item.fin_vnebud_ist,
+                        is_nessesary:item.item.is_nessesary ? 'Да' : 'Нет',
+                        date_event_start:item.item.date_event_start,
+                        date_event_end:item.item.date_event_end,
+                        cost_real:item.item.cost_real,
+                        sum_bud_fin:item.item.sum_bud_fin,
+                        fin_vnebud_ist:item.item.fin_vnebud_ist,
                     })
+
+                    
                 });
+
+
                 this.svedenia.items.push({
                     step:'Готово',
                     cost_real:c.toFixed(3),
@@ -630,4 +1194,90 @@ export default {
     vertical-align: middle !important;
     text-align: center;
 }
+
+:root {
+    --divider: lightgrey;
+}
+.labels-for-chart {
+    z-index: 1;
+    width: 1090px;
+    margin-left: 5px;
+    position: absolute;
+    top: 87px;
+    left: 5px;
+}
+.labels-for-chart > li {
+    margin-top: 10px;
+    border-bottom: 1px solid grey;
+}
+.charter1 {
+    z-index: 1;
+    position: absolute;
+    top: 52px;
+    left: 5px;
+    height: 320px;
+    width: 600px;
+    background-color: white; 
+}
+.charter2 {
+    z-index: 1;
+    position: absolute;
+    top: 52px;
+    left: 530px;
+    height: 320px;
+    width: 200px;
+    background: linear-gradient(to right, white 60%, transparent 100%); 
+}
+ul {
+    padding-inline-start: 0px !important;
+    list-style: none;
+}
+a {
+    text-decoration: none;
+    color: inherit;
+}
+body {
+    background: var(--body);
+    font-size: 16px;
+    font-family: sans-serif;
+}
+.chart-wrapper {
+    max-width: 1000px;
+    padding: 0 10px;
+    margin: 0 auto;
+    margin-left: 700px;
+}
+.chart-wrapper .chart-values {
+    position: relative;
+    display: flex;
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+.chart-wrapper .chart-values li {
+    flex: 1;
+    min-width: 80px;
+    text-align: center;
+}
+.chart-wrapper .chart-values li:not(:last-child) {
+    position: relative;
+}
+.chart-wrapper .chart-values li:not(:last-child)::before {
+    content: '';
+    position: absolute;
+    right: 0;
+    height: 300px;
+    border-right: 1px solid var(--divider);
+}
+.chart-wrapper .chart-bars li {
+    position: relative;
+    color: var(--white);
+    margin-bottom: 15px;
+    font-size: 16px;
+    border-radius: 20px;
+    padding: 10px 20px;
+    width: 0;
+    opacity: 0;
+    transition: all 0.65s linear 0.2s;
+}
+
 </style>
