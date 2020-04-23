@@ -157,6 +157,7 @@ $config = [
                 'api/object/get-status/<id:\d+>' => '/rest/program-objects/get-status',
                 'api/get-object/<id:\d+>' => '/rest/program-objects/by-id',
 
+                'program/object/set-real/<id:\d+>'=>'app/program-objects/set-real',
 
                 //НАДО ПЕРЕДЕЛАТЬ
                 'api/org-table/<id:\d+>' => '/app/organization/table-list',

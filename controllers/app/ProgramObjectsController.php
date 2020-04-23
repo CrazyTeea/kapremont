@@ -81,6 +81,14 @@ class ProgramObjectsController extends AppController
         return "Что не так с файлами, обратитесь в тех поддержку. ID объекта $id";
     }
 
+    public function actionSetRial($id)
+    {
+        $model = ProgramObjects::findOne($id);
+        $model->status = 5;
+        $model->save(false);
+        return $this->redirect(['view','id'=>$id]);
+    }
+
     public function actionSendEvent($id){
         $post = Yii::$app->request->post();
         $event = null;
