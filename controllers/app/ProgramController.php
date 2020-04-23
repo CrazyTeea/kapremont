@@ -18,10 +18,12 @@ class ProgramController extends AppController
 {
     public function actionIndex(){
         $user = User::findOne(Yii::$app->user->id);
-        if ($user->username == 'admin@admin.ru' or
-            $user->username == 'kozlov_v@mirea.ru' or
+        if (Yii::$app->user->can('root') or
+            Yii::$app->user->can('mgsu') or
             Yii::$app->user->can('orglist_view') or
-            Yii::$app->user->can('faiv_admin')){
+            Yii::$app->user->can('faiv_admin') or
+            Yii::$app->user->can('dep') or
+            Yii::$app->user->can('dku')){
             return $this->redirect(['/organization/list']);
         }
         return $this->render('index');

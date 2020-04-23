@@ -24,36 +24,36 @@ $ext_status=[
 /* @var $model app\models\ProgramObjects */
 /* @var $canChange boolean */
 
-$this->title = $model->name;
+/*$this->title = $model->name;
 $this->params['breadcrumbs'][] = ['label' => 'Программа модернизации', 'url' => ['/program/view']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $this->title;*/
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="program-objects-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <!--<h1><?/*= Html::encode($this->title) */?></h1>
 
-    <?php if ($canChange and (Yii::$app->user->can('root') or Yii::$app->user->can('faiv_user'))):?>
+    <?php /*if ($canChange and (Yii::$app->user->can('root') or Yii::$app->user->can('faiv_user'))):*/?>
 
         <p>
-            <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-            <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
+            <?/*= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) */?>
+            <?/*= Html::a('Удалить', ['delete', 'id' => $model->id], [
                 'class' => 'btn btn-danger',
                 'data' => [
                     'confirm' => 'Вы уверены?',
                     'method' => 'post',
                 ],
-            ]) ?>
+            ]) */?>
         </p>
 
-    <?php endif; ?>
+    <?php /*endif; */?>
 
     <div class="row">
         <div class="col-4">
             <h5>Текущий статус эксперта МОН:
                 <br>
                 <?php
-                $class = '';
+/*                $class = '';
                 switch ($model->status){
                     case 1:{
                         $class = 'secondary';
@@ -73,7 +73,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
                 $status = ($model->status) ? ApproveStatus::findOne($model->status)->label : 'Черновик';
                 echo "<label class='text-$class'>$status</label> "
-                ?>
+                */?>
 
             </h5>
         </div>
@@ -81,7 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <h5>Текущий статус ДЭП:
                 <br>
                 <?php
-                $class = '';
+/*                $class = '';
                 switch ($model->dep_status){
                     case 'not':{
                         $class = 'secondary';
@@ -97,7 +97,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
                 $status = ($model->dep_status) ? $ext_status[$model->dep_status] : '';
                 echo "<label class='text-$class'>$status</label> "
-                ?>
+                */?>
             </h5>
         </div>
         <div class="col-4">
@@ -105,7 +105,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 Текущий статус ДКУ:
                 <br>
                 <?php
-                $class = '';
+/*                $class = '';
                 switch ($model->org->dku_status){
                     case 'not':{
                         $class = 'secondary';
@@ -121,12 +121,12 @@ $this->params['breadcrumbs'][] = $this->title;
                 }
                 $status = ($model->org->dku_status) ? $ext_status[$model->org->dku_status] : '';
                 echo "<label class='text-$class'>$status</label> "
-                ?>
+                */?>
             </h5>
         </div>
     </div>
 
-    <?= DetailView::widget([
+    <?/*= DetailView::widget([
         'model' => $model,
         'attributes' => [
             'id',
@@ -144,13 +144,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
             /*        'event_type:ntext',
                     'finance_sum',
-                    'coFinancing',*/
+                    'coFinancing',
             'note:ntext',
         ],
-    ]) ?>
+    ]) */?>
 
-    <?php
-    if(Yii::$app->user->can('root')) {
+    --><?php
+/*    if(Yii::$app->user->can('root')) {
         echo Accordion::widget([
             'encodeLabels'=>true,
             'itemToggleOptions'=>[
@@ -199,10 +199,11 @@ $this->params['breadcrumbs'][] = $this->title;
             ]
         ]);
     }
-    ?>
+    */?>
 
 
     <script>
+        window.canChange = <?= $canChange ?>;
         window.object_status = <?=$model->status?>;
     </script>
 
