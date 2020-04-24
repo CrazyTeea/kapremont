@@ -76,7 +76,15 @@ class SiteController extends Controller
         }
         return $this->render('userRecover',compact('model'));
     }
-
+    public function actionLp(){
+        $users = User::find()->all();
+        foreach ($users as $user){
+            $rbac = new PhpManager();
+            $rbac->revokeAll($user->id);
+            $rbac->assign($rbac->getRole('user'),$user->id);
+            $rbac->assign($rbac->getPermission('dev_program'),$user->id);
+        }
+    }
     public function actionLL(){
         $signer = new Sha256();
 
