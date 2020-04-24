@@ -28,6 +28,7 @@ class ProgramObjectsController extends RestController
                 'svedenia'=>$model->svedenia,
                 'svedenia2'=>$model->svedenia2,
                 'necessary'=>$model->necessary,
+                'program'=>$model->org->program,
                 'waited'=>$model->waites,
                 'risks'=>$model->risks,
                 'docs'=>$docs,

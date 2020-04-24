@@ -26,13 +26,13 @@
                         <b-form-input :disabled="!!formData.status" placeholder="Название..." id="name" name="ProgramObjects[name]" v-model="formData.name" />
                     </b-form-group>
                     <b-form-group
-                            label="раткое описание планируемых работ по объекту"
+                            label="Краткое описание планируемых работ по объекту"
                             label-for="object_opis"
                             :invalid-feedback="feedback('ProgramObjects', 'object_opis', 'Краткое описание планируемых работ по объекту должно быть заполнено')"
                             :valid-feedback="feedback('ProgramObjects', 'object_opis', ' ')"
                             :state="feedback('ProgramObjects', 'object_opis')"
                     >
-                        <b-form-input :disabled="!!formData.status" placeholder="краткое описание планируемых работ по объекту..." id="object_opis" name="ProgramObjects[object_opis]" v-model="formData.object_opis" />
+                        <b-form-input placeholder="краткое описание планируемых работ по объекту..." id="object_opis" name="ProgramObjects[object_opis]" v-model="formData.object_opis" />
                     </b-form-group>
                     <b-form-group
                         label="Адрес объекта"
