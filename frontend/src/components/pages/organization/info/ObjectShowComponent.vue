@@ -247,10 +247,16 @@
                                         <b-form-input v-model="svedenia2[index].comment" />
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-checkbox v-model="svedenia2[index].doneExpert" />
+                                        <b-form-checkbox v-can:mgsu,root,dep v-model="svedenia2[index].doneExpert" />
+                                        <span v-can:user>
+                                            {{item.doneExpert ? 'Да' : 'Нет'}}
+                                        </span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input v-model="svedenia2[index].commentExpert" />
+                                        <b-form-input v-can:mgsu,root,dep v-model="svedenia2[index].commentExpert" />
+                                        <span v-can:user>
+                                            {{item.commentExpert}}
+                                        </span>
                                     </b-td>
                                     <div v-else>
                                         <b-td>
