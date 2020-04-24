@@ -42,7 +42,7 @@ class ProgObjectsEvents extends BaseMultiModel
     {
         return [
             [['is_nessesary', 'done', 'doneExpert','id_object'], 'integer'],
-            [['step_name', 'comment', 'commentExpert'], 'string'],
+            [[ 'comment', 'commentExpert'], 'string'],
             [['date_event_start', 'date_event_end'], 'safe'],
             [['step', 'cost_real', 'sum_bud_fin', 'fin_vnebud_ist'], 'number'],
         ];

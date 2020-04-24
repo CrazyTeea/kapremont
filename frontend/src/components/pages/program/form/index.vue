@@ -621,7 +621,9 @@ export default {
                     }
                 } else {
                     if (response.data?.id) {
-                        this.$refs.files.sendFile({ id: response.data.id });
+                        if (formData.status == 0)
+                            this.$refs.files.sendFile({ id: response.data.id });
+                        window.location.href = `/program/object/view/${response.data.id}`;
                     }
                     this.errors = response.data;
                 }
