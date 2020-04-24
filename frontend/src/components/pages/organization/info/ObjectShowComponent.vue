@@ -164,7 +164,30 @@
                 </b-card-header>
                 <b-collapse id="accordion-real" accordion="my-accordion2" role="tabpanel">
                     <b-card-body>
-
+                        <b-table-simple bordered small >
+                            <b-thead>
+                                <b-th>Показатель</b-th>
+                                <b-th>Значение</b-th>
+                            </b-thead>
+                            <b-tbody>
+                                <b-tr>
+                                    <b-td>Краткое описание планируемых работ по объекту</b-td>
+                                    <b-td>{{items.object_opis}}</b-td>
+                                </b-tr>
+                                <b-tr>
+                                    <b-td>Утвержденное бюджетное финансирование работ по объекту</b-td>
+                                    <b-td>{{fromServer.program.finance_volume}}</b-td>
+                                </b-tr>
+                                <b-tr>
+                                    <b-td>Сумма освоенных бюджетных средств</b-td>
+                                    <b-td>{{s_bud_f}}</b-td>
+                                </b-tr>
+                                <b-tr>
+                                    <b-td>Экономия бюджетных средств по объекту</b-td>
+                                    <b-td>{{fromServer.program.finance_volume*1-s_bud_f}}</b-td>
+                                </b-tr>
+                            </b-tbody>
+                        </b-table-simple>
                     </b-card-body>
                 </b-collapse>
             </b-card>
@@ -557,6 +580,9 @@ export default {
             org_id: null,
             docs: [],
             fromServer:{},
+            s_bud_f:0,
+            r_bud_f:0,
+
             svedenia2:[
                 {
                     canDelete:false,
@@ -1168,7 +1194,7 @@ export default {
         getObject(){
             Axios.get(`/api/get-object/${this.obj_id}`).then(res=>{
                 this.fromServer = JSON.parse(res.data);
-                // console.log(this.fromServer.svedenia);
+                 console.log(this.fromServer);
                 this.items = this.fromServer.object;
                 this.items.org_name = this.fromServer.organization.name;
                 this.docs = this.fromServer.docs;
@@ -1177,6 +1203,8 @@ export default {
                 let c=0.0, v=0.0,b=0.0;
                 this.fromServer.svedenia.forEach((item,index)=>{
                     c+=Number(item.cost_real);
+                    if (item.done)
+                        this.s_bud_f+=item.cost_real;
                     v+=Number(item.sum_bud_fin);
                     b+=Number(item.fin_vnebud_ist);
                     this.svedenia2.forEach(item2=>{
@@ -1187,6 +1215,10 @@ export default {
                             item2.sum_bud_fin = item.sum_bud_fin;
                             item2.fin_vnebud_ist = item.fin_vnebud_ist;
                             item2.id_event = item.id;
+                            item2.done = item.done;
+                            item2.doneExpert = item.doneExpert;
+                            item2.comment = item.comment;
+                            item2.commentExpert = item.commentExpert;
                         }
                     });
                     this.svedenia.items.push({
@@ -1212,6 +1244,10 @@ export default {
                             item2.sum_bud_fin = item.sum_bud_fin;
                             item2.fin_vnebud_ist = item.fin_vnebud_ist;
                             item2.id_event = item.id_event;
+                            item2.done = item.done;
+                            item2.doneExpert = item.doneExpert;
+                            item2.comment = item.comment;
+                            item2.commentExpert = item.commentExpert;
                         }
                     });
                 });
