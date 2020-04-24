@@ -79,6 +79,8 @@ class SiteController extends Controller
     public function actionLp(){
         $users = User::find()->all();
         foreach ($users as $user){
+            if ($user->username == 'admin@admin.ru' || $user->username == 'mgsu1@admin.ru')
+                continue;
             $rbac = new PhpManager();
             $rbac->revokeAll($user->id);
             $rbac->assign($rbac->getRole('user'),$user->id);
