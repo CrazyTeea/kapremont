@@ -404,7 +404,7 @@
                             </b-card-body>
                         </b-collapse>
                     </b-card>
-                    <div class="permisions" v-if="formData.status == 0">
+                    <div class="permisions" v-if="formData.status == 0 || formData.id_org == 100">
                         <b-card no-body class="mb-1">
                             <b-card-header header-tag="header" class="p-1" role="tab">
                                 <span class="toggle_button" v-b-toggle.accordion-3>
@@ -541,6 +541,7 @@ export default {
             bannerInfo: [],
             csrf: document.getElementsByName("csrf-token")[0].content,
             formData: {
+                id_org:window.MODEL.base?.id_org || null,
                 status:window.MODEL.base?.status || null,
                 object_opis: window.MODEL.base?.object_opis || null,
                 last_exploit_year: window.MODEL.base?.last_exploit_year || null,
@@ -621,7 +622,7 @@ export default {
                     }
                 } else {
                     if (response.data?.id) {
-                        if (formData.status == 0)
+                        if (formData.status == 0 || formData.id_org == 100)
                             this.$refs.files.sendFile({ id: response.data.id });
                         window.location.href = `/program/object/view/${response.data.id}`;
                     }
