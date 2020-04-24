@@ -555,7 +555,6 @@ export default {
             real:false,
             obj_id: null,
             org_id: null,
-            user_id: null,
             docs: [],
             fromServer:{},
             svedenia2:[
@@ -983,7 +982,6 @@ export default {
         this.obj_id = this.$route.params.id;
         await this.requestUser();
         await this.getStatus();
-        this.user_id = this.getUser.organization.id;
         await this.getObject();
         
         await this.setChart()
