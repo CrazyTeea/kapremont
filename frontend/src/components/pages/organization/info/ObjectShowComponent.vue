@@ -1316,27 +1316,23 @@ export default {
                 let w4 = this.getEl(this.fromServer.waited,4);
                 this.waited.items.push({
                     aim:'Проведение капитального ремонта, общая площадь',
-                    plan:w0.plan,
+                    plan:w0?.plan,
                     changes:'кв.м'
-                });
-                this.waited.items.push({
+                },{
                     aim:'Вовлечение в хозяйственную деятельность за счет проведенного капитального ремонта, общая площадь',
-                    plan:w1.plan,
+                    plan:w1?.plan,
                     changes:'кв.м'
-                });
-                this.waited.items.push({
+                },{
                     aim:'Снижение затрат на эксплуатацию',
-                    plan:w2.plan == '1' ? 'Да' : 'Нет',
+                    plan:w2?.plan == '1' ? 'Да' : 'Нет',
                     changes:''
-                });
-                this.waited.items.push({
+                },{
                     aim:'Повышение энергоэффективности',
-                    plan:w3.plan == '1' ? 'Да' : 'Нет',
+                    plan:w3?.plan == '1' ? 'Да' : 'Нет',
                     changes:''
-                });
-                this.waited.items.push({
+                },{
                     aim:'Восстановление (ремонт, реставрация, за исключением реконструкции) объектов культурного наследия',
-                    plan:w4.plan == '1' ? 'Да' : 'Нет',
+                    plan:w4?.plan == '1' ? 'Да' : 'Нет',
                     changes:''
                 });
                 for (let i = 5; i<this.fromServer.waited.length;i++){

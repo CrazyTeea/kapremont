@@ -444,21 +444,23 @@
                                 </b-card-body>
                             </b-collapse>
                         </b-card>
-                        <b-card no-body class="mb-1">
-                            <b-card-header header-tag="header" class="p-1" role="tab">
+
+                    </div>
+                    <b-card no-body class="mb-1">
+                        <b-card-header header-tag="header" class="p-1" role="tab">
                                 <span class="toggle_button" v-b-toggle.accordion-6>
                                     <b-icon-gear-wide-connected />
                                     Опись прилагаемых документов</span
                                 >
-                            </b-card-header>
-                            <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel">
-                                <b-card-body>
-                                    <v-uploads model-name="Files" ref="files" />
-                                </b-card-body>
-                            </b-collapse>
-                        </b-card>
-                    </div>
+                        </b-card-header>
+                        <b-collapse id="accordion-6" accordion="my-accordion" role="tabpanel">
+                            <b-card-body>
+                                <v-uploads model-name="Files" ref="files" />
+                            </b-card-body>
+                        </b-collapse>
+                    </b-card>
                 </div>
+
             </div>
             <b-button type="submit" variant="info">Сохранить</b-button>
             <b-button type="reset" variant="danger">Сброс</b-button>
@@ -622,9 +624,7 @@ export default {
                     }
                 } else {
                     if (response.data?.id) {
-                        if (formData.status == 0)
-                            this.$refs.files.sendFile({ id: response.data.id });
-                        window.location.href = `/program/object/view/${response.data.id}`;
+                        this.$refs.files.sendFile({ id: response.data.id });
                     }
                     this.errors = response.data;
                 }
