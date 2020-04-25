@@ -11,6 +11,7 @@ use app\models\ProgObjectsWaites;
 use app\models\Program;
 use app\models\ProgramObjectsEvents2;
 use app\models\ProObjectsNecessary;
+use app\models\User;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Reader\Html;
 use Yii;
@@ -133,6 +134,10 @@ class ProgramObjectsController extends AppController
     public function actionView($id)
     {
         $model = $this->findModel($id);
+        $user = User::findOne(Yii::$app->user->id);
+        if (Yii::$app->user->can('user') and $model->id_org != $user->id_org)
+            return $this->goBack();
+
         $program = Program::findOne($model->id_program);
         $canChange = !$program->ban;
         $canChange &=  (!$program->p_status or !$model->status || $model->status == 4);
@@ -325,6 +330,13 @@ class ProgramObjectsController extends AppController
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+
+        $user = User::findOne(Yii::$app->user->id);
+
+        if (Yii::$app->user->can('user') and $model->id_org != $user->id_org)
+            return $this->goBack();
+
+
         $progObjectsEvents = ProgObjectsEvents::findAll(['id_object'=>$id])? : [new ProgObjectsEvents()];
         $proObjectsNecessary = ProObjectsNecessary::findAll(['id_object'=>$id])? : [new ProObjectsNecessary()];
         $progObjectsWaites = ProgObjectsWaites::findAll(['id_object'=>$id])? : [new ProgObjectsWaites()];
