@@ -67,9 +67,9 @@
                         <b-th>Объектов добавлено</b-th>
                         <b-th>Выгрузка PDF</b-th>
                         <b-th>Выгрузка отправлена</b-th>
-                        <b-th v-can:dku>Статус программы (ДКУ)</b-th>
-                        <b-th v-can:dep>Статус программы (ДЭП)</b-th>
-                        <b-th v-can:dku>Согласованный объем бюджетного финансирования АТЗ</b-th>
+                        <b-th v-can:dku,dku_user>Статус программы (ДКУ)</b-th>
+                        <b-th v-can:dep >Статус программы (ДЭП)</b-th>
+                        <b-th v-can:dku,dku_user>Согласованный объем бюджетного финансирования АТЗ</b-th>
                     </b-tr>
                 </b-thead>
                 <b-tbody>
@@ -83,7 +83,7 @@
                         <b-th v-can:root,mgsu,dep @click="goToRef(item.id)" class="normal-font-weight-for-sell cursor-pointer center-text-in-cell">
                             <label class="cursor-pointer">{{ item.name }}</label>
                         </b-th>
-                        <b-th v-can:dku class="normal-font-weight-for-sell cursor-pointer center-text-in-cell">
+                        <b-th v-can:dku,dku_user class="normal-font-weight-for-sell cursor-pointer center-text-in-cell">
                             <label class="cursor-pointer">{{ item.name }}</label>
                         </b-th>
                         <b-th class="normal-font-weight-for-sell center-text-in-cell">
@@ -99,8 +99,9 @@
                             <b-icon v-if="item.p_status === '1'" icon="check" variant="success" scale="2"></b-icon>
                             <b-icon v-else icon="x-octagon" variant="danger" scale="2"></b-icon>
                         </b-th>
-                        <b-th v-can:dku class="normal-font-weight-for-sell center-text-in-cell">
+                        <b-th v-can:dku,dku_user class="normal-font-weight-for-sell center-text-in-cell">
                             <b-form-select
+                                    v-can:dku
                                 @input="setDkuStatus(item)"
                                 v-model="item.dku_status"
                                 :options="[
@@ -109,6 +110,7 @@
                                     {value: 'rejected', text: 'Резерв'}
                                 ]"
                             ></b-form-select>
+                            <span v-can:dku_user>{{ getDkuStatus(item.dku_status) }}</span>
                         </b-th>
                         <b-th v-can:dep class="normal-font-weight-for-sell center-text-in-cell">
                             <b-form-select
@@ -116,17 +118,17 @@
                                 v-model="item.dep_status"
                                 :options="[
                                     {value: 'not', text: 'В обработке'},
-                                    {value: 'approved', text: 'Согласовано ДКУ'},
+                                    {value: 'approved', text: 'Согласовано ДЕП'},
                                     {value: 'rejected', text: 'Резерв'}
                                 ]"
                             ></b-form-select>
                         </b-th>
-                        <b-th v-can:dku class="normal-font-weight-for-sell center-text-in-cell">
-                            <b-form-input
+                        <b-th  v-can:dku,dku_user class="normal-font-weight-for-sell center-text-in-cell">
+                            <b-form-input v-can:dku
                                     @input="setDkuAtz(item)"
                                     v-model="item.dku_atz"
-
                             ></b-form-input>
+                            <span v-can:dku_user>{{item.dku_atz}}</span>
                         </b-th>
                     </b-tr>
                 </b-tbody>
@@ -195,6 +197,11 @@ export default {
                 p_status: null,
             },
             options: {
+                dku_status:[
+                    {value: 'not', text: 'В обработке'},
+                    {value: 'approved', text: 'Согласовано ДКУ'},
+                    {value: 'rejected', text: 'Резерв'}
+                ],
                 quantity: [
                     { value: "up", text: "По возрастанию" },
                     { value: "down", text: "По убыванию" }
@@ -226,6 +233,9 @@ export default {
         this.getTable();
     },
     methods: {
+        getDkuStatus(s){
+          return this.options.dku_status.find(item=>item.value == s).text;
+        },
         setBanner(variant, message, timeout = 2500) {
             this.bannerInfo.unshift({
                 show: true,

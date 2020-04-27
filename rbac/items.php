@@ -9,12 +9,6 @@ return [
     '/*' => [
         'type' => 2,
     ],
-    'test' => [
-        'type' => 1,
-        'children' => [
-            '/*',
-        ],
-    ],
     'dev_program' => [
         'type' => 2,
         'children' => [
@@ -720,5 +714,11 @@ return [
     ],
     '/rest/upload/test' => [
         'type' => 2,
+    ],
+    'dku_user' => [
+        'type' => 1,
+        'children' => [
+            'dku',
+        ],
     ],
 ];
