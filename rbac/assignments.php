@@ -20,10 +20,6 @@ return [
         'root',
         'dev_program',
     ],
-    7 => [
-        'user',
-        'dev_program',
-    ],
     8 => [
         'user',
         'dev_program',
@@ -12508,5 +12504,8 @@ return [
     3130 => [
         'user',
         'dev_program',
+    ],
+    7 => [
+        'dku_user',
     ],
 ];
