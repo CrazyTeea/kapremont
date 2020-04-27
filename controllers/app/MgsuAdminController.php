@@ -106,7 +106,7 @@ class MgsuAdminController extends Controller
     {
         $param_status = [
             'id_org' => $request['id_org'] ?? null,
-            'id' => $request['id'] ?? null,
+            'program_objects.id' => $request['id'] ?? null,
         ];
 
         foreach ($param_status as $key => $param) {
