@@ -106,8 +106,8 @@ class ShitController extends Controller
                 'cost_depPr'=>round($obj_cost['depPr'],2),
                 'cost_depRes'=>round($obj_cost['depRes'],2),
                 'dep_status' => $dep_status[$program->org->dep_status],
-                'atz_nb'=>0,
-                'atz'=>$program->finance_events,
+                'atz_nb'=>$program->finance_events,
+                'atz'=>0,
                 'atz_bud_fin'=>$program->dku_atz,
                 'dku_status'=> $dku_status[$program->org->dku_status]
             ];
