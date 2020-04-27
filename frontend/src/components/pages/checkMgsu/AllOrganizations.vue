@@ -68,7 +68,7 @@
                         <b-th>Выгрузка PDF</b-th>
                         <b-th>Выгрузка отправлена</b-th>
                         <b-th v-can:dku,dku_user>Статус программы (ДКУ)</b-th>
-                        <b-th v-can:dep >Статус программы (ДЭП)</b-th>
+                        <b-th v-can:dep,dku,dku_user >Статус программы (ДЭП)</b-th>
                         <b-th v-can:dku,dku_user>Согласованный объем бюджетного финансирования АТЗ</b-th>
                     </b-tr>
                 </b-thead>
@@ -112,16 +112,17 @@
                             ></b-form-select>
                             <span v-can:dku_user>{{ getDkuStatus(item.dku_status) }}</span>
                         </b-th>
-                        <b-th v-can:dep class="normal-font-weight-for-sell center-text-in-cell">
+                        <b-th v-can:dep,dku,dku_user class="normal-font-weight-for-sell center-text-in-cell">
                             <b-form-select
+                                    v-can:dep
                                 @input="setDepStatus(item)"
                                 v-model="item.dep_status"
                                 :options="[
                                     {value: 'not', text: 'В обработке'},
                                     {value: 'approved', text: 'Согласовано ДЕП'},
                                     {value: 'rejected', text: 'Резерв'}
-                                ]"
-                            ></b-form-select>
+                                ]" />
+                            <span v-can:dku,dku_user>{{getDepStatus(item.dep_status)}}</span>
                         </b-th>
                         <b-th  v-can:dku,dku_user class="normal-font-weight-for-sell center-text-in-cell">
                             <b-form-input v-can:dku
@@ -202,6 +203,11 @@ export default {
                     {value: 'approved', text: 'Согласовано ДКУ'},
                     {value: 'rejected', text: 'Резерв'}
                 ],
+                dep_status:[
+                    {value: 'not', text: 'В обработке'},
+                    {value: 'approved', text: 'Согласовано ДЕП'},
+                    {value: 'rejected', text: 'Резерв'}
+                ],
                 quantity: [
                     { value: "up", text: "По возрастанию" },
                     { value: "down", text: "По убыванию" }
@@ -235,6 +241,9 @@ export default {
     methods: {
         getDkuStatus(s){
           return this.options.dku_status.find(item=>item.value == s).text;
+        },
+        getDepStatus(s){
+            return this.options.dep_status.find(item=>item.value == s).text;
         },
         setBanner(variant, message, timeout = 2500) {
             this.bannerInfo.unshift({
