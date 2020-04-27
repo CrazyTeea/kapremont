@@ -29,9 +29,9 @@
             },
         ]"/>
         <h1 class="mt-3">{{ this.items.name }}</h1>
-        <div v-if="canChange">
-            <a :href="`/program/object/update/${this.items.id}`" class="btn btn-primary">Редактировать </a>
-            <a v-if="!this.items.status" :href="`/program/object/delete/${this.items.id}`" class="btn btn-danger">Удалить </a>
+        <div >
+            <a v-if="canChange" :href="`/program/object/update/${this.items.id}`" class="btn btn-primary">Редактировать </a>
+            <a v-can:root :href="`/program/object/delete/${this.items.id}`" class="btn btn-danger">Удалить </a>
         </div>
         <a v-if="this.real" :href="`/program/object/set-real/${this.items.id}`" class="btn btn-success">Приступить к реалзации </a>
         <div class="d-flex justify-content-between align-items-center">
@@ -562,7 +562,7 @@ export default {
     data() {
         return {
             bannerInfo: [],
-            canChange: window.canChange || false,
+            canChange: false,
             status: {
                 label: '',
                 variant: ''
@@ -1023,6 +1023,8 @@ export default {
 
         let actionElement = document.querySelector('#action');
         actionElement?.addEventListener('click', event => {this.actionHendler(event)})
+        this.canChange = window.Permission === 'root' | window.canChange || false;
+        console.log(this.canChange)
     },
     methods: {
         async setChart() {
