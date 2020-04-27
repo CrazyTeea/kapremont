@@ -404,7 +404,7 @@
                             </b-card-body>
                         </b-collapse>
                     </b-card>
-                    <div class="permisions" v-show="formData.status == 0">
+
                         <b-card no-body class="mb-1">
                             <b-card-header header-tag="header" class="p-1" role="tab">
                                 <span class="toggle_button" v-b-toggle.accordion-3>
@@ -445,7 +445,7 @@
                             </b-collapse>
                         </b-card>
 
-                    </div>
+
                     <b-card no-body class="mb-1">
                         <b-card-header header-tag="header" class="p-1" role="tab">
                                 <span class="toggle_button" v-b-toggle.accordion-6>
