@@ -53,6 +53,7 @@
 
         </b-tabs>
         <a v-can:root,mgsu,dep class="btn btn-warning mt-3" href="/organization/export/2">Статистика по статусам</a>
+        <a v-can:dku,dku_user class="btn btn-warning mt-3" href="/program/dku-export">Статистика по статусам</a>
         <a v-can:root,mgsu,dep class="btn btn-warning mt-3" href="/organization/export/1">Статистика по бюджетам (Организация)</a>
         <a v-can:root,mgsu,dep class="btn btn-warning mt-3" href="/program-objects/export">Статистика по бюджетам (объект)</a>
     </div>

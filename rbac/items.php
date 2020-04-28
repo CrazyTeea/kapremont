@@ -188,6 +188,7 @@ return [
             '/api/com/*',
             '/rest/upload/*',
             '/app/program/is-approve',
+            '/app/program/dku-export',
         ],
     ],
     '/api/com/*' => [
@@ -720,5 +721,8 @@ return [
         'children' => [
             'dku',
         ],
+    ],
+    '/app/program/dku-export' => [
+        'type' => 2,
     ],
 ];

@@ -61,6 +61,57 @@ class ProgramController extends AppController
             unlink("$path/$param.xls");
     }
 
+    public function actionDkuExport(){
+        $objects = ProgramObjects::findAll(['system_status'=>1]);
+        $sum = 0;
+        $export = [];
+
+
+        $dku_status = [
+            'not' => 'В обработке',
+            'approved' => 'Согласовано ДКУ',
+            'rejected' => 'Резерв'
+        ];
+
+        $dep_status = [
+            'not' => 'В обработке',
+            'approved' => 'Согласовано ДЕП',
+            'rejected' => 'Резерв'
+        ];
+
+
+        foreach ($objects as $object){
+            if ($object->svedenia)
+                foreach ($object->svedenia as $item) {
+                    $sum+=$item->cost_real;
+                }
+            $export[] = [
+                'id_org'=>$object->id_org,
+                'region'=>$object->region->region,
+                'org'=>$object->org->name,
+                'sum'=>$sum,
+                'dep_status' => $dep_status[$object->org->dep_status],
+                'atz_nb'=>$object->program->finance_events,
+                'atz'=>0,
+                'atz_bud_fin'=>$object->program->dku_atz,
+                'dku_status'=> $dku_status[$object->org->dku_status]
+            ];
+        }
+
+        $html = $this->renderPartial('_dkuExport',['export'=>$export]);
+        $reader = new HTML();
+        $spreadsheet = $reader->loadFromString($html);
+        $writer = IOFactory::createWriter($spreadsheet,'Xls');
+
+        $path = Yii::getAlias( '@webroot' ) . "/uploads/dkuExport";
+        if (!file_exists($path))
+            FileHelper::createDirectory($path);
+        $writer->save("$path/dkuExport.xls");
+        Yii::$app->response->sendFile("$path/dkuExport.xls")->send();
+        if (file_exists("$path/dkuExport.xls"))
+            unlink("$path/dkuExport.xls");
+    }
+
     public function actionApprove(){
         if (Yii::$app->request->isPost) {
             $program = Yii::$app->session->get('program');
