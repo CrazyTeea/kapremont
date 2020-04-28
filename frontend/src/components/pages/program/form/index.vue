@@ -23,7 +23,7 @@
                         :valid-feedback="feedback('ProgramObjects', 'name', ' ')"
                         :state="feedback('ProgramObjects', 'name')"
                     >
-                        <b-form-input :disabled="!!formData.status" placeholder="Название..." id="name" name="ProgramObjects[name]" v-model="formData.name" />
+                        <b-form-input  placeholder="Название..." id="name" name="ProgramObjects[name]" v-model="formData.name" />
                     </b-form-group>
                     <b-form-group
                             label="Краткое описание планируемых работ по объекту"
@@ -41,7 +41,7 @@
                         :valid-feedback="feedback('ProgramObjects', 'address', ' ')"
                         :state="feedback('ProgramObjects', 'address')"
                     >
-                        <b-form-input :disabled="!!formData.status" placeholder="адрес..." id="address" name="ProgramObjects[address]" v-model="formData.address" />
+                        <b-form-input  placeholder="адрес..." id="address" name="ProgramObjects[address]" v-model="formData.address" />
                     </b-form-group>
                     <b-form-group
                         label="Вид ремонта"
@@ -50,9 +50,9 @@
                         :valid-feedback="feedback('ProgramObjects', 'type_remont', ' ')"
                         :state="feedback('ProgramObjects', 'type_remont')"
                     >
-                        <b-form-input :disabled="!!formData.status" style="display: none" id="type_remont" v-model="formData.type_remont" name="ProgramObjects[type_remont]" />
+                        <b-form-input  style="display: none" id="type_remont" v-model="formData.type_remont" name="ProgramObjects[type_remont]" />
                         <b-select
-                                :disabled="!!formData.status"
+
                             v-model="formData.type_remont"
                             :options="[
                                 { value: 0, text: 'Комплексный' },
@@ -78,9 +78,9 @@
                                         :valid-feedback="feedback('ProgramObjects', 'type', ' ')"
                                         :state="feedback('ProgramObjects', 'type')"
                                     >
-                                        <b-form-input :disabled="!!formData.status" style="display: none" id="type" v-model="formData.type" name="ProgramObjects[type]" />
+                                        <b-form-input  style="display: none" id="type" v-model="formData.type" name="ProgramObjects[type]" />
                                         <b-select
-                                                :disabled="!!formData.status"
+
                                             v-model="formData.type"
                                             :options="[
                                                 {
@@ -98,9 +98,9 @@
                                         :valid-feedback="feedback('ProgramObjects', 'id_priority', ' ')"
                                         :state="feedback('ProgramObjects', 'id_priority')"
                                     >
-                                        <b-form-input :disabled="!!formData.status" style="display: none" id="id_priority" v-model="formData.id_priority" name="ProgramObjects[id_priority]" />
+                                        <b-form-input  style="display: none" id="id_priority" v-model="formData.id_priority" name="ProgramObjects[id_priority]" />
                                         <b-select
-                                                :disabled="!!formData.status"
+
                                             v-model="formData.id_priority"
                                             :options="[
                                                 { value: 1, text: '1' },
@@ -116,9 +116,9 @@
                                         :valid-feedback="feedback('ProgramObjects', 'id_region', ' ')"
                                         :state="feedback('ProgramObjects', 'id_region')"
                                     >
-                                        <b-form-input :disabled="!!formData.status" style="display: none" id="id_region" v-model="formData.id_region" name="ProgramObjects[id_region]" />
+                                        <b-form-input  style="display: none" id="id_region" v-model="formData.id_region" name="ProgramObjects[id_region]" />
                                         <v-select2
-                                                :disabled="!!formData.status"
+
                                             v-model="formData.id_region"
                                             :options="getRegions"
                                             :reduce="region => region.id"
@@ -137,9 +137,9 @@
                                         :valid-feedback="feedback('ProgramObjects', 'id_city', ' ')"
                                         :state="feedback('ProgramObjects', 'id_city')"
                                     >
-                                        <b-form-input :disabled="!!formData.status" style="display: none" id="id_city" v-model="formData.id_city" name="ProgramObjects[id_city]" />
+                                        <b-form-input  style="display: none" id="id_city" v-model="formData.id_city" name="ProgramObjects[id_city]" />
                                         <v-select2
-                                                :disabled="!!formData.status"
+
                                             v-model="formData.id_city"
                                             :options="
                                                 getCities || [
@@ -160,7 +160,7 @@
                                         :valid-feedback="feedback('ProgramObjects', 'kad_number', ' ')"
                                         :state="feedback('ProgramObjects', 'kad_number') && kad_number_validator"
                                     >
-                                        <b-form-input :disabled="!!formData.status" id="kad_number" name="ProgramObjects[kad_number]" v-model="formData.kad_number" trim />
+                                        <b-form-input  id="kad_number" name="ProgramObjects[kad_number]" v-model="formData.kad_number" trim />
                                     </b-form-group>
                                     <b-form-group
                                         label="Год постройки здания:"
@@ -169,7 +169,7 @@
                                         :valid-feedback="feedback('ProgramObjects', 'year', ' ')"
                                         :state="feedback('ProgramObjects', 'year') && con_year_validator"
                                     >
-                                        <b-form-input :disabled="!!formData.status" id="year" name="ProgramObjects[year]" type="number" v-model="formData.year" />
+                                        <b-form-input  id="year" name="ProgramObjects[year]" type="number" v-model="formData.year" />
                                     </b-form-group>
                                     <b-form-group
                                         label="Год ввода здания в эксплуатацию:"
@@ -178,7 +178,7 @@
                                         :valid-feedback="feedback('ProgramObjects', 'exploit_year', ' ')"
                                         :state="feedback('ProgramObjects', 'exploit_year') && exp_year_validator"
                                     >
-                                        <b-form-input :disabled="!!formData.status" id="exploit_year" name="ProgramObjects[exploit_year]" type="number" v-model="formData.exploit_year" />
+                                        <b-form-input  id="exploit_year" name="ProgramObjects[exploit_year]" type="number" v-model="formData.exploit_year" />
                                     </b-form-group>
 
                                     <b-form-group
@@ -188,7 +188,7 @@
                                         :valid-feedback="feedback('ProgramObjects', 'last_exploit_year', ' ')"
                                         :state="feedback('ProgramObjects', 'last_exploit_year') && exp_year_validator"
                                     >
-                                        <b-form-input :disabled="!!formData.status" id="last_exploit_year" name="ProgramObjects[last_exploit_year]" type="number" v-model="formData.last_exploit_year" />
+                                        <b-form-input  id="last_exploit_year" name="ProgramObjects[last_exploit_year]" type="number" v-model="formData.last_exploit_year" />
                                     </b-form-group>
 
                                     <b-form-group
@@ -198,10 +198,10 @@
                                         :valid-feedback="feedback('ProgramObjects', 'exist_pred_nadz_orgs', ' ')"
                                         :state="feedback('ProgramObjects', 'exist_pred_nadz_orgs')"
                                     >
-                                        <b-form-input :disabled="!!formData.status" style="display: none;" id="exist_pred_nadz_orgs" name="ProgramObjects[exist_pred_nadz_orgs]" v-model="formData.exist_pred_nadz_orgs" />
+                                        <b-form-input  style="display: none;" id="exist_pred_nadz_orgs" name="ProgramObjects[exist_pred_nadz_orgs]" v-model="formData.exist_pred_nadz_orgs" />
 
                                         <b-select
-                                                :disabled="!!formData.status"
+
                                             v-model="formData.exist_pred_nadz_orgs"
                                             :options="[
                                                 { value: 0, text: 'Нет' },
@@ -217,7 +217,7 @@
                                         :valid-feedback="feedback('ProgramObjects', 'regulation', ' ')"
                                         :state="feedback('ProgramObjects', 'regulation')"
                                     >
-                                        <b-form-input :disabled="!!formData.status" id="regulation" name="ProgramObjects[regulation]" v-model="formData.regulation" />
+                                        <b-form-input  id="regulation" name="ProgramObjects[regulation]" v-model="formData.regulation" />
                                     </b-form-group>
                                     <b-form-group
                                         label="Износ здания (%):"
@@ -227,10 +227,10 @@
                                         :state="feedback('ProgramObjects', 'wear') && wear_validator"
                                     >
                                         <!-- <b-form-input style="display: none" id="type_wear" v-model="formData" name="ProgramObjects[type]" / -->
-                                        <b-form-input :disabled="!!formData.status" style="display: none;" id="wear" min="0" name="ProgramObjects[wear]" :state="wear_validator" type="number" v-model="formData.wear" />
+                                        <b-form-input  style="display: none;" id="wear" min="0" name="ProgramObjects[wear]" :state="wear_validator" type="number" v-model="formData.wear" />
 
                                         <b-select
-                                                :disabled="!!formData.status"
+
                                             v-model="formData.wear"
                                             :options="[
                                                 { value: 0, text: 'Менее 20%' },
@@ -257,7 +257,7 @@
                                         :valid-feedback="feedback('ProgramObjects', 'osn_isp_zdan', ' ')"
                                         :state="feedback('ProgramObjects', 'osn_isp_zdan')"
                                     >
-                                        <b-form-input :disabled="!!formData.status" id="osn_isp_zdan" name="ProgramObjects[osn_isp_zdan]" v-model="formData.osn_isp_zdan" />
+                                        <b-form-input  id="osn_isp_zdan" name="ProgramObjects[osn_isp_zdan]" v-model="formData.osn_isp_zdan" />
                                     </b-form-group>
                                     <b-form-group
                                         label="Право оперативного управления (рег. запись, номер):"
@@ -266,7 +266,7 @@
                                         :valid-feedback="feedback('ProgramObjects', 'prav_oper_upr', ' ')"
                                         :state="feedback('ProgramObjects', 'prav_oper_upr')"
                                     >
-                                        <b-form-input :disabled="!!formData.status" id="prav_oper_upr" name="ProgramObjects[prav_oper_upr]" v-model="formData.prav_oper_upr" />
+                                        <b-form-input  id="prav_oper_upr" name="ProgramObjects[prav_oper_upr]" v-model="formData.prav_oper_upr" />
                                     </b-form-group>
                                     <b-form-group
                                         label="Назначение:"
@@ -275,7 +275,7 @@
                                         :valid-feedback="feedback('ProgramObjects', 'assignment', ' ')"
                                         :state="feedback('ProgramObjects', 'assignment')"
                                     >
-                                        <b-form-input :disabled="!!formData.status" id="assignment" name="ProgramObjects[assignment]" v-model="formData.assignment" />
+                                        <b-form-input  id="assignment" name="ProgramObjects[assignment]" v-model="formData.assignment" />
                                     </b-form-group>
                                     <b-form-group
                                         label="Право собственности:"
@@ -284,10 +284,10 @@
                                         :valid-feedback="feedback('ProgramObjects', 'prav_sob', ' ')"
                                         :state="feedback('ProgramObjects', 'prav_sob')"
                                     >
-                                        <b-form-input :disabled="!!formData.status" style="display: none;" id="prav_sob" name="ProgramObjects[prav_sob]" v-model="formData.prav_sob" />
+                                        <b-form-input  style="display: none;" id="prav_sob" name="ProgramObjects[prav_sob]" v-model="formData.prav_sob" />
 
                                         <b-select
-                                                :disabled="!!formData.status"
+
                                             v-model="formData.prav_sob"
                                             :options="[
                                                 {
@@ -308,7 +308,7 @@
                                         :valid-feedback="feedback('ProgramObjects', 'square', ' ')"
                                         :state="feedback('ProgramObjects', 'square')"
                                     >
-                                        <b-form-input :disabled="!!formData.status" id="square" name="ProgramObjects[square]" type="number" step="0.001" v-model="formData.square" @change="val => setFloat(val, 'square')" />
+                                        <b-form-input  id="square" name="ProgramObjects[square]" type="number" step="0.001" v-model="formData.square" @change="val => setFloat(val, 'square')" />
                                     </b-form-group>
                                     <b-form-group
                                         label="Общая площадь здания (помещений), планируемого к капитальному ремонту, кв. м.:"
@@ -318,7 +318,7 @@
                                         :state="feedback('ProgramObjects', 'square_kap')"
                                     >
                                         <b-form-input
-                                                :disabled="!!formData.status"
+
                                             id="square_kap"
                                             name="ProgramObjects[square_kap]"
                                             type="number"
@@ -335,7 +335,7 @@
                                         :state="feedback('ProgramObjects', 'isp_v_ust_dey')"
                                     >
                                         <b-form-input
-                                                :disabled="!!formData.status"
+
                                             id="isp_v_ust_dey"
                                             name="ProgramObjects[isp_v_ust_dey]"
                                             type="number"
@@ -352,7 +352,7 @@
                                         :state="feedback('ProgramObjects', 'n_isp_v_ust_dey')"
                                     >
                                         <b-form-input
-                                                :disabled="!!formData.status"
+
                                             id="n_isp_v_ust_dey"
                                             name="ProgramObjects[n_isp_v_ust_dey]"
                                             type="number"
@@ -369,7 +369,7 @@
                                         :state="feedback('ProgramObjects', 'square_ar')"
                                     >
                                         <b-form-input
-                                                :disabled="!!formData.status"
+
                                             id="square_ar"
                                             name="ProgramObjects[square_ar]"
                                             type="number"
@@ -385,7 +385,7 @@
                                         :valid-feedback="feedback('ProgramObjects', 'note', ' ')"
                                         :state="feedback('ProgramObjects', 'note')"
                                     >
-                                        <b-form-input :disabled="!!formData.status" id="note" name="ProgramObjects[note]" v-model="formData.note" />
+                                        <b-form-input  id="note" name="ProgramObjects[note]" v-model="formData.note" />
                                     </b-form-group>
                                 </b-form-group>
                             </b-card-body>
