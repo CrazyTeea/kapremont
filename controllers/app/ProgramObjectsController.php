@@ -564,13 +564,6 @@ class ProgramObjectsController extends AppController
          return Json::encode($kek);
     }
 
-    public function actionDelete($id)
-    {
-        $model = $this->findModel($id);
-        $model->system_status = 0;
-        $model->save(false);
-        return $this->redirect(['program/view']);
-    }
 
     protected function findModel($id)
     {

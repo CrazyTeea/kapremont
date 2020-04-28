@@ -31,7 +31,6 @@
         <h1 class="mt-3">{{ this.items.name }}</h1>
         <div >
             <a v-if="canChange" :href="`/program/object/update/${this.items.id}`" class="btn btn-primary">Редактировать </a>
-            <a v-can:root :href="`/program/object/delete/${this.items.id}`" class="btn btn-danger">Удалить </a>
         </div>
         <a v-if="this.real" :href="`/program/object/set-real/${this.items.id}`" class="btn btn-success">Приступить к реалзации </a>
         <div class="d-flex justify-content-between align-items-center">
