@@ -113,7 +113,7 @@ $config = [
                 'program/view' => 'app/development-programme',
                 'program/org' => 'app/development-programme/status-realize',
                 'api/get/program-objects/realized/<id_org:\d+>' => 'app/program-objects/status-realize',
-
+                'program/dku-export' => 'app/program/dku-export',
                 'program/add-doc/<id:\d+>' => 'app/development-programme/add-doc',
                 'program/delete-doc/<id:\d+>' => 'app/development-programme/delete-doc',
                 'program/check-doc/<id:\d+>' => 'app/development-programme/check-doc',
