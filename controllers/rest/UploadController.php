@@ -45,7 +45,9 @@ class UploadController extends Controller
     {
         $fileName = Yii::$app->request->get('fileName');
         $path= "uploads/comments/$name/$fileName";
-        return Yii::$app->response->sendFile($path)->send();
+        if (file_exists($path))
+            return Yii::$app->response->sendFile($path)->send();
+        return 'файла не существует';
     }
 
     public function actionTest()

@@ -142,5 +142,56 @@ class ReferenceController extends Controller
 
     }
 
+    private function is_in_array($array, $key, $key_value){
+        $within_array = false;
+        foreach( $array as $k=>$v ){
+            if( is_array($v) ){
+                $within_array = $this->is_in_array($v, $key, $key_value);
+                if( $within_array ){
+                    break;
+                }
+            } else {
+                if( $v == $key_value && $k == $key ){
+                    $within_array = true;
+                    break;
+                }
+            }
+        }
+        return $within_array;
+    }
+    public function actionDubles(){
+        $objects = ProgramObjects::findAll(['system_status'=>1]);
+
+        $cont = [];
+        $sum = 0;
+        foreach ($objects as $object){
+            if ($object->svedenia)
+            {
+                foreach ($object->svedenia as $kek){
+                    $sum+=$kek->cost_real;
+                }
+            }
+            if (!$this->is_in_array($cont,'name',$object->name) and
+                !$this->is_in_array($cont,'status',$object->status) and
+                !$this->is_in_array($cont,'sum',$sum )) {
+
+                $cont[] = ['name'=>$object->name,'square'=>$object->square, 'year'=>$object->year];
+                $o2 = ProgramObjects::find()
+                    ->where(['name' => $object->name, 'square' => $object->square, 'id_org' => $object->id_org])
+                    ->andWhere(['not in', 'id', $object->id])->all();
+                if ($o2)
+                    foreach ($o2 as $item) {
+                        echo "\n                       
+            name ДУБЛИКАТ {$object->name}\n
+            square {$object->square}\n
+            year {$object->year}\n
+            ";
+                       /* $item->system_status = 0;
+                        $item->save(false);*/
+                    }
+            }
+        }
+    }
+
 
 }
