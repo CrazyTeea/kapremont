@@ -22,107 +22,6 @@ class ReferenceController extends Controller
 {
     static $jwt_key = 'example_key233';
 
-    public function actionLL(){
-        $signer = new Sha256();
-
-        $token = (new Builder())->set('reference', 'user')
-            ->sign($signer, 'example_key233')
-            ->getToken();
-
-        $response_token = file_get_contents("http://api.xn--80apneeq.xn--p1ai/api.php?option=reference_api&action=get_reference&module=constructor&reference_token=$token");
-
-        $signer = new Sha256();
-        $token = (new Parser())->parse($response_token);
-        $user = null;
-        if($token->verify($signer, 'example_key233')) {
-            $data_reference = $token->getClaims();
-            foreach ($data_reference as $ias_user){
-                $user = User::findOne(['username' => $ias_user->getValue()->login]);
-
-                if (!$user)
-                    $user = new User();
-                $user->id_org = $ias_user->getValue()->podved_id;;
-                $user->username = $ias_user->getValue()->login;
-                $user->auth_key = Yii::$app->getSecurity()->generateRandomString();
-                $user->setPassword($ias_user->getValue()->pwd);
-                $user->status = 10;
-                $user->save(false);
-
-                $rbac = new PhpManager();
-                $role = 'user';
-                switch ($ias_user->getValue()->access){
-                    case 'user':
-                    case 'podved':
-                    case 'other_podved':{
-                        $role = 'user';
-                        break;
-                    }
-                    case 'admin':{
-                        $role='root';
-                    }
-                }
-                print_r($user->username);
-
-                echo " ";
-                $rbac->revokeAll($user->id);
-                $rbac->assign($rbac->getRole($role),$user->id);
-                $rbac->assign($rbac->getPermission('dev_program'),$user->id);
-                print_r($role);
-                echo "\n";
-                //ss
-            }
-        }else {echo "с токеном хуйня"; return  false;}
-        return true;
-    }
-    public function actionStatus907(){
-        $ids = [16,
-            2,
-            6,
-            8,
-            12,
-            17,
-            26,
-            33,
-            41,
-            51,
-            80,
-            87,
-            93,
-            466,
-            115,
-            119,
-            123,
-            129,
-            135,
-            138,
-            146,
-            158,
-            159,
-            150,
-            210,
-            214,
-            221,
-            228,
-            240,
-            243,
-            245,
-            237,
-            249];
-
-        $programs = Program::findAll(['id_org'=>$ids]);
-        foreach ($programs as $program) {
-            $program->status907 = 1;
-            $program->save(false);
-        }
-        $program_objects = ProgramObjects::findAll(['id_org'=>$ids]);
-        foreach ($program_objects as $object){
-            $object->system_status = 0;
-            $object->save(false);
-        }
-
-    }
-
-
     /**
      * @return string
      * @throws \yii\db\Exception
@@ -241,6 +140,57 @@ class ReferenceController extends Controller
             return false;
         return true;
 
+    }
+
+    private function is_in_array($array, $key, $key_value){
+        $within_array = false;
+        foreach( $array as $k=>$v ){
+            if( is_array($v) ){
+                $within_array = $this->is_in_array($v, $key, $key_value);
+                if( $within_array ){
+                    break;
+                }
+            } else {
+                if( $v == $key_value && $k == $key ){
+                    $within_array = true;
+                    break;
+                }
+            }
+        }
+        return $within_array;
+    }
+    public function actionDubles(){
+        $objects = ProgramObjects::findAll(['system_status'=>1]);
+
+        $cont = [];
+        $sum = 0;
+        foreach ($objects as $object){
+            if ($object->svedenia)
+            {
+                foreach ($object->svedenia as $kek){
+                    $sum+=$kek->cost_real;
+                }
+            }
+            if (!$this->is_in_array($cont,'name',$object->name) and
+                !$this->is_in_array($cont,'status',$object->status) and
+                !$this->is_in_array($cont,'sum',$sum )) {
+
+                $cont[] = ['name'=>$object->name,'square'=>$object->square, 'year'=>$object->year];
+                $o2 = ProgramObjects::find()
+                    ->where(['name' => $object->name, 'square' => $object->square, 'id_org' => $object->id_org])
+                    ->andWhere(['not in', 'id', $object->id])->all();
+                if ($o2)
+                    foreach ($o2 as $item) {
+                        echo "\n                       
+            name ДУБЛИКАТ {$object->name}\n
+            square {$object->square}\n
+            year {$object->year}\n
+            ";
+                       /* $item->system_status = 0;
+                        $item->save(false);*/
+                    }
+            }
+        }
     }
 
 
