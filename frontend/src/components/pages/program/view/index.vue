@@ -59,8 +59,8 @@
         <br />
         <div class="row">
             <div class="col-6">
-                <b-button v-can:root,faiv_user variant="info" href="object/create" v-show="!programStatus && !ban && user_status">Добавить объект кап. ремонта</b-button>
-                <b-button v-can:root variant="info" href="atz" v-show="!programStatus && !ban && user_status">Добавить мероприятия по АТЗ</b-button>
+                <b-button v-can:root,faiv_user,user variant="info" href="object/create" v-show="!programStatus && !ban && user_status">Добавить объект кап. ремонта</b-button>
+                <b-button v-can:root,user variant="info" href="atz" v-show="!programStatus && !ban && user_status">Добавить мероприятия по АТЗ</b-button>
             </div>
             <div class="col-6"></div>
         </div>
