@@ -37,7 +37,7 @@
             <h5 class="vertical-horizontal-align">Текущий статус эксперта МОН: <label :class="`text-${status.variant}`">{{ status.label }}</label></h5>
             <h5 class="vertical-horizontal-align">Текущий статус ДЭП: <label :class="`text-${dep_status.color}`">{{ dep_status.label }}</label></h5>
             <h5 class="vertical-horizontal-align">Текущий статус ДКУ: <label :class="`text-${dku_status.color}`">{{ dku_status.label }}</label></h5>
-            <a v-if="this.real" :href="`/program/object/set-real/${this.items.id}`" class="btn btn-success">Приступить к реалзации </a>
+            <a v-if="this.real" :href="`/program/object/set-real/${this.items.id}`" class="btn btn-success">Приступить к реализации </a>
 
             <b-dropdown v-can:mgsu right text="Изменить статус" id="action" variant="info" class="m-2">
                 <b-dropdown-item :href="`/api/set-status/recomend/${obj_id}`" variant="success">Рекомендуется к согласованию</b-dropdown-item>
