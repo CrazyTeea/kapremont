@@ -82,7 +82,7 @@ class ProgramObjectsController extends AppController
         return "Что не так с файлами, обратитесь в тех поддержку. ID объекта $id";
     }
 
-    public function actionSetRial($id)
+    public function actionSetReal($id)
     {
         $model = ProgramObjects::findOne($id);
         $model->status = 5;
