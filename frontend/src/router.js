@@ -4,8 +4,8 @@ import Atz from "./components/pages/program/atz/index.vue";
 import ListObject from "./components/pages/organization/info/ListObjectComponent.vue";
 import ObjView from "./components/pages/organization/info/ObjectShowComponent.vue";
 import ObjectsForKrestiane from "./components/pages/program/ObjectView/ViewComponent.vue";
-import FaivAdminComponent from "./components/pages/FaivAdmin/FaivAdminComponent.vue"
-import StatusView from "./components/pages/program/view/status.vue"
+import FaivAdminComponent from "./components/pages/FaivAdmin/FaivAdminComponent.vue";
+import StatusView from "./components/pages/program/view/status.vue";
 
 Vue.use(VueRouter);
 

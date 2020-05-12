@@ -197,7 +197,7 @@ export default {
         ...mapActions(["requestPageData", "requestUser"]),
         onRowClick(item) {
             if (item.id) {
-                // window.location.href = `/program/object/view/${item.id}`;
+                 window.location.href = `/program/object/view/${item.id}`;
             }
         },
         rowCount(attr) {
