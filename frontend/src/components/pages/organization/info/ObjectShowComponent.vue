@@ -1194,7 +1194,7 @@ export default {
                 }
                 this.status.variant = color;
 
-                this.real = res.data.id == 2 && dku=='approved';
+                this.real = res.data.id == 2 && dep=='approved';
 
             })
         },
