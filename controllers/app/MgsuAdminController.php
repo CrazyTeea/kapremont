@@ -61,7 +61,7 @@ class MgsuAdminController extends Controller
         ];
 
         $begin_clause = [
-            'status' => $post['status'] ?? [0,1,2,3,4,5],
+            'status' => $post['status'] ?? [1,2,3,4,5],
         ];
 
         if (!isset($post['or_where'])) {
