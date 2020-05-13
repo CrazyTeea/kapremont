@@ -82,6 +82,9 @@ class Organizations extends \yii\db\ActiveRecord
     public function getProgram(){
         return $this->hasOne(Program::class,['id_org'=>'id']);
     }
+    public function getFounder(){
+        return $this->hasOne(Founders::class,['id_founder'=>'id']);
+    }
 
     private static function CalculateState($orgs){
         $state = null;

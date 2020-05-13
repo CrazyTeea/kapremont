@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\ChangePasswordForm;
 use app\models\forms\UserRecover;
+use app\models\Organizations;
 use app\models\Program;
 use app\models\ProgramObjects;
 use app\models\User;
@@ -231,15 +232,30 @@ class SiteController extends Controller
         return $this->render('about');
     }
     public function actionKek(){
-        $p = ProgramObjects::find()->all();
-        foreach ($p as $item) {
-            if ($item->id_priority > 3)
-                $item->id_priority = 1;
-            if ($item->wear > 4)
-                $item->wear = 1;
-            if (isset($item->prav_sob) and !($item->prav_sob=='fast' || $item->prav_sob=='others'))
-                $item->prav_sob = 'fast';
-            $item->save(false);
+        $users = User::find()->all();
+        foreach ($users as $user){
+            if (!$user->id_org)
+                continue;
+            $org = Organizations::findOne($user->id_org);
+            if (!$org)
+                continue;
+            $role = 'user';
+            if ($org->id_founder != 1)
+                $role = 'faiv_user';
+            $rbac = new PhpManager();
+            $mbAdmin = $rbac->getRolesByUser($user->id);
+            if (in_array('root',$mbAdmin))
+                continue;
+            if (in_array('dku',$mbAdmin))
+                continue;
+            if (in_array('dku_user',$mbAdmin))
+                continue;
+            if (in_array('dep',$mbAdmin))
+                continue;
+            $rbac->revokeAll($user->id);
+            $rbac->assign($rbac->getRole($role),$user->id);
+            echo "$user->username | $role \n";
+
         }
     }
 
