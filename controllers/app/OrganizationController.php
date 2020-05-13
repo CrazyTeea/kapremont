@@ -175,7 +175,7 @@ class OrganizationController extends AppController
 
     public function actionSetApproveStatusDep($obj_id)
     {
-        if(Yii::$app->getUser()->can('dep') && $this->commentPermision($obj_id)) {
+        if(Yii::$app->getUser()->can('dep')) {
             $object = ProgramObjects::findOne($obj_id);
             $object->dep_status = ProgramObjects::APPROVE_STATUS;
             $object->save(false);
@@ -187,7 +187,7 @@ class OrganizationController extends AppController
 
     public function actionSetRejectedStatusDep($obj_id)
     {
-        if(Yii::$app->getUser()->can('dep') && $this->commentPermision($obj_id)) {
+        if(Yii::$app->getUser()->can('dep')) {
             $object = ProgramObjects::findOne($obj_id);
             $object->dep_status = ProgramObjects::REJECTED_STATUS;
             $object->save(false);

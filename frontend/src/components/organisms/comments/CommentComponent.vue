@@ -11,8 +11,10 @@
                 <div>
                     <div v-if="allComments.length">
                         <transition-group name="slide-fade">
+
+
                             <b-list-group v-for="(comment, index) in allComments" :key="`key-${index}`">
-                                <b-list-group-item v-if="comment.user_role === 'mgsu'" class="flex-column align-items-start bg-light mt-2">
+                                <b-list-group-item v-if=" comment.user_role === 'mgsu'" class="flex-column align-items-start bg-light mt-2">
                                     <div class="d-flex w-100 justify-content-between">
                                         <h5 :id="`user_${comment.id_user}`" class="mb-1 font-weight-bold text-warning">Минобрнауки России (эксперт)</h5>
                                         <small>{{ comment.created_at }}</small>
@@ -36,6 +38,34 @@
                                         <b-button variant="outline-danger" size="sm" @click="deleteComment(comment.id)">Удалить</b-button>
                                     </div>
                                 </b-list-group-item>
+
+
+                                <b-list-group-item v-if=" comment.user_role === 'dep'" class="flex-column align-items-start bg-light mt-2">
+                                    <div class="d-flex w-100 justify-content-between">
+                                        <h5 :id="`user_${comment.id_user}`" class="mb-1 font-weight-bold text-warning">Минобрнауки России (ДЭП)</h5>
+                                        <small>{{ comment.created_at }}</small>
+                                    </div>
+
+                                    <p class="mb-1 font-italic">{{ comment.message }}</p>
+
+                                    <div v-if="comment.files.length" class="mt-2">
+                                        <div class="font-weight-bold">
+                                            Прикрепленные файлы:
+                                        </div>
+                                        <div v-for="(file, index) in comment.files" :key="index" class="ml-3">
+                                            <a @click="downloadFile(`${file.id_obj}_${file.id}`, `${file.file_name}.${file.file_ext}`)" :href="`#${file.id_obj}_${file.id}`">
+                                                {{ `${file.file_name}.${file.file_ext}` }}
+                                            </a>
+                                        </div>
+                                    </div>
+
+                                    <small></small>
+                                    <div class="d-flex justify-content-end" v-if="user_id === comment.id_user">
+                                        <b-button variant="outline-danger" size="sm" @click="deleteComment(comment.id)">Удалить</b-button>
+                                    </div>
+                                </b-list-group-item>
+
+
                                 <b-list-group-item v-else class="flex-column align-items-start mt-2">
                                     <div>
                                         <div class="d-flex w-100 justify-content-between">
@@ -63,6 +93,8 @@
                                     </div>
                                 </b-list-group-item>
                             </b-list-group>
+
+
                         </transition-group>
                     </div>
                     <b-list-group v-else>
