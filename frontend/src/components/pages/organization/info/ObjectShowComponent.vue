@@ -1136,7 +1136,7 @@ export default {
         },
         actionHendler(event) {
             event.preventDefault();
-            if(document.querySelector(`#user_${window.currentUser}`)) {
+            if(document.querySelector(`#user_${window.currentUser}`) || window.Permission === 'dep') {
                 window.location = event.target.href
             } else {
                 this.setBanner('danger', 'Сначала добавте комментарий!')
