@@ -58,6 +58,12 @@
             </b-dropdown>
         </div>
 
+        <div v-if="this.items.status == 5">
+            <label for="object_opis">Краткое описание планируемых работ по объекту</label>
+            <b-form-input @input="ObjectOpis" id="object_opis" v-can:user v-model="items.object_opis" />
+            <span v-can:root,mgsu>{{items.object_opis}}</span>
+        </div>
+
         <v-comments v-if="this.items.status != 5" :obj_id="obj_id" />
 
         <div class="mt-3">
@@ -157,6 +163,59 @@
         <div v-if="this.items.status == 5">
             <b-card no-body class="mb-1">
                 <b-card-header header-tag="header" class="p-1" role="tab">
+                            <span class="toggle_button" v-b-toggle.accordion-s>
+                                <b-icon-gear-wide-connected />
+                                График мероприятий
+                            </span>
+                </b-card-header>
+                <b-collapse id="accordion-s" accordion="my-accordion2" role="tabpanel" visible>
+                    <b-card-body style="overflow: auto">
+                        <div class="wraper-for-chart" style="overflow-x: scroll">
+                            <div class="chart-wrapper">
+                                <div class="charter1"></div>
+                                <div class="charter2"></div>
+                                <ul class="labels-for-chart">
+                                    <li>Проведение тендера и заключение договора на выполнение обследования</li>
+                                    <li>Выполнение обследования, подготовка и утверждение дефектного акта (дефектной ведомости)</li>
+                                    <li>Утверждение задания на проектирование</li>
+                                    <li>Проведение тендера и заключение договора на подготовку проектно-сметной документации</li>
+                                    <li>Подготовка проектно-сметной документации</li>
+                                    <li>Прохождение экспертизы проектно-сметной документации</li>
+                                    <li>Проведение тендера и заключение договора на выполнение строительно-монтажных работ</li>
+                                    <li>Выполнение строительно-монтажных работ</li>
+                                </ul>
+                                <ul class="chart-values">
+                                    <li>январь</li>
+                                    <li>февраль</li>
+                                    <li>март</li>
+                                    <li>апрель</li>
+                                    <li>май</li>
+                                    <li>июнь</li>
+                                    <li>июль</li>
+                                    <li>август</li>
+                                    <li>сентябрь</li>
+                                    <li>октябрь</li>
+                                    <li>ноябрь</li>
+                                    <li>декабрь</li>
+                                </ul>
+                                <ul class="chart-bars">
+                                    <li data-duration="январь-февраль½" data-color="#b03532"></li>
+                                    <li data-duration="февраль-июнь" data-color="#33a8a5"></li>
+                                    <li data-duration="июнь-июль½" data-color="#30997a"></li>
+                                    <li data-duration="июль½-август" data-color="#6a478f"></li>
+                                    <li data-duration="август-октябрь" data-color="#da6f2b"></li>
+                                    <li data-duration="октябрь-ноябрь" data-color="#3d8bb1"></li>
+                                    <li data-duration="октябрь-декабрь½" data-color="#e03f3f"></li>
+                                    <li data-duration="декабрь½-декабрь" data-color="#59a627"></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </b-card-body>
+                </b-collapse>
+            </b-card>
+            <b-card no-body class="mb-1">
+                <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-real>
                                 <b-icon-gear-wide-connected />
                                 Реализация мероприятий</span
@@ -170,10 +229,6 @@
                                 <b-th>Значение</b-th>
                             </b-thead>
                             <b-tbody>
-                                <b-tr>
-                                    <b-td>Краткое описание планируемых работ по объекту</b-td>
-                                    <b-td>{{items.object_opis}}</b-td>
-                                </b-tr>
                                 <b-tr>
                                     <b-td>Утвержденное бюджетное финансирование работ по объекту</b-td>
                                     <b-td>{{fromServer.program.finance_volume}}</b-td>
@@ -276,59 +331,7 @@
                 </b-collapse>
             </b-card>
             <v-comments :obj_id="obj_id" />
-            <b-card no-body class="mb-1">
-                <b-card-header header-tag="header" class="p-1" role="tab">
-                            <span class="toggle_button" v-b-toggle.accordion-s>
-                                <b-icon-gear-wide-connected />
-                                График мероприятий
-                            </span>
-                </b-card-header>
-                <b-collapse id="accordion-s" accordion="my-accordion2" role="tabpanel" visible>
-                    <b-card-body style="overflow: auto">
-                        <div class="wraper-for-chart" style="overflow-x: scroll">
-                            <div class="chart-wrapper">
-                                <div class="charter1"></div>
-                                <div class="charter2"></div>
-                                <ul class="labels-for-chart">
-                                    <li>Проведение тендера и заключение договора на выполнение обследования</li>
-                                    <li>Выполнение обследования, подготовка и утверждение дефектного акта (дефектной ведомости)</li>
-                                    <li>Утверждение задания на проектирование</li>
-                                    <li>Проведение тендера и заключение договора на подготовку проектно-сметной документации</li>
-                                    <li>Подготовка проектно-сметной документации</li>
-                                    <li>Прохождение экспертизы проектно-сметной документации</li>
-                                    <li>Проведение тендера и заключение договора на выполнение строительно-монтажных работ</li>
-                                    <li>Выполнение строительно-монтажных работ</li>
-                                </ul>
-                                <ul class="chart-values">
-                                    <li>январь</li>
-                                    <li>февраль</li>
-                                    <li>март</li>
-                                    <li>апрель</li>
-                                    <li>май</li>
-                                    <li>июнь</li>
-                                    <li>июль</li>
-                                    <li>август</li>
-                                    <li>сентябрь</li>
-                                    <li>октябрь</li>
-                                    <li>ноябрь</li>
-                                    <li>декабрь</li>
-                                </ul>
-                                <ul class="chart-bars">
-                                    <li data-duration="январь-февраль½" data-color="#b03532"></li>
-                                    <li data-duration="февраль-июнь" data-color="#33a8a5"></li>
-                                    <li data-duration="июнь-июль½" data-color="#30997a"></li>
-                                    <li data-duration="июль½-август" data-color="#6a478f"></li>
-                                    <li data-duration="август-октябрь" data-color="#da6f2b"></li>
-                                    <li data-duration="октябрь-ноябрь" data-color="#3d8bb1"></li>
-                                    <li data-duration="октябрь-декабрь½" data-color="#e03f3f"></li>
-                                    <li data-duration="декабрь½-декабрь" data-color="#59a627"></li>
-                                </ul>
-                            </div>
-                        </div>
 
-                    </b-card-body>
-                </b-collapse>
-            </b-card>
             <b-card no-body class="mb-1">
                 <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-archive>
@@ -1027,9 +1030,24 @@ export default {
         console.log(this.canChange)
     },
     methods: {
+        ObjectOpis(event){
+            let data = new FormData();
+            data.append('object_opis',this.items.object_opis);
+            Axios.post(`/program/object/set-value/${this.items.id}`,data, {
+                    headers: {
+                        "X-CSRF-Token": this.csrf
+                    }
+                }
+            ).then(response=>{
+                if(!response.data.success)
+                    response.data.errors.forEach(item=>{
+                        this.setBanner('danger',item)
+                    })
+            })
+        },
         async setChart() {
             console.log(this.svedenia.items)
-            // console.group('Svedenia: ')
+            console.group('Svedenia: ')
 
             const beginDate = [];
 

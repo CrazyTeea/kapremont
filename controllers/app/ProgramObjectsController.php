@@ -82,6 +82,17 @@ class ProgramObjectsController extends AppController
         return "Что не так с файлами, обратитесь в тех поддержку. ID объекта $id";
     }
 
+    public function actionSetValue($id){
+        $model = $this->findModel($id);
+        if ($model){
+            $model->object_opis = Yii::$app->request->post('object_opis');
+            return Json::encode([
+                'success'=>$model->save(),
+                'errors'=>$model->getErrors()
+            ]);
+        }
+    }
+
     public function actionSetReal($id)
     {
         $model = ProgramObjects::findOne($id);
