@@ -66,7 +66,7 @@ class ProgramStatus
         return false;
     }
 
-    public function isDep(): bool //согласовано деп (опирается на организации)
+    public function isDep(): bool //согласовано дЭп (опирается на организации)
     {
         $org = Organizations::find()->where(['id' => $this->id_org])->one();
         if($org->dep_status === 'approved') {
@@ -121,7 +121,7 @@ class ProgramStatus
         return $isDraft ?? false;
     }
 
-    public function getProgramStatus(): string
+    public function getProgramStatus(): ?string
     {
         $org = Organizations::find()->where(['id' => $this->id_org])->one();
 

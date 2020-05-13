@@ -75,7 +75,7 @@ class ProgramController extends AppController
 
         $dep_status = [
             'not' => 'В обработке',
-            'approved' => 'Согласовано ДЕП',
+            'approved' => 'Согласовано ДЭП',
             'rejected' => 'Резерв'
         ];
 

@@ -119,7 +119,7 @@
                                 v-model="item.dep_status"
                                 :options="[
                                     {value: 'not', text: 'В обработке'},
-                                    {value: 'approved', text: 'Согласовано ДЕП'},
+                                    {value: 'approved', text: 'Согласовано ДЭП'},
                                     {value: 'rejected', text: 'Резерв'}
                                 ]" />
                             <span v-can:dku,dku_user>{{getDepStatus(item.dep_status)}}</span>
@@ -205,7 +205,7 @@ export default {
                 ],
                 dep_status:[
                     {value: 'not', text: 'В обработке'},
-                    {value: 'approved', text: 'Согласовано ДЕП'},
+                    {value: 'approved', text: 'Согласовано ДЭП'},
                     {value: 'rejected', text: 'Резерв'}
                 ],
                 quantity: [

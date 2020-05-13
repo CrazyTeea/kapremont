@@ -79,7 +79,7 @@ class ShitController extends Controller
 
             $dep_status = [
                 'not' => 'В обработке',
-                'approved' => 'Согласовано ДЕП',
+                'approved' => 'Согласовано ДЭП',
                 'rejected' => 'Резерв'
             ];
 
