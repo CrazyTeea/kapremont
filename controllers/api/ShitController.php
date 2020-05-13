@@ -45,9 +45,9 @@ class ShitController extends Controller
 
         $ret = [];
         foreach ($programs as $program){
-            $ob_fin_vol = [0,0,0,0,0];
+            $ob_fin_vol = [0,0,0,0,0,0];
             $obj_cost = ['pr'=>0,'res'=>0,'depRes'=>0,'depPr'=>0];
-            $obj_count = [0,0,0,0,0,'dep'=>0];
+            $obj_count = [0,0,0,0,0,0,'dep'=>0];
             foreach ($program->objects as $object){
                 $obj_count[$object->status]++;
                 if ($object->dep_status=='approved')
