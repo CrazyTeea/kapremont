@@ -38,7 +38,7 @@
             </b-tab>
 
             <b-tab lazy v-can:root,mgsu,dep title-link-class="text-success" title="Рассмотрено ДЭП">
-                <v-objects status="2" dep_status="approved" />
+                <v-objects dep_status="approved" />
             </b-tab>
 
             <b-tab lazy v-can:root,mgsu,dep title-link-class="text-warning" title="Резерв">
