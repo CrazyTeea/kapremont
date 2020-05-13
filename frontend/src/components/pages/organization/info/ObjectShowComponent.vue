@@ -161,6 +161,7 @@
 
 
         <div v-if="this.items.status == 5">
+            <v-comments :obj_id="obj_id" />
             <b-card no-body class="mb-1">
                 <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-s>
