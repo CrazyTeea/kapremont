@@ -88,6 +88,7 @@ class Organizations extends \yii\db\ActiveRecord
         if($orgs === 'other') {
             $rolesId = array_merge(User::getUsersByRole('faiv_admin'), User::getUsersByRole('faiv_user')) ;
             $users = User::find()->where(['id'=> $rolesId])->all();
+            $orgIds = [];
             foreach($users as $user) {
                 $orgIds[] = $user->id_org;
             }
