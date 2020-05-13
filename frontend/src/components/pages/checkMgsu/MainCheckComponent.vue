@@ -33,7 +33,7 @@
             <b-tab lazy v-can:root,mgsu,dep title-link-class="text-danger" title="Не рекомендуется к согласованию">
                 <v-objects status="3" />
             </b-tab>
-            <b-tab lazy v-can:root title-link-class="text-danger" title="Реализация">
+            <b-tab lazy v-can:root,mgsu,dep title-link-class="text-danger" title="Реализация">
                 <v-objects status="5" />
             </b-tab>
 
