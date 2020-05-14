@@ -203,10 +203,6 @@ class OrganizationController extends AppController
             $post= Yii::$app->request->post();
             if (isset($post['dku_status'])) {
                 $org = Organizations::find()->where(['id' => $org_id])->one();
-                foreach (ProgramObjects::findAll(['id_org'=>$org_id]) as $item){
-                    $item->dep_status = $post['dku_status'];
-                    $item->save(false);
-                }
                 $org->dku_status = $post['dku_status'];
                 $org->save(false);
             }
@@ -225,10 +221,6 @@ class OrganizationController extends AppController
         if(Yii::$app->getUser()->can('dep')) {
             $status = Yii::$app->request->post('dep_status');
             $org = Organizations::find()->where(['id' => $org_id])->one();
-            foreach (ProgramObjects::findAll(['id_org'=>$org_id]) as $item){
-                $item->dep_status = $status;
-                $item->save(false);
-            }
             $org->dep_status = $status;
             $org->save(false);
 
