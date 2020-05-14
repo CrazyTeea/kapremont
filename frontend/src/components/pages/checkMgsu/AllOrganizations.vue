@@ -102,7 +102,7 @@
                         <b-th v-can:dku,dku_user class="normal-font-weight-for-sell center-text-in-cell">
                             <b-form-select
                                     v-can:dku
-                                @input="setDkuStatus(item)"
+                                @change="setDkuStatus(item)"
                                 v-model="item.dku_status"
                                 :options="[
                                     {value: 'not', text: 'В обработке'},
@@ -115,7 +115,7 @@
                         <b-th v-can:dep,dku,dku_user class="normal-font-weight-for-sell center-text-in-cell">
                             <b-form-select
                                     v-can:dep
-                                @input="setDepStatus(item)"
+                                @change="setDepStatus(item)"
                                 v-model="item.dep_status"
                                 :options="[
                                     {value: 'not', text: 'В обработке'},
@@ -126,7 +126,7 @@
                         </b-th>
                         <b-th  v-can:dku,dku_user class="normal-font-weight-for-sell center-text-in-cell">
                             <b-form-input v-can:dku
-                                    @input="setDkuAtz(item)"
+                                    @change="setDkuAtz(item)"
                                     v-model="item.dku_atz"
                             ></b-form-input>
                             <span v-can:dku_user>{{item.dku_atz}}</span>

@@ -170,6 +170,7 @@ return [
             '/rest/upload/*',
             '/api/user-info/*',
             '/app/program/is-approve',
+            '/api/shit/*',
         ],
     ],
     'dku' => [
