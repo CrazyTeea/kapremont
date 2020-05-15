@@ -267,6 +267,7 @@
                                     <b-th>Фактическая Сумма бюджетного финансирования на проведение капитального ремонта (тыс. руб.)</b-th>
                                     <b-th>Фактическое Софинансирование из внебюджетных источников (тыс. руб.)</b-th>
                                     <b-th>Отметка о завершении этапа </b-th>
+                                    <b-th>Подтверждающие документы </b-th>
                                     <b-th>Комментарий (текстовое поле Заполняет ВУЗ)</b-th>
                                     <b-th>Отметка Эксперта МОН (МГСУ) Принято / не принято</b-th>
                                     <b-th>Комментарий эксперта МОН )</b-th>
@@ -307,6 +308,9 @@
                                         <span v-can:user>
                                             {{item.doneExpert ? 'Да' : 'Нет'}}
                                         </span>
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <b-form-file v-can:mgsu,root,dep v-model="svedenia2[index].file" />
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
                                         <b-form-input v-can:mgsu,root,dep v-model="svedenia2[index].commentExpert" />
@@ -532,6 +536,7 @@ import {
     BThead,
     BTbody,
     BDropdown,
+    BFormFile,
     BDropdownItem,
     BTable,
     BBreadcrumb,
@@ -544,6 +549,7 @@ export default {
     },
     components: {
         "v-comments": CommentComponent,
+        BFormFile,
         BAlert,
         BBreadcrumb,
         BCollapse,
@@ -1019,8 +1025,6 @@ export default {
         await this.requestUser();
         await this.getStatus();
         await this.getObject();
-        
-        await this.setChart()
     
         await window.addEventListener("load", this.createChart);
         await window.addEventListener("resize", this.createChart);
@@ -1028,7 +1032,6 @@ export default {
         let actionElement = document.querySelector('#action');
         actionElement?.addEventListener('click', event => {this.actionHendler(event)})
         this.canChange = window.Permission === 'root' | window.canChange || false;
-        console.log(this.canChange)
     },
     methods: {
         ObjectOpis(event){
@@ -1046,18 +1049,7 @@ export default {
                     })
             })
         },
-        async setChart() {
-            console.log(this.svedenia.items)
-            console.group('Svedenia: ')
 
-            const beginDate = [];
-
-            this.svedenia.items.forEach( item => {
-                beginDate.push(item.date_event_start)
-            })
-
-            console.log(beginDate)
-        },
         createChart(e) {
             const days = document.querySelectorAll(".chart-values li");
             const tasks = document.querySelectorAll(".chart-bars li");
@@ -1221,7 +1213,6 @@ export default {
         getObject(){
             Axios.get(`/api/get-object/${this.obj_id}`).then(res=>{
                 this.fromServer = JSON.parse(res.data);
-                 console.log(this.fromServer);
                 this.items = this.fromServer.object;
                 this.items.org_name = this.fromServer.organization.name;
                 this.docs = this.fromServer.docs;
