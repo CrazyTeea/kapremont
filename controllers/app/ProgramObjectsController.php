@@ -85,7 +85,7 @@ class ProgramObjectsController extends AppController
     public function actionSetValue($id){
         $model = $this->findModel($id);
         if ($model){
-            $model->object_opis = Yii::$app->request->post('object_opis');
+            $model[Yii::$app->request->post('value')] = Yii::$app->request->post(Yii::$app->request->post('value'));
             return Json::encode([
                 'success'=>$model->save(),
                 'errors'=>$model->getErrors()
