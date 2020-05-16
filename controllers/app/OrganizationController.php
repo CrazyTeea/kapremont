@@ -242,13 +242,14 @@ class OrganizationController extends AppController
 
     public function actionGetApproveStatus($obj_id)
     {
-        $query = ProgramObjects::find()->where(['program_objects.id'=>$obj_id])->joinWith(['org'])->one();
+        $query = ProgramObjects::findOne($obj_id);
 
         return json_encode([
             'label' => $query->astatus->label,
             'id' => $query->astatus->id,
             'dep_status' => $query->dep_status,
-            'dku_status' => $query->org->dku_status
+            'dku_status' => $query->org->dku_status,
+            'real_status'=> $query->real_status ?? 0,
         ]);
     }
 

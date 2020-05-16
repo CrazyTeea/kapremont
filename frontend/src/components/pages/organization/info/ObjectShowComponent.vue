@@ -59,9 +59,22 @@
         </div>
 
         <div v-if="this.items.status == 5">
+            <div class="d-flex justify-content-between align-items-center">
+                <h5>
+                    Текущий этап реализации
+                    <label v-can:user :class="`text-${realStatusType[realStatus].variant}`">
+                        {{realStatusType[realStatus].label}}
+                    </label>
+                    <b-dropdown  v-can:mon,root :text="realStatusType[realStatus].label" :variant="realStatusType[realStatus].variant">
+                        <b-dropdown-item v-for="(item,index) in realStatusType" @click="changeRealStatus(index)" :key="index" :variant="item.variant" :value="index">{{item.label}}</b-dropdown-item>
+                    </b-dropdown>
+                </h5>
+
+            </div>
             <label for="object_opis">Краткое описание планируемых работ по объекту</label>
             <b-form-input @input="ObjectOpis" id="object_opis" v-can:user v-model="items.object_opis" />
             <span v-can:root,mgsu>{{items.object_opis}}</span>
+
         </div>
 
         <v-comments v-if="this.items.status != 5" :obj_id="obj_id" />
@@ -577,6 +590,25 @@ export default {
                 label: '',
                 variant: ''
             },
+            realStatus:0,
+            realStatusType:[
+                {
+                    variant:'secondary',
+                    label:'Не выполнен ни один этап'
+                },
+                {
+                    variant:'warning',
+                    label:'проверка экспертом МОН'
+                },
+                {
+                    variant:'success',
+                    label:'принят экспертом МОН'
+                },
+                {
+                    variant:'danger',
+                    label:'Не принят/отставание от графика'
+                },
+            ],
             dep_status: {
                 label: null,
                 color: null
@@ -1034,8 +1066,26 @@ export default {
         this.canChange = window.Permission === 'root' | window.canChange || false;
     },
     methods: {
+        changeRealStatus(real_status){
+            this.realStatus = real_status;
+            let data = new FormData();
+            data.append('value','real_status');
+            data.append('real_status',real_status);
+            Axios.post(`/program/object/set-value/${this.items.id}`,data, {
+                    headers: {
+                        "X-CSRF-Token": this.csrf
+                    }
+                }
+            ).then(response=>{
+                if(!response.data.success)
+                    response.data.errors.forEach(item=>{
+                        this.setBanner('danger',item)
+                    })
+            })
+        },
         ObjectOpis(event){
             let data = new FormData();
+            data.append('value','object_opis');
             data.append('object_opis',this.items.object_opis);
             Axios.post(`/program/object/set-value/${this.items.id}`,data, {
                     headers: {
@@ -1160,6 +1210,7 @@ export default {
         async getStatus() {
             Axios.get(`/api/get-status/${this.obj_id}`).then((res) =>{
                 this.status.label = res.data.label;
+                this.realStatus = res.data.real_status;
                 
                 let dep = res.data.dep_status;
                 if(dep === 'not') {
