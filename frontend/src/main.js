@@ -20,12 +20,13 @@ Vue.directive("can", {
             if (!roles.includes(window.Permission)) {
                 el.style.display = 'none';
                 el.childNodes.innerHTML = '';
-                node.elm.parentElement.removeChild(node.elm);
-                if (node.child) {
-                    let e = document.getElementById(node.child.controlledBy);
-                    if (e)
-                        e.parentElement.removeChild(e);
-                }
+
+                    node.elm.parentElement.removeChild(node.elm);
+                    if (node.child) {
+                        let e = document.getElementById(node.child.controlledBy);
+                        if (e)
+                            e.parentElement.removeChild(e);
+                    }
 
             }
         }, 1);

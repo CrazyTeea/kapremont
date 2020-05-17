@@ -31,53 +31,109 @@
         <h1 class="mt-3">{{ this.items.name }}</h1>
         <div >
             <a v-if="canChange" :href="`/program/object/update/${this.items.id}`" class="btn btn-primary">Редактировать </a>
-        </div>
-
-        <div class="d-flex justify-content-between align-items-center">
-            <h5 class="vertical-horizontal-align">Текущий статус эксперта МОН: <label :class="`text-${status.variant}`">{{ status.label }}</label></h5>
-            <h5 class="vertical-horizontal-align">Текущий статус ДЭП: <label :class="`text-${dep_status.color}`">{{ dep_status.label }}</label></h5>
-            <h5 class="vertical-horizontal-align">Текущий статус ДКУ: <label :class="`text-${dku_status.color}`">{{ dku_status.label }}</label></h5>
             <a v-if="this.real" :href="`/program/object/set-real/${this.items.id}`" class="btn btn-success">Приступить к реализации </a>
-
-            <b-dropdown v-can:mgsu right text="Изменить статус" id="action" variant="info" class="m-2">
-                <b-dropdown-item :href="`/api/set-status/recomend/${obj_id}`" variant="success">Рекомендуется к согласованию</b-dropdown-item>
-                <b-dropdown-item :href="`/api/set-status/not-recomend/${obj_id}`" variant="danger">Не рекомендуется к согласованию</b-dropdown-item>
-                <b-dropdown-item :href="`/api/set-status/to-work/${obj_id}`" variant="warning">На доработку</b-dropdown-item>
-            </b-dropdown>
-
-            <!-- <h5 class="vertical-horizontal-align">Текущий статус ДЭП: <label :class="`text-${dep_status.color}`">{{ dep_status.label }}</label></h5> -->
-            <b-dropdown :disabled="!show.dep" v-can:dep right id="action"  text="Изменить статус" variant="info" class="m-2">
-                <b-dropdown-item :href="`/api/set-status/approved/dep/${obj_id}`" variant="success">Рассмотрено ДЭП</b-dropdown-item>
-                <b-dropdown-item :href="`/api/set-status/rejected/dep/${obj_id}`" variant="warning">Резерв</b-dropdown-item>
-            </b-dropdown>
-
-            <!-- <h5 class="vertical-horizontal-align">Текущий статус ДКУ: <label :class="`text-${dku_status.color}`">{{ dku_status.label }}</label></h5> -->
-            <b-dropdown :disabled="!show.dku"  v-can:dku right id="action"  text="Изменить статус" variant="info" class="m-2">
-                <b-dropdown-item :href="`/api/set-status/approved/dku/${obj_id}`" variant="success">Согласовано ДКУ</b-dropdown-item>
-                <b-dropdown-item :href="`/api/set-status/rejected/dku/${obj_id}`" variant="warning">Резерв</b-dropdown-item>
-            </b-dropdown>
         </div>
 
         <div v-if="this.items.status == 5">
-            <div class="d-flex justify-content-between align-items-center">
-                <h5>
-                    Текущий этап реализации
-                    <label v-can:user :class="`text-${realStatusType[realStatus].variant}`">
-                        {{realStatusType[realStatus].label}}
-                    </label>
-                    <b-dropdown  v-can:mon,root :text="realStatusType[realStatus].label" :variant="realStatusType[realStatus].variant">
-                        <b-dropdown-item v-for="(item,index) in realStatusType" @click="changeRealStatus(index)" :key="index" :variant="item.variant" :value="index">{{item.label}}</b-dropdown-item>
-                    </b-dropdown>
-                </h5>
+            <div class="row">
+                <div class="col-2">
+                    <h5>Текущий статус эксперта МОН: <label :class="`text-${status.variant}`">{{ status.label }}</label></h5>
+                </div>
+                <div class="col-3">
+                    <h5>Текущий статус ДЭП: <label :class="`text-${dep_status.color}`">{{ dep_status.label }}</label></h5>
+                </div>
+                <div class="col-2">
+                    <h5>Текущий статус ДКУ: <label :class="`text-${dku_status.color}`">{{ dku_status.label }}</label></h5>
+                </div>
+                <div class="col-2">
+                    <h5 >
+                        Дата завершения текущего этапа:
+                        <label>
+                            {{dateStatus}}
+                        </label>
 
+                    </h5>
+                </div>
+                <div class="col-2">
+                    <h5 >
+                        Текущий статус:
+                        <label :class="`text-${realStatusType[realStatus].variant}`">
+                            {{realStatusType[realStatus].label}}
+                        </label>
+
+                    </h5>
+                </div>
             </div>
+            <div class="row">
+                <div class="col-3">
+                    <b-dropdown v-can:mgsu,root right text="статус эксперта МОН"  variant="info" class="m-2" >
+                        <b-dropdown-item :href="`/api/set-status/recomend/${obj_id}`" @click="actionHendler" variant="success">Рекомендуется к согласованию</b-dropdown-item>
+                        <b-dropdown-item :href="`/api/set-status/not-recomend/${obj_id}`" @click="actionHendler" variant="danger">Не рекомендуется к согласованию</b-dropdown-item>
+                        <b-dropdown-item :href="`/api/set-status/to-work/${obj_id}`" @click="actionHendler" variant="warning">На доработку</b-dropdown-item>
+                    </b-dropdown>
+                </div>
+                <div class="col-3">
+                    <b-dropdown v-can:dep,root right text="статус ДЭП" variant="info" class="m-2">
+                        <b-dropdown-item :href="`/api/set-status/approved/dep/${obj_id}`" @click="actionHendler" variant="success">Рассмотрено ДЭП</b-dropdown-item>
+                        <b-dropdown-item :href="`/api/set-status/rejected/dep/${obj_id}`" @click="actionHendler" variant="warning">Резерв</b-dropdown-item>
+                    </b-dropdown>
+                </div>
+                <div class="col-3">
+                    <b-dropdown v-can:dku,root right  text="статус ДКУ" variant="info" class="m-2">
+                        <b-dropdown-item :href="`/api/set-status/approved/dku/${obj_id}`" @click="actionHendler" variant="success">Согласовано ДКУ</b-dropdown-item>
+                        <b-dropdown-item :href="`/api/set-status/rejected/dku/${obj_id}`" @click="actionHendler" variant="warning">Резерв</b-dropdown-item>
+                    </b-dropdown>
+                </div>
+                <div class="col-3">
+                    <b-dropdown v-can:root right class="m-2" :text="realStatusType[realStatus].label" :variant="realStatusType[realStatus].variant">
+                        <b-dropdown-item v-for="(item,index) in realStatusType" @click="changeRealStatus(index)"
+                                         :key="index" :variant="item.variant" :value="index">{{item.label}}</b-dropdown-item>
+                    </b-dropdown>
+                </div>
+            </div>
+
             <label for="object_opis">Краткое описание планируемых работ по объекту</label>
             <b-form-input @input="ObjectOpis" id="object_opis" v-can:user v-model="items.object_opis" />
             <span v-can:root,mgsu>{{items.object_opis}}</span>
-
         </div>
 
-        <v-comments v-if="this.items.status != 5" :obj_id="obj_id" />
+        <div v-else>
+            <div class="row">
+                <div class="col-4">
+                    <h5>Текущий статус эксперта МОН: <label :class="`text-${status.variant}`">{{ status.label }}</label></h5>
+                </div>
+                <div class="col-4">
+                    <h5>Текущий статус ДЭП: <label :class="`text-${dep_status.color}`">{{ dep_status.label }}</label></h5>
+                </div>
+                <div class="col-4">
+                    <h5>Текущий статус ДКУ: <label :class="`text-${dku_status.color}`">{{ dku_status.label }}</label></h5>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4">
+                    <b-dropdown v-can:mgsu,root right text="статус эксперта МОН"  variant="info" class="m-2" >
+                        <b-dropdown-item :href="`/api/set-status/recomend/${obj_id}`" @click="actionHendler" variant="success">Рекомендуется к согласованию</b-dropdown-item>
+                        <b-dropdown-item :href="`/api/set-status/not-recomend/${obj_id}`" @click="actionHendler" variant="danger">Не рекомендуется к согласованию</b-dropdown-item>
+                        <b-dropdown-item :href="`/api/set-status/to-work/${obj_id}`" @click="actionHendler" variant="warning">На доработку</b-dropdown-item>
+                    </b-dropdown>
+                </div>
+                <div class="col-4">
+                    <b-dropdown v-can:dep,root right text="статус ДЭП" variant="info" class="m-2">
+                        <b-dropdown-item :href="`/api/set-status/approved/dep/${obj_id}`" @click="actionHendler" variant="success">Рассмотрено ДЭП</b-dropdown-item>
+                        <b-dropdown-item :href="`/api/set-status/rejected/dep/${obj_id}`" @click="actionHendler" variant="warning">Резерв</b-dropdown-item>
+                    </b-dropdown>
+                </div>
+                <div class="col-4">
+                    <b-dropdown v-can:dku,root right  text="статус ДКУ" variant="info" class="m-2">
+                        <b-dropdown-item :href="`/api/set-status/approved/dku/${obj_id}`" @click="actionHendler" variant="success">Согласовано ДКУ</b-dropdown-item>
+                        <b-dropdown-item :href="`/api/set-status/rejected/dku/${obj_id}`" @click="actionHendler" variant="warning">Резерв</b-dropdown-item>
+                    </b-dropdown>
+                </div>
+            </div>
+        <v-comments :obj_id="obj_id" />
+        </div>
+
+
 
         <div class="mt-3">
                 <div class="row">
@@ -174,7 +230,7 @@
 
 
         <div v-if="this.items.status == 5">
-            <v-comments :obj_id="obj_id" />
+            <v-comments style="margin: 5px 0" :obj_id="obj_id" />
             <b-card no-body class="mb-1">
                 <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-s>
@@ -348,8 +404,6 @@
                     </b-card-body>
                 </b-collapse>
             </b-card>
-            <v-comments :obj_id="obj_id" />
-
             <b-card no-body class="mb-1">
                 <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-archive>
@@ -586,6 +640,7 @@ export default {
         return {
             bannerInfo: [],
             canChange: false,
+            dateStatus:Date,
             status: {
                 label: '',
                 variant: ''
@@ -594,19 +649,19 @@ export default {
             realStatusType:[
                 {
                     variant:'secondary',
-                    label:'Не выполнен ни один этап'
+                    label:'Серый'
                 },
                 {
                     variant:'warning',
-                    label:'проверка экспертом МОН'
+                    label:'Желтый'
                 },
                 {
                     variant:'success',
-                    label:'принят экспертом МОН'
+                    label:'Зеленый'
                 },
                 {
                     variant:'danger',
-                    label:'Не принят/отставание от графика'
+                    label:'Красный'
                 },
             ],
             dep_status: {
@@ -1061,8 +1116,6 @@ export default {
         await window.addEventListener("load", this.createChart);
         await window.addEventListener("resize", this.createChart);
 
-        let actionElement = document.querySelector('#action');
-        actionElement?.addEventListener('click', event => {this.actionHendler(event)})
         this.canChange = window.Permission === 'root' | window.canChange || false;
     },
     methods: {
@@ -1213,33 +1266,33 @@ export default {
                 this.realStatus = res.data.real_status;
                 
                 let dep = res.data.dep_status;
-                if(dep === 'not') {
+                if(dep == 'not') {
                     this.dep_status.label = 'В обработке';
                     this.dep_status.color = 'secondary'
-                } else if(dep === 'approved') {
+                } else if(dep == 'approved') {
                     this.dep_status.label = 'Рассмотрено ДЭП';
                     this.dep_status.color = 'success'
-                } else if(dep === 'rejected') {
+                } else if(dep == 'rejected') {
                     this.dep_status.label = 'Резерв';
                     this.dep_status.color = 'warning'
                 }
 
                 let dku = res.data.dku_status;
-                if(dku === 'not') {
+                if(dku == 'not') {
                     this.dku_status.label = 'В обработке';
                     this.dku_status.color = 'secondary'
-                } else if(dku === 'approved') {
+                } else if(dku == 'approved') {
                     this.dku_status.label = 'Согласовано ДКУ';
                     this.dku_status.color = 'success'
-                } else if(dku === 'rejected') {
+                } else if(dku == 'rejected') {
                     this.dku_status.label = 'Резерв';
                     this.dku_status.color = 'warning'
                 }
 
-                if(res.data.id === 2) {
+                if(res.data.id == 2) {
                     this.show.dep = true
                 }
-                if(res.data.dep_status === 'approved') {
+                if(res.data.dep_status == 'approved') {
                     this.show.dku = true
                 }
 
@@ -1261,8 +1314,8 @@ export default {
             })
         },
         isFloat(x) { return !!(x % 1); },
-        getObject(){
-            Axios.get(`/api/get-object/${this.obj_id}`).then(res=>{
+        async getObject(){
+           await Axios.get(`/api/get-object/${this.obj_id}`).then(res=>{
                 this.fromServer = JSON.parse(res.data);
                 this.items = this.fromServer.object;
                 this.items.org_name = this.fromServer.organization.name;
@@ -1372,6 +1425,7 @@ export default {
                         }
                     }
                 });
+
                 let w0 = this.getEl(this.fromServer.waited,0);
                 let w1 = this.getEl(this.fromServer.waited,1);
                 let w2 = this.getEl(this.fromServer.waited,2);
@@ -1417,6 +1471,13 @@ export default {
                 }
 
 
+            });
+            this.svedenia2.some(item=>{
+                if (item.done == 0){
+                    if (item.date_event_end)
+                        this.dateStatus = new Date(item.date_event_end).toLocaleDateString();
+                    return true;
+                }
             });
         },
         getIznos(iznos) {

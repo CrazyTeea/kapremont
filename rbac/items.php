@@ -42,6 +42,7 @@ return [
             '/api/shit/data',
             '/api/user-info/*',
             '/app/program/is-approve',
+            '/app/program-objects/set-value',
         ],
     ],
     'orglist_view' => [
@@ -171,6 +172,7 @@ return [
             '/api/user-info/*',
             '/app/program/is-approve',
             '/api/shit/*',
+            '/app/program-objects/set-value',
         ],
     ],
     'dku' => [
@@ -724,6 +726,9 @@ return [
         ],
     ],
     '/app/program/dku-export' => [
+        'type' => 2,
+    ],
+    '/app/program-objects/set-value' => [
         'type' => 2,
     ],
 ];
