@@ -162,7 +162,7 @@
 
         <div v-if="this.items.status == 5">
             <v-comments :obj_id="obj_id" />
-            <b-card no-body class="mb-1">
+            <b-card no-body class="mb-1 mt-2">
                 <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-s>
                                 <b-icon-gear-wide-connected />
@@ -267,6 +267,9 @@
                                     <b-th>Фактическая Сумма бюджетного финансирования на проведение капитального ремонта (тыс. руб.)</b-th>
                                     <b-th>Фактическое Софинансирование из внебюджетных источников (тыс. руб.)</b-th>
                                     <b-th>Отметка о завершении этапа </b-th>
+
+                                    <b-th>Подтверждающие документы</b-th>
+
                                     <b-th>Комментарий (текстовое поле Заполняет ВУЗ)</b-th>
                                     <b-th>Отметка Эксперта МОН (МГСУ) Принято / не принято</b-th>
                                     <b-th>Комментарий эксперта МОН )</b-th>
@@ -299,6 +302,17 @@
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
                                         <b-form-checkbox v-model="svedenia2[index].done" />
                                     </b-td>
+
+
+                                    <!-- Подтверждающие документы -->
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <!-- <label @click="debugItem(item, svedenia2[index], index)"> Debug item {{index}} </label> -->
+                                        <b-form-input 
+                                            v-if=" sved2Href.includes(item.step + 1)"
+                                            v-model="svedenia2[index].access_document" />
+                                    </b-td>
+
+
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
                                         <b-form-input v-model="svedenia2[index].comment" />
                                     </b-td>
@@ -331,7 +345,6 @@
                     </b-card-body>
                 </b-collapse>
             </b-card>
-            <v-comments :obj_id="obj_id" />
 
             <b-card no-body class="mb-1">
                 <b-card-header header-tag="header" class="p-1" role="tab">
@@ -1006,7 +1019,8 @@ export default {
                     {key:'protect',label:'Способы защиты'},
                 ],
                 items:[]
-            }
+            },
+            sved2Href: [1.2, 4.2, 7.2],
         };
 
 
@@ -1031,6 +1045,15 @@ export default {
         console.log(this.canChange)
     },
     methods: {
+        debugItem(item, sved2, index) {
+            //Опытным путем было выяснено что индек считается вот таким образом (item.step + 1)
+
+            console.group('debugItem' + index);
+            console.log(item);
+            console.log(sved2);
+            console.log(item.step + 1)
+            console.groupEnd();
+        },
         ObjectOpis(event){
             let data = new FormData();
             data.append('object_opis',this.items.object_opis);
@@ -1047,8 +1070,6 @@ export default {
             })
         },
         async setChart() {
-            console.log(this.svedenia.items)
-            console.group('Svedenia: ')
 
             const beginDate = [];
 
@@ -1056,7 +1077,6 @@ export default {
                 beginDate.push(item.date_event_start)
             })
 
-            console.log(beginDate)
         },
         createChart(e) {
             const days = document.querySelectorAll(".chart-values li");
@@ -1112,6 +1132,7 @@ export default {
           }).then(response=>console.log(response.data))
         },
         addRow(index,toIndex = false){
+
             this.svedenia2.splice(index,0,{
                 step:this.svedenia2[index-1].step+0.1 ,
                 id_event:null,
@@ -1129,6 +1150,12 @@ export default {
                 parent:false,
                 canDelete:true,
             });
+        },
+        addAccessDocument(item, svedenie) {
+            // @change="addAccessDocument(item, svedenia2[index])" Добавить куда нужно
+
+            let ident_number = item.step + 1 //Идентификатор (Порядковый номер в таблице) 
+            let model = svedenie.access_document //Модель ссылки
         },
         deleteRow(index){
             if (this.svedenia2[index-1].canDelete)
