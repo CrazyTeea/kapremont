@@ -41,9 +41,9 @@ class ProgObjectsEvents extends BaseMultiModel
     public function rules()
     {
         return [
-            [['is_nessesary', 'done', 'doneExpert','id_object'], 'integer'],
+            [['is_nessesary', 'id_object'], 'integer'],
             [[ 'comment', 'commentExpert'], 'string'],
-            [['date_event_start', 'date_event_end'], 'safe'],
+            [['date_event_start', 'date_event_end','done', 'doneExpert'], 'safe'],
             [['step', 'cost_real', 'sum_bud_fin', 'fin_vnebud_ist'], 'number'],
         ];
     }
