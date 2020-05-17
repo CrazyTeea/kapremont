@@ -12,6 +12,7 @@ use Yii;
  * @property int $id_object
  * @property string|null $date_event_start
  * @property string|null $date_event_end
+ * @property string $access_document
  * @property float|null $cost_real
  * @property float|null $sum_bud_fin
  * @property float|null $fin_vnebud_ist
@@ -42,7 +43,7 @@ class ProgObjectsEvents extends BaseMultiModel
     {
         return [
             [['is_nessesary', 'id_object'], 'integer'],
-            [[ 'comment', 'commentExpert'], 'string'],
+            [[ 'comment', 'commentExpert','access_document'], 'string'],
             [['date_event_start', 'date_event_end','done', 'doneExpert'], 'safe'],
             [['step', 'cost_real', 'sum_bud_fin', 'fin_vnebud_ist'], 'number'],
         ];

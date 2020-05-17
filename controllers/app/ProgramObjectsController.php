@@ -124,6 +124,12 @@ class ProgramObjectsController extends AppController
             $model_name=ProgramObjectsEvents2::class;
         }else return Json::encode(['success'=>false,'errors'=>['global'=>'Не предвиденная ошибка']]);
 
+        if ($post['date_event_start']==='null') {
+            $post['date_event_start'] = date('Y-m-d');
+        }
+        if ($post['date_event_end']==='null') {
+            $post['date_event_end'] = date('Y-m-d');
+        }
         $event->date_event_start = $post['date_event_start'];
         $event->date_event_end = $post['date_event_end'];
         $event->cost_real = floatval($post['cost_real']);
@@ -132,6 +138,7 @@ class ProgramObjectsController extends AppController
         $event->done = filter_var($post['done'],FILTER_VALIDATE_BOOLEAN);
         $event->doneExpert = filter_var($post['doneExpert'],FILTER_VALIDATE_BOOLEAN);
         $event->comment = $post['comment'];
+        $event->access_document = $post['access_document'];
         $event->commentExpert = $post['commentExpert'];
         return Json::encode(['success'=>$event->save(),'model'=>$model_name,'errors'=>$event->getErrors()]);
     }

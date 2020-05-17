@@ -230,8 +230,8 @@
 
 
         <div v-if="this.items.status == 5">
-            <v-comments style="margin: 5px 0" :obj_id="obj_id" />
-            <b-card no-body class="mb-1">
+            <v-comments :obj_id="obj_id" />
+            <b-card no-body class="mb-1 mt-2">
                 <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-s>
                                 <b-icon-gear-wide-connected />
@@ -336,7 +336,9 @@
                                     <b-th>Фактическая Сумма бюджетного финансирования на проведение капитального ремонта (тыс. руб.)</b-th>
                                     <b-th>Фактическое Софинансирование из внебюджетных источников (тыс. руб.)</b-th>
                                     <b-th>Отметка о завершении этапа </b-th>
-                                    <b-th>Подтверждающие документы </b-th>
+
+                                    <b-th>Подтверждающие документы</b-th>
+
                                     <b-th>Комментарий (текстовое поле Заполняет ВУЗ)</b-th>
                                     <b-th>Отметка Эксперта МОН (МГСУ) Принято / не принято</b-th>
                                     <b-th>Комментарий эксперта МОН )</b-th>
@@ -369,6 +371,18 @@
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
                                         <b-form-checkbox v-model="svedenia2[index].done" />
                                     </b-td>
+
+
+                                    <!-- Подтверждающие документы -->
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <!-- <label @click="debugItem(item, svedenia2[index], index)"> Debug item {{index}} </label> -->
+                                        <b-form-input
+                                            placeholder="Ссылка на zakupki.gov.ru"
+                                            v-if=" sved2Href.includes(item.step + 1)"
+                                            v-model="svedenia2[index].access_document" />
+                                    </b-td>
+
+
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
                                         <b-form-input v-model="svedenia2[index].comment" />
                                     </b-td>
@@ -377,9 +391,6 @@
                                         <span v-can:user>
                                             {{item.doneExpert ? 'Да' : 'Нет'}}
                                         </span>
-                                    </b-td>
-                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-file v-can:mgsu,root,dep v-model="svedenia2[index].file" />
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
                                         <b-form-input v-can:mgsu,root,dep v-model="svedenia2[index].commentExpert" />
@@ -415,12 +426,12 @@
                     <b-card-body>
                         <b-card no-body class="mb-1">
                             <b-card-header header-tag="header" class="p-1" role="tab">
-                            <span class="toggle_button" v-b-toggle.accordion-2>
+                            <span class="toggle_button" v-b-toggle.accordion-2a>
                                 <b-icon-gear-wide-connected />
                                 Сведения о планируемых мероприятиях</span
                             >
                             </b-card-header>
-                            <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
+                            <b-collapse id="accordion-2a" accordion="my-accordion" role="tabpanel">
                                 <b-card-body>
                                     <b-table bordered :fields="svedenia.fields" :items="svedenia.items" />
                                 </b-card-body>
@@ -428,12 +439,12 @@
                         </b-card>
                         <b-card no-body class="mb-1">
                             <b-card-header header-tag="header" class="p-1" role="tab">
-                            <span class="toggle_button" v-b-toggle.accordion-3>
+                            <span class="toggle_button" v-b-toggle.accordion-3a>
                                 <b-icon-gear-wide-connected />
                                 Обоснование необходимости (целесообразности) планируемых мероприятий</span
                             >
                             </b-card-header>
-                            <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel">
+                            <b-collapse id="accordion-3a" accordion="my-accordion" role="tabpanel">
                                 <b-card-body>
                                     <b-table bordered :fields="necessary.fields.one" :items="necessary.items.one" />
                                     <b-table bordered :fields="necessary.fields.two" :items="necessary.items.two" />
@@ -442,12 +453,12 @@
                         </b-card>
                         <b-card no-body class="mb-1">
                             <b-card-header header-tag="header" class="p-1" role="tab">
-                            <span class="toggle_button" v-b-toggle.accordion-4>
+                            <span class="toggle_button" v-b-toggle.accordion-4a>
                                 <b-icon-gear-wide-connected />
                                 Ожидаемые результаты</span
                             >
                             </b-card-header>
-                            <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
+                            <b-collapse id="accordion-4a" accordion="my-accordion" role="tabpanel">
                                 <b-card-body>
                                     <b-table bordered :fields="waited.fields" :items="waited.items" />
                                 </b-card-body>
@@ -455,12 +466,12 @@
                         </b-card>
                         <b-card no-body class="mb-1">
                             <b-card-header header-tag="header" class="p-1" role="tab">
-                            <span class="toggle_button" v-b-toggle.accordion-5>
+                            <span class="toggle_button" v-b-toggle.accordion-5a>
                                 <b-icon-gear-wide-connected />
                                 Прогнозируемые риски</span
                             >
                             </b-card-header>
-                            <b-collapse id="accordion-5" accordion="my-accordion" role="tabpanel">
+                            <b-collapse id="accordion-5a" accordion="my-accordion" role="tabpanel">
                                 <b-card-body>
                                     <b-table bordered :fields="risks.fields" :items="risks.items" />
                                 </b-card-body>
@@ -500,12 +511,12 @@
         <div v-else>
             <b-card no-body class="mb-1">
                 <b-card-header header-tag="header" class="p-1" role="tab">
-                            <span class="toggle_button" v-b-toggle.accordion-2>
+                            <span class="toggle_button" v-b-toggle.accordion-2b>
                                 <b-icon-gear-wide-connected />
                                 Сведения о планируемых мероприятиях</span
                             >
                 </b-card-header>
-                <b-collapse id="accordion-2" accordion="my-accordion" role="tabpanel">
+                <b-collapse id="accordion-2b" accordion="my-accordion" role="tabpanel">
                     <b-card-body>
                         <b-table bordered :fields="svedenia.fields" :items="svedenia.items" />
                     </b-card-body>
@@ -513,12 +524,12 @@
             </b-card>
             <b-card no-body class="mb-1">
                 <b-card-header header-tag="header" class="p-1" role="tab">
-                            <span class="toggle_button" v-b-toggle.accordion-3>
+                            <span class="toggle_button" v-b-toggle.accordion-3b>
                                 <b-icon-gear-wide-connected />
                                 Обоснование необходимости (целесообразности) планируемых мероприятий</span
                             >
                 </b-card-header>
-                <b-collapse id="accordion-3" accordion="my-accordion" role="tabpanel" >
+                <b-collapse id="accordion-3b" accordion="my-accordion" role="tabpanel" >
                     <b-card-body>
                         <b-table bordered :fields="necessary.fields.one" :items="necessary.items.one" />
                         <b-table bordered :fields="necessary.fields.two" :items="necessary.items.two" />
@@ -527,12 +538,12 @@
             </b-card>
             <b-card no-body class="mb-1">
                 <b-card-header header-tag="header" class="p-1" role="tab">
-                            <span class="toggle_button" v-b-toggle.accordion-4>
+                            <span class="toggle_button" v-b-toggle.accordion-4b>
                                 <b-icon-gear-wide-connected />
                                 Ожидаемые результаты</span
                             >
                 </b-card-header>
-                <b-collapse id="accordion-4" accordion="my-accordion" role="tabpanel">
+                <b-collapse id="accordion-4b" accordion="my-accordion" role="tabpanel">
                     <b-card-body>
                         <b-table bordered :fields="waited.fields" :items="waited.items" />
                     </b-card-body>
@@ -540,12 +551,12 @@
             </b-card>
             <b-card no-body class="mb-1">
                 <b-card-header header-tag="header" class="p-1" role="tab">
-                            <span class="toggle_button" v-b-toggle.accordion-5>
+                            <span class="toggle_button" v-b-toggle.accordion-5b>
                                 <b-icon-gear-wide-connected />
                                 Прогнозируемые риски</span
                             >
                 </b-card-header>
-                <b-collapse id="accordion-5" accordion="my-accordion" role="tabpanel">
+                <b-collapse id="accordion-5b" accordion="my-accordion" role="tabpanel">
                     <b-card-body>
                         <b-table bordered :fields="risks.fields" :items="risks.items" />
                     </b-card-body>
@@ -696,6 +707,7 @@ export default {
                     date_event_end: null,
                     cost_real:null,
                     sum_bud_fin:null,
+                    access_document:null,
                     fin_vnebud_ist:null,
                     is_nessesary: null,
                     done:false,
@@ -713,6 +725,7 @@ export default {
                     date_event_end: null,
                     cost_real:null,
                     sum_bud_fin:null,
+                    access_document:null,
                     fin_vnebud_ist:null,
                     is_nessesary: null,
                     done:false,
@@ -727,6 +740,7 @@ export default {
                     id_event:null,
                     step_name:'Объявление пользователем аукциона на обследование объекта',
                     date_event_start: null,
+                    access_document:null,
                     date_event_end: null,
                     cost_real:null,
                     sum_bud_fin:null,
@@ -747,6 +761,7 @@ export default {
                     date_event_end: null,
                     cost_real:null,
                     sum_bud_fin:null,
+                    access_document:null,
                     fin_vnebud_ist:null,
                     is_nessesary: null,
                     done:false,
@@ -765,6 +780,7 @@ export default {
                     cost_real:null,
                     sum_bud_fin:null,
                     fin_vnebud_ist:null,
+                    access_document:null,
                     is_nessesary: null,
                     done:false,
                     doneExpert:false,
@@ -785,6 +801,7 @@ export default {
                     date_event_start: null,
                     date_event_end: null,
                     cost_real:null,
+                    access_document:null,
                     sum_bud_fin:null,
                     fin_vnebud_ist:null,
                     is_nessesary: null,
@@ -808,6 +825,7 @@ export default {
                     date_event_end: null,
                     cost_real:null,
                     sum_bud_fin:null,
+                    access_document:null,
                     fin_vnebud_ist:null,
                     is_nessesary: null,
                     done:false,
@@ -830,6 +848,7 @@ export default {
                     date_event_end: null,
                     cost_real:null,
                     sum_bud_fin:null,
+                    access_document:null,
                     fin_vnebud_ist:null,
                     is_nessesary: null,
                     done:false,
@@ -845,6 +864,7 @@ export default {
                     step_name:'Внесение пользователем закупки на обследование объекта в план закупок ',
                     date_event_start: null,
                     date_event_end: null,
+                    access_document:null,
                     cost_real:null,
                     sum_bud_fin:null,
                     fin_vnebud_ist:null,
@@ -864,6 +884,7 @@ export default {
                     date_event_end: null,
                     cost_real:null,
                     sum_bud_fin:null,
+                    access_document:null,
                     fin_vnebud_ist:null,
                     is_nessesary: null,
                     done:false,
@@ -884,6 +905,7 @@ export default {
                     fin_vnebud_ist:null,
                     is_nessesary: null,
                     done:false,
+                    access_document:null,
                     doneExpert:false,
                     comment:'',
                     commentExpert:'',
@@ -896,6 +918,7 @@ export default {
                     step_name:'Заключение договора с подрядчиком',
                     date_event_start: null,
                     date_event_end: null,
+                    access_document:null,
                     cost_real:null,
                     sum_bud_fin:null,
                     fin_vnebud_ist:null,
@@ -920,6 +943,7 @@ export default {
                     date_event_end: null,
                     cost_real:null,
                     sum_bud_fin:null,
+                    access_document:null,
                     fin_vnebud_ist:null,
                     is_nessesary: null,
                     done:false,
@@ -941,6 +965,7 @@ export default {
                     date_event_start: null,
                     date_event_end: null,
                     cost_real:null,
+                    access_document:null,
                     sum_bud_fin:null,
                     fin_vnebud_ist:null,
                     is_nessesary: null,
@@ -965,6 +990,7 @@ export default {
                     cost_real:null,
                     sum_bud_fin:null,
                     fin_vnebud_ist:null,
+                    access_document:null,
                     is_nessesary: null,
                     done:false,
                     doneExpert:false,
@@ -986,6 +1012,7 @@ export default {
                     date_event_end: null,
                     cost_real:null,
                     sum_bud_fin:null,
+                    access_document:null,
                     fin_vnebud_ist:null,
                     is_nessesary: null,
                     done:false,
@@ -1099,7 +1126,8 @@ export default {
                     {key:'protect',label:'Способы защиты'},
                 ],
                 items:[]
-            }
+            },
+            sved2Href: [1.2, 4.2, 7.2],
         };
 
 
@@ -1119,22 +1147,14 @@ export default {
         this.canChange = window.Permission === 'root' | window.canChange || false;
     },
     methods: {
-        changeRealStatus(real_status){
-            this.realStatus = real_status;
-            let data = new FormData();
-            data.append('value','real_status');
-            data.append('real_status',real_status);
-            Axios.post(`/program/object/set-value/${this.items.id}`,data, {
-                    headers: {
-                        "X-CSRF-Token": this.csrf
-                    }
-                }
-            ).then(response=>{
-                if(!response.data.success)
-                    response.data.errors.forEach(item=>{
-                        this.setBanner('danger',item)
-                    })
-            })
+        debugItem(item, sved2, index) {
+            //Опытным путем было выяснено что индек считается вот таким образом (item.step + 1)
+
+            console.group('debugItem' + index);
+            console.log(item);
+            console.log(sved2);
+            console.log(item.step + 1)
+            console.groupEnd();
         },
         ObjectOpis(event){
             let data = new FormData();
@@ -1152,7 +1172,15 @@ export default {
                     })
             })
         },
+        async setChart() {
 
+            const beginDate = [];
+
+            this.svedenia.items.forEach( item => {
+                beginDate.push(item.date_event_start)
+            })
+
+        },
         createChart(e) {
             const days = document.querySelectorAll(".chart-values li");
             const tasks = document.querySelectorAll(".chart-bars li");
@@ -1207,6 +1235,7 @@ export default {
           }).then(response=>console.log(response.data))
         },
         addRow(index,toIndex = false){
+
             this.svedenia2.splice(index,0,{
                 step:this.svedenia2[index-1].step+0.1 ,
                 id_event:null,
@@ -1215,6 +1244,7 @@ export default {
                 date_event_end: null,
                 cost_real:null,
                 sum_bud_fin:null,
+                access_document:null,
                 fin_vnebud_ist:null,
                 is_nessesary: null,
                 done:false,
@@ -1334,6 +1364,7 @@ export default {
                             item2.date_event_start = item.date_event_start;
                             item2.date_event_end = item.date_event_end;
                             item2.cost_real = item.cost_real;
+                            item2.access_document = item.access_document;
                             item2.sum_bud_fin = item.sum_bud_fin;
                             item2.fin_vnebud_ist = item.fin_vnebud_ist;
                             item2.id_event = item.id;
@@ -1367,6 +1398,7 @@ export default {
                             item2.fin_vnebud_ist = item.fin_vnebud_ist;
                             item2.id_event = item.id_event;
                             item2.done = item.done;
+                            item2.access_document = item.access_document;
                             item2.doneExpert = item.doneExpert;
                             item2.comment = item.comment;
                             item2.commentExpert = item.commentExpert;

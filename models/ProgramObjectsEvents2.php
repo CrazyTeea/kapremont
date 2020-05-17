@@ -21,6 +21,7 @@ use Yii;
  * @property int|null $done
  * @property int|null $doneExpert
  * @property string|null $comment
+ * @property string $access_document
  * @property string|null $commentExpert
  */
 class ProgramObjectsEvents2 extends \yii\db\ActiveRecord
@@ -40,7 +41,7 @@ class ProgramObjectsEvents2 extends \yii\db\ActiveRecord
     {
         return [
             [['is_nessesary','id_object'], 'integer'],
-            [['step_name', 'comment', 'commentExpert'], 'string'],
+            [['step_name', 'comment', 'commentExpert','access_document'], 'string'],
             [['date_event_start','id_event',  'done', 'doneExpert', 'date_event_end'], 'safe'],
             [['step', 'cost_real', 'sum_bud_fin', 'fin_vnebud_ist'], 'number'],
         ];
