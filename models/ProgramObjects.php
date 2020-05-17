@@ -41,6 +41,7 @@ use Yii;
  * @property string|null $osn_isp_zdan
  * @property int $last_exploit_year
  * @property int $status
+ * @property int $real_status
  * @property string $dku_status
  * @property string $dep_status
  * @property string $object_opis
@@ -69,11 +70,12 @@ class ProgramObjects extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_org', 'id_priority', 'id_program', 'year', 'system_status', 'id_region', 'id_city', 'type', 'exploit_year','type_remont','last_exploit_year'], 'integer'],
-            [['name', 'assignment', 'regulation', 'event_type', 'note', 'address','prav_oper_upr'], 'string','max'=>5000],
+            [['id_org', 'id_priority', 'id_program','real_status',
+                'year', 'system_status', 'id_region', 'id_city', 'type', 'exploit_year','type_remont','last_exploit_year'], 'integer'],
+            [['name', 'assignment', 'regulation', 'event_type', 'note', 'address','prav_oper_upr'], 'string'],
             [['square', 'wear', 'finance_sum', 'coFinancing', 'square_kap', 'isp_v_ust_dey', 'n_isp_v_ust_dey', 'square_ar', 'square_av', 'square_atz'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
-            [['exist_pred_nadz_orgs', 'prav_sob', 'kad_number', 'osn_isp_zdan','podrobnosti','object_opis'], 'string', 'max' => 5000],
+            [['exist_pred_nadz_orgs', 'prav_sob', 'kad_number', 'osn_isp_zdan','podrobnosti','object_opis'], 'string'],
             [[
                 'id_org', 'id_program', 'year', 'id_region', 'id_city', 'exploit_year',
                 'name', 'assignment', 'note', 'square', 'wear', 'address','type_remont',

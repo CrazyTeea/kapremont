@@ -123,6 +123,11 @@ class ProgramController extends AppController
             if ($program->file_exist) {
                 Yii::$app->db->createCommand("UPDATE program set p_status = 1 where id_org = {$id_org} ")->execute();
                 $status = new ProgramStatus($program->id_org);
+                $objs=ProgramObjects::findAll(['id_org'=>$id_org]);
+                foreach ($objs as $item){
+                    $item->status = 1;
+                    $item->save(false);
+                }
 
                 $status = true;
             } else  $errrMsg = 'Файл должен быть загружен';

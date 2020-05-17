@@ -1,6 +1,32 @@
 <template>
 
         <div id="program_mi_body">
+            <b-modal scrollable id="extraBaner" v-model="extraBaner" cancel-disabled>
+                <div class="text-center">Уважаемые коллеги!</div>
+                <p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Департамент экономической политики Минобрнауки России рассмотрел представленные
+                    подведомственными образовательными организациями высшего образования программы
+                    модернизации инфраструктуры в части осуществления мероприятий по капитальному
+                    ремонту объектов недвижимого имущества (далее – организации)
+                    и сообщает, что организации могут начинать осуществление закупочных процедур по приоритетным
+                    и резервным объектам со статусом «Рассмотрено ДЭП».
+                </p>
+                <p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;По вопросам работы в информационно-аналитической системе
+                    «Мониторинг» организации могут связаться со службой технической поддержки
+                    по телефону: 8-495-989-84-47 доб. 1 (многоканальный) или
+                    по адресу электронной почты: ias@mirea.ru.
+                </p>
+                <p>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;В части проведения мероприятий по антитеррористической защищенности объектов необходимо обращаться в Департамент корпоративного управления Минобрнауки России: Бочарова Елена Владимировна, консультант отдела оформления имущественных прав
+                    и ведения реестра федерального имущества, 8-926-623-99-10, bocharovaev@minobrnauki.gov.ru
+
+                </p>
+                <template v-slot:modal-footer>
+                    <b-button variant="success" @click="extraBaner = false">ОК!</b-button>
+                </template>
+
+            </b-modal>
             <div class="row">
                 <div class="col-6">
                     <h4 v-show="getOrg">{{getOrg && getOrg.name}}</h4>
@@ -65,6 +91,7 @@ export default {
     },
     data(){
         return {
+            extraBaner:true,
             perPage: 5,
             currentPage:1,
             id_org:null
@@ -101,6 +128,7 @@ export default {
     async mounted() {
         await this.requestUser();
         await this.requestPageData({pageName:"main"});
+
 
         //this.id_org = this.getUser.organization.id;
 
