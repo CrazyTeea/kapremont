@@ -307,7 +307,8 @@
                                     <!-- Подтверждающие документы -->
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
                                         <!-- <label @click="debugItem(item, svedenia2[index], index)"> Debug item {{index}} </label> -->
-                                        <b-form-input 
+                                        <b-form-input
+                                            placeholder="Ссылка на zakupki.gov.ru"
                                             v-if=" sved2Href.includes(item.step + 1)"
                                             v-model="svedenia2[index].access_document" />
                                     </b-td>
