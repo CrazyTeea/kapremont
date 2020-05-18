@@ -2,6 +2,7 @@
 
 namespace app\controllers\app;
 
+use app\models\EventsFiles;
 use app\models\Files;
 use app\models\ObjectDocumentsList;
 use app\models\ObjectDocumentsTypes;
@@ -104,7 +105,7 @@ class ProgramObjectsController extends AppController
     public function actionSendEvent($id){
         $post = Yii::$app->request->post();
         $event = null;
-        $model_name='';
+        $is_event2 = false;
         if (isset($post['parent']) and filter_var($post['parent'],FILTER_VALIDATE_BOOLEAN)) {
             $event = ProgObjectsEvents::findOne(['id_object' => $id, 'step' => $post['step']]);
             if (!$event) {
@@ -112,6 +113,7 @@ class ProgramObjectsController extends AppController
                 $event->id_object = $id;
                 $event->step = $post['step'];
             }
+            $is_event2 = false;
             $model_name=ProgObjectsEvents::class;
         }else if (isset($post['parent']) and !filter_var($post['parent'],FILTER_VALIDATE_BOOLEAN)){
             $event = ProgramObjectsEvents2::findOne(['id_object' => $id, 'step' => $post['step']]);
@@ -121,6 +123,7 @@ class ProgramObjectsController extends AppController
                 $event->id_event = $post['id_event'];
                 $event->step = floatval($post['step']);
             }
+            $is_event2 = true;
             $model_name=ProgramObjectsEvents2::class;
         }else return Json::encode(['success'=>false,'errors'=>['global'=>'Не предвиденная ошибка']]);
 
@@ -130,6 +133,8 @@ class ProgramObjectsController extends AppController
         if ($post['date_event_end']==='null') {
             $post['date_event_end'] = date('Y-m-d');
         }
+
+
         $event->date_event_start = $post['date_event_start'];
         $event->date_event_end = $post['date_event_end'];
         $event->cost_real = floatval($post['cost_real']);
@@ -140,7 +145,12 @@ class ProgramObjectsController extends AppController
         $event->comment = $post['comment'];
         $event->access_document = $post['access_document'];
         $event->commentExpert = $post['commentExpert'];
-        return Json::encode(['success'=>$event->save(),'model'=>$model_name,'errors'=>$event->getErrors()]);
+        $ret = ['success'=>$event->save(),'model'=>$model_name,'errors'=>$event->getErrors()];
+        $file = UploadedFile::getInstanceByName('file');
+        if ($file){
+           $ret['file'] = EventsFiles::UploadOrUpdate($file, $is_event2 ? null : $event->id,$is_event2 ? $event->id : null);
+        }
+        return Json::encode($ret);
     }
 
     /**

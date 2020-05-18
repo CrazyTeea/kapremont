@@ -24,6 +24,7 @@ use Yii;
  */
 class ProgObjectsEvents extends BaseMultiModel
 {
+    public $file_name;
     /**
      * {@inheritdoc}
      */
@@ -36,6 +37,10 @@ class ProgObjectsEvents extends BaseMultiModel
         return $this->hasMany(ProgramObjectsEvents2::class,['id_event'=>'id']);
     }
 
+    public function getFile(){
+        return $this->hasOne(EventsFiles::class,['id_event'=>'id']);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -43,7 +48,7 @@ class ProgObjectsEvents extends BaseMultiModel
     {
         return [
             [['is_nessesary', 'id_object'], 'integer'],
-            [[ 'comment', 'commentExpert','access_document'], 'string'],
+            [[ 'comment', 'commentExpert','access_document','file_name'], 'string'],
             [['date_event_start', 'date_event_end','done', 'doneExpert'], 'safe'],
             [['step', 'cost_real', 'sum_bud_fin', 'fin_vnebud_ist'], 'number'],
         ];

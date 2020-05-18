@@ -464,6 +464,8 @@ export default {
     vertical-align: middle !important;
     text-align: center !important;
 }
+
+/* Анимация инпута файла */
 .cell-center-for-items {
     display: flex;
     align-items: center;
@@ -562,6 +564,8 @@ export default {
 .example-1 .label:hover .title {
     color: #5bc0de;
 }
+
+/* Конец анимации стрелок, начало анимации крестика */
 .cross-to-animate {
     z-index: 999;
     height: 2px;
@@ -614,4 +618,7 @@ export default {
 .cross .label:hover {
     border: 2px solid #d9534f;
 }
+
+
+/* Конец анимации инпута */
 </style>
