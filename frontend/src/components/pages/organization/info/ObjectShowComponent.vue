@@ -379,7 +379,39 @@
                                         <b-form-input
                                             placeholder="Ссылка на zakupki.gov.ru"
                                             v-if=" sved2Href.includes(item.step + 1)"
-                                            v-model="svedenia2[index].access_document" />
+                                            v-model="svedenia2[index].access_document"
+                                        />
+
+                                        <div class="fileInput">
+                                            <input
+                                                type="file"
+                                                :id="'file_input_' + index"
+                                                class="hidden-file-input"
+                                                @input="fileInput(index)"
+                                            />
+                                            <div
+                                                class="cell-center-for-items"
+                                                v-if="sved2Doc.includes(item.step + 1)"
+                                            >
+                                                <div
+                                                    class="arrow">
+                                                        <label
+                                                            :for="`file_input_${index}`"
+                                                            class="label"
+                                                        >
+                                                            <span class="title">
+                                                                <span class="scope-to-animate"></span>
+                                                                <span class="scope-to-animate"></span>
+                                                                <span class="scope-to-animate"></span>
+                                                                <span class="scope-to-animate"></span>
+                                                            </span>
+                                                        </label>
+                                                </div>
+                                            </div>
+                                            
+                                        </div>
+                                        
+
                                     </b-td>
 
 
@@ -1115,6 +1147,7 @@ export default {
                 items:[]
             },
             sved2Href: [1.2, 4.2, 7.2],
+            sved2Doc:[1.1, 1.4, 2, 3, 4.1, 4.4, 5, 6, 7.1, 7.3, 7.4, 8],
         };
 
 
@@ -1134,6 +1167,13 @@ export default {
         this.canChange = window.Permission === 'root' | window.canChange || false;
     },
     methods: {
+        fileInput(index) {
+            let graph = document.querySelector(`#file_input_${index}`);
+            let file = graph.files[0];
+            this.svedenia2[index].file = file;
+
+            console.log(this.svedenia2[index].file);
+        },
         debugItem(item, sved2, index) {
             //Опытным путем было выяснено что индек считается вот таким образом (item.step + 1)
 
@@ -1614,4 +1654,105 @@ body {
     transition: all 0.65s linear 0.2s;
 }
 
+
+/* Анимация стрелочек и стили самих стрелочек */
+
+.cell-center-for-items {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.scope-to-animate {
+    z-index: 999;
+    height: 2px;
+    width: 8px;
+    background: grey;
+    transition: 0.4s ease;
+}
+.scope-to-animate:first-child {
+    display: block;
+    position: absolute;
+    transform: rotate(45deg);
+    left: 25%;
+    bottom: 35%;
+}
+.scope-to-animate:nth-child(2) {
+    display: block;
+    position: absolute;
+    transform: rotate(-45deg);
+    left: 45%;
+    bottom: 35%;
+}
+.scope-to-animate:nth-child(3) {
+    display: block;
+    position: absolute;
+    transform: rotate(45deg);
+    left: 25%;
+    bottom: 54%;
+}
+.scope-to-animate:nth-child(4) {
+    display: block;
+    position: absolute;
+    transform: rotate(-45deg);
+    left: 45%;
+    bottom: 54%;
+}
+.label:hover .scope-to-animate:nth-child(1) {
+    transform: rotate(-135deg);
+    background: #5bc0de;
+}
+.label:hover .scope-to-animate:nth-child(2) {
+    transform: rotate(135deg);
+    background: #5bc0de;
+}
+.label:hover .scope-to-animate:nth-child(3) {
+    transform: rotate(225deg);
+    background: #5bc0de;
+}
+.label:hover .scope-to-animate:nth-child(4) {
+    transform: rotate(-225deg);
+    background: #5bc0de;
+}
+.hidden-file-input {
+    display: none;
+}
+.label {
+    position: relative;
+    width: 28px;
+}
+.arrow {
+    display: flex;
+    align-items: center;
+}
+.arrow input[type="file"] {
+    outline: 0;
+    opacity: 0;
+    pointer-events: none;
+    user-select: none;
+}
+.arrow .label {
+    height: 28px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    display: block;
+    transition: border 300ms ease;
+    cursor: pointer;
+    text-align: center;
+}
+.arrow .label i {
+    display: block;
+    font-size: 42px;
+}
+.arrow .label i,
+.example-1 .label .title {
+    color: grey;
+    transition: 200ms color;
+}
+.arrow .label:hover {
+    border: 2px solid #5bc0de;
+}
+.arrow .label:hover i,
+.example-1 .label:hover .title {
+    color: #5bc0de;
+}
 </style>
