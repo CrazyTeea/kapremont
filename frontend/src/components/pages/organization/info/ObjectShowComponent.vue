@@ -1508,7 +1508,7 @@ export default {
            for (let i =0; i <= this.svedenia2.length; i++) {
                let item = this.svedenia2[i];
                console.log(item);
-               if (item.hasOwnProperty(done) && !item.done){
+               if (item.hasOwnProperty('done') && !item.done){
                    if (item.date_event_end)
                        this.dateStatus = new Date(item.date_event_end).toLocaleDateString();
                    return true;
