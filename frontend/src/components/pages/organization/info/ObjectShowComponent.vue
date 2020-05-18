@@ -651,7 +651,7 @@ export default {
         return {
             bannerInfo: [],
             canChange: false,
-            dateStatus:Date,
+            dateStatus:'',
             status: {
                 label: '',
                 variant: ''
