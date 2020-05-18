@@ -85,7 +85,7 @@
                     </b-dropdown>
                 </div>
                 <div class="col-3">
-                    <b-dropdown v-can:root right class="m-2" :text="realStatusType[realStatus].label" :variant="realStatusType[realStatus].variant">
+                    <b-dropdown v-can:root,dep right class="m-2" :text="realStatusType[realStatus].label" :variant="realStatusType[realStatus].variant">
                         <b-dropdown-item v-for="(item,index) in realStatusType" @click="changeRealStatus(index)"
                                          :key="index" :variant="item.variant" :value="index">{{item.label}}</b-dropdown-item>
                     </b-dropdown>
