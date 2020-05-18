@@ -26,6 +26,7 @@ use Yii;
  */
 class ProgramObjectsEvents2 extends \yii\db\ActiveRecord
 {
+    public $file_name;
     /**
      * {@inheritdoc}
      */
@@ -41,10 +42,13 @@ class ProgramObjectsEvents2 extends \yii\db\ActiveRecord
     {
         return [
             [['is_nessesary','id_object'], 'integer'],
-            [['step_name', 'comment', 'commentExpert','access_document'], 'string'],
+            [['step_name', 'comment', 'commentExpert','access_document','file_name'], 'string'],
             [['date_event_start','id_event',  'done', 'doneExpert', 'date_event_end'], 'safe'],
             [['step', 'cost_real', 'sum_bud_fin', 'fin_vnebud_ist'], 'number'],
         ];
+    }
+    public function getFile(){
+        return $this->hasOne(EventsFiles::class,['id_event2'=>'id']);
     }
 
     /**

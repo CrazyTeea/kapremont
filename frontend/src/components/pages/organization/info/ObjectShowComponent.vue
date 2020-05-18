@@ -130,18 +130,18 @@
                     </b-dropdown>
                 </div>
             </div>
-        <v-comments :obj_id="obj_id" />
+            <v-comments :obj_id="obj_id" />
         </div>
 
 
 
         <div class="mt-3">
-                <div class="row">
-                    <div class="col-12">
-                        <b-alert v-for="(banner, index) in bannerInfo" :key="index" :show="banner.show" :variant="banner.variant" dismissible fade>{{ banner.message }}</b-alert>
-                    </div>
+            <div class="row">
+                <div class="col-12">
+                    <b-alert v-for="(banner, index) in bannerInfo" :key="index" :show="banner.show" :variant="banner.variant" dismissible fade>{{ banner.message }}</b-alert>
                 </div>
             </div>
+        </div>
         <b-table-simple bordered hover class="mt-3">
             <b-tbody>
                 <b-tr>
@@ -347,7 +347,7 @@
                             <b-tbody>
                                 <b-tr  v-for="(item,index) in svedenia2" :key="index" @change="sendData(item)">
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        {{item.step + 1}}
+                                        {{item.step + 1}} {{item.id}}
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
                                         <b-form-input v-if="item.canDelete" v-model="svedenia2[index].step_name" />
@@ -377,9 +377,44 @@
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
                                         <!-- <label @click="debugItem(item, svedenia2[index], index)"> Debug item {{index}} </label> -->
                                         <b-form-input
-                                            placeholder="Ссылка на zakupki.gov.ru"
-                                            v-if=" sved2Href.includes(item.step + 1)"
-                                            v-model="svedenia2[index].access_document" />
+                                                placeholder="Ссылка на zakupki.gov.ru"
+                                                v-if=" sved2Href.includes(item.step + 1)"
+                                                v-model="svedenia2[index].access_document"
+                                        />
+
+                                        <div v-if="sved2Doc.includes(item.step + 1)" class="fileInput">
+                                            <div
+                                                    class="cell-center-for-items"
+
+                                            >
+                                                <input
+                                                        type="file"
+                                                        :id="'file_input_' + index"
+                                                        class="hidden-file-input"
+                                                        @change="fileInput(index)"
+                                                />
+                                                <div
+                                                        class="arrow">
+                                                    <label
+                                                            :for="`file_input_${index}`"
+                                                            class="label"
+                                                    >
+                                                            <span class="title">
+                                                                <span class="scope-to-animate"></span>
+                                                                <span class="scope-to-animate"></span>
+                                                                <span class="scope-to-animate"></span>
+                                                                <span class="scope-to-animate"></span>
+                                                            </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div v-if="svedenia2[index].file">
+                                            {{svedenia2[index].file.name}}
+                                        </div>
+
+
                                     </b-td>
 
 
@@ -596,1035 +631,1184 @@
 </template>
 
 <script>
-import Axios from "axios";
-import { CommentComponent } from "../../../organisms";
-import {mapActions, mapGetters} from "vuex";
-import {
-    BAlert,
-    BCard,
-    BCardHeader,
-    BCollapse,
-    BCardBody,
-    BTableSimple,
-    BTr,
-    BTh,
-    BTd,
-    BButton,
-    BFormInput,
-    BThead,
-    BTbody,
-    BDropdown,
-    BFormFile,
-    BDropdownItem,
-    BTable,
-    BBreadcrumb,
-    BFormCheckbox,
-    VBToggle,
-} from 'bootstrap-vue'
-export default {
-    directives:{
-        'b-toggle':VBToggle
-    },
-    components: {
-        "v-comments": CommentComponent,
-        BFormFile,
+    import Axios from "axios";
+    import {CommentComponent} from "../../../organisms";
+    import {mapActions, mapGetters} from "vuex";
+    import {
         BAlert,
         BBreadcrumb,
+        BButton,
+        BCard,
+        BCardBody,
+        BCardHeader,
         BCollapse,
-        BTableSimple,
-        BTr,
-        BTh,
-        BThead,
-        BTbody,
         BDropdown,
         BDropdownItem,
-        BTable,
-        BCard,
-        BButton,
-        BCardHeader,
         BFormCheckbox,
-        BCardBody,
+        BFormFile,
+        BFormInput,
+        BTable,
+        BTableSimple,
+        BTbody,
         BTd,
-        BFormInput
-    },
-    data() {
-        return {
-            bannerInfo: [],
-            canChange: false,
-            dateStatus:'',
-            status: {
-                label: '',
-                variant: ''
-            },
-            realStatus:0,
-            realStatusType:[
-                {
-                    variant:'secondary',
-                    label:'Серый'
-                },
-                {
-                    variant:'warning',
-                    label:'Желтый'
-                },
-                {
-                    variant:'success',
-                    label:'Зеленый'
-                },
-                {
-                    variant:'danger',
-                    label:'Красный'
-                },
-            ],
-            dep_status: {
-                label: null,
-                color: null
-            },
-            dku_status: {
-                label: null,
-                color: null
-            },
-            show: {
-                dep: false,
-                dku: false
-            },
-            csrf: document.getElementsByName("csrf-token")[0].content,
-            items: [],
-            real:false,
-            obj_id: null,
-            org_id: null,
-            docs: [],
-            fromServer:{},
-            s_bud_f:0,
-            r_bud_f:0,
+        BTh,
+        BThead,
+        BTr,
+        VBToggle,
+    } from 'bootstrap-vue'
 
-            svedenia2:[
-                {
-                    canDelete:false,
-                    step:0,
-                    id_event:null,
-                    step_name:'Проведение тендера и заключение договора на выполнение обследования',
-                    date_event_start: null,
-                    date_event_end: null,
-                    cost_real:null,
-                    sum_bud_fin:null,
-                    access_document:null,
-                    fin_vnebud_ist:null,
-                    is_nessesary: null,
-                    done:false,
-                    doneExpert:false,
-                    comment:'',
-                    commentExpert:'',
-                    parent:true
-                },
-                {
-                    canDelete:false,
-                    step:0.1,
-                    id_event:null,
-                    step_name:'Внесение пользователем закупки на обследование объекта в план закупок ',
-                    date_event_start: null,
-                    date_event_end: null,
-                    cost_real:null,
-                    sum_bud_fin:null,
-                    access_document:null,
-                    fin_vnebud_ist:null,
-                    is_nessesary: null,
-                    done:false,
-                    doneExpert:false,
-                    comment:'',
-                    commentExpert:'',
-                    parent:false
-                },
-                {
-                    canDelete:false,
-                    step:0.2,
-                    id_event:null,
-                    step_name:'Объявление пользователем аукциона на обследование объекта',
-                    date_event_start: null,
-                    access_document:null,
-                    date_event_end: null,
-                    cost_real:null,
-                    sum_bud_fin:null,
-                    fin_vnebud_ist:null,
-                    is_nessesary: null,
-                    done:false,
-                    doneExpert:false,
-                    comment:'',
-                    commentExpert:'',
-                    parent:false
-                },
-                {
-                    canDelete:false,
-                    step:0.3,
-                    id_event:null,
-                    step_name:'Определение подрядчика по результату аукциона',
-                    date_event_start: null,
-                    date_event_end: null,
-                    cost_real:null,
-                    sum_bud_fin:null,
-                    access_document:null,
-                    fin_vnebud_ist:null,
-                    is_nessesary: null,
-                    done:false,
-                    doneExpert:false,
-                    comment:'',
-                    commentExpert:'',
-                    parent:false
-                },
-                {
-                    canDelete:false,
-                    step:0.4,
-                    id_event:null,
-                    step_name:'Заключение договора с подрядчиком',
-                    date_event_start: null,
-                    date_event_end: null,
-                    cost_real:null,
-                    sum_bud_fin:null,
-                    fin_vnebud_ist:null,
-                    access_document:null,
-                    is_nessesary: null,
-                    done:false,
-                    doneExpert:false,
-                    comment:'',
-                    commentExpert:'',
-                    parent:false
-                },
-                {
-                    canDelete:false,
-                    button:true,
-                    button_name:'Добавить'
-                },
-                {
-                    canDelete:false,
-                    step:1,
-                    id_event:null,
-                    step_name:'Выполнение обследования, подготовка и утверждение дефектного акта (дефектной ведомости). ',
-                    date_event_start: null,
-                    date_event_end: null,
-                    cost_real:null,
-                    access_document:null,
-                    sum_bud_fin:null,
-                    fin_vnebud_ist:null,
-                    is_nessesary: null,
-                    done:false,
-                    doneExpert:false,
-                    comment:'',
-                    commentExpert:'',
-                    parent:true
-                },
-                {
-                    canDelete:false,
-                    button:true,
-                    button_name:'Добавить'
-                },
-                {
-                    canDelete:false,
-                    step:2,
-                    id_event:null,
-                    step_name:'Утверждение задания на проектирование ',
-                    date_event_start: null,
-                    date_event_end: null,
-                    cost_real:null,
-                    sum_bud_fin:null,
-                    access_document:null,
-                    fin_vnebud_ist:null,
-                    is_nessesary: null,
-                    done:false,
-                    doneExpert:false,
-                    comment:'',
-                    commentExpert:'',
-                    parent:true
-                },
-                {
-                    canDelete:false,
-                    button:true,
-                    button_name:'Добавить'
-                },
-                {
-                    canDelete:false,
-                    step:3,
-                    id_event:null,
-                    step_name:'Проведение тендера и заключение договора на подготовку проектно-сметной документации.',
-                    date_event_start: null,
-                    date_event_end: null,
-                    cost_real:null,
-                    sum_bud_fin:null,
-                    access_document:null,
-                    fin_vnebud_ist:null,
-                    is_nessesary: null,
-                    done:false,
-                    doneExpert:false,
-                    comment:'',
-                    commentExpert:'',
-                    parent:true
-                },
-                {
-                    canDelete:false,
-                    step:3.1,
-                    id_event:null,
-                    step_name:'Внесение пользователем закупки на обследование объекта в план закупок ',
-                    date_event_start: null,
-                    date_event_end: null,
-                    access_document:null,
-                    cost_real:null,
-                    sum_bud_fin:null,
-                    fin_vnebud_ist:null,
-                    is_nessesary: null,
-                    done:false,
-                    doneExpert:false,
-                    comment:'',
-                    commentExpert:'',
-                    parent:false
-                },
-                {
-                    canDelete:false,
-                    step:3.2,
-                    id_event:null,
-                    step_name:'Объявление пользователем аукциона на обследование объекта',
-                    date_event_start: null,
-                    date_event_end: null,
-                    cost_real:null,
-                    sum_bud_fin:null,
-                    access_document:null,
-                    fin_vnebud_ist:null,
-                    is_nessesary: null,
-                    done:false,
-                    doneExpert:false,
-                    comment:'',
-                    commentExpert:'',
-                    parent:false
-                },
-                {
-                    canDelete:false,
-                    step:3.3,
-                    id_event:null,
-                    step_name:'Определение подрядчика по результату аукциона',
-                    date_event_start: null,
-                    date_event_end: null,
-                    cost_real:null,
-                    sum_bud_fin:null,
-                    fin_vnebud_ist:null,
-                    is_nessesary: null,
-                    done:false,
-                    access_document:null,
-                    doneExpert:false,
-                    comment:'',
-                    commentExpert:'',
-                    parent:false
-                },
-                {
-                    canDelete:false,
-                    step:3.4,
-                    id_event:null,
-                    step_name:'Заключение договора с подрядчиком',
-                    date_event_start: null,
-                    date_event_end: null,
-                    access_document:null,
-                    cost_real:null,
-                    sum_bud_fin:null,
-                    fin_vnebud_ist:null,
-                    is_nessesary: null,
-                    done:false,
-                    doneExpert:false,
-                    comment:'',
-                    commentExpert:'',
-                    parent:false
-                },
-                {
-                    canDelete:false,
-                    button:true,
-                    button_name:'Добавить'
-                },
-                {
-                    canDelete:false,
-                    step:4,
-                    id_event:null,
-                    step_name:'Подготовка проектно-сметной документации.',
-                    date_event_start: null,
-                    date_event_end: null,
-                    cost_real:null,
-                    sum_bud_fin:null,
-                    access_document:null,
-                    fin_vnebud_ist:null,
-                    is_nessesary: null,
-                    done:false,
-                    doneExpert:false,
-                    comment:'',
-                    commentExpert:'',
-                    parent:true
-                },
-                {
-                    canDelete:false,
-                    button:true,
-                    button_name:'Добавить'
-                },
-                {
-                    canDelete:false,
-                    step:5,
-                    id_event:null,
-                    step_name:'Прохождение экспертизы проектно-сметной документации.',
-                    date_event_start: null,
-                    date_event_end: null,
-                    cost_real:null,
-                    access_document:null,
-                    sum_bud_fin:null,
-                    fin_vnebud_ist:null,
-                    is_nessesary: null,
-                    done:false,
-                    doneExpert:false,
-                    comment:'',
-                    commentExpert:'',
-                    parent:true
-                },
-                {
-                    canDelete:false,
-                    button:true,
-                    button_name:'Добавить'
-                },
-                {
-                    canDelete:false,
-                    step:6,
-                    id_event:null,
-                    step_name:'Проведение тендера и заключение договора на выполнение строительно-монтажных работ.',
-                    date_event_start: null,
-                    date_event_end: null,
-                    cost_real:null,
-                    sum_bud_fin:null,
-                    fin_vnebud_ist:null,
-                    access_document:null,
-                    is_nessesary: null,
-                    done:false,
-                    doneExpert:false,
-                    comment:'',
-                    commentExpert:'',
-                    parent:true
-                },
-                {
-                    canDelete:false,
-                    button:true,
-                    button_name:'Добавить'
-                },
-                {
-                    canDelete:false,
-                    step:8,
-                    id_event:null,
-                    step_name:'Выполнение строительно-монтажных работ.',
-                    date_event_start: null,
-                    date_event_end: null,
-                    cost_real:null,
-                    sum_bud_fin:null,
-                    access_document:null,
-                    fin_vnebud_ist:null,
-                    is_nessesary: null,
-                    done:false,
-                    doneExpert:false,
-                    comment:'',
-                    commentExpert:'',
-                    parent:true
-                },
-                {
-                    canDelete:false,
-                    button:true,
-                    button_name:'Добавить'
-                }
-
-
-            ],
-            svedenia: {
-                labels: [
-                    'Проведение тендера и заключение договора на выполнение обследования',
-                    'Выполнение обследования, подготовка и утверждение дефектного акта',
-                    'Утверждение задания на проектирование',
-                    'Проведение тендера и заключение договора на подготовку проектно-сметной документации',
-                    'Подготовка проектно-сметной документации',
-                    'Прохождение экспертизы проектно-сметной документации',
-                    'Проведение тендера и заключение договора на выполнение строительно-монтажных работ',
-                    'Выполнение строительно-монтажных работ'
-                ],
-                items:[],
-                fields:[
-                    {key:'index',label:'№'},
-                    {key:'step',label:'Этап'},
-                    {key:'is_nessesary',label:'Необходимость выполнения'},
-                    {key:'date_event_start',label:'Дата начала'},
-                    {key:'date_event_end',label:'Дата окончания'},
-                    {key:'cost_real',label:'Стоимость реализации (тыс.руб)'},
-                    {key:'sum_bud_fin',label:'Сумма бюджетного финансирования на проведение кап.ремонта (тыс.руб)'},
-                    {key:'fin_vnebud_ist',label:'Софинансирование из внебюджетных источников (тыс.руб)'},
-                ]
-            },
-            necessary: {
-                labels:[
-                    'Фундаменты',
-                    'Отмостка',
-                    'Стены ',
-                    'Колонны',
-                    'Перегородки',
-                    'Крыша (покрытия)',
-                    'Кровля',
-                    'Перекрытия',
-                    'Полы',
-                    'Окна',
-                    'Двери',
-                    'Ворота',
-                    'Лестницы',
-                    'Крыльца',
-                    'Балконы/лоджии',
-                    'Внутренняя отделка',
-                    'Наружная отделка',
-                    'Система электроснабжения',
-                    'Система водоснабжения',
-                    'Система водоотведения',
-                    'Система газоснабжения',
-                    'Система кондиционирования воздуха',
-                    'Система вентиляции',
-                    'Система отопления',
-                    'Система диспетчеризации',
-                    'Радиофикация',
-                    'Телевидение эфирное',
-                    'Система видеонаблюдения',
-                    'Система интернет и телефонии',
-                    'Система контроля управления доступом',
-                    'Пожарная сигнализация',
-                    'Охранная сигнализация',
-                    'Мусоропроводы',
-                    'Лифты',
-                ],
-                items:{
-                    one:[],
-                    two:[]
-                },
-                fields:{
-                    one:[
-                        {key:'element',label:'Строительные конструкции замена и (или) восстановление которых планируются при капитальном ремонте'},
-                        {key:'nalichie',label:'Наличие на объекте'},
-                        {key:'material',label:'Материал конструкции'},
-                        {key:'srok_eks',label:'Срок эксплуатации с момента строительства или предыдущего капитального ремонта'},
-                        {key:'kap_remont',label:'Требуется капитальный ремонт'},
-                        {key:'obosnovanie',label:'Обоснование необходимости'},
-                    ],
-                    two:[
-                        {key:'element',label:'Строительные конструкции замена и (или) восстановление которых планируются при капитальном ремонте'},
-                        {key:'nalichie',label:'Наличие на объекте'},
-                        {key:'srok_eks',label:'Срок эксплуатации с момента строительства или предыдущего капитального ремонта'},
-                        {key:'kap_remont',label:'Требуется капитальный ремонт'},
-                        {key:'obosnovanie',label:'Обоснование необходимости'},
-                    ]
-                }
-            },
-            waited:{
-                fields:[
-                    {key:'aim',label:'Цели и задачи'},
-                    {key:'plan',label:'Планируемый показатель'},
-                    {key:'changes',label:'Единица измерения'},
-                ],
-                items:[]
-            },
-            risks:{
-                fields:[
-                    {key:'types',label:'Виды рисков'},
-                    {key:'poison',label:'Отрицательные влияния'},
-                    {key:'protect',label:'Способы защиты'},
-                ],
-                items:[]
-            },
-            sved2Href: [1.2, 4.2, 7.2],
-        };
-
-
-    },
-    computed: {
-        ...mapGetters(['getUser']),
-    },
-    async mounted() {
-        this.obj_id = this.$route.params.id;
-        await this.requestUser();
-        await this.getStatus();
-        await this.getObject();
-    
-        await window.addEventListener("load", this.createChart);
-        await window.addEventListener("resize", this.createChart);
-
-        this.canChange = window.Permission === 'root' | window.canChange || false;
-    },
-    methods: {
-        debugItem(item, sved2, index) {
-            //Опытным путем было выяснено что индек считается вот таким образом (item.step + 1)
-
-            console.group('debugItem' + index);
-            console.log(item);
-            console.log(sved2);
-            console.log(item.step + 1)
-            console.groupEnd();
+    export default {
+        directives:{
+            'b-toggle':VBToggle
         },
-        ObjectOpis(event){
-            let data = new FormData();
-            data.append('value','object_opis');
-            data.append('object_opis',this.items.object_opis);
-            Axios.post(`/program/object/set-value/${this.items.id}`,data, {
+        components: {
+            "v-comments": CommentComponent,
+            BFormFile,
+            BAlert,
+            BBreadcrumb,
+            BCollapse,
+            BTableSimple,
+            BTr,
+            BTh,
+            BThead,
+            BTbody,
+            BDropdown,
+            BDropdownItem,
+            BTable,
+            BCard,
+            BButton,
+            BCardHeader,
+            BFormCheckbox,
+            BCardBody,
+            BTd,
+            BFormInput
+        },
+        data() {
+            return {
+                bannerInfo: [],
+                canChange: false,
+                dateStatus:'',
+                status: {
+                    label: '',
+                    variant: ''
+                },
+                realStatus:0,
+                realStatusType:[
+                    {
+                        variant:'secondary',
+                        label:'Серый'
+                    },
+                    {
+                        variant:'warning',
+                        label:'Желтый'
+                    },
+                    {
+                        variant:'success',
+                        label:'Зеленый'
+                    },
+                    {
+                        variant:'danger',
+                        label:'Красный'
+                    },
+                ],
+                dep_status: {
+                    label: null,
+                    color: null
+                },
+                dku_status: {
+                    label: null,
+                    color: null
+                },
+                show: {
+                    dep: false,
+                    dku: false
+                },
+                csrf: document.getElementsByName("csrf-token")[0].content,
+                items: [],
+                real:false,
+                obj_id: null,
+                org_id: null,
+                docs: [],
+                fromServer:{},
+                s_bud_f:0,
+                r_bud_f:0,
+
+                svedenia2:[
+                    {
+                        canDelete:false,
+                        step:0,
+                        id_event:null,
+                        step_name:'Проведение тендера и заключение договора на выполнение обследования',
+                        date_event_start: null,
+                        date_event_end: null,
+                        cost_real:null,
+                        sum_bud_fin:null,
+                        access_document:null,
+                        fin_vnebud_ist:null,
+                        is_nessesary: null,
+                        done:false,
+                        doneExpert:false,
+                        file:null,
+                        comment:'',
+                        commentExpert:'',
+                        parent:true
+                    },
+                    {
+                        canDelete:false,
+                        step:0.1,
+                        id_event:null,
+                        step_name:'Внесение пользователем закупки на обследование объекта в план закупок ',
+                        date_event_start: null,
+                        date_event_end: null,
+                        cost_real:null,
+                        file:null,
+                        sum_bud_fin:null,
+                        access_document:null,
+                        fin_vnebud_ist:null,
+                        is_nessesary: null,
+                        done:false,
+                        doneExpert:false,
+                        comment:'',
+                        commentExpert:'',
+                        parent:false
+                    },
+                    {
+                        canDelete:false,
+                        step:0.2,
+                        id_event:null,
+                        step_name:'Объявление пользователем аукциона на обследование объекта',
+                        date_event_start: null,
+                        access_document:null,
+                        date_event_end: null,
+                        cost_real:null,
+                        sum_bud_fin:null,
+                        fin_vnebud_ist:null,
+                        file:null,
+                        is_nessesary: null,
+                        done:false,
+                        doneExpert:false,
+                        comment:'',
+                        commentExpert:'',
+                        parent:false
+                    },
+                    {
+                        canDelete:false,
+                        step:0.3,
+                        id_event:null,
+                        step_name:'Определение подрядчика по результату аукциона',
+                        date_event_start: null,
+                        date_event_end: null,
+                        cost_real:null,
+                        sum_bud_fin:null,
+                        access_document:null,
+                        fin_vnebud_ist:null,
+                        is_nessesary: null,
+                        done:false,
+                        file:null,
+                        doneExpert:false,
+                        comment:'',
+                        commentExpert:'',
+                        parent:false
+                    },
+                    {
+                        canDelete:false,
+                        step:0.4,
+                        id_event:null,
+                        step_name:'Заключение договора с подрядчиком',
+                        date_event_start: null,
+                        date_event_end: null,
+                        cost_real:null,
+                        sum_bud_fin:null,
+                        fin_vnebud_ist:null,
+                        access_document:null,
+                        file:null,
+                        is_nessesary: null,
+                        done:false,
+                        doneExpert:false,
+                        comment:'',
+                        commentExpert:'',
+                        parent:false
+                    },
+                    {
+                        canDelete:false,
+                        button:true,
+                        button_name:'Добавить'
+                    },
+                    {
+                        canDelete:false,
+                        step:1,
+                        id_event:null,
+                        step_name:'Выполнение обследования, подготовка и утверждение дефектного акта (дефектной ведомости). ',
+                        date_event_start: null,
+                        date_event_end: null,
+                        cost_real:null,
+                        access_document:null,
+                        file:null,
+                        sum_bud_fin:null,
+                        fin_vnebud_ist:null,
+                        is_nessesary: null,
+                        done:false,
+                        doneExpert:false,
+                        comment:'',
+                        commentExpert:'',
+                        parent:true
+                    },
+                    {
+                        canDelete:false,
+                        button:true,
+                        button_name:'Добавить'
+                    },
+                    {
+                        canDelete:false,
+                        step:2,
+                        id_event:null,
+                        file:null,
+                        step_name:'Утверждение задания на проектирование ',
+                        date_event_start: null,
+                        date_event_end: null,
+                        cost_real:null,
+                        sum_bud_fin:null,
+                        access_document:null,
+                        fin_vnebud_ist:null,
+                        is_nessesary: null,
+                        done:false,
+                        doneExpert:false,
+                        comment:'',
+                        commentExpert:'',
+                        parent:true
+                    },
+                    {
+                        canDelete:false,
+                        button:true,
+                        button_name:'Добавить'
+                    },
+                    {
+                        canDelete:false,
+                        step:3,
+                        id_event:null,
+                        step_name:'Проведение тендера и заключение договора на подготовку проектно-сметной документации.',
+                        date_event_start: null,
+                        date_event_end: null,
+                        cost_real:null,
+                        sum_bud_fin:null,
+                        file:null,
+                        access_document:null,
+                        fin_vnebud_ist:null,
+                        is_nessesary: null,
+                        done:false,
+                        doneExpert:false,
+                        comment:'',
+                        commentExpert:'',
+                        parent:true
+                    },
+                    {
+                        canDelete:false,
+                        step:3.1,
+                        id_event:null,
+                        step_name:'Внесение пользователем закупки на обследование объекта в план закупок ',
+                        date_event_start: null,
+                        date_event_end: null,
+                        access_document:null,
+                        file:null,
+                        cost_real:null,
+                        sum_bud_fin:null,
+                        fin_vnebud_ist:null,
+                        is_nessesary: null,
+                        done:false,
+                        doneExpert:false,
+                        comment:'',
+                        commentExpert:'',
+                        parent:false
+                    },
+                    {
+                        canDelete:false,
+                        step:3.2,
+                        id_event:null,
+                        step_name:'Объявление пользователем аукциона на обследование объекта',
+                        date_event_start: null,
+                        date_event_end: null,
+                        cost_real:null,
+                        file:null,
+                        sum_bud_fin:null,
+                        access_document:null,
+                        fin_vnebud_ist:null,
+                        is_nessesary: null,
+                        done:false,
+                        doneExpert:false,
+                        comment:'',
+                        commentExpert:'',
+                        parent:false
+                    },
+                    {
+                        canDelete:false,
+                        step:3.3,
+                        id_event:null,
+                        step_name:'Определение подрядчика по результату аукциона',
+                        date_event_start: null,
+                        date_event_end: null,
+                        cost_real:null,
+                        sum_bud_fin:null,
+                        fin_vnebud_ist:null,
+                        is_nessesary: null,
+                        done:false,
+                        access_document:null,
+                        file:null,
+                        doneExpert:false,
+                        comment:'',
+                        commentExpert:'',
+                        parent:false
+                    },
+                    {
+                        canDelete:false,
+                        step:3.4,
+                        id_event:null,
+                        step_name:'Заключение договора с подрядчиком',
+                        date_event_start: null,
+                        date_event_end: null,
+                        access_document:null,
+                        cost_real:null,
+                        sum_bud_fin:null,
+                        fin_vnebud_ist:null,
+                        is_nessesary: null,
+                        file:null,
+                        done:false,
+                        doneExpert:false,
+                        comment:'',
+                        commentExpert:'',
+                        parent:false
+                    },
+                    {
+                        canDelete:false,
+                        button:true,
+                        button_name:'Добавить'
+                    },
+                    {
+                        canDelete:false,
+                        step:4,
+                        id_event:null,
+                        step_name:'Подготовка проектно-сметной документации.',
+                        date_event_start: null,
+                        date_event_end: null,
+                        cost_real:null,
+                        sum_bud_fin:null,
+                        access_document:null,
+                        fin_vnebud_ist:null,
+                        is_nessesary: null,
+                        file:null,
+                        done:false,
+                        doneExpert:false,
+                        comment:'',
+                        commentExpert:'',
+                        parent:true
+                    },
+                    {
+                        canDelete:false,
+                        button:true,
+                        button_name:'Добавить'
+                    },
+                    {
+                        canDelete:false,
+                        step:5,
+                        id_event:null,
+                        step_name:'Прохождение экспертизы проектно-сметной документации.',
+                        date_event_start: null,
+                        date_event_end: null,
+                        cost_real:null,
+                        access_document:null,
+                        sum_bud_fin:null,
+                        fin_vnebud_ist:null,
+                        is_nessesary: null,
+                        done:false,
+                        file:null,
+                        doneExpert:false,
+                        comment:'',
+                        commentExpert:'',
+                        parent:true
+                    },
+                    {
+                        canDelete:false,
+                        button:true,
+                        button_name:'Добавить'
+                    },
+                    {
+                        canDelete:false,
+                        step:6,
+                        id_event:null,
+                        step_name:'Проведение тендера и заключение договора на выполнение строительно-монтажных работ.',
+                        date_event_start: null,
+                        date_event_end: null,
+                        cost_real:null,
+                        sum_bud_fin:null,
+                        fin_vnebud_ist:null,
+                        access_document:null,
+                        is_nessesary: null,
+                        done:false,
+                        file:null,
+                        doneExpert:false,
+                        comment:'',
+                        commentExpert:'',
+                        parent:true
+                    },
+                    {
+                        canDelete:false,
+                        button:true,
+                        button_name:'Добавить'
+                    },
+                    {
+                        canDelete:false,
+                        step:8,
+                        id_event:null,
+                        step_name:'Выполнение строительно-монтажных работ.',
+                        date_event_start: null,
+                        date_event_end: null,
+                        cost_real:null,
+                        sum_bud_fin:null,
+                        access_document:null,
+                        fin_vnebud_ist:null,
+                        is_nessesary: null,
+                        file:null,
+                        done:false,
+                        doneExpert:false,
+                        comment:'',
+                        commentExpert:'',
+                        parent:true
+                    },
+                    {
+                        canDelete:false,
+                        button:true,
+                        button_name:'Добавить'
+                    }
+
+
+                ],
+                svedenia: {
+                    labels: [
+                        'Проведение тендера и заключение договора на выполнение обследования',
+                        'Выполнение обследования, подготовка и утверждение дефектного акта',
+                        'Утверждение задания на проектирование',
+                        'Проведение тендера и заключение договора на подготовку проектно-сметной документации',
+                        'Подготовка проектно-сметной документации',
+                        'Прохождение экспертизы проектно-сметной документации',
+                        'Проведение тендера и заключение договора на выполнение строительно-монтажных работ',
+                        'Выполнение строительно-монтажных работ'
+                    ],
+                    items:[],
+                    fields:[
+                        {key:'index',label:'№'},
+                        {key:'step',label:'Этап'},
+                        {key:'is_nessesary',label:'Необходимость выполнения'},
+                        {key:'date_event_start',label:'Дата начала'},
+                        {key:'date_event_end',label:'Дата окончания'},
+                        {key:'cost_real',label:'Стоимость реализации (тыс.руб)'},
+                        {key:'sum_bud_fin',label:'Сумма бюджетного финансирования на проведение кап.ремонта (тыс.руб)'},
+                        {key:'fin_vnebud_ist',label:'Софинансирование из внебюджетных источников (тыс.руб)'},
+                    ]
+                },
+                necessary: {
+                    labels:[
+                        'Фундаменты',
+                        'Отмостка',
+                        'Стены ',
+                        'Колонны',
+                        'Перегородки',
+                        'Крыша (покрытия)',
+                        'Кровля',
+                        'Перекрытия',
+                        'Полы',
+                        'Окна',
+                        'Двери',
+                        'Ворота',
+                        'Лестницы',
+                        'Крыльца',
+                        'Балконы/лоджии',
+                        'Внутренняя отделка',
+                        'Наружная отделка',
+                        'Система электроснабжения',
+                        'Система водоснабжения',
+                        'Система водоотведения',
+                        'Система газоснабжения',
+                        'Система кондиционирования воздуха',
+                        'Система вентиляции',
+                        'Система отопления',
+                        'Система диспетчеризации',
+                        'Радиофикация',
+                        'Телевидение эфирное',
+                        'Система видеонаблюдения',
+                        'Система интернет и телефонии',
+                        'Система контроля управления доступом',
+                        'Пожарная сигнализация',
+                        'Охранная сигнализация',
+                        'Мусоропроводы',
+                        'Лифты',
+                    ],
+                    items:{
+                        one:[],
+                        two:[]
+                    },
+                    fields:{
+                        one:[
+                            {key:'element',label:'Строительные конструкции замена и (или) восстановление которых планируются при капитальном ремонте'},
+                            {key:'nalichie',label:'Наличие на объекте'},
+                            {key:'material',label:'Материал конструкции'},
+                            {key:'srok_eks',label:'Срок эксплуатации с момента строительства или предыдущего капитального ремонта'},
+                            {key:'kap_remont',label:'Требуется капитальный ремонт'},
+                            {key:'obosnovanie',label:'Обоснование необходимости'},
+                        ],
+                        two:[
+                            {key:'element',label:'Строительные конструкции замена и (или) восстановление которых планируются при капитальном ремонте'},
+                            {key:'nalichie',label:'Наличие на объекте'},
+                            {key:'srok_eks',label:'Срок эксплуатации с момента строительства или предыдущего капитального ремонта'},
+                            {key:'kap_remont',label:'Требуется капитальный ремонт'},
+                            {key:'obosnovanie',label:'Обоснование необходимости'},
+                        ]
+                    }
+                },
+                waited:{
+                    fields:[
+                        {key:'aim',label:'Цели и задачи'},
+                        {key:'plan',label:'Планируемый показатель'},
+                        {key:'changes',label:'Единица измерения'},
+                    ],
+                    items:[]
+                },
+                risks:{
+                    fields:[
+                        {key:'types',label:'Виды рисков'},
+                        {key:'poison',label:'Отрицательные влияния'},
+                        {key:'protect',label:'Способы защиты'},
+                    ],
+                    items:[]
+                },
+                sved2Href: [1.2, 4.2, 7.2],
+                sved2Doc:[1.1, 1.4, 2, 3, 4.1, 4.4, 5, 6, 7.1, 7.3, 7.4, 8],
+            };
+
+
+        },
+        computed: {
+            ...mapGetters(['getUser']),
+        },
+        async mounted() {
+            this.obj_id = this.$route.params.id;
+            await this.requestUser();
+            await this.getStatus();
+            await this.getObject();
+
+            await window.addEventListener("load", this.createChart);
+            await window.addEventListener("resize", this.createChart);
+
+            this.canChange = window.Permission === 'root' | window.canChange || false;
+        },
+        methods: {
+            async changeRealStatus(index){
+                let data = new FormData();
+                data.append('value','real_status');
+                data.append('real_status',index);
+                await Axios.post(`/program/object/set-value/${this.items.id}`,data, {
+                        headers: {
+                            "X-CSRF-Token": this.csrf
+                        }
+                    }
+                ).then(response=>{
+                    if(!response.data.success)
+                        response.data.errors.forEach(item=>{
+                            this.setBanner('danger',item)
+                        })
+                });
+                this.realStatus = index;
+            },
+            fileInput(index) {
+                let graph = document.querySelector(`#file_input_${index}`);
+                this.svedenia2[index].file = graph.files[0];
+
+                console.log(this.svedenia2[index].file);
+            },
+            debugItem(item, sved2, index) {
+                //Опытным путем было выяснено что индек считается вот таким образом (item.step + 1)
+
+                console.group('debugItem' + index);
+                console.log(item);
+                console.log(sved2);
+                console.log(item.step + 1)
+                console.groupEnd();
+            },
+            ObjectOpis(event){
+                let data = new FormData();
+                data.append('value','object_opis');
+                data.append('object_opis',this.items.object_opis);
+                Axios.post(`/program/object/set-value/${this.items.id}`,data, {
+                        headers: {
+                            "X-CSRF-Token": this.csrf
+                        }
+                    }
+                ).then(response=>{
+                    if(!response.data.success)
+                        response.data.errors.forEach(item=>{
+                            this.setBanner('danger',item)
+                        })
+                })
+            },
+            async setChart() {
+
+                const beginDate = [];
+
+                this.svedenia.items.forEach( item => {
+                    beginDate.push(item.date_event_start)
+                })
+
+            },
+            createChart(e) {
+                const days = document.querySelectorAll(".chart-values li");
+                const tasks = document.querySelectorAll(".chart-bars li");
+                const daysArray = [...days];
+
+
+                tasks.forEach(el => {
+                    const duration = el.dataset.duration.split("-");
+                    const startDay = duration[0];
+
+                    const endDay = duration[1];
+                    let left = 0,
+                        width = 0;
+
+                    if (startDay.endsWith("½")) {
+                        const filteredArray = daysArray.filter(day => day.textContent == startDay.slice(0, -1));
+                        left = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth / 2;
+                    } else {
+                        const filteredArray = daysArray.filter(day => day.textContent == startDay);
+                        left = filteredArray[0].offsetLeft;
+                    }
+
+                    if (endDay.endsWith("½")) {
+                        const filteredArray = daysArray.filter(day => day.textContent == endDay.slice(0, -1));
+                        width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth / 2 - left;
+                    } else {
+                        const filteredArray = daysArray.filter(day => day.textContent == endDay);
+                        width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth - left;
+                    }
+
+                    // apply css
+                    el.style.left = `${left - 40}px`;
+                    el.style.width = `${width}px`;
+                    el.style.height = '20px';
+                    if (e.type == "load") {
+                        el.style.backgroundColor = el.dataset.color;
+                        el.style.opacity = 1;
+                    }
+                });
+
+            },
+            ...mapActions(['requestUser']),
+            sendData(item){
+                let data = new FormData();
+                Object.keys(item).forEach(key=>{
+                    data.append(key,item[key]);
+                })
+                Axios.post(`/program/object/send-event/${this.obj_id}`,data,{
                     headers: {
                         "X-CSRF-Token": this.csrf
                     }
-                }
-            ).then(response=>{
-                if(!response.data.success)
-                    response.data.errors.forEach(item=>{
-                        this.setBanner('danger',item)
-                    })
-            })
-        },
-        async setChart() {
+                }).then(response=>console.log(response.data))
+            },
+            addRow(index,toIndex = false){
 
-            const beginDate = [];
-
-            this.svedenia.items.forEach( item => {
-                beginDate.push(item.date_event_start)
-            })
-
-        },
-        createChart(e) {
-            const days = document.querySelectorAll(".chart-values li");
-            const tasks = document.querySelectorAll(".chart-bars li");
-            const daysArray = [...days];
-
-
-            tasks.forEach(el => {
-                const duration = el.dataset.duration.split("-");
-                const startDay = duration[0];
-
-                const endDay = duration[1];
-                let left = 0,
-                width = 0;
-
-                if (startDay.endsWith("½")) {
-                    const filteredArray = daysArray.filter(day => day.textContent == startDay.slice(0, -1));
-                    left = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth / 2;
+                this.svedenia2.splice(index,0,{
+                    step:this.svedenia2[index-1].step+0.1 ,
+                    id_event:null,
+                    step_name:'',
+                    date_event_start: null,
+                    date_event_end: null,
+                    cost_real:null,
+                    sum_bud_fin:null,
+                    access_document:null,
+                    fin_vnebud_ist:null,
+                    is_nessesary: null,
+                    done:false,
+                    doneExpert:false,
+                    comment:'',
+                    commentExpert:'',
+                    parent:false,
+                    canDelete:true,
+                });
+            },
+            deleteRow(index){
+                if (this.svedenia2[index-1].canDelete)
+                    this.svedenia2.splice(index-1,1);
+            },
+            actionHendler(event) {
+                event.preventDefault();
+                if(document.querySelector(`#user_${window.currentUser}`) || window.Permission === 'dep') {
+                    window.location = event.target.href
                 } else {
-                    const filteredArray = daysArray.filter(day => day.textContent == startDay);
-                    left = filteredArray[0].offsetLeft;
+                    this.setBanner('danger', 'Сначала добавте комментарий!')
                 }
-
-                if (endDay.endsWith("½")) {
-                    const filteredArray = daysArray.filter(day => day.textContent == endDay.slice(0, -1));
-                    width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth / 2 - left;
-                } else {
-                    const filteredArray = daysArray.filter(day => day.textContent == endDay);
-                    width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth - left;
-                }
-
-                // apply css
-                el.style.left = `${left - 40}px`;
-                el.style.width = `${width}px`;
-                el.style.height = '20px';
-                if (e.type == "load") {
-                    el.style.backgroundColor = el.dataset.color;
-                    el.style.opacity = 1;
-                }
-            });
-
-        },
-        ...mapActions(['requestUser']),
-        sendData(item){
-            let data = new FormData();
-            Object.keys(item).forEach(key=>{
-                data.append(key,item[key]);
-            })
-          Axios.post(`/program/object/send-event/${this.obj_id}`,data,{
-              headers: {
-                  "X-CSRF-Token": this.csrf
-              }
-          }).then(response=>console.log(response.data))
-        },
-        addRow(index,toIndex = false){
-
-            this.svedenia2.splice(index,0,{
-                step:this.svedenia2[index-1].step+0.1 ,
-                id_event:null,
-                step_name:'',
-                date_event_start: null,
-                date_event_end: null,
-                cost_real:null,
-                sum_bud_fin:null,
-                access_document:null,
-                fin_vnebud_ist:null,
-                is_nessesary: null,
-                done:false,
-                doneExpert:false,
-                comment:'',
-                commentExpert:'',
-                parent:false,
-                canDelete:true,
-            });
-        },
-        deleteRow(index){
-            if (this.svedenia2[index-1].canDelete)
-                this.svedenia2.splice(index-1,1);
-        },
-        actionHendler(event) {
-            event.preventDefault();
-            if(document.querySelector(`#user_${window.currentUser}`) || window.Permission === 'dep') {
-                window.location = event.target.href
-            } else {
-                this.setBanner('danger', 'Сначала добавте комментарий!')
-            }
-        },
-        setBanner(variant, message) {
-            this.bannerInfo.unshift({
-                show: true,
-                variant: variant,
-                message: message
-            });
-            setTimeout(() => {
-                this.resetBanners();
-            }, 1500);
-        },
-        resetBanners() {
-            this.bannerInfo.pop();
-        },
-        getEl(arr,index){
-            let el = null;
-            arr.forEach(item=>{
-                if (item.element == index) {
-                    el = item;
-                    return false;
-                }
-            });
-            return el;
-        },
-        async getStatus() {
-            Axios.get(`/api/get-status/${this.obj_id}`).then((res) =>{
-                this.status.label = res.data.label;
-                this.realStatus = res.data.real_status;
-                
-                let dep = res.data.dep_status;
-                if(dep == 'not') {
-                    this.dep_status.label = 'В обработке';
-                    this.dep_status.color = 'secondary'
-                } else if(dep == 'approved') {
-                    this.dep_status.label = 'Рассмотрено ДЭП';
-                    this.dep_status.color = 'success'
-                } else if(dep == 'rejected') {
-                    this.dep_status.label = 'Резерв';
-                    this.dep_status.color = 'warning'
-                }
-
-                let dku = res.data.dku_status;
-                if(dku == 'not') {
-                    this.dku_status.label = 'В обработке';
-                    this.dku_status.color = 'secondary'
-                } else if(dku == 'approved') {
-                    this.dku_status.label = 'Согласовано ДКУ';
-                    this.dku_status.color = 'success'
-                } else if(dku == 'rejected') {
-                    this.dku_status.label = 'Резерв';
-                    this.dku_status.color = 'warning'
-                }
-
-                if(res.data.id == 2) {
-                    this.show.dep = true
-                }
-                if(res.data.dep_status == 'approved') {
-                    this.show.dku = true
-                }
-
-
-                let color = '';
-                if(res.data.id == 1) {
-                    color = 'secondary'
-                } else if (res.data.id == 2) {
-                    color = 'success'
-                } else if (res.data.id == 3) {
-                    color = 'danger'
-                } else if (res.data.id == 4) {
-                    color = 'warning'
-                }
-                this.status.variant = color;
-
-                this.real = res.data.id == 2 && dep=='approved';
-
-            })
-        },
-        isFloat(x) { return !!(x % 1); },
-        async getObject(){
-           await Axios.get(`/api/get-object/${this.obj_id}`).then(res=>{
-                this.fromServer = JSON.parse(res.data);
-                this.items = this.fromServer.object;
-                this.items.org_name = this.fromServer.organization.name;
-                this.docs = this.fromServer.docs;
-                this.org_id = JSON.parse(res.data).org_id;
-
-                let c=0.0, v=0.0,b=0.0;
-                this.fromServer.svedenia.forEach((item,index)=>{
-                    c+=Number(item.cost_real);
-                    if (item.done)
-                        this.s_bud_f+=item.cost_real;
-                    v+=Number(item.sum_bud_fin);
-                    b+=Number(item.fin_vnebud_ist);
-                    this.svedenia2.forEach(item2=>{
-                        if (item2.step == item.step) {
-                            item2.date_event_start = item.date_event_start;
-                            item2.date_event_end = item.date_event_end;
-                            item2.cost_real = item.cost_real;
-                            item2.access_document = item.access_document;
-                            item2.sum_bud_fin = item.sum_bud_fin;
-                            item2.fin_vnebud_ist = item.fin_vnebud_ist;
-                            item2.id_event = item.id;
-                            item2.done = item.done;
-                            item2.doneExpert = item.doneExpert;
-                            item2.comment = item.comment;
-                            item2.commentExpert = item.commentExpert;
-                        }
-                    });
-                    this.svedenia.items.push({
-                        index:index+1,
-                        step:this.svedenia.labels[index],
-                        is_nessesary:item.is_nessesary ? 'Да' : 'Нет',
-                        date_event_start:item.date_event_start,
-                        date_event_end:item.date_event_end,
-                        cost_real:item.cost_real,
-                        sum_bud_fin:item.sum_bud_fin,
-                        fin_vnebud_ist:item.fin_vnebud_ist,
-                    })
+            },
+            setBanner(variant, message) {
+                this.bannerInfo.unshift({
+                    show: true,
+                    variant: variant,
+                    message: message
                 });
-                this.fromServer.svedenia2.forEach((item,index)=>{
-                    c+=Number(item.cost_real);
-                    v+=Number(item.sum_bud_fin);
-                    b+=Number(item.fin_vnebud_ist);
-                    this.svedenia2.forEach(item2=>{
-                        if (this.isFloat(item2.step) && item2.step == item.step) {
-                            item2.date_event_start = item.date_event_start;
-                            item2.date_event_end = item.date_event_end;
-                            item2.cost_real = item.cost_real;
-                            item2.sum_bud_fin = item.sum_bud_fin;
-                            item2.fin_vnebud_ist = item.fin_vnebud_ist;
-                            item2.id_event = item.id_event;
-                            item2.done = item.done;
-                            item2.access_document = item.access_document;
-                            item2.doneExpert = item.doneExpert;
-                            item2.comment = item.comment;
-                            item2.commentExpert = item.commentExpert;
-                        }
-                    });
-                });
-
-                this.svedenia.items.push({
-                    step:'Готово',
-                    cost_real:c.toFixed(3),
-                    sum_bud_fin:v.toFixed(3),
-                    fin_vnebud_ist:b.toFixed(3),
-                });
-                this.necessary.labels.forEach((item,index)=>{
-                    let el = this.getEl(this.fromServer.necessary,index);
-                    if (!el) {
-                        if (index < 17) {
-                            this.necessary.items.one.push({
-                                element: item,
-                                nalichie: null,
-                                material: null,
-                                srok_eks: null,
-                                kap_remont: null,
-                                obosnovanie: null,
-                            })
-                        }
-                        else{
-                            this.necessary.items.two.push({
-                                element: item,
-                                nalichie: null,
-                                srok_eks: null,
-                                kap_remont: null,
-                                obosnovanie: null,
-                            })
-                        }
-                    }else {
-                        if (index < 17) {
-                            this.necessary.items.one.push({
-                                element: item,
-                                nalichie: el.nalichie == '1' ? 'Да' : 'Нет',
-                                material: el.nalichie == '1' ? el.material : '',
-                                srok_eks: el.nalichie == '1' ? el.srok_eks : '',
-                                kap_remont: el.nalichie == '1' ? el.kap_remont ? 'Да' : 'Нет' : '',
-                                obosnovanie: el.nalichie == '1' ? el.kap_remont ? item.obosnovanie : '' : '',
-                            })
-
-                        } else {
-                            this.necessary.items.two.push({
-                                element: item,
-                                nalichie: el.nalichie == '1' ? 'Да' : 'Нет',
-                                srok_eks: el.nalichie == '1' ? el.srok_eks : '',
-                                kap_remont: el.nalichie == '1' ? el.kap_remont ? 'Да' : 'Нет' : '',
-                                obosnovanie: el.nalichie == '1' ? el.kap_remont ? el.obosnovanie : '' : '',
-                            })
-
-                        }
+                setTimeout(() => {
+                    this.resetBanners();
+                }, 1500);
+            },
+            resetBanners() {
+                this.bannerInfo.pop();
+            },
+            getEl(arr,index){
+                let el = null;
+                arr.forEach(item=>{
+                    if (item.element == index) {
+                        el = item;
+                        return false;
                     }
                 });
+                return el;
+            },
+            async getStatus() {
+                Axios.get(`/api/get-status/${this.obj_id}`).then((res) =>{
+                    this.status.label = res.data.label;
+                    this.realStatus = res.data.real_status;
 
-                let w0 = this.getEl(this.fromServer.waited,0);
-                let w1 = this.getEl(this.fromServer.waited,1);
-                let w2 = this.getEl(this.fromServer.waited,2);
-                let w3 = this.getEl(this.fromServer.waited,3);
-                let w4 = this.getEl(this.fromServer.waited,4);
-                this.waited.items.push({
-                    aim:'Проведение капитального ремонта, общая площадь',
-                    plan:w0?.plan,
-                    changes:'кв.м'
-                },{
-                    aim:'Вовлечение в хозяйственную деятельность за счет проведенного капитального ремонта, общая площадь',
-                    plan:w1?.plan,
-                    changes:'кв.м'
-                },{
-                    aim:'Снижение затрат на эксплуатацию',
-                    plan:w2?.plan == '1' ? 'Да' : 'Нет',
-                    changes:''
-                },{
-                    aim:'Повышение энергоэффективности',
-                    plan:w3?.plan == '1' ? 'Да' : 'Нет',
-                    changes:''
-                },{
-                    aim:'Восстановление (ремонт, реставрация, за исключением реконструкции) объектов культурного наследия',
-                    plan:w4?.plan == '1' ? 'Да' : 'Нет',
-                    changes:''
-                });
-                for (let i = 5; i<this.fromServer.waited.length;i++){
-                    let el = this.fromServer.waited[i];
-                    this.waited.items.push({
-                        aim:el.aim,
-                        plan:el.plan,
-                        changes:el.changes
+                    let dep = res.data.dep_status;
+                    if(dep == 'not') {
+                        this.dep_status.label = 'В обработке';
+                        this.dep_status.color = 'secondary'
+                    } else if(dep == 'approved') {
+                        this.dep_status.label = 'Рассмотрено ДЭП';
+                        this.dep_status.color = 'success'
+                    } else if(dep == 'rejected') {
+                        this.dep_status.label = 'Резерв';
+                        this.dep_status.color = 'warning'
+                    }
+
+                    let dku = res.data.dku_status;
+                    if(dku == 'not') {
+                        this.dku_status.label = 'В обработке';
+                        this.dku_status.color = 'secondary'
+                    } else if(dku == 'approved') {
+                        this.dku_status.label = 'Согласовано ДКУ';
+                        this.dku_status.color = 'success'
+                    } else if(dku == 'rejected') {
+                        this.dku_status.label = 'Резерв';
+                        this.dku_status.color = 'warning'
+                    }
+
+                    if(res.data.id == 2) {
+                        this.show.dep = true
+                    }
+                    if(res.data.dep_status == 'approved') {
+                        this.show.dku = true
+                    }
+
+
+                    let color = '';
+                    if(res.data.id == 1) {
+                        color = 'secondary'
+                    } else if (res.data.id == 2) {
+                        color = 'success'
+                    } else if (res.data.id == 3) {
+                        color = 'danger'
+                    } else if (res.data.id == 4) {
+                        color = 'warning'
+                    }
+                    this.status.variant = color;
+
+                    this.real = res.data.id == 2 && dep=='approved';
+
+                })
+            },
+            isFloat(x) { return !!(x % 1); },
+            async getObject(){
+                await Axios.get(`/api/get-object/${this.obj_id}`).then(res=>{
+                    this.fromServer = JSON.parse(res.data);
+                    this.items = this.fromServer.object;
+                    this.items.org_name = this.fromServer.organization.name;
+                    this.docs = this.fromServer.docs;
+                    this.org_id = JSON.parse(res.data).org_id;
+
+                    let c=0.0, v=0.0,b=0.0;
+                    console.log(this.fromServer);
+                    this.fromServer.svedenia.forEach((item,index)=>{
+                        c+=Number(item.model.cost_real);
+                        if (item.model.done)
+                            this.s_bud_f+=item.model.cost_real;
+                        v+=Number(item.model.sum_bud_fin);
+                        b+=Number(item.model.fin_vnebud_ist);
+                        this.svedenia2.forEach(item2=>{
+                            if (item2.step == item.model.step) {
+                                item2.id = item.model.id;
+                                item2.date_event_start = item.model.date_event_start;
+                                item2.date_event_end = item.model.date_event_end;
+                                item2.cost_real = item.model.cost_real;
+                                item2.access_document = item.model.access_document;
+                                item2.sum_bud_fin = item.model.sum_bud_fin;
+                                item2.fin_vnebud_ist = item.model.fin_vnebud_ist;
+                                item2.id_event = item.model.id;
+                                item2.done = item.model.done;
+                                item2.doneExpert = item.model.doneExpert;
+                                item2.comment = item.model.comment;
+                                item2.commentExpert = item.model.commentExpert;
+                            }
+                        });
+                        this.svedenia.items.push({
+                            index:index+1,
+                            step:this.svedenia.labels[index],
+                            is_nessesary:item.model.is_nessesary ? 'Да' : 'Нет',
+                            date_event_start:item.model.date_event_start,
+                            date_event_end:item.model.date_event_end,
+                            cost_real:item.model.cost_real,
+                            sum_bud_fin:item.model.sum_bud_fin,
+                            fin_vnebud_ist:item.model.fin_vnebud_ist,
+                        })
                     });
-                }
-                if (this.fromServer.risks) {
-                    this.fromServer.risks.forEach(item => {
-                        this.risks.items.push({
-                            types: item.types,
-                            poison: item.poison,
-                            protect: item.protect,
+                    this.fromServer.svedenia2.forEach((item,index)=>{
+                        c+=Number(item.model.cost_real);
+                        v+=Number(item.model.sum_bud_fin);
+                        b+=Number(item.model.fin_vnebud_ist);
+                        this.svedenia2.forEach(item2=>{
+                            if (this.isFloat(item2.step) && item2.step == item.model.step) {
+                                item2.date_event_start = item.model.date_event_start;
+                                item2.date_event_end = item.model.date_event_end;
+                                item2.cost_real = item.model.cost_real;
+                                item2.sum_bud_fin = item.model.sum_bud_fin;
+                                item2.fin_vnebud_ist = item.model.fin_vnebud_ist;
+                                item2.id_event = item.model.id_event;
+                                item2.done = item.model.done;
+                                item2.access_document = item.model.access_document;
+                                item2.doneExpert = item.model.doneExpert;
+                                if (item.file) {
+                                    item2.file = {
+                                        name: item.file
+                                    }
+                                }
+                                item2.comment = item.model.comment;
+                                item2.commentExpert = item.model.commentExpert;
+                            }
                         });
                     });
-                }
 
+                    this.svedenia.items.push({
+                        step:'Готово',
+                        cost_real:c.toFixed(3),
+                        sum_bud_fin:v.toFixed(3),
+                        fin_vnebud_ist:b.toFixed(3),
+                    });
+                    this.necessary.labels.forEach((item,index)=>{
+                        let el = this.getEl(this.fromServer.necessary,index);
+                        if (!el) {
+                            if (index < 17) {
+                                this.necessary.items.one.push({
+                                    element: item,
+                                    nalichie: null,
+                                    material: null,
+                                    srok_eks: null,
+                                    kap_remont: null,
+                                    obosnovanie: null,
+                                })
+                            }
+                            else{
+                                this.necessary.items.two.push({
+                                    element: item,
+                                    nalichie: null,
+                                    srok_eks: null,
+                                    kap_remont: null,
+                                    obosnovanie: null,
+                                })
+                            }
+                        }else {
+                            if (index < 17) {
+                                this.necessary.items.one.push({
+                                    element: item,
+                                    nalichie: el.nalichie == '1' ? 'Да' : 'Нет',
+                                    material: el.nalichie == '1' ? el.material : '',
+                                    srok_eks: el.nalichie == '1' ? el.srok_eks : '',
+                                    kap_remont: el.nalichie == '1' ? el.kap_remont ? 'Да' : 'Нет' : '',
+                                    obosnovanie: el.nalichie == '1' ? el.kap_remont ? item.obosnovanie : '' : '',
+                                })
 
-            });
-         //  console.log( this.svedenia2);
+                            } else {
+                                this.necessary.items.two.push({
+                                    element: item,
+                                    nalichie: el.nalichie == '1' ? 'Да' : 'Нет',
+                                    srok_eks: el.nalichie == '1' ? el.srok_eks : '',
+                                    kap_remont: el.nalichie == '1' ? el.kap_remont ? 'Да' : 'Нет' : '',
+                                    obosnovanie: el.nalichie == '1' ? el.kap_remont ? el.obosnovanie : '' : '',
+                                })
 
-            this.svedenia2.some(item=>{
-                if (item.done == 0){
-                    if (item.date_event_end) {
-                        this.dateStatus = new Date(item.date_event_end).toLocaleDateString();
-                        return true;
+                            }
+                        }
+                    });
+
+                    let w0 = this.getEl(this.fromServer.waited,0);
+                    let w1 = this.getEl(this.fromServer.waited,1);
+                    let w2 = this.getEl(this.fromServer.waited,2);
+                    let w3 = this.getEl(this.fromServer.waited,3);
+                    let w4 = this.getEl(this.fromServer.waited,4);
+                    this.waited.items.push({
+                        aim:'Проведение капитального ремонта, общая площадь',
+                        plan:w0?.plan,
+                        changes:'кв.м'
+                    },{
+                        aim:'Вовлечение в хозяйственную деятельность за счет проведенного капитального ремонта, общая площадь',
+                        plan:w1?.plan,
+                        changes:'кв.м'
+                    },{
+                        aim:'Снижение затрат на эксплуатацию',
+                        plan:w2?.plan == '1' ? 'Да' : 'Нет',
+                        changes:''
+                    },{
+                        aim:'Повышение энергоэффективности',
+                        plan:w3?.plan == '1' ? 'Да' : 'Нет',
+                        changes:''
+                    },{
+                        aim:'Восстановление (ремонт, реставрация, за исключением реконструкции) объектов культурного наследия',
+                        plan:w4?.plan == '1' ? 'Да' : 'Нет',
+                        changes:''
+                    });
+                    for (let i = 5; i<this.fromServer.waited.length;i++){
+                        let el = this.fromServer.waited[i];
+                        this.waited.items.push({
+                            aim:el.aim,
+                            plan:el.plan,
+                            changes:el.changes
+                        });
                     }
+                    if (this.fromServer.risks) {
+                        this.fromServer.risks.forEach(item => {
+                            this.risks.items.push({
+                                types: item.types,
+                                poison: item.poison,
+                                protect: item.protect,
+                            });
+                        });
+                    }
+
+
+                });
+                //  console.log( this.svedenia2);
+
+                this.svedenia2.some(item=>{
+                    if (item.done == 0){
+                        if (item.date_event_end) {
+                            this.dateStatus = new Date(item.date_event_end).toLocaleDateString();
+                            return true;
+                        }
+                    }
+                });
+            },
+            getIznos(iznos) {
+                let izn = parseInt(iznos);
+                if (izn === 0) {
+                    return "Менее 20%";
+                } else if (izn === 1) {
+                    return "От 20% до 50%";
+                } else if (izn === 2) {
+                    return "От 50% до 70%";
+                } else if (izn === 3) {
+                    return "От 70% до 90%";
+                } else if (izn === 4) {
+                    return "Более 90%";
                 }
-            });
-        },
-        getIznos(iznos) {
-            let izn = parseInt(iznos);
-            if (izn === 0) {
-                return "Менее 20%";
-            } else if (izn === 1) {
-                return "От 20% до 50%";
-            } else if (izn === 2) {
-                return "От 50% до 70%";
-            } else if (izn === 3) {
-                return "От 70% до 90%";
-            } else if (izn === 4) {
-                return "Более 90%";
             }
         }
-    }
-};
+    };
 </script>
 
 <style>
-.normal-font-weight-for-sell {
-    font-weight: normal !important;
-}
-.vertical-horizontal-align {
-    vertical-align: middle !important;
-    text-align: center;
-}
+    .normal-font-weight-for-sell {
+        font-weight: normal !important;
+    }
+    .vertical-horizontal-align {
+        vertical-align: middle !important;
+        text-align: center;
+    }
 
-:root {
-    --divider: lightgrey;
-}
-.labels-for-chart {
-    z-index: 1;
-    width: 1090px;
-    margin-left: 5px;
-    position: absolute;
-    top: 87px;
-    left: 5px;
-}
-.labels-for-chart > li {
-    margin-top: 10px;
-    border-bottom: 1px solid grey;
-}
-.charter1 {
-    z-index: 1;
-    position: absolute;
-    top: 52px;
-    left: 5px;
-    height: 320px;
-    width: 600px;
-    background-color: white; 
-}
-.charter2 {
-    z-index: 1;
-    position: absolute;
-    top: 52px;
-    left: 530px;
-    height: 320px;
-    width: 200px;
-    background: linear-gradient(to right, white 60%, transparent 100%); 
-}
-ul {
-    padding-inline-start: 0px !important;
-    list-style: none;
-}
-a {
-    text-decoration: none;
-    color: inherit;
-}
-body {
-    background: var(--body);
-    font-size: 16px;
-    font-family: sans-serif;
-}
-.chart-wrapper {
-    max-width: 1000px;
-    padding: 0 10px;
-    margin: 0 auto;
-    margin-left: 700px;
-}
-.chart-wrapper .chart-values {
-    position: relative;
-    display: flex;
-    margin-bottom: 20px;
-    font-weight: bold;
-}
-.chart-wrapper .chart-values li {
-    flex: 1;
-    min-width: 80px;
-    text-align: center;
-}
-.chart-wrapper .chart-values li:not(:last-child) {
-    position: relative;
-}
-.chart-wrapper .chart-values li:not(:last-child)::before {
-    content: '';
-    position: absolute;
-    right: 0;
-    height: 300px;
-    border-right: 1px solid var(--divider);
-}
-.chart-wrapper .chart-bars li {
-    position: relative;
-    color: var(--white);
-    margin-bottom: 15px;
-    font-size: 16px;
-    border-radius: 20px;
-    padding: 10px 20px;
-    width: 0;
-    opacity: 0;
-    transition: all 0.65s linear 0.2s;
-}
+    :root {
+        --divider: lightgrey;
+    }
+    .labels-for-chart {
+        z-index: 1;
+        width: 1090px;
+        margin-left: 5px;
+        position: absolute;
+        top: 87px;
+        left: 5px;
+    }
+    .labels-for-chart > li {
+        margin-top: 10px;
+        border-bottom: 1px solid grey;
+    }
+    .charter1 {
+        z-index: 1;
+        position: absolute;
+        top: 52px;
+        left: 5px;
+        height: 320px;
+        width: 600px;
+        background-color: white;
+    }
+    .charter2 {
+        z-index: 1;
+        position: absolute;
+        top: 52px;
+        left: 530px;
+        height: 320px;
+        width: 200px;
+        background: linear-gradient(to right, white 60%, transparent 100%);
+    }
+    ul {
+        padding-inline-start: 0px !important;
+        list-style: none;
+    }
+    a {
+        text-decoration: none;
+        color: inherit;
+    }
+    body {
+        background: var(--body);
+        font-size: 16px;
+        font-family: sans-serif;
+    }
+    .chart-wrapper {
+        max-width: 1000px;
+        padding: 0 10px;
+        margin: 0 auto;
+        margin-left: 700px;
+    }
+    .chart-wrapper .chart-values {
+        position: relative;
+        display: flex;
+        margin-bottom: 20px;
+        font-weight: bold;
+    }
+    .chart-wrapper .chart-values li {
+        flex: 1;
+        min-width: 80px;
+        text-align: center;
+    }
+    .chart-wrapper .chart-values li:not(:last-child) {
+        position: relative;
+    }
+    .chart-wrapper .chart-values li:not(:last-child)::before {
+        content: '';
+        position: absolute;
+        right: 0;
+        height: 300px;
+        border-right: 1px solid var(--divider);
+    }
+    .chart-wrapper .chart-bars li {
+        position: relative;
+        color: var(--white);
+        margin-bottom: 15px;
+        font-size: 16px;
+        border-radius: 20px;
+        padding: 10px 20px;
+        width: 0;
+        opacity: 0;
+        transition: all 0.65s linear 0.2s;
+    }
 
+
+    /* Анимация стрелочек и стили самих стрелочек */
+
+    .cell-center-for-items {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .scope-to-animate {
+        z-index: 999;
+        height: 2px;
+        width: 8px;
+        background: grey;
+        transition: 0.4s ease;
+    }
+    .scope-to-animate:first-child {
+        display: block;
+        position: absolute;
+        transform: rotate(45deg);
+        left: 25%;
+        bottom: 35%;
+    }
+    .scope-to-animate:nth-child(2) {
+        display: block;
+        position: absolute;
+        transform: rotate(-45deg);
+        left: 45%;
+        bottom: 35%;
+    }
+    .scope-to-animate:nth-child(3) {
+        display: block;
+        position: absolute;
+        transform: rotate(45deg);
+        left: 25%;
+        bottom: 54%;
+    }
+    .scope-to-animate:nth-child(4) {
+        display: block;
+        position: absolute;
+        transform: rotate(-45deg);
+        left: 45%;
+        bottom: 54%;
+    }
+    .label:hover .scope-to-animate:nth-child(1) {
+        transform: rotate(-135deg);
+        background: #5bc0de;
+    }
+    .label:hover .scope-to-animate:nth-child(2) {
+        transform: rotate(135deg);
+        background: #5bc0de;
+    }
+    .label:hover .scope-to-animate:nth-child(3) {
+        transform: rotate(225deg);
+        background: #5bc0de;
+    }
+    .label:hover .scope-to-animate:nth-child(4) {
+        transform: rotate(-225deg);
+        background: #5bc0de;
+    }
+    .hidden-file-input {
+        display: none;
+    }
+    .label {
+        position: relative;
+        width: 28px;
+    }
+    .arrow {
+        display: flex;
+        align-items: center;
+    }
+    .arrow input[type="file"] {
+        outline: 0;
+        opacity: 0;
+        pointer-events: none;
+        user-select: none;
+    }
+    .arrow .label {
+        height: 28px;
+        border: 1px solid grey;
+        border-radius: 5px;
+        display: block;
+        transition: border 300ms ease;
+        cursor: pointer;
+        text-align: center;
+    }
+    .arrow .label i {
+        display: block;
+        font-size: 42px;
+    }
+    .arrow .label i,
+    .example-1 .label .title {
+        color: grey;
+        transition: 200ms color;
+    }
+    .arrow .label:hover {
+        border: 2px solid #5bc0de;
+    }
+    .arrow .label:hover i,
+    .example-1 .label:hover .title {
+        color: #5bc0de;
+    }
 </style>
