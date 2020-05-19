@@ -42,9 +42,9 @@
                 <div class="col-3">
                     <h5>Текущий статус ДЭП: <label :class="`text-${dep_status.color}`">{{ dep_status.label }}</label></h5>
                 </div>
-                <div class="col-2">
+                <!--<div class="col-2">
                     <h5>Текущий статус ДКУ: <label :class="`text-${dku_status.color}`">{{ dku_status.label }}</label></h5>
-                </div>
+                </div>-->
                 <div class="col-2">
                     <h5 >
                         Дата завершения текущего этапа:
@@ -65,26 +65,26 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-3">
+                <div class="col-4">
                     <b-dropdown v-can:mgsu,root right text="статус эксперта МОН"  variant="info" class="m-2" >
                         <b-dropdown-item :href="`/api/set-status/recomend/${obj_id}`" @click="actionHendler" variant="success">Рекомендуется к согласованию</b-dropdown-item>
                         <b-dropdown-item :href="`/api/set-status/not-recomend/${obj_id}`" @click="actionHendler" variant="danger">Не рекомендуется к согласованию</b-dropdown-item>
                         <b-dropdown-item :href="`/api/set-status/to-work/${obj_id}`" @click="actionHendler" variant="warning">На доработку</b-dropdown-item>
                     </b-dropdown>
                 </div>
-                <div class="col-3">
+                <div class="col-4">
                     <b-dropdown v-can:dep,root right text="статус ДЭП" variant="info" class="m-2">
                         <b-dropdown-item :href="`/api/set-status/approved/dep/${obj_id}`" @click="actionHendler" variant="success">Рассмотрено ДЭП</b-dropdown-item>
                         <b-dropdown-item :href="`/api/set-status/rejected/dep/${obj_id}`" @click="actionHendler" variant="warning">Резерв</b-dropdown-item>
                     </b-dropdown>
                 </div>
-                <div class="col-3">
+                <!--<div class="col-3">
                     <b-dropdown v-can:dku,root right  text="статус ДКУ" variant="info" class="m-2">
                         <b-dropdown-item :href="`/api/set-status/approved/dku/${obj_id}`" @click="actionHendler" variant="success">Согласовано ДКУ</b-dropdown-item>
                         <b-dropdown-item :href="`/api/set-status/rejected/dku/${obj_id}`" @click="actionHendler" variant="warning">Резерв</b-dropdown-item>
                     </b-dropdown>
-                </div>
-                <div class="col-3">
+                </div>-->
+                <div class="col-4">
                     <b-dropdown v-can:root,dep right class="m-2" :text="realStatusType[realStatus].label" :variant="realStatusType[realStatus].variant">
                         <b-dropdown-item v-for="(item,index) in realStatusType" @click="changeRealStatus(index)"
                                          :key="index" :variant="item.variant" :value="index">{{item.label}}</b-dropdown-item>
@@ -93,42 +93,42 @@
             </div>
 
             <label for="object_opis">Краткое описание планируемых работ по объекту</label>
-            <b-form-input @input="ObjectOpis" id="object_opis" v-can:user v-model="items.object_opis" />
+            <b-form-input @input="ObjectOpis" id="object_opis" v-can:user,root v-model="items.object_opis" />
             <span v-can:root,mgsu>{{items.object_opis}}</span>
         </div>
 
         <div v-else>
             <div class="row">
-                <div class="col-4">
+                <div class="col-6">
                     <h5>Текущий статус эксперта МОН: <label :class="`text-${status.variant}`">{{ status.label }}</label></h5>
                 </div>
-                <div class="col-4">
+                <div class="col-6">
                     <h5>Текущий статус ДЭП: <label :class="`text-${dep_status.color}`">{{ dep_status.label }}</label></h5>
                 </div>
-                <div class="col-4">
+                <!--<div class="col-4">
                     <h5>Текущий статус ДКУ: <label :class="`text-${dku_status.color}`">{{ dku_status.label }}</label></h5>
-                </div>
+                </div>-->
             </div>
             <div class="row">
-                <div class="col-4">
+                <div class="col-6">
                     <b-dropdown v-can:mgsu,root right text="статус эксперта МОН"  variant="info" class="m-2" >
                         <b-dropdown-item :href="`/api/set-status/recomend/${obj_id}`" @click="actionHendler" variant="success">Рекомендуется к согласованию</b-dropdown-item>
                         <b-dropdown-item :href="`/api/set-status/not-recomend/${obj_id}`" @click="actionHendler" variant="danger">Не рекомендуется к согласованию</b-dropdown-item>
                         <b-dropdown-item :href="`/api/set-status/to-work/${obj_id}`" @click="actionHendler" variant="warning">На доработку</b-dropdown-item>
                     </b-dropdown>
                 </div>
-                <div class="col-4">
+                <div class="col-6">
                     <b-dropdown v-can:dep,root right text="статус ДЭП" variant="info" class="m-2">
                         <b-dropdown-item :href="`/api/set-status/approved/dep/${obj_id}`" @click="actionHendler" variant="success">Рассмотрено ДЭП</b-dropdown-item>
                         <b-dropdown-item :href="`/api/set-status/rejected/dep/${obj_id}`" @click="actionHendler" variant="warning">Резерв</b-dropdown-item>
                     </b-dropdown>
                 </div>
-                <div class="col-4">
+                <!--<div class="col-4">
                     <b-dropdown v-can:dku,root right  text="статус ДКУ" variant="info" class="m-2">
                         <b-dropdown-item :href="`/api/set-status/approved/dku/${obj_id}`" @click="actionHendler" variant="success">Согласовано ДКУ</b-dropdown-item>
                         <b-dropdown-item :href="`/api/set-status/rejected/dku/${obj_id}`" @click="actionHendler" variant="warning">Резерв</b-dropdown-item>
                     </b-dropdown>
-                </div>
+                </div>-->
             </div>
             <v-comments :obj_id="obj_id" />
         </div>
