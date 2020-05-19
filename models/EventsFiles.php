@@ -58,6 +58,7 @@ class EventsFiles extends \yii\db\ActiveRecord
      * @param null $id_event
      * @param null $id_event2
      * @return array|string[]
+     * @throws \yii\base\Exception
      */
     public static function UploadOrUpdate(UploadedFile $file, $id_event = null, $id_event2 = null){
         if (!$id_event and !$id_event2)
@@ -75,8 +76,12 @@ class EventsFiles extends \yii\db\ActiveRecord
 
         }
         $flag = $f->save();
-        $id_event = $id_event ?? $id_event2;
-        $path= Yii::getAlias('@webroot')."/uploads/events/{$id_event}";
+        $path = '';
+
+        if ($id_event)
+            $path= Yii::getAlias('@webroot')."/uploads/events/1/{$id_event}";
+        if ($id_event2)
+            $path= Yii::getAlias('@webroot')."/uploads/events/2/{$id_event2}";
         if (!file_exists($path))
             FileHelper::createDirectory($path);
         $path .= "/{$file->name}";
@@ -84,6 +89,23 @@ class EventsFiles extends \yii\db\ActiveRecord
             unlink($path);
         $file->saveAs($path);
         return ['success'=>$flag,'errors'=>$f->getErrors()];
+    }
+    public static function download($id_event){
+        $f = self::findOne(['id_event'=>$id_event]);
+        if (!$f)
+            $f= self::findOne(['id_event2'=>$id_event]);
+        if (!$f)
+            return 'Файл не найден';
+        $path = '';
+        if ($f->id_event)
+            $path= Yii::getAlias('@webroot')."/uploads/events/1/{$f->id_event}";
+        if ($f->id_event2)
+            $path= Yii::getAlias('@webroot')."/uploads/events/2/{$f->id_event2}";
+
+        $path .= "/{$f->file_name}";
+        if (file_exists($path))
+            return Yii::$app->response->sendFile($path);
+        return 'Файл не найден';
     }
 
     /**

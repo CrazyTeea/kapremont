@@ -43,6 +43,7 @@ return [
             '/api/user-info/*',
             '/app/program/is-approve',
             '/app/program-objects/set-value',
+            '/app/program/download-event',
         ],
     ],
     'orglist_view' => [
@@ -173,6 +174,7 @@ return [
             '/app/program/is-approve',
             '/api/shit/*',
             '/app/program-objects/set-value',
+            '/app/program/download-event',
         ],
     ],
     'dku' => [
@@ -192,6 +194,7 @@ return [
             '/rest/upload/*',
             '/app/program/is-approve',
             '/app/program/dku-export',
+            '/app/program/download-event',
         ],
     ],
     '/api/com/*' => [
@@ -234,6 +237,7 @@ return [
             '/rest/program-objects/*',
             '/rest/program-objects/get-status',
             '/app/organization/get-approve-status',
+            '/app/program/download-event',
         ],
     ],
     '/admin/assignment/index' => [
@@ -729,6 +733,9 @@ return [
         'type' => 2,
     ],
     '/app/program-objects/set-value' => [
+        'type' => 2,
+    ],
+    '/app/program/download-event' => [
         'type' => 2,
     ],
 ];
