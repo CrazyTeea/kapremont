@@ -1056,7 +1056,7 @@
                     },
                     {
                         canDelete:false,
-                        step:8,
+                        step:7,
                         id_event:null,
                         step_name:'Выполнение строительно-монтажных работ.',
                         date_event_start: null,
