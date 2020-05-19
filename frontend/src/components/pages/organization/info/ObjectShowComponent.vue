@@ -347,7 +347,7 @@
                             <b-tbody>
                                 <b-tr  v-for="(item,index) in svedenia2" :key="index" @change="sendData(item)">
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        {{item.step + 1}} {{item.id}}
+                                        {{item.step + 1}}
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
                                         <b-form-input v-if="item.canDelete" v-model="svedenia2[index].step_name" />
