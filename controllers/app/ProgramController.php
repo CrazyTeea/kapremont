@@ -5,6 +5,7 @@ namespace app\controllers\app;
 
 
 use app\facades\ProgramStatus;
+use app\models\EventsFiles;
 use app\models\Program;
 use app\models\ProgramObjects;
 use app\models\User;
@@ -110,6 +111,9 @@ class ProgramController extends AppController
         Yii::$app->response->sendFile("$path/dkuExport.xls")->send();
         if (file_exists("$path/dkuExport.xls"))
             unlink("$path/dkuExport.xls");
+    }
+    public function actionDownloadEvent($id_event){
+        return EventsFiles::download($id_event);
     }
 
     public function actionApprove(){

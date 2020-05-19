@@ -411,7 +411,7 @@
 
                                         </div>
                                         <div v-if="svedenia2[index].file">
-                                            {{svedenia2[index].file.name}}
+                                            <a :href="`/program/event/download/${item.id}`">{{svedenia2[index].file.name}}</a>
                                         </div>
 
 
@@ -1447,6 +1447,11 @@
                                 item2.fin_vnebud_ist = item.model.fin_vnebud_ist;
                                 item2.id_event = item.model.id;
                                 item2.done = item.model.done;
+                                if (item.file) {
+                                    item2.file = {
+                                        name: item.file
+                                    }
+                                }
                                 item2.doneExpert = item.model.doneExpert;
                                 item2.comment = item.model.comment;
                                 item2.commentExpert = item.model.commentExpert;
@@ -1469,6 +1474,7 @@
                         b+=Number(item.model.fin_vnebud_ist);
                         this.svedenia2.forEach(item2=>{
                             if (this.isFloat(item2.step) && item2.step == item.model.step) {
+                                item2.id = item.model.id;
                                 item2.date_event_start = item.model.date_event_start;
                                 item2.date_event_end = item.model.date_event_end;
                                 item2.cost_real = item.model.cost_real;

@@ -83,6 +83,7 @@ $config = [
 
 
                 'shit-table/data' => 'api/shit/data',
+                'program/event/download/<id_event:\d+>'=>'/app/program/download-event',
 
                 'api/set-status/approved/dep/<obj_id:\d+>' => '/app/organization/set-approve-status-dep',
                 'api/set-status/rejected/dep/<obj_id:\d+>' => '/app/organization/set-rejected-status-dep',
