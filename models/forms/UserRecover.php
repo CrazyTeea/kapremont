@@ -70,17 +70,6 @@ class UserRecover extends Model
 
                         $rbac = new PhpManager();
                         $role = 'user';
-                        switch ($ias_user->getValue()->access){
-                            case 'user':
-                            case 'podved':
-                            case 'other_podved':{
-                                $role = 'user';
-                                break;
-                            }
-                            case 'admin':{
-                                $role='root';
-                            }
-                        }
                         $rbac->revokeAll($user->id);
                         $rbac->assign($rbac->getRole($role),$user->id);
                         $rbac->assign($rbac->getPermission('dev_program'),$user->id);
