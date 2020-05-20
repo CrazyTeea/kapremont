@@ -1284,6 +1284,8 @@
             await this.requestUser();
             await this.getStatus();
             await this.getObject();
+            await this.setChart();
+            await this.createChart();
 
             await window.addEventListener("load", this.createChart);
             await window.addEventListener("resize", this.createChart);
@@ -1341,14 +1343,34 @@
             },
             async setChart() {
 
-                const beginDate = [];
 
-                this.svedenia.items.forEach( item => {
-                    beginDate.push(item.date_event_start)
-                })
+                const months = [
+                    'Январь',
+                    'Февраль',
+                    'Март',
+                    'Апрель',
+                    'Май',
+                    'Июнь',
+                    'Июль',
+                    'Август',
+                    'Сентябрь',
+                    'Октябрь',
+                    'Ноябрь',
+                    'Декабрь'
+                ];
+                let bars = document.querySelectorAll('.chart-bars li');
+                bars.forEach((el,index)=>{
+                    let item = this.svedenia.items[index];
+                    let date = null;
+                    if (item.date_event_start && item.date_event_end) {
+                        date = months[parseInt(item.date_event_start.split('-')[1])] + '-' + months[parseInt(item.date_event_end.split('-')[1])];
+                    }
+                    el.dataset.duration = date
+                });
+
 
             },
-            createChart(e) {
+            createChart(e = 'load') {
                 const days = document.querySelectorAll(".chart-values li");
                 const tasks = document.querySelectorAll(".chart-bars li");
                 const daysArray = [...days];
@@ -1362,27 +1384,29 @@
                     let left = 0,
                         width = 0;
 
-                    if (startDay.endsWith("½")) {
+                    if (startDay && startDay.length && startDay.endsWith("½")) {
                         const filteredArray = daysArray.filter(day => day.textContent == startDay.slice(0, -1));
                         left = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth / 2;
                     } else {
                         const filteredArray = daysArray.filter(day => day.textContent == startDay);
-                        left = filteredArray[0].offsetLeft;
+                        if (filteredArray.length)
+                            left = filteredArray[0].offsetLeft;
                     }
 
-                    if (endDay.endsWith("½")) {
+                    if (endDay && endDay.length && endDay.endsWith("½")) {
                         const filteredArray = daysArray.filter(day => day.textContent == endDay.slice(0, -1));
                         width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth / 2 - left;
                     } else {
                         const filteredArray = daysArray.filter(day => day.textContent == endDay);
-                        width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth - left;
+                        if (filteredArray.length)
+                            width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth - left;
                     }
 
                     // apply css
                     el.style.left = `${left - 40}px`;
                     el.style.width = `${width}px`;
                     el.style.height = '20px';
-                    if (e.type == "load") {
+                    if (e && e === 'load') {
                         el.style.backgroundColor = el.dataset.color;
                         el.style.opacity = 1;
                     }
