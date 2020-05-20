@@ -44,6 +44,7 @@ return [
             '/app/program/is-approve',
             '/app/program-objects/set-value',
             '/app/program/download-event',
+            '/app/program-objects/send-event',
         ],
     ],
     'orglist_view' => [
