@@ -24,13 +24,11 @@ class ProgramObjectsController extends RestController
             }
             $svedenia = $svedenia2 = [];
             foreach ($model->svedenia as $s){
-                $s->file_name = $s->file ? $s->file->file_name : 'f';
                 $svedenia[] = ['model'=>$s,
                     'file'=>$s->file ? $s->file->file_name : null
                 ];
             }
             foreach ($model->svedenia2 as $s){
-                $s->file_name = $s->file ? $s->file->file_name : 'd';
                 $svedenia2[] = ['model'=>$s,
                     'file'=>$s->file ? $s->file->file_name : null
                 ];
