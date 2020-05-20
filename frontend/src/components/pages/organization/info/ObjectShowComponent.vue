@@ -423,13 +423,13 @@
                                         <b-form-input v-model="svedenia2[index].comment" />
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-checkbox v-can:mgsu,root,dep v-model="svedenia2[index].doneExpert" />
+                                        <b-form-checkbox v-can:root,mgsu,dep v-model="svedenia2[index].doneExpert" />
                                         <span v-can:user>
                                             {{item.doneExpert ? 'Да' : 'Нет'}}
                                         </span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input v-can:mgsu,root,dep v-model="svedenia2[index].commentExpert" />
+                                        <b-form-input v-can:root,mgsu,dep v-model="svedenia2[index].commentExpert" />
                                         <span v-can:user>
                                             {{item.commentExpert}}
                                         </span>
@@ -1543,7 +1543,7 @@
                                         name: item.file
                                     }
                                 }
-                                item2.doneExpert = item.model.doneExpert;
+                                item2.doneExpert = item.model.doneExpert == 1;
                                 item2.comment = item.model.comment;
                                 item2.commentExpert = item.model.commentExpert;
                             }
@@ -1574,7 +1574,7 @@
                                 item2.id_event = item.model.id_event;
                                 item2.done = item.model.done;
                                 item2.access_document = item.model.access_document;
-                                item2.doneExpert = item.model.doneExpert;
+                                item2.doneExpert = item.model.doneExpert == 1;
                                 if (item.file) {
                                     item2.file = {
                                         name: item.file

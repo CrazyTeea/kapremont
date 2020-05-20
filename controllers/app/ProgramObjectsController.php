@@ -145,7 +145,7 @@ class ProgramObjectsController extends AppController
         $event->comment = $post['comment'];
         $event->access_document = $post['access_document'];
         $event->commentExpert = $post['commentExpert'];
-        $ret = ['success'=>$event->save(),'model'=>$model_name,'errors'=>$event->getErrors()];
+        $ret = ['success'=>$event->save(),'$event->doneExpert'=>$event->doneExpert,'model'=>$model_name,'errors'=>$event->getErrors()];
         $file = UploadedFile::getInstanceByName('file');
         if ($file){
            $ret['file'] = EventsFiles::UploadOrUpdate($file, $is_event2 ? null : $event->id,$is_event2 ? $event->id : null);
