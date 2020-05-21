@@ -128,10 +128,10 @@ class ProgramObjectsController extends AppController
         }else return Json::encode(['success'=>false,'errors'=>['global'=>'Не предвиденная ошибка']]);
 
         if ($post['date_event_start']==='null') {
-            $post['date_event_start'] = date('Y-m-d');
+            $post['date_event_start'] = null;
         }
         if ($post['date_event_end']==='null') {
-            $post['date_event_end'] = date('Y-m-d');
+            $post['date_event_end'] = null;
         }
 
 
