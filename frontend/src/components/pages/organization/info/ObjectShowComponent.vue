@@ -473,7 +473,7 @@
                                 </b-card-body>
                             </b-collapse>
                         </b-card>
-                        <b-card no-body class="mb-1">
+                        <b-card v-if="permission !== 'faiv_user'" no-body class="mb-1">
                             <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-3a>
                                 <b-icon-gear-wide-connected />
@@ -487,7 +487,7 @@
                                 </b-card-body>
                             </b-collapse>
                         </b-card>
-                        <b-card no-body class="mb-1">
+                        <b-card v-if="permission !== 'faiv_user'" no-body class="mb-1">
                             <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-4a>
                                 <b-icon-gear-wide-connected />
@@ -500,7 +500,7 @@
                                 </b-card-body>
                             </b-collapse>
                         </b-card>
-                        <b-card no-body class="mb-1">
+                        <b-card v-if="permission !== 'faiv_user'" no-body class="mb-1">
                             <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-5a>
                                 <b-icon-gear-wide-connected />
@@ -513,8 +513,7 @@
                                 </b-card-body>
                             </b-collapse>
                         </b-card>
-
-                        <b-card no-body>
+                        <b-card v-if="permission !== 'faiv_user'" no-body class="mb-1">
                             <b-card-header header-tag="header" class="p-1" role="tab">
                                 <span> <b-icon icon="document-text" scale="1.5" class="mr-2 ml-1"></b-icon>Загруженные документы</span>
                             </b-card-header>
@@ -558,7 +557,7 @@
                     </b-card-body>
                 </b-collapse>
             </b-card>
-            <b-card no-body class="mb-1">
+            <b-card v-if="permission !== 'faiv_user'" no-body class="mb-1">
                 <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-3b>
                                 <b-icon-gear-wide-connected />
@@ -572,7 +571,7 @@
                     </b-card-body>
                 </b-collapse>
             </b-card>
-            <b-card no-body class="mb-1">
+            <b-card v-if="permission !== 'faiv_user'" no-body class="mb-1">
                 <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-4b>
                                 <b-icon-gear-wide-connected />
@@ -585,7 +584,7 @@
                     </b-card-body>
                 </b-collapse>
             </b-card>
-            <b-card no-body class="mb-1">
+            <b-card v-if="permission !== 'faiv_user'" no-body class="mb-1">
                 <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-5b>
                                 <b-icon-gear-wide-connected />
@@ -598,8 +597,7 @@
                     </b-card-body>
                 </b-collapse>
             </b-card>
-
-            <b-card no-body>
+            <b-card v-if="permission !== 'faiv_user'" no-body class="mb-1">
                 <b-card-header header-tag="header" class="p-1" role="tab">
                     <span> <b-icon icon="document-text" scale="1.5" class="mr-2 ml-1"></b-icon>Загруженные документы</span>
                 </b-card-header>
@@ -693,6 +691,7 @@
                     label: '',
                     variant: ''
                 },
+                permission:window.Permission,
                 realStatus:0,
                 realStatusType:[
                     {
@@ -1286,6 +1285,7 @@
             await this.getObject();
             await this.setChart();
             await this.createChart();
+            this.permission = window.Permission;
 
             await window.addEventListener("load", this.createChart);
             await window.addEventListener("resize", this.createChart);

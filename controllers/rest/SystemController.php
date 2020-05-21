@@ -54,19 +54,26 @@ class SystemController extends RestController
                             "Объем финансового обеспечения на реализацию мероприятий по модернизации инфраструктуры, включая капитальный ремонт объектов и проведение мероприятий по антитеррористической защищенности объектов,тыс. рублей",
                             'value' => round( $program->finance_volume,2)
                         ],
-                        ['id' => 2, 'label' =>
-                            "Из них на реализацию мероприятий по антитеррористической защищенности, не более,тыс. рублей",
-                            'value' => round( $program->finance_events,2)
-                        ],
-                        ['id' => 3, 'label' =>
-                            "Предельная стоимость капитального ремонта 1 кв. м. площади, рублей",
-                            'value' => round( $program->cost,2)
-                        ],
-                        ['id' => 4, 'label' =>
-                            "Ожидаемая площадь капитального ремонта, кв.м.",
-                            'value'=>  round( ($program->finance_volume*1000 - $program->finance_events*1000)/$program->cost,2)
-                        ],
                     ];
+                    if (!Yii::$app->getUser()->can('faiv_user')){
+                        $ret['items'] = ArrayHelper::merge($ret['items'], [
+
+                                ['id' => 2, 'label' =>
+                                    "Из них на реализацию мероприятий по антитеррористической защищенности, не более,тыс. рублей",
+                                    'value' => round( $program->finance_events,2)
+                                ],
+                                ['id' => 3, 'label' =>
+                                    "Предельная стоимость капитального ремонта 1 кв. м. площади, рублей",
+                                    'value' => round( $program->cost,2)
+                                ],
+                                ['id' => 4, 'label' =>
+                                    "Ожидаемая площадь капитального ремонта, кв.м.",
+                                    'value'=>  round( ($program->finance_volume*1000 - $program->finance_events*1000)/$program->cost,2)
+                                ]
+                            ]
+                        );
+                    }
+
                     return $ret;
                     break;
                 }
@@ -211,97 +218,111 @@ class SystemController extends RestController
                             "Сокращенное наименование организации",
                             'value' => $org->short_name
                         ],
-                        ['id' => 3, 'label' =>
-                            "Общая численность обучающихся по программам среднего профессионального образования, бакалавриата, специалитета, магистратуры, аспирантуры, включая очную и заочную формы обучения, из них:",
-                            'value' => $org->orgInfo?$org->orgInfo->st_sr_count: 0
-                        ],
-                        ['id' => 3.1, 'label' =>
-                            "Численность обучающихся за счет средств федерального бюджета",
-                            'value'=>  $org->orgInfo?$org->orgInfo->st_fed_count: 0
-                        ],
-                        ['id' => 3.2, 'label' =>
-                            "Численность обучающихся по договору с полным возмещением затрат",
-                            'value' => $org->orgInfo?$org->orgInfo->st_dog_count: 0
-                        ],
-                        ['id' => 3.3, 'label' =>
-                            "Общая численность обучающихся иностранных граждан и лиц без гражданства",
-                            'value' => $org->orgInfo?$org->orgInfo->st_in_count: 0
-                        ],
-                        ['id' => 4, 'label' =>
-                            "Численность профессорско-преподавательского состава",
-                            'value'=>  $org->orgInfo?$org->orgInfo->prof_count: 0
-                        ],
-                        ['id' => 5, 'label' =>
-                            "Студенты всего, из них:",
-                            'value' => ($org->orgInfo) ?
-                                floatval($org->orgInfo->st_sr_pr_count) +
-                                floatval($org->orgInfo->st_bak_count) +
-                                floatval($org->orgInfo->st_spec_count) +
-                                floatval($org->orgInfo->st_mag_count) +
-                                floatval($org->orgInfo->st_asp_count)
-                                : 0
-                        ],
-                        ['id' => 5.1, 'label' =>
-                            "Среднего профессионального образования",
-                            'value' => $org->orgInfo?$org->orgInfo->st_sr_pr_count: 0
-                        ],
-                        ['id' => 5.2, 'label' =>
-                            "Бакалавриата",
-                            'value'=>  $org->orgInfo?$org->orgInfo->st_bak_count: 0
-                        ],
-                        ['id' => 5.3, 'label' =>
-                            "Специалитета",
-                            'value' => $org->orgInfo?$org->orgInfo->st_spec_count: 0
-                        ],
-                        ['id' => 5.4, 'label' =>
-                            "Магистратуры",
-                            'value' => $org->orgInfo?$org->orgInfo->st_mag_count: 0
-                        ],
-                        ['id' => 5.5, 'label' =>
-                            "Аспирантуры",
-                            'value'=>  $org->orgInfo?$org->orgInfo->st_asp_count: 0
-                        ],
-                        ['id' => 6, 'label' =>
-                            "Работники, из них:",
-                            'value' => $org->orgInfo?$org->orgInfo->rab_count: 0
-                        ],
-                        ['id' => 6.1, 'label' =>
-                            "Научные сотрудники",
-                            'value' => $org->orgInfo?$org->orgInfo->nauch_rab: 0
-                        ],
-                        ['id' => 6.2, 'label' =>
-                            "Профессорско-преподавательский состав",
-                            'value'=>  $org->orgInfo?$org->orgInfo->prof_prep_count: 0
-                        ],
-                        ['id' => 6.3, 'label' =>
-                            "Иные категории работников",
-                            'value'=>  $org->orgInfo?$org->orgInfo->in_kat_rab: 0
-                        ],
-                        ['id' => 7, 'label' =>
-                            "Численность инвалидов и лиц с ограниченными возможностями здоровья",
-                            'value'=>  $org->orgInfo?$org->orgInfo->invalid_count: 0
-                        ],
-                        ['id' => 8, 'label' =>
-                            "Общая площадь всех зданий и сооружений",
-                            'value'=> ($org->orgInfo)? $org->orgInfo->square_all: 0
-                        ],
-                        ['id' => 9, 'label' =>
-                            "Общая площадь всех зданий и сооружений, требующих капитального ремонта (на основании акта обследования или предписаний надзорных органов)",
-                            'value'=>  ($org->orgInfo)? $org->orgInfo->square_all_kap: 0
-                        ],
-                        ['id' => 10, 'label' =>
-                            "Общая площадь всех зданий и сооружений, находящихся в аварийном состоянии (на основании акта обследования или предписаний надзорных органов)",
-                            'value'=>  $org->orgInfo? $org->orgInfo->square_all_av: 0
-                        ],
-                        ['id' => 11, 'label' =>
-                            "Общая площадь всех зданий и сооружений, требующих мероприятий по АТЗ",
-                            'value'=>  $org->orgInfo? $org->orgInfo->square_all_atz: 0
-                        ],
-                        ['id' => 12, 'label' =>
-                            "ФИО ректора",
-                            'value'=>  $org->orgInfo? $org->orgInfo->rector: ''
-                        ],
                     ];
+                    if (!Yii::$app->getUser()->can('faiv_user'))
+                        $ret['items'] = ArrayHelper::merge($ret['items'],
+                            [
+                                ['id' => 3, 'label' =>
+                                    "Общая численность обучающихся по программам среднего профессионального образования, бакалавриата, специалитета, магистратуры, аспирантуры, включая очную и заочную формы обучения, из них:",
+                                    'value' => $org->orgInfo?$org->orgInfo->st_sr_count: 0
+                                ],
+                                ['id' => 3.1, 'label' =>
+                                    "Численность обучающихся за счет средств федерального бюджета",
+                                    'value'=>  $org->orgInfo?$org->orgInfo->st_fed_count: 0
+                                ],
+                                ['id' => 3.2, 'label' =>
+                                    "Численность обучающихся по договору с полным возмещением затрат",
+                                    'value' => $org->orgInfo?$org->orgInfo->st_dog_count: 0
+                                ],
+                                ['id' => 3.3, 'label' =>
+                                    "Общая численность обучающихся иностранных граждан и лиц без гражданства",
+                                    'value' => $org->orgInfo?$org->orgInfo->st_in_count: 0
+                                ],
+                                ['id' => 4, 'label' =>
+                                    "Численность профессорско-преподавательского состава",
+                                    'value'=>  $org->orgInfo?$org->orgInfo->prof_count: 0
+                                ],
+                                ['id' => 5, 'label' =>
+                                    "Студенты всего, из них:",
+                                    'value' => ($org->orgInfo) ?
+                                        floatval($org->orgInfo->st_sr_pr_count) +
+                                        floatval($org->orgInfo->st_bak_count) +
+                                        floatval($org->orgInfo->st_spec_count) +
+                                        floatval($org->orgInfo->st_mag_count) +
+                                        floatval($org->orgInfo->st_asp_count)
+                                        : 0
+                                ],
+                                ['id' => 5.1, 'label' =>
+                                    "Среднего профессионального образования",
+                                    'value' => $org->orgInfo?$org->orgInfo->st_sr_pr_count: 0
+                                ],
+                                ['id' => 5.2, 'label' =>
+                                    "Бакалавриата",
+                                    'value'=>  $org->orgInfo?$org->orgInfo->st_bak_count: 0
+                                ],
+                                ['id' => 5.3, 'label' =>
+                                    "Специалитета",
+                                    'value' => $org->orgInfo?$org->orgInfo->st_spec_count: 0
+                                ],
+                                ['id' => 5.4, 'label' =>
+                                    "Магистратуры",
+                                    'value' => $org->orgInfo?$org->orgInfo->st_mag_count: 0
+                                ],
+                                ['id' => 5.5, 'label' =>
+                                    "Аспирантуры",
+                                    'value'=>  $org->orgInfo?$org->orgInfo->st_asp_count: 0
+                                ],
+                                ['id' => 6, 'label' =>
+                                    "Работники, из них:",
+                                    'value' => $org->orgInfo?$org->orgInfo->rab_count: 0
+                                ],
+                                ['id' => 6.1, 'label' =>
+                                    "Научные сотрудники",
+                                    'value' => $org->orgInfo?$org->orgInfo->nauch_rab: 0
+                                ],
+                                ['id' => 6.2, 'label' =>
+                                    "Профессорско-преподавательский состав",
+                                    'value'=>  $org->orgInfo?$org->orgInfo->prof_prep_count: 0
+                                ],
+                                ['id' => 6.3, 'label' =>
+                                    "Иные категории работников",
+                                    'value'=>  $org->orgInfo?$org->orgInfo->in_kat_rab: 0
+                                ],
+                                ['id' => 7, 'label' =>
+                                    "Численность инвалидов и лиц с ограниченными возможностями здоровья",
+                                    'value'=>  $org->orgInfo?$org->orgInfo->invalid_count: 0
+                                ],
+                                ['id' => 8, 'label' =>
+                                    "Общая площадь всех зданий и сооружений",
+                                    'value'=> ($org->orgInfo)? $org->orgInfo->square_all: 0
+                                ],
+                                ['id' => 9, 'label' =>
+                                    "Общая площадь всех зданий и сооружений, требующих капитального ремонта (на основании акта обследования или предписаний надзорных органов)",
+                                    'value'=>  ($org->orgInfo)? $org->orgInfo->square_all_kap: 0
+                                ],
+                                ['id' => 10, 'label' =>
+                                    "Общая площадь всех зданий и сооружений, находящихся в аварийном состоянии (на основании акта обследования или предписаний надзорных органов)",
+                                    'value'=>  $org->orgInfo? $org->orgInfo->square_all_av: 0
+                                ],
+                                ['id' => 11, 'label' =>
+                                    "Общая площадь всех зданий и сооружений, требующих мероприятий по АТЗ",
+                                    'value'=>  $org->orgInfo? $org->orgInfo->square_all_atz: 0
+                                ],
+                                ['id' => 12, 'label' =>
+                                    "ФИО ректора",
+                                    'value'=>  $org->orgInfo? $org->orgInfo->rector: ''
+                                ],
+                            ]
+                        );
+                    else
+                        $ret['items'] = ArrayHelper::merge($ret['items'],
+                            [
+                                ['id' => 3, 'label' =>
+                                    "ИНН",
+                                    'value' => $org->inn
+                                ],
+                            ]
+                        );
 
                     return $ret;
                 }

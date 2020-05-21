@@ -13,6 +13,7 @@ use app\models\ProgramObjects;
  * @property string|null $full_name
  * @property string|null $name
  * @property string|null $short_name
+ * @property string|null $inn
  * @property int|null $system_status
  * @property  OrgInfo $orgInfo
  */
@@ -46,7 +47,7 @@ class Organizations extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['full_name', 'name', 'short_name'], 'string'],
+            [['full_name', 'name', 'short_name','inn'], 'string'],
             [['system_status'], 'integer'],
         ];
     }

@@ -115,6 +115,7 @@ return [
             '/api/shit/data',
             '/api/user-info/*',
             '/app/program/is-approve',
+            '/app/program/set-value',
         ],
     ],
     'faiv_admin' => [
@@ -737,6 +738,9 @@ return [
         'type' => 2,
     ],
     '/app/program/download-event' => [
+        'type' => 2,
+    ],
+    '/app/program/set-value' => [
         'type' => 2,
     ],
 ];
