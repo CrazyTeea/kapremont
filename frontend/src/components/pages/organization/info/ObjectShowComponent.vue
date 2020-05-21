@@ -1297,7 +1297,9 @@
             checkFOIV(){
                 if (this.permission !== 'faiv_user')
                     return false;
-                return this.permission !== 'faiv_admin';
+                if(this.permission !== 'faiv_admin')
+                    return false
+                return true;
             },
             async changeRealStatus(index){
                 let data = new FormData();
