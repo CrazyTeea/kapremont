@@ -123,8 +123,8 @@
         <b-card no-body class="mt-4">
             <b-card-header header-tag="header" class="p-1" role="tab">
                 <span>
-                    <b-icon icon="gear-wide-connected" scale="1.5" class="mr-2 ml-1"></b-icon>Объекты требующие
-                    капитального ремонта (Приоритетные)
+                    <b-icon icon="gear-wide-connected" scale="1.5" class="mr-2 ml-1"></b-icon>
+                    Объекты требующие капитального ремонта (Приоритетные)
                 </span>
             </b-card-header>
             <b-card-body class="hidden-overflow">
@@ -183,7 +183,7 @@
             </b-card-body>
         </b-card>
 
-        <b-card no-body class="mt-4">
+        <b-card v-if="checkFOIV()" no-body class="mt-4">
             <b-card-header header-tag="header" class="p-1" role="tab">
                 <span>
                     <b-icon icon="gear-wide-connected" scale="1.5" class="mr-2 ml-1"></b-icon>Объекты требующие
@@ -275,6 +275,7 @@ export default {
     },
     data() {
         return {
+            permission:window.Permission,
             programm: {},
             currentPage: 1,
             perPage: 5,
@@ -303,7 +304,11 @@ export default {
         }
     },
     methods: {
-
+        checkFOIV(){
+            if (this.permission !== 'faiv_user')
+                return false;
+            return this.permission !== 'faiv_admin';
+        },
         async getCurentOrg() {
             return Axios.post(`/api/org-table/${this.org_id}`, null, {
                 headers: {
