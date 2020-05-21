@@ -305,9 +305,7 @@ export default {
     },
     methods: {
         checkFOIV(){
-            if (this.permission !== 'faiv_user')
-                return false;
-            return this.permission !== 'faiv_admin';
+            return !(this.permission === 'faiv_admin' || this.permission === 'faiv_user');
         },
         async getCurentOrg() {
             return Axios.post(`/api/org-table/${this.org_id}`, null, {
