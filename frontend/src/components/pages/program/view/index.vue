@@ -85,20 +85,23 @@
                         hover
                     />
                     <b-pagination v-show="rowCount('prevTable')" :per-page="prevTable.perPage" v-model="prevTable.curPage" :total-rows="rowsPrev" />
-                    <b-card-text>Резервные объекты</b-card-text>
-                    <b-table
-                        class="text-center"
-                        :per-page="resTable.perPage"
-                        :current-page="resTable.curPage"
-                        @row-clicked="onRowClick"
-                        tbody-tr-class="hover"
-                        :items="reservedObjects && reservedObjects.items"
-                        :fields="fieldsObjects && fieldsObjects.fields"
-                        small
-                        bordered
-                        hover
-                    />
-                    <b-pagination v-show="rowCount('resTable')" :per-page="resTable.perPage" v-model="resTable.curPage" :total-rows="resPrev" />
+                    <div v-can:user>
+                        <b-card-text>Резервные объекты</b-card-text>
+                        <b-table
+                                class="text-center"
+                                :per-page="resTable.perPage"
+                                :current-page="resTable.curPage"
+                                @row-clicked="onRowClick"
+                                tbody-tr-class="hover"
+                                :items="reservedObjects && reservedObjects.items"
+                                :fields="fieldsObjects && fieldsObjects.fields"
+                                small
+                                bordered
+                                hover
+                        />
+                        <b-pagination v-show="rowCount('resTable')" :per-page="resTable.perPage" v-model="resTable.curPage" :total-rows="resPrev" />
+                    </div>
+
                 </b-card-body>
             </b-card>
 

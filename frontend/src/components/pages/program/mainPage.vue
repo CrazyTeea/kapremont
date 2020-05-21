@@ -40,7 +40,19 @@
                              :per-page="perPage"
                              :current-page="currentPage"
                              small bordered
-                    />
+                    >
+                        <template v-slot:cell(value) = 'data' >
+                            <div v-if="!data.index">
+                                <b-form-input @change="setProgramValue('finance_volume',data.item.value)"
+                                              style="min-width: 120px"
+                                              v-model="data.item.value"
+                                              type="number"
+                                              v-can:faiv_user></b-form-input>
+                                <span v-can:user>{{data.item.value}}</span>
+                            </div>
+                            <span v-else>{{data.item.value}}</span>
+                        </template>
+                    </b-table>
                     <h3 v-else>
                         <span class="text-danger">Данные о вашей организации отсутствуют в системе</span>
                     </h3>
@@ -76,7 +88,9 @@ import {
     BTable,
     BPagination,
     VBToggle,
+    BFormInput
 } from "bootstrap-vue";
+import Axios from "axios";
 // import b_vue from 'bootstrap-vue';
 export default {
     directives:{
@@ -84,6 +98,7 @@ export default {
     },
     components:{
         "v-userPanel":userPanel,
+        BFormInput,
         BButton,
         BPagination,
         BTable,
@@ -91,7 +106,8 @@ export default {
     },
     data(){
         return {
-            extraBaner:true,
+            csrf: document.getElementsByName("csrf-token")[0].content,
+            extraBaner:window.Permission === 'user',
             perPage: 5,
             currentPage:1,
             id_org:null
@@ -123,7 +139,25 @@ export default {
         }
     },
     methods:{
-        ...mapActions(['requestProgram','requestOrg','requestPageData','requestUser'])
+        ...mapActions(['requestProgram','requestOrg','requestPageData','requestUser']),
+        setProgramValue(atr,value){
+            if (this.id_org) {
+                let data = new FormData();
+                data.append('value', atr);
+                data.append(atr, value);
+                Axios.post(`/program/set-value/${this.id_org}`, data, {
+                        headers: {
+                            "X-CSRF-Token": this.csrf
+                        }
+                    }
+                ).then(response => {
+                    if (!response.data.success)
+                        response.data.errors.forEach(item => {
+                            this.setBanner('danger', item)
+                        })
+                })
+            }
+        }
     },
     async mounted() {
         await this.requestUser();

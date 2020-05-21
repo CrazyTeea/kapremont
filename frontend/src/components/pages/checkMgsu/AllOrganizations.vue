@@ -80,7 +80,7 @@
                         <b-th class="normal-font-weight-for-sell center-text-in-cell">
                             <label>{{ item.region }}</label>
                         </b-th>
-                        <b-th v-can:root,mgsu,dep @click="goToRef(item.id)" class="normal-font-weight-for-sell cursor-pointer center-text-in-cell">
+                        <b-th @click="goToRef(item.id)" class="normal-font-weight-for-sell cursor-pointer center-text-in-cell">
                             <label class="cursor-pointer">{{ item.name }}</label>
                         </b-th>
                         <b-th v-can:dku,dku_user class="normal-font-weight-for-sell cursor-pointer center-text-in-cell">
@@ -124,7 +124,7 @@
                                 ]" />
                             <span v-can:dku,dku_user>{{getDepStatus(item.dep_status)}}</span>
                         </b-th>
-                        <b-th  v-can:dku,dku_user class="normal-font-weight-for-sell center-text-in-cell">
+                        <b-th v-can:dku,dku_user class="normal-font-weight-for-sell center-text-in-cell">
                             <b-form-input v-can:dku
                                     @change="setDkuAtz(item)"
                                     v-model="item.dku_atz"

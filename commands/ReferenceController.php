@@ -28,16 +28,16 @@ class ReferenceController extends Controller
      */
     public function actionIndex(){
         $transaction = Yii::$app->db->beginTransaction();
-        if ($this->actionOrgs() and $this->actionRegions() and $this->actionFounders() and $this->actionLL()) {
+        if ($this->actionRegions() and $this->actionOrgs()) {
             $transaction->commit();
-            return "success";
+            echo "success";
         }
         $transaction->rollBack();
-        return "error";
+        echo "error";
     }
     public function actionOrgs(){
         echo "Выполняется синхронизация организаций\n";
-
+        $err=0;
         $signer = new Sha256();
         $key = new Key( self::$jwt_key );
         $token = ( new Builder() )->withClaim( 'reference', 'organization' )
@@ -57,13 +57,16 @@ class ReferenceController extends Controller
                 $row_org->full_name = htmlspecialchars_decode( $data->getValue()->fullname );
                 $row_org->short_name = htmlspecialchars_decode( $data->getValue()->shot_name );
                 $row_org->name = htmlspecialchars_decode( $data->getValue()->name );
+                $row_org->inn = htmlspecialchars_decode( $data->getValue()->inn );
                 $row_org->id_region = ($data->getValue()->region_id != 0)?$data->getValue()->region_id:87;
-                $row_org->save();
+                if (!$row_org->save()) {
+                    $err++;
+                    var_dump($row_org->getErrors());
+                }
 
             }
-            return true;
-        } else
-            return false;
+        } else return false;
+        return !$err;
 
     }
     public function actionRegions(){
@@ -97,16 +100,9 @@ class ReferenceController extends Controller
                 }
             }
 
-            if($err>0){
-                return false;
-            }else{
-                return true;
-            }
+            return !$err;
 
-        }else{
-            return false;
-        }
-
+        }else return false;
     }
     public function actionFounders(){
         echo "Выполняется синхронизация фаундеров\n";
@@ -142,56 +138,6 @@ class ReferenceController extends Controller
 
     }
 
-    private function is_in_array($array, $key, $key_value){
-        $within_array = false;
-        foreach( $array as $k=>$v ){
-            if( is_array($v) ){
-                $within_array = $this->is_in_array($v, $key, $key_value);
-                if( $within_array ){
-                    break;
-                }
-            } else {
-                if( $v == $key_value && $k == $key ){
-                    $within_array = true;
-                    break;
-                }
-            }
-        }
-        return $within_array;
-    }
-    public function actionDubles(){
-        $objects = ProgramObjects::findAll(['system_status'=>1]);
-
-        $cont = [];
-        $sum = 0;
-        foreach ($objects as $object){
-            if ($object->svedenia)
-            {
-                foreach ($object->svedenia as $kek){
-                    $sum+=$kek->cost_real;
-                }
-            }
-            if (!$this->is_in_array($cont,'name',$object->name) and
-                !$this->is_in_array($cont,'status',$object->status) and
-                !$this->is_in_array($cont,'sum',$sum )) {
-
-                $cont[] = ['name'=>$object->name,'square'=>$object->square, 'year'=>$object->year];
-                $o2 = ProgramObjects::find()
-                    ->where(['name' => $object->name, 'square' => $object->square, 'id_org' => $object->id_org])
-                    ->andWhere(['not in', 'id', $object->id])->all();
-                if ($o2)
-                    foreach ($o2 as $item) {
-                        echo "\n                       
-            name ДУБЛИКАТ {$object->name}\n
-            square {$object->square}\n
-            year {$object->year}\n
-            ";
-                       /* $item->system_status = 0;
-                        $item->save(false);*/
-                    }
-            }
-        }
-    }
 
 
 }
