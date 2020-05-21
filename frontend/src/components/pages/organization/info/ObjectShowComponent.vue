@@ -1286,7 +1286,7 @@
             await this.setChart();
             await this.createChart();
             this.permission = window.Permission;
-            console.log(this.permission)
+            console.log(this.permission !== 'faiv_admin' || this.permission !== 'faiv_user')
 
             await window.addEventListener("load", this.createChart);
             await window.addEventListener("resize", this.createChart);
@@ -1295,11 +1295,8 @@
         },
         methods: {
             checkFOIV(){
-                if (this.permission !== 'faiv_user')
-                    return false;
-                if(this.permission !== 'faiv_admin')
-                    return false
-                return true;
+                return !(this.permission === 'faiv_admin' || this.permission === 'faiv_user');
+
             },
             async changeRealStatus(index){
                 let data = new FormData();
