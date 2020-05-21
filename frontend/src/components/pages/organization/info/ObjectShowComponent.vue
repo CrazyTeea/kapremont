@@ -1566,7 +1566,7 @@
                                 item2.sum_bud_fin = item.model.sum_bud_fin;
                                 item2.fin_vnebud_ist = item.model.fin_vnebud_ist;
                                 item2.id_event = item.model.id;
-                                item2.done = item.model.done;
+                                item2.done = item.model.done == 1;
                                 if (item.file) {
                                     item2.file = {
                                         name: item.file
@@ -1601,7 +1601,7 @@
                                 item2.sum_bud_fin = item.model.sum_bud_fin;
                                 item2.fin_vnebud_ist = item.model.fin_vnebud_ist;
                                 item2.id_event = item.model.id_event;
-                                item2.done = item.model.done;
+                                item2.done = item.model.done == 1;
                                 item2.access_document = item.model.access_document;
                                 item2.doneExpert = item.model.doneExpert == 1;
                                 if (item.file) {
