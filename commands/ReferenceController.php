@@ -30,10 +30,10 @@ class ReferenceController extends Controller
         $transaction = Yii::$app->db->beginTransaction();
         if ($this->actionRegions() and $this->actionOrgs()) {
             $transaction->commit();
-            echo "success";
+            echo "success";exit();
         }
         $transaction->rollBack();
-        echo "error";
+        echo "error";exit();
     }
     public function actionOrgs(){
         echo "Выполняется синхронизация организаций\n";
@@ -58,7 +58,7 @@ class ReferenceController extends Controller
                 $row_org->short_name = htmlspecialchars_decode( $data->getValue()->shot_name );
                 $row_org->name = htmlspecialchars_decode( $data->getValue()->name );
                 $row_org->inn = htmlspecialchars_decode( $data->getValue()->inn );
-                $row_org->id_region = ($data->getValue()->region_id != 0)?$data->getValue()->region_id:87;
+                $row_org->id_region = ($data->getValue()->region_id != 0)?$data->getValue()->region_id:86;
                 if (!$row_org->save()) {
                     $err++;
                     var_dump($row_org->getErrors());
