@@ -9356,9 +9356,6 @@ return [
         'user',
         'dev_program',
     ],
-    3118 => [
-        'faiv_user',
-    ],
     3120 => [
         'user',
     ],
@@ -9409,5 +9406,8 @@ return [
     ],
     3116 => [
         'faiv_admin',
+    ],
+    3118 => [
+        'dku',
     ],
 ];
