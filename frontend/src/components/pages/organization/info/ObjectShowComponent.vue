@@ -301,7 +301,7 @@
                             <b-tbody>
                                 <b-tr>
                                     <b-td>Утвержденное бюджетное финансирование работ по объекту</b-td>
-                                    <b-td>{{fromServer.program.finance_volume}}</b-td>
+                                    <b-td>{{parseFloat(fromServer.program.finance_volume)}}</b-td>
                                 </b-tr>
                                 <b-tr>
                                     <b-td>Сумма освоенных бюджетных средств</b-td>
@@ -309,7 +309,7 @@
                                 </b-tr>
                                 <b-tr>
                                     <b-td>Экономия бюджетных средств по объекту</b-td>
-                                    <b-td>{{fromServer.program.finance_volume*1-s_bud_f}}</b-td>
+                                    <b-td>{{parseFloat(fromServer.program.finance_volume)-s_bud_f}}</b-td>
                                 </b-tr>
                             </b-tbody>
                         </b-table-simple>
@@ -350,26 +350,32 @@
                                         {{item.step + 1}}
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input v-if="item.canDelete" v-model="svedenia2[index].step_name" />
+                                        <b-form-input v-can:user,root v-if="item.canDelete" v-model="svedenia2[index].step_name" />
                                         <span v-else>{{item.step_name}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input type="date" v-model="svedenia2[index].date_event_start" />
+                                        <b-form-input v-can:user,root type="date" v-model="svedenia2[index].date_event_start" />
+                                        <span v-can:mgsu,dep,dku,dku_user>{{item.date_event_start}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input type="date" v-model="svedenia2[index].date_event_end" />
+                                        <b-form-input v-can:user,root type="date" v-model="svedenia2[index].date_event_end" />
+                                        <span v-can:mgsu,dep,dku,dku_user>{{item.date_event_end}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input type="number" step=".01"  v-model="svedenia2[index].cost_real" />
+                                        <b-form-input v-can:user,root type="number" step=".01"  v-model="svedenia2[index].cost_real" />
+                                        <span v-can:mgsu,dep,dku,dku_user>{{item.cost_real}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input type="number" step=".01"  v-model="svedenia2[index].sum_bud_fin" />
+                                        <b-form-input v-can:user,root type="number" step=".01"  v-model="svedenia2[index].sum_bud_fin" />
+                                        <span v-can:mgsu,dep,dku,dku_user>{{item.sum_bud_fin}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input type="number" step=".01"  v-model="svedenia2[index].fin_vnebud_ist" />
+                                        <b-form-input v-can:user,root type="number" step=".01"  v-model="svedenia2[index].fin_vnebud_ist" />
+                                        <span v-can:mgsu,dep,dku,dku_user>{{item.fin_vnebud_ist}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-checkbox v-model="svedenia2[index].done" />
+                                        <b-form-checkbox v-can:user,root v-model="svedenia2[index].done" />
+                                        <span v-can:mgsu,dep,dku,dku_user>{{item.done ? 'Да' : 'Нет'}}</span>
                                     </b-td>
 
 
@@ -378,12 +384,13 @@
                                         <!-- <label @click="debugItem(item, svedenia2[index], index)"> Debug item {{index}} </label> -->
                                         {{item.help}}
                                         <b-form-input
+                                                v-can:user,root
                                                 placeholder="Ссылка на zakupki.gov.ru"
                                                 v-if=" sved2Href.includes(item.step + 1)"
                                                 v-model="svedenia2[index].access_document"
                                         />
 
-                                        <div v-if="sved2Doc.includes(item.step + 1)" class="fileInput">
+                                        <div v-can:user,root v-if="sved2Doc.includes(item.step + 1)" class="fileInput">
                                             <div
                                                     class="cell-center-for-items"
 
@@ -420,7 +427,8 @@
 
 
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input v-model="svedenia2[index].comment" />
+                                        <b-form-input v-can:user,root v-model="svedenia2[index].comment" />
+                                        <span v-can:mgsu,dep,dku,dku_user>{{item.comment}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
                                         <b-form-checkbox v-can:root,mgsu,dep v-model="svedenia2[index].doneExpert" />
@@ -434,7 +442,7 @@
                                             {{item.commentExpert}}
                                         </span>
                                     </b-td>
-                                    <div v-else>
+                                    <div v-can:user,root v-else>
                                         <b-td>
                                             <b-button variant="danger" @click="deleteRow(index)">Удалить</b-button>
                                         </b-td>
@@ -1553,7 +1561,7 @@
                     this.fromServer.svedenia.forEach((item,index)=>{
                         c+=Number(item.model.cost_real);
                         if (item.model.done)
-                            this.s_bud_f+=item.model.cost_real;
+                            this.s_bud_f+=parseFloat(item.model.cost_real);
                         v+=Number(item.model.sum_bud_fin);
                         b+=Number(item.model.fin_vnebud_ist);
                         this.svedenia2.forEach(item2=>{
