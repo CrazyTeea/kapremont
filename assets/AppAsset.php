@@ -26,6 +26,8 @@ class AppAsset extends AssetBundle
     ];
     public $js = [
         'vue/main.js',
+        'vue/vendor.js',
+        'vue/manifest.js'
     ];
 
     public $depends = [
