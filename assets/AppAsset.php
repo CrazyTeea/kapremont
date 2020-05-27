@@ -21,7 +21,7 @@ class AppAsset extends AssetBundle
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
-        'vue/index.css',
+        'vue/main.css',
         'css/site.css'
     ];
     public $js = [
