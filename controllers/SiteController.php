@@ -87,7 +87,6 @@ class SiteController extends Controller
         {
             $success = $model->change_password();
         }
-        var_dump($model);
         return $this->render('change_password',compact('model','success'));
     }
 
