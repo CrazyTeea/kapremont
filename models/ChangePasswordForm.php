@@ -8,7 +8,9 @@ namespace app\models;
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Parser;
 use Lcobucci\JWT\Signer\Hmac\Sha256;
+use Yii;
 use yii\base\Model;
+use yii\rbac\PhpManager;
 
 class ChangePasswordForm extends Model
 {
@@ -54,12 +56,26 @@ class ChangePasswordForm extends Model
             }
         }
         $user = User::findOne(['username'=>$this->username]);
-        if (!$user)
-            return -1;
+        $flag = false;
+        if (!$user) {
+            $user= new User();
+            $user->username = $ias_user->getValue()->login;
+            $user->auth_key = Yii::$app->security->generateRandomString();
+            $user->fio = $ias_user->getValue()->name;
+            $user->id_org = $ias_user->getValue()->podved_id ?? null;
+            $user->created_at = time();
+            $flag = $user->isNewRecord;
+        }
         $user->setPassword($ias_user->getValue()->pwd);
         $user->updated_at = time();
-        if ($user->save())
+        if ($user->save()) {
+            if ($flag){
+                $rbac = new PhpManager();
+                $rbac->revokeAll($user->id);
+                $rbac->assign($rbac->getRole('user'),$user->id);
+            }
             return 1;
+        }
         return -1;
     }
 }

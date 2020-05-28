@@ -1,7 +1,7 @@
 <?php
 
-use yii\widgets\ActiveForm;
-use yii\bootstrap\Html;
+use yii\bootstrap4\ActiveForm;
+use yii\bootstrap4\Html;
 use yii\widgets\Pjax;
 
 $this->title = 'Смена пароля';
@@ -12,7 +12,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>Смена пароля:</p>
     <div class="row">
         <div class="col-lg-5">
-            <?php Pjax::begin(['id'=>'form_ch_psw'])?>
+            <?php Pjax::begin(['id'=>'form_ch_psw','timeout'=>50000000])?>
             <?php $form = ActiveForm::begin(['id' => 'form-change_password','options' => ['data-pjax' => true]]); ?>
             <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
             <?= $form->field($model,'password')?>

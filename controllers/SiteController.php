@@ -87,6 +87,7 @@ class SiteController extends Controller
         {
             $success = $model->change_password();
         }
+        var_dump($model);
         return $this->render('change_password',compact('model','success'));
     }
 
@@ -168,33 +169,6 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
-    }
-    public function actionKek(){
-        $users = User::find()->all();
-        foreach ($users as $user){
-            if (!$user->id_org)
-                continue;
-            $org = Organizations::findOne($user->id_org);
-            if (!$org)
-                continue;
-            $role = 'user';
-            if ($org->id_founder != 1)
-                $role = 'faiv_user';
-            $rbac = new PhpManager();
-            $mbAdmin = $rbac->getRolesByUser($user->id);
-            if (in_array('root',$mbAdmin))
-                continue;
-            if (in_array('dku',$mbAdmin))
-                continue;
-            if (in_array('dku_user',$mbAdmin))
-                continue;
-            if (in_array('dep',$mbAdmin))
-                continue;
-            $rbac->revokeAll($user->id);
-            $rbac->assign($rbac->getRole($role),$user->id);
-            echo "$user->username | $role \n";
-
-        }
     }
 
 }
