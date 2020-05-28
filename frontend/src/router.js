@@ -11,24 +11,15 @@ Vue.use(VueRouter);
 const routes = [
     {
         path: "/",
-        component: require('./components/pages/program/mainPage.vue').default /*() =>
-            import("./components/pages").then(module => {
-                return module.mainPage;
-            })*/
+        component: require('./components/pages/program/mainPage.vue').default
     },
     {
         path: "/program",
-        component: require('./components/pages/program/mainPage.vue').default /*() =>
-            import("./components/pages").then(module => {
-                return module.mainPage;
-            })*/
+        component: require('./components/pages/program/mainPage.vue').default
     },
     {
         path: "/program/view",
-        component:require('./components/pages/program/view/index.vue').default /*() =>
-            import("./components/pages").then(module => {
-                return module.devView;
-            })*/
+        component:require('./components/pages/program/view/index.vue').default
     },
     {
         path: "/program/org",
@@ -36,33 +27,21 @@ const routes = [
     },
     {
         path: "/program/object/create",
-        component: require('./components/pages/program/form/index.vue').default/*() =>
-            import("./components/pages").then(module => {
-                return module.form;
-            })*/
+        component: require('./components/pages/program/form/index.vue').default
     },
     {
         path: "/program/object/update/:id",
-        component: require('./components/pages/program/form/index.vue').default /*() =>
-            import("./components/pages").then(module => {
-                return module.form;
-            })*/
+        component: require('./components/pages/program/form/index.vue').default
     },
     {
         path: "/organization/info",
         name: "orgInfo",
-        component: require('./components/pages/organization/info/index.vue').default /*() =>
-            import("./components/pages").then(module => {
-                return module.orgInfo;
-            })*/
+        component: require('./components/pages/organization/info/index.vue').default
     },
     {
         path: "/error/browser",
         name: "error",
-        component: require('./components/pages/error/errorPage.vue').default /*() =>
-            import("./components/pages").then(module => {
-                return module.errorPage;
-            })*/
+        component: require('./components/pages/error/errorPage.vue').default
     },
     {
         path: "/error/status907",
@@ -77,10 +56,7 @@ const routes = [
     {
         path: "/organization/list",
         name: "MainCheck",
-        component: require('./components/pages/checkMgsu/MainCheckComponent.vue').default/*() =>
-            import("./components/pages").then(module => {
-                return module.checkMgsu;
-            })*/
+        component: require('./components/pages/checkMgsu/MainCheckComponent.vue').default
     },
     {
         path: "/organization/list/:id",
@@ -101,7 +77,6 @@ const routes = [
         path: "/organization/user-info/:id_org",
         name: "user-info",
         component:require('./components/pages/organization/userInfo/index.vue').default ,
-        /*()=>import('./components/pages').then(module=>module.userInfo)*/
     },
     {
         path: "/admin/faiv",
