@@ -1294,7 +1294,6 @@
             await this.setChart();
             await this.createChart();
             this.permission = window.Permission;
-            console.log(this.permission !== 'faiv_admin' || this.permission !== 'faiv_user')
 
             await window.addEventListener("load", this.createChart);
             await window.addEventListener("resize", this.createChart);
@@ -1327,7 +1326,6 @@
                 let graph = document.querySelector(`#file_input_${index}`);
                 this.svedenia2[index].file = graph.files[0];
 
-                console.log(this.svedenia2[index].file);
             },
             debugItem(item, sved2, index) {
                 //Опытным путем было выяснено что индек считается вот таким образом (item.step + 1)
@@ -1438,10 +1436,9 @@
                     }
                 }).then(response=>console.log(response.data))
             },
-            addRow(index,toIndex = false){
-
+            addRow(index,byStep = null){
                 this.svedenia2.splice(index,0,{
-                    step:this.svedenia2[index-1].step+0.1 ,
+                    step: byStep || Math.round((this.svedenia2[index-1].step+0.1+Number.EPSILON)*100)/100 ,
                     id_event:null,
                     step_name:'',
                     date_event_start: null,
@@ -1596,29 +1593,56 @@
                             fin_vnebud_ist:item.model.fin_vnebud_ist,
                         })
                     });
+                    this.fromServer.svedenia2.sort((p,n)=>p.model.step - n.model.step)
                     this.fromServer.svedenia2.forEach((item,index)=>{
                         c+=Number(item.model.cost_real);
                         v+=Number(item.model.sum_bud_fin);
                         b+=Number(item.model.fin_vnebud_ist);
                         this.svedenia2.forEach(item2=>{
-                            if (this.isFloat(item2.step) && item2.step == item.model.step) {
-                                item2.id = item.model.id;
-                                item2.date_event_start = item.model.date_event_start;
-                                item2.date_event_end = item.model.date_event_end;
-                                item2.cost_real = item.model.cost_real;
-                                item2.sum_bud_fin = item.model.sum_bud_fin;
-                                item2.fin_vnebud_ist = item.model.fin_vnebud_ist;
-                                item2.id_event = item.model.id_event;
-                                item2.done = item.model.done == 1;
-                                item2.access_document = item.model.access_document;
-                                item2.doneExpert = item.model.doneExpert == 1;
+                            if (this.svedenia2.find(i=>i.step == item.model.step)){
+                                if (this.isFloat(item2.step) && item2.step == item.model.step) {
+                                    item2.id = item.model.id;
+                                    item2.date_event_start = item.model.date_event_start;
+                                    item2.date_event_end = item.model.date_event_end;
+                                    item2.cost_real = item.model.cost_real;
+                                    item2.sum_bud_fin = item.model.sum_bud_fin;
+                                    item2.fin_vnebud_ist = item.model.fin_vnebud_ist;
+                                    item2.id_event = item.model.id_event;
+                                    item2.done = item.model.done == 1;
+                                    item2.access_document = item.model.access_document;
+                                    item2.doneExpert = item.model.doneExpert == 1;
+                                    if (item.file) {
+                                        item2.file = {
+                                            name: item.file
+                                        }
+                                    }
+                                    item2.comment = item.model.comment;
+                                    item2.commentExpert = item.model.commentExpert;
+                                }
+                            }
+                            else {
+                                let i = this.svedenia2.map(e=>{return e.step}).indexOf(parseFloat(item.model.step)-0.1);
+                                this.addRow(i+1,parseFloat(item.model.step));
+                                let l = this.svedenia2.find(e=>e.step == item.model.step);
+
+                                l.id = item.model.id;
+                                l.step_name = item.model.step_name;
+                                l.date_event_start = item.model.date_event_start;
+                                l.date_event_end = item.model.date_event_end;
+                                l.cost_real = item.model.cost_real;
+                                l.sum_bud_fin = item.model.sum_bud_fin;
+                                l.fin_vnebud_ist = item.model.fin_vnebud_ist;
+                                l.id_event = item.model.id_event;
+                                l.done = item.model.done == 1;
+                                l.access_document = item.model.access_document;
+                                l.doneExpert = item.model.doneExpert == 1;
                                 if (item.file) {
-                                    item2.file = {
+                                    l.file = {
                                         name: item.file
                                     }
                                 }
-                                item2.comment = item.model.comment;
-                                item2.commentExpert = item.model.commentExpert;
+                                l.comment = item.model.comment;
+                                l.commentExpert = item.model.commentExpert;
                             }
                         });
                     });
@@ -1721,7 +1745,6 @@
 
 
                 });
-                //  console.log( this.svedenia2);
 
                 this.svedenia2.some(item=>{
                     if (item.done == 0){
