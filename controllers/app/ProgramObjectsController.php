@@ -137,6 +137,7 @@ class ProgramObjectsController extends AppController
 
         $event->date_event_start = $post['date_event_start'];
         $event->date_event_end = $post['date_event_end'];
+        $event->step_name = $post['step_name'];
         $event->cost_real = floatval($post['cost_real']);
         $event->sum_bud_fin = floatval($post['sum_bud_fin']);
         $event->fin_vnebud_ist = floatval($post['fin_vnebud_ist']);
