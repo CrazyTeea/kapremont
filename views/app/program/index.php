@@ -1,3 +1,2 @@
-<?php
-?>
+<?php ?>
 <div id="app"></div>

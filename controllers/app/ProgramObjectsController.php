@@ -123,6 +123,7 @@ class ProgramObjectsController extends AppController
                 $event->id_event = $post['id_event'];
                 $event->step = floatval($post['step']);
             }
+            $event->step_name = $post['step_name'];
             $is_event2 = true;
             $model_name=ProgramObjectsEvents2::class;
         }else return Json::encode(['success'=>false,'errors'=>['global'=>'Не предвиденная ошибка']]);
@@ -137,7 +138,7 @@ class ProgramObjectsController extends AppController
 
         $event->date_event_start = $post['date_event_start'];
         $event->date_event_end = $post['date_event_end'];
-        $event->step_name = $post['step_name'];
+
         $event->cost_real = floatval($post['cost_real']);
         $event->sum_bud_fin = floatval($post['sum_bud_fin']);
         $event->fin_vnebud_ist = floatval($post['fin_vnebud_ist']);

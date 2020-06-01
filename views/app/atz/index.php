@@ -7,6 +7,5 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <div class="program-objects-view">
-    <div id="app">
-    </div>
+    <div id="app"></div>
 </div>
