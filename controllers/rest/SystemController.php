@@ -168,7 +168,9 @@ class SystemController extends RestController
                         );
                     }
                     if (isset($ret['priorityObjects']['items'])) {
-                        array_push($ret['priorityObjects']['items'], ['assignment' => 'итого', 'square_kap' => number_format($s_sum, 3, '.',' ') , 'finance_sum' => number_format($sum_sum, 3, '.',' ')]);
+                        array_push($ret['priorityObjects']['items'], ['assignment' => 'итого',
+                            'square_kap' => number_format($s_sum, 3, '.',' ') ,
+                            'finance_sum' => number_format($sum_sum, 3, '.',' ')]);
                     }
                     $s_sum = 0; $sum_sum = 0;
                     $progObj = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$this->user->id_org,'type'=>1])->joinWith(['region'])->all();
