@@ -235,7 +235,7 @@
                 <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-s>
                                 <b-icon-gear-wide-connected />
-                                График мероприятий
+                                Согласованный График мероприятий
                             </span>
                 </b-card-header>
                 <b-collapse id="accordion-s" accordion="my-accordion2" role="tabpanel" visible>
