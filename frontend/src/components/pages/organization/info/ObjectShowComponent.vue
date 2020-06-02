@@ -235,7 +235,7 @@
                 <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-s>
                                 <b-icon-gear-wide-connected />
-                                Согласованный График мероприятий
+                                Согласованный график мероприятий
                             </span>
                 </b-card-header>
                 <b-collapse id="accordion-s" accordion="my-accordion2" role="tabpanel" visible>
@@ -421,6 +421,7 @@
                                         <div v-if="svedenia2[index].file">
                                             <a :href="`/program/event/download/${item.id}`">{{svedenia2[index].file.name}}</a>
                                         </div>
+                                        <span v-can:mgsu,dep,dku,dku_user>{{svedenia2[index].access_document}}</span>
 
 
                                     </b-td>
