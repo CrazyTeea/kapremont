@@ -421,7 +421,7 @@
                                         <div v-if="svedenia2[index].file">
                                             <a :href="`/program/event/download/${item.id}`">{{svedenia2[index].file.name}}</a>
                                         </div>
-                                        <span v-can:mgsu,dep,dku,dku_user>{{svedenia2[index].access_document}}</span>
+                                        <a v-if="svedenia2[index].access_document != null" :href=svedenia2[index].access_document v-can:mgsu,dep,dku,dku_user>{{svedenia2[index].access_document}}</a>
 
 
                                     </b-td>
