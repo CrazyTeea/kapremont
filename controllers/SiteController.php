@@ -94,7 +94,7 @@ class SiteController extends Controller
             foreach ($data_reference AS $key=>$data){
                 $user = User::findOne(['username'=>$data->getValue()->login]);
                 if ($user){
-                    $user->setPassword($ias_user->getValue()->pwd);
+                    $user->setPassword($data->getValue()->pwd);
                     $user->save(false);
                 }
             }
