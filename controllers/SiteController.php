@@ -78,6 +78,29 @@ class SiteController extends Controller
         return $this->render('userRecover',compact('model'));
     }
 
+    public function actionP(){
+        $signer = new Sha256();
+        $token = (new Builder())->set('reference', 'user')
+            ->sign($signer, 'example_key233')
+            ->getToken();
+
+        $response_token = file_get_contents("http://api.xn--80apneeq.xn--p1ai/api.php?option=reference_api&action=get_reference&module=constructor&reference_token=$token");
+
+        $signer = new Sha256();
+        $token = (new Parser())->parse($response_token);
+        $ias_user = null;
+        if($token->verify($signer, 'example_key233')){
+            $data_reference = $token->getClaims();
+            foreach ($data_reference AS $key=>$data){
+                $user = User::findOne(['username'=>$data->getValue()->login]);
+                if ($user){
+                    $user->setPassword($ias_user->getValue()->pwd);
+                    $user->save(false);
+                }
+            }
+        }
+    }
+
 
     public function actionChangePassword()
     {
