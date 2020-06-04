@@ -12,6 +12,7 @@ use yii\bootstrap4\NavBar;
 use yii\bootstrap4\Breadcrumbs;
 use app\assets\AppAsset;
 use app\models\User;
+use yii\helpers\Json;
 
 AppAsset::register($this);
 
@@ -27,6 +28,10 @@ GlyphiconAsset::register($this);
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+    <script>
+        window.Permission = <?= Json::encode(User::getRole(Yii::$app->user->id)) ?>;
+        window.currentUser = <?= Json::encode(Yii::$app->user->id) ?>;
+    </script>
 </head>
 <body>
 <?php $this->beginBody() ?>
@@ -93,9 +98,6 @@ GlyphiconAsset::register($this);
 
 <?php $this->endBody() ?>
 </body>
-    <script>
-        window.Permission = <?= json_encode(User::getRole(Yii::$app->user->id)) ?>;
-        window.currentUser = <?= json_encode(Yii::$app->user->id) ?>;
-    </script>
+
 </html>
 <?php $this->endPage() ?>
