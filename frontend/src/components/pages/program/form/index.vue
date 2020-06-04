@@ -575,6 +575,7 @@
 
         methods: {
             checkFOIV(){
+                //console.log(this.permission)
                 return !(this.permission === 'faiv_admin' || this.permission === 'faiv_user');
             },
             setBanner(variant, message) {
