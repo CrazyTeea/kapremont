@@ -404,7 +404,7 @@
                             </b-card-body>
                         </b-collapse>
                     </b-card>
-                    <b-card v-if="permission !== 'faiv_user'" no-body class="mb-1">
+                    <b-card v-if="checkFOIV()" no-body class="mb-1">
                         <b-card-header header-tag="header" class="p-1" role="tab">
                                 <span class="toggle_button" v-b-toggle.accordion-3>
                                     <b-icon-gear-wide-connected />
@@ -417,7 +417,7 @@
                             </b-card-body>
                         </b-collapse>
                     </b-card>
-                    <b-card v-if="permission !== 'faiv_user'" no-body class="mb-1">
+                    <b-card v-if="checkFOIV()" no-body class="mb-1">
                         <b-card-header header-tag="header" class="p-1" role="tab">
                                 <span class="toggle_button" v-b-toggle.accordion-4>
                                     <b-icon-gear-wide-connected />
@@ -430,7 +430,7 @@
                             </b-card-body>
                         </b-collapse>
                     </b-card>
-                    <b-card v-if="permission !== 'faiv_user'" no-body class="mb-1">
+                    <b-card v-if="checkFOIV()" no-body class="mb-1">
                         <b-card-header header-tag="header" class="p-1" role="tab">
                                 <span class="toggle_button" v-b-toggle.accordion-5>
                                     <b-icon-gear-wide-connected />
@@ -443,7 +443,7 @@
                             </b-card-body>
                         </b-collapse>
                     </b-card>
-                    <b-card v-if="permission !== 'faiv_user'" no-body class="mb-1">
+                    <b-card v-if="checkFOIV()" no-body class="mb-1">
                         <b-card-header header-tag="header" class="p-1" role="tab">
                                 <span class="toggle_button" v-b-toggle.accordion-6>
                                     <b-icon-gear-wide-connected />
@@ -574,6 +574,9 @@
         },
 
         methods: {
+            checkFOIV(){
+                return !(this.permission === 'faiv_admin' || this.permission === 'faiv_user');
+            },
             setBanner(variant, message) {
                 this.bannerInfo.unshift({
                     show: true,
@@ -664,6 +667,7 @@
         mounted() {
             this.requestPageData({ pageName: "objectCreate" });
             if (this.formData.id_region) this.requestCity({ id: this.formData.id_region });
+            this.permission = window.Permission;
         }
     };
 </script>
