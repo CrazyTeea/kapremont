@@ -1355,32 +1355,32 @@
                 })
             },
             async setChart() {
-
-
                 const months = [
-                    'Январь',
-                    'Февраль',
-                    'Март',
-                    'Апрель',
-                    'Май',
-                    'Июнь',
-                    'Июль',
-                    'Август',
-                    'Сентябрь',
-                    'Октябрь',
-                    'Ноябрь',
-                    'Декабрь'
+                    'январь',
+                    'февраль',
+                    'март',
+                    'апрель',
+                    'май',
+                    'июнь',
+                    'июль',
+                    'август',
+                    'сентябрь',
+                    'октябрь',
+                    'ноябрь',
+                    'декабрь'
                 ];
                 let bars = document.querySelectorAll('.chart-bars li');
                 bars.forEach((el,index)=>{
                     let item = this.svedenia.items[index];
                     let date = null;
                     if (item && item.date_event_start && item.date_event_end) {
-                        date = months[parseInt(item.date_event_start.split('-')[1])] + '-' + months[parseInt(item.date_event_end.split('-')[1])];
+                        let sDate = months[parseInt(item.date_event_start.split('-')[1])];
+                        let eDate = months[parseInt(item.date_event_end.split('-')[1])];
+
+                        date = sDate + '-' + eDate;
                     }
                     el.dataset.duration = date
                 });
-
 
             },
             createChart(e = 'load') {
@@ -1408,7 +1408,8 @@
 
                     if (endDay && endDay.length && endDay.endsWith("½")) {
                         const filteredArray = daysArray.filter(day => day.textContent == endDay.slice(0, -1));
-                        width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth / 2 - left;
+                        if (filteredArray)
+                            width = filteredArray[0].offsetLeft + filteredArray[0].offsetWidth / 2 - left;
                     } else {
                         const filteredArray = daysArray.filter(day => day.textContent == endDay);
                         if (filteredArray.length)
