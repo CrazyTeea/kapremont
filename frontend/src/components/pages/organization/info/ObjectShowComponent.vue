@@ -1293,7 +1293,7 @@
             await this.requestUser();
             await this.getStatus();
             await this.getObject();
-            await this.setChart();
+
             await this.createChart();
             this.permission = window.Permission;
 
@@ -1756,6 +1756,8 @@
                         }
                     }
                 });
+
+                await this.setChart();
             },
             getIznos(iznos) {
                 let izn = parseInt(iznos);
