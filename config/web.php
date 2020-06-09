@@ -91,9 +91,6 @@ $config = [
                 'api/set-status/dep/<org_id:\d+>' => '/app/organization/set-status-dep',
                 'api/set-status/dku/<org_id:\d+>' => '/app/organization/set-status-dku',
 
-                'api/set-status/recomend/<obj_id:\d+>' => '/app/organization/set-recomend-status',
-                'api/set-status/not-recomend/<obj_id:\d+>' => '/app/organization/set-not-recomend-status',
-                'api/set-status/to-work/<obj_id:\d+>' => '/app/organization/set-to-work-status',
                 'api/get-status/<obj_id:\d+>' => 'app/organization/get-approve-status',
 
                 'admin/faiv' => 'app/faiv-admin/faiv',

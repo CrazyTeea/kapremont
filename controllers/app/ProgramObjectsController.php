@@ -2,6 +2,7 @@
 
 namespace app\controllers\app;
 
+use app\facades\ProgramStatus;
 use app\models\EventsFiles;
 use app\models\Files;
 use app\models\ObjectDocumentsList;
@@ -87,6 +88,8 @@ class ProgramObjectsController extends AppController
         $model = $this->findModel($id);
         if ($model){
             $model[Yii::$app->request->post('value')] = Yii::$app->request->post(Yii::$app->request->post('value'));
+            if (Yii::$app->request->post('value') == 'status')
+                new ProgramStatus($model->id_org);
             return Json::encode([
                 'success'=>$model->save(),
                 'errors'=>$model->getErrors()

@@ -67,9 +67,10 @@
             <div class="row">
                 <div class="col-4">
                     <b-dropdown v-can:mgsu,root right text="статус эксперта МОН"  variant="info" class="m-2" >
-                        <b-dropdown-item :href="`/api/set-status/recomend/${obj_id}`" @click="actionHendler" variant="success">Рекомендуется к согласованию</b-dropdown-item>
-                        <b-dropdown-item :href="`/api/set-status/not-recomend/${obj_id}`" @click="actionHendler" variant="danger">Не рекомендуется к согласованию</b-dropdown-item>
-                        <b-dropdown-item :href="`/api/set-status/to-work/${obj_id}`" @click="actionHendler" variant="warning">На доработку</b-dropdown-item>
+                        <b-dropdown-item @click="setStatus(2)" variant="success">Рекомендуется к согласованию</b-dropdown-item>
+                        <b-dropdown-item @click="setStatus(3)" variant="danger">Не рекомендуется к согласованию</b-dropdown-item>
+                        <b-dropdown-item @click="setStatus(4)" variant="warning">На доработку</b-dropdown-item>
+                        <b-dropdown-item @click="setStatus(5)" variant="info">В реализации</b-dropdown-item>
                     </b-dropdown>
                 </div>
                 <div class="col-4">
@@ -112,9 +113,10 @@
             <div class="row">
                 <div class="col-6">
                     <b-dropdown v-can:mgsu,root right text="статус эксперта МОН"  variant="info" class="m-2" >
-                        <b-dropdown-item :href="`/api/set-status/recomend/${obj_id}`" @click="actionHendler" variant="success">Рекомендуется к согласованию</b-dropdown-item>
-                        <b-dropdown-item :href="`/api/set-status/not-recomend/${obj_id}`" @click="actionHendler" variant="danger">Не рекомендуется к согласованию</b-dropdown-item>
-                        <b-dropdown-item :href="`/api/set-status/to-work/${obj_id}`" @click="actionHendler" variant="warning">На доработку</b-dropdown-item>
+                        <b-dropdown-item @click="setStatus(2)" variant="success">Рекомендуется к согласованию</b-dropdown-item>
+                        <b-dropdown-item @click="setStatus(3)" variant="danger">Не рекомендуется к согласованию</b-dropdown-item>
+                        <b-dropdown-item @click="setStatus(4)" variant="warning">На доработку</b-dropdown-item>
+                        <b-dropdown-item v-if="items.type" @click="setStatus(5)" variant="info">В реализации</b-dropdown-item>
                     </b-dropdown>
                 </div>
                 <div class="col-6">
@@ -1337,6 +1339,22 @@
                 console.log(sved2);
                 console.log(item.step + 1)
                 console.groupEnd();
+            },
+            setStatus(staus){
+                let data = new FormData();
+                data.append('value','status');
+                data.append('status',staus);
+                Axios.post(`/program/object/set-value/${this.items.id}`,data, {
+                        headers: {
+                            "X-CSRF-Token": this.csrf
+                        }
+                    }
+                ).then(response=>{
+                    if(!response.data.success)
+                        response.data.errors.forEach(item=>{
+                            this.setBanner('danger',item)
+                        })
+                })
             },
             ObjectOpis(event){
                 let data = new FormData();

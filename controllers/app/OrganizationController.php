@@ -147,32 +147,6 @@ class OrganizationController extends AppController
         return false;
     }
 
-    public function actionSetRecomendStatus($obj_id)
-    {
-        $this->setStatus($obj_id, ApproveStatus::STATUS_RECOMEND);
-        new ProgramStatus(ProgramObjects::find()->where(['id' => $obj_id, 'system_status' => 1])->one()->id_org);
-
-        return $this->redirect(Yii::$app->request->referrer);
-    }
-
-    public function actionSetNotRecomendStatus($obj_id)
-    {
-        $this->setStatus($obj_id, ApproveStatus::STATUS_NOT_RECOMEND);
-        new ProgramStatus(ProgramObjects::find()->where(['id' => $obj_id, 'system_status' => 1])->one()->id_org);
-
-
-        return $this->redirect(Yii::$app->request->referrer);
-    }
-
-    public function actionSetToWorkStatus($obj_id)
-    {
-        $this->setStatus($obj_id, ApproveStatus::STATUS_TO_WORK);
-        new ProgramStatus(ProgramObjects::find()->where(['id' => $obj_id, 'system_status' => 1])->one()->id_org);
-
-
-        return $this->redirect(Yii::$app->request->referrer);
-    }
-
     public function actionSetApproveStatusDep($obj_id)
     {
         if(Yii::$app->getUser()->can('dep')) {
