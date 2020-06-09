@@ -40,7 +40,7 @@ class UserRecover extends Model
         if ($this->validate()){
             $signer = new Sha256();
 
-            $token = (new Builder())->set('reference', 'user')
+            $token = (new Builder())->set('reference', 'users')
                 ->sign($signer, 'example_key233')
                 ->getToken();
 
