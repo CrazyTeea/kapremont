@@ -1476,6 +1476,8 @@
                     parent:false,
                     canDelete:true,
                 });
+                this.sved2Doc.push((byStep || Math.round((this.svedenia2[index-1].step+0.1+Number.EPSILON)*100)/100)+1)
+                this.sved2Href.push((byStep || Math.round((this.svedenia2[index-1].step+0.1+Number.EPSILON)*100)/100)+1)
             },
             deleteRow(index){
                 if (this.svedenia2[index-1].canDelete)
