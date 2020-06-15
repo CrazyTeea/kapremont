@@ -70,7 +70,7 @@ class ProgramController extends AppController
 
         $dku_status = [
             'not' => 'В обработке',
-            'approved' => 'Согласовано ДКУ',
+            'approved' => 'Рассмотрено ДКУ',
             'rejected' => 'Резерв'
         ];
 

@@ -81,7 +81,7 @@
                 </div>
                 <!--<div class="col-3">
                     <b-dropdown v-can:dku,root right  text="статус ДКУ" variant="info" class="m-2">
-                        <b-dropdown-item :href="`/api/set-status/approved/dku/${obj_id}`" @click="actionHendler" variant="success">Согласовано ДКУ</b-dropdown-item>
+                        <b-dropdown-item :href="`/api/set-status/approved/dku/${obj_id}`" @click="actionHendler" variant="success">Рассмотрено ДКУ</b-dropdown-item>
                         <b-dropdown-item :href="`/api/set-status/rejected/dku/${obj_id}`" @click="actionHendler" variant="warning">Резерв</b-dropdown-item>
                     </b-dropdown>
                 </div>-->
@@ -127,7 +127,7 @@
                 </div>
                 <!--<div class="col-4">
                     <b-dropdown v-can:dku,root right  text="статус ДКУ" variant="info" class="m-2">
-                        <b-dropdown-item :href="`/api/set-status/approved/dku/${obj_id}`" @click="actionHendler" variant="success">Согласовано ДКУ</b-dropdown-item>
+                        <b-dropdown-item :href="`/api/set-status/approved/dku/${obj_id}`" @click="actionHendler" variant="success">Рассмотрено ДКУ</b-dropdown-item>
                         <b-dropdown-item :href="`/api/set-status/rejected/dku/${obj_id}`" @click="actionHendler" variant="warning">Резерв</b-dropdown-item>
                     </b-dropdown>
                 </div>-->
@@ -1536,7 +1536,7 @@
                         this.dku_status.label = 'В обработке';
                         this.dku_status.color = 'secondary'
                     } else if(dku == 'approved') {
-                        this.dku_status.label = 'Согласовано ДКУ';
+                        this.dku_status.label = 'Рассмотрено ДКУ';
                         this.dku_status.color = 'success'
                     } else if(dku == 'rejected') {
                         this.dku_status.label = 'Резерв';
