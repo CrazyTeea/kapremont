@@ -73,7 +73,7 @@ class ShitController extends Controller
 
             $dku_status = [
                 'not' => 'В обработке',
-                'approved' => 'Согласовано ДКУ',
+                'approved' => 'Рассмотрено ДКУ',
                 'rejected' => 'Резерв'
             ];
 

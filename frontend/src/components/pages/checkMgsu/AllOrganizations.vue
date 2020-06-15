@@ -103,7 +103,7 @@
                                 v-model="item.dku_status"
                                 :options="[
                                     {value: 'not', text: 'В обработке'},
-                                    {value: 'approved', text: 'Согласовано ДКУ'},
+                                    {value: 'approved', text: 'Рассмотрено ДКУ'},
                                     {value: 'rejected', text: 'Резерв'}
                                 ]"
                             ></b-form-select>
@@ -197,7 +197,7 @@ export default {
             options: {
                 dku_status:[
                     {value: 'not', text: 'В обработке'},
-                    {value: 'approved', text: 'Согласовано ДКУ'},
+                    {value: 'approved', text: 'Рассмотрено ДКУ'},
                     {value: 'rejected', text: 'Резерв'}
                 ],
                 dep_status:[
