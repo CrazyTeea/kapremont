@@ -113,7 +113,33 @@ class SiteController extends Controller
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        if(Yii::$app->request->get('auth_token')) {
+
+            $signer = new Sha256();
+            $token = (new Parser())->parse(Yii::$app->request->get('auth_token'));
+            if ($token->verify($signer, 'ias@mirea9884')) {
+                $model->username = $token->getClaim("login");
+                $model->password = $token->getClaim("password");
+                if ($model->validate()) {
+                    Yii::$app->user->login($model->getUser());
+
+
+                    if (Yii::$app->user->can('root') or
+                        Yii::$app->user->can('mgsu') or
+                        Yii::$app->user->can('orglist_view') or
+                        Yii::$app->user->can('faiv_admin') or
+                        Yii::$app->user->can('dep') or
+                        Yii::$app->user->can('dku')){
+                        return $this->redirect(['/organization/list']);
+                    }
+
+                    return $this->goBack();
+                }
+                Yii::$app->session->setFlash("auth_error", "Ошибка входа!");
+                return $this->redirect(['site/login']);
+            }
+        }
+        else if ($model->load(Yii::$app->request->post()) && $model->login()) {
             if (Yii::$app->user->can('root') or
                 Yii::$app->user->can('mgsu') or
                 Yii::$app->user->can('orglist_view') or
