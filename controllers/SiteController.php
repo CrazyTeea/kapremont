@@ -128,7 +128,7 @@ class SiteController extends Controller
                     return $this->goBack();
                 }
                 Yii::$app->session->setFlash("auth_error", "Ошибка входа!");
-                return $this->redirect(['site/login']);
+               // return $this->redirect(['site/login']);
             }
         }
         else if ($model->load(Yii::$app->request->post()) && $model->login()) {
