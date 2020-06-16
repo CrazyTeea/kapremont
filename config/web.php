@@ -105,7 +105,6 @@ $config = [
                 'api/comment/obj/<id:\d+>' => 'api/comment/obj',
                 'program' => 'app/program',
                 '' => 'app/program',
-                'login' => 'site/login',
                 'error/browser' => 'app/error/browser',
                 'error/status907' => 'app/error/status907',
 
