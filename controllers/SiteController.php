@@ -104,8 +104,6 @@ class SiteController extends Controller
             return $this->goHome();
         }
 
-        var_dump(Yii::$app->request->get('auth_token'));exit();
-
         $model = new LoginForm();
         if(Yii::$app->request->get('auth_token')) {
 
