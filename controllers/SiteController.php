@@ -101,7 +101,15 @@ class SiteController extends Controller
     public function actionLogin()
     {
         if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
+            if (Yii::$app->user->can('root') or
+                Yii::$app->user->can('mgsu') or
+                Yii::$app->user->can('orglist_view') or
+                Yii::$app->user->can('faiv_admin') or
+                Yii::$app->user->can('dep') or
+                Yii::$app->user->can('dku')){
+                return $this->redirect(['/organization/list']);
+            }
+            else return $this->redirect(['/program']);
         }
 
         $model = new LoginForm();
@@ -140,7 +148,7 @@ class SiteController extends Controller
                 Yii::$app->user->can('dku')){
                 return $this->redirect(['/organization/list']);
             }
-            return $this->goBack();
+            return $this->redirect(['/program']);
         }
 
         return $this->render('login', [
