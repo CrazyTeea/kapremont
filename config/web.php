@@ -75,11 +75,6 @@ $config = [
             'showScriptName' => false,
             'rules' => [
 
-                [
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => 'api/comment',
-                    'pluralize' => false
-                ],
 
 
                 'shit-table/data' => 'api/shit/data',
@@ -104,7 +99,6 @@ $config = [
                 'api/permissions' => 'api/permission/permissions',
                 'api/comment/obj/<id:\d+>' => 'api/comment/obj',
                 'program' => 'app/program',
-                '' => 'app/program',
                 'error/browser' => 'app/error/browser',
                 'error/status907' => 'app/error/status907',
 
