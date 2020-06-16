@@ -10,7 +10,7 @@ $config = [
     'basePath' => dirname(__DIR__),
     'bootstrap' => ['log'],
     'language' => 'ru-RU',
-    'defaultRoute' => 'login',
+    'defaultRoute' => 'site/login',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
@@ -35,6 +35,9 @@ $config = [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'KNbbRnlbgg_iYBM3JO7rQV80xzojoned',
+            'parsers' => [
+                'multipart/form-data' => 'yii\web\MultipartFormDataParser'
+            ],
         ],
         'authManager' => [
             'class' => 'yii\rbac\PhpManager', // or use 'yii\rbac\DbManager'
@@ -72,11 +75,6 @@ $config = [
             'showScriptName' => false,
             'rules' => [
 
-                [
-                    'class' => 'yii\rest\UrlRule',
-                    'controller' => 'api/comment',
-                    'pluralize' => false
-                ],
 
 
                 'shit-table/data' => 'api/shit/data',
@@ -101,7 +99,6 @@ $config = [
                 'api/permissions' => 'api/permission/permissions',
                 'api/comment/obj/<id:\d+>' => 'api/comment/obj',
                 'program' => 'app/program',
-                '' => 'app/program',
                 'error/browser' => 'app/error/browser',
                 'error/status907' => 'app/error/status907',
 
