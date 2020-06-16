@@ -4,18 +4,10 @@ namespace app\controllers;
 
 use app\models\ChangePasswordForm;
 use app\models\forms\UserRecover;
-use app\models\Organizations;
-use app\models\ProgObjectsEvents;
-use app\models\Program;
-use app\models\ProgramObjects;
-use app\models\User;
-use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Parser;
 use Lcobucci\JWT\Signer\Hmac\Sha256;
 use Yii;
 use yii\filters\AccessControl;
-use yii\helpers\Json;
-use yii\rbac\PhpManager;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
