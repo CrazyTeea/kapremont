@@ -125,7 +125,7 @@ class SiteController extends Controller
                         return $this->redirect(['/organization/list']);
                     }
 
-                    return $this->goBack();
+                    return $this->redirect(['/program']);
                 }
                 Yii::$app->session->setFlash("auth_error", "Ошибка входа!");
                // return $this->redirect(['site/login']);
