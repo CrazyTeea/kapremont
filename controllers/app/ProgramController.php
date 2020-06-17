@@ -63,7 +63,7 @@ class ProgramController extends AppController
     }
 
     public function actionDkuExport(){
-        $objects = ProgramObjects::findAll(['system_status'=>1]);
+        $objects = ProgramObjects::find()->where(['system_status'=>1])->groupBy(['id_org'])->all();
         $sum = 0;
         $export = [];
 

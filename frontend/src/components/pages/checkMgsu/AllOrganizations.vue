@@ -69,7 +69,7 @@
                         <b-th>Выгрузка отправлена</b-th>
                         <b-th v-can:dku,dku_user>Статус программы (ДКУ)</b-th>
                         <b-th v-can:dep,dku,dku_user >Статус программы (ДЭП)</b-th>
-                        <b-th v-can:dku,dku_user>Согласованный объем бюджетного финансирования АТЗ</b-th>
+                        <b-th v-can:dku,dku_user>Сумма к выделению для финансирования мероприятий по АТЗ Р.</b-th>
                     </b-tr>
                 </b-thead>
                 <b-tbody>
@@ -125,6 +125,7 @@
                             <b-form-input v-can:dku
                                     @change="setDkuAtz(item)"
                                     v-model="item.dku_atz"
+
                             ></b-form-input>
                             <span v-can:dku_user>{{item.dku_atz}}</span>
                         </b-th>
@@ -158,10 +159,12 @@ import {
     BPagination,
     VBToggle
 } from "bootstrap-vue";
+import {mask} from 'vue-the-mask'
 export default {
     props: ['state'],
     directives: {
-        "b-toggle": VBToggle
+        "b-toggle": VBToggle,
+        mask
     },
     components: {
         BAlert,
@@ -280,6 +283,7 @@ export default {
             }).catch(() => {
                 this.setBanner("danger", "Что-то пошло не так! Обратитесь в служюу поддержки.")
             })
+
         },
         setDkuStatus(item) {
             let form = new FormData();
