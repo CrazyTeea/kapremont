@@ -125,7 +125,7 @@
                             <b-form-input v-can:dku
                                     @change="setDkuAtz(item)"
                                     v-model="item.dku_atz"
-                                          v-mask="'# ### ###.##'"
+
                             ></b-form-input>
                             <span v-can:dku_user>{{item.dku_atz}}</span>
                         </b-th>
@@ -272,7 +272,7 @@ export default {
         },
         setDkuAtz(item) {
             let form = new FormData();
-            form.append('dku_atz', item.dku_atz.replace(/\s/g, ''))
+            form.append('dku_atz', item.dku_atz)
             Axios.post(`/api/set-status/dku/${item.id}`, form, {
                 headers: {
                     "X-CSRF-Token": this.csrf
@@ -283,6 +283,7 @@ export default {
             }).catch(() => {
                 this.setBanner("danger", "Что-то пошло не так! Обратитесь в служюу поддержки.")
             })
+
         },
         setDkuStatus(item) {
             let form = new FormData();
