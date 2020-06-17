@@ -17,7 +17,7 @@ use yii\db\ActiveRecord;
  * @property int $file_exist
  * @property int $p_status
  * @property int $status907
- * @property int $dku_atz
+ * @property float $dku_atz
  */
 class Program extends ActiveRecord
 {
@@ -44,7 +44,7 @@ class Program extends ActiveRecord
     public function rules()
     {
         return [
-            [['finance_volume', 'finance_events', 'cost','p_status'], 'number'],
+            [['finance_volume', 'finance_events', 'cost','p_status','dku_atz'], 'number'],
             [['system_status', 'id_org'], 'integer'],
         ];
     }

@@ -69,7 +69,7 @@
                         <b-th>Выгрузка отправлена</b-th>
                         <b-th v-can:dku,dku_user>Статус программы (ДКУ)</b-th>
                         <b-th v-can:dep,dku,dku_user >Статус программы (ДЭП)</b-th>
-                        <b-th v-can:dku,dku_user>Согласованный объем бюджетного финансирования АТЗ</b-th>
+                        <b-th v-can:dku,dku_user>Сумма к выделению для финансирования мероприятий по АТЗ Р.</b-th>
                     </b-tr>
                 </b-thead>
                 <b-tbody>
@@ -125,6 +125,7 @@
                             <b-form-input v-can:dku
                                     @change="setDkuAtz(item)"
                                     v-model="item.dku_atz"
+                                          v-mask="'# ### ###.##'"
                             ></b-form-input>
                             <span v-can:dku_user>{{item.dku_atz}}</span>
                         </b-th>
@@ -158,10 +159,12 @@ import {
     BPagination,
     VBToggle
 } from "bootstrap-vue";
+import {mask} from 'vue-the-mask'
 export default {
     props: ['state'],
     directives: {
-        "b-toggle": VBToggle
+        "b-toggle": VBToggle,
+        mask
     },
     components: {
         BAlert,
@@ -269,7 +272,7 @@ export default {
         },
         setDkuAtz(item) {
             let form = new FormData();
-            form.append('dku_atz', item.dku_atz)
+            form.append('dku_atz', item.dku_atz.replace(/\s/g, ''))
             Axios.post(`/api/set-status/dku/${item.id}`, form, {
                 headers: {
                     "X-CSRF-Token": this.csrf

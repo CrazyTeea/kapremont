@@ -13,6 +13,7 @@ Vue.use(IconsPlugin);
 
 //import "./styles";
 
+
 Vue.directive("can", {
     bind(el, binding,node) {
         const roles = binding.arg.split(",");
