@@ -125,7 +125,6 @@
                             <b-form-input v-can:dku
                                     @change="setDkuAtz(item)"
                                     v-model="item.dku_atz"
-
                             ></b-form-input>
                             <span v-can:dku_user>{{item.dku_atz}}</span>
                         </b-th>
@@ -159,12 +158,10 @@ import {
     BPagination,
     VBToggle
 } from "bootstrap-vue";
-import {mask} from 'vue-the-mask'
 export default {
     props: ['state'],
     directives: {
         "b-toggle": VBToggle,
-        mask
     },
     components: {
         BAlert,
@@ -267,12 +264,16 @@ export default {
                 }
             }).then(res => {
                 this.items = res.data.rows;
+                this.items.forEach(item=>{
+                    item.dku_atz = item.dku_atz ? Number(item.dku_atz).toLocaleString() : null;
+                })
                 this.totalRows = res.data.count.quantity;
             });
         },
         setDkuAtz(item) {
             let form = new FormData();
-            form.append('dku_atz', item.dku_atz)
+            item.dku_atz = Number(item.dku_atz).toLocaleString();
+            form.append('dku_atz', item.dku_atz.replace(/\s/g,'').replace(',','.'))
             Axios.post(`/api/set-status/dku/${item.id}`, form, {
                 headers: {
                     "X-CSRF-Token": this.csrf
