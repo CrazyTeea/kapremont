@@ -82,19 +82,15 @@ class ProgramController extends AppController
 
 
         foreach ($objects as $object){
-            if ($object->svedenia)
-                foreach ($object->svedenia as $item) {
-                    $sum+=$item->cost_real;
-                }
             $export[] = [
                 'id_org'=>$object->id_org,
                 'region'=>$object->region->region,
                 'org'=>$object->org->name,
-                'sum'=>$sum,
+                'sum'=>$object->program->finance_volume*1000,
                 'dep_status' => $dep_status[$object->org->dep_status],
                 'atz_nb'=>$object->program->finance_events,
                 'atz'=>0,
-                'atz_bud_fin'=>$object->program->dku_atz,
+                'atz_bud_fin'=>$object->program->dku_atz*1000,
                 'dku_status'=> $dku_status[$object->org->dku_status]
             ];
         }
