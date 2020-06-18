@@ -23,6 +23,9 @@ class Program extends ActiveRecord
 {
     public const ACTIVE = 1;
 
+    public $organization;
+
+
     public function getObjects()
     {
         return $this->hasMany(ProgramObjects::class,['id_program'=>'id'])->andOnCondition([ProgramObjects::tableName().'.system_status'=>1]);
