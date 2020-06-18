@@ -88,9 +88,9 @@ class ProgramController extends AppController
                 'org'=>$object->org->name,
                 'sum'=>$object->program->finance_volume*1000,
                 'dep_status' => $dep_status[$object->org->dep_status],
-                'atz_nb'=>$object->program->finance_events,
+                'atz_nb'=>$object->program->finance_events*1000,
                 'atz'=>0,
-                'atz_bud_fin'=>$object->program->dku_atz*1000,
+                'atz_bud_fin'=>$object->program->dku_atz,
                 'dku_status'=> $dku_status[$object->org->dku_status]
             ];
         }
