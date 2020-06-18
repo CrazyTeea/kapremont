@@ -65,8 +65,8 @@
                 </div>
             </div>
             <div class="row">
-                <div class="col-4">
-                    <b-dropdown v-can:mgsu,root right text="статус эксперта МОН"  variant="info" class="m-2" >
+                <div class="col-3">
+                    <b-dropdown v-can:mgsu,root right text="статус эксперта МОН" size="xs"  variant="info" class="m-2" >
                         <b-dropdown-item @click="setStatus(2)" variant="success">Рекомендуется к согласованию</b-dropdown-item>
                         <b-dropdown-item @click="setStatus(3)" variant="danger">Не рекомендуется к согласованию</b-dropdown-item>
                         <b-dropdown-item @click="setStatus(4)" variant="warning">На доработку</b-dropdown-item>
@@ -111,7 +111,7 @@
                 </div>-->
             </div>
             <div class="row">
-                <div class="col-6">
+                <div class="col-2">
                     <b-dropdown v-can:mgsu,root right text="статус эксперта МОН"  variant="info" class="m-2" >
                         <b-dropdown-item @click="setStatus(2)" variant="success">Рекомендуется к согласованию</b-dropdown-item>
                         <b-dropdown-item @click="setStatus(3)" variant="danger">Не рекомендуется к согласованию</b-dropdown-item>
@@ -119,7 +119,7 @@
                         <b-dropdown-item v-if="items.type" @click="setStatus(5)" variant="info">В реализации</b-dropdown-item>
                     </b-dropdown>
                 </div>
-                <div class="col-6">
+                <div class="col-4">
                     <b-dropdown v-can:dep,root right text="статус ДЭП" variant="info" class="m-2">
                         <b-dropdown-item :href="`/api/set-status/approved/dep/${obj_id}`" @click="actionHendler" variant="success">Рассмотрено ДЭП</b-dropdown-item>
                         <b-dropdown-item :href="`/api/set-status/rejected/dep/${obj_id}`" @click="actionHendler" variant="warning">Резерв</b-dropdown-item>
