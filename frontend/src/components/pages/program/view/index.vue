@@ -54,6 +54,9 @@
 
             <div class="col-4 offset-2">
                 <v-user-panel />
+
+               <h5 style="margin-top: 5px">Текущий статус ДКУ: <label :class="`text-${dku_status.color}`">{{ dku_status.label }}</label></h5>
+
             </div>
         </div>
         <br />
@@ -245,6 +248,10 @@ export default {
             resTable: {
                 curPage: 1,
                 perPage: 5
+            },
+            dku_status:{
+                color:'secondary',
+                label:'',
             }
         };
     },
@@ -400,6 +407,19 @@ export default {
         this.requestPageData({ pageName: "programView" });
         await this.getApprove();
         await this.requestUser();
+
+        let dku = this.getUser.organization.dku_status;
+        if(dku == 'not') {
+            this.dku_status.label = 'В обработке';
+            this.dku_status.color = 'secondary'
+        } else if(dku == 'approved') {
+            this.dku_status.label = 'Рассмотрено ДКУ';
+            this.dku_status.color = 'success'
+        } else if(dku == 'rejected') {
+            this.dku_status.label = 'Резерв';
+            this.dku_status.color = 'warning'
+        }
+
         this.id_org = this.getUser.organization.id;
         this.getFileStatus();
         //  this.$bvModal.show('modal-1')

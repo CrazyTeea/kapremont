@@ -12,6 +12,7 @@ use app\models\User;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Reader\Html;
 use Yii;
+use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
 use yii\helpers\Json;
 
@@ -36,7 +37,9 @@ class ProgramController extends AppController
 
 
 
-        $gg = Program::findOne(['id_org'=>$id]);
+        $gg = Program::find()->where(['id_org'=>$id])->one();
+
+       // $gg = ArrayHelper::merge($gg,['organization'=>$gg->org->name]);
 
 
         return Json::encode($gg);
