@@ -124,7 +124,7 @@ class Organizations extends \yii\db\ActiveRecord
                     JOIN regions AS reg ON org.id_region = reg.id
                     JOIN program_objects po ON org.id = po.id_org
                     WHERE
-                        org.system_status = 1 $faiv $state
+                        org.system_status = 1 and po.system_status = 1 $faiv $state
                     GROUP BY po.id_org
                     ) AS res
                         JOIN
