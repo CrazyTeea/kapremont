@@ -46,6 +46,14 @@ class SystemController extends RestController
                     ];
                     $id_org = Yii::$app->session->get('user')->id_org;
                     $program = Program::findOne(['id_org'=>$id_org]);
+
+                    $org = Organizations::findOne($id_org);
+                    if (!$program and $org and $org->id_founder > 1){
+                        $program = new Program();
+                        $program->id_org = $org->id;
+                        $program->save(false);
+                    }
+
                     Yii::$app->getSession()->set('program',$program);
                     if (!$program)
                         return null;
