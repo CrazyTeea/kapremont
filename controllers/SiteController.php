@@ -4,10 +4,13 @@ namespace app\controllers;
 
 use app\models\ChangePasswordForm;
 use app\models\forms\UserRecover;
+use app\models\Organizations;
+use app\models\User;
 use Lcobucci\JWT\Parser;
 use Lcobucci\JWT\Signer\Hmac\Sha256;
 use Yii;
 use yii\filters\AccessControl;
+use yii\rbac\PhpManager;
 use yii\web\Controller;
 use yii\web\Response;
 use yii\filters\VerbFilter;
@@ -154,6 +157,18 @@ class SiteController extends Controller
         return $this->render('login', [
             'model' => $model,
         ]);
+    }
+
+    public function actionP(){
+        $orgs = Organizations::findAll(['>','id_founder',1]);
+        foreach ($orgs as $org){
+            $users = User::findAll(['id_org'=>$org->id]);
+            foreach ($users as $user){
+                $php = new PhpManager();
+                $php->revokeAll($user->id);
+                $php->assign($php->getRole('faiv_user'),$user->id);
+            }
+        }
     }
 
     /**
