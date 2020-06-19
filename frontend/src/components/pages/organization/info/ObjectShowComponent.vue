@@ -1651,7 +1651,7 @@
 
                                     i = this.svedenia2.map(e => {
                                         return e.step
-                                    }).reverse().indexOf(parseFloat(item.model.step) - s);
+                                    }).indexOf(parseFloat(item.model.step) - s);
                                     console.log(i,s);
                                     s = Math.round((s+0.01+Number.EPSILON)*1000)/1000
 
