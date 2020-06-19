@@ -845,6 +845,7 @@
                         parent:false
                     },
                     {
+                        step:0.99999999,
                         canDelete:false,
                         button:true,
                         button_name:'Добавить'
@@ -870,6 +871,7 @@
                         parent:true
                     },
                     {
+                        step:1.9999999,
                         canDelete:false,
                         button:true,
                         button_name:'Добавить'
@@ -895,6 +897,7 @@
                         parent:true
                     },
                     {
+                        step:2.9999999,
                         canDelete:false,
                         button:true,
                         button_name:'Добавить'
@@ -998,6 +1001,7 @@
                         parent:false
                     },
                     {
+                        step:3.999999,
                         canDelete:false,
                         button:true,
                         button_name:'Добавить'
@@ -1023,6 +1027,7 @@
                         parent:true
                     },
                     {
+                        step:4.99999999999,
                         canDelete:false,
                         button:true,
                         button_name:'Добавить'
@@ -1048,6 +1053,7 @@
                         parent:true
                     },
                     {
+                        step:5.999999999,
                         canDelete:false,
                         button:true,
                         button_name:'Добавить'
@@ -1151,6 +1157,7 @@
                         parent:false
                     },
                     {
+                        step:6.999999,
                         canDelete:false,
                         button:true,
                         button_name:'Добавить'
@@ -1176,6 +1183,7 @@
                         parent:true
                     },
                     {
+                        step:7.999999,
                         canDelete:false,
                         button:true,
                         button_name:'Добавить'
@@ -1644,7 +1652,7 @@
                                 }
                             }
                             else {
-                                console.log(parseFloat(item.model.step));
+                              //  console.log(parseFloat(item.model.step));
                                 let i = -1;
                                 let s = 0.01;
                                 while (i === -1) {
@@ -1652,7 +1660,7 @@
                                     i = this.svedenia2.map(e => {
                                         return e.step
                                     }).indexOf(parseFloat(item.model.step) - s);
-                                    console.log(i,s);
+                                   // console.log(i,s);
                                     s = Math.round((s+0.01+Number.EPSILON)*1000)/1000
 
                                 }
@@ -1682,6 +1690,8 @@
                     });
 
                     this.svedenia2.sort((a,b)=>{return a.step-b.step});
+
+                //    console.log(this.svedenia2)
 
                     this.svedenia.items.push({
                         step:'Готово',
