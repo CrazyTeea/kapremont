@@ -1459,7 +1459,7 @@
             },
             addRow(index,byStep = null){
                 this.svedenia2.splice(index,0,{
-                    step: byStep || Math.round((this.svedenia2[index-1].step+0.1+Number.EPSILON)*100)/100 ,
+                    step: byStep || Math.round((this.svedenia2[index-1].step+0.01+Number.EPSILON)*1000)/1000 ,
                     id_event:null,
                     step_name:'',
                     date_event_start: null,
@@ -1476,8 +1476,8 @@
                     parent:false,
                     canDelete:true,
                 });
-                this.sved2Doc.push((byStep || Math.round((this.svedenia2[index-1].step+0.1+Number.EPSILON)*100)/100)+1)
-                this.sved2Href.push((byStep || Math.round((this.svedenia2[index-1].step+0.1+Number.EPSILON)*100)/100)+1)
+                this.sved2Doc.push(byStep || Math.round((this.svedenia2[index-1].step+0.01+Number.EPSILON)*1000)/1000+1)
+                this.sved2Href.push(byStep || Math.round((this.svedenia2[index-1].step+0.01+Number.EPSILON)*1000)/1000+1)
             },
             deleteRow(index){
                 if (this.svedenia2[index-1].canDelete)
@@ -1644,8 +1644,19 @@
                                 }
                             }
                             else {
-                                let i = this.svedenia2.map(e=>{return e.step}).indexOf(parseFloat(item.model.step)-0.1);
-                                this.addRow(i+1,parseFloat(item.model.step));
+                                console.log(parseFloat(item.model.step));
+                                let i = -1;
+                                let s = 0.01;
+                                while (i === -1) {
+
+                                    i = this.svedenia2.map(e => {
+                                        return e.step
+                                    }).reverse().indexOf(parseFloat(item.model.step) - s);
+                                    console.log(i,s);
+                                    s = Math.round((s+0.01+Number.EPSILON)*1000)/1000
+
+                                }
+                                this.addRow(i,parseFloat(item.model.step));
                                 let l = this.svedenia2.find(e=>e.step == item.model.step);
 
                                 l.id = item.model.id;
