@@ -1681,7 +1681,7 @@
                         });
                     });
 
-                    this.svedenia2.filter((a,b)=>{return a-b});
+                    this.svedenia2.sort((a,b)=>{return a-b});
 
                     this.svedenia.items.push({
                         step:'Готово',
