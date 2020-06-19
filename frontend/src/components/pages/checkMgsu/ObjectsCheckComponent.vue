@@ -30,6 +30,7 @@
             <b-table-simple bordered hover>
                 <b-thead>
                     <b-tr>
+                        <b-th v-if="filters.id_org">№</b-th>
                         <b-th>ID Организации</b-th>
                         <b-th>Название организации</b-th>
                         <b-th>ID Объекта</b-th>
@@ -40,6 +41,7 @@
                 </b-thead>
                 <b-tbody>
                     <b-tr v-for="(item, index) in items" :key="index" @click="goTo(item.po_id)" class="cursor-pointer">
+                        <b-th v-if="filters.id_org">{{index+perPage*(currentPage-1)+1}}</b-th>
                         <b-th class="normal-font-weight-for-sell center-text-in-cell">
                             <label class="cursor-pointer">{{ item.o_id }}</label>
                         </b-th>

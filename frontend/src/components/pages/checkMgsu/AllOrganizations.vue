@@ -61,6 +61,7 @@
             <b-table-simple bordered hover>
                 <b-thead>
                     <b-tr>
+                        <b-th v-if="filters.id">№</b-th>
                         <b-th>ID</b-th>
                         <b-th>Субъект</b-th>
                         <b-th>Образовательная организация высшего образования</b-th>
@@ -74,6 +75,7 @@
                 </b-thead>
                 <b-tbody>
                     <b-tr v-for="(item, index) in items" :key="index">
+                        <b-th v-if="filters.id">{{index+perPage*(currentPage-1)+1}}</b-th>
                         <b-th class="normal-font-weight-for-sell center-text-in-cell">
                             <label>{{ item.id }}</label>
                         </b-th>
