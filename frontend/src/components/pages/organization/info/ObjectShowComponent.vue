@@ -1681,6 +1681,8 @@
                         });
                     });
 
+                    this.svedenia2.filter((a,b)=>{return a-b});
+
                     this.svedenia.items.push({
                         step:'Готово',
                         cost_real:c.toFixed(3),
