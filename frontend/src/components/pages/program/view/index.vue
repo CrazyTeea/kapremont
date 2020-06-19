@@ -13,8 +13,8 @@
 
         <div class="row">
             <div class="col-12">
-                <b-alert v-show="!user_status" show variant="warning" >
-                    Уважаемые пользователи! Просим Вас <a :href="`/organization/user-info/${id_org}`">заполнить форму</a>, предоставив контактные данные сотрудников организации.
+                <b-alert v-show="!user_status" show variant="danger" >
+                    Уважаемые пользователи! Просим Вас <a class="btn btn-link" :href="`/organization/user-info/${id_org}`">заполнить форму</a>, предоставив контактные данные сотрудников организации.
                 </b-alert>
             </div>
             <div class="col-12">
