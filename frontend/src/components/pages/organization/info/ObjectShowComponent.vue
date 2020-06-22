@@ -472,30 +472,30 @@
                 </b-card-header>
                 <b-collapse id="accordion-plan2" accordion="my-accordion2" role="tabpanel">
                     <b-card-body>
-                        <b-table-simple class="mt-3" small sticky-header bordered style="min-height: 1000px">
+                        <b-table-simple class="mt-3" small sticky-header bordered style=" font-size: 10px min-height: 1000px">
                             <b-thead>
                                 <b-tr>
                                     <b-th></b-th>
                                     <b-th>Этап</b-th>
-                                    <b-th>Дата начала</b-th>
-                                    <b-th>Дата окончания</b-th>
-                                    <b-th>Общая Фактическая
+                                    <b-th style="min-width: 25px">Дата начала</b-th>
+                                    <b-th style="min-width: 25px">Дата окончания</b-th>
+                                    <b-th style="min-width: 25px">Общая Фактическая
                                         Стоимость реализации
                                         (тыс.руб.)
-                                    </b-th>
-                                    <b-th>Фактическая Сумма бюджетного финансирования
+                                    </b-th >
+                                    <b-th style="min-width: 25px">Фактическая Сумма бюджетного финансирования
                                         (тыс. руб.)
                                     </b-th>
-                                    <b-th>Софинанси-рование  (тыс. руб.)</b-th>
-                                 <!--   <b-th>Отметка о завершении этапа </b-th>-->
+                                    <b-th style="min-width: 25px">Софинанси-рование  (тыс. руб.)</b-th>
+                                    <b-th>Отметка о завершении этапа </b-th>
 
                                     <b-th>Подтверждающие документы</b-th>
 
-                                    <!--<b-th>Комментарий (текстовое поле Заполняет ВУЗ)</b-th>-->
+                                    <b-th>Комментарий (текстовое поле Заполняет ВУЗ)</b-th>
                                     <b-th>ЭкспертМОН
                                         Принято / не принято
                                     </b-th>
-                                   <!-- <b-th>Комментарий эксперта МОН )</b-th>-->
+                                   <b-th>Комментарий эксперта МОН )</b-th>
                                 </b-tr>
                             </b-thead>
                             <b-tbody>
@@ -527,10 +527,10 @@
                                         <b-form-input v-can:user,root type="number" step=".01"  v-model="svedenia2[index].fin_vnebud_ist" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.fin_vnebud_ist}}</span>
                                     </b-td>
-                                    <!--<b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
                                         <b-form-checkbox v-can:user,root v-model="svedenia2[index].done" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.done ? 'Да' : 'Нет'}}</span>
-                                    </b-td>-->
+                                    </b-td>
 
 
                                     <!-- Подтверждающие документы -->
@@ -582,22 +582,22 @@
                                     </b-td>
 
 
-                                  <!--  <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
                                         <b-form-input v-can:user,root v-model="svedenia2[index].comment" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.comment}}</span>
-                                    </b-td>-->
+                                    </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
                                         <b-form-checkbox v-can:root,mgsu,dep v-model="svedenia2[index].doneExpert" />
                                         <span v-can:user>
                                             {{item.doneExpert ? 'Да' : 'Нет'}}
                                         </span>
                                     </b-td>
-                                    <!--<b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
                                         <b-form-input v-can:root,mgsu,dep v-model="svedenia2[index].commentExpert" />
                                         <span v-can:user>
                                             {{item.commentExpert}}
                                         </span>
-                                    </b-td>-->
+                                    </b-td>
                                     <div v-can:user,root v-else>
                                         <b-td>
                                             <b-button variant="danger" @click="deleteRow(index)">Удалить</b-button>
