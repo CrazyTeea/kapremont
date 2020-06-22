@@ -472,7 +472,7 @@
                 </b-card-header>
                 <b-collapse id="accordion-plan2" accordion="my-accordion2" role="tabpanel">
                     <b-card-body>
-                        <b-table-simple class="mt-3" small sticky-header bordered style=" font-size: 10px min-height: 1000px">
+                        <b-table-simple class="mt-3" small sticky-header bordered style=" font-size: 10px; min-height: 1000px">
                             <b-thead>
                                 <b-tr>
                                     <b-th></b-th>
