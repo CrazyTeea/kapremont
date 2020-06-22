@@ -477,9 +477,9 @@
                                 <b-tr>
                                     <b-th></b-th>
                                     <b-th>Этап</b-th>
-                                    <b-th style="min-width: 35px">Дата начала</b-th>
-                                    <b-th style="min-width: 35px">Дата окончания</b-th>
-                                    <b-th style="min-width: 35px">Общая Фактическая
+                                    <b-th style="min-width: 65px">Дата начала</b-th>
+                                    <b-th style="min-width: 65px">Дата окончания</b-th>
+                                    <b-th style="min-width: 65px">Общая Фактическая
                                         Стоимость реализации
                                         (тыс.руб.)
                                     </b-th >
