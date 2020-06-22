@@ -463,6 +463,158 @@
                     </b-card-body>
                 </b-collapse>
             </b-card>
+            <b-card v-if="permission !='user'" no-body class="mb-1">
+                <b-card-header header-tag="header" class="p-1" role="tab">
+                            <span class="toggle_button" v-b-toggle.accordion-plan2>
+                                <b-icon-gear-wide-connected />
+                                План-график мероприятий (ТЕСТ)</span
+                            >
+                </b-card-header>
+                <b-collapse id="accordion-plan2" accordion="my-accordion2" role="tabpanel">
+                    <b-card-body>
+                        <b-table-simple class="mt-3" small sticky-header bordered style="min-height: 1000px">
+                            <b-thead>
+                                <b-tr>
+                                    <b-th></b-th>
+                                    <b-th>Этап</b-th>
+                                    <b-th>Дата начала</b-th>
+                                    <b-th>Дата окончания</b-th>
+                                    <b-th>Общая Фактическая
+                                        Стоимость реализации
+                                        (тыс.руб.)
+                                    </b-th>
+                                    <b-th>Фактическая Сумма бюджетного финансирования
+                                        (тыс. руб.)
+                                    </b-th>
+                                    <b-th>Софинанси-рование  (тыс. руб.)</b-th>
+                                 <!--   <b-th>Отметка о завершении этапа </b-th>-->
+
+                                    <b-th>Подтверждающие документы</b-th>
+
+                                    <!--<b-th>Комментарий (текстовое поле Заполняет ВУЗ)</b-th>-->
+                                    <b-th>ЭкспертМОН
+                                        Принято / не принято
+                                    </b-th>
+                                   <!-- <b-th>Комментарий эксперта МОН )</b-th>-->
+                                </b-tr>
+                            </b-thead>
+                            <b-tbody>
+                                <b-tr  v-for="(item,index) in svedenia2" :key="index" @change="sendData(item)">
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        {{item.step + 1}}
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <b-form-input v-can:user,root v-if="item.canDelete" v-model="svedenia2[index].step_name" />
+                                        <span v-else>{{item.step_name}}</span>
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <b-form-input v-can:user,root type="date" v-model="svedenia2[index].date_event_start" />
+                                        <span v-can:mgsu,dep,dku,dku_user>{{item.date_event_start}}</span>
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <b-form-input v-can:user,root type="date" v-model="svedenia2[index].date_event_end" />
+                                        <span v-can:mgsu,dep,dku,dku_user>{{item.date_event_end}}</span>
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <b-form-input v-can:user,root type="number" step=".01"  v-model="svedenia2[index].cost_real" />
+                                        <span v-can:mgsu,dep,dku,dku_user>{{item.cost_real}}</span>
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <b-form-input v-can:user,root type="number" step=".01"  v-model="svedenia2[index].sum_bud_fin" />
+                                        <span v-can:mgsu,dep,dku,dku_user>{{item.sum_bud_fin}}</span>
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <b-form-input v-can:user,root type="number" step=".01"  v-model="svedenia2[index].fin_vnebud_ist" />
+                                        <span v-can:mgsu,dep,dku,dku_user>{{item.fin_vnebud_ist}}</span>
+                                    </b-td>
+                                    <!--<b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <b-form-checkbox v-can:user,root v-model="svedenia2[index].done" />
+                                        <span v-can:mgsu,dep,dku,dku_user>{{item.done ? 'Да' : 'Нет'}}</span>
+                                    </b-td>-->
+
+
+                                    <!-- Подтверждающие документы -->
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <!-- <label @click="debugItem(item, svedenia2[index], index)"> Debug item {{index}} </label> -->
+                                        {{item.help}}
+                                        <b-form-input
+                                                v-can:user,root
+                                                placeholder="Ссылка на zakupki.gov.ru"
+                                                v-if=" sved2Href.includes(item.step + 1)"
+                                                v-model="svedenia2[index].access_document"
+                                        />
+
+                                        <div v-can:user,root v-if="sved2Doc.includes(item.step + 1)" class="fileInput">
+                                            <div
+                                                    class="cell-center-for-items"
+
+                                            >
+                                                <input
+                                                        type="file"
+                                                        :id="'file_input_' + index"
+                                                        class="hidden-file-input"
+                                                        @change="fileInput(index)"
+                                                />
+                                                <div
+                                                        class="arrow">
+                                                    <label
+                                                            :for="`file_input_${index}`"
+                                                            class="label"
+                                                    >
+                                                            <span class="title">
+                                                                <span class="scope-to-animate"></span>
+                                                                <span class="scope-to-animate"></span>
+                                                                <span class="scope-to-animate"></span>
+                                                                <span class="scope-to-animate"></span>
+                                                            </span>
+                                                    </label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div v-if="svedenia2[index].file">
+                                            <a :href="`/program/event/download/${item.id}`">{{svedenia2[index].file.name}}</a>
+                                        </div>
+                                        <a v-if="svedenia2[index].access_document && svedenia2[index].access_document != 'null'"
+                                           :href=svedenia2[index].access_document v-can:mgsu,dep,dku,dku_user>{{svedenia2[index].access_document}}</a>
+
+
+                                    </b-td>
+
+
+                                  <!--  <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <b-form-input v-can:user,root v-model="svedenia2[index].comment" />
+                                        <span v-can:mgsu,dep,dku,dku_user>{{item.comment}}</span>
+                                    </b-td>-->
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <b-form-checkbox v-can:root,mgsu,dep v-model="svedenia2[index].doneExpert" />
+                                        <span v-can:user>
+                                            {{item.doneExpert ? 'Да' : 'Нет'}}
+                                        </span>
+                                    </b-td>
+                                    <!--<b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <b-form-input v-can:root,mgsu,dep v-model="svedenia2[index].commentExpert" />
+                                        <span v-can:user>
+                                            {{item.commentExpert}}
+                                        </span>
+                                    </b-td>-->
+                                    <div v-can:user,root v-else>
+                                        <b-td>
+                                            <b-button variant="danger" @click="deleteRow(index)">Удалить</b-button>
+                                        </b-td>
+                                        <b-td >
+                                            <b-button variant="info" @click="addRow(index)">Добавить</b-button>
+                                        </b-td>
+                                    </div>
+
+                                </b-tr>
+
+                            </b-tbody>
+
+                        </b-table-simple>
+                    </b-card-body>
+                </b-collapse>
+            </b-card>
             <b-card no-body class="mb-1">
                 <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-archive>
