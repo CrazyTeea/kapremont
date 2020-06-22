@@ -477,19 +477,19 @@
                                 <b-tr>
                                     <b-th></b-th>
                                     <b-th>Этап</b-th>
-                                    <b-th style="min-width: 25px">Дата начала</b-th>
-                                    <b-th style="min-width: 25px">Дата окончания</b-th>
-                                    <b-th style="min-width: 25px">Общая Фактическая
+                                    <b-th style="min-width: 35px">Дата начала</b-th>
+                                    <b-th style="min-width: 35px">Дата окончания</b-th>
+                                    <b-th style="min-width: 35px">Общая Фактическая
                                         Стоимость реализации
                                         (тыс.руб.)
                                     </b-th >
-                                    <b-th style="min-width: 25px">Фактическая Сумма бюджетного финансирования
+                                    <b-th style="max-width: 50px">Фактическая Сумма бюджетного финансирования
                                         (тыс. руб.)
                                     </b-th>
-                                    <b-th style="min-width: 25px">Софинанси-рование  (тыс. руб.)</b-th>
-                                    <b-th>Отметка о завершении этапа </b-th>
+                                    <b-th style="max-width: 50px">Софинанси-рование  (тыс. руб.)</b-th>
+                                    <b-th style="max-width: 50px">Отметка о завершении этапа </b-th>
 
-                                    <b-th>Подтверждающие документы</b-th>
+                                    <b-th style="max-width: 50px">Подтверждающие документы</b-th>
 
                                     <b-th>Комментарий (текстовое поле Заполняет ВУЗ)</b-th>
                                     <b-th>ЭкспертМОН
