@@ -26,7 +26,7 @@ class MgsuAdminController extends Controller
         $isOther = json_decode(Yii::$app->request->post('form'))->state;
 
         if(Yii::$app->user->can('faiv_admin')) {
-            $id_founder = FaivUsers::find()->where(['id_user' => Yii::$app->user->id])->one()->id_founder;
+            $id_founder = Organizations::findOne(User::findOne(Yii::$app->user->id)->id_org)->id_founder;
             $params = $this->getParams(json_decode(Yii::$app->request->post('form')));
             $order = $this->getOrder(json_decode(Yii::$app->request->post('form')));
             $select = Organizations::getMainCheckTable($offset, $params, $order, $isOther, " and id_founder = $id_founder");

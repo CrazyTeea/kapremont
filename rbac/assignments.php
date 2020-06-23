@@ -9411,6 +9411,6 @@ return [
         'faiv_user',
     ],
     2561 => [
-        'dep',
+        'faiv_admin',
     ],
 ];

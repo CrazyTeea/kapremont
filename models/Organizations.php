@@ -88,24 +88,7 @@ class Organizations extends \yii\db\ActiveRecord
     }
 
     private static function CalculateState($orgs){
-        $state = null;
-        if($orgs === 'other') {
-            $rolesId =  User::getUsersByRole('faiv_user') ;
-            $users = User::find()->where(['id'=> $rolesId])->all();
-            $orgIds = [];
-            foreach($users as $user) {
-                $orgIds[] = $user->id_org ?? 1;
-            }
-            $array = implode(',', $orgIds);
-            if($array) {
-                $state = "and org.id in ($array)";
-            } else {
-                $state = null;
-            }
-        } else {
-            $state = null;
-        }
-        return $state;
+        return ($orgs==='other' and !Yii::$app->user->can('faiv_admin')) ? 'and org.id_founder > 1' : null;
     }
 
     public static function getMainCheckTable($offset, $whereClouse, $order, $orgs, $faiv = null)
