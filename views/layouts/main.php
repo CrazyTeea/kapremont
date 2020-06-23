@@ -5,7 +5,6 @@
 
 use app\widgets\Alert;
 use mdm\admin\components\MenuHelper;
-use xtetis\bootstrap4glyphicons\assets\GlyphiconAsset;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
 use yii\bootstrap4\NavBar;
@@ -16,7 +15,6 @@ use yii\helpers\Json;
 
 AppAsset::register($this);
 
-GlyphiconAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
