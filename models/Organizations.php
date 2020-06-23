@@ -96,7 +96,7 @@ class Organizations extends \yii\db\ActiveRecord
             foreach($users as $user) {
                 $orgIds[] = $user->id_org;
             }
-            $array = implode(', ', array_unique($orgIds));
+            $array = implode(',', $orgIds);
             if($array) {
                 $state = "and org.id in ($array)";
             } else {
