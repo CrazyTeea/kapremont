@@ -90,11 +90,11 @@ class Organizations extends \yii\db\ActiveRecord
     private static function CalculateState($orgs){
         $state = null;
         if($orgs === 'other') {
-            $rolesId = array_merge(User::getUsersByRole('faiv_admin'), User::getUsersByRole('faiv_user')) ;
+            $rolesId =  User::getUsersByRole('faiv_user') ;
             $users = User::find()->where(['id'=> $rolesId])->all();
             $orgIds = [];
             foreach($users as $user) {
-                $orgIds[] = $user->id_org;
+                $orgIds[] = $user->id_org ?? 1;
             }
             $array = implode(',', $orgIds);
             if($array) {
