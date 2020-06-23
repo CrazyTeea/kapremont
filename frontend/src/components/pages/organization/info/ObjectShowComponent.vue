@@ -483,23 +483,22 @@
                                         Стоимость реализации
                                         (тыс.руб.)
                                     </b-th >
-                                    <b-th style="max-width: 50px">Фактическая Сумма бюджетного финансирования
+                                    <b-th>Фактическая <br> Сумма <br> бюджетного финансирования
                                         (тыс. руб.)
                                     </b-th>
                                     <b-th style="max-width: 50px">Софинанси-рование  (тыс. руб.)</b-th>
                                     <b-th style="max-width: 50px">Отметка о завершении этапа </b-th>
 
-                                    <b-th style="max-width: 50px">Подтверждающие документы</b-th>
+                                    <b-th>Подтверждающие <br> документы</b-th>
 
                                     <b-th>Комментарий (текстовое поле Заполняет ВУЗ)</b-th>
-                                    <b-th>ЭкспертМОН
-                                        Принято / не принято
+                                    <b-th>Эксперт<br>МОН +/-
                                     </b-th>
                                    <b-th>Комментарий эксперта МОН )</b-th>
                                 </b-tr>
                             </b-thead>
                             <b-tbody>
-                                <b-tr  v-for="(item,index) in svedenia2" :key="index" @change="sendData(item)">
+                                <b-tr  v-for="(item,index) in svedenia2" :key="index" @change="sendData(item)" :variant="!isFloat(item.step) ? 'success' : ''">
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
                                         {{item.step + 1}}
                                     </b-td>
@@ -515,7 +514,7 @@
                                         <b-form-input v-can:user,root type="date" v-model="svedenia2[index].date_event_end" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.date_event_end}}</span>
                                     </b-td>
-                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-td style="max-width: 10px" v-if="!(item.hasOwnProperty('button') && item.button)">
                                         <b-form-input v-can:user,root type="number" step=".01"  v-model="svedenia2[index].cost_real" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.cost_real}}</span>
                                     </b-td>
@@ -534,7 +533,7 @@
 
 
                                     <!-- Подтверждающие документы -->
-                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-td style="max-width: 50px" v-if="!(item.hasOwnProperty('button') && item.button)">
                                         <!-- <label @click="debugItem(item, svedenia2[index], index)"> Debug item {{index}} </label> -->
                                         {{item.help}}
                                         <b-form-input
@@ -582,7 +581,7 @@
                                     </b-td>
 
 
-                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-td style="max-width: 100px" v-if="!(item.hasOwnProperty('button') && item.button)">
                                         <b-form-input v-can:user,root v-model="svedenia2[index].comment" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.comment}}</span>
                                     </b-td>
@@ -593,7 +592,7 @@
                                         </span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input v-can:root,mgsu,dep v-model="svedenia2[index].commentExpert" />
+                                        <b-form-textarea aria-invalid="true" size="sm" type="area" v-can:root,mgsu,dep v-model="svedenia2[index].commentExpert" />
                                         <span v-can:user>
                                             {{item.commentExpert}}
                                         </span>
@@ -808,6 +807,7 @@
         BDropdown,
         BDropdownItem,
         BFormCheckbox,
+        BFormTextarea,
         BFormFile,
         BFormInput,
         BTable,
@@ -839,6 +839,7 @@
             BDropdownItem,
             BTable,
             BCard,
+            BFormTextarea,
             BButton,
             BCardHeader,
             BFormCheckbox,
