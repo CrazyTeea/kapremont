@@ -5,7 +5,7 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
     actions: {
-        requestUser(ctx) {
+        async requestUser(ctx) {
             return Axios.post("/rest/system/get-user")
                 .then(response => {
                     ctx.commit("updateUser", response.data);
@@ -14,7 +14,7 @@ export default new Vuex.Store({
                     console.error(error);
                 });
         },
-        requestCurrentOrg(ctx) {
+        async requestCurrentOrg(ctx) {
             Axios.post("/rest/organizations/current")
                 .then(response => {
                     ctx.commit("updateOrg", response.data);
@@ -23,7 +23,7 @@ export default new Vuex.Store({
                     console.error(error);
                 });
         },
-        requestOrg(ctx, { id }) {
+        async requestOrg(ctx, { id }) {
             Axios.post("/rest/organizations/by-id", {
                 id
             })
@@ -34,7 +34,7 @@ export default new Vuex.Store({
                     console.error(error);
                 });
         },
-        requestPageData(ctx, { pageName }) {
+        async requestPageData(ctx, { pageName }) {
             Axios.get("/rest/system/get-page", {
                 params: {
                     pageName
@@ -48,7 +48,7 @@ export default new Vuex.Store({
                     console.error(err);
                 });
         },
-        requestCity(ctx, { id }) {
+        async requestCity(ctx, { id }) {
             Axios.get("/rest/cities/by-id", {
                 params: {
                     id
