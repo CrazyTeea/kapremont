@@ -117,7 +117,8 @@
                                             :state="feedback('ProgramObjects', 'id_region')"
                                     >
                                         <b-form-input  style="display: none" id="id_region" v-model="formData.id_region" name="ProgramObjects[id_region]" />
-                                        <v-select2
+                                        <b-select @change="onChangeRegion" v-model="formData.id_region" :options="regions" />
+                                       <!-- <v-select2
 
                                                 v-model="formData.id_region"
                                                 :options="getRegions"
@@ -128,7 +129,7 @@
                                                     id: formData.id_region
                                                 })
                                             "
-                                        />
+                                        />-->
                                     </b-form-group>
                                     <b-form-group
                                             label="Город:"
@@ -138,7 +139,8 @@
                                             :state="feedback('ProgramObjects', 'id_city')"
                                     >
                                         <b-form-input  style="display: none" id="id_city" v-model="formData.id_city" name="ProgramObjects[id_city]" />
-                                        <v-select2
+                                        <b-select v-model="formData.id_city" :options="cities" />
+                                        <!--<v-select2
 
                                                 v-model="formData.id_city"
                                                 :options="
@@ -151,7 +153,7 @@
                                             "
                                                 :reduce="city => city.id"
                                                 label="city"
-                                        />
+                                        />-->
                                     </b-form-group>
                                     <b-form-group
                                             label="Кадастровый номер:"
@@ -467,7 +469,6 @@
 
 <script>
     import { userPanel } from "../../../organisms";
-    import Multiselect from "vue-select";
     import { mapActions, mapGetters } from "vuex";
     import Svedenia from "./Svedenia.vue";
     import Necessary from "./Necessary.vue";
@@ -508,7 +509,6 @@
             BButton,
             "v-svedenia": Svedenia,
             "v-user-panel": userPanel,
-            "v-select2": Multiselect,
             "v-necessary": Necessary,
             "v-waited": Waited,
             "v-riscs": Riscs,
@@ -540,6 +540,8 @@
                 permission:window.Permission,
                 bannerInfo: [],
                 csrf: document.getElementsByName("csrf-token")[0].content,
+                regions:[],
+                cities:[],
                 formData: {
                     id_org:window.MODEL.base?.id_org || null,
                     status:window.MODEL.base?.status || null,
@@ -574,6 +576,43 @@
         },
 
         methods: {
+            getRegions2(){
+                this.regions = [];
+                if (this.getRegions){
+                    this.getRegions.forEach(item=>{
+                        this.regions.push({
+                            value:item.id,
+                            text:item.region
+                        })
+                    })
+                }else if (this.getPageData){
+                    this.getPageData.regionOptions.forEach(item=>{
+                        this.regions.push({
+                            value:item.id,
+                            text:item.region
+                        })
+                    })
+                }
+            },
+            getCities2(){
+                this.cities = [];
+                if (this.getCities.length) {
+                    this.getCities.forEach(item => {
+                        this.cities.push({
+                            value: item.id,
+                            text: item.city
+                        })
+                    })
+                    console.log(this.getCities);
+                }else {
+                    this.getPageData.cityOptions.forEach(item=>{
+                        this.cities.push({
+                            value:item.id,
+                            text:item.city
+                        })
+                    })
+                }
+            },
             checkFOIV(){
                 //console.log(this.permission)
                 return !(this.permission === 'faiv_admin' || this.permission === 'faiv_user');
@@ -626,6 +665,9 @@
                         }
                     } else {
                         if (response.data?.id) {
+                            if (this.permission == 'faiv_user'){
+                                window.location.href = `/program/object/view/${response.data.id}`;
+                            }
                             this.$refs.files.sendFile({ id: response.data.id });
                         }
                         this.errors = response.data;
@@ -661,13 +703,32 @@
                 this.formData.n_isp_v_ust_dey = 0;
                 this.formData.square_ar = 0;
             },
-            onChangeRegion({ id }) {
+            onChangeRegion( id ) {
+                console.log(id)
                 this.requestCity({ id });
             }
         },
-        mounted() {
-            this.requestPageData({ pageName: "objectCreate" });
-            if (this.formData.id_region) this.requestCity({ id: this.formData.id_region });
+       watch:{
+            /*formData: {
+                 handler: async function () {
+                    console.log(this.formData.id_region)
+                    await this.requestCity({id: this.formData.id_region});
+                    this.getCities2();
+                },
+                deep: true
+            },*/
+          getPageData:function(){
+              this.getRegions2();
+              this.getCities2()
+          },
+           getCities:function () {
+                this.getCities2()
+           }
+
+        },
+        async mounted() {
+            await this.requestPageData({ pageName: "objectCreate" });
+            if (this.formData.id_region) await this.requestCity({ id: this.formData.id_region });
             this.permission = window.Permission;
         }
     };

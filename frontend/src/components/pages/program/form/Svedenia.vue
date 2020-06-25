@@ -17,7 +17,11 @@
                     v-model="sved.is_nessesary[row.index]"
                     :name="`${modelName}[${row.index}][is_nessesary]`"
                 />
-                <v-select
+                <b-form-select v-model="sved.is_nessesary[row.index]" :options="[
+                        { value: 1, text: 'Да' },
+                        { value: 0, text: 'Нет' }
+                    ]"/>
+                <!--<v-select
                     class="mt-5"
                     v-model="sved.is_nessesary[row.index]"
                     label="type"
@@ -26,7 +30,7 @@
                         { id: 0, type: 'Нет' }
                     ]"
                     :reduce="type => type.id"
-                />
+                />-->
             </template>
             <template v-slot:cell(begin_date)="row">
                 <b-form-input
@@ -125,8 +129,8 @@
 </template>
 
 <script>
-import Multiselect from "vue-select";
-import {BFormInput, BTable} from "bootstrap-vue";
+
+import {BFormInput, BTable,BFormSelect} from "bootstrap-vue";
 
 export default {
     name: "Svedenia",
@@ -144,8 +148,8 @@ export default {
     },
     components: {
         BFormInput,
+        BFormSelect,
         BTable,
-        "v-select": Multiselect
     },
     methods: {
         setFloat(val, index, attr) {
