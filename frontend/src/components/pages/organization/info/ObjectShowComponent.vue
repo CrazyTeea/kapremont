@@ -467,8 +467,8 @@
                 <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-plan2>
                                 <b-icon-gear-wide-connected />
-                                План-график мероприятий (ТЕСТ)</span
-                            >
+                                План-график мероприятий (ТЕСТ)
+                            </span>
                 </b-card-header>
                 <b-collapse id="accordion-plan2" accordion="my-accordion2" role="tabpanel">
                     <b-card-body>
@@ -503,31 +503,31 @@
                                         {{item.step + 1}}
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input v-can:user,root v-if="item.canDelete" v-model="svedenia2[index].step_name" />
+                                        <b-form-input v-can:user,faiv_user,root v-if="item.canDelete" v-model="svedenia2[index].step_name" />
                                         <span v-else>{{item.step_name}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input v-can:user,root type="date" v-model="svedenia2[index].date_event_start" />
+                                        <b-form-input v-can:user,faiv_user,root type="date" v-model="svedenia2[index].date_event_start" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.date_event_start}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input v-can:user,root type="date" v-model="svedenia2[index].date_event_end" />
+                                        <b-form-input v-can:user,faiv_user,root type="date" v-model="svedenia2[index].date_event_end" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.date_event_end}}</span>
                                     </b-td>
                                     <b-td style="max-width: 10px" v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input v-can:user,root type="number" step=".01"  v-model="svedenia2[index].cost_real" />
+                                        <b-form-input v-can:user,faiv_user,root type="number" step=".01"  v-model="svedenia2[index].cost_real" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.cost_real}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input v-can:user,root type="number" step=".01"  v-model="svedenia2[index].sum_bud_fin" />
+                                        <b-form-input v-can:user,faiv_user,root type="number" step=".01"  v-model="svedenia2[index].sum_bud_fin" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.sum_bud_fin}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input v-can:user,root type="number" step=".01"  v-model="svedenia2[index].fin_vnebud_ist" />
+                                        <b-form-input v-can:user,faiv_user,root type="number" step=".01"  v-model="svedenia2[index].fin_vnebud_ist" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.fin_vnebud_ist}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-checkbox v-can:user,root v-model="svedenia2[index].done" />
+                                        <b-form-checkbox v-can:user,faiv_user,root v-model="svedenia2[index].done" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.done ? 'Да' : 'Нет'}}</span>
                                     </b-td>
 
@@ -543,7 +543,7 @@
                                                 v-model="svedenia2[index].access_document"
                                         />
 
-                                        <div v-can:user,root v-if="sved2Doc.includes(item.step + 1)" class="fileInput">
+                                        <div v-can:user,faiv_user,root v-if="sved2Doc.includes(item.step + 1)" class="fileInput">
                                             <div
                                                     class="cell-center-for-items"
 
@@ -597,7 +597,7 @@
                                             {{item.commentExpert}}
                                         </span>
                                     </b-td>
-                                    <div v-can:user,root v-else>
+                                    <div v-can:user,faiv_user,root v-else>
                                         <b-td>
                                             <b-button variant="danger" @click="deleteRow(index)">Удалить</b-button>
                                         </b-td>
