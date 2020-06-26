@@ -189,6 +189,17 @@ class OrganizationController extends AppController
             new ProgramStatus($org_id);
         }
     }
+    public function actionSetCommentDku($org_id)
+    {
+        if(Yii::$app->getUser()->can('dku')) {
+            $post= Yii::$app->request->post();
+            if (isset($post['dku_comment'])) {
+                $org = Organizations::findOne($org_id);
+                $org->dku_comment = $post['dku_comment'];
+                $org->save(false);
+            }
+        }
+    }
 
     public function actionSetStatusDep($org_id)
     {
