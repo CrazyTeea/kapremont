@@ -16,6 +16,7 @@ use app\models\ProgramObjects;
  * @property string|null $inn
  * @property int|null $system_status
  * @property  OrgInfo $orgInfo
+ * @property string $dku_comment
  */
 class Organizations extends \yii\db\ActiveRecord
 {
@@ -47,7 +48,7 @@ class Organizations extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['full_name', 'name', 'short_name','inn'], 'string'],
+            [['full_name', 'name', 'short_name','inn','dku_comment'], 'string'],
             [['system_status'], 'integer'],
         ];
     }
@@ -98,10 +99,11 @@ class Organizations extends \yii\db\ActiveRecord
         $query = Yii::$app->db
             ->createCommand("
                 SELECT 
-                    res.id, res.name, res.region, res.quantity, res.dep_status, res.dku_status, pr.file_exist, pr.p_status,pr.dku_atz,pr.status907
+                    res.id, res.name,res.dku_comment, res.region,
+                     res.quantity, res.dep_status, res.dku_status, pr.file_exist, pr.p_status,pr.dku_atz,pr.status907
                 FROM
                     (SELECT 
-                        org.id, org.name, COUNT(po.id_org) AS quantity, reg.region, org.dep_status, org.dku_status
+                        org.id, org.name, COUNT(po.id_org) AS quantity, reg.region, org.dep_status, org.dku_status, org.dku_comment
                     FROM
                         organizations AS org
                     JOIN regions AS reg ON org.id_region = reg.id

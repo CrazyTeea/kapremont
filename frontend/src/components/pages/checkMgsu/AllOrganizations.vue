@@ -71,6 +71,7 @@
                         <b-th v-can:dku,dku_user>Статус программы (ДКУ)</b-th>
                         <b-th v-can:dep,dku,dku_user >Статус программы (ДЭП)</b-th>
                         <b-th v-can:dku,dku_user>Сумма к выделению для финансирования мероприятий по АТЗ (Рублей)</b-th>
+                        <b-th v-can:dku,dku_user>Дополнительная информация</b-th>
                     </b-tr>
                 </b-thead>
                 <b-tbody>
@@ -130,6 +131,12 @@
                             ></b-form-input>
                             <span v-can:dku_user>{{item.dku_atz}}</span>
                         </b-th>
+                        <b-th v-can:dku,dku_user class="normal-font-weight-for-sell center-text-in-cell">
+                            <b-form-textarea
+                                          @change="setDkuComment(item)"
+                                          v-model="item.dku_comment"
+                            ></b-form-textarea>
+                        </b-th>
                     </b-tr>
                 </b-tbody>
             </b-table-simple>
@@ -155,6 +162,7 @@ import {
     BTableSimple,
     BThead,
     BTr,
+    BFormTextarea,
     BTh,
     BTbody,
     BPagination,
@@ -166,6 +174,7 @@ export default {
         "b-toggle": VBToggle,
     },
     components: {
+        BFormTextarea,
         BAlert,
         BCollapse,
         BCard,
@@ -277,6 +286,21 @@ export default {
             item.dku_atz = Number(item.dku_atz).toLocaleString();
             form.append('dku_atz', item.dku_atz.replace(/\s/g,'').replace(',','.'))
             Axios.post(`/api/set-status/dku/${item.id}`, form, {
+                headers: {
+                    "X-CSRF-Token": this.csrf
+                }
+            }).then(res => {
+                this.getTable()
+                this.setBanner('success', `Данные внесены успешно: ${item.name}`, 3200)
+            }).catch(() => {
+                this.setBanner("danger", "Что-то пошло не так! Обратитесь в служюу поддержки.")
+            })
+
+        },
+        setDkuComment(item) {
+            let form = new FormData();
+            form.append('dku_comment', item.dku_comment)
+            Axios.post(`/api/set-comment/dku/${item.id}`, form, {
                 headers: {
                     "X-CSRF-Token": this.csrf
                 }
