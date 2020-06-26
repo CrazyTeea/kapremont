@@ -104,6 +104,7 @@
                                     v-can:dku
                                     size="sm"
                                 @change="setDkuStatus(item)"
+                                    style="max-width: 50px"
                                 v-model="item.dku_status"
                                 :options="[
                                     {value: 'not', text: 'В обработке'},
@@ -119,6 +120,7 @@
                                     size="sm"
                                 @change="setDepStatus(item)"
                                 v-model="item.dep_status"
+                                    style="max-width: 50px"
                                 :options="[
                                     {value: 'not', text: 'В обработке'},
                                     {value: 'approved', text: 'Согласовано ДЭП'},
@@ -131,6 +133,7 @@
                                           size="sm"
                                     @change="setDkuAtz(item)"
                                     v-model="item.dku_atz"
+                                          style="max-width: 50px"
                             ></b-form-input>
                             <span v-can:dku_user>{{item.dku_atz}}</span>
                         </b-th>
