@@ -58,7 +58,7 @@
         </div>
 
         <div class="table-overflow-hidden mt-1">
-            <b-table-simple bordered hover>
+            <b-table-simple style="font-size: 12px" bordered hover>
                 <b-thead>
                     <b-tr>
                         <b-th v-if="filters.id">№</b-th>
