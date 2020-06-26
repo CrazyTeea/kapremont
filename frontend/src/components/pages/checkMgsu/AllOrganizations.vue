@@ -99,12 +99,12 @@
                             <b-icon v-if="item.p_status === '1'" icon="check" variant="success" scale="2"></b-icon>
                             <b-icon v-else icon="x-octagon" variant="danger" scale="2"></b-icon>
                         </b-th>
-                        <b-th v-can:dku,dku_user class="normal-font-weight-for-sell center-text-in-cell">
+                        <b-th v-can:dku,dku_user style="max-width: 100px" class="normal-font-weight-for-sell center-text-in-cell">
                             <b-form-select
                                     v-can:dku
                                     size="sm"
                                 @change="setDkuStatus(item)"
-                                    style="max-width: 50px"
+
                                 v-model="item.dku_status"
                                 :options="[
                                     {value: 'not', text: 'В обработке'},
@@ -114,13 +114,12 @@
                             ></b-form-select>
                             <span v-can:dku_user>{{ getDkuStatus(item.dku_status) }}</span>
                         </b-th>
-                        <b-th v-can:dep,dku,dku_user class="normal-font-weight-for-sell center-text-in-cell">
+                        <b-th v-can:dep,dku,dku_user style="max-width: 100px" class="normal-font-weight-for-sell center-text-in-cell">
                             <b-form-select
                                     v-can:dep
                                     size="sm"
                                 @change="setDepStatus(item)"
                                 v-model="item.dep_status"
-                                    style="max-width: 50px"
                                 :options="[
                                     {value: 'not', text: 'В обработке'},
                                     {value: 'approved', text: 'Согласовано ДЭП'},
@@ -128,12 +127,11 @@
                                 ]" />
                             <span v-can:dku,dku_user>{{getDepStatus(item.dep_status)}}</span>
                         </b-th>
-                        <b-th v-can:dku,dku_user class="normal-font-weight-for-sell center-text-in-cell">
+                        <b-th v-can:dku,dku_user style="max-width: 100px" class="normal-font-weight-for-sell center-text-in-cell">
                             <b-form-input v-can:dku
                                           size="sm"
                                     @change="setDkuAtz(item)"
                                     v-model="item.dku_atz"
-                                          style="max-width: 50px"
                             ></b-form-input>
                             <span v-can:dku_user>{{item.dku_atz}}</span>
                         </b-th>
