@@ -69,7 +69,7 @@
                         <b-th>Выгрузка PDF</b-th>
                         <b-th>Выгрузка отправлена</b-th>
                         <b-th v-can:dku,dku_user style="min-width: 150px !important;">Статус программы (ДКУ)</b-th>
-                        <b-th v-can:dep,dku,dku_user style="min-width: 150px !important;">Статус программы (ДЭП)</b-th>
+                        <b-th v-can:dep,dku,dku_user style="min-width: 125px !important;">Статус программы (ДЭП)</b-th>
                         <b-th v-can:dku,dku_user style="min-width: 150px !important;">Сумма к выделению для финансирования мероприятий по АТЗ (Рублей)</b-th>
                         <b-th v-can:dku,dku_user>Дополнительная информация</b-th>
                     </b-tr>
