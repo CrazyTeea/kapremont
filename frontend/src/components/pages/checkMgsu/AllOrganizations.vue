@@ -102,6 +102,7 @@
                         <b-th v-can:dku,dku_user class="normal-font-weight-for-sell center-text-in-cell">
                             <b-form-select
                                     v-can:dku
+                                    size="sm"
                                 @change="setDkuStatus(item)"
                                 v-model="item.dku_status"
                                 :options="[
@@ -115,6 +116,7 @@
                         <b-th v-can:dep,dku,dku_user class="normal-font-weight-for-sell center-text-in-cell">
                             <b-form-select
                                     v-can:dep
+                                    size="sm"
                                 @change="setDepStatus(item)"
                                 v-model="item.dep_status"
                                 :options="[
@@ -126,6 +128,7 @@
                         </b-th>
                         <b-th v-can:dku,dku_user class="normal-font-weight-for-sell center-text-in-cell">
                             <b-form-input v-can:dku
+                                          size="sm"
                                     @change="setDkuAtz(item)"
                                     v-model="item.dku_atz"
                             ></b-form-input>
@@ -133,6 +136,7 @@
                         </b-th>
                         <b-th v-can:dku,dku_user class="normal-font-weight-for-sell center-text-in-cell">
                             <b-form-textarea
+                                    size="sm"
                                           @change="setDkuComment(item)"
                                           v-model="item.dku_comment"
                             ></b-form-textarea>
