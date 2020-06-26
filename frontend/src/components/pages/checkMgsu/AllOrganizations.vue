@@ -68,9 +68,9 @@
                         <b-th>Объектов добавлено</b-th>
                         <b-th>Выгрузка PDF</b-th>
                         <b-th>Выгрузка отправлена</b-th>
-                        <b-th v-can:dku,dku_user>Статус программы (ДКУ)</b-th>
-                        <b-th v-can:dep,dku,dku_user >Статус программы (ДЭП)</b-th>
-                        <b-th v-can:dku,dku_user>Сумма к выделению для финансирования мероприятий по АТЗ (Рублей)</b-th>
+                        <b-th v-can:dku,dku_user style="min-width: 150px !important;">Статус программы (ДКУ)</b-th>
+                        <b-th v-can:dep,dku,dku_user style="min-width: 150px !important;">Статус программы (ДЭП)</b-th>
+                        <b-th v-can:dku,dku_user style="min-width: 150px !important;">Сумма к выделению для финансирования мероприятий по АТЗ (Рублей)</b-th>
                         <b-th v-can:dku,dku_user>Дополнительная информация</b-th>
                     </b-tr>
                 </b-thead>
@@ -99,7 +99,7 @@
                             <b-icon v-if="item.p_status === '1'" icon="check" variant="success" scale="2"></b-icon>
                             <b-icon v-else icon="x-octagon" variant="danger" scale="2"></b-icon>
                         </b-th>
-                        <b-th v-can:dku,dku_user style="max-width: 100px" class="normal-font-weight-for-sell center-text-in-cell">
+                        <b-th v-can:dku,dku_user class="normal-font-weight-for-sell center-text-in-cell">
                             <b-form-select
                                     v-can:dku
                                     size="sm"
@@ -114,7 +114,7 @@
                             ></b-form-select>
                             <span v-can:dku_user>{{ getDkuStatus(item.dku_status) }}</span>
                         </b-th>
-                        <b-th v-can:dep,dku,dku_user style="max-width: 100px" class="normal-font-weight-for-sell center-text-in-cell">
+                        <b-th v-can:dep,dku,dku_user class="normal-font-weight-for-sell center-text-in-cell">
                             <b-form-select
                                     v-can:dep
                                     size="sm"
