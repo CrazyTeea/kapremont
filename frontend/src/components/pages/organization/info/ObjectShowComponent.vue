@@ -472,16 +472,14 @@
                                     <b-th>Фактическая Сумма бюджетного финансирования на проведение капитального ремонта (тыс. руб.)</b-th>
                                     <b-th>Фактическое Софинансирование из внебюджетных источников (тыс. руб.)</b-th>
                                     <b-th>Отметка о завершении этапа </b-th>
-
                                     <b-th>Подтверждающие документы</b-th>
-
                                     <b-th>Комментарий (текстовое поле Заполняет ВУЗ)</b-th>
                                     <b-th>Отметка Эксперта МОН Принято / не принято</b-th>
                                     <b-th>Комментарий эксперта МОН )</b-th>
                                 </b-tr>
                             </b-thead>
                             <b-tbody>
-                                <b-tr  v-for="(item,index) in svedenia2" :key="index" @change="sendData(item)">
+                                <b-tr  v-for="(item,index) in svedenia2" :key="index" @change="sendData(item)" v-if="!(item.hasOwnProperty('button') && item.button)">
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
                                         {{item.step + 1}}
                                     </b-td>
@@ -506,8 +504,6 @@
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
                                         <span v-can:user,root>{{item.done ? 'Да' : 'Нет'}}</span>
                                     </b-td>
-
-
                                     <!-- Подтверждающие документы -->
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
                                         <!-- <label @click="debugItem(item, svedenia2[index], index)"> Debug item {{index}} </label> -->
