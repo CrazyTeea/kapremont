@@ -17,6 +17,7 @@ use app\models\ProgramObjects;
  * @property int|null $system_status
  * @property  OrgInfo $orgInfo
  * @property string $dku_comment
+ * @property int $id_founder
  */
 class Organizations extends \yii\db\ActiveRecord
 {
@@ -49,7 +50,7 @@ class Organizations extends \yii\db\ActiveRecord
     {
         return [
             [['full_name', 'name', 'short_name','inn','dku_comment'], 'string'],
-            [['system_status'], 'integer'],
+            [['system_status','id_founder'], 'integer'],
         ];
     }
 
@@ -76,9 +77,7 @@ class Organizations extends \yii\db\ActiveRecord
     public function getUserInfo(){
         return $this->hasMany(UserInfo::class,['id_org'=>'id']);
     }
-
-    public function getProgramObjects()
-    {
+    public function getProgramObjects(){
         return $this->hasMany(ProgramObjects::class, ['id_org' => 'id']);
     }
     public function getProgram(){
@@ -87,7 +86,6 @@ class Organizations extends \yii\db\ActiveRecord
     public function getFounder(){
         return $this->hasOne(Founders::class,['id_founder'=>'id']);
     }
-
     private static function CalculateState($orgs){
         return ($orgs==='other' and !Yii::$app->user->can('faiv_admin')) ? 'and org.id_founder > 1' : null;
     }
