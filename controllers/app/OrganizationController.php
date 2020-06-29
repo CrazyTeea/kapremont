@@ -106,7 +106,7 @@ class OrganizationController extends AppController
                     $sved[3]++;
             }
 
-            $objects[$key]['status'] = $object->astatus->label;
+            $objects[$key]['status'] = $object->astatus ? $object->astatus->label : '';
         }
         $programm = Program::find()->where(['id_org' => $id, 'system_status' => Program::ACTIVE])->one();
 
