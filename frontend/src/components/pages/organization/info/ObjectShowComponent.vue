@@ -31,6 +31,7 @@
         <h1 class="mt-3">{{ this.items.name }}</h1>
         <div >
             <a v-if="canChange" :href="`/program/object/update/${this.items.id}`" class="btn btn-primary">Редактировать </a>
+            <b-button v-can:root @click="tableToExel()" >Export</b-button>
             <a v-if="this.real" :href="`/program/object/set-real/${this.items.id}`" class="btn btn-success">Приступить к реализации </a>
         </div>
 
@@ -454,6 +455,81 @@
                                             <b-button variant="info" @click="addRow(index)">Добавить</b-button>
                                         </b-td>
                                     </div>
+
+                                </b-tr>
+
+                            </b-tbody>
+
+                        </b-table-simple>
+                        <b-table-simple style="display:none" id="exportPlan" class="mt-3" small sticky-header bordered>
+                            <b-thead>
+                                <b-tr>
+                                    <b-th></b-th>
+                                    <b-th>Этап</b-th>
+                                    <b-th>Дата начала (план.)</b-th>
+                                    <b-th>Дата окончания (план.)</b-th>
+                                    <b-th>Фактическая Стоимость реализации (тыс.руб.)</b-th>
+                                    <b-th>Фактическая Сумма бюджетного финансирования на проведение капитального ремонта (тыс. руб.)</b-th>
+                                    <b-th>Фактическое Софинансирование из внебюджетных источников (тыс. руб.)</b-th>
+                                    <b-th>Отметка о завершении этапа </b-th>
+                                    <b-th>Подтверждающие документы</b-th>
+                                    <b-th>Комментарий (текстовое поле Заполняет ВУЗ)</b-th>
+                                    <b-th>Отметка Эксперта МОН Принято / не принято</b-th>
+                                    <b-th>Комментарий эксперта МОН )</b-th>
+                                </b-tr>
+                            </b-thead>
+                            <b-tbody>
+                                <b-tr  v-for="(item,index) in svedenia2" :key="index" @change="sendData(item)" v-if="!(item.hasOwnProperty('button') && item.button)">
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        {{item.step + 1}}
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <span v-can:user,root>{{item.step_name}}</span>
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <span v-can:user,root>{{item.date_event_start}}</span>
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <span v-can:user,root>{{item.date_event_end}}</span>
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <span v-can:user,root>{{item.cost_real}}</span>
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <span  v-can:user,root>{{item.sum_bud_fin}}</span>
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <span v-can:user,root>{{item.fin_vnebud_ist}}</span>
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <span v-can:user,root>{{item.done ? 'Да' : 'Нет'}}</span>
+                                    </b-td>
+                                    <!-- Подтверждающие документы -->
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <!-- <label @click="debugItem(item, svedenia2[index], index)"> Debug item {{index}} </label> -->
+                                        {{item.help}}
+                                        <span v-can:user,root >{{svedenia2[index].access_document}}</span>
+                                        <div v-if="svedenia2[index].file">
+                                            {{svedenia2[index].file.name}}
+                                        </div>
+
+
+                                    </b-td>
+
+
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <span v-can:user,root>{{item.comment}}</span>
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <span v-can:root,mgsu,dep>
+                                            {{item.doneExpert ? 'Да' : 'Нет'}}
+                                        </span>
+                                    </b-td>
+                                    <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
+                                        <span v-can:root,user>
+                                            {{item.commentExpert}}
+                                        </span>
+                                    </b-td>
 
                                 </b-tr>
 
@@ -1466,6 +1542,31 @@
             this.canChange = window.Permission === 'root' | window.canChange || false;
         },
         methods: {
+            tableToExel(){
+                var tableToExcel = (function() {
+                    var uri = 'data:application/vnd.ms-excel;base64,'
+                        , template = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:x="urn:schemas-microsoft-com:office:excel" xmlns="http://www.w3.org/TR/REC-html40"><head><!--[if gte mso 9]><xml><x:ExcelWorkbook><x:ExcelWorksheets><x:ExcelWorksheet><x:Name>{worksheet}</x:Name><x:WorksheetOptions><x:DisplayGridlines/></x:WorksheetOptions></x:ExcelWorksheet></x:ExcelWorksheets></x:ExcelWorkbook></xml><![endif]--><meta http-equiv="content-type" content="text/plain; charset=UTF-8"/></head><body><table>{table}</table></body></html>'
+                        , base64 = function(s) { return window.btoa(unescape(encodeURIComponent(s))) }
+                        , format = function(s, c) {
+                        return s.replace(/{(\w+)}/g, function(m, p) { return c[p]; })
+                    }
+                        , downloadURI = function(uri, name) {
+                        var link = document.createElement("a");
+                        link.download = name;
+                        link.href = uri;
+                        link.click();
+                    }
+
+                    return function(table, name, fileName) {
+                        console.log(table);
+                        if (!table.nodeType) table = document.getElementById(table)
+                        var ctx = {worksheet: name || 'Worksheet', table: table.innerHTML}
+                        var resuri = uri + base64(format(template, ctx))
+                        downloadURI(resuri, fileName);
+                    }
+                })();
+                tableToExcel('exportPlan','Смета', 'Ремрайон_смета.xls');
+            },
             checkFOIV(){
                 return !(this.permission === 'faiv_admin' || this.permission === 'faiv_user');
 
