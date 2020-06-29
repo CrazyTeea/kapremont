@@ -73,7 +73,7 @@
             <b-card-header header-tag="header" class="p-1" role="tab">
                 <span> <b-icon icon="bookmark-fill" scale="1.5" class="mr-2 ml-1"></b-icon>Информация</span>
             </b-card-header>
-            <b-card-body>
+            <b-card-body style="overflow-x: auto">
                 <b-table-simple bordered hover>
                     <b-thead>
                         <b-tr>
