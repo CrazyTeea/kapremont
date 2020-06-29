@@ -40,7 +40,7 @@
                 <div class="col-2">
                     <h5>Текущий статус эксперта МОН: <label :class="`text-${status.variant}`">{{ status.label }}</label></h5>
                 </div>
-                <div class="col-3">
+                <div v-if="items.id_founder===1" class="col-3">
                     <h5>Текущий статус ДЭП: <label :class="`text-${dep_status.color}`">{{ dep_status.label }}</label></h5>
                 </div>
                 <!--<div class="col-2">
@@ -71,10 +71,10 @@
                         <b-dropdown-item @click="setStatus(2)" variant="success">Рекомендуется к согласованию</b-dropdown-item>
                         <b-dropdown-item @click="setStatus(3)" variant="danger">Не рекомендуется к согласованию</b-dropdown-item>
                         <b-dropdown-item @click="setStatus(4)" variant="warning">На доработку</b-dropdown-item>
-                        <b-dropdown-item @click="setStatus(5)" variant="info">В реализации</b-dropdown-item>
+                        <b-dropdown-item v-if="items.type || items.id_founder !==1" @click="setStatus(5)" variant="info">В реализации</b-dropdown-item>
                     </b-dropdown>
                 </div>
-                <div class="col-4">
+                <div v-if="items.id_founder===1" class="col-4">
                     <b-dropdown v-can:dep,root right text="статус ДЭП" variant="info" class="m-2">
                         <b-dropdown-item :href="`/api/set-status/approved/dep/${obj_id}`" @click="actionHendler" variant="success">Рассмотрено ДЭП</b-dropdown-item>
                         <b-dropdown-item :href="`/api/set-status/rejected/dep/${obj_id}`" @click="actionHendler" variant="warning">Резерв</b-dropdown-item>
@@ -86,7 +86,7 @@
                         <b-dropdown-item :href="`/api/set-status/rejected/dku/${obj_id}`" @click="actionHendler" variant="warning">Резерв</b-dropdown-item>
                     </b-dropdown>
                 </div>-->
-                <div class="col-4">
+                <div v-if="items.id_founder===1" class="col-4">
                     <b-dropdown v-can:root,dep right class="m-2" :text="realStatusType[realStatus].label" :variant="realStatusType[realStatus].variant">
                         <b-dropdown-item v-for="(item,index) in realStatusType" @click="changeRealStatus(index)"
                                          :key="index" :variant="item.variant" :value="index">{{item.label}}</b-dropdown-item>
@@ -104,7 +104,7 @@
                 <div class="col-6">
                     <h5>Текущий статус эксперта МОН: <label :class="`text-${status.variant}`">{{ status.label }}</label></h5>
                 </div>
-                <div class="col-6">
+                <div v-if="items.id_founder===1" class="col-6">
                     <h5>Текущий статус ДЭП: <label :class="`text-${dep_status.color}`">{{ dep_status.label }}</label></h5>
                 </div>
                 <!--<div class="col-4">
@@ -117,10 +117,10 @@
                         <b-dropdown-item @click="setStatus(2)" variant="success">Рекомендуется к согласованию</b-dropdown-item>
                         <b-dropdown-item @click="setStatus(3)" variant="danger">Не рекомендуется к согласованию</b-dropdown-item>
                         <b-dropdown-item @click="setStatus(4)" variant="warning">На доработку</b-dropdown-item>
-                        <b-dropdown-item v-if="items.type" @click="setStatus(5)" variant="info">В реализации</b-dropdown-item>
+                        <b-dropdown-item v-if="items.type || items.id_founder !==1" @click="setStatus(5)" variant="info">В реализации</b-dropdown-item>
                     </b-dropdown>
                 </div>
-                <div class="col-4">
+                <div v-if="items.id_founder===1" class="col-4">
                     <b-dropdown v-can:dep,root right text="статус ДЭП" variant="info" class="m-2">
                         <b-dropdown-item :href="`/api/set-status/approved/dep/${obj_id}`" @click="actionHendler" variant="success">Рассмотрено ДЭП</b-dropdown-item>
                         <b-dropdown-item :href="`/api/set-status/rejected/dep/${obj_id}`" @click="actionHendler" variant="warning">Резерв</b-dropdown-item>
@@ -579,31 +579,31 @@
                                         {{item.step + 1}}
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input v-can:user,faiv_user,root v-if="item.canDelete" v-model="svedenia2[index].step_name" />
+                                        <b-form-input style="font-size: 10px"  v-can:user,faiv_user,root v-if="item.canDelete" v-model="svedenia2[index].step_name" />
                                         <span v-else>{{item.step_name}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input v-can:user,faiv_user,root type="date" v-model="svedenia2[index].date_event_start" />
+                                        <b-form-input style="font-size: 10px"  v-can:user,faiv_user,root type="date" v-model="svedenia2[index].date_event_start" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.date_event_start}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input v-can:user,faiv_user,root type="date" v-model="svedenia2[index].date_event_end" />
+                                        <b-form-input style="font-size: 10px"  v-can:user,faiv_user,root type="date" v-model="svedenia2[index].date_event_end" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.date_event_end}}</span>
                                     </b-td>
                                     <b-td style="max-width: 10px" v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input v-can:user,faiv_user,root type="number" step=".01"  v-model="svedenia2[index].cost_real" />
+                                        <b-form-input style="font-size: 10px"  v-can:user,faiv_user,root type="number" step=".01"  v-model="svedenia2[index].cost_real" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.cost_real}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input v-can:user,faiv_user,root type="number" step=".01"  v-model="svedenia2[index].sum_bud_fin" />
+                                        <b-form-input style="font-size: 10px"  v-can:user,faiv_user,root type="number" step=".01"  v-model="svedenia2[index].sum_bud_fin" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.sum_bud_fin}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input v-can:user,faiv_user,root type="number" step=".01"  v-model="svedenia2[index].fin_vnebud_ist" />
+                                        <b-form-input style="font-size: 10px"  v-can:user,faiv_user,root type="number" step=".01"  v-model="svedenia2[index].fin_vnebud_ist" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.fin_vnebud_ist}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-checkbox v-can:user,faiv_user,root v-model="svedenia2[index].done" />
+                                        <b-form-checkbox style="font-size: 10px"  v-can:user,faiv_user,root v-model="svedenia2[index].done" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.done ? 'Да' : 'Нет'}}</span>
                                     </b-td>
 
@@ -658,17 +658,17 @@
 
 
                                     <b-td style="max-width: 100px" v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input v-can:user,root v-model="svedenia2[index].comment" />
+                                        <b-form-input style="font-size: 10px"  v-can:user,root v-model="svedenia2[index].comment" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.comment}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-checkbox v-can:root,mgsu,dep v-model="svedenia2[index].doneExpert" />
+                                        <b-form-checkbox style="font-size: 10px"  v-can:root,mgsu,dep v-model="svedenia2[index].doneExpert" />
                                         <span v-can:user>
                                             {{item.doneExpert ? 'Да' : 'Нет'}}
                                         </span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-textarea aria-invalid="true" size="sm" type="area" v-can:root,mgsu,dep v-model="svedenia2[index].commentExpert" />
+                                        <b-form-textarea style="font-size: 10px"  aria-invalid="true" size="sm" type="area" v-can:root,mgsu,dep v-model="svedenia2[index].commentExpert" />
                                         <span v-can:user>
                                             {{item.commentExpert}}
                                         </span>
@@ -1533,6 +1533,8 @@
             await this.getStatus();
             await this.getObject();
 
+            console.log(this.items.id_founder === 1);
+
             await this.createChart();
             this.permission = window.Permission;
 
@@ -1568,7 +1570,7 @@
                 tableToExcel('exportPlan','Смета', 'Ремрайон_смета.xls');
             },
             checkFOIV(){
-                return !(this.permission === 'faiv_admin' || this.permission === 'faiv_user');
+                return this.items.id_founder === 1;
 
             },
             async changeRealStatus(index){
@@ -1835,8 +1837,11 @@
                     this.fromServer = JSON.parse(res.data);
                     this.items = this.fromServer.object;
                     this.items.org_name = this.fromServer.organization.name;
+                    this.items.id_founder = this.fromServer.organization.id_founder;
                     this.docs = this.fromServer.docs;
                     this.org_id = JSON.parse(res.data).org_id;
+
+                    console.log(this.items)
 
                     let c=0.0, v=0.0,b=0.0;
                     console.log(this.fromServer);

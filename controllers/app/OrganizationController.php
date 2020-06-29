@@ -95,6 +95,7 @@ class OrganizationController extends AppController
                 $naDorab += 1;
             }
 
+
             foreach ($object->svedenia as $kek){
                 if (!$object->type and $kek->is_nessesary and $object->status == 2)
                     $sved[0]++;
@@ -230,8 +231,8 @@ class OrganizationController extends AppController
         $query = ProgramObjects::findOne($obj_id);
 
         return json_encode([
-            'label' => $query->astatus->label,
-            'id' => $query->astatus->id,
+            'label' => $query->astatus? $query->astatus->label : '',
+            'id' => $query->astatus? $query->astatus->id : 0,
             'dep_status' => $query->dep_status,
             'dku_status' => $query->org->dku_status,
             'real_status'=> $query->real_status ?? 0,
