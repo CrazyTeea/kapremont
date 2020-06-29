@@ -675,10 +675,8 @@
                                     </b-td>
                                     <div v-can:user,faiv_user,root v-else>
                                         <b-td>
-                                            <b-button variant="danger" @click="deleteRow(index)">Удалить</b-button>
-                                        </b-td>
-                                        <b-td >
-                                            <b-button variant="info" @click="addRow(index)">Добавить</b-button>
+                                            <b-button size="sm" variant="danger" @click="deleteRow(index)">Удалить</b-button>
+                                            <b-button size="sm" variant="info" @click="addRow(index)">Добавить</b-button>
                                         </b-td>
                                     </div>
 
