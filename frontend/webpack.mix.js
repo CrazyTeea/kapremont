@@ -14,7 +14,11 @@ let path = require('path');
 mix.js('src/main.js', '../web/vue/')
     .sass('src/main.scss', '../web/vue/')
     .setPublicPath('../web/vue')
-    .browserSync('http://localhost:8080')
+    .browserSync(
+        {
+            proxy: 'http://localhost:8080',
+            open:false
+        })
     .sourceMaps(false);
 mix.webpackConfig({
     output: {
@@ -22,6 +26,7 @@ mix.webpackConfig({
     }
 });
 mix.extract();
+mix.disableNotifications();
 
 // Full API
 // mix.js(src, output);
@@ -41,8 +46,6 @@ mix.extract();
 // mix.copyDirectory(fromDir, toDir);
 // mix.minify(file);
 // mix.sourceMaps(); // Enable sourcemaps
- mix.version(); // Enable versioning.
- mix.disableNotifications();
 // mix.setPublicPath('path/to/public');
 // mix.setResourceRoot('prefix/for/resource/locators');
 // mix.autoload({}); <-- Will be passed to Webpack's ProvidePlugin.

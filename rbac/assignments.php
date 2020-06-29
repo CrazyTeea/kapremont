@@ -9413,4 +9413,7 @@ return [
     7 => [
         'faiv_user',
     ],
+    3133 => [
+        'faiv_admin',
+    ],
 ];
