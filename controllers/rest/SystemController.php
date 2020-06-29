@@ -76,7 +76,7 @@ class SystemController extends RestController
                                 ],
                                 ['id' => 4, 'label' =>
                                     "Ожидаемая площадь капитального ремонта, кв.м.",
-                                    'value'=>  round( ($program->finance_volume*1000 - $program->finance_events*1000)/$program->cost,2)
+                                    'value'=>  round( ($program->finance_volume*1000 - $program->finance_events*1000)/$program->cost ? : 1,2)
                                 ]
                             ]
                         );

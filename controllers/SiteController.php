@@ -5,13 +5,18 @@ namespace app\controllers;
 use app\models\ChangePasswordForm;
 use app\models\forms\UserRecover;
 use app\models\Organizations;
+use app\models\Program;
+use app\models\ProgramObjects;
 use app\models\User;
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Parser;
 use Lcobucci\JWT\Signer\Hmac\Sha256;
 use Lcobucci\JWT\Signer\Key;
+use PhpOffice\PhpSpreadsheet\IOFactory;
+use PhpOffice\PhpSpreadsheet\Reader\Html;
 use Yii;
 use yii\filters\AccessControl;
+use yii\helpers\FileHelper;
 use yii\rbac\PhpManager;
 use yii\web\Controller;
 use yii\web\Response;
@@ -238,6 +243,27 @@ class SiteController extends Controller
     public function actionAbout()
     {
         return $this->render('about');
+    }
+
+    public function actionExport(){
+
+
+
+        $objs = ProgramObjects::find()->where(['id_org'=>100,'status'=>5])->joinWith(['svedenia','svedenia2'])->asArray()->all();
+        $param = 'export';
+        $html = $this->renderPartial('_export',compact('objs'));
+        $reader = new HTML();
+        $spreadsheet = $reader->loadFromString($html);
+        $writer = IOFactory::createWriter($spreadsheet,'Xls');
+
+        $path = Yii::getAlias( '@webroot' ) . "/uploads/$param";
+        if (!file_exists($path))
+            FileHelper::createDirectory($path);
+        $writer->save("$path/$param.xls");
+        Yii::$app->response->sendFile("$path/$param.xls")->send();
+        if (file_exists("$path/$param.xls"))
+            unlink("$path/$param.xls");
+
     }
 
 }
