@@ -68,9 +68,9 @@
             <div class="row">
                 <div class="col-3">
                     <b-dropdown v-can:mgsu,root right text="статус эксперта МОН" size="xs"  variant="info" class="m-2" >
-                        <b-dropdown-item @click="setStatus(2)" variant="success">Рекомендуется к согласованию</b-dropdown-item>
-                        <b-dropdown-item @click="setStatus(3)" variant="danger">Не рекомендуется к согласованию</b-dropdown-item>
-                        <b-dropdown-item @click="setStatus(4)" variant="warning">На доработку</b-dropdown-item>
+                        <b-dropdown-item v-if="items.id_founder ===1" @click="setStatus(2)" variant="success">Рекомендуется к согласованию</b-dropdown-item>
+                        <b-dropdown-item v-if="items.id_founder ===1" @click="setStatus(3)" variant="danger">Не рекомендуется к согласованию</b-dropdown-item>
+                        <b-dropdown-item v-if="items.id_founder ===1" @click="setStatus(4)" variant="warning">На доработку</b-dropdown-item>
                         <b-dropdown-item v-if="items.type || items.id_founder !==1" @click="setStatus(5)" variant="info">В реализации</b-dropdown-item>
                     </b-dropdown>
                 </div>
@@ -114,9 +114,9 @@
             <div class="row">
                 <div class="col-2">
                     <b-dropdown v-can:mgsu,root right text="статус эксперта МОН"  variant="info" class="m-2" >
-                        <b-dropdown-item @click="setStatus(2)" variant="success">Рекомендуется к согласованию</b-dropdown-item>
-                        <b-dropdown-item @click="setStatus(3)" variant="danger">Не рекомендуется к согласованию</b-dropdown-item>
-                        <b-dropdown-item @click="setStatus(4)" variant="warning">На доработку</b-dropdown-item>
+                        <b-dropdown-item v-if="items.id_founder ===1" @click="setStatus(2)" variant="success">Рекомендуется к согласованию</b-dropdown-item>
+                        <b-dropdown-item v-if="items.id_founder ===1" @click="setStatus(3)" variant="danger">Не рекомендуется к согласованию</b-dropdown-item>
+                        <b-dropdown-item v-if="items.id_founder ===1" @click="setStatus(4)" variant="warning">На доработку</b-dropdown-item>
                         <b-dropdown-item v-if="items.type || items.id_founder !==1" @click="setStatus(5)" variant="info">В реализации</b-dropdown-item>
                     </b-dropdown>
                 </div>
