@@ -25,6 +25,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use ZipArchive;
+use function Matrix\trace;
 
 /**
  * ProgramObjectsController implements the CRUD actions for ProgramObjects model.
@@ -156,6 +157,15 @@ class ProgramObjectsController extends AppController
            $ret['file'] = EventsFiles::UploadOrUpdate($file, $is_event2 ? null : $event->id,$is_event2 ? $event->id : null);
         }
         return Json::encode($ret);
+    }
+
+    public function actionDelEvent($id){
+        if ($post = Yii::$app->request->post()){
+            $post = (object)$post;
+            $e = ProgObjectsEvents::find()->where(['id_object'=>$id,'step'=>$post->step])->one() ?? ProgramObjectsEvents2::find()->where(['id_object'=>$id,'step'=>$post->step])->one();
+            if ($e) {$e->delete(); return Json::encode(['success'=>true]);}
+        }
+        return Json::encode(['success'=>false]);
     }
 
     /**
