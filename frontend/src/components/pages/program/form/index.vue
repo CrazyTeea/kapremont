@@ -71,7 +71,6 @@
                             <b-card-body>
                                 <b-form-group>
                                     <b-form-group
-                                            v-can:root
                                             label="Тип объекта"
                                             label-for="type"
                                             :invalid-feedback="feedback('ProgramObjects', 'type', 'Тип объекта должен быть заполнен')"
