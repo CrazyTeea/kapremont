@@ -122,6 +122,7 @@ $config = [
                 'program/object/files/<id:\d+>' => 'app/program-objects/get-all-obj-files',
                 'program/object/zip/<id:\d+>' => 'app/program-objects/zip',
                 'program/object/send-event/<id:\d+>' => 'app/program-objects/send-event',
+                'program/object/del-event/<id:\d+>' => 'app/program-objects/del-event',
                 'program/export' => 'app/development-programme/export',
                 'program/approve' => 'app/program/approve',
                 'program/is-approve' => 'app/program/is-approve',

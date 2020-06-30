@@ -95,7 +95,7 @@
             </div>
 
             <label for="object_opis">Краткое описание планируемых работ по объекту</label>
-            <b-form-input @input="ObjectOpis" id="object_opis" v-can:user,root v-model="items.object_opis" />
+            <b-form-input @input="ObjectOpis" id="object_opis" v-can:user,root,faiv_user v-model="items.object_opis" />
             <span v-can:root,mgsu>{{items.object_opis}}</span>
         </div>
 
@@ -353,31 +353,31 @@
                                         {{item.step + 1}}
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input v-can:user,root v-if="item.canDelete" v-model="svedenia2[index].step_name" />
+                                        <b-form-input v-can:user,root,faiv_user v-if="item.canDelete" v-model="svedenia2[index].step_name" />
                                         <span v-else>{{item.step_name}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input v-can:user,root type="date" v-model="svedenia2[index].date_event_start" />
+                                        <b-form-input v-can:user,root,faiv_user type="date" v-model="svedenia2[index].date_event_start" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.date_event_start}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input v-can:user,root type="date" v-model="svedenia2[index].date_event_end" />
+                                        <b-form-input v-can:user,root,faiv_user type="date" v-model="svedenia2[index].date_event_end" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.date_event_end}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input v-can:user,root type="number" step=".01"  v-model="svedenia2[index].cost_real" />
+                                        <b-form-input v-can:user,root,faiv_user type="number" step=".01"  v-model="svedenia2[index].cost_real" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.cost_real}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input v-can:user,root type="number" step=".01"  v-model="svedenia2[index].sum_bud_fin" />
+                                        <b-form-input v-can:user,root,faiv_user type="number" step=".01"  v-model="svedenia2[index].sum_bud_fin" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.sum_bud_fin}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input v-can:user,root type="number" step=".01"  v-model="svedenia2[index].fin_vnebud_ist" />
+                                        <b-form-input v-can:user,root,faiv_user type="number" step=".01"  v-model="svedenia2[index].fin_vnebud_ist" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.fin_vnebud_ist}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-checkbox v-can:user,root v-model="svedenia2[index].done" />
+                                        <b-form-checkbox v-can:user,root,faiv_user v-model="svedenia2[index].done" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.done ? 'Да' : 'Нет'}}</span>
                                     </b-td>
 
@@ -387,13 +387,13 @@
                                         <!-- <label @click="debugItem(item, svedenia2[index], index)"> Debug item {{index}} </label> -->
                                         {{item.help}}
                                         <b-form-input
-                                                v-can:user,root
+                                                v-can:user,root,faiv_user
                                                 placeholder="Ссылка на zakupki.gov.ru"
                                                 v-if=" sved2Href.includes(item.step + 1)"
                                                 v-model="svedenia2[index].access_document"
                                         />
 
-                                        <div v-can:user,root v-if="sved2Doc.includes(item.step + 1)" class="fileInput">
+                                        <div v-can:user,root,faiv_user v-if="sved2Doc.includes(item.step + 1)" class="fileInput">
                                             <div
                                                     class="cell-center-for-items"
 
@@ -432,7 +432,7 @@
 
 
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input v-can:user,root v-model="svedenia2[index].comment" />
+                                        <b-form-input v-can:user,root,faiv_user,faiv_user v-model="svedenia2[index].comment" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.comment}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
@@ -447,7 +447,7 @@
                                             {{item.commentExpert}}
                                         </span>
                                     </b-td>
-                                    <div v-can:user,root v-else>
+                                    <div v-can:user,root,faiv_user v-else>
                                         <b-td>
                                             <b-button variant="danger" @click="deleteRow(index)">Удалить</b-button>
                                         </b-td>
@@ -484,31 +484,31 @@
                                         {{item.step + 1}}
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <span v-can:user,root>{{item.step_name}}</span>
+                                        <span v-can:user,root,faiv_user>{{item.step_name}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <span v-can:user,root>{{item.date_event_start}}</span>
+                                        <span v-can:user,root,faiv_user>{{item.date_event_start}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <span v-can:user,root>{{item.date_event_end}}</span>
+                                        <span v-can:user,root,faiv_user>{{item.date_event_end}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <span v-can:user,root>{{item.cost_real}}</span>
+                                        <span v-can:user,root,faiv_user>{{item.cost_real}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <span  v-can:user,root>{{item.sum_bud_fin}}</span>
+                                        <span  v-can:user,root,faiv_user>{{item.sum_bud_fin}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <span v-can:user,root>{{item.fin_vnebud_ist}}</span>
+                                        <span v-can:user,root,faiv_user>{{item.fin_vnebud_ist}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <span v-can:user,root>{{item.done ? 'Да' : 'Нет'}}</span>
+                                        <span v-can:user,root,faiv_user>{{item.done ? 'Да' : 'Нет'}}</span>
                                     </b-td>
                                     <!-- Подтверждающие документы -->
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
                                         <!-- <label @click="debugItem(item, svedenia2[index], index)"> Debug item {{index}} </label> -->
                                         {{item.help}}
-                                        <span v-can:user,root >{{svedenia2[index].access_document}}</span>
+                                        <span v-can:user,root,faiv_user >{{svedenia2[index].access_document}}</span>
                                         <div v-if="svedenia2[index].file">
                                             {{svedenia2[index].file.name}}
                                         </div>
@@ -518,7 +518,7 @@
 
 
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <span v-can:user,root>{{item.comment}}</span>
+                                        <span v-can:user,root,faiv_user>{{item.comment}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
                                         <span v-can:root,mgsu,dep>
@@ -613,7 +613,7 @@
                                         <!-- <label @click="debugItem(item, svedenia2[index], index)"> Debug item {{index}} </label> -->
                                         {{item.help}}
                                         <b-form-input
-                                                v-can:user,root
+                                                v-can:user,root,faiv_user
                                                 placeholder="Ссылка на zakupki.gov.ru"
                                                 v-if=" sved2Href.includes(item.step + 1)"
                                                 v-model="svedenia2[index].access_document"
@@ -658,7 +658,7 @@
 
 
                                     <b-td style="max-width: 100px" v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input style="font-size: 10px"  v-can:user,root v-model="svedenia2[index].comment" />
+                                        <b-form-input style="font-size: 10px"  v-can:user,root,faiv_user v-model="svedenia2[index].comment" />
                                         <span v-can:mgsu,dep,dku,dku_user>{{item.comment}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
@@ -1741,9 +1741,20 @@
                 this.sved2Doc.push(byStep || Math.round((this.svedenia2[index-1].step+0.01+Number.EPSILON)*1000)/1000+1)
                 this.sved2Href.push(byStep || Math.round((this.svedenia2[index-1].step+0.01+Number.EPSILON)*1000)/1000+1)
             },
-            deleteRow(index){
-                if (this.svedenia2[index-1].canDelete)
-                    this.svedenia2.splice(index-1,1);
+            async deleteRow(index){
+                if (this.svedenia2[index-1].canDelete){
+                    let data = new FormData();
+                    data.append('step',this.svedenia2[index-1].step);
+                    await Axios.post(`/program/object/del-event/${this.obj_id}`,data,{
+                        headers: {
+                            "X-CSRF-Token": this.csrf
+                        }
+                    }).then(resp=>{
+                        if(resp.data.success)
+                            this.svedenia2.splice(index-1,1);
+                    })
+
+                }
             },
             actionHendler(event) {
                 event.preventDefault();
