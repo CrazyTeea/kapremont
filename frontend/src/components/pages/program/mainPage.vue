@@ -33,26 +33,32 @@
                     <p v-show="getRegion">Субъект РФ:
                         <span class="text-success">{{getRegion && getRegion.region }}</span>
                     </p>
-                    <b-table id="program_table"
-                             v-if="getPageData"
-                             :fields="fields"
-                             :items="items"
-                             :per-page="perPage"
-                             :current-page="currentPage"
-                             small bordered
-                    >
-                        <template v-slot:cell(value) = 'data' >
-                            <div v-if="!data.index">
-                                <b-form-input @change="setProgramValue('finance_volume',data.item.value)"
-                                              style="min-width: 120px"
-                                              v-model="data.item.value"
-                                              type="number"
-                                              v-can:faiv_user></b-form-input>
-                                <span v-can:user>{{data.item.value}}</span>
-                            </div>
-                            <span v-else>{{data.item.value}}</span>
-                        </template>
-                    </b-table>
+                    <div v-if="getPageData">
+                        <b-table id="program_table"
+
+                                 :fields="fields"
+                                 :items="items"
+                                 :per-page="perPage"
+                                 :current-page="currentPage"
+                                 small bordered
+                        >
+                            <template v-slot:cell(value) = 'data' >
+                                <div v-if="!data.index">
+                                    <b-form-input @change="setProgramValue('finance_volume',data.item.value)"
+                                                  style="min-width: 120px"
+                                                  v-model="data.item.value"
+                                                  type="number"
+                                                  v-can:faiv_user></b-form-input>
+                                    <span v-can:user>{{data.item.value}}</span>
+                                </div>
+                                <span v-else>{{data.item.value}}</span>
+                            </template>
+                        </b-table>
+                        <h5 style="margin-top: 5px">Текущий статус ДКУ: <label :class="`text-${dku_status.color}`">{{ dku_status.label }}</label></h5>
+                        <h5 style="margin-top: 5px">Сумма к выделению для финансирования мероприятий по АТЗ (Рублей) <label :class="`text-${dku_status.color}`">{{ dku_status.atz }}</label></h5>
+
+                    </div>
+
                     <h3 v-else>
                         <span class="text-danger">Данные о вашей организации отсутствуют в системе</span>
                     </h3>
@@ -110,7 +116,12 @@ export default {
             extraBaner:window.Permission === 'user',
             perPage: 5,
             currentPage:1,
-            id_org:null
+            id_org:null,
+            dku_status:{
+                color:'secondary',
+                label:'',
+                atz:0
+            }
         }
     },
     computed:{
@@ -136,6 +147,20 @@ export default {
         getUser:function () {
             this.requestOrg({id:this.getUser.organization.id});
             this.id_org = this.getUser.organization.id;
+
+            let dku = this.getUser.organization.dku_status;
+            if(dku == 'not') {
+                this.dku_status.label = 'В обработке';
+                this.dku_status.color = 'secondary'
+            } else if(dku == 'approved') {
+                this.dku_status.label = 'Рассмотрено ДКУ';
+                this.dku_status.color = 'success'
+            } else if(dku == 'rejected') {
+                this.dku_status.label = 'Резерв';
+                this.dku_status.color = 'warning'
+            }
+            this.dku_status.atz = this.getUser.program.dku_atz;
+
         }
     },
     methods:{

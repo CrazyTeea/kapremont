@@ -55,7 +55,7 @@
 
                     </h5>
                 </div>
-                <div class="col-2">
+                <div class="col-2" v-if="items.id_founder===1">
                     <h5 >
                         Текущий статус:
                         <label :class="`text-${realStatusType[realStatus].variant}`">
