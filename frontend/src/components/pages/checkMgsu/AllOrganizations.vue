@@ -72,6 +72,7 @@
                         <b-th v-can:dep,dku,dku_user style="min-width: 125px !important;">Статус программы (ДЭП)</b-th>
                         <b-th v-can:dku,dku_user style="min-width: 150px !important;">Сумма к выделению для финансирования мероприятий по АТЗ (Рублей)</b-th>
                         <b-th v-can:dku,dku_user>Дополнительная информация</b-th>
+                        <b-th v-can:dku,dku_user>Документ</b-th>
                     </b-tr>
                 </b-thead>
                 <b-tbody>
@@ -142,6 +143,39 @@
                                           v-model="item.dku_comment"
                             ></b-form-textarea>
                         </b-th>
+                        <b-th v-can:dku,dku_user class="normal-font-weight-for-sell center-text-in-cell">
+                            <div class="fileInput">
+                                <div
+                                        class="cell-center-for-items"
+
+                                >
+                                    <input
+                                            type="file"
+                                            :id="'file_input_' + index"
+                                            class="hidden-file-input"
+                                            @change="setDkuDoc(item,index)"
+                                    />
+                                    <div
+                                            class="arrow">
+                                        <label
+                                                :for="`file_input_${index}`"
+                                                class="label"
+                                        >
+                                                            <span class="title">
+                                                                <span class="scope-to-animate"></span>
+                                                                <span class="scope-to-animate"></span>
+                                                                <span class="scope-to-animate"></span>
+                                                                <span class="scope-to-animate"></span>
+                                                            </span>
+                                        </label>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div v-if="item.dku_doc">
+                                <a :href="`/uploads/dku_docs/${item.id}/${item.dku_doc}`">{{item.dku_doc}}</a>
+                            </div>
+                        </b-th>
                     </b-tr>
                 </b-tbody>
             </b-table-simple>
@@ -168,6 +202,7 @@ import {
     BThead,
     BTr,
     BFormTextarea,
+    BFormFile,
     BTh,
     BTbody,
     BPagination,
@@ -194,6 +229,7 @@ export default {
         BThead,
         BTr,
         BTh,
+        BFormFile,
         BTbody,
         BPagination,
     },
@@ -270,6 +306,25 @@ export default {
         },
         goToRef(id) {
             window.location = `/organization/list/${id}`;
+        },
+        setDkuDoc(item,index){
+            let graph = document.querySelector(`#file_input_${index}`);
+            graph = graph.files[0];
+            let form = new FormData();
+            form.append('dku_doc', graph)
+            Axios.post(`/org/dku-doc/${item.id}`, form, {
+                headers: {
+                    "X-CSRF-Token": this.csrf
+                }
+            }).then(res => {
+                if (res.data.success){
+                    this.getTable()
+                    this.setBanner('success', `Данные внесены успешно: ${item.name}`, 3200)
+                }
+
+            }).catch(() => {
+                this.setBanner("danger", "Что-то пошло не так! Обратитесь в служюу поддержки.")
+            })
         },
         getTable(offset = 0) {
             let form = new FormData();
