@@ -76,8 +76,8 @@
                                 <h5 style="margin-top: 5px">Приложение </h5>
                             </div>
                             <div class="col-6">
-                                <a style="display: block" :href="`/uploads/dku_docs/${getUser.organization.id}/${dku_status.doc.file_name}`" >
-                                <b-icon v-if="dku_status.doc" icon="file-earmark-arrow-down" scale="2" vriant="success"></b-icon>
+                                <a v-if="dku_status.doc" style="display: block" :href="`/uploads/dku_docs/${getUser.organization.id}/${dku_status.doc.file_name}`" >
+                                <b-icon  icon="file-earmark-arrow-down" scale="2" vriant="success"></b-icon>
                                 </a>
                             </div>
                         </div>
