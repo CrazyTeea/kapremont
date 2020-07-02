@@ -27,6 +27,17 @@
                 </template>
 
             </b-modal>
+
+            <b-modal scrollable id="extraBaner2" v-model="extraBaner2" cancel-disabled>
+                "Уважаемые коллеги!
+                Программа модернизации инфраструктуры рассмотрена Департаментом корпоративного управления. С суммой к выделению для финансирования мероприятий по АТЗ Вы можете ознакомиться на стартовой странице модуля. Она расположена над кнопками "Заполнить программу модернизации" и "Приступить к реализации программы модернизации"
+                <template v-slot:modal-footer>
+                    <b-button variant="success" @click="extraBaner2 = false">ОК!</b-button>
+                </template>
+
+            </b-modal>
+
+
             <div class="row">
                 <div class="col-6">
                     <h4 v-show="getOrg">{{getOrg && getOrg.name}}</h4>
@@ -114,6 +125,7 @@ export default {
         return {
             csrf: document.getElementsByName("csrf-token")[0].content,
             extraBaner:window.Permission === 'user',
+            extraBaner2:false,
             perPage: 5,
             currentPage:1,
             id_org:null,
@@ -151,9 +163,11 @@ export default {
             let dku = this.getUser.organization.dku_status;
             if(dku == 'not') {
                 this.dku_status.label = 'В обработке';
+
                 this.dku_status.color = 'secondary'
             } else if(dku == 'approved') {
                 this.dku_status.label = 'Рассмотрено ДКУ';
+                this.extraBaner2 = true;
                 this.dku_status.color = 'success'
             } else if(dku == 'rejected') {
                 this.dku_status.label = 'Резерв';
