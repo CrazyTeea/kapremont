@@ -70,6 +70,18 @@
                         </b-table>
                         <h5 style="margin-top: 5px">Текущий статус ДКУ: <label :class="`text-${dku_status.color}`">{{ dku_status.label }}</label></h5>
                         <h5 style="margin-top: 5px">Сумма к выделению для финансирования мероприятий по АТЗ (Рублей) <label :class="`text-${dku_status.color}`">{{ dku_status.atz }}</label></h5>
+                        <h5 style="margin-top: 5px">Комментарий <label :class="`text-${dku_status.color}`">{{ dku_status.comment }}</label></h5>
+                        <div class="row">
+                            <div class="col-6">
+                                <h5 style="margin-top: 5px">Приложение </h5>
+                            </div>
+                            <div class="col-6">
+                                <a style="display: block" :href="`/uploads/dku_docs/${getUser.organization.id}/${dku_status.doc.file_name}`" >
+                                <b-icon v-if="dku_status.doc" icon="file-earmark-arrow-down" scale="2" vriant="success"></b-icon>
+                                </a>
+                            </div>
+                        </div>
+
 
                     </div>
 
@@ -135,7 +147,9 @@ export default {
             dku_status:{
                 color:'secondary',
                 label:'',
-                atz:0
+                atz:0,
+                comment:'',
+                doc:null
             }
         }
     },
@@ -177,6 +191,9 @@ export default {
                 this.dku_status.color = 'warning'
             }
             this.dku_status.atz = this.getUser.program.dku_atz;
+            this.dku_status.comment = this.getUser.organization.dku_comment;
+            this.dku_status.doc = this.getUser.dku_doc;
+
 
         }
     },

@@ -90,6 +90,10 @@ class Organizations extends \yii\db\ActiveRecord
         return ($orgs==='other' and !Yii::$app->user->can('faiv_admin')) ? 'and org.id_founder > 1' : null;
     }
 
+    public function getDkuDoc(){
+        return $this->hasOne(DkuDocs::class,['id_org'=>'id']);
+    }
+
     public static function getMainCheckTable($offset, $whereClouse, $order, $orgs, $faiv = null)
     {
         $state = self::CalculateState($orgs);
@@ -98,14 +102,15 @@ class Organizations extends \yii\db\ActiveRecord
             ->createCommand("
                 SELECT 
                     res.id, res.name,res.dku_comment, res.region,
-                     res.quantity, res.dep_status, res.dku_status, pr.file_exist, pr.p_status,pr.dku_atz,pr.status907
+                     res.quantity, res.dep_status, res.dku_status, pr.file_exist, pr.p_status,pr.dku_atz,pr.status907,res.dku_doc
                 FROM
                     (SELECT 
-                        org.id, org.name, COUNT(po.id_org) AS quantity, reg.region, org.dep_status, org.dku_status, org.dku_comment
+                        org.id, org.name, COUNT(po.id_org) AS quantity, reg.region, org.dep_status, org.dku_status, org.dku_comment,dd.file_name dku_doc
                     FROM
                         organizations AS org
                     JOIN regions AS reg ON org.id_region = reg.id
                     JOIN program_objects po ON org.id = po.id_org
+                    left join dku_docs dd on dd.id_org = org.id
                     WHERE
                         org.system_status = 1 and po.system_status = 1 $faiv $state
                     GROUP BY po.id_org

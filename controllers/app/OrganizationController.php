@@ -5,6 +5,7 @@ namespace app\controllers\app;
 use app\facades\ProgramStatus;
 use app\models\ApproveStatus;
 use app\models\Comments;
+use app\models\DkuDocs;
 use app\models\Organizations;
 use app\models\OrgInfo;
 use app\models\ProgObjectsEvents;
@@ -15,6 +16,7 @@ use app\models\UserInfo;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Json;
+use yii\web\UploadedFile;
 
 class OrganizationController extends AppController
 {
@@ -224,6 +226,15 @@ class OrganizationController extends AppController
             return true;
         }
         return false;
+    }
+
+    public function actionSetDkuDoc($id_org){
+        if ($dku_doc = UploadedFile::getInstanceByName('dku_doc')){
+            $doc = DkuDocs::findOne(['id_org'=>$id_org]) ?? new DkuDocs();
+            return Json::encode(['success'=>$doc->addDoc($dku_doc,$id_org)]);
+
+        }
+        return Json::encode(['success'=>false,'file'=>UploadedFile::getInstanceByName('dku_doc')]);
     }
 
     public function actionGetApproveStatus($obj_id)
