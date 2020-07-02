@@ -182,6 +182,10 @@ class User extends ActiveRecord implements IdentityInterface
     {
         return $this->hasOne(Organizations::className(),['id'=>'id_org']);
     }
+    public function getProgram()
+    {
+        return $this->hasOne(Program::className(),['id_org'=>'id_org']);
+    }
 
     public static function getRole($id)
     {

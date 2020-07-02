@@ -355,6 +355,7 @@ class SystemController extends RestController
             $user = Yii::$app->getSession()->get('user');
             return [
                 'organization' => $user->organization,
+                'program' => $user->program,
                 'fio' => $user->fio,
                 'position' => $user->position,
                 'isAdmin' => self::$cans[5]

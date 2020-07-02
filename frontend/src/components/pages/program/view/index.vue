@@ -56,6 +56,7 @@
                 <v-user-panel />
 
                <h5 style="margin-top: 5px">Текущий статус ДКУ: <label :class="`text-${dku_status.color}`">{{ dku_status.label }}</label></h5>
+                <h5 style="margin-top: 5px">Сумма к выделению для финансирования мероприятий по АТЗ (Рублей) <label :class="`text-${dku_status.color}`">{{ dku_status.atz }}</label></h5>
 
             </div>
         </div>
@@ -252,6 +253,7 @@ export default {
             dku_status:{
                 color:'secondary',
                 label:'',
+                atz:0
             }
         };
     },
@@ -419,6 +421,7 @@ export default {
             this.dku_status.label = 'Резерв';
             this.dku_status.color = 'warning'
         }
+        this.dku_status.atz = this.getUser.program.dku_atz;
 
         this.id_org = this.getUser.organization.id;
         this.getFileStatus();
