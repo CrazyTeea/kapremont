@@ -88,7 +88,7 @@ class EventsFiles extends \yii\db\ActiveRecord
         if (file_exists($path))
             unlink($path);
         $file->saveAs($path);
-        return ['success'=>$flag,'errors'=>$f->getErrors()];
+        return ['success'=>$flag,'errors'=>$f->getErrors(),'file'=>file_exists($path)];
     }
     public static function download($id_event){
         $f = self::findOne(['id_event'=>$id_event]);
