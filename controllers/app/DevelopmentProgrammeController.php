@@ -123,15 +123,15 @@ class DevelopmentProgrammeController extends AppController
         $user = Yii::$app->getSession()->get('user');
         $org = Organizations::findOne($user->id_org);
 
-        //$pr_ob = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$user->id_org,'type'=>0])->orderBy(['created_at'=>SORT_ASC])->all();
-       // $r_ob = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$user->id_org,'type'=>1])->orderBy(['created_at'=>SORT_ASC])->all();
-       // $sq =[
-       // 's_k' => ProgramObjects::find()->select(['square'])->where(['system_status'=>1,'id_org'=>$org->id,])->sum('square'),
-        //'s_k_s' => ProgramObjects::find()->select(['square_kap'])->where(['system_status'=>1,'id_org'=>$org->id,])->sum('square_kap'),
-       // 's_av' => ProgramObjects::find()->select(['square_ar'])->where(['system_status'=>1,'id_org'=>$org->id,])->sum('square_av'),
-        //'s_atz' => ProgramObjects::find()->select(['square_ar'])->where(['system_status'=>1,'id_org'=>$org->id,])->sum('square_av'),
-        //];
-        //$pr_cols = ProgramObjects::getTableSchema()->getColumnNames();
+        $pr_ob = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$user->id_org,'type'=>0])->orderBy(['created_at'=>SORT_ASC])->all();
+        $r_ob = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$user->id_org,'type'=>1])->orderBy(['created_at'=>SORT_ASC])->all();
+        $sq =[
+        's_k' => ProgramObjects::find()->select(['square'])->where(['system_status'=>1,'id_org'=>$org->id,])->sum('square'),
+        's_k_s' => ProgramObjects::find()->select(['square_kap'])->where(['system_status'=>1,'id_org'=>$org->id,])->sum('square_kap'),
+        's_av' => ProgramObjects::find()->select(['square_ar'])->where(['system_status'=>1,'id_org'=>$org->id,])->sum('square_av'),
+        's_atz' => ProgramObjects::find()->select(['square_ar'])->where(['system_status'=>1,'id_org'=>$org->id,])->sum('square_av'),
+        ];
+        $pr_cols = ProgramObjects::getTableSchema()->getColumnNames();
         $program = Yii::$app->getSession()->get('program');
         if (!$program)
             return $this->redirect(['/']);
