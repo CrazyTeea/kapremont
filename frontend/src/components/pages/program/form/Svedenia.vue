@@ -67,7 +67,7 @@
             </template>
             <template v-slot:cell(rc)="row">
                 <b-form-input
-                    v-if="row.value"
+                   
                     v-model="sved.realization_cost[row.index]"
                     placeholder="Цена"
                     step="0.001"
@@ -77,11 +77,11 @@
                     "
                     :name="`${modelName}[${row.index}][cost_real]`"
                 ></b-form-input>
-                <label v-else>-</label>
+                
             </template>
             <template v-slot:cell(kap_cost)="row">
                 <b-form-input
-                    v-if="row.value"
+                   
                     v-model="sved.kap_cost[row.index]"
                     placeholder="Цена"
                     step="0.001"
@@ -89,11 +89,11 @@
                     @change="val => setFloat(val, row.index, 'kap_cost')"
                     :name="`${modelName}[${row.index}][sum_bud_fin]`"
                 ></b-form-input>
-                <label v-else>-</label>
+               
             </template>
             <template v-slot:cell(finanse)="row">
                 <b-form-input
-                    v-if="row.value"
+                   
                     v-model="sved.finanse[row.index]"
                     placeholder="Цена"
                     step="0.001"
@@ -101,7 +101,7 @@
                     @change="val => setFloat(val, row.index, 'finanse')"
                     :name="`${modelName}[${row.index}][fin_vnebud_ist]`"
                 ></b-form-input>
-                <label v-else>-</label>
+                
             </template>
             <template v-slot:foot(stage)>
                 <span class="font-weight-bold">ИТОГО:</span>
