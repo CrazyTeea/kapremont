@@ -159,7 +159,12 @@ class DevelopmentProgrammeController extends AppController
         }
 
 
-        $objects = ProgramObjects::find()->where(['system_status'=>1,'id_program'=>$program->id])->orderBy(['created_at'=>SORT_ASC])->all();
+        $objects = ProgramObjects::find()->where(['system_status'=>1,'id_program'=>$program->id]);
+
+        if ($org->id_founder !== 1)
+            $objects->andWhere(['type'=>0]);
+
+        $objects = $objects->orderBy(['created_at'=>SORT_ASC])->all();
         $events = null;$nes = null;$wai = null;;$risks = null;
         foreach ($objects as $index=>$item) {
             for ($i = 0;$i<8;$i++){

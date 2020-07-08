@@ -511,6 +511,9 @@ function getSum($arr,$i_o,$attr){
             </tr>
             </tbody>
         </table>
+
+        <?php if ($org->id_founder == 1): ?>
+
         <div style="float: right">
             Таблица 3.2. Резерв
         </div>
@@ -580,6 +583,8 @@ function getSum($arr,$i_o,$attr){
             </tr>
             </tbody>
         </table>
+
+        <?php endif; ?>
     </div>
 
         <div class="portrait">
