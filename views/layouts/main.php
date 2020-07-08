@@ -85,9 +85,9 @@ AppAsset::register($this);
                 Официальный ресурс Министерства науки и высшего образования Российской Федерации
             </div>
             <div class="col-6">
-                Служба технической поддержки: 8-495-989-84-47 доб. 1 (многоканальный)
-                По техническим вопросам: ias@mirea.ru,
-                по методическим вопросам (в части капитального ремонта): support_monitoring@mirea.ru
+                Служба технической поддержки: 8-495-989-84-47 доб. 1 (многоканальный) По техническим вопросам: ias@mirea.ru,
+                по методическим вопросам (в части капитального ремонта): <a href="support_monitoring@mirea.ru">support_monitoring@mirea.ru</a>, по методическим вопросам (в части АТЗ):
+                <a href="support_atz@mirea.ru">support_atz@mirea.ru</a>.
                 <?=Html::a('Типовые вопросы',['/tips_quations.pdf'],['target'=>'_blank','class'=>'btn btn-warning btn-sm'])?>
             </div>
         </div>
