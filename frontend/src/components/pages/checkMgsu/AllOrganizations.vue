@@ -87,8 +87,8 @@
                         <b-th class="normal-font-weight-for-sell cursor-pointer center-text-in-cell" @click="goToRef(item.id)">
                             <label class="cursor-pointer">
                                 {{ item.name }}
-                                <div v-if="item.is_new==='1'">
-                                    <b-badge variant="danger">!</b-badge>
+                                <div v-can:mgsu,root v-if="item.id_founder !== '1' && item.is_new==='1'">
+                                    <b-badge variant="danger">новый пользователь</b-badge>
                                 </div>
                             </label>
 
@@ -349,6 +349,7 @@ export default {
                     "X-CSRF-Token": this.csrf
                 }
             }).then(res => {
+                console.log(res.data.rows)
                 this.items = res.data.rows;
                 this.items.forEach(item=>{
                     item.dku_atz = item.dku_atz ? Number(item.dku_atz).toLocaleString() : null;
