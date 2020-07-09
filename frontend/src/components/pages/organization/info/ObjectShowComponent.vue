@@ -319,7 +319,7 @@
                     </b-card-body>
                 </b-collapse>
             </b-card>
-            <b-card no-body class="mb-1">
+            <!--<b-card no-body class="mb-1">
                 <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-plan>
                                 <b-icon-gear-wide-connected />
@@ -382,9 +382,9 @@
                                     </b-td>
 
 
-                                    <!-- Подтверждающие документы -->
+                                    &lt;!&ndash; Подтверждающие документы &ndash;&gt;
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <!-- <label @click="debugItem(item, svedenia2[index], index)"> Debug item {{index}} </label> -->
+                                        &lt;!&ndash; <label @click="debugItem(item, svedenia2[index], index)"> Debug item {{index}} </label> &ndash;&gt;
                                         {{item.help}}
                                         <b-form-input
                                                 v-can:user,root,faiv_user
@@ -504,9 +504,9 @@
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
                                         <span v-can:user,root,faiv_user>{{item.done ? 'Да' : 'Нет'}}</span>
                                     </b-td>
-                                    <!-- Подтверждающие документы -->
+                                    &lt;!&ndash; Подтверждающие документы &ndash;&gt;
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <!-- <label @click="debugItem(item, svedenia2[index], index)"> Debug item {{index}} </label> -->
+                                        &lt;!&ndash; <label @click="debugItem(item, svedenia2[index], index)"> Debug item {{index}} </label> &ndash;&gt;
                                         {{item.help}}
                                         <span v-can:user,root,faiv_user >{{svedenia2[index].access_document}}</span>
                                         <div v-if="svedenia2[index].file">
@@ -538,12 +538,12 @@
                         </b-table-simple>
                     </b-card-body>
                 </b-collapse>
-            </b-card>
-            <b-card v-if="permission !='user'" no-body class="mb-1">
+            </b-card>-->
+            <b-card no-body class="mb-1">
                 <b-card-header header-tag="header" class="p-1" role="tab">
                             <span class="toggle_button" v-b-toggle.accordion-plan2>
                                 <b-icon-gear-wide-connected />
-                                План-график мероприятий (ТЕСТ)
+                                План-график мероприятий
                             </span>
                 </b-card-header>
                 <b-collapse id="accordion-plan2" accordion="my-accordion2" role="tabpanel">
