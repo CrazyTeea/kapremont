@@ -356,7 +356,7 @@ class SystemController extends RestController
             return [
                 'organization' => $user->organization,
                 'program' => $user->program,
-                'dku_doc'=>$user->organization->dkuDoc,
+                'dku_doc'=>$user->organization->dkuDoc ?? null,
                 'fio' => $user->fio,
                 'position' => $user->position,
                 'isAdmin' => self::$cans[5]

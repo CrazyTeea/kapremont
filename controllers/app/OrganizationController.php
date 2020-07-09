@@ -140,6 +140,12 @@ class OrganizationController extends AppController
         return $this->render('ObjectView');
     }
 
+    public function actionSetOld($id){
+        $org = Organizations::findOne($id);
+        $org->is_new = 0;
+        $org->save(false);
+    }
+
     public function commentPermision($obj_id)
     {
         $comment = Comments::find()->where(['id_user' => Yii::$app->user->id, 'id_obj' =>$obj_id])->one();
