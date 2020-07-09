@@ -141,9 +141,11 @@ class OrganizationController extends AppController
     }
 
     public function actionSetOld($id){
-        $org = Organizations::findOne($id);
-        $org->is_new = 0;
-        $org->save(false);
+        if (Yii::$app->user->can('mgsu')) {
+            $org = Organizations::findOne($id);
+            $org->is_new = 0;
+            $org->save(false);
+        }
     }
 
     public function commentPermision($obj_id)
