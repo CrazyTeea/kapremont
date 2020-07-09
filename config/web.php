@@ -157,6 +157,8 @@ $config = [
                 //НАДО ПЕРЕДЕЛАТЬ
                 'api/org-table/<id:\d+>' => '/app/organization/table-list',
                 'org/dku-doc/<id_org:\d+>' => '/app/organization/set-dku-doc',
+
+                'organization/set-old/<id:\d+>'=>'app/organization/set-old'
                 //'api/object/<id:\d+>' => '/app/organization/get-object-by-id'
             ],
         ],

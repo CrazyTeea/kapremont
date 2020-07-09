@@ -85,7 +85,13 @@
                             <label>{{ item.region }}</label>
                         </b-th>
                         <b-th class="normal-font-weight-for-sell cursor-pointer center-text-in-cell" @click="goToRef(item.id)">
-                            <label class="cursor-pointer">{{ item.name }}</label>
+                            <label class="cursor-pointer">
+                                {{ item.name }}
+                                <div v-if="item.is_new==='1'">
+                                    <b-badge variant="danger">!</b-badge>
+                                </div>
+                            </label>
+
                         </b-th>
                         <b-th class="normal-font-weight-for-sell center-text-in-cell">
                             <label>{{ item.quantity }}</label>
@@ -201,6 +207,7 @@ import {
     BTableSimple,
     BThead,
     BTr,
+    BBadge,
     BFormTextarea,
     BFormFile,
     BTh,
@@ -216,6 +223,7 @@ export default {
     components: {
         BFormTextarea,
         BAlert,
+        BBadge,
         BCollapse,
         BCard,
         BCardHeader,
@@ -304,8 +312,15 @@ export default {
                 this.bannerInfo.pop();
             }, timeout);
         },
-        goToRef(id) {
-            window.location = `/organization/list/${id}`;
+        async goToRef(id) {
+            await Axios.post(`/organization/set-old/${id}`,null,{
+                headers: {
+                    "X-CSRF-Token": this.csrf
+                }
+            }).finally(()=>{
+                window.location = `/organization/list/${id}`;
+            })
+
         },
         setDkuDoc(item,index){
             let graph = document.querySelector(`#file_input_${index}`);
