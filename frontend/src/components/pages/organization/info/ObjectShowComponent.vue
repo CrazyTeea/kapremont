@@ -576,10 +576,10 @@
                             <b-tbody>
                                 <b-tr  v-for="(item,index) in svedenia2" :key="index" @change="sendData(item)" :variant="!isFloat(item.step) ? 'success' : ''">
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        {{item.step + 1}}
+                                        {{getMonth(item.step)}}
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input style="font-size: 10px"  v-can:user,faiv_user,root v-if="item.canDelete" v-model="svedenia2[index].step_name" />
+                                        <b-form-input style="font-size: 10px"  v-can:user,faiv_user,root v-if="item.canDelete && item.step < 7" v-model="svedenia2[index].step_name" />
                                         <span v-else>{{item.step_name}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
@@ -932,6 +932,21 @@
                 },
                 permission:window.Permission,
                 realStatus:0,
+                curMonth:0,
+                months: [
+                    'январь',
+                    'февраль',
+                    'март',
+                    'апрель',
+                    'май',
+                    'июнь',
+                    'июль',
+                    'август',
+                    'сентябрь',
+                    'октябрь',
+                    'ноябрь',
+                    'декабрь'
+                ],
                 realStatusType:[
                     {
                         variant:'secondary',
@@ -1521,6 +1536,7 @@
             };
 
 
+
         },
         computed: {
             ...mapGetters(['getUser']),
@@ -2084,6 +2100,10 @@
                 } else if (izn === 4) {
                     return "Более 90%";
                 }
+            },
+            getMonth(step){
+                return step > 7 ? this.months[Math.round((step-7)*100)-1] : step + 1;
+
             }
         }
     };
