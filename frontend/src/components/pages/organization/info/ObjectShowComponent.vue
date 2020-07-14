@@ -579,7 +579,8 @@
                                         {{getMonth(item.step)}}
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
-                                        <b-form-input style="font-size: 10px"  v-can:user,faiv_user,root v-if="item.canDelete && item.step < 7" v-model="svedenia2[index].step_name" />
+                                        <b-form-input style="font-size: 10px"  v-can:user,faiv_user,root v-if="item.canDelete && item.step < 7" v-model="item.step_name" />
+                                        <b-form-select @change="sendData(item)" :plain="true" :options="months" style="font-size: 10px;-webkit-appearance: none;-moz-appearance: none;appearance: none;"  v-can:user,faiv_user,root v-else-if="item.canDelete && item.step > 7" v-model="item.step_name" />
                                         <span v-else>{{item.step_name}}</span>
                                     </b-td>
                                     <b-td v-if="!(item.hasOwnProperty('button') && item.button)">
@@ -872,6 +873,7 @@
     import {mapActions, mapGetters} from "vuex";
     import {
         BAlert,
+        BFormSelect,
         BBreadcrumb,
         BButton,
         BCard,
@@ -907,6 +909,7 @@
             BTableSimple,
             BTr,
             BTh,
+            BFormSelect,
             BThead,
             BTbody,
             BDropdown,
@@ -2102,7 +2105,7 @@
                 }
             },
             getMonth(step){
-                return step > 7 ? this.months[Math.round((step-7)*100)-1] : step + 1;
+                return step > 7 ? 'месяц-'+Math.round((step-7)*100) : step + 1;
 
             }
         }
