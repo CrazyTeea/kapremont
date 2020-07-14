@@ -612,7 +612,7 @@
                                     <!-- Подтверждающие документы -->
                                     <b-td style="max-width: 50px" v-if="!(item.hasOwnProperty('button') && item.button)">
                                         <!-- <label @click="debugItem(item, svedenia2[index], index)"> Debug item {{index}} </label> -->
-                                        {{item.help}}
+                                        <div class="text-center" >{{ item.step>7 ? 'Загрузить файл (не более 20 МБ) формата word, pdf, zip или rar c фотографиями выполненных работ.' : item.help}}</div>
                                         <b-form-input
                                                 v-can:user,root,faiv_user
                                                 placeholder="Ссылка на zakupki.gov.ru"
