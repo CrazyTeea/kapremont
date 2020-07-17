@@ -154,7 +154,7 @@ class ProgramObjectsController extends AppController
         $ret = ['success'=>$event->save(),'$event->doneExpert'=>$event->doneExpert,'model'=>$model_name,'errors'=>$event->getErrors()];
         $file = UploadedFile::getInstanceByName('file');
         if ($file){
-           $ret['file'] = EventsFiles::UploadOrUpdate($file, $is_event2 ? null : $event->id,$is_event2 ? $event->id : null);
+            $ret['file'] = EventsFiles::UploadOrUpdate($file, $is_event2 ? null : $event->id,$is_event2 ? $event->id : null);
         }
         return Json::encode($ret);
     }
@@ -287,13 +287,13 @@ class ProgramObjectsController extends AppController
                         $errors['ProObjectsNecessary'][] = $pr->getErrors();
                     }
 
-                  //  $deletedIDs = null;
-                   // $oldIds = ArrayHelper::map($progObjectsWaites,'id','id');
+                    //  $deletedIDs = null;
+                    // $oldIds = ArrayHelper::map($progObjectsWaites,'id','id');
                     $progObjectsWaites = ProgObjectsWaites::createMultiple(ProgObjectsWaites::className(), $progObjectsWaites);
                     ProgObjectsWaites::loadMultiple($progObjectsWaites, Yii::$app->request->post());
-                   // $deletedIDs = array_diff($oldIds, array_filter(ArrayHelper::map($progObjectsWaites, 'id', 'id')));
-                   // if (! empty($deletedIDs))
-                   //     ProgObjectsWaites::deleteAll(['id' => $deletedIDs]);
+                    // $deletedIDs = array_diff($oldIds, array_filter(ArrayHelper::map($progObjectsWaites, 'id', 'id')));
+                    // if (! empty($deletedIDs))
+                    //     ProgObjectsWaites::deleteAll(['id' => $deletedIDs]);
                     foreach ($progObjectsWaites as $index => $item) {
                         $pr = ProgObjectsWaites::findOne(['id_object' => $model->id, 'element' => $index]);
                         if (!$pr) {
@@ -307,12 +307,12 @@ class ProgramObjectsController extends AppController
                         $save &= $pr->save();
                         $errors['ProgObjectsWaites'][] = [$pr->getErrors()];
                     }
-                //    $oldIds = ArrayHelper::map($progObjectsRiscs,'id','id');
+                    //    $oldIds = ArrayHelper::map($progObjectsRiscs,'id','id');
                     $progObjectsRiscs = ProgObjectsRiscs::createMultiple(ProgObjectsRiscs::className(), $progObjectsRiscs);
                     ProgObjectsRiscs::loadMultiple($progObjectsRiscs, Yii::$app->request->post());
-                //    $deletedIDs = array_diff($oldIds, array_filter(ArrayHelper::map($progObjectsWaites, 'id', 'id')));
-                 //   if (! empty($deletedIDs))
-                  //      ProgObjectsRiscs::deleteAll(['id' => $deletedIDs]);
+                    //    $deletedIDs = array_diff($oldIds, array_filter(ArrayHelper::map($progObjectsWaites, 'id', 'id')));
+                    //   if (! empty($deletedIDs))
+                    //      ProgObjectsRiscs::deleteAll(['id' => $deletedIDs]);
                     foreach ($progObjectsRiscs as $index => $item) {
                         $pr = ProgObjectsRiscs::findOne(['id_object' => $model->id, 'element' => $index]);
                         if (!$pr){
@@ -565,18 +565,18 @@ class ProgramObjectsController extends AppController
                 'docList.types' => function($query) { return $query->select(['id', 'descriptor']); }])
             ->one();
         //$i = 0;
-    //    return Json::encode($obj->docList[0]->files);
+        //    return Json::encode($obj->docList[0]->files);
         foreach($obj->docList as $i=>$file) {
             $toSend[$i] = [
                 'name' =>  $file->files[0]->name,
                 'descriptor' => $file->types[0]->descriptor,
                 'label'=>$file->label
             ];
-          //  $i++;
+            //  $i++;
         }
 
         // echo "<pre>";
-         return Json::encode($toSend);
+        return Json::encode($toSend);
 
     }
 
@@ -604,7 +604,7 @@ class ProgramObjectsController extends AppController
 
         // echo "<pre>";
         // print_r($list_obj_id[0]['id']);
-         return Json::encode($kek);
+        return Json::encode($kek);
     }
 
 
@@ -626,7 +626,7 @@ class ProgramObjectsController extends AppController
     public function actionStatusRealize($id_org)
     {
         $select = ProgramObjects::find()->where(['system_status'=>1, 'id_org' => $id_org, 'status' => 5])->joinWith(['region'])->orderBy(['created_at'=>SORT_ASC])->all();
-        
+
         foreach($select as $query) {
             $toServe[] = [
                 'id' => $query->id,
@@ -647,10 +647,10 @@ class ProgramObjectsController extends AppController
             ];
         }
 
-        
+
         // echo "<pre>";
         // print_r($toServe);
-        return json_encode($toServe);
+        return Json::encode($toServe ?? []);
     }
 
 

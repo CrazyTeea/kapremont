@@ -15,7 +15,7 @@ class ComController extends Controller
         $comments = Comments::find()->where(['id_obj' => $id_obj])->all();
         $responce=[];
         foreach($comments as $comment) {
-                        
+
             $responce [] = [
                 'id' => $comment->id,
                 'message' => $comment->message,
@@ -42,7 +42,7 @@ class ComController extends Controller
         if($comment->save()) {
             return json_encode($comment->id);
         }
-        
+
         return false;
     }
 

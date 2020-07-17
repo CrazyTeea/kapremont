@@ -16,37 +16,37 @@
 </template>
 
 <script>
-import {mapActions, mapGetters} from "vuex";
-import {userPanel} from "../../../organisms";
-import {BButton, BTable, VBToggle} from "bootstrap-vue";
-export default {
+    import {mapActions, mapGetters} from "vuex";
+    import {userPanel} from "../../../organisms";
+    import {BButton, BTable, VBToggle} from "bootstrap-vue";
+    export default {
 
-    directives:{
-        'b-toggle':VBToggle
-    },
-    components:{
-        'b-button':BButton,
-        'b-table':BTable,
-        userPanel
-    },
-    data(){
-        return {
-            canChange: window.canChange
-        }  
-    },
-    computed: {
-        ...mapGetters(['getPageData','getUser']),
-    },
-    methods: {
-        link() {
-            return window.location.href = `/organization/update/${this.getUser.organization.id}`
+        directives:{
+            'b-toggle':VBToggle
         },
-        ...mapActions(['requestPageData'])
-    },
-    mounted() {
-        this.requestPageData({pageName:"orgInfo"});
+        components:{
+            'b-button':BButton,
+            'b-table':BTable,
+            userPanel
+        },
+        data(){
+            return {
+                canChange: window.canChange
+            }
+        },
+        computed: {
+            ...mapGetters(['getPageData','getUser']),
+        },
+        methods: {
+            link() {
+                return window.location.href = `/organization/update/${this.getUser.organization.id}`
+            },
+            ...mapActions(['requestPageData'])
+        },
+        mounted() {
+            this.requestPageData({pageName:"orgInfo"});
+        }
     }
-}
 </script>
 
 <style scoped>

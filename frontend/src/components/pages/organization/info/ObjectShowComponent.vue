@@ -570,7 +570,7 @@
                                     <b-th>Комментарий (текстовое поле Заполняет ВУЗ)</b-th>
                                     <b-th>Эксперт<br>МОН +/-
                                     </b-th>
-                                   <b-th>Комментарий эксперта МОН )</b-th>
+                                    <b-th>Комментарий эксперта МОН )</b-th>
                                 </b-tr>
                             </b-thead>
                             <b-tbody>
@@ -1939,7 +1939,7 @@
                                 }
                             }
                             else {
-                              //  console.log(parseFloat(item.model.step));
+                                //  console.log(parseFloat(item.model.step));
                                 let i = -1;
                                 let s = 0.01;
                                 while (i === -1) {
@@ -1947,7 +1947,7 @@
                                     i = this.svedenia2.map(e => {
                                         return e.step
                                     }).indexOf(parseFloat(item.model.step) - s);
-                                   // console.log(i,s);
+                                    // console.log(i,s);
                                     s = Math.round((s+0.01+Number.EPSILON)*1000)/1000
 
                                 }
@@ -1978,7 +1978,7 @@
 
                     this.svedenia2.sort((a,b)=>{return a.step-b.step});
 
-                //    console.log(this.svedenia2)
+                    //    console.log(this.svedenia2)
 
                     this.svedenia.items.push({
                         step:'Готово',

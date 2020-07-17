@@ -32,7 +32,7 @@ class AppController extends \yii\web\Controller
         $test = new ProgramStatus(38);
         // $test->isNotApproved();
         // $test->isDep();
-        
+
         // return $test->isNotApproved();
 
         // ProgramObjects::updateAll(['status' => 2]);

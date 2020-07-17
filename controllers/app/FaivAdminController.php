@@ -67,5 +67,5 @@ class FaivAdminController extends Controller
         }
 
         return $filters ?? [];
-    } 
+    }
 }

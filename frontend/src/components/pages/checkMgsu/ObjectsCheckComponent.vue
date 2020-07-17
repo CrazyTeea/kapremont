@@ -74,92 +74,92 @@
 </template>
 
 <script>
-import Axios from "axios";
-import { BBadge, BTableSimple, BCard, BCardHeader, BCollapse, BCardBody, BInputGroup, BFormInput, BInputGroupAppend, BButton, BTr, BTh, BTbody, BPagination, BThead, VBToggle } from "bootstrap-vue";
-export default {
-    directives: {
-        "b-toggle": VBToggle
-    },
-    components: {
-        BBadge,
-        BButton,
-        BInputGroupAppend,
-        BFormInput,
-        BInputGroup,
-        BCardBody,
-        BCollapse,
-        BTableSimple,
-        BTbody,
-        BTr,
-        BTh,
-        BPagination,
-        BThead,
-        BCard,
-        BCardHeader
-    },
-    props: ["status", "dep_status", "dku_status", "or_where"],
-    data() {
-        return {
-            csrf: document.getElementsByName("csrf-token")[0].content,
-            filters: {
-                status: null,
-                id_org: null,
-                id: null,
-                dep_status: null,
-                dku_status: null,
-                or_where: null
-            },
-            items: [],
-            currentPage: 1,
-            totalRows: [],
-            perPage: 10
-        };
-    },
-    async mounted() {
-        await this.status;
-        await this.getObjects();
-    },
-    watch: {
-        currentPage() {
-            let offset = (parseInt(this.currentPage) - 1) * 10;
-            this.getObjects(offset);
+    import Axios from "axios";
+    import { BBadge, BTableSimple, BCard, BCardHeader, BCollapse, BCardBody, BInputGroup, BFormInput, BInputGroupAppend, BButton, BTr, BTh, BTbody, BPagination, BThead, VBToggle } from "bootstrap-vue";
+    export default {
+        directives: {
+            "b-toggle": VBToggle
         },
-        filters: {
-            handler() {
-                this.getObjects();
+        components: {
+            BBadge,
+            BButton,
+            BInputGroupAppend,
+            BFormInput,
+            BInputGroup,
+            BCardBody,
+            BCollapse,
+            BTableSimple,
+            BTbody,
+            BTr,
+            BTh,
+            BPagination,
+            BThead,
+            BCard,
+            BCardHeader
+        },
+        props: ["status", "dep_status", "dku_status", "or_where"],
+        data() {
+            return {
+                csrf: document.getElementsByName("csrf-token")[0].content,
+                filters: {
+                    status: null,
+                    id_org: null,
+                    id: null,
+                    dep_status: null,
+                    dku_status: null,
+                    or_where: null
+                },
+                items: [],
+                currentPage: 1,
+                totalRows: [],
+                perPage: 10
+            };
+        },
+        async mounted() {
+            await this.status;
+            await this.getObjects();
+        },
+        watch: {
+            currentPage() {
+                let offset = (parseInt(this.currentPage) - 1) * 10;
+                this.getObjects(offset);
             },
-            deep: true
-        }
-    },
-    methods: {
-        getPriority(num) {
-            let id = parseInt(num);
-            if (id == 0) {
-                return "Приоритетный";
-            } else {
-                return "Резервный";
+            filters: {
+                handler() {
+                    this.getObjects();
+                },
+                deep: true
             }
         },
-        goTo(id_obj) {
-            window.location = `/organization/obj/${id_obj}`;
-        },
-        async getObjects(offset = 0) {
-            let form = new FormData();
-            this.filters.status = this.status;
-            this.filters.dep_status = this.dep_status;
-            this.filters.dku_status = this.dku_status;
-            this.filters.or_where = this.or_where;
-            // form.append("form", JSON.stringify({ status: this.status }));
-            form.append("form", JSON.stringify(this.filters));
-            return Axios.post(`/api/mgsu/objects-table/${offset}`, form, {
-                headers: {
-                    "X-CSRF-Token": this.csrf
+        methods: {
+            getPriority(num) {
+                let id = parseInt(num);
+                if (id == 0) {
+                    return "Приоритетный";
+                } else {
+                    return "Резервный";
                 }
-            }).then((res) => {
-                this.items = res.data.items;
-                this.totalRows[this.status] = res.data.count;
-            });
+            },
+            goTo(id_obj) {
+                window.location = `/organization/obj/${id_obj}`;
+            },
+            async getObjects(offset = 0) {
+                let form = new FormData();
+                this.filters.status = this.status;
+                this.filters.dep_status = this.dep_status;
+                this.filters.dku_status = this.dku_status;
+                this.filters.or_where = this.or_where;
+                // form.append("form", JSON.stringify({ status: this.status }));
+                form.append("form", JSON.stringify(this.filters));
+                return Axios.post(`/api/mgsu/objects-table/${offset}`, form, {
+                    headers: {
+                        "X-CSRF-Token": this.csrf
+                    }
+                }).then((res) => {
+                    this.items = res.data.items;
+                    this.totalRows[this.status] = res.data.count;
+                });
+            }
         }
-    }
-};
+    };
 </script>

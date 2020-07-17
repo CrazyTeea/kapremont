@@ -31,7 +31,7 @@ class ProgramStatus
             } else {
                 $this->setStatus(Organizations::PROGRAM_STATUS_DEP_REVIEWED);
             }
-        } 
+        }
     }
 
     /**
@@ -48,7 +48,7 @@ class ProgramStatus
     {
         $v_obr = true;
         $na_dorabotku = false;
-    
+
         $objs = ProgramObjects::find()->where(['id_org' => $this->id_org])->all();
         foreach($objs as $obj) {
             if($obj->astatus->id == ApproveStatus::STATUS_NOT_SEND) {
@@ -58,7 +58,7 @@ class ProgramStatus
                 $na_dorabotku = true;
             }
         }
-        
+
         if($v_obr == true && $na_dorabotku == true) {
             return true;
         }

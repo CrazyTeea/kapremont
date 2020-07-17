@@ -39,7 +39,7 @@ class ProgramController extends AppController
 
         $gg = Program::find()->where(['id_org'=>$id])->one();
 
-       // $gg = ArrayHelper::merge($gg,['organization'=>$gg->org->name]);
+        // $gg = ArrayHelper::merge($gg,['organization'=>$gg->org->name]);
 
 
         return Json::encode($gg);

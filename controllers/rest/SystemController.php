@@ -168,8 +168,8 @@ class SystemController extends RestController
                         'Более 90%'
                     ];
                     $r = [
-                      'Комплексный',
-                      'Выборочный'
+                        'Комплексный',
+                        'Выборочный'
                     ];
                     $s_sum = 0; $sum_sum = 0;
                     foreach ($progObj as $index=>$item) {

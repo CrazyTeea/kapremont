@@ -98,7 +98,7 @@
                         </b-th>
                         <b-th class="normal-font-weight-for-sell center-text-in-cell">
                             <a v-if="item.file_exist === '1'" :href="`/program/download-doc/${item.id}`" class="a-decorating"
-                                ><b-icon icon="file-earmark-arrow-down" scale="2" vriant="success"></b-icon
+                            ><b-icon icon="file-earmark-arrow-down" scale="2" vriant="success"></b-icon
                             ></a>
                             <b-icon v-else icon="alert-circle" scale="2"></b-icon>
                         </b-th>
@@ -110,10 +110,10 @@
                             <b-form-select
                                     v-can:dku
                                     size="sm"
-                                @change="setDkuStatus(item)"
+                                    @change="setDkuStatus(item)"
 
-                                v-model="item.dku_status"
-                                :options="[
+                                    v-model="item.dku_status"
+                                    :options="[
                                     {value: 'not', text: 'В обработке'},
                                     {value: 'approved', text: 'Рассмотрено ДКУ'},
                                     {value: 'rejected', text: 'Резерв'}
@@ -125,9 +125,9 @@
                             <b-form-select
                                     v-can:dep
                                     size="sm"
-                                @change="setDepStatus(item)"
-                                v-model="item.dep_status"
-                                :options="[
+                                    @change="setDepStatus(item)"
+                                    v-model="item.dep_status"
+                                    :options="[
                                     {value: 'not', text: 'В обработке'},
                                     {value: 'approved', text: 'Согласовано ДЭП'},
                                     {value: 'rejected', text: 'Резерв'}
@@ -137,16 +137,16 @@
                         <b-th v-can:dku,dku_user style="max-width: 100px" class="normal-font-weight-for-sell center-text-in-cell">
                             <b-form-input v-can:dku
                                           size="sm"
-                                    @change="setDkuAtz(item)"
-                                    v-model="item.dku_atz"
+                                          @change="setDkuAtz(item)"
+                                          v-model="item.dku_atz"
                             ></b-form-input>
                             <span v-can:dku_user>{{item.dku_atz}}</span>
                         </b-th>
                         <b-th v-can:dku,dku_user class="normal-font-weight-for-sell center-text-in-cell">
                             <b-form-textarea
                                     size="sm"
-                                          @change="setDkuComment(item)"
-                                          v-model="item.dku_comment"
+                                    @change="setDkuComment(item)"
+                                    v-model="item.dku_comment"
                             ></b-form-textarea>
                         </b-th>
                         <b-th v-can:dku,dku_user class="normal-font-weight-for-sell center-text-in-cell">
@@ -192,263 +192,263 @@
 </template>
 
 <script>
-import Axios from "axios";
-import {
-    BAlert,
-    BCard,
-    BCardHeader,
-    BInputGroup,
-    BFormInput,
-    BInputGroupAppend,
-    BCollapse,
-    BCardBody,
-    BButton,
-    BFormSelect,
-    BTableSimple,
-    BThead,
-    BTr,
-    BBadge,
-    BFormTextarea,
-    BFormFile,
-    BTh,
-    BTbody,
-    BPagination,
-    VBToggle
-} from "bootstrap-vue";
-export default {
-    props: ['state'],
-    directives: {
-        "b-toggle": VBToggle,
-    },
-    components: {
-        BFormTextarea,
+    import Axios from "axios";
+    import {
         BAlert,
-        BBadge,
-        BCollapse,
         BCard,
         BCardHeader,
-        BCardBody,
         BInputGroup,
         BFormInput,
         BInputGroupAppend,
+        BCollapse,
+        BCardBody,
         BButton,
         BFormSelect,
         BTableSimple,
         BThead,
         BTr,
-        BTh,
+        BBadge,
+        BFormTextarea,
         BFormFile,
+        BTh,
         BTbody,
         BPagination,
-    },
-    data() {
-        return {
-            bannerInfo: [],
-            selected:null,
-            filters: {
-                state: null,
-                id: null,
-                region: null,
-                name: null,
-                quantity: null,
-                file_exist: null,
-                p_status: null,
+        VBToggle
+    } from "bootstrap-vue";
+    export default {
+        props: ['state'],
+        directives: {
+            "b-toggle": VBToggle,
+        },
+        components: {
+            BFormTextarea,
+            BAlert,
+            BBadge,
+            BCollapse,
+            BCard,
+            BCardHeader,
+            BCardBody,
+            BInputGroup,
+            BFormInput,
+            BInputGroupAppend,
+            BButton,
+            BFormSelect,
+            BTableSimple,
+            BThead,
+            BTr,
+            BTh,
+            BFormFile,
+            BTbody,
+            BPagination,
+        },
+        data() {
+            return {
+                bannerInfo: [],
+                selected:null,
+                filters: {
+                    state: null,
+                    id: null,
+                    region: null,
+                    name: null,
+                    quantity: null,
+                    file_exist: null,
+                    p_status: null,
+                },
+                options: {
+                    dku_status:[
+                        {value: 'not', text: 'В обработке'},
+                        {value: 'approved', text: 'Рассмотрено ДКУ'},
+                        {value: 'rejected', text: 'Резерв'}
+                    ],
+                    dep_status:[
+                        {value: 'not', text: 'В обработке'},
+                        {value: 'approved', text: 'Согласовано ДЭП'},
+                        {value: 'rejected', text: 'Резерв'}
+                    ],
+                    quantity: [
+                        { value: "up", text: "По возрастанию" },
+                        { value: "down", text: "По убыванию" }
+                    ],
+                    file_exist: [
+                        { value: "1", text: "Выгружено" },
+                        { value: "0", text: "Не выгружено" }
+                    ],
+                    p_status: [
+                        { value: "1", text: "Отправлена" },
+                        { value: "0", text: "Не отправлена" }
+                    ],
+                    status: [
+                        { value: "1", text: "В обработке" },
+                        { value: "2", text: "Рекомендуется к согласованию" },
+                        { value: "3", text: "Не рекомендуется к согласованию" },
+                        { value: "4", text: "Возвращено на доработку" }
+                    ]
+                },
+                csrf: document.getElementsByName("csrf-token")[0].content,
+                items: [],
+                currentPage: 1,
+                perPage: 10,
+                totalRows: 1
+            };
+        },
+        async mounted() {
+            this.filters.state = this.state;
+            this.getTable();
+        },
+        methods: {
+            getDkuStatus(s){
+                return this.options.dku_status.find(item=>item.value == s).text;
             },
-            options: {
-                dku_status:[
-                    {value: 'not', text: 'В обработке'},
-                    {value: 'approved', text: 'Рассмотрено ДКУ'},
-                    {value: 'rejected', text: 'Резерв'}
-                ],
-                dep_status:[
-                    {value: 'not', text: 'В обработке'},
-                    {value: 'approved', text: 'Согласовано ДЭП'},
-                    {value: 'rejected', text: 'Резерв'}
-                ],
-                quantity: [
-                    { value: "up", text: "По возрастанию" },
-                    { value: "down", text: "По убыванию" }
-                ],
-                file_exist: [
-                    { value: "1", text: "Выгружено" },
-                    { value: "0", text: "Не выгружено" }
-                ],
-                p_status: [
-                    { value: "1", text: "Отправлена" },
-                    { value: "0", text: "Не отправлена" }
-                ],
-                status: [
-                    { value: "1", text: "В обработке" },
-                    { value: "2", text: "Рекомендуется к согласованию" },
-                    { value: "3", text: "Не рекомендуется к согласованию" },
-                    { value: "4", text: "Возвращено на доработку" }
-                ]
+            getDepStatus(s){
+                return this.options.dep_status.find(item=>item.value == s).text;
             },
-            csrf: document.getElementsByName("csrf-token")[0].content,
-            items: [],
-            currentPage: 1,
-            perPage: 10,
-            totalRows: 1
-        };
-    },
-    async mounted() {
-        this.filters.state = this.state;
-        this.getTable();
-    },
-    methods: {
-        getDkuStatus(s){
-          return this.options.dku_status.find(item=>item.value == s).text;
-        },
-        getDepStatus(s){
-            return this.options.dep_status.find(item=>item.value == s).text;
-        },
-        setBanner(variant, message, timeout = 2500) {
-            this.bannerInfo.unshift({
-                show: true,
-                variant: variant,
-                message: message
-            });
-            setTimeout(() => {
-                this.bannerInfo.pop();
-            }, timeout);
-        },
-        async goToRef(id) {
-            await Axios.post(`/organization/set-old/${id}`,null,{
-                headers: {
-                    "X-CSRF-Token": this.csrf
-                }
-            }).finally(()=>{
-                window.location = `/organization/list/${id}`;
-            })
+            setBanner(variant, message, timeout = 2500) {
+                this.bannerInfo.unshift({
+                    show: true,
+                    variant: variant,
+                    message: message
+                });
+                setTimeout(() => {
+                    this.bannerInfo.pop();
+                }, timeout);
+            },
+            async goToRef(id) {
+                await Axios.post(`/organization/set-old/${id}`,null,{
+                    headers: {
+                        "X-CSRF-Token": this.csrf
+                    }
+                }).finally(()=>{
+                    window.location = `/organization/list/${id}`;
+                })
 
-        },
-        setDkuDoc(item,index){
-            let graph = document.querySelector(`#file_input_${index}`);
-            graph = graph.files[0];
-            let form = new FormData();
-            form.append('dku_doc', graph)
-            Axios.post(`/org/dku-doc/${item.id}`, form, {
-                headers: {
-                    "X-CSRF-Token": this.csrf
-                }
-            }).then(res => {
-                if (res.data.success){
+            },
+            setDkuDoc(item,index){
+                let graph = document.querySelector(`#file_input_${index}`);
+                graph = graph.files[0];
+                let form = new FormData();
+                form.append('dku_doc', graph)
+                Axios.post(`/org/dku-doc/${item.id}`, form, {
+                    headers: {
+                        "X-CSRF-Token": this.csrf
+                    }
+                }).then(res => {
+                    if (res.data.success){
+                        this.getTable()
+                        this.setBanner('success', `Данные внесены успешно: ${item.name}`, 3200)
+                    }
+
+                }).catch(() => {
+                    this.setBanner("danger", "Что-то пошло не так! Обратитесь в служюу поддержки.")
+                })
+            },
+            getTable(offset = 0) {
+                let form = new FormData();
+                form.append("form", JSON.stringify(this.filters));
+                Axios.post(`/api/mgsu/main-table/${offset}`, form, {
+                    headers: {
+                        "X-CSRF-Token": this.csrf
+                    }
+                }).then(res => {
+                    console.log(res.data.rows)
+                    this.items = res.data.rows;
+                    this.items.forEach(item=>{
+                        item.dku_atz = item.dku_atz ? Number(item.dku_atz).toLocaleString() : null;
+                    })
+                    this.totalRows = res.data.count.quantity;
+                });
+            },
+            setDkuAtz(item) {
+                let form = new FormData();
+                item.dku_atz = Number(item.dku_atz).toLocaleString();
+                form.append('dku_atz', item.dku_atz.replace(/\s/g,'').replace(',','.'))
+                Axios.post(`/api/set-status/dku/${item.id}`, form, {
+                    headers: {
+                        "X-CSRF-Token": this.csrf
+                    }
+                }).then(res => {
                     this.getTable()
                     this.setBanner('success', `Данные внесены успешно: ${item.name}`, 3200)
-                }
-
-            }).catch(() => {
-                this.setBanner("danger", "Что-то пошло не так! Обратитесь в служюу поддержки.")
-            })
-        },
-        getTable(offset = 0) {
-            let form = new FormData();
-            form.append("form", JSON.stringify(this.filters));
-            Axios.post(`/api/mgsu/main-table/${offset}`, form, {
-                headers: {
-                    "X-CSRF-Token": this.csrf
-                }
-            }).then(res => {
-                console.log(res.data.rows)
-                this.items = res.data.rows;
-                this.items.forEach(item=>{
-                    item.dku_atz = item.dku_atz ? Number(item.dku_atz).toLocaleString() : null;
+                }).catch(() => {
+                    this.setBanner("danger", "Что-то пошло не так! Обратитесь в служюу поддержки.")
                 })
-                this.totalRows = res.data.count.quantity;
-            });
-        },
-        setDkuAtz(item) {
-            let form = new FormData();
-            item.dku_atz = Number(item.dku_atz).toLocaleString();
-            form.append('dku_atz', item.dku_atz.replace(/\s/g,'').replace(',','.'))
-            Axios.post(`/api/set-status/dku/${item.id}`, form, {
-                headers: {
-                    "X-CSRF-Token": this.csrf
-                }
-            }).then(res => {
-                this.getTable()
-                this.setBanner('success', `Данные внесены успешно: ${item.name}`, 3200)
-            }).catch(() => {
-                this.setBanner("danger", "Что-то пошло не так! Обратитесь в служюу поддержки.")
-            })
 
-        },
-        setDkuComment(item) {
-            let form = new FormData();
-            form.append('dku_comment', item.dku_comment)
-            Axios.post(`/api/set-comment/dku/${item.id}`, form, {
-                headers: {
-                    "X-CSRF-Token": this.csrf
-                }
-            }).then(res => {
-                this.getTable()
-                this.setBanner('success', `Данные внесены успешно: ${item.name}`, 3200)
-            }).catch(() => {
-                this.setBanner("danger", "Что-то пошло не так! Обратитесь в служюу поддержки.")
-            })
-
-        },
-        setDkuStatus(item) {
-            let form = new FormData();
-            form.append('dku_status', item.dku_status)
-            Axios.post(`/api/set-status/dku/${item.id}`, form, {
-                headers: {
-                    "X-CSRF-Token": this.csrf
-                }
-            }).then(res => {
-                this.getTable()
-                this.setBanner('success', `Статус успешно изменен: ${item.name}`, 3200)
-            }).catch(() => {
-                this.setBanner("danger", "Что-то пошло не так! Обратитесь в служюу поддержки.")
-            })
-        },
-        setDepStatus(item) {
-            let form = new FormData();
-            form.append('dep_status', item.dep_status)
-            Axios.post(`/api/set-status/dep/${item.id}`, form, {
-                headers: {
-                    "X-CSRF-Token": this.csrf
-                }
-            }).then(res => {
-                this.getTable()
-                this.setBanner('success', `Статус успешно изменен: ${item.name}`, 3200)
-            }).catch(() => {
-                this.setBanner("danger", "Что-то пошло не так! Обратитесь в служюу поддержки.")
-            })
-        }
-    },
-    watch: {
-        currentPage() {
-            let offset = (parseInt(this.currentPage) - 1) * 10;
-            this.getTable(offset);
-        },
-        filters: {
-            handler() {
-                this.getTable();
             },
-            deep: true
+            setDkuComment(item) {
+                let form = new FormData();
+                form.append('dku_comment', item.dku_comment)
+                Axios.post(`/api/set-comment/dku/${item.id}`, form, {
+                    headers: {
+                        "X-CSRF-Token": this.csrf
+                    }
+                }).then(res => {
+                    this.getTable()
+                    this.setBanner('success', `Данные внесены успешно: ${item.name}`, 3200)
+                }).catch(() => {
+                    this.setBanner("danger", "Что-то пошло не так! Обратитесь в служюу поддержки.")
+                })
+
+            },
+            setDkuStatus(item) {
+                let form = new FormData();
+                form.append('dku_status', item.dku_status)
+                Axios.post(`/api/set-status/dku/${item.id}`, form, {
+                    headers: {
+                        "X-CSRF-Token": this.csrf
+                    }
+                }).then(res => {
+                    this.getTable()
+                    this.setBanner('success', `Статус успешно изменен: ${item.name}`, 3200)
+                }).catch(() => {
+                    this.setBanner("danger", "Что-то пошло не так! Обратитесь в служюу поддержки.")
+                })
+            },
+            setDepStatus(item) {
+                let form = new FormData();
+                form.append('dep_status', item.dep_status)
+                Axios.post(`/api/set-status/dep/${item.id}`, form, {
+                    headers: {
+                        "X-CSRF-Token": this.csrf
+                    }
+                }).then(res => {
+                    this.getTable()
+                    this.setBanner('success', `Статус успешно изменен: ${item.name}`, 3200)
+                }).catch(() => {
+                    this.setBanner("danger", "Что-то пошло не так! Обратитесь в служюу поддержки.")
+                })
+            }
+        },
+        watch: {
+            currentPage() {
+                let offset = (parseInt(this.currentPage) - 1) * 10;
+                this.getTable(offset);
+            },
+            filters: {
+                handler() {
+                    this.getTable();
+                },
+                deep: true
+            }
         }
-    }
-};
+    };
 </script>
 
 <style>
-.table-overflow-hidden {
-    overflow: hidden !important;
-    overflow-x: scroll !important;
-}
-.normal-font-weight-for-sell {
-    font-weight: normal !important;
-}
-.center-text-in-cell {
-    vertical-align: middle !important;
-    text-align: center !important;
-}
-.cursor-pointer {
-    cursor: pointer !important;
-}
-.a-decorating {
-    text-decoration: none !important;
-    color: darkgreen !important;
-}
+    .table-overflow-hidden {
+        overflow: hidden !important;
+        overflow-x: scroll !important;
+    }
+    .normal-font-weight-for-sell {
+        font-weight: normal !important;
+    }
+    .center-text-in-cell {
+        vertical-align: middle !important;
+        text-align: center !important;
+    }
+    .cursor-pointer {
+        cursor: pointer !important;
+    }
+    .a-decorating {
+        text-decoration: none !important;
+        color: darkgreen !important;
+    }
 </style>
