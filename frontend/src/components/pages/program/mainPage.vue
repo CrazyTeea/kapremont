@@ -134,38 +134,38 @@
           >
             <template v-slot:cell(value)="data">
 
-                <b-form-input
-                        @change="setProgramValue('finance_volume', data.item.value)"
-                        style="min-width: 120px"
-                        v-model="data.item.value"
-                        type="number"
-                        v-can:faiv_user
-                ></b-form-input>
-                <span v-can:user>{{ data.item.value }}</span>
+              <b-form-input
+                      @change="setProgramValue('finance_volume', data.item.value)"
+                      style="min-width: 120px"
+                      v-model="data.item.value"
+                      type="number"
+                      v-can:faiv_user
+              ></b-form-input>
+              <span v-can:user>{{ data.item.value }}</span>
 
             </template>
             <template v-slot:cell(value)="data">
 
-                <b-form-input
-                        @change="setProgramValue('finance_events', data.item.value)"
-                        style="min-width: 120px"
-                        v-model="data.item.value"
-                        type="number"
-                        v-can:faiv_user
-                ></b-form-input>
-                <span v-can:user>{{ data.item.value }}</span>
+              <b-form-input
+                      @change="setProgramValue('finance_events', data.item.value)"
+                      style="min-width: 120px"
+                      v-model="data.item.value"
+                      type="number"
+                      v-can:faiv_user
+              ></b-form-input>
+              <span v-can:user>{{ data.item.value }}</span>
 
             </template>
             <template v-slot:cell(value)="data">
 
-                <b-form-input
-                        @change="setProgramValue('cost', data.item.value)"
-                        style="min-width: 120px"
-                        v-model="data.item.value"
-                        type="number"
-                        v-can:faiv_user
-                ></b-form-input>
-                <span v-can:user>{{ data.item.value }}</span>
+              <b-form-input
+                      @change="setProgramValue('cost', data.item.value)"
+                      style="min-width: 120px"
+                      v-model="data.item.value"
+                      type="number"
+                      v-can:faiv_user
+              ></b-form-input>
+              <span v-can:user>{{ data.item.value }}</span>
 
             </template>
           </b-table>

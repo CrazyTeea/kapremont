@@ -69,7 +69,7 @@ class UploadController extends Controller
         //             ->where(['org.id' => 104]);
         //     }], true, 'JOIN')
         //     ->where(['in', 'user.id', $rolesId])->all();
-        
+
         // foreach($selects as $select) {
         //     $toServ[] = [
         //         'id' => $select->organization->id,
@@ -78,7 +78,7 @@ class UploadController extends Controller
         //         'region' => $select->organization->region,
         //         'dep_status' => $select->organization->dep_status,
         //         'dku_status' => $select->organization->dku_status
-        //     ];   
+        //     ];
         // }
 
         echo "<pre>";

@@ -40,8 +40,8 @@ class OrganizationsController extends RestController
             $org = Organizations::findOne($data->id);
             if ($org)
                 return [
-                "org" =>$org,
-                "region"=>$org->region
+                    "org" =>$org,
+                    "region"=>$org->region
                 ];
         }
     }

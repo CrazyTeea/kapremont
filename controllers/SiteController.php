@@ -146,7 +146,7 @@ class SiteController extends Controller
                     return $this->redirect(['/program']);
                 }
                 Yii::$app->session->setFlash("auth_error", "Ошибка входа!");
-               // return $this->redirect(['site/login']);
+                // return $this->redirect(['site/login']);
             }
         }
         else if ($model->load(Yii::$app->request->post()) && $model->login()) {
@@ -229,7 +229,7 @@ class SiteController extends Controller
 
             return $this->refresh();
         }
-        
+
         return $this->render('contact', [
             'model' => $model,
         ]);

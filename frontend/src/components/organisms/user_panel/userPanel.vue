@@ -20,29 +20,29 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
-export default {
-    name: "userPanel",
-    data() {
-        return {
-            user: {}
-        };
-    },
-    computed: {
-        ...mapGetters(["getUser"])
-    },
-    methods: {
-        ...mapActions(["requestUser"])
-    },
-    mounted() {
-        this.requestUser();
-        // this.user = this.getUser;
-    }
-};
+    import { mapActions, mapGetters } from "vuex";
+    export default {
+        name: "userPanel",
+        data() {
+            return {
+                user: {}
+            };
+        },
+        computed: {
+            ...mapGetters(["getUser"])
+        },
+        methods: {
+            ...mapActions(["requestUser"])
+        },
+        mounted() {
+            this.requestUser();
+            // this.user = this.getUser;
+        }
+    };
 </script>
 
 <style scoped>
-#user_card_title {
-    font-size: 85%;
-}
+    #user_card_title {
+        font-size: 85%;
+    }
 </style>

@@ -92,11 +92,11 @@ class FilterBuilder
 
     public function getWhere(): array
     {
-        return $this->whereClouse ?? []; 
+        return $this->whereClouse ?? [];
     }
 
     public function getWhereLike(): array
     {
-        return $this->whereLikeClouse ?? []; 
+        return $this->whereLikeClouse ?? [];
     }
 }

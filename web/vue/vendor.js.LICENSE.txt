@@ -1,5 +1,5 @@
 /*!
-  * vue-router v3.3.0
+  * vue-router v3.3.4
   * (c) 2020 Evan You
   * @license MIT
   */
@@ -13,10 +13,10 @@
  */
 
 /*!
- * Platform.js <https://mths.be/platform>
- * Copyright 2014-2018 Benjamin Tan <https://bnjmnt4n.now.sh/>
- * Copyright 2011-2013 John-David Dalton <http://allyoucanleet.com/>
- * Available under MIT license <https://mths.be/mit>
+ * Platform.js v1.3.6
+ * Copyright 2014-2020 Benjamin Tan
+ * Copyright 2011-2013 John-David Dalton
+ * Available under MIT license
  */
 
 /*!
@@ -26,7 +26,7 @@
  */
 
 /*!
- * vuex v3.4.0
+ * vuex v3.5.1
  * (c) 2020 Evan You
  * @license MIT
  */

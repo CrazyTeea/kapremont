@@ -31,7 +31,7 @@ class ShitController extends Controller
                 function($query) use ($get){
                     return $query->joinWith(['region'])
                         ->andWhere(['like','regions.region',$get['region']]);
-            }]);
+                }]);
 
         if (isset($get['org_name']) and $get['org_name']!='')
             $programs->joinWith(['org'])->andWhere(['like','organizations.name',$get['org_name']]);

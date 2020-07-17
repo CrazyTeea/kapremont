@@ -13,10 +13,10 @@
                     <b-th class="font-normal-first-colomn">
                         <label v-if="index < 5">{{ item.aim }}</label>
                         <b-form-input
-                            v-else
-                            type="text"
-                            :name="`${modelName}[${index}][aim]`"
-                            v-model="item.aim"
+                                v-else
+                                type="text"
+                                :name="`${modelName}[${index}][aim]`"
+                                v-model="item.aim"
                         ></b-form-input>
                     </b-th>
                     <b-th>
@@ -43,10 +43,10 @@
                     <b-th class="font-normal-first-colomn">
                         <label v-if="index < 5">{{ item.changes }}</label>
                         <b-form-input
-                            v-else
-                            type="text"
-                            :name="`${modelName}[${index}][changes]`"
-                            v-model="item.changes"
+                                v-else
+                                type="text"
+                                :name="`${modelName}[${index}][changes]`"
+                                v-model="item.changes"
                         ></b-form-input>
                     </b-th>
                 </b-tr>
@@ -54,19 +54,19 @@
             <b-tfoot>
                 <b-tr>
                     <b-td
-                        @click="deleteLastRow()"
-                        v-if="dataFirst.length > 6"
-                        colspan="2"
-                        variant="secondary"
-                        class="text-right text-danger"
+                            @click="deleteLastRow()"
+                            v-if="dataFirst.length > 6"
+                            colspan="2"
+                            variant="secondary"
+                            class="text-right text-danger"
                     >
                         Удалить строку
                     </b-td>
                     <b-td
-                        @click="addNewRow()"
-                        colspan="3"
-                        variant="secondary"
-                        class="text-right text-info"
+                            @click="addNewRow()"
+                            colspan="3"
+                            variant="secondary"
+                            class="text-right text-info"
                     >
                         Добавить строку
                     </b-td>
@@ -77,110 +77,110 @@
 </template>
 
 <script>
-import {BFormInput,
-    BFormSelect,
-    BTableSimple,
-    BTbody, BTfoot,
-    BTh, BThead, BTd,
-    BTr, VBToggle} from "bootstrap-vue";
-
-export default {
-    directives:{
-        'b-toggle':VBToggle
-    },
-    components:{
-        BFormInput,
+    import {BFormInput,
+        BFormSelect,
         BTableSimple,
-        BThead,
-        BTr,
-        BTh,
-        BTd,
-        BTbody,
-        BTfoot,
-        'b-select':BFormSelect
-    },
-    props: {
-        modelName: String
-    },
-    data() {
-        return {
-            dataFirst: [
-                {
-                    aim: "Проведение капитального ремонта, общая площадь",
-                    plan: null,
-                    changes: "кв.м"
-                },
-                {
-                    aim:
-                        "Вовлечение в хозяйственную деятельность за счет проведенного капитального ремонта, общая площадь",
-                    plan: null,
-                    changes: "кв.м"
-                },
-                {
-                    aim: "Снижение затрат на эксплуатацию",
-                    plan: 0,
-                    changes: "",
-                    var: true
-                },
-                {
-                    aim: "Повышение энергоэффективности",
-                    plan: 0,
-                    changes: "",
-                    var: true
-                },
-                {
-                    aim:
-                        "Восстановление (ремонт, реставрация, за исключением реконструкции) объектов культурного наследия",
-                    plan: 0,
-                    changes: "",
-                    var: true
-                },
-                {aim: null, plan: null, changes: null}
-            ]
-        };
-    },
-    mounted() {
-        if (window.MODEL.waited?.length) {
-            window.MODEL.waited.forEach((item, index) => {
-                if (index < 5) {
-                    if (this.dataFirst[item.element]) {
-                        this.dataFirst[item.element].plan = item.plan;
-                    }
-                } else {
-                    if (this.dataFirst[item.element]) {
-                        this.dataFirst[item.element] = {
-                            aim: item.aim,
-                            plan: item.plan,
-                            changes: item.changes
-                        };
-                    } else {
-                        this.dataFirst.push({
-                            aim: item.aim,
-                            plan: item.plan,
-                            changes: item.changes
-                        });
-                    }
-                }
-            });
-        }
-    },
-    methods: {
-        addNewRow: function() {
-            this.dataFirst.push({
-                aim: null,
-                plan: null,
-                changes: null
-            });
+        BTbody, BTfoot,
+        BTh, BThead, BTd,
+        BTr, VBToggle} from "bootstrap-vue";
+
+    export default {
+        directives:{
+            'b-toggle':VBToggle
         },
-        deleteLastRow: function() {
-            this.dataFirst.pop();
+        components:{
+            BFormInput,
+            BTableSimple,
+            BThead,
+            BTr,
+            BTh,
+            BTd,
+            BTbody,
+            BTfoot,
+            'b-select':BFormSelect
+        },
+        props: {
+            modelName: String
+        },
+        data() {
+            return {
+                dataFirst: [
+                    {
+                        aim: "Проведение капитального ремонта, общая площадь",
+                        plan: null,
+                        changes: "кв.м"
+                    },
+                    {
+                        aim:
+                            "Вовлечение в хозяйственную деятельность за счет проведенного капитального ремонта, общая площадь",
+                        plan: null,
+                        changes: "кв.м"
+                    },
+                    {
+                        aim: "Снижение затрат на эксплуатацию",
+                        plan: 0,
+                        changes: "",
+                        var: true
+                    },
+                    {
+                        aim: "Повышение энергоэффективности",
+                        plan: 0,
+                        changes: "",
+                        var: true
+                    },
+                    {
+                        aim:
+                            "Восстановление (ремонт, реставрация, за исключением реконструкции) объектов культурного наследия",
+                        plan: 0,
+                        changes: "",
+                        var: true
+                    },
+                    {aim: null, plan: null, changes: null}
+                ]
+            };
+        },
+        mounted() {
+            if (window.MODEL.waited?.length) {
+                window.MODEL.waited.forEach((item, index) => {
+                    if (index < 5) {
+                        if (this.dataFirst[item.element]) {
+                            this.dataFirst[item.element].plan = item.plan;
+                        }
+                    } else {
+                        if (this.dataFirst[item.element]) {
+                            this.dataFirst[item.element] = {
+                                aim: item.aim,
+                                plan: item.plan,
+                                changes: item.changes
+                            };
+                        } else {
+                            this.dataFirst.push({
+                                aim: item.aim,
+                                plan: item.plan,
+                                changes: item.changes
+                            });
+                        }
+                    }
+                });
+            }
+        },
+        methods: {
+            addNewRow: function() {
+                this.dataFirst.push({
+                    aim: null,
+                    plan: null,
+                    changes: null
+                });
+            },
+            deleteLastRow: function() {
+                this.dataFirst.pop();
+            }
         }
-    }
-};
+    };
 </script>
 
 <style>
-.font-normal-first-colomn {
-    font-weight: normal !important;
-}
+    .font-normal-first-colomn {
+        font-weight: normal !important;
+    }
 </style>

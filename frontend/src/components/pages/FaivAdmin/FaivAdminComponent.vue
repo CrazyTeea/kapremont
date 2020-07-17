@@ -26,140 +26,140 @@
                 </b-card-body>
             </b-collapse>
         </b-card>
-    <div class="row mt-3">
-        <div id="table" class="col-12">
-            <b-table-simple
-            bordered
-            hover
-            >
-                <b-thead>
-                <b-tr>
-                    <b-th>ID</b-th>
-                    <b-th>Username</b-th>
-                    <b-th>Организация</b-th>
-                </b-tr>
-                </b-thead>
-                <b-tbody>
-                <b-tr v-for="(user, index) in users" :key="index" @click="showInfo()">
-                    <b-th><label>{{ user.id }}</label></b-th>
-                    <b-th><label>{{ user.username}}</label></b-th>
-                    <b-th><label>{{ user.org}}</label></b-th>
-                </b-tr>
-                </b-tbody>
-                <b-tfoot>
-                
-                </b-tfoot>
-            </b-table-simple>
-        </div>
-        <div v-if="showInfo" id="info" class="col-6">
-            <b-card title="Card title" sub-title="Card subtitle">
-                <b-card-text>
-                    Some quick example text to build on the <em>card title</em> and make up the bulk of the card's
-                    content.
-                </b-card-text>
+        <div class="row mt-3">
+            <div id="table" class="col-12">
+                <b-table-simple
+                        bordered
+                        hover
+                >
+                    <b-thead>
+                        <b-tr>
+                            <b-th>ID</b-th>
+                            <b-th>Username</b-th>
+                            <b-th>Организация</b-th>
+                        </b-tr>
+                    </b-thead>
+                    <b-tbody>
+                        <b-tr v-for="(user, index) in users" :key="index" @click="showInfo()">
+                            <b-th><label>{{ user.id }}</label></b-th>
+                            <b-th><label>{{ user.username}}</label></b-th>
+                            <b-th><label>{{ user.org}}</label></b-th>
+                        </b-tr>
+                    </b-tbody>
+                    <b-tfoot>
+
+                    </b-tfoot>
+                </b-table-simple>
+            </div>
+            <div v-if="showInfo" id="info" class="col-6">
+                <b-card title="Card title" sub-title="Card subtitle">
+                    <b-card-text>
+                        Some quick example text to build on the <em>card title</em> and make up the bulk of the card's
+                        content.
+                    </b-card-text>
                     <template v-slot:footer>
                         <b-icon class="icon-hover" icon="chevron-bar-right" scale="1.5"></b-icon>
                     </template>
 
-                <a href="#" class="card-link">Card link</a>
-                <b-link href="#" class="card-link">Another link</b-link>
-            </b-card>
+                    <a href="#" class="card-link">Card link</a>
+                    <b-link href="#" class="card-link">Another link</b-link>
+                </b-card>
+            </div>
         </div>
-    </div>
     </div>
 </template>
 
 <script>
-import Axios from 'axios';
-import {
-    BTableSimple,
-    BCard,
-    BCardHeader,
-    BCollapse,
-    BCardBody,
-    BInputGroup,
-    BFormInput,
-    BInputGroupAppend,
-    BButton,
-    BTr,
-    BTh,
-    BTbody,
-    BPagination,
-    BThead,
-    VBToggle
-} from 'bootstrap-vue'
-export default {
-    directives:{
-        'b-toggle':VBToggle  
-    },
-    components:{
-        BButton,
-        BInputGroupAppend,
-        BFormInput,
-        BInputGroup,
-        BCardBody,
-        BCollapse,
+    import Axios from 'axios';
+    import {
         BTableSimple,
-        BTbody,BTr,
+        BCard,
+        BCardHeader,
+        BCollapse,
+        BCardBody,
+        BInputGroup,
+        BFormInput,
+        BInputGroupAppend,
+        BButton,
+        BTr,
         BTh,
+        BTbody,
         BPagination,
         BThead,
-        BCard,
-        BCardHeader
-    },
-    data() {
-        return {
-            csrf: document.getElementsByName('csrf-token')[0].content,
-            filters: {
-                id: null,
-                username: null
-            },
-            users: [],
-            showInfo: false
-        }
-    },
-    async mounted(){
-        await this.getTable()
-    },
-    methods: {
-        showInfo() {
-            let table = document.querySelector('#table')
-            let info = document.querySelector('#info')
-            table.classList.remove("col-12")
-            table.classList.add("col-6")
-            info.classList.add("col-6")
-            this.showInfo = true
+        VBToggle
+    } from 'bootstrap-vue'
+    export default {
+        directives:{
+            'b-toggle':VBToggle
         },
-        async getTable(offset = 0) {
-            let form = new FormData()
-            form.append('filters', JSON.stringify(this.filters))
-            return Axios.post(`/faiv-admin/get/users/${offset}`, form,{
-                headers:
-                    {
-                        'X-CSRF-Token':this.csrf,
-                    },
-            }).then( res => {
-                this.users = res.data
-            })
-        }
-    },
-    watch: {
-        filters: {
-            handler() {
-                this.getTable();
+        components:{
+            BButton,
+            BInputGroupAppend,
+            BFormInput,
+            BInputGroup,
+            BCardBody,
+            BCollapse,
+            BTableSimple,
+            BTbody,BTr,
+            BTh,
+            BPagination,
+            BThead,
+            BCard,
+            BCardHeader
+        },
+        data() {
+            return {
+                csrf: document.getElementsByName('csrf-token')[0].content,
+                filters: {
+                    id: null,
+                    username: null
+                },
+                users: [],
+                showInfo: false
+            }
+        },
+        async mounted(){
+            await this.getTable()
+        },
+        methods: {
+            showInfo() {
+                let table = document.querySelector('#table')
+                let info = document.querySelector('#info')
+                table.classList.remove("col-12")
+                table.classList.add("col-6")
+                info.classList.add("col-6")
+                this.showInfo = true
             },
-            deep: true
+            async getTable(offset = 0) {
+                let form = new FormData()
+                form.append('filters', JSON.stringify(this.filters))
+                return Axios.post(`/faiv-admin/get/users/${offset}`, form,{
+                    headers:
+                        {
+                            'X-CSRF-Token':this.csrf,
+                        },
+                }).then( res => {
+                    this.users = res.data
+                })
+            }
+        },
+        watch: {
+            filters: {
+                handler() {
+                    this.getTable();
+                },
+                deep: true
+            }
         }
     }
-}
 </script>
 
 <style>
-.icon-hover {
-    transition: .6s;
-}
-.icon-hover:hover {
-    transform: scale(1.2);
-    color: red;
-}
+    .icon-hover {
+        transition: .6s;
+    }
+    .icon-hover:hover {
+        transform: scale(1.2);
+        color: red;
+    }
 </style>

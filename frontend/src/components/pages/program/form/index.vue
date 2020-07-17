@@ -117,18 +117,18 @@
                                     >
                                         <b-form-input  style="display: none" id="id_region" v-model="formData.id_region" name="ProgramObjects[id_region]" />
                                         <b-select @change="onChangeRegion" v-model="formData.id_region" :options="regions" />
-                                       <!-- <v-select2
+                                        <!-- <v-select2
 
-                                                v-model="formData.id_region"
-                                                :options="getRegions"
-                                                :reduce="region => region.id"
-                                                label="region"
-                                                @input="
-                                                onChangeRegion({
-                                                    id: formData.id_region
-                                                })
-                                            "
-                                        />-->
+                                                 v-model="formData.id_region"
+                                                 :options="getRegions"
+                                                 :reduce="region => region.id"
+                                                 label="region"
+                                                 @input="
+                                                 onChangeRegion({
+                                                     id: formData.id_region
+                                                 })
+                                             "
+                                         />-->
                                     </b-form-group>
                                     <b-form-group
                                             label="Город:"
@@ -707,7 +707,7 @@
                 this.requestCity({ id });
             }
         },
-       watch:{
+        watch:{
             /*formData: {
                  handler: async function () {
                     console.log(this.formData.id_region)
@@ -716,13 +716,13 @@
                 },
                 deep: true
             },*/
-          getPageData:function(){
-              this.getRegions2();
-              this.getCities2()
-          },
-           getCities:function () {
+            getPageData:function(){
+                this.getRegions2();
                 this.getCities2()
-           }
+            },
+            getCities:function () {
+                this.getCities2()
+            }
 
         },
         async mounted() {

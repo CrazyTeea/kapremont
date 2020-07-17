@@ -1,7 +1,7 @@
 <template>
     <div>
         <b-breadcrumb
-            :items="[
+                :items="[
                 {
                     text: 'Список организаций',
                     href: '/organization/list'
@@ -60,25 +60,25 @@
 </template>
 
 <script>
-import AllOrganizations from "./AllOrganizations.vue";
-import ObjectsCheckComponent from "./ObjectsCheckComponent.vue";
-import { ShitTable } from "../../organisms";
-import { BBreadcrumb, BTabs, BTab } from "bootstrap-vue";
-export default {
-    components: {
-        BBreadcrumb,
-        BTabs,
-        BTab,
-        ShitTable,
-        "v-all-organizations": AllOrganizations,
-        "v-objects": ObjectsCheckComponent
-    },
-    data() {
-        return {
-            tab_show: window.show_comp
-        };
-    }
-};
+    import AllOrganizations from "./AllOrganizations.vue";
+    import ObjectsCheckComponent from "./ObjectsCheckComponent.vue";
+    import { ShitTable } from "../../organisms";
+    import { BBreadcrumb, BTabs, BTab } from "bootstrap-vue";
+    export default {
+        components: {
+            BBreadcrumb,
+            BTabs,
+            BTab,
+            ShitTable,
+            "v-all-organizations": AllOrganizations,
+            "v-objects": ObjectsCheckComponent
+        },
+        data() {
+            return {
+                tab_show: window.show_comp
+            };
+        }
+    };
 </script>
 
 <style></style>

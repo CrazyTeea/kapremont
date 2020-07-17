@@ -119,7 +119,9 @@ class OrganizationController extends AppController
             'organization'=>[
                 'id'=>$programm->org->id,
                 'name'=>$programm->org->name,
-                'file'=>$programm->file_exist],
+                'file'=>$programm->file_exist,
+                'id_founder'=>$programm->org->id_founder
+            ],
             'info' => [
                 'countAll' => $countAll,
                 'vObr' => $vObr,
@@ -196,7 +198,7 @@ class OrganizationController extends AppController
                 $pr->dku_atz = $post['dku_atz'];
                 $pr->save(false);
             }
-            
+
             new ProgramStatus($org_id);
         }
     }
@@ -249,7 +251,7 @@ class OrganizationController extends AppController
     {
         $query = ProgramObjects::findOne($obj_id);
 
-        return json_encode([
+        return Json::encode([
             'label' => $query->astatus? $query->astatus->label : '',
             'id' => $query->astatus? $query->astatus->id : 0,
             'dep_status' => $query->dep_status,
