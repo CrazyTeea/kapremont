@@ -31,7 +31,7 @@
                 </b-table-simple>
                 <b-table-simple bordered hover>
                     <b-thead>
-                        <b-tr v-if="organization.id_founder ==='1'">
+                        <b-tr v-if="organization.id_founder =='1'">
                             <b-th>
                                 Объем финансового обеспечения на реализацию мероприятий по модернизации инфраструктуры,
                                 включая капитальный ремонт объектов и проведение мероприятий по антитеррористической
@@ -56,7 +56,7 @@
                         </b-tr>
                     </b-thead>
                     <b-tbody>
-                        <b-tr v-if="organization.id_founder ==='1'">
+                        <b-tr v-if="organization.id_founder =='1'">
                             <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
                                 <label class="cursor-pointer">{{ programm.finance_volume }}</label>
                             </b-th>
