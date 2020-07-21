@@ -677,7 +677,16 @@
                                     <div v-can:user,faiv_user,root v-else>
                                         <b-td>
                                             <b-button size="sm" variant="danger" @click="deleteRow(index)">Удалить</b-button>
-                                            <b-button size="sm" variant="info" @click="addRow(index)">Добавить</b-button>
+                                            <b-button size="sm" variant="info" @click="()=>{
+
+                                                addRow(index);
+                                                if (item.step > 7){
+                                                    if (btnCntMnt < 12){
+                                                    svedenia2[index].step_name = months[btnCntMnt];
+                                                    btnCntMnt++;
+                                                    }
+                                                }
+                                            }">Добавить</b-button>
                                         </b-td>
                                     </div>
 
@@ -936,6 +945,7 @@
                 permission:window.Permission,
                 realStatus:0,
                 curMonth:0,
+                btnCntMnt:0,
                 months: [
                     'январь',
                     'февраль',
@@ -1536,6 +1546,7 @@
                 },
                 sved2Href: [1.2,1.3,4.3, 4.2, 7.2,7.3,7.41,8.01],
                 sved2Doc:[1.1, 1.4, 2, 3,1.3,4.3, 4.1, 4.4, 5, 6, 7.1, 7.3, 7.4, 8],
+                firstLoad:true
             };
 
 

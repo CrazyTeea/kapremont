@@ -5,7 +5,6 @@ namespace app\controllers\app;
 use app\models\User;
 use Yii;
 use yii\web\Controller;
-use app\facades\FilterBuilder;
 
 class FaivAdminController extends Controller
 {
@@ -29,27 +28,6 @@ class FaivAdminController extends Controller
         return json_encode($responce);
     }
 
-    public function actionTest()
-    {
-        //http://localhost:3000/app/faiv-admin/test
-        $request = (object) [
-            'id' => 1,
-            'username' => 'test'
-        ];
-
-        $filters = (new FilterBuilder($request))->whereLike('id')->get();
-        // $query = User::find()->where($filters)->limit(10)->all();
-
-        echo "<pre>";
-        print_r($filters);
-
-        $filt = $this->getFilters($request);
-        // $query = User::find()->where($filt)->limit(10)->all();
-
-
-        echo "<pre>";
-        print_r($filt);
-    }
 
     private function getFilters($request)
     {
