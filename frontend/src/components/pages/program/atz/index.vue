@@ -5,6 +5,7 @@
             <b-table-simple
                     bordered
                     hover
+                    style="font-size: 12px;"
             >
                 <b-thead>
                     <b-tr>
@@ -162,7 +163,7 @@
             },
             sendInfo() {
                 let formData = new FormData(document.getElementById('atz_form'));
-                Axios.post(this.$route.path,formData,{
+                Axios.post('/program/atz',formData,{
                     headers:
                         {
                             'X-CSRF-Token':this.csrf,
