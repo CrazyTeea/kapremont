@@ -62,4 +62,9 @@ class AtzController extends Controller
 
         return false;
     }
+
+    public function actionInDev()
+    {
+        return $this->render('inDev.php');
+    }
 }

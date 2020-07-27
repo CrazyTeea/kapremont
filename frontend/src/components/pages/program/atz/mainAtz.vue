@@ -16,12 +16,16 @@
           <b-tbody>
             <b-tr>
               <b-td>1</b-td>
-              <b-td colspan="2">Объем финансового обеспечения на реализацию мероприятий по модернизации инфраструктуры, включая капитальный ремонт объектов и проведение мероприятий по антитеррористической защищенности объектов</b-td>
+              <b-td
+                colspan="2"
+              >Объем финансового обеспечения на реализацию мероприятий по модернизации инфраструктуры, включая капитальный ремонт объектов и проведение мероприятий по антитеррористической защищенности объектов</b-td>
               <b-td>Данные</b-td>
             </b-tr>
             <b-tr>
               <b-td rowspan="3">2</b-td>
-              <b-td rowspan="4">Утвержденная программа модернизации инфраструктуры, включая капитальный ремонт объектов и проведение мероприятий по антитеррористической защищенности объектов</b-td>
+              <b-td
+                rowspan="4"
+              >Утвержденная программа модернизации инфраструктуры, включая капитальный ремонт объектов и проведение мероприятий по антитеррористической защищенности объектов</b-td>
               <b-td>Сумма бюджетного финансирования (руб.)</b-td>
               <b-td>Данные</b-td>
             </b-tr>
@@ -43,9 +47,11 @@
         <user-info-view :id_org="id_org" />
       </div>
     </div>
-    <div class="row">Тут будут комментарии... когда-нибудь</div>
+    <div class="row">
+      <comments class="col-12" />
+    </div>
     <div class="row mt-5">
-      <b-card no-body class="mb-1">
+      <b-card no-body class="mb-1 col-12">
         <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.TABLE2>
           <span class="toggle_button">Таблица 2</span>
         </b-card-header>
@@ -57,14 +63,22 @@
       </b-card>
     </div>
     <div class="row mt-5">
-      <b-card no-body class="mb-1">
-        <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.TABLE2>
+      <b-card no-body class="mb-1 col-12">
+        <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.TABLE3>
           <span class="toggle_button">Таблица 3</span>
         </b-card-header>
-        <b-collapse id="TABLE2" accordion="TABLE2" role="tabpanel">
-          <b-card-body>
-            Тут пока хз что)
-          </b-card-body>
+        <b-collapse id="TABLE3" accordion="TABLE3" role="tabpanel">
+          <b-card-body>В разработке</b-card-body>
+        </b-collapse>
+      </b-card>
+    </div>
+    <div class="row mt-5">
+      <b-card no-body class="mb-1 col-12">
+        <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.TABLEDoc>
+          <span class="toggle_button">Список документов</span>
+        </b-card-header>
+        <b-collapse id="TABLEDoc" accordion="TABLEDoc" role="tabpanel">
+          <b-card-body>В разработке</b-card-body>
         </b-collapse>
       </b-card>
     </div>
@@ -73,6 +87,7 @@
 
 <script>
 import { userPanel, UserInfoView } from "../../../organisms";
+import { CommentComponent } from "../../../organisms/comments/";
 import AtzTable from "./index";
 import {
   BButton,
@@ -86,15 +101,16 @@ import {
   BCard,
   BCardHeader,
   BCardBody,
-  VBToggle
+  VBToggle,
 } from "bootstrap-vue";
 export default {
   directives: {
-    BToggle: VBToggle
+    BToggle: VBToggle,
   },
   components: {
     "v-userPanel": userPanel,
     "atz-table": AtzTable,
+    comments: CommentComponent,
     UserInfoView,
     BButton,
     BTableSimple,
@@ -106,7 +122,7 @@ export default {
     BCollapse,
     BCard,
     BCardHeader,
-    BCardBody
+    BCardBody,
   },
   data() {
     return {
@@ -123,11 +139,11 @@ export default {
 
       if (window._Region) this.orgInfo.region = window._Region;
 
-      if(this.$route.params.id) this.id_org = this.$route.params.id
+      if (this.$route.params.id) this.id_org = this.$route.params.id;
 
-      console.log(this.id_org)
-    }
-  }
+      console.log(this.id_org);
+    },
+  },
 };
 </script>
 

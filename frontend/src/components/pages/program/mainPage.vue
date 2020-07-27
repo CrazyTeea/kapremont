@@ -238,7 +238,7 @@
             class="btn-info mt-2"
             href="/program/org"
           >Приступить к реализации программы модернизации</b-button>
-          <b-button class="btn-info mt-2" :href="`/program/main-atz/${id_org}`">Мероприятия по АТЗ</b-button>
+          <b-button @click="goAtz()" class="btn-info mt-2">Мероприятия по АТЗ</b-button>
         </div>
       </div>
       <div class="col-2"></div>
@@ -335,6 +335,14 @@ export default {
     }
   },
   methods: {
+    goAtz() {
+      if(window.currentUser === 2535) {
+        window.location = `/program/main-atz/${this.id_org}`;
+      }
+      else {
+        window.location = '/app/atz/in-dev';
+      }
+    },
     ...mapActions([
       "requestProgram",
       "requestOrg",
