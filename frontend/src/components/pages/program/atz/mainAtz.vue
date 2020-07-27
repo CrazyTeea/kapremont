@@ -62,23 +62,28 @@
         </b-collapse>
       </b-card>
     </div>
+
     <div class="row mt-5">
       <b-card no-body class="mb-1 col-12">
         <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.TABLE3>
           <span class="toggle_button">Таблица 3</span>
         </b-card-header>
         <b-collapse id="TABLE3" accordion="TABLE3" role="tabpanel">
-          <b-card-body>В разработке</b-card-body>
+          <b-card-body>
+            <table3 />
+          </b-card-body>
         </b-collapse>
       </b-card>
     </div>
     <div class="row mt-5">
       <b-card no-body class="mb-1 col-12">
-        <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.TABLEDoc>
-          <span class="toggle_button">Список документов</span>
+        <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.TABLE4>
+          <span class="toggle_button">Таблица 4</span>
         </b-card-header>
-        <b-collapse id="TABLEDoc" accordion="TABLEDoc" role="tabpanel">
-          <b-card-body>В разработке</b-card-body>
+        <b-collapse id="TABLE4" accordion="TABLE4" role="tabpanel" visible>
+          <b-card-body>
+            <table4 />
+          </b-card-body>
         </b-collapse>
       </b-card>
     </div>
@@ -87,8 +92,10 @@
 
 <script>
 import { userPanel, UserInfoView } from "../../../organisms";
-import { CommentComponent } from "../../../organisms/comments/";
+import { AtzCommentComponent } from "../../../organisms/comments/";
 import AtzTable from "./index";
+import Table3 from "./table3";
+import Table4 from "./table4";
 import {
   BButton,
   BTableSimple,
@@ -110,7 +117,9 @@ export default {
   components: {
     "v-userPanel": userPanel,
     "atz-table": AtzTable,
-    comments: CommentComponent,
+    comments: AtzCommentComponent,
+    table3: Table3,
+    table4: Table4,
     UserInfoView,
     BButton,
     BTableSimple,
