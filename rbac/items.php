@@ -197,6 +197,9 @@ return [
             '/app/program/is-approve',
             '/app/program/dku-export',
             '/app/program/download-event',
+            '/app/atz/*',
+            '/api/user-info/roles',
+            '/api/user-info/users',
         ],
     ],
     '/api/com/*' => [

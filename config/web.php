@@ -136,7 +136,16 @@ $config = [
                 'organization/update/<id:\d+>' => 'app/organization/update',
                 'organization/user-info/<id_org:\d+>'=>'app/organization/user-info',
                 'api/user_info_roles' =>'api/user-info/roles',
+
+
+                // Тут все роуты по атз!
                 'program/atz' => 'app/atz/index',
+                'program/main-atz/<id_org:\d+>' => 'app/atz/main-atz',
+
+
+
+
+
                 'check' => 'app/mgsu-admin/view',
 
                 'api/fileUpload/<id_obj:\d+>/<id_comment:\d+>' => '/rest/upload/upload',

@@ -77,6 +77,7 @@
                 </b-thead>
                 <b-tbody>
                     <b-tr v-for="(item, index) in items" :key="index">
+
                         <b-th v-if="filters.id">{{index+perPage*(currentPage-1)+1}}</b-th>
                         <b-th class="normal-font-weight-for-sell center-text-in-cell">
                             <label>{{ item.id }}</label>
@@ -84,8 +85,24 @@
                         <b-th class="normal-font-weight-for-sell center-text-in-cell">
                             <label>{{ item.region }}</label>
                         </b-th>
-                        <b-th class="normal-font-weight-for-sell cursor-pointer center-text-in-cell" @click="goToRef(item.id)">
-                            <label class="cursor-pointer">
+                        <b-th :id="`popover-window-${index}`" class="normal-font-weight-for-sell cursor-pointer center-text-in-cell" @click="goToRefNotDku(item.id, '/organization/list/')">
+
+                            <b-popover
+                                v-if="isUserDku()"
+                                :target="`popover-window-${index}`"
+                                triggers="hover focus"
+                                placement="top"
+
+                            >
+                                <div class="d-flex popover-styling">
+                                    <h6 class="atz" @click="goToRef(item.id, '/program/main-atz/')">АТЗ</h6>
+                                    <h6 class="ml-2 dep" @click="goToRef(item.id, '/organization/list/')">ДЭП</h6>
+                                </div>
+                            </b-popover>
+
+                            
+
+                            <label class="cursor-pointer" >
                                 {{ item.name }}
                                 <div v-can:mgsu,root v-if="item.id_founder !== '1' && item.is_new==='1'">
                                     <b-badge variant="danger">новый пользователь</b-badge>
@@ -187,6 +204,7 @@
             </b-table-simple>
 
             <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage"></b-pagination>
+            <b-button @click="debug">debug</b-button>
         </div>
     </div>
 </template>
@@ -213,14 +231,19 @@
         BTh,
         BTbody,
         BPagination,
-        VBToggle
+        VBToggle,
+        BTooltip,
+        VBTooltip,
+        BPopover
     } from "bootstrap-vue";
     export default {
         props: ['state'],
         directives: {
             "b-toggle": VBToggle,
+            "b-tooltip": VBTooltip
         },
         components: {
+            BTooltip,
             BFormTextarea,
             BAlert,
             BBadge,
@@ -240,6 +263,7 @@
             BFormFile,
             BTbody,
             BPagination,
+            BPopover
         },
         data() {
             return {
@@ -292,10 +316,25 @@
             };
         },
         async mounted() {
+            await this.init();
             this.filters.state = this.state;
             this.getTable();
         },
         methods: {
+            debug() {
+                console.log(this.isUserDku());
+            },
+            async init() {
+                // if(window)
+            },
+            getToolTip(id) {
+                return `
+                    <div class="d-flex">
+                        <a href="/organization/list/${id}">АТЗ</a>
+                        <a class="ml-2" href="/organization/list/${id}">ДКУ</a>
+                    </div>
+                `;
+            },
             getDkuStatus(s){
                 return this.options.dku_status.find(item=>item.value == s).text;
             },
@@ -312,15 +351,29 @@
                     this.bannerInfo.pop();
                 }, timeout);
             },
-            async goToRef(id) {
+            async goToRef(id, url) {
                 await Axios.post(`/organization/set-old/${id}`,null,{
                     headers: {
                         "X-CSRF-Token": this.csrf
                     }
                 }).finally(()=>{
-                    window.location = `/organization/list/${id}`;
+                    window.location = `${url}${id}`;
                 })
 
+            },
+            async goToRefNotDku(id, url) {
+                if(this.isUserDku()) return;
+                await Axios.post(`/organization/set-old/${id}`,null,{
+                    headers: {
+                        "X-CSRF-Token": this.csrf
+                    }
+                }).finally(()=>{
+                    window.location = `${url}${id}`;
+                })
+
+            },
+            async setOldOrg(id) {
+                return 
             },
             setDkuDoc(item,index){
                 let graph = document.querySelector(`#file_input_${index}`);
@@ -340,6 +393,9 @@
                 }).catch(() => {
                     this.setBanner("danger", "Что-то пошло не так! Обратитесь в служюу поддержки.")
                 })
+            },
+            isUserDku() {
+                return window.Permission === "dku";
             },
             getTable(offset = 0) {
                 let form = new FormData();
@@ -433,6 +489,21 @@
 </script>
 
 <style>
+.atz:hover {
+    color: red;
+}
+.dep:hover {
+    color: green;
+}
+.popover-styling > h6 {
+    font-weight: normal;
+}
+.popover-styling > h6:hover {
+    transform: scale(1.3);
+}
+.popover-styling > h6 > a {
+    text-decoration: none;
+}
     .table-overflow-hidden {
         overflow: hidden !important;
         overflow-x: scroll !important;

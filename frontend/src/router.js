@@ -5,6 +5,7 @@ import ListObject from "./components/pages/organization/info/ListObjectComponent
 import ObjView from "./components/pages/organization/info/ObjectShowComponent.vue";
 import FaivAdminComponent from "./components/pages/FaivAdmin/FaivAdminComponent.vue";
 import StatusView from "./components/pages/program/view/status.vue";
+import MainAtz from './components/pages/program/atz/mainAtz.vue';
 
 Vue.use(VueRouter);
 
@@ -54,6 +55,11 @@ const routes = [
         component: Atz
     },
     {
+        path: "/program/main-atz/:id",
+        name: "main-atz",
+        component: MainAtz
+    },
+    {
         path: "/organization/list",
         name: "MainCheck",
         component: require('./components/pages/checkMgsu/MainCheckComponent.vue').default
@@ -65,7 +71,7 @@ const routes = [
     },
     {
         path: "/organization/obj/:id",
-        name: "ObjView",
+        name: "OrgView",
         component: ObjView
     },
     {
