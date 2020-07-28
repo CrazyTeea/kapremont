@@ -46,9 +46,7 @@
             <b-td>
               <b-form-input v-model="row.type_event"></b-form-input>
             </b-td>
-            <b-td>
-              <b-form-input v-model="row.address"></b-form-input>
-            </b-td>
+
 
 
             <b-td>
