@@ -95,7 +95,7 @@
 
                             >
                                 <div class="d-flex popover-styling">
-                                    <h6 class="atz" @click="goToRef(item.id, '/program/main-atz/')">АТЗ</h6>
+                                    <h6 class="atz" @click="goToDev" href="/app/atz/in-dev">АТЗ</h6>
                                     <h6 class="ml-2 dep" @click="goToRef(item.id, '/organization/list/')">ДЭП</h6>
                                 </div>
                             </b-popover>
@@ -321,6 +321,9 @@
             this.getTable();
         },
         methods: {
+            goToDev() {
+                window.location = '/app/atz/in-dev';
+            },
             debug() {
                 console.log(this.isUserDku());
             },
