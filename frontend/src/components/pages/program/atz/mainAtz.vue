@@ -87,7 +87,7 @@
                     </b-card-body>
                 </b-collapse>
             </b-card>
-        </div>
+     \   </div>
     </div>
 </template>
 
