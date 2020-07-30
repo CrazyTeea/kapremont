@@ -160,7 +160,7 @@ export default {
                         {
                             address: null,
                             stage_number: null,
-                            stage_name: "Выполняется получение данных. Подождите несколько секунд, а затем еще раз попробуйте вырезать или скопировать.",
+                            stage_name: "Закупка не конкурентный способом /Заключение договора /контракта ",
                             type_event: null,
                             address: null,
                             method: null,
