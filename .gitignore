@@ -36,4 +36,4 @@ tests/_support/_generated
 #vagrant folder
 /.vagrant
 .env
-/web/dev
+/web/vue
