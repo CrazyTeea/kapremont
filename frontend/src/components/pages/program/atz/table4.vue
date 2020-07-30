@@ -38,7 +38,10 @@
                 </b-thead>
                 <b-tbody v-for="(body, indexBody) in rows" :key="`b-body-${indexBody}`">
                     <b-tr v-for="(row, index) in body.row.row_stages" :key="`b-tr-${index}`">
-                        <b-td>{{ body.row.stage + row.stage_number }}</b-td>
+                        <b-td>
+                            {{ (indexBody + 1) + row.stage_number }}
+                            <b-icon v-if="!index" @click="deleteRow(indexBody)" variant="danger" icon="trash" class="trash-icon mt-2 col-1"></b-icon>
+                        </b-td>
                         <b-td>{{ row.stage_name }}</b-td>
                         <b-td class="min-width-for-multiselect">
                             <multiselect
@@ -116,11 +119,12 @@
             </b-table-simple>
         </div>
         <div class="d-flex justify-content-end mt-2">
-            <!--<b-button class="mr-2" @click="debug">Debug</b-button> -->
+            <b-button class="mr-2" @click="debug">Debug</b-button>
 
-            <b-button size="sm" @click="addRow">Добавить строку</b-button>
+            <b-button size="sm" @click="addRow1">Добавить строку 1</b-button>
+            <b-button size="sm" class="ml-2" @click="addRow2">Добавить строку 2</b-button>
+
             <b-button variant="success" size="sm" class="ml-2">Сохранить</b-button>
-
         </div>
     </div>
 </template>
@@ -130,7 +134,7 @@ import { BButton, BTableSimple, BThead, BTbody, BTh, BTd, BTr, BFormInput } from
 import Multiselect from "vue-multiselect";
 
 export default {
-    props: ['passport'],
+    props: ["passport"],
     components: {
         BButton,
         BTableSimple,
@@ -152,7 +156,11 @@ export default {
         debug() {
             console.log(this.rows);
         },
-        addRow() {
+        deleteRow(index) {
+            this.rows.splice(index, 1);
+            console.log(index)
+        },
+        addRow1() {
             this.rows.push({
                 row: {
                     stage: this.rows.length + 1,
@@ -205,6 +213,15 @@ export default {
                             mon_expert: null,
                             comment_mon: null,
                         },
+                    ],
+                },
+            });
+        },
+        addRow2() {
+            this.rows.push({
+                row: {
+                    stage: this.rows.length + 1,
+                    row_stages: [
                         {
                             address: null,
                             stage_number: ".2",
@@ -319,5 +336,12 @@ export default {
 .min-width-for-multiselect {
     min-width: 390px;
 }
-
+.trash-icon {
+    transform: scale(1);
+    transition: all .3s ease;
+}
+.trash-icon:hover {
+    transform: scale(1.3);
+    transition: all .3s ease;
+}
 </style>

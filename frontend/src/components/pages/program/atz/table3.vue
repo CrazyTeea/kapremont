@@ -19,7 +19,7 @@
                     <b-tr v-for="(row, index) in rows" :key="`table3_${index}`">
                         <b-td class="first-table-column">
                             <multiselect
-                                v-model="row.object"    
+                                v-model="row.object"
                                 label="passport_name"
                                 track-by="id"
                                 :options="passport"
@@ -28,6 +28,7 @@
                                 deselect-label="Удалить"
                                 selectedLabel="Выбрано"
                             ></multiselect>
+                            <b-icon @click="deleteRow(index)" variant="danger" icon="trash" class="trash-icon mt-2"></b-icon>
                         </b-td>
                         <b-td class="mw-145">
                             <b-form-input :disabled="isDku()" type="number" v-model="row.video_system.podved"></b-form-input>
@@ -36,42 +37,42 @@
                         </b-td>
                         <b-td class="mw-145">
                             <b-form-input :disabled="isDku()" type="number" v-model="row.evacuation_system.podved"></b-form-input>
-                            <b-form-input :disabled="!isDku()"  type="number" class="mt-1" v-model="row.evacuation_system.dku"></b-form-input>
+                            <b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.evacuation_system.dku"></b-form-input>
                             <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
                             <b-form-input :disabled="isDku()" type="number" v-model="row.light_system.podved"></b-form-input>
-                            <b-form-input :disabled="!isDku()"   type="number" class="mt-1" v-model="row.light_system.dku"></b-form-input>
+                            <b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.light_system.dku"></b-form-input>
                             <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
                             <b-form-input :disabled="isDku()" type="number" v-model="row.predator_system.podved"></b-form-input>
-                            <b-form-input :disabled="!isDku()"  type="number" class="mt-1" v-model="row.predator_system.dku"></b-form-input>
+                            <b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.predator_system.dku"></b-form-input>
                             <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
                             <b-form-input :disabled="isDku()" type="number" v-model="row.alarm_warning_system.podved"></b-form-input>
-                            <b-form-input :disabled="!isDku()"  type="number" class="mt-1" v-model="row.alarm_warning_system.dku"></b-form-input>
+                            <b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.alarm_warning_system.dku"></b-form-input>
                             <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
                             <b-form-input :disabled="isDku()" type="number" v-model="row.alarm_fire_system.podved"></b-form-input>
-                            <b-form-input :disabled="!isDku()"  type="number" class="mt-1" v-model="row.alarm_fire_system.dku"></b-form-input>
+                            <b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.alarm_fire_system.dku"></b-form-input>
                             <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
                             <b-form-input :disabled="isDku()" type="number" v-model="row.phone_system.podved"></b-form-input>
-                            <b-form-input :disabled="!isDku()"  type="number" class="mt-1" v-model="row.phone_system.dku"></b-form-input>
+                            <b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.phone_system.dku"></b-form-input>
                             <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
                             <b-form-input :disabled="isDku()" type="number" v-model="row.fence.podved"></b-form-input>
-                            <b-form-input :disabled="!isDku()"  type="number" class="mt-1" v-model="row.fence.dku"></b-form-input>
+                            <b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.fence.dku"></b-form-input>
                             <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
                             <b-form-input :disabled="isDku()" type="number" v-model="row.skud.podved"></b-form-input>
-                            <b-form-input :disabled="!isDku()"  type="number" class="mt-1" v-model="row.skud.dku"></b-form-input>
+                            <b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.skud.dku"></b-form-input>
                             <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
@@ -89,7 +90,7 @@
             <b-button size="sm" variant="success" class="ml-2" @click="saveChanges">Сохранить</b-button>
         </div>
         <div class="mt-5">
-           <!-- <multiselect
+            <!-- <multiselect
                 v-model="sel2"
                 label="passport_name"
                 track-by="id"
@@ -120,7 +121,7 @@
 <script>
 import { BButton, BTableSimple, BThead, BTbody, BTh, BTd, BTr, BFormInput } from "bootstrap-vue";
 import Multiselect from "vue-multiselect";
-import Axios from 'axios';
+import Axios from "axios";
 
 export default {
     props: ["passport", "id_org"],
@@ -148,36 +149,54 @@ export default {
         await this.getInfoTable3();
     },
     methods: {
+        deleteRow(index) {
+            if (this.rows[index].id) {
+                this.deleteRowFromServer(this.rows[index].id);
+                return;
+            }
+            this.rows.splice(index, 1);
+        },
+        deleteRowFromServer(id) {
+            let data = new FormData();
+            data.append("id", id);
+            return Axios.post("/app/atz/delete-table3", data, {
+                headers: {
+                    "X-CSRF-Token": this.csrf,
+                },
+            }).then(() => {
+                this.getInfoTable3();
+            });
+        },
         isDku() {
-            return window.Permission === 'dku';
+            return window.Permission === "dku";
         },
         async getInfoTable3() {
             let data = new FormData();
-            data.append('id_org', this.id_org);
-            return Axios.post('/app/atz/get-table3', data, {
+            data.append("id_org", this.id_org);
+            return Axios.post("/app/atz/get-table3", data, {
                 headers: {
                     "X-CSRF-Token": this.csrf,
                 },
-            }).then(res => {
-                if(res.data)
-                    this.rows = res.data;
-
+            }).then((res) => {
+                if (res.data) this.rows = res.data;
             });
         },
-        saveChanges() { 
+        saveChanges() {
             let data = new FormData();
-            data.append('data', JSON.stringify(this.rows));
-            data.append('id_org', this.id_org);
+            data.append("data", JSON.stringify(this.rows));
+            data.append("id_org", this.id_org);
 
-            return Axios.post('/app/atz/save-table3', data, {
+            return Axios.post("/app/atz/save-table3", data, {
                 headers: {
                     "X-CSRF-Token": this.csrf,
                 },
-            }).then(res => {
-                console.log(res);
-            }).catch(() => {
-                console.log('error!')
-            });
+            })
+                .then((res) => {
+                    console.log(res);
+                })
+                .catch(() => {
+                    console.log("error!");
+                });
         },
         debug() {
             console.log(this.rows);
@@ -249,5 +268,13 @@ export default {
 }
 .mw-145 {
     min-width: 145px;
+}
+.trash-icon {
+    transform: scale(1);
+    transition: all .3s ease;
+}
+.trash-icon:hover {
+    transform: scale(1.3);
+    transition: all .3s ease;
 }
 </style>
