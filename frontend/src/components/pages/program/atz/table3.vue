@@ -30,8 +30,8 @@
                             ></multiselect>
                         </b-td>
                         <b-td class="mw-145">
-                            <b-form-input type="number" v-model="row.video_system.podved"></b-form-input>
-                            <b-form-input type="number" class="mt-1" v-model="row.video_system.dku"></b-form-input>
+                            <b-form-input :disabled="!isDku()" type="number" v-model="row.video_system.podved"></b-form-input>
+                            <b-form-input :disabled="isDku()" type="number" class="mt-1" v-model="row.video_system.dku"></b-form-input>
                             <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
@@ -41,7 +41,7 @@
                         </b-td>
                         <b-td class="mw-145">
                             <b-form-input type="number" v-model="row.light_system.podved"></b-form-input>
-                            <b-form-input type="number" class="mt-1" v-model="row.light_system.dku"></b-form-input>
+                            <b-form-input  type="number" class="mt-1" v-model="row.light_system.dku"></b-form-input>
                             <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
@@ -148,6 +148,9 @@ export default {
         await this.getInfoTable3();
     },
     methods: {
+        isDku() {
+            return window.Permission === 'dku';
+        },
         async getInfoTable3() {
             let data = new FormData();
             data.append('id_org', this.id_org);
