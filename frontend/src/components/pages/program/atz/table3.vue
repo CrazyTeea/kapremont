@@ -35,43 +35,43 @@
                             <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
-                            <b-form-input type="number" v-model="row.evacuation_system.podved"></b-form-input>
-                            <b-form-input type="number" class="mt-1" v-model="row.evacuation_system.dku"></b-form-input>
+                            <b-form-input :disabled="!isDku()" type="number" v-model="row.evacuation_system.podved"></b-form-input>
+                            <b-form-input :disabled="isDku()"  type="number" class="mt-1" v-model="row.evacuation_system.dku"></b-form-input>
                             <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
-                            <b-form-input type="number" v-model="row.light_system.podved"></b-form-input>
-                            <b-form-input  type="number" class="mt-1" v-model="row.light_system.dku"></b-form-input>
+                            <b-form-input :disabled="!isDku()" type="number" v-model="row.light_system.podved"></b-form-input>
+                            <b-form-input :disabled="isDku()"   type="number" class="mt-1" v-model="row.light_system.dku"></b-form-input>
                             <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
-                            <b-form-input type="number" v-model="row.predator_system.podved"></b-form-input>
-                            <b-form-input type="number" class="mt-1" v-model="row.predator_system.dku"></b-form-input>
+                            <b-form-input :disabled="!isDku()" type="number" v-model="row.predator_system.podved"></b-form-input>
+                            <b-form-input :disabled="isDku()"  type="number" class="mt-1" v-model="row.predator_system.dku"></b-form-input>
                             <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
-                            <b-form-input type="number" v-model="row.alarm_warning_system.podved"></b-form-input>
-                            <b-form-input type="number" class="mt-1" v-model="row.alarm_warning_system.dku"></b-form-input>
+                            <b-form-input :disabled="!isDku()" type="number" v-model="row.alarm_warning_system.podved"></b-form-input>
+                            <b-form-input :disabled="isDku()"  type="number" class="mt-1" v-model="row.alarm_warning_system.dku"></b-form-input>
                             <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
-                            <b-form-input type="number" v-model="row.alarm_fire_system.podved"></b-form-input>
-                            <b-form-input type="number" class="mt-1" v-model="row.alarm_fire_system.dku"></b-form-input>
+                            <b-form-input :disabled="!isDku()" type="number" v-model="row.alarm_fire_system.podved"></b-form-input>
+                            <b-form-input :disabled="isDku()"  type="number" class="mt-1" v-model="row.alarm_fire_system.dku"></b-form-input>
                             <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
-                            <b-form-input type="number" v-model="row.phone_system.podved"></b-form-input>
-                            <b-form-input type="number" class="mt-1" v-model="row.phone_system.dku"></b-form-input>
+                            <b-form-input :disabled="!isDku()" type="number" v-model="row.phone_system.podved"></b-form-input>
+                            <b-form-input :disabled="isDku()"  type="number" class="mt-1" v-model="row.phone_system.dku"></b-form-input>
                             <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
-                            <b-form-input type="number" v-model="row.fence.podved"></b-form-input>
-                            <b-form-input type="number" class="mt-1" v-model="row.fence.dku"></b-form-input>
+                            <b-form-input :disabled="!isDku()" type="number" v-model="row.fence.podved"></b-form-input>
+                            <b-form-input :disabled="isDku()"  type="number" class="mt-1" v-model="row.fence.dku"></b-form-input>
                             <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
-                            <b-form-input type="number" v-model="row.skud.podved"></b-form-input>
-                            <b-form-input type="number" class="mt-1" v-model="row.skud.dku"></b-form-input>
+                            <b-form-input :disabled="!isDku()" type="number" v-model="row.skud.podved"></b-form-input>
+                            <b-form-input :disabled="isDku()"  type="number" class="mt-1" v-model="row.skud.dku"></b-form-input>
                             <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
