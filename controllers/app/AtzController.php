@@ -133,7 +133,7 @@ class AtzController extends Controller
         // print_r($id_org);
         // die;
 
-        return json_encode($toClient);
+        return json_encode($toClient ?? null);
 
     }
 
@@ -193,5 +193,51 @@ class AtzController extends Controller
         // echo"<pre>";
         // print_r($new);
         // die;
+    }
+
+    public function actionSecretMethod()
+    {
+        $old = Antiterror::find()
+            ->select(['id_podved', 'passport_name'])
+            ->where(['system_status' => 1])
+            ->groupBy(['id_podved', 'passport_name'])
+            ->all();
+
+            // echo"<pre>";
+            // print_r($);
+            // die;
+
+        foreach($old as $arr) {
+            $new = new AntiterrorPassport();
+            $new->id_org = $arr->id_podved;
+            $new->name_address = $arr->passport_name;
+            $old_ids = Antiterror::find()
+                ->select('id_object')
+                ->where(['id_podved' => $arr->id_podved, 'system_status' => 1])
+                ->asArray()
+                ->all();
+            if(!empty($old_ids)) {
+                foreach($old_ids as $old_id) {
+                    $sub[] = $old_id['id_object'];
+                }
+            }
+                $old_ids = implode(',', $sub);
+                
+            $new->old_ids = $old_ids;
+
+            $old_ids = [];
+            $sub = [];
+
+            try {
+                $new->save();
+            } catch (Exception $e) {
+                continue;
+            }
+
+        }
+
+        echo"<pre>";
+        print_r($new);
+        die;
     }
 }

@@ -32,52 +32,53 @@
                         <b-td class="mw-145">
                             <b-form-input type="number" v-model="row.video_system.podved"></b-form-input>
                             <b-form-input type="number" class="mt-1" v-model="row.video_system.dku"></b-form-input>
-                            <b-form-input class="mt-1" v-model="row.docs"></b-form-input>
+                            <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
                             <b-form-input type="number" v-model="row.evacuation_system.podved"></b-form-input>
                             <b-form-input type="number" class="mt-1" v-model="row.evacuation_system.dku"></b-form-input>
-                            <b-form-input class="mt-1" v-model="row.docs"></b-form-input>
+                            <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
                             <b-form-input type="number" v-model="row.light_system.podved"></b-form-input>
                             <b-form-input type="number" class="mt-1" v-model="row.light_system.dku"></b-form-input>
-                            <b-form-input class="mt-1" v-model="row.docs"></b-form-input>
+                            <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
                             <b-form-input type="number" v-model="row.predator_system.podved"></b-form-input>
                             <b-form-input type="number" class="mt-1" v-model="row.predator_system.dku"></b-form-input>
-                            <b-form-input class="mt-1" v-model="row.docs"></b-form-input>
+                            <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
                             <b-form-input type="number" v-model="row.alarm_warning_system.podved"></b-form-input>
                             <b-form-input type="number" class="mt-1" v-model="row.alarm_warning_system.dku"></b-form-input>
-                            <b-form-input class="mt-1" v-model="row.docs"></b-form-input>
+                            <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
                             <b-form-input type="number" v-model="row.alarm_fire_system.podved"></b-form-input>
                             <b-form-input type="number" class="mt-1" v-model="row.alarm_fire_system.dku"></b-form-input>
-                            <b-form-input class="mt-1" v-model="row.docs"></b-form-input>
+                            <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
                             <b-form-input type="number" v-model="row.phone_system.podved"></b-form-input>
                             <b-form-input type="number" class="mt-1" v-model="row.phone_system.dku"></b-form-input>
-                            <b-form-input class="mt-1" v-model="row.docs"></b-form-input>
+                            <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
                             <b-form-input type="number" v-model="row.fence.podved"></b-form-input>
                             <b-form-input type="number" class="mt-1" v-model="row.fence.dku"></b-form-input>
-                            <b-form-input class="mt-1" v-model="row.docs"></b-form-input>
+                            <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
                             <b-form-input type="number" v-model="row.skud.podved"></b-form-input>
                             <b-form-input type="number" class="mt-1" v-model="row.skud.dku"></b-form-input>
-                            <b-form-input class="mt-1" v-model="row.docs"></b-form-input>
+                            <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
                         </b-td>
                         <b-td class="mw-145">
-                            <b-form-input type="number" v-model="row.docs"></b-form-input>
+                            ---
+                            <!--<b-form-input type="number" v-model="row.docs"></b-form-input>
                             <b-form-input type="number" class="mt-1" v-model="row.docs"></b-form-input>
-                            <b-form-input class="mt-1" v-model="row.docs"></b-form-input>
+                            <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input> -->
                         </b-td>
                     </b-tr>
                 </b-tbody>
@@ -88,7 +89,7 @@
             <b-button size="sm" variant="success" class="ml-2" @click="saveChanges">Сохранить</b-button>
         </div>
         <div class="mt-5">
-            <multiselect
+           <!-- <multiselect
                 v-model="sel2"
                 label="passport_name"
                 track-by="id"
@@ -111,7 +112,7 @@
                 select-label="Добваить"
                 deselect-label="Удалить"
                 selectedLabel="Выбрано"
-            ></multiselect>
+            ></multiselect> -->
         </div>
     </div>
 </template>
@@ -155,7 +156,9 @@ export default {
                     "X-CSRF-Token": this.csrf,
                 },
             }).then(res => {
-                this.rows = res.data;
+                if(res.data)
+                    this.rows = res.data;
+
             });
         },
         saveChanges() { 
