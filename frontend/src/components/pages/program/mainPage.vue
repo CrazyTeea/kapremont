@@ -238,7 +238,7 @@
             class="btn-info mt-2"
             href="/program/org"
           >Приступить к реализации программы модернизации</b-button>
-          <b-button @click="goAtz()" class="btn-info mt-2">Мероприятия по АТЗ</b-button>
+          <!--<b-button @click="goAtz()" class="btn-info mt-2">Мероприятия по АТЗ</b-button> -->
         </div>
       </div>
       <div class="col-2"></div>

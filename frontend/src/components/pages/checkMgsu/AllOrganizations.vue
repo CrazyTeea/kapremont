@@ -321,6 +321,9 @@
             this.getTable();
         },
         methods: {
+            goToDev() {
+                window.location = '/app/atz/in-dev';
+            },
             debug() {
                 console.log(this.isUserDku());
             },

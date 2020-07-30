@@ -116,9 +116,11 @@
             </b-table-simple>
         </div>
         <div class="d-flex justify-content-end mt-2">
-            <b-button class="mr-2" @click="debug">Debug</b-button>
+            <!--<b-button class="mr-2" @click="debug">Debug</b-button> -->
 
-            <b-button @click="addRow">Добавить</b-button>
+            <b-button size="sm" @click="addRow">Добавить строку</b-button>
+            <b-button variant="success" size="sm" class="ml-2">Сохранить</b-button>
+
         </div>
     </div>
 </template>
