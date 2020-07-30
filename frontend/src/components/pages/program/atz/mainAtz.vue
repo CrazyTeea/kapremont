@@ -87,7 +87,19 @@
                     </b-card-body>
                 </b-collapse>
             </b-card>
-     \   </div>
+        </div>
+         <div class="row mt-5">
+            <b-card no-body class="mb-1 col-12">
+                <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.TABLEDoc>
+                    <span class="toggle_button">Документы</span>
+                </b-card-header>
+                <b-collapse id="TABLEDoc" accordion="TABLEDoc" role="tabpanel">
+                    <b-card-body>
+                        В разработке...
+                    </b-card-body>
+                </b-collapse>
+            </b-card>
+        </div>
     </div>
 </template>
 
