@@ -123,8 +123,8 @@
     <div class="d-flex justify-content-end mt-2">
       <!-- <b-button class="mr-2" @click="debug">Debug</b-button> -->
 
-      <b-button size="sm" @click="addRow1">Добавить строку 1</b-button>
-      <b-button size="sm" class="ml-2" @click="addRow2">Добавить строку 2</b-button>
+      <b-button size="sm" @click="addRow1">Добавить закупку у единственного поставщика</b-button>
+      <b-button size="sm" class="ml-2" @click="addRow2">Добавить закупку конкурентным способом</b-button>
 
       <b-button disabled variant="success" size="sm" class="ml-2">Сохранить</b-button>
     </div>
