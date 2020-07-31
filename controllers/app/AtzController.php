@@ -150,13 +150,13 @@ class AtzController extends Controller
         $id_org = Yii::$app->request->post('id_org');
 
         $query = Antiterror::find()
-            ->select(['id',     'passport_name'])
+            ->select(['id', 'passport_name'])
             ->where(['id_podved' => $id_org, 'system_status' => 1])
             ->groupBy('passport_name')
             ->asArray()
             ->all();
 
-        return json_encode($query);
+        return json_encode(array_map( function($elem) {return $elem += ['selected' => null];}, $query ));
 
         // foreach($old as $arr) {
         //     $new = new AntiterrorPassport();
