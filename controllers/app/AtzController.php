@@ -102,14 +102,18 @@ class AtzController extends Controller
         // die;
     }
 
+    public function actionDeleteTable3()
+    {
+        $id = Yii::$app->request->post('id');
+        $atzRecord = AtzTableThree::findOne($id);
+
+        return json_encode($atzRecord->delete());
+    }
+
     public function actionGetTable3()
     {
         $id_org = Yii::$app->request->post('id_org');
-
         $atz = AtzTableThree::find()->where(['id_org' => $id_org])->all();
-
-
-
         foreach ($atz as $at) {
             $toClient[] = [
                 'object' => [
@@ -129,12 +133,7 @@ class AtzController extends Controller
             ];
         }
 
-        // echo "<pre>";
-        // print_r($id_org);
-        // die;
-
         return json_encode($toClient ?? null);
-
     }
 
     private function arrayCompact($element)
