@@ -164,6 +164,7 @@ import {
   BFormInput,
 } from "bootstrap-vue";
 import Multiselect from "vue-multiselect";
+import Axios from "axios";
 
 export default {
   props: ["passport"],
@@ -181,16 +182,10 @@ export default {
   data() {
     return {
       rows: [],
+      csrf: document.getElementsByName("csrf-token")[0].content,
     };
   },
-  async mounted() {
-    await this.passport;
-    console.log(this.passport);
-    this.passport.forEach(el => {
-      el.push({selected: null});
-    })
-    console.log(this.passport)
-  },
+  async mounted() {},
   methods: {
     ONinput(index1, index2) {
       if (!this.rows[index1].row_stages[index2].address) return [];
@@ -248,35 +243,47 @@ export default {
       ];
     },
     debug() {
-
-      console.log(this.rows)
-
-      let toClient = [];
       console.log(this.rows);
-      this.rows.forEach((elementRow, index) => {
-        elementRow.row_stages.forEach((elementStage) => {
-          let addresPUSH = [];
-          
-          elementStage.address.forEach((address) => {
-            // console.log(elementStage.address);
-            const func = () => {
-              return elementStage.type_event.filter(
-                (elem) => elem.split("-")[1] === index
-              );
-            };
-            let per = {
-              [address.passport_name]: func(),
-            };
-            addresPUSH.push(per);
-          });
-          console.log(addresPUSH);
-        });
-        // toClient.push({
-        //   pushInfo: {
 
-        //   }
-        // });
+      let data = new FormData();
+      data.append("data", JSON.stringify(this.rows));
+
+      return Axios.post("/app/atz/save-table4", data, {
+        headers: {
+          "X-CSRF-Token": this.csrf,
+        },
+      }).then(res => {
+        console.log(res);
       });
+
+      
+
+      // let toClient = [];
+      // console.log(this.rows);
+      // this.rows.forEach((elementRow, index) => {
+      //   elementRow.row_stages.forEach((elementStage) => {
+      //     let addresPUSH = [];
+
+      //     elementStage.address.forEach((address) => {
+      //       // console.log(elementStage.address);
+      //       const func = () => {
+      //         return elementStage.type_event.filter(
+      //           (elem) => elem.split("-")[1] === index
+      //         );
+      //       };
+      //       let per = {
+      //         [address.passport_name]: func(),
+      //       };
+      //       addresPUSH.push(per);
+      //     });
+      //     console.log(addresPUSH);
+      //   });
+      //   // toClient.push({
+      //   pushInfo: {
+
+      //   }
+      // });
+      // });
 
       console.log(toClient);
       console.log(this.rows);

@@ -78,7 +78,7 @@ class AtzController extends Controller
         $id_org = Yii::$app->request->post('id_org');
 
         foreach ($dataArray as $data) {
-            if(!empty($data->id)) continue;
+            if (!empty($data->id)) continue;
 
             $atz = new AtzTableThree();
             $atz->id_object = $data->object->id;
@@ -156,7 +156,7 @@ class AtzController extends Controller
             ->asArray()
             ->all();
 
-        return json_encode(array_map( function($elem) {return $elem += ['selected' => null];}, $query ));
+        return json_encode($query);
 
         // foreach($old as $arr) {
         //     $new = new AntiterrorPassport();
@@ -194,6 +194,34 @@ class AtzController extends Controller
         // die;
     }
 
+    public function actionSaveTable4()
+    {
+        $data = json_decode(Yii::$app->request->post('data'));
+
+        foreach ($data as $row) {
+            foreach ($row->row_stages as $rowData) {
+
+                foreach ($rowData->address as $i => $address) {
+                    if (empty($address)) continue;
+                    $arrayToSave[] = [
+                        $address->passport_name => array_filter($rowData->type_event, function ($elem) use ($i) {
+                            $value = $elem->value;
+                            $num = explode('-', $value)[1];
+                            return $num == $i;
+                        }),
+                    ];
+                }
+                // echo "<pre>";
+                // print_r($arrayToSave);
+                // die();
+            }
+        }
+
+        echo "<pre>";
+        print_r($data);
+        die();
+    }
+
     public function actionSecretMethod()
     {
         // $old = Antiterror::find()
@@ -221,7 +249,7 @@ class AtzController extends Controller
         //         }
         //     }
         //         $old_ids = implode(',', $sub);
-                
+
         //     $new->old_ids = $old_ids;
 
         //     $old_ids = [];

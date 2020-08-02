@@ -28,15 +28,15 @@
                                 >Утвержденная программа модернизации инфраструктуры, включая капитальный ремонт объектов и проведение мероприятий по антитеррористической защищенности объектов (Раздел 2. Антитеррористическая защищенность объектов)</b-td
                             >
                             <b-td>Сумма бюджетного финансирования (руб.)</b-td>
-                            <b-td>Данные</b-td>
+                            <b-td>{{ table2Info.cost_b_full }}</b-td>
                         </b-tr>
                         <b-tr>
                             <b-td>Сумма внебюджетного финансирования (руб.)</b-td>
-                            <b-td>Данные</b-td>
+                            <b-td>{{ table2Info.cost_v_full }}</b-td>
                         </b-tr>
                         <b-tr>
                             <b-td>Общий объем финансирования (руб.)</b-td>
-                            <b-td>Данные</b-td>
+                            <b-td>{{ table2Info.cost_b_full + table2Info.cost_v_full }}</b-td>
                         </b-tr>
                     </b-tbody>
                 </b-table-simple>
@@ -58,7 +58,7 @@
                 </b-card-header>
                 <b-collapse id="TABLE2" accordion="TABLE2" role="tabpanel">
                     <b-card-body>
-                        <atz-table />
+                        <atz-table @getTable2AtzInfo="setTable2Atz" />
                     </b-card-body>
                 </b-collapse>
             </b-card>
@@ -139,6 +139,7 @@ export default {
             csrf: document.getElementsByName("csrf-token")[0].content,
             orgInfo: {},
             id_org: null,
+            table2Info: {},
             passport: [],
         };
     },
@@ -147,6 +148,12 @@ export default {
         await this.getPassportInfo();
     },
     methods: {
+        setTable2Atz(event) {
+            console.group('atz table 2');
+            console.log(event);
+            console.groupEnd();
+            this.table2Info = event;
+        },
         init() {
             if (window._Organization) this.orgInfo = window._Organization;
 
