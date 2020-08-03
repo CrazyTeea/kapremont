@@ -5,7 +5,10 @@ namespace app\controllers\app;
 use app\models\Antiterror;
 use app\models\AntiterrorPassport;
 use app\models\Atz;
+use app\models\AtzAddress;
+use app\models\AtzTableFour;
 use app\models\AtzTableThree;
+use app\models\AtzTypeActivity;
 use app\models\Organizations;
 use app\models\ProgObjectsEvents;
 use app\models\Program;
@@ -157,68 +160,117 @@ class AtzController extends Controller
             ->all();
 
         return json_encode($query);
-
-        // foreach($old as $arr) {
-        //     $new = new AntiterrorPassport();
-        //     $new->id_org = $arr->id_podved;
-        //     $new->name_address = $arr->passport_name;
-        //     $old_ids = Antiterror::find()
-        //         ->select('id_object')
-        //         ->where(['id_podved' => $arr->id_podved, 'system_status' => 1])
-        //         ->asArray()
-        //         ->all();
-        //     if(!empty($old_ids)) {
-        //         foreach($old_ids as $old_id) {
-        //             $sub[] = $old_id['id_object'];
-        //         }
-        //     }
-        //         $old_ids = implode(',', $sub);
-        //         // echo"<pre>";
-        //         // print_r($sub);
-        //         // die;
-        //     $new->old_ids = $old_ids;
-
-        //     $old_ids = [];
-        //     $sub = [];
-
-        //     try {
-        //         $new->save();
-        //     } catch (Exception $e) {
-        //         continue;
-        //     }
-
-        // }
-
-        // echo"<pre>";
-        // print_r($new);
-        // die;
     }
 
     public function actionSaveTable4()
     {
         $data = json_decode(Yii::$app->request->post('data'));
+        $id_org = Yii::$app->request->post('id_org');
+        $card_number = Yii::$app->request->post('card_number');
+
+        // echo "<pre>";
+        // print_r($data);
+        // die;
 
         foreach ($data as $row) {
             foreach ($row->row_stages as $rowData) {
-
                 foreach ($rowData->address as $i => $address) {
                     if (empty($address)) continue;
                     $arrayToSave[] = [
-                        $address->passport_name => array_filter($rowData->type_event, function ($elem) use ($i) {
+                        'passport_name' => $address->passport_name,
+                        'attributes' => array_filter($rowData->type_event, function ($elem) use ($i) {
                             $value = $elem->value;
                             $num = explode('-', $value)[1];
                             return $num == $i;
                         }),
                     ];
                 }
-                // echo "<pre>";
-                // print_r($arrayToSave);
-                // die();
+                $mainArray[] = [
+                    'attributes' => array_filter((array)$rowData, function ($key) {
+                        return !in_array($key, ['address', 'type_event']);
+                    }, ARRAY_FILTER_USE_KEY),
+                    'address' => $arrayToSave,
+                ];
+                $arrayToSave = [];
             }
         }
 
+        foreach ($mainArray as $mainData) {
+            $mainAtzFour = new AtzTableFour();
+
+            $mainAtzFour->id_org = $id_org;
+            $mainAtzFour->card_number = $card_number;
+            $mainAtzFour->stage_number = $mainData['attributes']['stage_number'];
+            $mainAtzFour->stage_name = $mainData['attributes']['stage_name'];
+            $mainAtzFour->method = $mainData['attributes']['method'];
+            $mainAtzFour->type_document = $mainData['attributes']['type_document'];
+            $mainAtzFour->name_object = $mainData['attributes']['name_object'];
+            $mainAtzFour->cost_full = $mainData['attributes']['cost_full'];
+            $mainAtzFour->cost_budjet = $mainData['attributes']['cost_budjet'];
+            $mainAtzFour->cost_vb = $mainData['attributes']['cost_vb'];
+            $mainAtzFour->number_contract = $mainData['attributes']['number_contract'];
+            $mainAtzFour->date_doc = $mainData['attributes']['date_doc'];
+            $mainAtzFour->number_deal = $mainData['attributes']['number_deal'];
+            $mainAtzFour->name_deller_by_doc = $mainData['attributes']['name_deller_by_doc'];
+            $mainAtzFour->inn_deller_by_doc = $mainData['attributes']['inn_deller_by_doc'];
+            $mainAtzFour->date_start = $mainData['attributes']['date_start'];
+            $mainAtzFour->date_end = $mainData['attributes']['date_end'];
+            $mainAtzFour->docs = $mainData['attributes']['docs'];
+            $mainAtzFour->comment_vuz = $mainData['attributes']['comment_vuz'];
+            $mainAtzFour->mon_expert = $mainData['attributes']['mon_expert'];
+            $mainAtzFour->comment_mon = $mainData['attributes']['comment_mon'];
+
+            // echo "<pre>";
+            // print_r($mainAtzFour);
+            // die;
+
+            if ($mainAtzFour->save()) {
+                foreach ($mainData['address'] as $address) {
+                    $atz_address = new AtzAddress();
+                    $atz_address->id_atz_table_four = $mainAtzFour->id;
+                    $atz_address->passport_name = $address['passport_name'];
+                    if ($atz_address->save()) {
+                        foreach ($address['attributes'] as $type_event) {
+                            $atz_type_activity = new AtzTypeActivity();
+                            $atz_type_activity->id_atz_table_for_address = $atz_address->id;
+                            $atz_type_activity->name = $type_event->name;
+                            $atz_type_activity->value = $type_event->value;
+                            $atz_type_activity->save();
+                            // if ($atz_type_activity->save()) return json_encode('saved');
+                        }
+                    }
+                }
+            }
+        }
+
+        return 'error';
         echo "<pre>";
-        print_r($data);
+        print_r($mainArray);
+        die();
+    }
+
+    public function actionGetTable4()
+    {
+        $id_org = 100; //Yii::$app->request->post('id_org');
+        $card_number = 1; //Yii::$app->request->post('card_number');
+
+        $atz_table_four = AtzTableFour::find()->where(['id_org' => $id_org, 'card_number' => $card_number])->all();
+
+        foreach ($atz_table_four as $atz_table_four_one) {
+            // $toClient []['row_stages'] [] =  
+
+            $addresses = AtzAddress::find()->where(['id_atz_table_four' => $atz_table_four_one->id])->all();
+
+            foreach($addresses as $address) {
+                $type_event = AtzTypeActivity::find()->where()
+            }
+            echo "<pre>";
+            print_r($addresses);
+            die();
+        }
+
+        echo "<pre>";
+        print_r($atz_table_four);
         die();
     }
 

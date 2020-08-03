@@ -4,10 +4,10 @@ namespace app\models;
 
 use yii\db\ActiveRecord;
 
-class AtzAddress extends ActiveRecord
+class AtzTypeActivity extends ActiveRecord
 {
     public static function tableName()
     {
-        return 'atz_address';
+        return 'atz_type_activity';
     }
 }

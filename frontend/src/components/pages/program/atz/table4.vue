@@ -167,7 +167,7 @@ import Multiselect from "vue-multiselect";
 import Axios from "axios";
 
 export default {
-  props: ["passport"],
+  props: ["passport", "id_org"],
   components: {
     BButton,
     BTableSimple,
@@ -183,6 +183,7 @@ export default {
     return {
       rows: [],
       csrf: document.getElementsByName("csrf-token")[0].content,
+      card: 1,
     };
   },
   async mounted() {},
@@ -247,46 +248,16 @@ export default {
 
       let data = new FormData();
       data.append("data", JSON.stringify(this.rows));
+      data.append("id_org", this.id_org);
+      data.append("card_number", this.card);
 
       return Axios.post("/app/atz/save-table4", data, {
         headers: {
           "X-CSRF-Token": this.csrf,
         },
-      }).then(res => {
+      }).then((res) => {
         console.log(res);
       });
-
-      
-
-      // let toClient = [];
-      // console.log(this.rows);
-      // this.rows.forEach((elementRow, index) => {
-      //   elementRow.row_stages.forEach((elementStage) => {
-      //     let addresPUSH = [];
-
-      //     elementStage.address.forEach((address) => {
-      //       // console.log(elementStage.address);
-      //       const func = () => {
-      //         return elementStage.type_event.filter(
-      //           (elem) => elem.split("-")[1] === index
-      //         );
-      //       };
-      //       let per = {
-      //         [address.passport_name]: func(),
-      //       };
-      //       addresPUSH.push(per);
-      //     });
-      //     console.log(addresPUSH);
-      //   });
-      //   // toClient.push({
-      //   pushInfo: {
-
-      //   }
-      // });
-      // });
-
-      console.log(toClient);
-      console.log(this.rows);
     },
     deleteRow(index) {
       this.rows.splice(index, 1);
