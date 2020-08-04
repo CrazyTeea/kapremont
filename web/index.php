@@ -2,6 +2,8 @@
 // Don't delete file. Copy it and rename to index.php
 require __DIR__ . '/../vendor/autoload.php';
 
+require  __DIR__ . '/helpers.php';
+
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__. '/../');
 $dotenv->load();
 

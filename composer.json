@@ -26,7 +26,8 @@
         "dompdf/dompdf": "^0.8.5",
         "mpdf/mpdf": "^8.0",
         "rkorebrits/htmltoopenxml": "^0.1.9",
-        "phpoffice/phpspreadsheet": "^1.13"
+        "phpoffice/phpspreadsheet": "^1.13",
+      "ext-json": "*"
     },
     "require-dev": {
         "yiisoft/yii2-debug": "~2.1.0",

@@ -3,26 +3,22 @@
 namespace app\controllers\app;
 
 use app\models\Antiterror;
-use app\models\AntiterrorPassport;
 use app\models\Atz;
 use app\models\AtzAddress;
 use app\models\AtzTableFour;
 use app\models\AtzTableThree;
 use app\models\AtzTypeActivity;
 use app\models\Organizations;
-use app\models\ProgObjectsEvents;
 use app\models\Program;
 use app\models\User;
-use Exception;
 use Yii;
-use yii\helpers\Json;
 use yii\web\Controller;
 
 class AtzController extends Controller
 {
     public function actionIndex()
     {
-        $program = \Yii::$app->getSession()->get('program');
+        $program = Yii::$app->getSession()->get('program');
         if (!$program)
             $program = Program::findOne(['id_org' => Yii::$app->session->get('user')->id_org]);
         //$atz = Atz::findAll(['id_program'=>$program->id]) ? : [new Atz()];
@@ -168,10 +164,6 @@ class AtzController extends Controller
         $id_org = Yii::$app->request->post('id_org');
         $card_number = Yii::$app->request->post('card_number');
 
-        // echo "<pre>";
-        // print_r($data);
-        // die;
-
         foreach ($data as $row) {
             foreach ($row->row_stages as $rowData) {
                 foreach ($rowData->address as $i => $address) {
@@ -189,15 +181,23 @@ class AtzController extends Controller
                     'attributes' => array_filter((array)$rowData, function ($key) {
                         return !in_array($key, ['address', 'type_event']);
                     }, ARRAY_FILTER_USE_KEY),
-                    'address' => $arrayToSave,
+                    'address' => $arrayToSave ?? [],
                 ];
                 $arrayToSave = [];
             }
         }
 
-        foreach ($mainArray as $mainData) {
-            $mainAtzFour = new AtzTableFour();
+//        echo "<pre>";
+//        print_r($mainArray);
+//        die();
 
+//        dd($mainArray);
+
+        if (empty($mainArray)) return 'emptyData';
+
+        foreach ($mainArray as $mainData) {
+
+            $mainAtzFour = (isset($mainData['attributes']['id'])) ? AtzTableFour::find()->where(['id' => $mainData['attributes']['id']])->one() : new AtzTableFour();
             $mainAtzFour->id_org = $id_org;
             $mainAtzFour->card_number = $card_number;
             $mainAtzFour->stage_number = $mainData['attributes']['stage_number'];
@@ -226,7 +226,7 @@ class AtzController extends Controller
 
             if ($mainAtzFour->save()) {
                 foreach ($mainData['address'] as $address) {
-                    $atz_address = new AtzAddress();
+                    $atz_address = (isset($address['id'])) ? AtzAddress::find()->where(['id' => $address['id']])->one() : new AtzAddress();
                     $atz_address->id_atz_table_four = $mainAtzFour->id;
                     $atz_address->passport_name = $address['passport_name'];
                     if ($atz_address->save()) {
@@ -251,27 +251,49 @@ class AtzController extends Controller
 
     public function actionGetTable4()
     {
+//        $arry1 = ['Закупка не конкурентный способом /Заключение договора /контракта ', 'Исполнение договора /контракта'];
+//        $array2 = ['Закупка конкурентный способом', 'Подведение итогов по закупке', 'Заключение договора /контракта', 'Исполнение договора /контракта'];
+
+        $array1Numbers = [null, '.1'];
+        $array2Numbers = ['.2', '.21', '.23', '.24'];
+
+
+
+
         $id_org = 100; //Yii::$app->request->post('id_org');
         $card_number = 1; //Yii::$app->request->post('card_number');
 
-        $atz_table_four = AtzTableFour::find()->where(['id_org' => $id_org, 'card_number' => $card_number])->all();
+        $atz_table_four = AtzTableFour::find()->where(['id_org' => $id_org, 'card_number' => $card_number])->asArray()->all();
+
+//        dump($atz_table_four);
+
+        $compactIDs = (function () use ($atz_table_four) {
+            $lastIndex = count($atz_table_four) - 1;
+//            dd(is_null($atz_table_four[0]['stage_number']));
+
+            if (is_null($atz_table_four[0]['stage_number'])) {
+                var_dump($atz_table_four[0]['stage_number']);
+            }
+        })();
 
         foreach ($atz_table_four as $atz_table_four_one) {
-            // $toClient []['row_stages'] [] =  
-
-            $addresses = AtzAddress::find()->where(['id_atz_table_four' => $atz_table_four_one->id])->all();
-
-            foreach($addresses as $address) {
-                $type_event = AtzTypeActivity::find()->where()
-            }
-            echo "<pre>";
-            print_r($addresses);
-            die();
+            $addresses = AtzAddress::find()->where(['id_atz_table_four' => $atz_table_four_one['id']])->asArray()->all();
+            $row_stages[] = array_merge($atz_table_four_one, ['address' => $addresses, 'type_event' => (function () use ($addresses) {
+                foreach ($addresses as $address) {
+                    $type_event = array_merge($type_event ?? [], AtzTypeActivity::find()->select(['id', 'name', 'value'])->where(['id_atz_table_for_address' => $address['id']])->asArray()->all());
+                }
+                return $type_event ?? [];
+            })()]);
+            // echo "<pre>";
+            // print_r($addresses);
+            // die();
+            // echo "<pre>";
+            // print_r($atz_table_four_one);
+            // die();
         }
-
-        echo "<pre>";
-        print_r($atz_table_four);
-        die();
+        return json_encode([
+            'row_stages' => $row_stages ?? []
+        ]);
     }
 
     public function actionSecretMethod()

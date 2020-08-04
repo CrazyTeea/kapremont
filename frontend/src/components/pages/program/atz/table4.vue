@@ -142,12 +142,14 @@
       </b-table-simple>
     </div>
     <div class="d-flex justify-content-end mt-2">
-      <b-button class="mr-2" @click="debug">Debug</b-button>
+      <b-button class="mr-2" @click="debug" >Debug</b-button>
+      <b-button class="mr-2" @click="debugClient" >Debug Client</b-button>
+
 
       <b-button size="sm" @click="addRow1">Добавить закупку у единственного поставщика</b-button>
       <b-button size="sm" class="ml-2" @click="addRow2">Добавить закупку конкурентным способом</b-button>
 
-      <b-button disabled variant="success" size="sm" class="ml-2">Сохранить</b-button>
+      <b-button @click="saveInfo" variant="success" size="sm" class="ml-2">Сохранить</b-button>
     </div>
   </div>
 </template>
@@ -189,7 +191,7 @@ export default {
   async mounted() {},
   methods: {
     ONinput(index1, index2) {
-      if (!this.rows[index1].row_stages[index2].address) return [];
+      if (!this.rows[index1].row_stages[index2].address || typeof this.rows[index1].row_stages[index2].address !== 'object') return [];
       let options = [];
       this.rows[index1].row_stages[index2].address.forEach(
         (element, indexArray) => {
@@ -233,19 +235,7 @@ export default {
 
       return options;
     },
-    getOptions(index1, index2) {
-      let array = this.rows[index1].row_stages[index2].address;
-
-      return [
-        {
-          id_podved: 12,
-          passport_name: "lol",
-        },
-      ];
-    },
-    debug() {
-      console.log(this.rows);
-
+    saveInfo() {
       let data = new FormData();
       data.append("data", JSON.stringify(this.rows));
       data.append("id_org", this.id_org);
@@ -255,8 +245,29 @@ export default {
         headers: {
           "X-CSRF-Token": this.csrf,
         },
+      }).then(res => {
+        console.log(res)
+      });
+    },
+    debugClient() {
+      console.log(this.rows);
+    },
+    debug() {
+      console.log(this.rows);
+
+      
+
+      return Axios.post("/app/atz/get-table4", null, {
+        headers: {
+          "X-CSRF-Token": this.csrf,
+        },
       }).then((res) => {
+        this.rows = [res.data];
+            // ({
+            //   ...res.data
+            // })
         console.log(res);
+        console.log(this.rows);
       });
     },
     deleteRow(index) {
