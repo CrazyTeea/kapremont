@@ -44,7 +44,7 @@
               {{ indexBody + 1 + row.stage_number }}
               <b-icon
                 v-if="!index"
-                @click="deleteRow(indexBody)"
+                @click="deleteRow(indexBody, index)"
                 variant="danger"
                 icon="trash"
                 class="trash-icon mt-2 col-1"
@@ -188,7 +188,9 @@ export default {
       card: 1,
     };
   },
-  async mounted() {},
+  async mounted() {
+    await this.getTableFourInfo();
+  },
   methods: {
     ONinput(index1, index2) {
       if (!this.rows[index1].row_stages[index2].address || typeof this.rows[index1].row_stages[index2].address !== 'object') return [];
@@ -246,33 +248,49 @@ export default {
           "X-CSRF-Token": this.csrf,
         },
       }).then(res => {
-        console.log(res)
+        this.getTableFourInfo();
       });
     },
     debugClient() {
       console.log(this.rows);
     },
     debug() {
+
+    },
+    getTableFourInfo() {
       console.log(this.rows);
-
-      
-
       return Axios.post("/app/atz/get-table4", null, {
         headers: {
           "X-CSRF-Token": this.csrf,
         },
       }).then((res) => {
-        this.rows = [res.data];
-            // ({
-            //   ...res.data
-            // })
-        console.log(res);
-        console.log(this.rows);
+        this.rows = [...res.data];
       });
     },
-    deleteRow(index) {
+    deleteRow(index, row_stages_index) {
+      if (this.rows[index].row_stages[row_stages_index].id) {
+        let ids = [];
+        this.rows[index].row_stages.forEach(element => {
+          ids.push(element.id);
+        });
+        console.log(ids);
+        this.deleteRowFromServer(ids);
+        console.log(this.rows[index].row_stages[row_stages_index].id);
+        return;
+      }
+
       this.rows.splice(index, 1);
-      console.log(index);
+    },
+    deleteRowFromServer(ids) {
+      let data = new FormData();
+      data.append('ids', JSON.stringify(ids));
+      return Axios.post('/app/atz/destroy-atz-table-four-row', data, {
+        headers: {
+          "X-CSRF-Token": this.csrf,
+        },
+      }).then(res => {
+        this.getTableFourInfo();
+      })
     },
     addRow1() {
       this.rows.push({

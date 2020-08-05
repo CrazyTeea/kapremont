@@ -2,6 +2,7 @@
 
 namespace app\controllers\app;
 
+use app\facades\ExceptionLogger;
 use app\models\Antiterror;
 use app\models\Atz;
 use app\models\AtzAddress;
@@ -11,7 +12,9 @@ use app\models\AtzTypeActivity;
 use app\models\Organizations;
 use app\models\Program;
 use app\models\User;
+use Mpdf\Tag\P;
 use Yii;
+use yii\db\Exception;
 use yii\web\Controller;
 
 class AtzController extends Controller
@@ -187,6 +190,7 @@ class AtzController extends Controller
             }
         }
 
+
 //        echo "<pre>";
 //        print_r($mainArray);
 //        die();
@@ -194,6 +198,10 @@ class AtzController extends Controller
 //        dd($mainArray);
 
         if (empty($mainArray)) return 'emptyData';
+
+        $destroyOld = (function () use ($mainArray) {
+
+        })();
 
         foreach ($mainArray as $mainData) {
 
@@ -226,7 +234,7 @@ class AtzController extends Controller
 
             if ($mainAtzFour->save()) {
                 foreach ($mainData['address'] as $address) {
-                    $atz_address = (isset($address['id'])) ? AtzAddress::find()->where(['id' => $address['id']])->one() : new AtzAddress();
+                    $atz_address =  new AtzAddress();
                     $atz_address->id_atz_table_four = $mainAtzFour->id;
                     $atz_address->passport_name = $address['passport_name'];
                     if ($atz_address->save()) {
@@ -249,32 +257,28 @@ class AtzController extends Controller
         die();
     }
 
+    public function actionDestroyAtzTableFourRow($id = null)
+    {
+        if(is_null($id)) {
+            $ids = json_decode(Yii::$app->request->post('ids'));
+            foreach ($ids as $id) {
+                AtzTableFour::destroy($id);
+            }
+        }
+        AtzTableFour::destroy($id);
+    }
+
     public function actionGetTable4()
     {
-//        $arry1 = ['Закупка не конкурентный способом /Заключение договора /контракта ', 'Исполнение договора /контракта'];
-//        $array2 = ['Закупка конкурентный способом', 'Подведение итогов по закупке', 'Заключение договора /контракта', 'Исполнение договора /контракта'];
-
-        $array1Numbers = [null, '.1'];
-        $array2Numbers = ['.2', '.21', '.23', '.24'];
-
-
-
-
+        $arrayLastRowIndex = ['.1', '.24'];
         $id_org = 100; //Yii::$app->request->post('id_org');
         $card_number = 1; //Yii::$app->request->post('card_number');
 
         $atz_table_four = AtzTableFour::find()->where(['id_org' => $id_org, 'card_number' => $card_number])->asArray()->all();
 
-//        dump($atz_table_four);
-
-        $compactIDs = (function () use ($atz_table_four) {
-            $lastIndex = count($atz_table_four) - 1;
-//            dd(is_null($atz_table_four[0]['stage_number']));
-
-            if (is_null($atz_table_four[0]['stage_number'])) {
-                var_dump($atz_table_four[0]['stage_number']);
-            }
-        })();
+        $isLastRow = function ($atz_table_four_one) use($arrayLastRowIndex) {
+            return in_array($atz_table_four_one['stage_number'], $arrayLastRowIndex);
+        };
 
         foreach ($atz_table_four as $atz_table_four_one) {
             $addresses = AtzAddress::find()->where(['id_atz_table_four' => $atz_table_four_one['id']])->asArray()->all();
@@ -284,16 +288,14 @@ class AtzController extends Controller
                 }
                 return $type_event ?? [];
             })()]);
-            // echo "<pre>";
-            // print_r($addresses);
-            // die();
-            // echo "<pre>";
-            // print_r($atz_table_four_one);
-            // die();
+
+            if ($isLastRow($atz_table_four_one)) {
+                $toClient [] = ['row_stages' => $row_stages];
+                $row_stages = [];
+            }
         }
-        return json_encode([
-            'row_stages' => $row_stages ?? []
-        ]);
+
+        return json_encode($toClient ?? []);
     }
 
     public function actionSecretMethod()
