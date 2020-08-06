@@ -195,17 +195,21 @@ class AtzController extends Controller
 //        print_r($mainArray);
 //        die();
 
-//        dd($mainArray);
-
+//
         if (empty($mainArray)) return 'emptyData';
 
-        $destroyOld = (function () use ($mainArray) {
+        $getOldIds = function () use ($mainArray) {
+            foreach ($mainArray as $row) {
+                if (isset($row['attributes']['id'])) $ids = array_merge($ids ?? [], [$row['attributes']['id']]);
+            }
+            return $ids ?? [];
+        };
 
-        })();
+//        dd($getOldIds());
+        $this->actionDestroyAtzTableFourRow($getOldIds());
 
         foreach ($mainArray as $mainData) {
-
-            $mainAtzFour = (isset($mainData['attributes']['id'])) ? AtzTableFour::find()->where(['id' => $mainData['attributes']['id']])->one() : new AtzTableFour();
+            $mainAtzFour = new AtzTableFour();
             $mainAtzFour->id_org = $id_org;
             $mainAtzFour->card_number = $card_number;
             $mainAtzFour->stage_number = $mainData['attributes']['stage_number'];
@@ -228,10 +232,6 @@ class AtzController extends Controller
             $mainAtzFour->mon_expert = $mainData['attributes']['mon_expert'];
             $mainAtzFour->comment_mon = $mainData['attributes']['comment_mon'];
 
-            // echo "<pre>";
-            // print_r($mainAtzFour);
-            // die;
-
             if ($mainAtzFour->save()) {
                 foreach ($mainData['address'] as $address) {
                     $atz_address =  new AtzAddress();
@@ -244,28 +244,21 @@ class AtzController extends Controller
                             $atz_type_activity->name = $type_event->name;
                             $atz_type_activity->value = $type_event->value;
                             $atz_type_activity->save();
-                            // if ($atz_type_activity->save()) return json_encode('saved');
                         }
                     }
                 }
             }
         }
 
-        return 'error';
-        echo "<pre>";
-        print_r($mainArray);
-        die();
+        return 'saved';
     }
 
-    public function actionDestroyAtzTableFourRow($id = null)
+    public function actionDestroyAtzTableFourRow(array $ids = null)
     {
-        if(is_null($id)) {
-            $ids = json_decode(Yii::$app->request->post('ids'));
-            foreach ($ids as $id) {
-                AtzTableFour::destroy($id);
-            }
+        if(is_null($ids)) $ids = json_decode(Yii::$app->request->post('ids'));
+        foreach ($ids as $id) {
+            AtzTableFour::destroy($id);
         }
-        AtzTableFour::destroy($id);
     }
 
     public function actionGetTable4()
