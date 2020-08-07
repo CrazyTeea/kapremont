@@ -24,7 +24,8 @@ class FileComment extends ActiveRecord
     public function rules()
     {
         return [
-            [['id_obj', 'file_name', 'file_ext'], 'required'],
+            [['file_name', 'file_ext'], 'required'],
+            [['id_obj', 'id_atz'], 'default', 'value' => 'null'],
             [['archived'], 'default', 'value' => false]
         ];
     }

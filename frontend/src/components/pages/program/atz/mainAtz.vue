@@ -20,7 +20,7 @@
                                 >Объем финансового обеспечения на реализацию мероприятий по модернизации инфраструктуры, включая капитальный ремонт объектов и проведение мероприятий по
                                 антитеррористической защищенности объектов</b-td
                             >
-                            <b-td>Данные</b-td>
+                            <b-td>{{ finanse_volume }}</b-td>
                         </b-tr>
                         <b-tr>
                             <b-td rowspan="3">2</b-td>
@@ -49,7 +49,7 @@
             </div>
         </div>
         <div class="row">
-            <comments class="col-12" />
+            <comments  class="col-12" />
         </div>
         <div class="row mt-5">
             <b-card no-body class="mb-1 col-12">
@@ -95,7 +95,7 @@
                 </b-card-header>
                 <b-collapse id="TABLEDoc" accordion="TABLEDoc" role="tabpanel">
                     <b-card-body>
-                        В разработке...
+                        <upload-file-atchive :id_card="id_card" />
                     </b-card-body>
                 </b-collapse>
             </b-card>
@@ -106,6 +106,7 @@
 <script>
 import { userPanel, UserInfoView } from "../../../organisms";
 import { AtzCommentComponent } from "../../../organisms/comments/";
+import UploadFileArchive from './files';
 import AtzTable from "./index";
 import Table3 from "./table3";
 import Table4 from "./table4";
@@ -121,6 +122,7 @@ export default {
         comments: AtzCommentComponent,
         table3: Table3,
         table4: Table4,
+        "upload-file-atchive": UploadFileArchive,
         UserInfoView,
         BButton,
         BTableSimple,
@@ -141,11 +143,17 @@ export default {
             id_org: null,
             table2Info: {},
             passport: [],
+            finanse_volume: null,
+            id_card: 1
         };
     },
     async mounted() {
         await this.init();
         await this.getPassportInfo();
+        await this.getCurentOrg();
+        console.group('info');
+
+        console.groupEnd()
     },
     methods: {
         setTable2Atz(event) {
@@ -171,6 +179,15 @@ export default {
               this.passport = res.data;
             });
         },
+      async getCurentOrg() {
+        return Axios.post(`/api/org-table/${this.$route.params.id}`, null, {
+          headers: {
+            "X-CSRF-Token": this.csrf
+          }
+        }).then(res => {
+          this.finanse_volume = res.data.programm.finance_volume;
+        });
+      },
     },
 };
 </script>

@@ -50,36 +50,41 @@ class UploadController extends Controller
         return 'файла не существует';
     }
 
-    public function actionTest()
-    {// Url::rest/upload/test
+    public function actionUploadAtz()
+    {
+        return 'here atz upload file';
+        $post = Yii::$app->request->post();
+        $id_atz = $post['id_atz'];
+        $id_comment = $post['id_comment'];
 
-        $rolesId = array_merge(User::getUsersByRole('faiv_admin'), User::getUsersByRole('faiv_user')) ;
-        $users = User::find()->where(['in', 'id', $rolesId])->all();
-        foreach($users as $user) {
-            $orgIds[] = $user->id_org;
+        $upload = new UploadForm();
+        $upload->file = UploadedFile::getInstanceByName('file');
+        $saveFileComment = function () use ($upload, $id_atz, $id_comment) {
+            $fileComment = new FileComment();
+            $fileComment->id_atz = $id_atz;
+            $fileComment->id_comment = $id_comment;
+            $fileComment->file_name = $upload->file->basename;
+            $fileComment->file_ext = $upload->file->extension;
+            if($fileComment->save()) {
+                return $fileComment->id;
+            } else {
+                return false;
+            }
+        };
+
+        if($file_id = $saveFileComment()) {
+            $path = 'uploads/comments/atz/' . $id_atz . '_' . $file_id;
+            if (!file_exists($path))
+                FileHelper::createDirectory($path);
+            $upload->file->saveAs("$path/{$upload->file->name}");
+            return true;
         }
 
-        // $selects = User::find()
-        //     ->joinWith(['organization' => function($query) {
-        //         $query
-        //             ->select('org.id, org.name, COUNT(po.id_org) as quantity, reg.region, org.dep_status, org.dku_status')
-        //             ->alias('org')
-        //             ->joinWith('region reg', true, 'JOIN')
-        //             ->joinWith('programObjects po', true, 'JOIN')
-        //             ->where(['org.id' => 104]);
-        //     }], true, 'JOIN')
-        //     ->where(['in', 'user.id', $rolesId])->all();
+        return false;
+    }
 
-        // foreach($selects as $select) {
-        //     $toServ[] = [
-        //         'id' => $select->organization->id,
-        //         'name' => $select->organization->name,
-        //         'quantity' => $select->organization->quantity,
-        //         'region' => $select->organization->region,
-        //         'dep_status' => $select->organization->dep_status,
-        //         'dku_status' => $select->organization->dku_status
-        //     ];
-        // }
+    public function actionTest()
+    {// Url::rest/upload/test
 
         echo "<pre>";
         print_r(array_unique($orgIds));

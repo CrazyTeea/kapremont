@@ -15,7 +15,8 @@ class Comments extends ActiveRecord
     public function rules()
     {
         return [
-            [['id_user', 'id_obj', 'message'], 'required']
+            [['id_user', 'message'], 'required'],
+            [['id_obj', 'id_atz'], 'default', 'value' => 'null']
         ];
     }
 
