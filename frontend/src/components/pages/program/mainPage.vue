@@ -248,6 +248,35 @@
         <br />
         <user-info-view />
       </div>
+
+      <div class="col-12 mt-4">
+        <b-table-simple>
+          <b-thead>
+            <b-th>
+              Скачать выгрузку
+            </b-th>
+            <b-th>
+              Загрузить xlsx
+            </b-th>
+            <b-th>
+              Загрузить pdf
+            </b-th>
+          </b-thead>
+          <b-tbody>
+            <b-td>
+              <a href="/api/file-main-page/get-file" target="_blank">Скачать</a>
+            </b-td>
+            <b-td>
+              <label class="file_atz_label" for="file_atz_xls">Загрузить</label>
+              <input @input="fileInput($event, 'xlsx')" id="file_atz_xls" hidden type="file">
+            </b-td>
+            <b-td>
+              <label class="file_atz_label" for="file_atz_pdf">Загрузить</label>
+              <input @input="fileInput($event,'pdf')" id="file_atz_pdf" hidden type="file">
+            </b-td>
+          </b-tbody>
+        </b-table-simple>
+      </div>
     </div>
   </div>
 </template>
@@ -260,7 +289,12 @@ import {
   BTable,
   BPagination,
   VBToggle,
-  BFormInput
+  BFormInput,
+  BTableSimple,
+  BThead,
+  BTh,
+  BTbody,
+  BTd
 } from "bootstrap-vue";
 import Axios from "axios";
 // import b_vue from 'bootstrap-vue';
@@ -274,7 +308,12 @@ export default {
     BButton,
     BPagination,
     BTable,
-    UserInfoView
+    UserInfoView,
+    BTableSimple,
+    BThead,
+    BTh,
+    BTbody,
+    BTd
   },
   data() {
     return {
@@ -335,6 +374,23 @@ export default {
     }
   },
   methods: {
+    fileInput(e, type) {
+      let file = e.target.files[0];
+      let splitFileName = file.name.split('.');
+      if(splitFileName[splitFileName.length - 1] != type) return;
+
+      let data = new FormData();
+      data.append('file', file);
+      data.append('type', type);
+      Axios.post('/api/file-main-page/save-file', data, {
+        headers: {
+          "X-CSRF-Token": this.csrf,
+          "Content-Type": "multipart/form-data;"
+        },
+      }).then(res => {
+        console.log('sended');
+      });
+    },
     goAtz() {
       if(window.currentUser === 2535) {
         window.location = `/program/main-atz/${this.id_org}`;
@@ -378,4 +434,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.file_atz_label:hover {
+  border-bottom: 1px solid #1b1e21;
+}
+</style>
