@@ -21,19 +21,18 @@ class FileMainPageController extends Controller
 
         $file_names = FileHelper::findFiles(Yii::getAlias('@webroot') . '/static/downloads');
         foreach ($file_names as $file_name) {
-            $files[] = substr($file_name, 70);
+            $file_str_exploded = explode('/', $file_name);
+            $count = count($file_str_exploded);
+            $files[] = implode('/', [$file_str_exploded[$count - 2], $file_str_exploded[$count - 1]]);
         }
+
         $file_needed = array_filter($files, function ($file) use ($id_org) {
             $id_org_file = explode('_', $file)[0];
             return $id_org_file == $id_org;
         });
         if (empty(array_keys($file_needed)))
             throw new \Exception('файл не найден');
-
         $full_path = 'static/downloads/' . $file_needed[array_keys($file_needed)[0]];
-//        echo "<pre>";
-//        print_r($file_needed);
-//        if(file_exists($full_path)) return 'yes';
 
         return Yii::$app->response->sendFile($full_path);
     }
