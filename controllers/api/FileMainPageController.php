@@ -3,6 +3,7 @@
 
 namespace app\controllers\api;
 
+use app\models\Organizations;
 use app\models\UploadForm;
 use app\models\User;
 use yii\helpers\FileHelper;
@@ -52,5 +53,28 @@ class FileMainPageController extends Controller
         if (!file_exists($path))
             FileHelper::createDirectory($path);
         $upload->file->saveAs("$path/$type");
+    }
+
+    public  function actionGetFileInfo()
+    {
+        $id_org = Yii::$app->request->post('id_org');
+        $file_xlsx_path = "uploads/mainAtz/$id_org/xlsx";
+        $file_pdf_path = "uploads/mainAtz/$id_org/pdf";
+
+        return json_encode([
+            'xlsx' => file_exists($file_xlsx_path) ? true : false,
+            'pdf' => file_exists($file_pdf_path) ? true : false,
+        ]);
+    }
+
+    public function actionGetUploadedFile($id_org, $type)
+    {
+        $path = "uploads/mainAtz/$id_org/$type";
+        if (!file_exists($path))
+            throw new \Exception('файл не найден');
+
+        $orgInfo = Organizations::findOne($id_org);
+
+        return Yii::$app->response->sendFile($path, "$id_org\_\\$orgInfo->name.$type");
     }
 }
