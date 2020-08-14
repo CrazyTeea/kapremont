@@ -258,9 +258,15 @@
             </b-th>
             <b-th>
               Загрузить xlsx
+              <a v-if="file_atz_info.xlsx" :href="`/api/file-main-page/get-uploaded-file?id_org=${this.id_org}&type=xlsx`"><b-icon v-b-popover.hover.top="'Нажмите чтобы скачать'" variant="success" icon="check-circle-fill"></b-icon></a>
+              <a v-else><b-icon v-b-popover.hover.top="'Файл еще не загружен'" variant="danger" icon="check-circle-fill"></b-icon></a>
+
             </b-th>
             <b-th>
               Загрузить pdf
+              <a v-if="file_atz_info.pdf" :href="`/api/file-main-page/get-uploaded-file?id_org=${this.id_org}&type=pdf`"><b-icon v-b-popover.hover.top="'Нажмите чтобы скачать'" variant="success" icon="check-circle-fill"></b-icon></a>
+              <a v-else><b-icon v-b-popover.hover.top="'Файл еще не загружен'" variant="danger" icon="check-circle-fill"></b-icon></a>
+
             </b-th>
           </b-thead>
           <b-tbody>
@@ -295,13 +301,15 @@ import {
   BThead,
   BTh,
   BTbody,
-  BTd
+  BTd,
+  VBPopover
 } from "bootstrap-vue";
 import Axios from "axios";
 // import b_vue from 'bootstrap-vue';
 export default {
   directives: {
-    "b-toggle": VBToggle
+    "b-toggle": VBToggle,
+    "b-popover": VBPopover
   },
   components: {
     "v-userPanel": userPanel,
@@ -319,6 +327,10 @@ export default {
   data() {
     return {
       csrf: document.getElementsByName("csrf-token")[0].content,
+      file_atz_info: {
+        xlsx: false,
+        pdf: false
+      },
       extraBaner: window.Permission === "user",
       extraBaner2: false,
       perPage: 5,
@@ -389,8 +401,20 @@ export default {
           "Content-Type": "multipart/form-data;"
         },
       }).then(res => {
-        console.log('sended');
+        this.getFilesAtzInfo();
       });
+    },
+    async getFilesAtzInfo() {
+      let data = new FormData();
+      data.append('id_org', this.id_org);
+
+      return Axios.post('/api/file-main-page/get-file-info', data, {
+        headers: {
+          "X-CSRF-Token": this.csrf,
+        },
+      }).then(res => {
+        this.file_atz_info = res.data;
+      })
     },
     goAtz() {
       if(window.currentUser === 2535) {
@@ -427,6 +451,8 @@ export default {
   async mounted() {
     await this.requestUser();
     await this.requestPageData({ pageName: "main" });
+
+    await this.getFilesAtzInfo();
 
     //this.id_org = this.getUser.organization.id;
 
