@@ -82,8 +82,6 @@ class FileMainPageController extends Controller
         if (!file_exists($path))
             throw new \Exception('файл не найден');
 
-        $orgInfo = Organizations::findOne($id_org);
-
         return Yii::$app->response->sendFile($path, "$id_org\_\\$orgInfo->name.$type");
     }
 }
