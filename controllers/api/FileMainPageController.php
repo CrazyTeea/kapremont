@@ -57,11 +57,11 @@ class FileMainPageController extends Controller
 
         $org = Organizations::findOne($id_org);
 
-        $file_statistics = MainAtzFileStatistics::find()-where(['path' => "$path/{$org->name}.$type"])->one();
+        $file_statistics = MainAtzFileStatistics::find()->where(['path' => "$path/{$org->name}.$type"])->one();
 
         if (is_null($file_statistics)) {
             $new_file_statistics = new MainAtzFileStatistics();
-            $new_file_statistics->id_org = $org->id_org;
+            $new_file_statistics->id_org = $org->id;
             $new_file_statistics->path = "$path/{$org->name}.$type";
             $new_file_statistics->save();
         }
