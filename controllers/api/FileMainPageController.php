@@ -7,6 +7,7 @@ use app\models\Organizations;
 use app\models\UploadForm;
 use app\models\User;
 use yii\helpers\FileHelper;
+use yii\helpers\Json;
 use yii\web\Controller;
 use Yii;
 use yii\web\UploadedFile;
@@ -44,7 +45,7 @@ class FileMainPageController extends Controller
         $upload = new UploadForm();
         $upload->file = UploadedFile::getInstanceByName('file');
         $type = Yii::$app->request->post('type');
-        $id_org = User::find()->where(['id' => Yii::$app->user->id])->one()->id_org ?? null;
+        $id_org = User::findOne(Yii::$app->user->id)->id_org ?? null;
 
         if (!isset($id_org))
             throw new \Exception('файл нельзя созранить');
@@ -52,18 +53,24 @@ class FileMainPageController extends Controller
         $path = "uploads/mainAtz/$id_org";
         if (!file_exists($path))
             FileHelper::createDirectory($path);
-        $upload->file->saveAs("$path/$type");
+
+        $org = Organizations::findOne($id_org);
+
+        $upload->file->saveAs("$path/{$org->name}.$type");
     }
 
     public  function actionGetFileInfo()
     {
         $id_org = Yii::$app->request->post('id_org');
-        $file_xlsx_path = "uploads/mainAtz/$id_org/xlsx";
-        $file_pdf_path = "uploads/mainAtz/$id_org/pdf";
 
-        return json_encode([
-            'xlsx' => file_exists($file_xlsx_path) ? true : false,
-            'pdf' => file_exists($file_pdf_path) ? true : false,
+        $org = Organizations::findOne($id_org);
+
+        $file_xlsx_path = "uploads/mainAtz/$id_org/{$org->name}.xlsx";
+        $file_pdf_path = "uploads/mainAtz/$id_org/{$org->name}.pdf";
+
+        return Json::encode([
+            'xlsx' => file_exists($file_xlsx_path),
+            'pdf' => file_exists($file_pdf_path),
         ]);
     }
 
