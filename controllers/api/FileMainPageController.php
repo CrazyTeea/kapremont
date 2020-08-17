@@ -3,6 +3,7 @@
 
 namespace app\controllers\api;
 
+use app\models\MainAtzFileStatistics;
 use app\models\Organizations;
 use app\models\UploadForm;
 use app\models\User;
@@ -56,6 +57,15 @@ class FileMainPageController extends Controller
 
         $org = Organizations::findOne($id_org);
 
+        $file_statistics = MainAtzFileStatistics::find()-where(['path' => "$path/{$org->name}.$type"])->one();
+
+        if (is_null($file_statistics)) {
+            $new_file_statistics = new MainAtzFileStatistics();
+            $new_file_statistics->id_org = $org->id_org;
+            $new_file_statistics->path = "$path/{$org->name}.$type";
+            $new_file_statistics->save();
+        }
+
         $upload->file->saveAs("$path/{$org->name}.$type");
     }
 
@@ -83,5 +93,32 @@ class FileMainPageController extends Controller
             throw new \Exception('файл не найден');
 
         return Yii::$app->response->sendFile($path, "$id_org\_\\$orgInfo->name.$type");
+    }
+
+    public function actionHardResetMainAtzFileStatistics()
+    {
+        $directory = 'uploads/mainAtz';
+
+        $files = FileHelper::findFiles($directory);
+
+        $needed_files = array_map(function ($element) {
+            $array = explode('/', $element);
+            return [
+                'id_org' => array_splice($array, 2, 1)[0],
+                'path' => $element
+            ];
+        }, $files);
+
+        Yii::$app->db->createCommand('TRUNCATE TABLE main_atz_files_statistics')->execute();
+
+        foreach($needed_files as $file_to_save) {
+            $file_instance = new MainAtzFileStatistics();
+            $file_instance->id_org = $file_to_save['id_org'];
+            $file_instance->path = $file_to_save['path'];
+            $file_instance->save();
+        }
+
+        echo "<pre>";
+        print_r($needed_files);
     }
 }
