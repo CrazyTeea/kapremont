@@ -109,7 +109,7 @@ class FileMainPageController extends Controller
             ];
         }, $files);
 
-        Yii::$app->db->createCommand('TRUNCATE TABLE main_atz_files_statistics')->execute();
+//        Yii::$app->db->createCommand('TRUNCATE TABLE main_atz_files_statistics')->execute();
 
         foreach($needed_files as $file_to_save) {
             $file_instance = new MainAtzFileStatistics();
