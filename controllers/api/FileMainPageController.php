@@ -76,7 +76,9 @@ class FileMainPageController extends Controller
 
     public function actionGetUploadedFile($id_org, $type)
     {
-        $path = "uploads/mainAtz/$id_org/$type";
+        $orgInfo = Organizations::findOne($id_org);
+        $path = "uploads/mainAtz/$id_org/$orgInfo->name.$type";
+
         if (!file_exists($path))
             throw new \Exception('файл не найден');
 
