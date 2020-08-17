@@ -329,7 +329,8 @@ export default {
       csrf: document.getElementsByName("csrf-token")[0].content,
       file_atz_info: {
         xlsx: false,
-        pdf: false
+        pdf: false,
+        kek:false
       },
       extraBaner: window.Permission === "user",
       extraBaner2: false,
