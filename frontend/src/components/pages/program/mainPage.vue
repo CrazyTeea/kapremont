@@ -248,6 +248,42 @@
         <br />
         <user-info-view />
       </div>
+
+      <div class="col-12 mt-5">
+        <h4>Информация о выполнении (невыполнении) мероприятий по АТЗ</h4>
+        <b-table-simple>
+          <b-thead>
+            <b-th>
+              Информация от 25.02.2020 № МН-18/548
+            </b-th>
+            <b-th>
+              Загрузить xlsx
+              <a v-if="file_atz_info.xlsx" :href="`/api/file-main-page/get-uploaded-file?id_org=${this.id_org}&type=xlsx`"><b-icon v-b-popover.hover.top="'Нажмите чтобы скачать'" variant="success" icon="check-circle-fill"></b-icon></a>
+              <a v-else><b-icon v-b-popover.hover.top="'Файл еще не загружен'" variant="danger" icon="check-circle-fill"></b-icon></a>
+
+            </b-th>
+            <b-th>
+              Загрузить pdf
+              <a v-if="file_atz_info.pdf" :href="`/api/file-main-page/get-uploaded-file?id_org=${this.id_org}&type=pdf`"><b-icon v-b-popover.hover.top="'Нажмите чтобы скачать'" variant="success" icon="check-circle-fill"></b-icon></a>
+              <a v-else><b-icon v-b-popover.hover.top="'Файл еще не загружен'" variant="danger" icon="check-circle-fill"></b-icon></a>
+
+            </b-th>
+          </b-thead>
+          <b-tbody>
+            <b-td>
+              <a href="/api/file-main-page/get-file" target="_blank">Скачать</a>
+            </b-td>
+            <b-td>
+              <label class="file_atz_label" for="file_atz_xls">Загрузить</label>
+              <input @input="fileInput($event, 'xlsx')" id="file_atz_xls" hidden type="file">
+            </b-td>
+            <b-td>
+              <label class="file_atz_label" for="file_atz_pdf">Загрузить</label>
+              <input @input="fileInput($event,'pdf')" id="file_atz_pdf" hidden type="file">
+            </b-td>
+          </b-tbody>
+        </b-table-simple>
+      </div>
     </div>
   </div>
 </template>
@@ -260,13 +296,20 @@ import {
   BTable,
   BPagination,
   VBToggle,
-  BFormInput
+  BFormInput,
+  BTableSimple,
+  BThead,
+  BTh,
+  BTbody,
+  BTd,
+  VBPopover
 } from "bootstrap-vue";
 import Axios from "axios";
 // import b_vue from 'bootstrap-vue';
 export default {
   directives: {
-    "b-toggle": VBToggle
+    "b-toggle": VBToggle,
+    "b-popover": VBPopover
   },
   components: {
     "v-userPanel": userPanel,
@@ -274,11 +317,21 @@ export default {
     BButton,
     BPagination,
     BTable,
-    UserInfoView
+    UserInfoView,
+    BTableSimple,
+    BThead,
+    BTh,
+    BTbody,
+    BTd
   },
   data() {
     return {
       csrf: document.getElementsByName("csrf-token")[0].content,
+      file_atz_info: {
+        xlsx: false,
+        pdf: false,
+        kek:false
+      },
       extraBaner: window.Permission === "user",
       extraBaner2: false,
       perPage: 5,
@@ -335,6 +388,35 @@ export default {
     }
   },
   methods: {
+    fileInput(e, type) {
+      let file = e.target.files[0];
+      let splitFileName = file.name.split('.');
+      if(splitFileName[splitFileName.length - 1] != type) return;
+
+      let data = new FormData();
+      data.append('file', file);
+      data.append('type', type);
+      Axios.post('/api/file-main-page/save-file', data, {
+        headers: {
+          "X-CSRF-Token": this.csrf,
+          "Content-Type": "multipart/form-data;"
+        },
+      }).then(res => {
+        this.getFilesAtzInfo();
+      });
+    },
+    async getFilesAtzInfo() {
+      let data = new FormData();
+      data.append('id_org', this.id_org);
+
+      return Axios.post('/api/file-main-page/get-file-info', data, {
+        headers: {
+          "X-CSRF-Token": this.csrf,
+        },
+      }).then(res => {
+        this.file_atz_info = res.data;
+      })
+    },
     goAtz() {
       if(window.currentUser === 2535) {
         window.location = `/program/main-atz/${this.id_org}`;
@@ -371,6 +453,8 @@ export default {
     await this.requestUser();
     await this.requestPageData({ pageName: "main" });
 
+    await this.getFilesAtzInfo();
+
     //this.id_org = this.getUser.organization.id;
 
     //this.requestProgram();
@@ -378,4 +462,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+.file_atz_label:hover {
+  border-bottom: 1px solid #1b1e21;
+}
+</style>

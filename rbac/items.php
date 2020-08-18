@@ -116,6 +116,9 @@ return [
             '/api/user-info/*',
             '/app/program/is-approve',
             '/app/program/set-value',
+            '/api/file-main-page/get-file',
+            '/api/file-main-page/save-file',
+            '/api/file-main-page/*',
         ],
     ],
     'faiv_admin' => [
@@ -243,6 +246,9 @@ return [
             '/rest/program-objects/get-status',
             '/app/organization/get-approve-status',
             '/app/program/download-event',
+            '/api/file-main-page/get-file',
+            '/api/file-main-page/save-file',
+            '/api/file-main-page/*',
         ],
     ],
     '/admin/assignment/index' => [
@@ -744,6 +750,15 @@ return [
         'type' => 2,
     ],
     '/app/program/set-value' => [
+        'type' => 2,
+    ],
+    '/api/file-main-page/get-file' => [
+        'type' => 2,
+    ],
+    '/api/file-main-page/save-file' => [
+        'type' => 2,
+    ],
+    '/api/file-main-page/*' => [
         'type' => 2,
     ],
 ];

@@ -15,7 +15,7 @@ $config = [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
         '@mdm/admin' => '@app/widgets/yii2-admin',
-        '@webroot' => '@app/web'
+        '@webroot' => '@app/web',
     ],
     'modules' => [
         'admin' => [
