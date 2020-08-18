@@ -14,9 +14,6 @@
           browse-text="Файл"
           @input="change"
       ></b-form-file>
-      <b-input-group-append>
-        <b-button @click="deleteRow" variant="info">Удалить</b-button>
-      </b-input-group-append>
     </b-input-group>
     </div>
     <div v-show="message.show" class="row justify-content-start message-danger text-danger">{{ message.text }}</div>
@@ -44,11 +41,9 @@ export default {
       }
     }
   },
+
   mounted() {},
   methods: {
-    deleteRow() {
-      this.$emit('deleteRow', this.index);
-    },
     change(file) {
       if(!this.label) {
         this.message.show = true;

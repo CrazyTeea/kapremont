@@ -55,7 +55,7 @@ class AtzController extends Controller
             $region = Organizations::find()->where(['id' => $id_org])->one()->region->region;
         }
 
-        return $this->render('mainAtz', ['organization' => $organization ?? null, 'region' => $region]);
+        return $this->render('mainAtz', ['organization' => $organization ?? null, 'region' => $regio ?? null]);
     }
 
     public function getCurrentOrgId()
