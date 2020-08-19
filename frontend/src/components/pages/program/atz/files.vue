@@ -8,10 +8,10 @@
       <b-button variant="info" @click="addDockRow">Добавить</b-button>
       <b-button variant="danger" @click="deleteLastRow">Удалить последний</b-button>
 
-      <b-button variant="success" @click="save">Сохранить</b-button>
+      <b-button variant="success" @click="saveFile">Сохранить</b-button>
 
 
-      <b-button @click="debug">debug</b-button>
+<!--      <b-button @click="debug">debug</b-button>-->
     </div>
     <div class="arhivated-docs">
 
@@ -39,7 +39,6 @@ export default {
   },
   async mounted() {
     // await this.getCurrentFiles();
-    this.saveFile();
   },
   methods: {
     deleteLastRow() {
@@ -63,8 +62,17 @@ export default {
     async saveFile() {
       const filesSended = this.files.map(async element => {
         let data = new FormData();
-        data.append('bla', 'files');
-        return await Axios.post('/');
+        data.append('file', element.value.file);
+        data.append('id_atz', this.$route.params.id);
+        data.append('id_card', this.id_card);
+        data.append('description', element.value.description);
+
+        return await Axios.post('/api/files-upload/save-file', data, {
+          headers: {
+            "X-CSRF-Token": this.csrf,
+            "Content-Type": "multipart/form-data;"
+          },
+        });
       });
       await Promise.all(filesSended)
     }

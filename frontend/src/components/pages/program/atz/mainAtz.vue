@@ -93,7 +93,7 @@
                 <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.TABLEDoc>
                     <span class="toggle_button">Документы</span>
                 </b-card-header>
-                <b-collapse id="TABLEDoc" accordion="TABLEDoc" role="tabpanel" visible>
+                <b-collapse id="TABLEDoc" accordion="TABLEDoc" role="tabpanel">
                     <b-card-body>
                         <upload-file-atchive :id_card="id_card" />
                     </b-card-body>
