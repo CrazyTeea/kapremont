@@ -2,24 +2,26 @@
 
 namespace app\controllers\app;
 
+use app\facades\ExceptionLogger;
 use app\models\Antiterror;
-use app\models\AntiterrorPassport;
 use app\models\Atz;
+use app\models\AtzAddress;
+use app\models\AtzTableFour;
 use app\models\AtzTableThree;
+use app\models\AtzTypeActivity;
 use app\models\Organizations;
-use app\models\ProgObjectsEvents;
 use app\models\Program;
 use app\models\User;
-use Exception;
+use Mpdf\Tag\P;
 use Yii;
-use yii\helpers\Json;
+use yii\db\Exception;
 use yii\web\Controller;
 
 class AtzController extends Controller
 {
     public function actionIndex()
     {
-        $program = \Yii::$app->getSession()->get('program');
+        $program = Yii::$app->getSession()->get('program');
         if (!$program)
             $program = Program::findOne(['id_org' => Yii::$app->session->get('user')->id_org]);
         //$atz = Atz::findAll(['id_program'=>$program->id]) ? : [new Atz()];
@@ -53,7 +55,7 @@ class AtzController extends Controller
             $region = Organizations::find()->where(['id' => $id_org])->one()->region->region;
         }
 
-        return $this->render('mainAtz', ['organization' => $organization ?? null, 'region' => $region]);
+        return $this->render('mainAtz', ['organization' => $organization ?? null, 'region' => $regio ?? null]);
     }
 
     public function getCurrentOrgId()
@@ -78,7 +80,7 @@ class AtzController extends Controller
         $id_org = Yii::$app->request->post('id_org');
 
         foreach ($dataArray as $data) {
-            if(!empty($data->id)) continue;
+            if (!empty($data->id)) continue;
 
             $atz = new AtzTableThree();
             $atz->id_object = $data->object->id;
@@ -150,48 +152,143 @@ class AtzController extends Controller
         $id_org = Yii::$app->request->post('id_org');
 
         $query = Antiterror::find()
-            ->select(['id',     'passport_name'])
+            ->select(['id', 'passport_name'])
             ->where(['id_podved' => $id_org, 'system_status' => 1])
             ->groupBy('passport_name')
             ->asArray()
             ->all();
 
         return json_encode($query);
+    }
 
-        // foreach($old as $arr) {
-        //     $new = new AntiterrorPassport();
-        //     $new->id_org = $arr->id_podved;
-        //     $new->name_address = $arr->passport_name;
-        //     $old_ids = Antiterror::find()
-        //         ->select('id_object')
-        //         ->where(['id_podved' => $arr->id_podved, 'system_status' => 1])
-        //         ->asArray()
-        //         ->all();
-        //     if(!empty($old_ids)) {
-        //         foreach($old_ids as $old_id) {
-        //             $sub[] = $old_id['id_object'];
-        //         }
-        //     }
-        //         $old_ids = implode(',', $sub);
-        //         // echo"<pre>";
-        //         // print_r($sub);
-        //         // die;
-        //     $new->old_ids = $old_ids;
+    public function actionSaveTable4()
+    {
+        $data = json_decode(Yii::$app->request->post('data'));
+        $id_org = Yii::$app->request->post('id_org');
+        $card_number = Yii::$app->request->post('card_number');
 
-        //     $old_ids = [];
-        //     $sub = [];
+        foreach ($data as $row) {
+            foreach ($row->row_stages as $rowData) {
+                foreach ($rowData->address as $i => $address) {
+                    if (empty($address)) continue;
+                    $arrayToSave[] = [
+                        'passport_name' => $address->passport_name,
+                        'attributes' => array_filter($rowData->type_event, function ($elem) use ($i) {
+                            $value = $elem->value;
+                            $num = explode('-', $value)[1];
+                            return $num == $i;
+                        }),
+                    ];
+                }
+                $mainArray[] = [
+                    'attributes' => array_filter((array)$rowData, function ($key) {
+                        return !in_array($key, ['address', 'type_event']);
+                    }, ARRAY_FILTER_USE_KEY),
+                    'address' => $arrayToSave ?? [],
+                ];
+                $arrayToSave = [];
+            }
+        }
 
-        //     try {
-        //         $new->save();
-        //     } catch (Exception $e) {
-        //         continue;
-        //     }
 
-        // }
+//        echo "<pre>";
+//        print_r($mainArray);
+//        die();
 
-        // echo"<pre>";
-        // print_r($new);
-        // die;
+//
+        if (empty($mainArray)) return 'emptyData';
+
+        $getOldIds = function () use ($mainArray) {
+            foreach ($mainArray as $row) {
+                if (isset($row['attributes']['id'])) $ids = array_merge($ids ?? [], [$row['attributes']['id']]);
+            }
+            return $ids ?? [];
+        };
+
+//        dd($getOldIds());
+        $this->actionDestroyAtzTableFourRow($getOldIds());
+
+        foreach ($mainArray as $mainData) {
+            $mainAtzFour = new AtzTableFour();
+            $mainAtzFour->id_org = $id_org;
+            $mainAtzFour->card_number = $card_number;
+            $mainAtzFour->stage_number = $mainData['attributes']['stage_number'];
+            $mainAtzFour->stage_name = $mainData['attributes']['stage_name'];
+            $mainAtzFour->method = $mainData['attributes']['method'];
+            $mainAtzFour->type_document = $mainData['attributes']['type_document'];
+            $mainAtzFour->name_object = $mainData['attributes']['name_object'];
+            $mainAtzFour->cost_full = $mainData['attributes']['cost_full'];
+            $mainAtzFour->cost_budjet = $mainData['attributes']['cost_budjet'];
+            $mainAtzFour->cost_vb = $mainData['attributes']['cost_vb'];
+            $mainAtzFour->number_contract = $mainData['attributes']['number_contract'];
+            $mainAtzFour->date_doc = $mainData['attributes']['date_doc'];
+            $mainAtzFour->number_deal = $mainData['attributes']['number_deal'];
+            $mainAtzFour->name_deller_by_doc = $mainData['attributes']['name_deller_by_doc'];
+            $mainAtzFour->inn_deller_by_doc = $mainData['attributes']['inn_deller_by_doc'];
+            $mainAtzFour->date_start = $mainData['attributes']['date_start'];
+            $mainAtzFour->date_end = $mainData['attributes']['date_end'];
+            $mainAtzFour->docs = $mainData['attributes']['docs'];
+            $mainAtzFour->comment_vuz = $mainData['attributes']['comment_vuz'];
+            $mainAtzFour->mon_expert = $mainData['attributes']['mon_expert'];
+            $mainAtzFour->comment_mon = $mainData['attributes']['comment_mon'];
+
+            if ($mainAtzFour->save()) {
+                foreach ($mainData['address'] as $address) {
+                    $atz_address =  new AtzAddress();
+                    $atz_address->id_atz_table_four = $mainAtzFour->id;
+                    $atz_address->passport_name = $address['passport_name'];
+                    if ($atz_address->save()) {
+                        foreach ($address['attributes'] as $type_event) {
+                            $atz_type_activity = new AtzTypeActivity();
+                            $atz_type_activity->id_atz_table_for_address = $atz_address->id;
+                            $atz_type_activity->name = $type_event->name;
+                            $atz_type_activity->value = $type_event->value;
+                            $atz_type_activity->save();
+                        }
+                    }
+                }
+            }
+        }
+
+        return 'saved';
+    }
+
+    public function actionDestroyAtzTableFourRow(array $ids = null)
+    {
+        if(is_null($ids)) $ids = json_decode(Yii::$app->request->post('ids'));
+        foreach ($ids as $id) {
+            AtzTableFour::destroy($id);
+        }
+    }
+
+    public function actionGetTable4()
+    {
+        $arrayLastRowIndex = ['.1', '.24'];
+        $id_org = 100; //Yii::$app->request->post('id_org');
+        $card_number = 1; //Yii::$app->request->post('card_number');
+
+        $atz_table_four = AtzTableFour::find()->where(['id_org' => $id_org, 'card_number' => $card_number])->asArray()->all();
+
+        $isLastRow = function ($atz_table_four_one) use($arrayLastRowIndex) {
+            return in_array($atz_table_four_one['stage_number'], $arrayLastRowIndex);
+        };
+
+        foreach ($atz_table_four as $atz_table_four_one) {
+            $addresses = AtzAddress::find()->where(['id_atz_table_four' => $atz_table_four_one['id']])->asArray()->all();
+            $row_stages[] = array_merge($atz_table_four_one, ['address' => $addresses, 'type_event' => (function () use ($addresses) {
+                foreach ($addresses as $address) {
+                    $type_event = array_merge($type_event ?? [], AtzTypeActivity::find()->select(['id', 'name', 'value'])->where(['id_atz_table_for_address' => $address['id']])->asArray()->all());
+                }
+                return $type_event ?? [];
+            })()]);
+
+            if ($isLastRow($atz_table_four_one)) {
+                $toClient [] = ['row_stages' => $row_stages];
+                $row_stages = [];
+            }
+        }
+
+        return json_encode($toClient ?? []);
     }
 
     public function actionSecretMethod()
@@ -221,7 +318,7 @@ class AtzController extends Controller
         //         }
         //     }
         //         $old_ids = implode(',', $sub);
-                
+
         //     $new->old_ids = $old_ids;
 
         //     $old_ids = [];

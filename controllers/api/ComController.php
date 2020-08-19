@@ -30,14 +30,58 @@ class ComController extends Controller
         return json_encode($responce);
     }
 
+    public function actionGetCommentsAtz($id_atz)
+    {
+        $comments = Comments::find()->where(['id_atz' => $id_atz])->all();
+        $responce=[];
+        foreach($comments as $comment) {
+
+            $responce [] = [
+                'id' => $comment->id,
+                'message' => $comment->message,
+                'id_user' => $comment->id_user,
+                'username' => $comment->user->username,
+                'created_at' => $comment->created_at,
+                'user_role' => User::getRole($comment->id_user),
+                'files' => FileComment::find()->select('id, id_obj, file_name, file_ext, archived')->where(['id_comment' => $comment->id])->asArray()->all()
+            ];
+        }
+
+        return json_encode($responce);
+    }
+
     public function actionSaveComment()
     {
-        $post = (object) Yii::$app->request->post();
+        $post = Yii::$app->request->post();
+        if(!isset($post['id_obj']))
+            $commentSavedID = $this->saveCommentAtz($post);
+        else
+            $commentSavedID = $this->saveCommentObject($post);
 
+        return $commentSavedID;
+    }
+
+    private function saveCommentObject($post)
+    {
         $comment = new Comments();
-        $comment->id_obj = $post->id_obj;
-        $comment->message = $post->message;
-        $comment->id_user = $post->id_user;
+        $comment->id_obj = $post['id_obj'];
+        $comment->id_atz = 'null';
+        $comment->message = $post['message'];
+        $comment->id_user = $post['id_user'];
+        $comment->user_role = User::getRole($comment->id_user);
+        if($comment->save()) {
+            return json_encode($comment->id);
+        }
+
+        return false;
+    }
+
+    private function saveCommentAtz($post)
+    {
+        $comment = new Comments();
+        $comment->id_atz = $post['id_atz'];
+        $comment->message = $post['message'];
+        $comment->id_user = $post['id_user'];
         $comment->user_role = User::getRole($comment->id_user);
         if($comment->save()) {
             return json_encode($comment->id);

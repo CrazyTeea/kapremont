@@ -15,7 +15,9 @@
 
             <b-th colspan="3">Начальная (максимальная) цена закупки лота /договора, контракта, руб.</b-th>
 
-            <b-th rowspan="2">Номер извещения /номер Номер реестровой записи договора/контракта на сайте https://zakupki.gov.ru/ (в случаи публикации)</b-th>
+            <b-th
+              rowspan="2"
+            >Номер извещения /номер Номер реестровой записи договора/контракта на сайте https://zakupki.gov.ru/ (в случаи публикации)</b-th>
             <b-th rowspan="2">Дата заключения контракта/договора</b-th>
             <b-th rowspan="2">Номер договора /контракта</b-th>
             <b-th rowspan="2">Наименование поставщика по договору /контракту</b-th>
@@ -37,32 +39,51 @@
           </b-tr>
         </b-thead>
         <b-tbody v-for="(body, indexBody) in rows" :key="`b-body-${indexBody}`">
-          <b-tr v-for="(row, index) in body.row.row_stages" :key="`b-tr-${index}`">
+          <b-tr v-for="(row, index) in body.row_stages" :key="`b-tr-${index}`">
             <b-td>
               {{ indexBody + 1 + row.stage_number }}
-              <b-icon v-if="!index" @click="deleteRow(indexBody)" variant="danger" icon="trash" class="trash-icon mt-2 col-1"></b-icon>
+              <b-icon
+                v-if="!index"
+                @click="deleteRow(indexBody, index)"
+                variant="danger"
+                icon="trash"
+                class="trash-icon mt-2 col-1"
+              ></b-icon>
             </b-td>
             <b-td>{{ row.stage_name }}</b-td>
             <b-td class="min-width-for-multiselect">
-              <multiselect class="mt-5" v-model="row.address" label="passport_name" track-by="id" :multiple="true" :taggable="true" :options="passport" placeholder="Выберите объект" select-label="Добваить" deselect-label="Удалить" selectedLabel="Выбрано" :close-on-select="false"></multiselect>
+              <multiselect
+                class="mt-5"
+                v-model="row.address"
+                label="passport_name"
+                track-by="id"
+                :multiple="true"
+                :taggable="true"
+                :options="passport"
+                placeholder="Выберите объект"
+                select-label="Добваить"
+                deselect-label="Удалить"
+                selectedLabel="Выбрано"
+                :close-on-select="false"
+              ></multiselect>
             </b-td>
             <b-td class="min-width-for-multiselect">
-                <multiselect 
-                    class="mt-5"
-                    v-model="row.type_event"
-                    label="name"
-                    track-by="value"
-                    :multiple="true"
-                    :taggable="true"
-                    :options="ONinput(indexBody, index)" 
-                    group-values="variants"
-                    group-label="state"
-                    placeholder="Выберите системы"
-                    select-label="Добваить" 
-                    deselect-label="Удалить"
-                    selectedLabel="Выбрано" 
-                    :close-on-select="false"
-                ></multiselect>
+              <multiselect
+                class="mt-5"
+                v-model="row.type_event"
+                label="name"
+                track-by="value"
+                :multiple="true"
+                :taggable="true"
+                :options="ONinput(indexBody, index)"
+                group-values="variants"
+                group-label="state"
+                placeholder="Выберите системы"
+                select-label="Добваить"
+                deselect-label="Удалить"
+                selectedLabel="Выбрано"
+                :close-on-select="false"
+              ></multiselect>
             </b-td>
 
             <b-td>
@@ -121,22 +142,32 @@
       </b-table-simple>
     </div>
     <div class="d-flex justify-content-end mt-2">
-      <!-- <b-button class="mr-2" @click="debug">Debug</b-button> -->
+
 
       <b-button size="sm" @click="addRow1">Добавить закупку у единственного поставщика</b-button>
       <b-button size="sm" class="ml-2" @click="addRow2">Добавить закупку конкурентным способом</b-button>
 
-      <b-button disabled variant="success" size="sm" class="ml-2">Сохранить</b-button>
+      <b-button @click="saveInfo" variant="success" size="sm" class="ml-2">Сохранить</b-button>
     </div>
   </div>
 </template>
 
 <script>
-import { BButton, BTableSimple, BThead, BTbody, BTh, BTd, BTr, BFormInput } from "bootstrap-vue";
+import {
+  BButton,
+  BTableSimple,
+  BThead,
+  BTbody,
+  BTh,
+  BTd,
+  BTr,
+  BFormInput,
+} from "bootstrap-vue";
 import Multiselect from "vue-multiselect";
+import Axios from "axios";
 
 export default {
-  props: ["passport"],
+  props: ["passport", "id_org"],
   components: {
     BButton,
     BTableSimple,
@@ -151,208 +182,263 @@ export default {
   data() {
     return {
       rows: [],
+      csrf: document.getElementsByName("csrf-token")[0].content,
+      card: 1,
     };
+  },
+  async mounted() {
+    await this.getTableFourInfo();
   },
   methods: {
     ONinput(index1, index2) {
-      if(!this.rows[index1].row.row_stages[index2].address) return [];
+      if (!this.rows[index1].row_stages[index2].address || typeof this.rows[index1].row_stages[index2].address !== 'object') return [];
       let options = [];
-      this.rows[index1].row.row_stages[index2].address.forEach((element) => {
-        options.push({
-          state: element.passport_name,
-          variants: [
-            { name: "Система видеонаблюдения", value: "video_system" },
-            { name: "Система оповещения и управления эвакуацией", value: "evacuation_system" },
-            { name: "Система освещения", value: "light_system" },
-            { name: "Средства охранной сигнализации", value: "predator_system" },
-            { name: "Средства тревожной сигнализации", value: "alarm_warning_system" },
-            { name: "Средства пожарной сигнализации", value: "alarm_fire_system" },
-            { name: "Средства телефонной связи и радиосвязи", value: "phone_system" },
-            { name: "Ограждения", value: "fence" },
-            { name: "СКУД", value: "skud" },
-          ],
-        });
-      });
+      this.rows[index1].row_stages[index2].address.forEach(
+        (element, indexArray) => {
+          options.push({
+            state: element.passport_name,
+            variants: [
+              {
+                name: "Система видеонаблюдения",
+                value: `video_system-${indexArray}`,
+              },
+              {
+                name: "Система оповещения и управления эвакуацией",
+                value: `evacuation_system-${indexArray}`,
+              },
+              {
+                name: "Система освещения",
+                value: `light_system-${indexArray}`,
+              },
+              {
+                name: "Средства охранной сигнализации",
+                value: `predator_system-${indexArray}`,
+              },
+              {
+                name: "Средства тревожной сигнализации",
+                value: `alarm_warning_system-${indexArray}`,
+              },
+              {
+                name: "Средства пожарной сигнализации",
+                value: `alarm_fire_system-${indexArray}`,
+              },
+              {
+                name: "Средства телефонной связи и радиосвязи",
+                value: `phone_system-${indexArray}`,
+              },
+              { name: "Ограждения", value: `fence-${indexArray}` },
+              { name: "СКУД", value: `skud-${indexArray}` },
+            ],
+          });
+        }
+      );
 
       return options;
     },
-    getOptions(index1, index2) {
-      let array = this.rows[index1].row.row_stages[index2].address;
+    saveInfo() {
+      let data = new FormData();
+      data.append("data", JSON.stringify(this.rows));
+      data.append("id_org", this.id_org);
+      data.append("card_number", this.card);
 
-      return [
-        {
-          id_podved: 12,
-          passport_name: "lol",
+      return Axios.post("/app/atz/save-table4", data, {
+        headers: {
+          "X-CSRF-Token": this.csrf,
         },
-      ];
+      }).then(res => {
+        this.getTableFourInfo();
+      });
     },
-    debug() {
+    debugClient() {
       console.log(this.rows);
     },
-    deleteRow(index) {
+    debug() {
+
+    },
+    getTableFourInfo() {
+      console.log(this.rows);
+      return Axios.post("/app/atz/get-table4", null, {
+        headers: {
+          "X-CSRF-Token": this.csrf,
+        },
+      }).then((res) => {
+        this.rows = [...res.data];
+      });
+    },
+    deleteRow(index, row_stages_index) {
+      if (this.rows[index].row_stages[row_stages_index].id) {
+        let ids = [];
+        this.rows[index].row_stages.forEach(element => {
+          ids.push(element.id);
+        });
+        console.log(ids);
+        this.deleteRowFromServer(ids);
+        console.log(this.rows[index].row_stages[row_stages_index].id);
+        return;
+      }
+
       this.rows.splice(index, 1);
-      console.log(index);
+    },
+    deleteRowFromServer(ids) {
+      let data = new FormData();
+      data.append('ids', JSON.stringify(ids));
+      return Axios.post('/app/atz/destroy-atz-table-four-row', data, {
+        headers: {
+          "X-CSRF-Token": this.csrf,
+        },
+      }).then(res => {
+        this.getTableFourInfo();
+      })
     },
     addRow1() {
       this.rows.push({
-        row: {
-          stage: this.rows.length + 1,
-          row_stages: [
-            {
-              address: null,
-              stage_number: null,
-              stage_name: "Закупка не конкурентный способом /Заключение договора /контракта ",
-              type_event: null,
-              address: null,
-              method: null,
-              type_document: null,
-              name_object: null,
-              cost_full: null,
-              cost_budjet: null,
-              cost_vb: null,
-              number_contract: null,
-              date_doc: null,
-              number_deal: null,
-              name_deller_by_doc: null,
-              inn_deller_by_doc: null,
-              date_start: null,
-              date_end: null,
-              docs: null,
-              comment_vuz: null,
-              mon_expert: null,
-              comment_mon: null,
-            },
-            {
-              address: null,
-              stage_number: ".1",
-              stage_name: "Исполнение договора /контракта",
-              type_event: null,
-              address: null,
-              method: null,
-              type_document: null,
-              name_object: null,
-              cost_full: null,
-              cost_budjet: null,
-              cost_vb: null,
-              number_contract: null,
-              date_doc: null,
-              number_deal: null,
-              name_deller_by_doc: null,
-              inn_deller_by_doc: null,
-              date_start: null,
-              date_end: null,
-              docs: null,
-              comment_vuz: null,
-              mon_expert: null,
-              comment_mon: null,
-            },
-          ],
-        },
+        row_stages: [
+          {
+            address: [],
+            stage_number: null,
+            stage_name:
+              "Закупка не конкурентный способом /Заключение договора /контракта ",
+            type_event: [],
+            method: null,
+            type_document: null,
+            name_object: null,
+            cost_full: null,
+            cost_budjet: null,
+            cost_vb: null,
+            number_contract: null,
+            date_doc: null,
+            number_deal: null,
+            name_deller_by_doc: null,
+            inn_deller_by_doc: null,
+            date_start: null,
+            date_end: null,
+            docs: null,
+            comment_vuz: null,
+            mon_expert: null,
+            comment_mon: null,
+          },
+          {
+            address: [],
+            stage_number: ".1",
+            stage_name: "Исполнение договора /контракта",
+            type_event: [],
+            method: null,
+            type_document: null,
+            name_object: null,
+            cost_full: null,
+            cost_budjet: null,
+            cost_vb: null,
+            number_contract: null,
+            date_doc: null,
+            number_deal: null,
+            name_deller_by_doc: null,
+            inn_deller_by_doc: null,
+            date_start: null,
+            date_end: null,
+            docs: null,
+            comment_vuz: null,
+            mon_expert: null,
+            comment_mon: null,
+          },
+        ],
       });
     },
     addRow2() {
       this.rows.push({
-        row: {
-          stage: this.rows.length + 1,
-          row_stages: [
-            {
-              address: null,
-              stage_number: ".2",
-              stage_name: "Закупка конкурентный способом",
-              type_event: null,
-              address: null,
-              method: null,
-              type_document: null,
-              name_object: null,
-              cost_full: null,
-              cost_budjet: null,
-              cost_vb: null,
-              number_contract: null,
-              date_doc: null,
-              number_deal: null,
-              name_deller_by_doc: null,
-              inn_deller_by_doc: null,
-              date_start: null,
-              date_end: null,
-              docs: null,
-              comment_vuz: null,
-              mon_expert: null,
-              comment_mon: null,
-            },
-            {
-              address: null,
-              stage_number: ".21",
-              stage_name: "Подведение итогов по закупке",
-              type_event: null,
-              address: null,
-              method: null,
-              type_document: null,
-              name_object: null,
-              cost_full: null,
-              cost_budjet: null,
-              cost_vb: null,
-              number_contract: null,
-              date_doc: null,
-              number_deal: null,
-              name_deller_by_doc: null,
-              inn_deller_by_doc: null,
-              date_start: null,
-              date_end: null,
-              docs: null,
-              comment_vuz: null,
-              mon_expert: null,
-              comment_mon: null,
-            },
-            {
-              address: null,
-              stage_number: ".23",
-              stage_name: "Заключение договора /контракта",
-              type_event: null,
-              address: null,
-              method: null,
-              type_document: null,
-              name_object: null,
-              cost_full: null,
-              cost_budjet: null,
-              cost_vb: null,
-              number_contract: null,
-              date_doc: null,
-              number_deal: null,
-              name_deller_by_doc: null,
-              inn_deller_by_doc: null,
-              date_start: null,
-              date_end: null,
-              docs: null,
-              comment_vuz: null,
-              mon_expert: null,
-              comment_mon: null,
-            },
-            {
-              address: null,
-              stage_number: ".24",
-              stage_name: "Исполнение договора /контракта",
-              type_event: null,
-              address: null,
-              method: null,
-              type_document: null,
-              name_object: null,
-              cost_full: null,
-              cost_budjet: null,
-              cost_vb: null,
-              number_contract: null,
-              date_doc: null,
-              number_deal: null,
-              name_deller_by_doc: null,
-              inn_deller_by_doc: null,
-              date_start: null,
-              date_end: null,
-              docs: null,
-              comment_vuz: null,
-              mon_expert: null,
-              comment_mon: null,
-            },
-          ],
-        },
+        row_stages: [
+          {
+            address: [],
+            stage_number: ".2",
+            stage_name: "Закупка конкурентный способом",
+            type_event: [],
+            method: null,
+            type_document: null,
+            name_object: null,
+            cost_full: null,
+            cost_budjet: null,
+            cost_vb: null,
+            number_contract: null,
+            date_doc: null,
+            number_deal: null,
+            name_deller_by_doc: null,
+            inn_deller_by_doc: null,
+            date_start: null,
+            date_end: null,
+            docs: null,
+            comment_vuz: null,
+            mon_expert: null,
+            comment_mon: null,
+          },
+          {
+            address: [],
+            stage_number: ".21",
+            stage_name: "Подведение итогов по закупке",
+            type_event: [],
+            method: null,
+            type_document: null,
+            name_object: null,
+            cost_full: null,
+            cost_budjet: null,
+            cost_vb: null,
+            number_contract: null,
+            date_doc: null,
+            number_deal: null,
+            name_deller_by_doc: null,
+            inn_deller_by_doc: null,
+            date_start: null,
+            date_end: null,
+            docs: null,
+            comment_vuz: null,
+            mon_expert: null,
+            comment_mon: null,
+          },
+          {
+            address: [],
+            stage_number: ".23",
+            stage_name: "Заключение договора /контракта",
+            type_event: [],
+            method: null,
+            type_document: null,
+            name_object: null,
+            cost_full: null,
+            cost_budjet: null,
+            cost_vb: null,
+            number_contract: null,
+            date_doc: null,
+            number_deal: null,
+            name_deller_by_doc: null,
+            inn_deller_by_doc: null,
+            date_start: null,
+            date_end: null,
+            docs: null,
+            comment_vuz: null,
+            mon_expert: null,
+            comment_mon: null,
+          },
+          {
+            address: [],
+            stage_number: ".24",
+            stage_name: "Исполнение договора /контракта",
+            type_event: [],
+            method: null,
+            type_document: null,
+            name_object: null,
+            cost_full: null,
+            cost_budjet: null,
+            cost_vb: null,
+            number_contract: null,
+            date_doc: null,
+            number_deal: null,
+            name_deller_by_doc: null,
+            inn_deller_by_doc: null,
+            date_start: null,
+            date_end: null,
+            docs: null,
+            comment_vuz: null,
+            mon_expert: null,
+            comment_mon: null,
+          },
+        ],
       });
     },
   },

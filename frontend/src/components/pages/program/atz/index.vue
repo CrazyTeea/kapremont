@@ -97,8 +97,12 @@
                 response.data.forEach(item=>{
                     this.items[item.elem].cost_b= item.cost_b;
                     this.items[item.elem].cost_v= item.cost_v;
-
                 })
+
+                this.$emit('getTable2AtzInfo', {
+                    cost_b_full: this.cost_b_full,
+                    cost_v_full: this.cost_v_full,
+                });
             }).catch(err=>{console.error(err);});
         },
 
