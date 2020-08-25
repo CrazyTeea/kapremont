@@ -66,7 +66,7 @@ class ChangePasswordForm extends Model
             $user->created_at = time();
             $flag = $user->isNewRecord;
         }
-        $user->setPassword($ias_user->getValue()->pwd);
+        $user->setPassword($ias_user ? $ias_user->getValue()->pwd : $this->password);
         $user->updated_at = time();
         if ($user->save()) {
             if ($flag){
