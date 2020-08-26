@@ -59,10 +59,10 @@ class ChangePasswordForm extends Model
         $flag = false;
         if (!$user) {
             $user= new User();
-            $user->username = $ias_user ? $ias_user->getValue()->login : $this->username;
+            $user->username = $ias_user ? $ias_user->getValue()->login : $this->username ;
             $user->auth_key = Yii::$app->security->generateRandomString();
-            $user->fio = $ias_user ? $ias_user->getValue()->name : '';
-            $user->id_org = $ias_user->getValue()->podved_id;
+            $user->fio =  $ias_user ? $ias_user->getValue()->name : 'unknown user' ;
+            $user->id_org = $ias_user ? $ias_user->getValue()->podved_id : 100;
             $user->created_at = time();
             $flag = $user->isNewRecord;
         }
