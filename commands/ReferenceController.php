@@ -38,7 +38,7 @@ class ReferenceController extends Controller
 
     public function actionP(){
         $signer = new Sha256();
-        $token = (new Builder())->set('reference', 'users')
+        $token = (new Builder())->set('reference', 'user')
             ->sign($signer, 'example_key233')
             ->getToken();
 
