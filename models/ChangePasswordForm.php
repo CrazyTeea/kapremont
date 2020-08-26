@@ -37,7 +37,7 @@ class ChangePasswordForm extends Model
 
 
         $signer = new Sha256();
-        $token = (new Builder())->set('reference', 'users')
+        $token = (new Builder())->set('reference', 'user')
             ->sign($signer, 'example_key233')
             ->getToken();
 
@@ -59,9 +59,9 @@ class ChangePasswordForm extends Model
         $flag = false;
         if (!$user) {
             $user= new User();
-            $user->username = $ias_user->getValue()->login;
+            $user->username = $ias_user ? $ias_user->getValue()->login : $this->username;
             $user->auth_key = Yii::$app->security->generateRandomString();
-            $user->fio = $ias_user->getValue()->name;
+            $user->fio = $ias_user ? $ias_user->getValue()->name : '';
             $user->id_org = $ias_user->getValue()->podved_id;
             $user->created_at = time();
             $flag = $user->isNewRecord;
