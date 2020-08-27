@@ -34,6 +34,7 @@ Vue.directive("can", {
     }
 });
 
+/*
 const browser = [
     { name: "Chrome", version: 79 },
     { name: "Opera", version: 66 },
@@ -41,6 +42,7 @@ const browser = [
     { name: "Safari", version: 11 },
     { name: "Firefox", version: 75 }
 ];
+*/
 
 //Vue.config.productionTip = false;
 
@@ -66,7 +68,7 @@ async function getUser(){
 
 }
 
-router.beforeEach((to, from, next) => {
+/*router.beforeEach((to, from, next) => {
     if (to.path !== "/error/browser") {
         let access = false;
         browser.forEach(item => {
@@ -91,7 +93,7 @@ router.beforeEach((to, from, next) => {
 
     }
     next();
-});
+});*/
 
 new Vue({
     render: h => h(App),
