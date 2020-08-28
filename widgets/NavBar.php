@@ -106,8 +106,8 @@ class NavBar extends Widget
             Html::addCssClass($this->brandOptions, ['widget' => 'navbar-brand d-flex align-items-center']);
 
             $brand = Html::tag('div',
-                    ($this->brandImage ? Html::a( Html::img($this->brandImage) ,$this->brandUrl ?? Yii::$app->homeUrl,['class'=>'mr-2  ']) : '').
-                ($this->brandLabel ? Html::a($this->brandLabel,Yii::$app->homeUrl,['class' => 'mt-1 d-block']) : ''),
+                ($this->brandImage ? Html::a( Html::img($this->brandImage) ,$this->brandUrl ?? Yii::$app->homeUrl,['class'=>'mr-2  ']) : '').
+                ($this->brandLabel ? Html::a($this->brandLabel,Yii::$app->homeUrl,['class' => 'text-light mt-1 d-block']) : ''),
                 $this->brandOptions);
 
         }
