@@ -8,9 +8,12 @@ use app\facades\ProgramStatus;
 use app\models\EventsFiles;
 use app\models\Program;
 use app\models\ProgramObjects;
+use app\models\ProgramObjectsEvents2;
 use app\models\User;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Reader\Html;
+use PhpOffice\PhpWord\Element\Table;
+use PhpOffice\PhpWord\PhpWord;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
@@ -30,6 +33,91 @@ class ProgramController extends AppController
         }
         return $this->render('index');
     }
+
+    private function addRow(Table $table,$val) {
+        $table->addRow(25);
+        $table->addCell(25)->addText($val->step+1);
+        $table->addCell(25)->addText(htmlspecialchars($val->step_name ?? '') );
+        $table->addCell(25)->addText(htmlspecialchars($val->date_event_end ? Yii::$app->formatter->asDate($val->date_event_start,'php: d F Y') : null));
+        $table->addCell(25)->addText(htmlspecialchars($val->date_event_end ? Yii::$app->formatter->asDate($val->date_event_end,'php: d F Y'): null ));
+        $table->addCell(25)->addText(htmlspecialchars($val->cost_real));
+        $table->addCell(25)->addText(htmlspecialchars($val->sum_bud_fin));
+        $table->addCell(25)->addText(htmlspecialchars($val->fin_vnebud_ist));
+        $table->addCell(25)->addText($val->done ? '+' : '-');
+        $table->addCell(25)->addText(htmlspecialchars($val->access_document ).' '.htmlspecialchars( $S= $val->file ? $val->file->file_name : null));
+        $table->addCell(25)->addText(htmlspecialchars($val->comment));
+        $table->addCell(25)->addText($val->doneExpert ? '+' : '-');
+        $table->addCell(25)->addText(htmlspecialchars($val->commentExpert));
+    }
+
+
+    public function actionExportPlan(){
+        $get = array_filter(Yii::$app->request->get(),function ($val){
+            if ($val !== 'null' or !$val)
+                return $val;
+        });
+        $query = ProgramObjects::find()->joinWith(['region','org'])->where(['program_objects.system_status'=>1]);
+        if (ArrayHelper::keyExists('id',$get)){
+            $query->andWhere(['id'=>$get['id']]);
+        }
+        if (ArrayHelper::keyExists('region',$get)){
+            $query->andWhere(['like','regions.region',$get['region']]);
+        }
+        if (ArrayHelper::keyExists('name',$get)){
+            $query->andWhere(['like','organizations.name',$get['name']]);
+        }
+
+        $phpWord = new PhpWord();
+        $phpWord->setDefaultFontName('Times New Roman');
+        $phpWord->setDefaultFontSize(12);
+        $section = $phpWord->addSection(['orientation'=>'landscape']);
+
+
+        foreach ($query->all() as $object) {
+             $section->addText($object->name);
+            if ($object->svedenia){
+                $kek = $section->addTable([
+                    'borderSize' => 1,
+                    'borderColor' => '999999',
+                    'cellMargin'=>50
+                ]);
+                $kek->addRow(25);
+                $kek->addCell(25)->addText('#');
+                $kek->addCell(25)->addText('Этап');
+                $kek->addCell(25)->addText('Дата начала');
+                $kek->addCell(25)->addText('Дата окончания');
+                $kek->addCell(25)->addText('Общая Фактическая Стоимость реализации (тыс.руб.)');
+                $kek->addCell(25)->addText('Фактическая Сумма бюджетного финансирования (тыс. руб.)');
+                $kek->addCell(25)->addText('Софинанси-рование (тыс. руб.)');
+                $kek->addCell(25)->addText('Отметка о завершении этапа');
+                $kek->addCell(25)->addText('Подтверждающие документы');
+                $kek->addCell(25)->addText('Комментарий (текстовое поле Заполняет ВУЗ)');
+                $kek->addCell(25)->addText('Эксперт МОН +/-');
+                $kek->addCell(25)->addText('Комментарий эксперта МОН )');
+                foreach ($object->svedenia as $sv) {
+                    $this->addRow($kek,$sv);
+                    foreach (ProgramObjectsEvents2::find()
+                                 ->where(['id_object'=>$object->id])
+                                 ->andWhere(['>','step',$sv->step])
+                                 ->andWhere(['<','step',$sv->step+1])
+                                ->orderBy('step ASC')
+                                 ->all() as $sv2) {
+                        $this->addRow($kek,$sv2);
+                    }
+
+                }
+            }
+
+        }
+
+        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+        $path = Yii::getAlias('@webroot').'/uploads/helloWorld.docx';
+        $objWriter->save($path);
+        Yii::$app->response->sendFile($path)->send();
+        unlink($path);
+
+    }
+
 
     public function actionIsApprove($id_org = 0){
 

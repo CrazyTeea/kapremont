@@ -85,6 +85,11 @@ class ProgramObjectsController extends AppController
         return "Что не так с файлами, обратитесь в тех поддержку. ID объекта $id";
     }
 
+    /**
+     * @param $id
+     * @return string
+     * @throws NotFoundHttpException
+     */
     public function actionSetValue($id){
         $model = $this->findModel($id);
         if ($model){
@@ -98,6 +103,10 @@ class ProgramObjectsController extends AppController
         }
     }
 
+    /**
+     * @param $id
+     * @return \yii\web\Response
+     */
     public function actionSetReal($id)
     {
         $model = ProgramObjects::findOne($id);
@@ -106,6 +115,11 @@ class ProgramObjectsController extends AppController
         return $this->redirect(['view','id'=>$id]);
     }
 
+    /**
+     * @param $id
+     * @return string
+     * @throws \yii\base\Exception
+     */
     public function actionSendEvent($id){
         $post = Yii::$app->request->post();
         $event = null;
@@ -159,6 +173,12 @@ class ProgramObjectsController extends AppController
         return Json::encode($ret);
     }
 
+    /**
+     * @param $id
+     * @return string
+     * @throws \Throwable
+     * @throws \yii\db\StaleObjectException
+     */
     public function actionDelEvent($id){
         if ($post = Yii::$app->request->post()){
             $post = (object)$post;
@@ -516,6 +536,11 @@ class ProgramObjectsController extends AppController
         return $this->render('update',compact('model','progObjectsEvents','progObjectsWaites','progObjectsRiscs','proObjectsNecessary'));
     }
 
+    /**
+     * @param $id
+     * @return int
+     * @throws NotFoundHttpException
+     */
     public function actionAddDocs($id)
     {
         $model = $this->findModel($id);
@@ -607,7 +632,6 @@ class ProgramObjectsController extends AppController
         return Json::encode($kek);
     }
 
-
     protected function findModel($id)
     {
         if (($model = ProgramObjects::findOne($id)) !== null) {
@@ -652,6 +676,5 @@ class ProgramObjectsController extends AppController
         // print_r($toServe);
         return Json::encode($toServe ?? []);
     }
-
 
 }

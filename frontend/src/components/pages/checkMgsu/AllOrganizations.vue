@@ -46,6 +46,9 @@
                 <b-button variant="outline-secondary" @click="filters.p_status = null"><b-icon icon="backspace" variant="danger" scale="1.2"></b-icon></b-button>
               </b-input-group-append>
             </b-input-group>
+
+            <b-button @click="getPlanExport" variant="outline-success">Выгрузить план график</b-button>
+
           </div>
         </b-card-body>
       </b-collapse>
@@ -168,10 +171,7 @@
             </b-th>
             <b-th v-can:dku,dku_user class="normal-font-weight-for-sell center-text-in-cell">
               <div class="fileInput">
-                <div
-                    class="cell-center-for-items"
-
-                >
+                <div class="cell-center-for-items">
                   <input
                       type="file"
                       :id="'file_input_' + index"
@@ -180,16 +180,13 @@
                   />
                   <div
                       class="arrow">
-                    <label
-                        :for="`file_input_${index}`"
-                        class="label"
-                    >
-                                                            <span class="title">
-                                                                <span class="scope-to-animate"></span>
-                                                                <span class="scope-to-animate"></span>
-                                                                <span class="scope-to-animate"></span>
-                                                                <span class="scope-to-animate"></span>
-                                                            </span>
+                    <label :for="`file_input_${index}`" class="label">
+                      <span class="title">
+                        <span class="scope-to-animate"></span>
+                        <span class="scope-to-animate"></span>
+                        <span class="scope-to-animate"></span>
+                        <span class="scope-to-animate"></span>
+                      </span>
                     </label>
                   </div>
                 </div>
@@ -375,8 +372,11 @@ export default {
       })
 
     },
-    async setOldOrg(id) {
-      return
+    getPlanExport() {
+      let data = new URLSearchParams(this.filters).toString();
+      window.open(`/app/program/export-plan?${data}`);
+     // win.close();
+
     },
     setDkuDoc(item,index){
       let graph = document.querySelector(`#file_input_${index}`);
