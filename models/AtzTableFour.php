@@ -34,7 +34,7 @@ class AtzTableFour extends ActiveRecord
     public static function destroy($id)
     {
         $atz_table_four = self::find()->where(['id' => $id])->one();
-        if(empty($atz_table_four)) return false;
+        if (empty($atz_table_four)) return false;
         $atz_table_four_addresses = AtzAddress::find()->where(['id_atz_table_four' => $atz_table_four->id])->all();
         foreach ($atz_table_four_addresses as $atz_table_four_one_address) {
             $atz_table_four_event_types = AtzTypeActivity::find()->where(['id_atz_table_for_address' => $atz_table_four_one_address->id])->all();

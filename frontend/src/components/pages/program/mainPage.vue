@@ -48,18 +48,18 @@
       <div>
         &nbsp;&nbsp;&nbsp;После размещения информации на официальном сайте
         <a
-          class="bnt btn-link"
-          href="www.zakupki.gov.ru"
+            class="bnt btn-link"
+            href="www.zakupki.gov.ru"
         >www.zakupki.gov.ru</a>
         о закупке в рамках проведения мероприятий по антитеррористической
         защищённости объектов подведомственному образовательному учреждению
         необходимо,
         <span
-          class="font-weight-bold"
+            class="font-weight-bold"
         >в день размещения информации о закупке</span>направить уведомление на электронную почту
         <a
-          class="bnt btn-link"
-          href="zakupki_atz@mirea.ru"
+            class="bnt btn-link"
+            href="zakupki_atz@mirea.ru"
         >zakupki_atz@mirea.ru</a>.
       </div>
       <p>Пример направляемого уведомления о закупки:</p>
@@ -69,7 +69,7 @@
       <p>
         Уведомление о размещении закупки:
         <span
-          class="text-danger"
+            class="text-danger"
         >ФГБОУ ВО «Адыгейский государственный университет»</span>
       </p>
       <p class="font-weight-bold mt-2">
@@ -82,7 +82,7 @@
       <p>
         Извещение о проведении:
         <span
-          class="text-danger"
+            class="text-danger"
         >электронного аукциона от 19.06.2020 №0130200002420001879</span>
       </p>
       <p class="font-weight-bold mt-2">В случае размещения у поставщика</p>
@@ -92,7 +92,7 @@
       <p>
         Наименование, ИНН единственного поставщика:
         <span
-          class="text-danger"
+            class="text-danger"
         >ООО «ПРОЕКАПС», ИНН 3305795967</span>
       </p>
       <p>
@@ -120,7 +120,7 @@
         учреждениями в рамках проведения мероприятий по антитеррористической
         защищённости объектов
         <span
-          class="font-weight-bold"
+            class="font-weight-bold"
         >осуществляется строго после получения согласования</span>
         от Департамента корпоративного управления.
       </p>
@@ -139,41 +139,41 @@
         </p>
         <div v-if="getPageData">
           <b-table
-            id="program_table"
-            :fields="fields"
-            :items="items"
-            :per-page="perPage"
-            :current-page="currentPage"
-            small
-            bordered
+              id="program_table"
+              :fields="fields"
+              :items="items"
+              :per-page="perPage"
+              :current-page="currentPage"
+              small
+              bordered
           >
             <template v-slot:cell(value)="data">
               <b-form-input
-                @change="setProgramValue('finance_volume', data.item.value)"
-                style="min-width: 120px"
-                v-model="data.item.value"
-                type="number"
-                v-can:faiv_user
+                  @change="setProgramValue('finance_volume', data.item.value)"
+                  style="min-width: 120px"
+                  v-model="data.item.value"
+                  type="number"
+                  v-can:faiv_user
               ></b-form-input>
               <span v-can:user>{{ data.item.value }}</span>
             </template>
             <template v-slot:cell(value)="data">
               <b-form-input
-                @change="setProgramValue('finance_events', data.item.value)"
-                style="min-width: 120px"
-                v-model="data.item.value"
-                type="number"
-                v-can:faiv_user
+                  @change="setProgramValue('finance_events', data.item.value)"
+                  style="min-width: 120px"
+                  v-model="data.item.value"
+                  type="number"
+                  v-can:faiv_user
               ></b-form-input>
               <span v-can:user>{{ data.item.value }}</span>
             </template>
             <template v-slot:cell(value)="data">
               <b-form-input
-                @change="setProgramValue('cost', data.item.value)"
-                style="min-width: 120px"
-                v-model="data.item.value"
-                type="number"
-                v-can:faiv_user
+                  @change="setProgramValue('cost', data.item.value)"
+                  style="min-width: 120px"
+                  v-model="data.item.value"
+                  type="number"
+                  v-can:faiv_user
               ></b-form-input>
               <span v-can:user>{{ data.item.value }}</span>
             </template>
@@ -182,17 +182,17 @@
             Текущий статус ДКУ:
             <label :class="`text-${dku_status.color}`">
               {{
-              dku_status.label
+                dku_status.label
               }}
             </label>
           </h5>
           <h5 style="margin-top: 5px">
             Сумма к выделению для финансирования мероприятий по АТЗ (Рублей)
             <label
-              :class="`text-${dku_status.color}`"
+                :class="`text-${dku_status.color}`"
             >
               {{
-              dku_status.atz
+                dku_status.atz
               }}
             </label>
           </h5>
@@ -200,7 +200,7 @@
             Комментарий
             <label :class="`text-${dku_status.color}`">
               {{
-              dku_status.comment
+                dku_status.comment
               }}
             </label>
           </h5>
@@ -210,9 +210,9 @@
             </div>
             <div class="col-6">
               <a
-                v-if="dku_status.doc"
-                style="display: block"
-                :href="
+                  v-if="dku_status.doc"
+                  style="display: block"
+                  :href="
                   `/uploads/dku_docs/${getUser.organization.id}/${dku_status.doc.file_name}`
                 "
               >
@@ -226,27 +226,28 @@
           <span class="text-danger">Данные о вашей организации отсутствуют в системе</span>
         </h3>
         <b-pagination
-          v-show="rows > perPage"
-          v-model="currentPage"
-          :total-rows="rows"
-          :per-page="perPage"
-          aria-controls="my-table"
+            v-show="rows > perPage"
+            v-model="currentPage"
+            :total-rows="rows"
+            :per-page="perPage"
+            aria-controls="my-table"
         ></b-pagination>
         <div style="float: right" v-show="getUser.isAdmin && getPageData">
           <b-button href="/program/view">Заполнить программу модернизации</b-button>
           <b-button
-            class="btn-info mt-2"
-            href="/program/org"
-          >Приступить к реализации программы модернизации</b-button>
+              class="btn-info mt-2"
+              href="/program/org"
+          >Приступить к реализации программы модернизации
+          </b-button>
           <!--<b-button @click="goAtz()" class="btn-info mt-2">Мероприятия по АТЗ</b-button> -->
         </div>
       </div>
       <div class="col-2"></div>
 
       <div class="col-4">
-        <v-userPanel />
-        <br />
-        <user-info-view />
+        <v-userPanel/>
+        <br/>
+        <user-info-view/>
       </div>
 
       <div class="col-12 mt-5">
@@ -258,14 +259,28 @@
             </b-th>
             <b-th>
               Загрузить xlsx
-              <a v-if="file_atz_info.xlsx" :href="`/api/file-main-page/get-uploaded-file?id_org=${this.id_org}&type=xlsx`"><b-icon v-b-popover.hover.top="'Нажмите чтобы скачать'" variant="success" icon="check-circle-fill"></b-icon></a>
-              <a v-else><b-icon v-b-popover.hover.top="'Файл еще не загружен'" variant="danger" icon="check-circle-fill"></b-icon></a>
+              <a v-if="file_atz_info.xlsx"
+                 :href="`/api/file-main-page/get-uploaded-file?id_org=${this.id_org}&type=xlsx`">
+                <b-icon v-b-popover.hover.top="'Нажмите чтобы скачать'" variant="success"
+                        icon="check-circle-fill"></b-icon>
+              </a>
+              <a v-else>
+                <b-icon v-b-popover.hover.top="'Файл еще не загружен'" variant="danger"
+                        icon="check-circle-fill"></b-icon>
+              </a>
 
             </b-th>
             <b-th>
               Загрузить pdf
-              <a v-if="file_atz_info.pdf" :href="`/api/file-main-page/get-uploaded-file?id_org=${this.id_org}&type=pdf`"><b-icon v-b-popover.hover.top="'Нажмите чтобы скачать'" variant="success" icon="check-circle-fill"></b-icon></a>
-              <a v-else><b-icon v-b-popover.hover.top="'Файл еще не загружен'" variant="danger" icon="check-circle-fill"></b-icon></a>
+              <a v-if="file_atz_info.pdf"
+                 :href="`/api/file-main-page/get-uploaded-file?id_org=${this.id_org}&type=pdf`">
+                <b-icon v-b-popover.hover.top="'Нажмите чтобы скачать'" variant="success"
+                        icon="check-circle-fill"></b-icon>
+              </a>
+              <a v-else>
+                <b-icon v-b-popover.hover.top="'Файл еще не загружен'" variant="danger"
+                        icon="check-circle-fill"></b-icon>
+              </a>
 
             </b-th>
           </b-thead>
@@ -289,20 +304,20 @@
 </template>
 
 <script>
-import { userPanel, UserInfoView } from "../../organisms";
-import { mapActions, mapGetters } from "vuex";
+import {UserInfoView, userPanel} from "../../organisms";
+import {mapActions, mapGetters} from "vuex";
 import {
   BButton,
-  BTable,
-  BPagination,
-  VBToggle,
   BFormInput,
+  BPagination,
+  BTable,
   BTableSimple,
-  BThead,
-  BTh,
   BTbody,
   BTd,
-  VBPopover
+  BTh,
+  BThead,
+  VBPopover,
+  VBToggle
 } from "bootstrap-vue";
 import Axios from "axios";
 // import b_vue from 'bootstrap-vue';
@@ -330,7 +345,7 @@ export default {
       file_atz_info: {
         xlsx: false,
         pdf: false,
-        kek:false
+        kek: false
       },
       extraBaner: window.Permission === "user",
       extraBaner2: false,
@@ -365,8 +380,8 @@ export default {
     }
   },
   watch: {
-    getUser: function() {
-      this.requestOrg({ id: this.getUser.organization.id });
+    getUser: function () {
+      this.requestOrg({id: this.getUser.organization.id});
       this.id_org = this.getUser.organization.id;
 
       let dku = this.getUser.organization.dku_status;
@@ -391,7 +406,7 @@ export default {
     fileInput(e, type) {
       let file = e.target.files[0];
       let splitFileName = file.name.split('.');
-      if(splitFileName[splitFileName.length - 1] != type) return;
+      if (splitFileName[splitFileName.length - 1] != type) return;
 
       let data = new FormData();
       data.append('file', file);
@@ -418,10 +433,9 @@ export default {
       })
     },
     goAtz() {
-      if(window.currentUser === 2535) {
+      if (window.currentUser === 2535) {
         window.location = `/program/main-atz/${this.id_org}`;
-      }
-      else {
+      } else {
         window.location = '/app/atz/in-dev';
       }
     },
@@ -451,7 +465,7 @@ export default {
   },
   async mounted() {
     await this.requestUser();
-    await this.requestPageData({ pageName: "main" });
+    await this.requestPageData({pageName: "main"});
 
     await this.getFilesAtzInfo();
 

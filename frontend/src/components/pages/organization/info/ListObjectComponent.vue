@@ -19,8 +19,8 @@
         <b-table-simple bordered small>
           <b-thead>
             <b-tr>
-              <b-th>{{organization? organization.id : ''}}</b-th>
-              <b-th>{{organization? organization.name : ''}}</b-th>
+              <b-th>{{ organization ? organization.id : '' }}</b-th>
+              <b-th>{{ organization ? organization.name : '' }}</b-th>
               <b-th v-if="organization">
                 <a style="display: block" v-if="organization.file" :href="`/program/download-doc/${organization.id}`">
                   <b-icon size="lg" icon="file-earmark-arrow-down" variant="success"/>
@@ -87,7 +87,7 @@
     </b-card>
 
     <br>
-    <user-info-view :id_org="org_id" />
+    <user-info-view :id_org="org_id"/>
 
 
     <b-card no-body class="mt-3">
@@ -99,12 +99,14 @@
           <b-thead>
             <b-tr>
               <b-th>Объем бюджетного финансирования кап.ремонт по программе</b-th>
-              <b-th>Объекты: всего/в обработке / возвращено на доработку/не рекомендуется к согласованию/ рекомендуется к согласованию</b-th>
+              <b-th>Объекты: всего/в обработке / возвращено на доработку/не рекомендуется к согласованию/ рекомендуется
+                к согласованию
+              </b-th>
               <b-th>Объем бюджетного финансирования по приоритетным объектам рекомендованным к согласованию</b-th>
               <b-th>Объем бюджетного финансирования по резервным объектам рекомендованным к согласованию</b-th>
               <b-th>Объем бюджетного финансирования по объектам рассмотренным ДЭП</b-th>
               <b-th>Объем бюджетного финансирования по объектам рассмотренным ДЭП (в резерв)</b-th>
-              <b-th>Статус программы (ДЭП) </b-th>
+              <b-th>Статус программы (ДЭП)</b-th>
             </b-tr>
           </b-thead>
           <b-tbody>
@@ -112,7 +114,7 @@
               <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
                 <label class="cursor-pointer">{{ info.budjet ? info.budjet.toFixed(3) : 0 }}</label>
               </b-th>
-              <b-th  class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
+              <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
                 <label class="cursor-pointer">{{ infoFromServ ? infoFromServ.countAll : 0 }}</label>
                 <label class="cursor-pointer text-secondary">/ {{ infoFromServ ? infoFromServ.vObr : 0 }}</label>
                 <label class="cursor-pointer text-warning">/ {{ infoFromServ ? infoFromServ.naDorab : 0 }}</label>
@@ -156,8 +158,12 @@
               <b-th>Объекты</b-th>
               <b-th>Уровень приоритета</b-th>
               <b-th>ID Объекта</b-th>
-              <b-th>Сумма бюджетного финансирования на проведение капитального ремонта (тыс. руб.) согласно программы ВУЗа</b-th>
-              <b-th>Сумма внебюджетного финансирования на проведение капитального ремонта (тыс. руб.) согласно программы ВУЗа</b-th>
+              <b-th>Сумма бюджетного финансирования на проведение капитального ремонта (тыс. руб.) согласно программы
+                ВУЗа
+              </b-th>
+              <b-th>Сумма внебюджетного финансирования на проведение капитального ремонта (тыс. руб.) согласно программы
+                ВУЗа
+              </b-th>
               <b-th>Статус Эксперт</b-th>
               <b-th>Статус ДЭП</b-th>
             </b-tr>
@@ -200,7 +206,7 @@
           </b-tbody>
         </b-table-simple>
 
-        <b-pagination v-show="currentPage" :per-page="perPage" v-model="currentPage" />
+        <b-pagination v-show="currentPage" :per-page="perPage" v-model="currentPage"/>
       </b-card-body>
     </b-card>
 
@@ -219,8 +225,12 @@
               <b-th>Объекты</b-th>
               <b-th>Уровень приоритета</b-th>
               <b-th>ID Объекта</b-th>
-              <b-th>Сумма бюджетного финансирования на проведение капитального ремонта (тыс. руб.) согласно программы ВУЗа</b-th>
-              <b-th>Сумма внебюджетного финансирования на проведение капитального ремонта (тыс. руб.) согласно программы ВУЗа</b-th>
+              <b-th>Сумма бюджетного финансирования на проведение капитального ремонта (тыс. руб.) согласно программы
+                ВУЗа
+              </b-th>
+              <b-th>Сумма внебюджетного финансирования на проведение капитального ремонта (тыс. руб.) согласно программы
+                ВУЗа
+              </b-th>
               <b-th>Статус Эксперт</b-th>
               <b-th>Статус ДЭП</b-th>
             </b-tr>
@@ -261,7 +271,7 @@
           </b-tbody>
         </b-table-simple>
 
-        <b-pagination v-show="currentPage" :per-page="perPage" v-model="currentPage" />
+        <b-pagination v-show="currentPage" :per-page="perPage" v-model="currentPage"/>
       </b-card-body>
     </b-card>
   </div>
@@ -270,16 +280,22 @@
 <script>
 import Axios from "axios";
 import {
+  BBreadcrumb,
   BCard,
   BCardBody,
-  BCardHeader, BBreadcrumb,
-  BPagination, BTableSimple, BTbody, BTh, BThead, BTr
+  BCardHeader,
+  BPagination,
+  BTableSimple,
+  BTbody,
+  BTh,
+  BThead,
+  BTr
 } from "bootstrap-vue";
 
 import {UserInfoView} from '../../../organisms'
 
 export default {
-  components:{
+  components: {
     BBreadcrumb,
     BCard,
     BCardHeader,
@@ -294,14 +310,14 @@ export default {
   },
   data() {
     return {
-      permission:window.Permission,
+      permission: window.Permission,
       programm: {},
       currentPage: 1,
       perPage: 5,
       csrf: document.getElementsByName("csrf-token")[0].content,
       org_id: null,
       items: [],
-      organization:{},
+      organization: {},
       prioritet_object: [],
       rezerv_object: [],
       info: {
@@ -323,7 +339,7 @@ export default {
     }
   },
   methods: {
-    checkFOIV(){
+    checkFOIV() {
       return !(this.permission === 'faiv_admin' || this.permission === 'faiv_user');
     },
     async getCurentOrg() {
@@ -389,9 +405,11 @@ export default {
   overflow: hidden;
   overflow-x: scroll;
 }
+
 .normal-font-weight-for-sell {
   font-weight: normal !important;
 }
+
 .cursor-pointer {
   cursor: pointer;
 }

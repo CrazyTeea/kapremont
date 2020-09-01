@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "org_info".
  *
@@ -56,8 +54,8 @@ class OrgInfo extends \yii\db\ActiveRecord
                 'st_asp_count', 'rab_count', 'nauch_rab',
                 'prof_prep_count', 'in_kat_rab', 'invalid_count',
                 'zdan_count'], 'integer'],
-            [['square_all','square_all_kap','square_all_av','square_all_atz'],'number'],
-            [['rector'],'string']
+            [['square_all', 'square_all_kap', 'square_all_av', 'square_all_atz'], 'number'],
+            [['rector'], 'string']
         ];
     }
 
@@ -86,11 +84,11 @@ class OrgInfo extends \yii\db\ActiveRecord
             'in_kat_rab' => 'In Kat Rab',
             'invalid_count' => 'Invalid Count',
             'zdan_count' => 'Zdan Count',
-            'square_all'=>'Общая площадь всех зданий и сооружений',
-            'square_all_kap'=>'Общая площадь всех зданий и сооружений, требующих капитального ремонта (на основании акта обследования или предписаний надзорных органов)',
-            'square_all_av'=>'Общая площадь всех зданий и сооружений, находящихся в аварийном состоянии ',
-            'square_all_atz'=>'Общая площадь всех зданий и сооружений, требующих мероприятий по АТЗ',
-            'rector'=>'ФИО ректора'
+            'square_all' => 'Общая площадь всех зданий и сооружений',
+            'square_all_kap' => 'Общая площадь всех зданий и сооружений, требующих капитального ремонта (на основании акта обследования или предписаний надзорных органов)',
+            'square_all_av' => 'Общая площадь всех зданий и сооружений, находящихся в аварийном состоянии ',
+            'square_all_atz' => 'Общая площадь всех зданий и сооружений, требующих мероприятий по АТЗ',
+            'rector' => 'ФИО ректора'
         ];
     }
 }

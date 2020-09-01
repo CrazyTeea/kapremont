@@ -69,7 +69,7 @@ class FileMainPageController extends Controller
         $upload->file->saveAs("$path/{$org->name}.$type");
     }
 
-    public  function actionGetFileInfo()
+    public function actionGetFileInfo()
     {
         $id_org = Yii::$app->request->post('id_org');
 
@@ -111,7 +111,7 @@ class FileMainPageController extends Controller
 
 //        Yii::$app->db->createCommand('TRUNCATE TABLE main_atz_files_statistics')->execute();
 
-        foreach($needed_files as $file_to_save) {
+        foreach ($needed_files as $file_to_save) {
             $file_instance = new MainAtzFileStatistics();
             $file_instance->id_org = $file_to_save['id_org'];
             $file_instance->path = $file_to_save['path'];

@@ -25,7 +25,7 @@ class Files extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            ['file','file'],
+            ['file', 'file'],
             [['name', 'ext'], 'string', 'max' => 255],
         ];
     }
@@ -59,11 +59,11 @@ class Files extends \yii\db\ActiveRecord
 
     public function upload(UploadedFile $uploadedFile, $extPath = false)
     {
-        $path = Yii::getAlias( '@webroot' ) . '/uploads';
-        if ( $extPath )
+        $path = Yii::getAlias('@webroot') . '/uploads';
+        if ($extPath)
             $path .= $extPath;
-        if ( !file_exists( $path ) )
-            FileHelper::createDirectory( $path );
+        if (!file_exists($path))
+            FileHelper::createDirectory($path);
         $this->name = $uploadedFile->baseName;
         $this->ext = $uploadedFile->extension;
         if ($uploadedFile->saveAs("$path/$uploadedFile->baseName.$uploadedFile->extension") and $this->save())

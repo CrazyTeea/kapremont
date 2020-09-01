@@ -13,8 +13,8 @@ class ComController extends Controller
     public function actionGetComments($id_obj)
     {
         $comments = Comments::find()->where(['id_obj' => $id_obj])->all();
-        $responce=[];
-        foreach($comments as $comment) {
+        $responce = [];
+        foreach ($comments as $comment) {
 
             $responce [] = [
                 'id' => $comment->id,
@@ -33,8 +33,8 @@ class ComController extends Controller
     public function actionGetCommentsAtz($id_atz)
     {
         $comments = Comments::find()->where(['id_atz' => $id_atz])->all();
-        $responce=[];
-        foreach($comments as $comment) {
+        $responce = [];
+        foreach ($comments as $comment) {
 
             $responce [] = [
                 'id' => $comment->id,
@@ -53,7 +53,7 @@ class ComController extends Controller
     public function actionSaveComment()
     {
         $post = Yii::$app->request->post();
-        if(!isset($post['id_obj']))
+        if (!isset($post['id_obj']))
             $commentSavedID = $this->saveCommentAtz($post);
         else
             $commentSavedID = $this->saveCommentObject($post);
@@ -69,7 +69,7 @@ class ComController extends Controller
         $comment->message = $post['message'];
         $comment->id_user = $post['id_user'];
         $comment->user_role = User::getRole($comment->id_user);
-        if($comment->save()) {
+        if ($comment->save()) {
             return json_encode($comment->id);
         }
 
@@ -83,7 +83,7 @@ class ComController extends Controller
         $comment->message = $post['message'];
         $comment->id_user = $post['id_user'];
         $comment->user_role = User::getRole($comment->id_user);
-        if($comment->save()) {
+        if ($comment->save()) {
             return json_encode($comment->id);
         }
 
@@ -93,9 +93,9 @@ class ComController extends Controller
     public function actionDeleteComment($id_comment)
     {
         $fileComments = FileComment::find()->where(['id_comment' => $id_comment])->all();
-        if(!empty($fileComments)) {
-            foreach($fileComments as $fileComment) {
-                $path ="uploads/comments/{$fileComment->id_obj}_{$fileComment->id}/{$fileComment->file_name}.{$fileComment->file_ext}";
+        if (!empty($fileComments)) {
+            foreach ($fileComments as $fileComment) {
+                $path = "uploads/comments/{$fileComment->id_obj}_{$fileComment->id}/{$fileComment->file_name}.{$fileComment->file_ext}";
                 if (file_exists($path))
                     unlink($path);
                 $fileComment->delete();

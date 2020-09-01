@@ -2,7 +2,7 @@
   <div>
     <b-card no-body class="mb-1">
       <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.accordion-3>
-                <span class="toggle_button" >
+                <span class="toggle_button">
                     <b-icon icon="filter" scale="1.5" class="mr-2 ml-1"></b-icon>
                     Фильтры</span
                 >
@@ -13,37 +13,49 @@
             <b-input-group prepend="ID" class="mb-2">
               <b-form-input type="number" aria-label="First name" v-model="filters.id"></b-form-input>
               <b-input-group-append>
-                <b-button variant="outline-secondary" @click="filters.id = null"><b-icon icon="backspace" variant="danger" scale="1.2"></b-icon></b-button>
+                <b-button variant="outline-secondary" @click="filters.id = null">
+                  <b-icon icon="backspace" variant="danger" scale="1.2"></b-icon>
+                </b-button>
               </b-input-group-append>
             </b-input-group>
             <b-input-group prepend="Субъект" class="mb-2">
               <b-form-input aria-label="First name" v-model="filters.region"></b-form-input>
               <b-input-group-append>
-                <b-button variant="outline-secondary" @click="filters.region = null"><b-icon icon="backspace" variant="danger" scale="1.2"></b-icon></b-button>
+                <b-button variant="outline-secondary" @click="filters.region = null">
+                  <b-icon icon="backspace" variant="danger" scale="1.2"></b-icon>
+                </b-button>
               </b-input-group-append>
             </b-input-group>
             <b-input-group prepend="Организация" class="mb-2">
               <b-form-input aria-label="First name" v-model="filters.name"></b-form-input>
               <b-input-group-append>
-                <b-button variant="outline-secondary" @click="filters.name = null"><b-icon icon="backspace" variant="danger" scale="1.2"></b-icon></b-button>
+                <b-button variant="outline-secondary" @click="filters.name = null">
+                  <b-icon icon="backspace" variant="danger" scale="1.2"></b-icon>
+                </b-button>
               </b-input-group-append>
             </b-input-group>
             <b-input-group prepend="Колличество объектов" class="mb-2">
               <b-form-select v-model="filters.quantity" :options="options.quantity"></b-form-select>
               <b-input-group-append>
-                <b-button variant="outline-secondary" @click="filters.quantity = null"><b-icon icon="backspace" variant="danger" scale="1.2"></b-icon></b-button>
+                <b-button variant="outline-secondary" @click="filters.quantity = null">
+                  <b-icon icon="backspace" variant="danger" scale="1.2"></b-icon>
+                </b-button>
               </b-input-group-append>
             </b-input-group>
             <b-input-group prepend="Выгрузка PDF" class="mb-2">
               <b-form-select v-model="filters.file_exist" :options="options.file_exist"></b-form-select>
               <b-input-group-append>
-                <b-button variant="outline-secondary" @click="filters.file_exist = null"><b-icon icon="backspace" variant="danger" scale="1.2"></b-icon></b-button>
+                <b-button variant="outline-secondary" @click="filters.file_exist = null">
+                  <b-icon icon="backspace" variant="danger" scale="1.2"></b-icon>
+                </b-button>
               </b-input-group-append>
             </b-input-group>
             <b-input-group prepend="Выгрузка отправлена" class="mb-2">
               <b-form-select v-model="filters.p_status" :options="options.p_status"></b-form-select>
               <b-input-group-append>
-                <b-button variant="outline-secondary" @click="filters.p_status = null"><b-icon icon="backspace" variant="danger" scale="1.2"></b-icon></b-button>
+                <b-button variant="outline-secondary" @click="filters.p_status = null">
+                  <b-icon icon="backspace" variant="danger" scale="1.2"></b-icon>
+                </b-button>
               </b-input-group-append>
             </b-input-group>
 
@@ -56,7 +68,9 @@
 
     <div class="row mt-3">
       <div class="col-12">
-        <b-alert v-for="(banner, index) in bannerInfo" :key="index" :show="banner.show" :variant="banner.variant" dismissible fade>{{ banner.message }}</b-alert>
+        <b-alert v-for="(banner, index) in bannerInfo" :key="index" :show="banner.show" :variant="banner.variant"
+                 dismissible fade>{{ banner.message }}
+        </b-alert>
       </div>
     </div>
 
@@ -73,7 +87,9 @@
             <b-th>Выгрузка отправлена</b-th>
             <b-th v-can:dku,dku_user style="min-width: 150px !important;">Статус программы (ДКУ)</b-th>
             <b-th v-can:dep,dku,dku_user style="min-width: 125px !important;">Статус программы (ДЭП)</b-th>
-            <b-th v-can:dku,dku_user style="min-width: 150px !important;">Сумма к выделению для финансирования мероприятий по АТЗ (Рублей)</b-th>
+            <b-th v-can:dku,dku_user style="min-width: 150px !important;">Сумма к выделению для финансирования
+              мероприятий по АТЗ (Рублей)
+            </b-th>
             <b-th v-can:dku,dku_user>Дополнительная информация</b-th>
             <b-th v-can:dku,dku_user>Документ</b-th>
           </b-tr>
@@ -81,14 +97,15 @@
         <b-tbody>
           <b-tr v-for="(item, index) in items" :key="index">
 
-            <b-th v-if="filters.id">{{index+perPage*(currentPage-1)+1}}</b-th>
+            <b-th v-if="filters.id">{{ index + perPage * (currentPage - 1) + 1 }}</b-th>
             <b-th class="normal-font-weight-for-sell center-text-in-cell">
               <label>{{ item.id }}</label>
             </b-th>
             <b-th class="normal-font-weight-for-sell center-text-in-cell">
               <label>{{ item.region }}</label>
             </b-th>
-            <b-th :id="`popover-window-${index}`" class="normal-font-weight-for-sell cursor-pointer center-text-in-cell" @click="goToRefNotDku(item.id, '/organization/list/')">
+            <b-th :id="`popover-window-${index}`" class="normal-font-weight-for-sell cursor-pointer center-text-in-cell"
+                  @click="goToRefNotDku(item.id, '/organization/list/')">
 
               <b-popover
                   v-if="isUserDku()"
@@ -104,8 +121,7 @@
               </b-popover>
 
 
-
-              <label class="cursor-pointer" >
+              <label class="cursor-pointer">
                 {{ item.name }}
                 <div v-can:mgsu,root v-if="item.id_founder !== '1' && item.is_new==='1'">
                   <b-badge variant="danger">новый пользователь</b-badge>
@@ -118,8 +134,10 @@
             </b-th>
             <b-th class="normal-font-weight-for-sell center-text-in-cell">
               <a v-if="item.file_exist === '1'" :href="`/program/download-doc/${item.id}`" class="a-decorating"
-              ><b-icon icon="file-earmark-arrow-down" scale="2" vriant="success"></b-icon
-              ></a>
+              >
+                <b-icon icon="file-earmark-arrow-down" scale="2" vriant="success"></b-icon
+                >
+              </a>
               <b-icon v-else icon="alert-circle" scale="2"></b-icon>
             </b-th>
             <b-th class="normal-font-weight-for-sell center-text-in-cell">
@@ -151,8 +169,8 @@
                                     {value: 'not', text: 'В обработке'},
                                     {value: 'approved', text: 'Согласовано ДЭП'},
                                     {value: 'rejected', text: 'Резерв'}
-                                ]" />
-              <span v-can:dku,dku_user>{{getDepStatus(item.dep_status)}}</span>
+                                ]"/>
+              <span v-can:dku,dku_user>{{ getDepStatus(item.dep_status) }}</span>
             </b-th>
             <b-th v-can:dku,dku_user style="max-width: 100px" class="normal-font-weight-for-sell center-text-in-cell">
               <b-form-input v-can:dku
@@ -160,7 +178,7 @@
                             @change="setDkuAtz(item)"
                             v-model="item.dku_atz"
               ></b-form-input>
-              <span v-can:dku_user>{{item.dku_atz}}</span>
+              <span v-can:dku_user>{{ item.dku_atz }}</span>
             </b-th>
             <b-th v-can:dku,dku_user class="normal-font-weight-for-sell center-text-in-cell">
               <b-form-textarea
@@ -193,7 +211,7 @@
 
               </div>
               <div v-if="item.dku_doc">
-                <a :href="`/uploads/dku_docs/${item.id}/${item.dku_doc}`">{{item.dku_doc}}</a>
+                <a :href="`/uploads/dku_docs/${item.id}/${item.dku_doc}`">{{ item.dku_doc }}</a>
               </div>
             </b-th>
           </b-tr>
@@ -210,29 +228,30 @@
 import Axios from "axios";
 import {
   BAlert,
-  BCard,
-  BCardHeader,
-  BInputGroup,
-  BFormInput,
-  BInputGroupAppend,
-  BCollapse,
-  BCardBody,
-  BButton,
-  BFormSelect,
-  BTableSimple,
-  BThead,
-  BTr,
   BBadge,
-  BFormTextarea,
+  BButton,
+  BCard,
+  BCardBody,
+  BCardHeader,
+  BCollapse,
   BFormFile,
-  BTh,
-  BTbody,
+  BFormInput,
+  BFormSelect,
+  BFormTextarea,
+  BInputGroup,
+  BInputGroupAppend,
   BPagination,
-  VBToggle,
+  BPopover,
+  BTableSimple,
+  BTbody,
+  BTh,
+  BThead,
   BTooltip,
-  VBTooltip,
-  BPopover
+  BTr,
+  VBToggle,
+  VBTooltip
 } from "bootstrap-vue";
+
 export default {
   props: ['state'],
   directives: {
@@ -265,7 +284,7 @@ export default {
   data() {
     return {
       bannerInfo: [],
-      selected:null,
+      selected: null,
       filters: {
         state: null,
         id: null,
@@ -276,33 +295,33 @@ export default {
         p_status: null,
       },
       options: {
-        dku_status:[
+        dku_status: [
           {value: 'not', text: 'В обработке'},
           {value: 'approved', text: 'Рассмотрено ДКУ'},
           {value: 'rejected', text: 'Резерв'}
         ],
-        dep_status:[
+        dep_status: [
           {value: 'not', text: 'В обработке'},
           {value: 'approved', text: 'Согласовано ДЭП'},
           {value: 'rejected', text: 'Резерв'}
         ],
         quantity: [
-          { value: "up", text: "По возрастанию" },
-          { value: "down", text: "По убыванию" }
+          {value: "up", text: "По возрастанию"},
+          {value: "down", text: "По убыванию"}
         ],
         file_exist: [
-          { value: "1", text: "Выгружено" },
-          { value: "0", text: "Не выгружено" }
+          {value: "1", text: "Выгружено"},
+          {value: "0", text: "Не выгружено"}
         ],
         p_status: [
-          { value: "1", text: "Отправлена" },
-          { value: "0", text: "Не отправлена" }
+          {value: "1", text: "Отправлена"},
+          {value: "0", text: "Не отправлена"}
         ],
         status: [
-          { value: "1", text: "В обработке" },
-          { value: "2", text: "Рекомендуется к согласованию" },
-          { value: "3", text: "Не рекомендуется к согласованию" },
-          { value: "4", text: "Возвращено на доработку" }
+          {value: "1", text: "В обработке"},
+          {value: "2", text: "Рекомендуется к согласованию"},
+          {value: "3", text: "Не рекомендуется к согласованию"},
+          {value: "4", text: "Возвращено на доработку"}
         ]
       },
       csrf: document.getElementsByName("csrf-token")[0].content,
@@ -335,11 +354,11 @@ export default {
                     </div>
                 `;
     },
-    getDkuStatus(s){
-      return this.options.dku_status.find(item=>item.value == s).text;
+    getDkuStatus(s) {
+      return this.options.dku_status.find(item => item.value == s).text;
     },
-    getDepStatus(s){
-      return this.options.dep_status.find(item=>item.value == s).text;
+    getDepStatus(s) {
+      return this.options.dep_status.find(item => item.value == s).text;
     },
     setBanner(variant, message, timeout = 2500) {
       this.bannerInfo.unshift({
@@ -352,22 +371,22 @@ export default {
       }, timeout);
     },
     async goToRef(id, url) {
-      await Axios.post(`/organization/set-old/${id}`,null,{
+      await Axios.post(`/organization/set-old/${id}`, null, {
         headers: {
           "X-CSRF-Token": this.csrf
         }
-      }).finally(()=>{
+      }).finally(() => {
         window.location = `${url}${id}`;
       })
 
     },
     async goToRefNotDku(id, url) {
-      if(this.isUserDku()) return;
-      await Axios.post(`/organization/set-old/${id}`,null,{
+      if (this.isUserDku()) return;
+      await Axios.post(`/organization/set-old/${id}`, null, {
         headers: {
           "X-CSRF-Token": this.csrf
         }
-      }).finally(()=>{
+      }).finally(() => {
         window.location = `${url}${id}`;
       })
 
@@ -375,10 +394,10 @@ export default {
     getPlanExport() {
       let data = new URLSearchParams(this.filters).toString();
       window.open(`/app/program/export-plan?${data}`);
-     // win.close();
+      // win.close();
 
     },
-    setDkuDoc(item,index){
+    setDkuDoc(item, index) {
       let graph = document.querySelector(`#file_input_${index}`);
       graph = graph.files[0];
       let form = new FormData();
@@ -388,7 +407,7 @@ export default {
           "X-CSRF-Token": this.csrf
         }
       }).then(res => {
-        if (res.data.success){
+        if (res.data.success) {
           this.getTable()
           this.setBanner('success', `Данные внесены успешно: ${item.name}`, 3200)
         }
@@ -410,7 +429,7 @@ export default {
       }).then(res => {
         console.log(res.data.rows)
         this.items = res.data.rows;
-        this.items.forEach(item=>{
+        this.items.forEach(item => {
           item.dku_atz = item.dku_atz ? Number(item.dku_atz).toLocaleString() : null;
         })
         this.totalRows = res.data.count.quantity;
@@ -419,7 +438,7 @@ export default {
     setDkuAtz(item) {
       let form = new FormData();
       item.dku_atz = Number(item.dku_atz).toLocaleString();
-      form.append('dku_atz', item.dku_atz.replace(/\s/g,'').replace(',','.'))
+      form.append('dku_atz', item.dku_atz.replace(/\s/g, '').replace(',', '.'))
       Axios.post(`/api/set-status/dku/${item.id}`, form, {
         headers: {
           "X-CSRF-Token": this.csrf
@@ -495,32 +514,41 @@ export default {
 .atz:hover {
   color: red;
 }
+
 .dep:hover {
   color: green;
 }
+
 .popover-styling > h6 {
   font-weight: normal;
 }
+
 .popover-styling > h6:hover {
   transform: scale(1.3);
 }
+
 .popover-styling > h6 > a {
   text-decoration: none;
 }
+
 .table-overflow-hidden {
   overflow: hidden !important;
   overflow-x: scroll !important;
 }
+
 .normal-font-weight-for-sell {
   font-weight: normal !important;
 }
+
 .center-text-in-cell {
   vertical-align: middle !important;
   text-align: center !important;
 }
+
 .cursor-pointer {
   cursor: pointer !important;
 }
+
 .a-decorating {
   text-decoration: none !important;
   color: darkgreen !important;

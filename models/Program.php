@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use Yii;
 use yii\db\ActiveRecord;
 
 /**
@@ -25,20 +24,19 @@ class Program extends ActiveRecord
 
     public $organization;
 
+    public static function tableName()
+    {
+        return 'program';
+    }
 
     public function getObjects()
     {
-        return $this->hasMany(ProgramObjects::class,['id_program'=>'id'])->andOnCondition([ProgramObjects::tableName().'.system_status'=>1]);
+        return $this->hasMany(ProgramObjects::class, ['id_program' => 'id'])->andOnCondition([ProgramObjects::tableName() . '.system_status' => 1]);
     }
 
     public function getOrg()
     {
-        return $this->hasOne(Organizations::class,['id'=>'id_org']);
-    }
-
-    public static function tableName()
-    {
-        return 'program';
+        return $this->hasOne(Organizations::class, ['id' => 'id_org']);
     }
 
     /**
@@ -47,7 +45,7 @@ class Program extends ActiveRecord
     public function rules()
     {
         return [
-            [['finance_volume', 'finance_events', 'cost','p_status','dku_atz'], 'number'],
+            [['finance_volume', 'finance_events', 'cost', 'p_status', 'dku_atz'], 'number'],
             [['system_status', 'id_org'], 'integer'],
         ];
     }

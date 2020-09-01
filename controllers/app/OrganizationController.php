@@ -25,18 +25,20 @@ class OrganizationController extends AppController
         $canChange = !Program::findOne(['id_org' => Yii::$app->session->get('user')->id_org])->p_status;
         return $this->render('info', compact('canChange'));
     }
-    public function actionUserInfo($id_org){
-        $models = UserInfo::findAll(['id_org'=>$id_org]);
-        if ($post = Yii::$app->request->post()){
 
-            $oldIds = ArrayHelper::map($models,'id','id');
+    public function actionUserInfo($id_org)
+    {
+        $models = UserInfo::findAll(['id_org' => $id_org]);
+        if ($post = Yii::$app->request->post()) {
+
+            $oldIds = ArrayHelper::map($models, 'id', 'id');
             $models = UserInfo::createMultiple(UserInfo::className(), $models);
             UserInfo::loadMultiple($models, Yii::$app->request->post());
             $deletedIDs = array_diff($oldIds, array_filter(ArrayHelper::map($models, 'id', 'id')));
             if (!empty($deletedIDs))
                 UserInfo::deleteAll(['id' => $deletedIDs]);
             $save = true;
-            foreach ($models as $model){
+            foreach ($models as $model) {
                 $model->id_org = $id_org;
                 $save &= $model->save();
             }
@@ -47,9 +49,9 @@ class OrganizationController extends AppController
                 $save &= $program->save();
             }
 
-            return Json::encode(['success'=>$save]);
+            return Json::encode(['success' => $save]);
         }
-        return $this->render('userInfo',compact('models'));
+        return $this->render('userInfo', compact('models'));
     }
 
     public function actionUpdate($id)
@@ -79,33 +81,33 @@ class OrganizationController extends AppController
         $notRecomend = 0;
         $naDorab = 0;
 
-        $sved = [0,0,0,0];
+        $sved = [0, 0, 0, 0];
 
-        foreach($objects as $key => $object) {
+        foreach ($objects as $key => $object) {
 
             $countAll += 1;
-            if($object->status == 1) {
+            if ($object->status == 1) {
                 $vObr += 1;
             }
-            if($object->status == 2) {
+            if ($object->status == 2) {
                 $recomend += 1;
             }
-            if($object->status == 3) {
+            if ($object->status == 3) {
                 $notRecomend += 1;
             }
-            if($object->status == 4) {
+            if ($object->status == 4) {
                 $naDorab += 1;
             }
 
 
-            foreach ($object->svedenia as $kek){
+            foreach ($object->svedenia as $kek) {
                 if (!$object->type and $kek->is_nessesary and $object->status == 2)
                     $sved[0]++;
-                if($object->type and $kek->is_nessesary and $object->status == 2)
+                if ($object->type and $kek->is_nessesary and $object->status == 2)
                     $sved[1]++;
                 if ($object->dep_status == 'approved')
                     $sved[2]++;
-                if($object->dep_status == 'rejected')
+                if ($object->dep_status == 'rejected')
                     $sved[3]++;
             }
 
@@ -116,11 +118,11 @@ class OrganizationController extends AppController
         return Json::encode([
             'objects' => $objects,
             'programm' => $programm,
-            'organization'=>[
-                'id'=>$programm->org->id,
-                'name'=>$programm->org->name,
-                'file'=>$programm->file_exist,
-                'id_founder'=>$programm->org->id_founder
+            'organization' => [
+                'id' => $programm->org->id,
+                'name' => $programm->org->name,
+                'file' => $programm->file_exist,
+                'id_founder' => $programm->org->id_founder
             ],
             'info' => [
                 'countAll' => $countAll,
@@ -128,11 +130,11 @@ class OrganizationController extends AppController
                 'recomend' => $recomend,
                 'notRecomend' => $notRecomend,
                 'naDorab' => $naDorab,
-                'pr'=>$sved[0],
-                'res'=>$sved[1],
-                'dep'=>$sved[2],
-                'depr'=>$sved[3],
-                'st'=>(new ProgramStatus($id))->isDep() ? 'Рассмотрено' : 'Не рассмотрено'
+                'pr' => $sved[0],
+                'res' => $sved[1],
+                'dep' => $sved[2],
+                'depr' => $sved[3],
+                'st' => (new ProgramStatus($id))->isDep() ? 'Рассмотрено' : 'Не рассмотрено'
             ]
         ]);
     }
@@ -142,7 +144,8 @@ class OrganizationController extends AppController
         return $this->render('ObjectView');
     }
 
-    public function actionSetOld($id){
+    public function actionSetOld($id)
+    {
         if (Yii::$app->user->can('mgsu')) {
             $org = Organizations::findOne($id);
             $org->is_new = 0;
@@ -152,8 +155,8 @@ class OrganizationController extends AppController
 
     public function commentPermision($obj_id)
     {
-        $comment = Comments::find()->where(['id_user' => Yii::$app->user->id, 'id_obj' =>$obj_id])->one();
-        if($comment) {
+        $comment = Comments::find()->where(['id_user' => Yii::$app->user->id, 'id_obj' => $obj_id])->one();
+        if ($comment) {
             return true;
         }
 
@@ -162,7 +165,7 @@ class OrganizationController extends AppController
 
     public function actionSetApproveStatusDep($obj_id)
     {
-        if(Yii::$app->getUser()->can('dep')) {
+        if (Yii::$app->getUser()->can('dep')) {
             $object = ProgramObjects::findOne($obj_id);
             $object->dep_status = ProgramObjects::APPROVE_STATUS;
             $object->save(false);
@@ -174,7 +177,7 @@ class OrganizationController extends AppController
 
     public function actionSetRejectedStatusDep($obj_id)
     {
-        if(Yii::$app->getUser()->can('dep')) {
+        if (Yii::$app->getUser()->can('dep')) {
             $object = ProgramObjects::findOne($obj_id);
             $object->dep_status = ProgramObjects::REJECTED_STATUS;
             $object->save(false);
@@ -186,8 +189,8 @@ class OrganizationController extends AppController
 
     public function actionSetStatusDku($org_id)
     {
-        if(Yii::$app->getUser()->can('dku')) {
-            $post= Yii::$app->request->post();
+        if (Yii::$app->getUser()->can('dku')) {
+            $post = Yii::$app->request->post();
             if (isset($post['dku_status'])) {
                 $org = Organizations::find()->where(['id' => $org_id])->one();
                 $org->dku_status = $post['dku_status'];
@@ -202,10 +205,11 @@ class OrganizationController extends AppController
             new ProgramStatus($org_id);
         }
     }
+
     public function actionSetCommentDku($org_id)
     {
-        if(Yii::$app->getUser()->can('dku')) {
-            $post= Yii::$app->request->post();
+        if (Yii::$app->getUser()->can('dku')) {
+            $post = Yii::$app->request->post();
             if (isset($post['dku_comment'])) {
                 $org = Organizations::findOne($org_id);
                 $org->dku_comment = $post['dku_comment'];
@@ -216,7 +220,7 @@ class OrganizationController extends AppController
 
     public function actionSetStatusDep($org_id)
     {
-        if(Yii::$app->getUser()->can('dep')) {
+        if (Yii::$app->getUser()->can('dep')) {
             $status = Yii::$app->request->post('dep_status');
             $org = Organizations::find()->where(['id' => $org_id])->one();
             $org->dep_status = $status;
@@ -229,7 +233,7 @@ class OrganizationController extends AppController
     private function setStatus($obj_id, $status)
     {
 
-        if(Yii::$app->getUser()->can('mgsu') && $this->commentPermision($obj_id)) {
+        if (Yii::$app->getUser()->can('mgsu') && $this->commentPermision($obj_id)) {
             $object = ProgramObjects::findOne($obj_id);
             $object->status = $status;
             $object->save(false);
@@ -238,13 +242,14 @@ class OrganizationController extends AppController
         return false;
     }
 
-    public function actionSetDkuDoc($id_org){
-        if ($dku_doc = UploadedFile::getInstanceByName('dku_doc')){
-            $doc = DkuDocs::findOne(['id_org'=>$id_org]) ?? new DkuDocs();
-            return Json::encode(['success'=>$doc->addDoc($dku_doc,$id_org)]);
+    public function actionSetDkuDoc($id_org)
+    {
+        if ($dku_doc = UploadedFile::getInstanceByName('dku_doc')) {
+            $doc = DkuDocs::findOne(['id_org' => $id_org]) ?? new DkuDocs();
+            return Json::encode(['success' => $doc->addDoc($dku_doc, $id_org)]);
 
         }
-        return Json::encode(['success'=>false,'file'=>UploadedFile::getInstanceByName('dku_doc')]);
+        return Json::encode(['success' => false, 'file' => UploadedFile::getInstanceByName('dku_doc')]);
     }
 
     public function actionGetApproveStatus($obj_id)
@@ -252,11 +257,11 @@ class OrganizationController extends AppController
         $query = ProgramObjects::findOne($obj_id);
 
         return Json::encode([
-            'label' => $query->astatus? $query->astatus->label : '',
-            'id' => $query->astatus? $query->astatus->id : 0,
+            'label' => $query->astatus ? $query->astatus->label : '',
+            'id' => $query->astatus ? $query->astatus->id : 0,
             'dep_status' => $query->dep_status,
             'dku_status' => $query->org->dku_status,
-            'real_status'=> $query->real_status ?? 0,
+            'real_status' => $query->real_status ?? 0,
         ]);
     }
 

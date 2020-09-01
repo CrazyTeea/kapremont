@@ -2,10 +2,11 @@
 
 /* @var $this yii\web\View */
 /* @var $form yii\bootstrap\ActiveForm */
+
 /* @var $model app\models\LoginForm */
 
-use yii\bootstrap4\Html;
 use yii\bootstrap4\ActiveForm;
+use yii\bootstrap4\Html;
 
 $this->title = 'Модернизация инфраструктуры';
 $this->params['breadcrumbs'][] = $this->title;
@@ -32,7 +33,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="form-group">
                 <div class="col-lg-offset-1 col-lg-11">
                     <?= Html::submitButton('Войти', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
-                    <?= Html::a('Восстановить аккаунт',['user-recover'],['class'=>'btn btn-primary'])?>
+                    <?= Html::a('Восстановить аккаунт', ['user-recover'], ['class' => 'btn btn-primary']) ?>
                 </div>
             </div>
 

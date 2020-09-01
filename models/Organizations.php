@@ -3,7 +3,6 @@
 namespace app\models;
 
 use Yii;
-use app\models\ProgramObjects;
 
 /**
  * This is the model class for table "organizations".
@@ -44,57 +43,6 @@ class Organizations extends \yii\db\ActiveRecord
         return 'organizations';
     }
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
-        return [
-            [['full_name', 'name', 'short_name','inn','dku_comment'], 'string'],
-            [['system_status','id_founder','is_new'], 'integer'],
-        ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'full_name' => 'Full Name',
-            'name' => 'Наименование организации ',
-            'short_name' => 'Short Name',
-            'system_status' => 'System Status',
-        ];
-    }
-
-    public function getRegion(){
-        return $this->hasOne(Regions::className(),['id'=>'id_region']);
-    }
-    public function getOrgInfo(){
-        return $this->hasOne(OrgInfo::className(),['id_org'=>'id']);
-    }
-    public function getUserInfo(){
-        return $this->hasMany(UserInfo::class,['id_org'=>'id']);
-    }
-    public function getProgramObjects(){
-        return $this->hasMany(ProgramObjects::class, ['id_org' => 'id']);
-    }
-    public function getProgram(){
-        return $this->hasOne(Program::class,['id_org'=>'id']);
-    }
-    public function getFounder(){
-        return $this->hasOne(Founders::class,['id_founder'=>'id']);
-    }
-    private static function CalculateState($orgs){
-        return ($orgs==='other' and !Yii::$app->user->can('faiv_admin')) ? 'and org.id_founder > 1' : null;
-    }
-
-    public function getDkuDoc(){
-        return $this->hasOne(DkuDocs::class,['id_org'=>'id']);
-    }
-
     public static function getMainCheckTable($offset, $whereClouse, $order, $orgs, $faiv = null)
     {
         $state = self::CalculateState($orgs);
@@ -128,7 +76,12 @@ class Organizations extends \yii\db\ActiveRecord
         return $query;
     }
 
-    public static function getMainCheckTableCount($params,$orgs, $faiv = null)
+    private static function CalculateState($orgs)
+    {
+        return ($orgs === 'other' and !Yii::$app->user->can('faiv_admin')) ? 'and org.id_founder > 1' : null;
+    }
+
+    public static function getMainCheckTableCount($params, $orgs, $faiv = null)
     {
 
         $state = self::CalculateState($orgs);
@@ -154,5 +107,65 @@ class Organizations extends \yii\db\ActiveRecord
             ")->queryOne();
 
         return $count;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            [['full_name', 'name', 'short_name', 'inn', 'dku_comment'], 'string'],
+            [['system_status', 'id_founder', 'is_new'], 'integer'],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'full_name' => 'Full Name',
+            'name' => 'Наименование организации ',
+            'short_name' => 'Short Name',
+            'system_status' => 'System Status',
+        ];
+    }
+
+    public function getRegion()
+    {
+        return $this->hasOne(Regions::className(), ['id' => 'id_region']);
+    }
+
+    public function getOrgInfo()
+    {
+        return $this->hasOne(OrgInfo::className(), ['id_org' => 'id']);
+    }
+
+    public function getUserInfo()
+    {
+        return $this->hasMany(UserInfo::class, ['id_org' => 'id']);
+    }
+
+    public function getProgramObjects()
+    {
+        return $this->hasMany(ProgramObjects::class, ['id_org' => 'id']);
+    }
+
+    public function getProgram()
+    {
+        return $this->hasOne(Program::class, ['id_org' => 'id']);
+    }
+
+    public function getFounder()
+    {
+        return $this->hasOne(Founders::class, ['id_founder' => 'id']);
+    }
+
+    public function getDkuDoc()
+    {
+        return $this->hasOne(DkuDocs::class, ['id_org' => 'id']);
     }
 }

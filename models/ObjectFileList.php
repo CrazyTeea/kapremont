@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-
 class ObjectFileList extends \yii\db\ActiveRecord
 {
     public static function tableName()
@@ -18,7 +16,7 @@ class ObjectFileList extends \yii\db\ActiveRecord
             [['obj_id', 'file_id'], 'integer'],
         ];
     }
-    
+
     public function attribute()
     {
         return [

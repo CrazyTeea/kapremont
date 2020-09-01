@@ -19,16 +19,16 @@
     <tbody>
     <?php foreach ($export as $item): ?>
         <tr>
-            <td><?=$item['id_org']?></td>
-            <td><?=$item['region']?></td>
-            <td><?=$item['org']?></td>
-            <td><?=$item['sum']?></td>
-            <td><?=$item['dep_status']?></td>
-            <td><?=$item['atz_nb']?></td>
-            <td><?=$item['atz']?></td>
-            <td><?=$item['atz_bud_fin']?></td>
-            <td><?=$item['dku_status']?></td>
+            <td><?= $item['id_org'] ?></td>
+            <td><?= $item['region'] ?></td>
+            <td><?= $item['org'] ?></td>
+            <td><?= $item['sum'] ?></td>
+            <td><?= $item['dep_status'] ?></td>
+            <td><?= $item['atz_nb'] ?></td>
+            <td><?= $item['atz'] ?></td>
+            <td><?= $item['atz_bud_fin'] ?></td>
+            <td><?= $item['dku_status'] ?></td>
         </tr>
-    <?php endforeach;?>
+    <?php endforeach; ?>
     </tbody>
 </table>

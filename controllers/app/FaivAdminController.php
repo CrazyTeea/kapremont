@@ -39,7 +39,7 @@ class FaivAdminController extends Controller
 
 
         foreach ($params as $key => $param) {
-            if($param != null) {
+            if ($param != null) {
                 $filters [] = "'like', $key, '%$param%', false";
             }
         }

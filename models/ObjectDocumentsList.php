@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use Yii;
 use yii\web\UploadedFile;
 
 /**
@@ -31,9 +30,9 @@ class ObjectDocumentsList extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['label'],'string'],
+            [['label'], 'string'],
             [['id_object', 'id_file', 'id_type'], 'required'],
-            [['id_object', 'id_file', 'id_type','system_status'], 'integer'],
+            [['id_object', 'id_file', 'id_type', 'system_status'], 'integer'],
         ];
     }
 
@@ -49,15 +48,20 @@ class ObjectDocumentsList extends \yii\db\ActiveRecord
             'id_type' => 'Id Type',
         ];
     }
-    public function getType(){
-        return $this->hasOne(ObjectDocumentsTypes::className(),['id'=>'id_type']);
-    }
-    public function getFile(){
-        return $this->hasOne(Files::className(),['id'=>'id_file']);
+
+    public function getType()
+    {
+        return $this->hasOne(ObjectDocumentsTypes::className(), ['id' => 'id_type']);
     }
 
-    public function add(UploadedFile $uploadedFile, $id_object, $id_type, $label, $status = 1){
-        $ifDoc = self::findOne(['id_object'=>$id_object,'id_type'=>$id_type,'system_status'=>1]);
+    public function getFile()
+    {
+        return $this->hasOne(Files::className(), ['id' => 'id_file']);
+    }
+
+    public function add(UploadedFile $uploadedFile, $id_object, $id_type, $label, $status = 1)
+    {
+        $ifDoc = self::findOne(['id_object' => $id_object, 'id_type' => $id_type, 'system_status' => 1]);
         if (!$ifDoc) {
             $file = new Files();
             $this->id_file = $file->upload($uploadedFile, "/$id_object");
@@ -72,6 +76,7 @@ class ObjectDocumentsList extends \yii\db\ActiveRecord
         return $ifDoc->id_file and $ifDoc->save(false);
 
     }
+
     public function updateItem($id)
     {
         self::update(['system_status' => 0])->where(['id' => $id]);

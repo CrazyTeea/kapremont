@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "prog_objects_waites".
  *
@@ -31,9 +29,9 @@ class ProgObjectsWaites extends BaseMultiModel
     {
         return [
             [['id_object'], 'required'],
-            [['element','id_object'], 'integer'],
+            [['element', 'id_object'], 'integer'],
             [['plan', 'changes'], 'string', 'max' => 255],
-            ['aim','safe']
+            ['aim', 'safe']
         ];
     }
 

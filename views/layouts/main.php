@@ -1,16 +1,17 @@
 <?php
 
 /* @var $this \yii\web\View */
+
 /* @var $content string */
 
+use app\assets\AppAsset;
+use app\models\User;
 use app\widgets\Alert;
 use app\widgets\NavBar;
 use mdm\admin\components\MenuHelper;
+use yii\bootstrap4\Breadcrumbs;
 use yii\bootstrap4\Html;
 use yii\bootstrap4\Nav;
-use yii\bootstrap4\Breadcrumbs;
-use app\assets\AppAsset;
-use app\models\User;
 use yii\helpers\Json;
 
 AppAsset::register($this);
@@ -37,9 +38,9 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     NavBar::begin([
-        'brandLabel' => Yii::$app->name ,
-        'brandUrl'=>'https://xn--80apneeq.xn--p1ai/',
-        'brandImage'=>'/img/light-logo.svg',
+        'brandLabel' => Yii::$app->name,
+        'brandUrl' => 'https://xn--80apneeq.xn--p1ai/',
+        'brandImage' => '/img/light-logo.svg',
         //'renderInnerContainer'=>false,
         'options' => [
             'class' => 'navbar-expand-lg navbar-dark bg-dark d-flex align-items-center',
@@ -75,7 +76,7 @@ AppAsset::register($this);
             'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
         ]) ?>
         <?= Alert::widget() ?>
-        <?=  $content ?>
+        <?= $content ?>
 
     </div>
 </div>
@@ -87,10 +88,12 @@ AppAsset::register($this);
                 Официальный ресурс Министерства науки и высшего образования Российской Федерации
             </div>
             <div class="col-6">
-                Служба технической поддержки: 8-495-989-84-47 доб. 1 (многоканальный) По техническим вопросам: ias@mirea.ru,
-                по методическим вопросам (в части капитального ремонта): <a href="support_monitoring@mirea.ru">support_monitoring@mirea.ru</a>, по методическим вопросам (в части АТЗ):
+                Служба технической поддержки: 8-495-989-84-47 доб. 1 (многоканальный) По техническим вопросам:
+                ias@mirea.ru,
+                по методическим вопросам (в части капитального ремонта): <a href="support_monitoring@mirea.ru">support_monitoring@mirea.ru</a>,
+                по методическим вопросам (в части АТЗ):
                 <a href="support_atz@mirea.ru">support_atz@mirea.ru</a>.
-                <?=Html::a('Типовые вопросы',['/tips_quations.pdf'],['target'=>'_blank','class'=>'btn btn-warning btn-sm'])?>
+                <?= Html::a('Типовые вопросы', ['/tips_quations.pdf'], ['target' => '_blank', 'class' => 'btn btn-warning btn-sm']) ?>
             </div>
         </div>
     </div>

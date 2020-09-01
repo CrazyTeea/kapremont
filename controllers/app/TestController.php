@@ -4,7 +4,8 @@ namespace app\controllers\app;
 
 class TestController extends AppController
 {
-    public function actionIndex(){
+    public function actionIndex()
+    {
         $a = getenv('DB_SCHEMA');
         return $a;
         //sdgsdgsfg

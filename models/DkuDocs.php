@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use phpDocumentor\Reflection\Types\AbstractList;
 use Yii;
 use yii\helpers\FileHelper;
 use yii\web\UploadedFile;
@@ -37,13 +36,15 @@ class DkuDocs extends \yii\db\ActiveRecord
             [['id_org'], 'exist', 'skipOnError' => true, 'targetClass' => Organizations::className(), 'targetAttribute' => ['id_org' => 'id']],
         ];
     }
-    public function addDoc(UploadedFile $file,$id_org){
+
+    public function addDoc(UploadedFile $file, $id_org)
+    {
         $this->id_org = $id_org;
         $this->file_name = $file->name;
-        $path = Yii::getAlias('@webroot')."/uploads/dku_docs/$id_org";
+        $path = Yii::getAlias('@webroot') . "/uploads/dku_docs/$id_org";
         if (!file_exists($path))
             FileHelper::createDirectory($path);
-        $path.="/{$this->file_name}";
+        $path .= "/{$this->file_name}";
         $file->saveAs($path);
         $file = $path;
         return $this->save();

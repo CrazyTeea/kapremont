@@ -25,12 +25,12 @@ class MgsuAdminController extends Controller
     {
         $isOther = json_decode(Yii::$app->request->post('form'))->state;
 
-        if(Yii::$app->user->can('faiv_admin')) {
+        if (Yii::$app->user->can('faiv_admin')) {
             $id_founder = User::findOne(Yii::$app->user->id)->id_founder;
             $params = $this->getParams(json_decode(Yii::$app->request->post('form')));
             $order = $this->getOrder(json_decode(Yii::$app->request->post('form')));
             $select = Organizations::getMainCheckTable($offset, $params, $order, $isOther, " and id_founder = $id_founder");
-            $count = Organizations::getMainCheckTableCount($params, $isOther," and id_founder = $id_founder");
+            $count = Organizations::getMainCheckTableCount($params, $isOther, " and id_founder = $id_founder");
 
             return Json::encode([
                 'rows' => $select,
@@ -56,12 +56,12 @@ class MgsuAdminController extends Controller
 
         // echo "<pre>";
         // print_r($params);
-        $static_clause=[
+        $static_clause = [
             'program_objects.system_status' => 1,
         ];
 
         $begin_clause = [
-            'status' => $post['status'] ?? [1,2,3,4,5],
+            'status' => $post['status'] ?? [1, 2, 3, 4, 5],
         ];
 
         if (!isset($post['or_where'])) {
@@ -70,17 +70,16 @@ class MgsuAdminController extends Controller
             if (isset($post['dku_status']))
                 $begin_clause['organizations.dku_status'] = $post['dku_status'];
         }
-        $params = array_merge($begin_clause, $post_close ?? [] );
+        $params = array_merge($begin_clause, $post_close ?? []);
 
-        $select = ProgramObjects::find()->joinWith(['org'])->where($static_clause)->andWhere($params)->andWhere(['<>','status',0])->offset($offset)->limit(10);
-        $count = ProgramObjects::find()->joinWith(['org'])->where($static_clause)->andWhere($params)->andWhere(['<>','status',0]);
-        if (isset($post['or_where'])){
-            $select->andWhere(['or',['program_objects.dep_status'=>$post['dep_status']],['organizations.dku_status'=>$post['dku_status']]]);
-            $count->andWhere(['or',['program_objects.dep_status'=>$post['dep_status']],['organizations.dku_status'=>$post['dku_status']]]);
+        $select = ProgramObjects::find()->joinWith(['org'])->where($static_clause)->andWhere($params)->andWhere(['<>', 'status', 0])->offset($offset)->limit(10);
+        $count = ProgramObjects::find()->joinWith(['org'])->where($static_clause)->andWhere($params)->andWhere(['<>', 'status', 0]);
+        if (isset($post['or_where'])) {
+            $select->andWhere(['or', ['program_objects.dep_status' => $post['dep_status']], ['organizations.dku_status' => $post['dku_status']]]);
+            $count->andWhere(['or', ['program_objects.dep_status' => $post['dep_status']], ['organizations.dku_status' => $post['dku_status']]]);
         }
         $select = $select->all();
         $count = $count->count();
-
 
 
         $toServ = [];
@@ -125,7 +124,7 @@ class MgsuAdminController extends Controller
         $where_files = '';
         $status_clouse = '';
 
-        $params1 =  [
+        $params1 = [
             'id' => $request->id ?? null,
             'status' => $request->status ?? null,
         ];
@@ -164,7 +163,7 @@ class MgsuAdminController extends Controller
 
     private function getOrder($request, $default = 'res.id')
     {
-        $params =  [
+        $params = [
             'order' => $request->quantity ?? null,
         ];
 

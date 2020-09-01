@@ -234,7 +234,7 @@ class AtzController extends Controller
 
             if ($mainAtzFour->save()) {
                 foreach ($mainData['address'] as $address) {
-                    $atz_address =  new AtzAddress();
+                    $atz_address = new AtzAddress();
                     $atz_address->id_atz_table_four = $mainAtzFour->id;
                     $atz_address->passport_name = $address['passport_name'];
                     if ($atz_address->save()) {
@@ -255,7 +255,7 @@ class AtzController extends Controller
 
     public function actionDestroyAtzTableFourRow(array $ids = null)
     {
-        if(is_null($ids)) $ids = json_decode(Yii::$app->request->post('ids'));
+        if (is_null($ids)) $ids = json_decode(Yii::$app->request->post('ids'));
         foreach ($ids as $id) {
             AtzTableFour::destroy($id);
         }
@@ -269,7 +269,7 @@ class AtzController extends Controller
 
         $atz_table_four = AtzTableFour::find()->where(['id_org' => $id_org, 'card_number' => $card_number])->asArray()->all();
 
-        $isLastRow = function ($atz_table_four_one) use($arrayLastRowIndex) {
+        $isLastRow = function ($atz_table_four_one) use ($arrayLastRowIndex) {
             return in_array($atz_table_four_one['stage_number'], $arrayLastRowIndex);
         };
 

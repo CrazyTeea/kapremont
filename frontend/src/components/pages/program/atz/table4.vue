@@ -16,8 +16,10 @@
             <b-th colspan="3">Начальная (максимальная) цена закупки лота /договора, контракта, руб.</b-th>
 
             <b-th
-              rowspan="2"
-            >Номер извещения /номер Номер реестровой записи договора/контракта на сайте https://zakupki.gov.ru/ (в случаи публикации)</b-th>
+                rowspan="2"
+            >Номер извещения /номер Номер реестровой записи договора/контракта на сайте https://zakupki.gov.ru/ (в
+              случаи публикации)
+            </b-th>
             <b-th rowspan="2">Дата заключения контракта/договора</b-th>
             <b-th rowspan="2">Номер договора /контракта</b-th>
             <b-th rowspan="2">Наименование поставщика по договору /контракту</b-th>
@@ -43,46 +45,46 @@
             <b-td>
               {{ indexBody + 1 + row.stage_number }}
               <b-icon
-                v-if="!index"
-                @click="deleteRow(indexBody, index)"
-                variant="danger"
-                icon="trash"
-                class="trash-icon mt-2 col-1"
+                  v-if="!index"
+                  @click="deleteRow(indexBody, index)"
+                  variant="danger"
+                  icon="trash"
+                  class="trash-icon mt-2 col-1"
               ></b-icon>
             </b-td>
             <b-td>{{ row.stage_name }}</b-td>
             <b-td class="min-width-for-multiselect">
               <multiselect
-                class="mt-5"
-                v-model="row.address"
-                label="passport_name"
-                track-by="id"
-                :multiple="true"
-                :taggable="true"
-                :options="passport"
-                placeholder="Выберите объект"
-                select-label="Добваить"
-                deselect-label="Удалить"
-                selectedLabel="Выбрано"
-                :close-on-select="false"
+                  class="mt-5"
+                  v-model="row.address"
+                  label="passport_name"
+                  track-by="id"
+                  :multiple="true"
+                  :taggable="true"
+                  :options="passport"
+                  placeholder="Выберите объект"
+                  select-label="Добваить"
+                  deselect-label="Удалить"
+                  selectedLabel="Выбрано"
+                  :close-on-select="false"
               ></multiselect>
             </b-td>
             <b-td class="min-width-for-multiselect">
               <multiselect
-                class="mt-5"
-                v-model="row.type_event"
-                label="name"
-                track-by="value"
-                :multiple="true"
-                :taggable="true"
-                :options="ONinput(indexBody, index)"
-                group-values="variants"
-                group-label="state"
-                placeholder="Выберите системы"
-                select-label="Добваить"
-                deselect-label="Удалить"
-                selectedLabel="Выбрано"
-                :close-on-select="false"
+                  class="mt-5"
+                  v-model="row.type_event"
+                  label="name"
+                  track-by="value"
+                  :multiple="true"
+                  :taggable="true"
+                  :options="ONinput(indexBody, index)"
+                  group-values="variants"
+                  group-label="state"
+                  placeholder="Выберите системы"
+                  select-label="Добваить"
+                  deselect-label="Удалить"
+                  selectedLabel="Выбрано"
+                  :close-on-select="false"
               ></multiselect>
             </b-td>
 
@@ -153,16 +155,7 @@
 </template>
 
 <script>
-import {
-  BButton,
-  BTableSimple,
-  BThead,
-  BTbody,
-  BTh,
-  BTd,
-  BTr,
-  BFormInput,
-} from "bootstrap-vue";
+import {BButton, BFormInput, BTableSimple, BTbody, BTd, BTh, BThead, BTr,} from "bootstrap-vue";
 import Multiselect from "vue-multiselect";
 import Axios from "axios";
 
@@ -194,43 +187,43 @@ export default {
       if (!this.rows[index1].row_stages[index2].address || typeof this.rows[index1].row_stages[index2].address !== 'object') return [];
       let options = [];
       this.rows[index1].row_stages[index2].address.forEach(
-        (element, indexArray) => {
-          options.push({
-            state: element.passport_name,
-            variants: [
-              {
-                name: "Система видеонаблюдения",
-                value: `video_system-${indexArray}`,
-              },
-              {
-                name: "Система оповещения и управления эвакуацией",
-                value: `evacuation_system-${indexArray}`,
-              },
-              {
-                name: "Система освещения",
-                value: `light_system-${indexArray}`,
-              },
-              {
-                name: "Средства охранной сигнализации",
-                value: `predator_system-${indexArray}`,
-              },
-              {
-                name: "Средства тревожной сигнализации",
-                value: `alarm_warning_system-${indexArray}`,
-              },
-              {
-                name: "Средства пожарной сигнализации",
-                value: `alarm_fire_system-${indexArray}`,
-              },
-              {
-                name: "Средства телефонной связи и радиосвязи",
-                value: `phone_system-${indexArray}`,
-              },
-              { name: "Ограждения", value: `fence-${indexArray}` },
-              { name: "СКУД", value: `skud-${indexArray}` },
-            ],
-          });
-        }
+          (element, indexArray) => {
+            options.push({
+              state: element.passport_name,
+              variants: [
+                {
+                  name: "Система видеонаблюдения",
+                  value: `video_system-${indexArray}`,
+                },
+                {
+                  name: "Система оповещения и управления эвакуацией",
+                  value: `evacuation_system-${indexArray}`,
+                },
+                {
+                  name: "Система освещения",
+                  value: `light_system-${indexArray}`,
+                },
+                {
+                  name: "Средства охранной сигнализации",
+                  value: `predator_system-${indexArray}`,
+                },
+                {
+                  name: "Средства тревожной сигнализации",
+                  value: `alarm_warning_system-${indexArray}`,
+                },
+                {
+                  name: "Средства пожарной сигнализации",
+                  value: `alarm_fire_system-${indexArray}`,
+                },
+                {
+                  name: "Средства телефонной связи и радиосвязи",
+                  value: `phone_system-${indexArray}`,
+                },
+                {name: "Ограждения", value: `fence-${indexArray}`},
+                {name: "СКУД", value: `skud-${indexArray}`},
+              ],
+            });
+          }
       );
 
       return options;
@@ -297,7 +290,7 @@ export default {
             address: [],
             stage_number: null,
             stage_name:
-              "Закупка не конкурентный способом /Заключение договора /контракта ",
+                "Закупка не конкурентный способом /Заключение договора /контракта ",
             type_event: [],
             method: null,
             type_document: null,
@@ -452,13 +445,16 @@ export default {
   overflow-x: scroll;
   height: auto;
 }
+
 .min-width-for-multiselect {
   min-width: 450px;
 }
+
 .trash-icon {
   transform: scale(1);
   transition: all 0.3s ease;
 }
+
 .trash-icon:hover {
   transform: scale(1.3);
   transition: all 0.3s ease;

@@ -72,13 +72,14 @@ class SiteController extends Controller
      * @return string|Response
      * @throws \yii\base\Exception
      */
-    public function actionUserRecover(){
+    public function actionUserRecover()
+    {
         $model = new UserRecover();
-        if ($post = Yii::$app->request->post()){
+        if ($post = Yii::$app->request->post()) {
             if ($model->load($post) and $model->resetFromIasmon())
                 return $this->redirect(['login']);
         }
-        return $this->render('userRecover',compact('model'));
+        return $this->render('userRecover', compact('model'));
     }
 
 
@@ -86,11 +87,10 @@ class SiteController extends Controller
     {
         $model = new ChangePasswordForm();
         $success = -1;
-        if ( $model->load(Yii::$app->request->post()))
-        {
+        if ($model->load(Yii::$app->request->post())) {
             $success = $model->change_password();
         }
-        return $this->render('change_password',compact('model','success'));
+        return $this->render('change_password', compact('model', 'success'));
     }
 
     /**
@@ -116,14 +116,13 @@ class SiteController extends Controller
                 Yii::$app->user->can('orglist_view') or
                 Yii::$app->user->can('faiv_admin') or
                 Yii::$app->user->can('dep') or
-                Yii::$app->user->can('dku')){
+                Yii::$app->user->can('dku')) {
                 return $this->redirect(['/organization/list']);
-            }
-            else return $this->redirect(['/program']);
+            } else return $this->redirect(['/program']);
         }
 
         $model = new LoginForm();
-        if(Yii::$app->request->get('auth_token')) {
+        if (Yii::$app->request->get('auth_token')) {
 
             $signer = new Sha256();
             $token = (new Parser())->parse(Yii::$app->request->get('auth_token'));
@@ -139,7 +138,7 @@ class SiteController extends Controller
                         Yii::$app->user->can('orglist_view') or
                         Yii::$app->user->can('faiv_admin') or
                         Yii::$app->user->can('dep') or
-                        Yii::$app->user->can('dku')){
+                        Yii::$app->user->can('dku')) {
                         return $this->redirect(['/organization/list']);
                     }
 
@@ -148,14 +147,13 @@ class SiteController extends Controller
                 Yii::$app->session->setFlash("auth_error", "Ошибка входа!");
                 // return $this->redirect(['site/login']);
             }
-        }
-        else if ($model->load(Yii::$app->request->post()) && $model->login()) {
+        } else if ($model->load(Yii::$app->request->post()) && $model->login()) {
             if (Yii::$app->user->can('root') or
                 Yii::$app->user->can('mgsu') or
                 Yii::$app->user->can('orglist_view') or
                 Yii::$app->user->can('faiv_admin') or
                 Yii::$app->user->can('dep') or
-                Yii::$app->user->can('dku')){
+                Yii::$app->user->can('dku')) {
                 return $this->redirect(['/organization/list']);
             }
             return $this->redirect(['/program']);
@@ -166,34 +164,36 @@ class SiteController extends Controller
         ]);
     }
 
-    public function actionP(){
+    public function actionP()
+    {
         echo "Выполняется синхронизация организаций\n";
-        $err=0;
+        $err = 0;
         $signer = new Sha256();
-        $key = new Key( 'example_key233' );
-        $token = ( new Builder() )->withClaim( 'reference', 'organization' )
+        $key = new Key('example_key233');
+        $token = (new Builder())->withClaim('reference', 'organization')
             // ->sign($signer, self::$jwt_key)
-            ->getToken( $signer, $key );
-        $response_token = file_get_contents( "http://api.xn--80apneeq.xn--p1ai/api.php?option=reference_api&action=get_reference&module=constructor&reference_token=$token" );
+            ->getToken($signer, $key);
+        $response_token = file_get_contents("http://api.xn--80apneeq.xn--p1ai/api.php?option=reference_api&action=get_reference&module=constructor&reference_token=$token");
         $signer = new Sha256();
-        $token = ( new Parser() )->parse( $response_token );
-        if ( $token->verify( $signer,'example_key233' ) ) {
+        $token = (new Parser())->parse($response_token);
+        if ($token->verify($signer, 'example_key233')) {
             $data_reference = $token->getClaims();
-            foreach ($data_reference AS $key => $data) {
-                $row_org = Organizations::findOne( $data->getValue()->id ) ?? new Organizations();
+            foreach ($data_reference as $key => $data) {
+                $row_org = Organizations::findOne($data->getValue()->id) ?? new Organizations();
                 $row_org->id = $data->getValue()->id;
                 $row_org->id_founder = $data->getValue()->subordination;
-                $row_org->full_name = htmlspecialchars_decode( $data->getValue()->fullname );
-                $row_org->short_name = htmlspecialchars_decode( $data->getValue()->shot_name );
-                $row_org->name = htmlspecialchars_decode( $data->getValue()->name );
-                $row_org->inn = htmlspecialchars_decode( $data->getValue()->inn );
-                $row_org->id_region = ($data->getValue()->region_id != 0)?$data->getValue()->region_id:86;
+                $row_org->full_name = htmlspecialchars_decode($data->getValue()->fullname);
+                $row_org->address = htmlspecialchars_decode($data->getValue()->fullname);
+                $row_org->short_name = htmlspecialchars_decode($data->getValue()->shot_name);
+                $row_org->name = htmlspecialchars_decode($data->getValue()->name);
+                $row_org->inn = htmlspecialchars_decode($data->getValue()->inn);
+                $row_org->id_region = ($data->getValue()->region_id != 0) ? $data->getValue()->region_id : 86;
                 $row_org->save(false);
 
             }
         }
 
-        $orgs = Organizations::findAll(['>','id_founder',1]);
+        /*$orgs = Organizations::findAll(['>','id_founder',1]);
         foreach ($orgs as $org){
             $u = User::findAll(['id_org'=>$org->id]);
             foreach ($u as $kek){
@@ -201,7 +201,7 @@ class SiteController extends Controller
                 $pgp->revokeAll($kek->id);
                 $pgp->assign($pgp->getRole('faiv_user'),$kek->id);
             }
-        }
+        }*/
     }
 
     /**
@@ -245,18 +245,18 @@ class SiteController extends Controller
         return $this->render('about');
     }
 
-    public function actionExport(){
+    public function actionExport()
+    {
 
 
-
-        $objs = ProgramObjects::find()->where(['id_org'=>100,'status'=>5])->joinWith(['svedenia','svedenia2'])->asArray()->all();
+        $objs = ProgramObjects::find()->where(['id_org' => 100, 'status' => 5])->joinWith(['svedenia', 'svedenia2'])->asArray()->all();
         $param = 'export';
-        $html = $this->renderPartial('_export',compact('objs'));
+        $html = $this->renderPartial('_export', compact('objs'));
         $reader = new HTML();
         $spreadsheet = $reader->loadFromString($html);
-        $writer = IOFactory::createWriter($spreadsheet,'Xls');
+        $writer = IOFactory::createWriter($spreadsheet, 'Xls');
 
-        $path = Yii::getAlias( '@webroot' ) . "/uploads/$param";
+        $path = Yii::getAlias('@webroot') . "/uploads/$param";
         if (!file_exists($path))
             FileHelper::createDirectory($path);
         $writer->save("$path/$param.xls");

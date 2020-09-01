@@ -14,6 +14,6 @@ $this->params['breadcrumbs'][] = 'Редактирование';
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <?= $this->render('_form',compact('model','progObjectsEvents','progObjectsWaites','progObjectsRiscs','proObjectsNecessary')) ?>
+    <?= $this->render('_form', compact('model', 'progObjectsEvents', 'progObjectsWaites', 'progObjectsRiscs', 'proObjectsNecessary')) ?>
 
 </div>

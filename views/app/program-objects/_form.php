@@ -11,11 +11,11 @@ use yii\helpers\Json;
 
     <script>
         window.MODEL = {
-            base:<?=Json::encode($model)?>,
-            svedenia:<?=Json::encode($progObjectsEvents)?>,
-            necessary:<?=Json::encode($proObjectsNecessary)?>,
-            waited:<?=Json::encode($progObjectsWaites)?>,
-            riscs:<?=Json::encode($progObjectsRiscs)?>,
+            base: <?=Json::encode($model)?>,
+            svedenia: <?=Json::encode($progObjectsEvents)?>,
+            necessary: <?=Json::encode($proObjectsNecessary)?>,
+            waited: <?=Json::encode($progObjectsWaites)?>,
+            riscs: <?=Json::encode($progObjectsRiscs)?>,
         };
     </script>
     <div id="app"></div>
