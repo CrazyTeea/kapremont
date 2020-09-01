@@ -1,6 +1,7 @@
 import Vue from "vue";
 import Vuex from "vuex";
 import Axios from "axios";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -23,7 +24,7 @@ export default new Vuex.Store({
                     console.error(error);
                 });
         },
-        async requestOrg(ctx, { id }) {
+        async requestOrg(ctx, {id}) {
             Axios.post("/rest/organizations/by-id", {
                 id
             })
@@ -34,7 +35,7 @@ export default new Vuex.Store({
                     console.error(error);
                 });
         },
-        async requestPageData(ctx, { pageName }) {
+        async requestPageData(ctx, {pageName}) {
             Axios.get("/rest/system/get-page", {
                 params: {
                     pageName
@@ -48,7 +49,7 @@ export default new Vuex.Store({
                     console.error(err);
                 });
         },
-        async requestCity(ctx, { id }) {
+        async requestCity(ctx, {id}) {
             Axios.get("/rest/cities/by-id", {
                 params: {
                     id

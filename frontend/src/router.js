@@ -20,7 +20,7 @@ const routes = [
     },
     {
         path: "/program/view",
-        component:require('./components/pages/program/view/index.vue').default
+        component: require('./components/pages/program/view/index.vue').default
     },
     {
         path: "/program/org",
@@ -82,7 +82,7 @@ const routes = [
     {
         path: "/organization/user-info/:id_org",
         name: "user-info",
-        component:require('./components/pages/organization/userInfo/index.vue').default ,
+        component: require('./components/pages/organization/userInfo/index.vue').default,
     },
     {
         path: "/admin/faiv",

@@ -12,29 +12,32 @@ $this->params['breadcrumbs'][] = $this->title;
     <p>Смена пароля:</p>
     <div class="row">
         <div class="col-lg-5">
-            <?php Pjax::begin(['id'=>'form_ch_psw','timeout'=>50000000])?>
-            <?php $form = ActiveForm::begin(['id' => 'form-change_password','options' => ['data-pjax' => true]]); ?>
+            <?php Pjax::begin(['id' => 'form_ch_psw', 'timeout' => 50000000]) ?>
+            <?php $form = ActiveForm::begin(['id' => 'form-change_password', 'options' => ['data-pjax' => true]]); ?>
             <?= $form->field($model, 'username')->textInput(['autofocus' => true]) ?>
-            <?= $form->field($model,'password')?>
+            <?= $form->field($model, 'password') ?>
             <div class="form-group">
                 <?= Html::submitButton('Сменить', ['class' => 'btn btn-primary', 'name' => 'change_password-button']) ?>
             </div>
             <?php ActiveForm::end(); ?>
-            <?php switch ($success){
-                case 0:{
+            <?php switch ($success) {
+                case 0:
+                {
                     echo '<div class="alert alert-warning">Что-то пошло не так или такого пользователя не существует !</div>';
                     break;
                 }
-                case 1:{
+                case 1:
+                {
                     echo '<div class="alert alert-success">Успешно!</div>';
                     break;
                 }
-                default:{
+                default:
+                {
                     break;
                 }
-            }?>
+            } ?>
 
-            <?php Pjax::end()?>
+            <?php Pjax::end() ?>
 
         </div>
     </div>

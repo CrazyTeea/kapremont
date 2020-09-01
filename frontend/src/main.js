@@ -2,8 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import store from "./store";
 import router from "./router";
-import platform from "platform";
-import { IconsPlugin, ModalPlugin } from "bootstrap-vue";
+import {IconsPlugin, ModalPlugin} from "bootstrap-vue";
 import Axios from "axios";
 //import BootstrapVue from 'bootstrap-vue';
 
@@ -15,19 +14,19 @@ Vue.use(IconsPlugin);
 
 
 Vue.directive("can", {
-    bind(el, binding,node) {
+    bind(el, binding, node) {
         const roles = binding.arg.split(",");
-        setTimeout(()=>{
+        setTimeout(() => {
             if (!roles.includes(window.Permission)) {
                 el.style.display = 'none';
                 el.childNodes.innerHTML = '';
 
-                    node.elm.parentElement.removeChild(node.elm);
-                    if (node.child) {
-                        let e = document.getElementById(node.child.controlledBy);
-                        if (e)
-                            e.parentElement.removeChild(e);
-                    }
+                node.elm.parentElement.removeChild(node.elm);
+                if (node.child) {
+                    let e = document.getElementById(node.child.controlledBy);
+                    if (e)
+                        e.parentElement.removeChild(e);
+                }
 
             }
         }, 1);
@@ -46,7 +45,7 @@ const browser = [
 
 //Vue.config.productionTip = false;
 
-async function getUser(){
+async function getUser() {
     let user = null;
     let a = Axios.post("/rest/system/get-user")
         .then(response => {

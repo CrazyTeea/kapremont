@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "prog_objects_riscs".
  *
@@ -31,7 +29,7 @@ class ProgObjectsRiscs extends BaseMultiModel
     {
         return [
             [['types', 'poison', 'protect'], 'string'],
-            [['id_object','element'], 'integer'],
+            [['id_object', 'element'], 'integer'],
         ];
     }
 

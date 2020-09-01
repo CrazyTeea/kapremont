@@ -13,7 +13,7 @@ $config = [
     'defaultRoute' => 'site/login',
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
-        '@npm'   => '@vendor/npm-asset',
+        '@npm' => '@vendor/npm-asset',
         '@mdm/admin' => '@app/widgets/yii2-admin',
         '@webroot' => '@app/web',
     ],
@@ -77,10 +77,9 @@ $config = [
             'rules' => [
 
 
-
                 'shit-table/data' => 'api/shit/data',
-                'program/event/download/<id_event:\d+>'=>'/app/program/download-event',
-                'program/set-value/<id_org:\d+>'=>'/app/program/set-value',
+                'program/event/download/<id_event:\d+>' => '/app/program/download-event',
+                'program/set-value/<id_org:\d+>' => '/app/program/set-value',
 
                 'api/set-status/approved/dep/<obj_id:\d+>' => '/app/organization/set-approve-status-dep',
                 'api/set-status/rejected/dep/<obj_id:\d+>' => '/app/organization/set-rejected-status-dep',
@@ -107,7 +106,7 @@ $config = [
                 'program/view' => 'app/development-programme',
                 'program/org' => 'app/development-programme/status-realize',
                 'api/get/program-objects/realized/<id_org:\d+>' => 'app/program-objects/status-realize',
-                'program/object/set-value/<id:\d+>'=>'app/program-objects/set-value',
+                'program/object/set-value/<id:\d+>' => 'app/program-objects/set-value',
                 'program/dku-export' => 'app/program/dku-export',
                 'program/add-doc/<id:\d+>' => 'app/development-programme/add-doc',
                 'program/delete-doc/<id:\d+>' => 'app/development-programme/delete-doc',
@@ -135,16 +134,13 @@ $config = [
                 'organization/obj/<id:\d+>' => 'app/organization/object-view',
                 'organization/info' => 'app/organization/info',
                 'organization/update/<id:\d+>' => 'app/organization/update',
-                'organization/user-info/<id_org:\d+>'=>'app/organization/user-info',
-                'api/user_info_roles' =>'api/user-info/roles',
+                'organization/user-info/<id_org:\d+>' => 'app/organization/user-info',
+                'api/user_info_roles' => 'api/user-info/roles',
 
 
                 // Тут все роуты по атз!
                 'program/atz' => 'app/atz/index',
                 'program/main-atz/<id_org:\d+>' => 'app/atz/main-atz',
-
-
-
 
 
                 'check' => 'app/mgsu-admin/view',
@@ -153,7 +149,7 @@ $config = [
 
                 'api/file/download/<name:.+>' => 'rest/upload/download',
 
-                'api/getUsersInfo/<id_org:\d+>'=>'api/user-info/users',
+                'api/getUsersInfo/<id_org:\d+>' => 'api/user-info/users',
 
                 'api/mgsu/main-table/<offset:\d+>' => '/app/mgsu-admin/main-table',
                 'api/mgsu/objects-table/<offset:\d+>' => '/app/mgsu-admin/objects-table',
@@ -162,13 +158,13 @@ $config = [
                 'api/object/get-status/<id:\d+>' => '/rest/program-objects/get-status',
                 'api/get-object/<id:\d+>' => '/rest/program-objects/by-id',
 
-                'program/object/set-real/<id:\d+>'=>'app/program-objects/set-real',
+                'program/object/set-real/<id:\d+>' => 'app/program-objects/set-real',
 
                 //НАДО ПЕРЕДЕЛАТЬ
                 'api/org-table/<id:\d+>' => '/app/organization/table-list',
                 'org/dku-doc/<id_org:\d+>' => '/app/organization/set-dku-doc',
 
-                'organization/set-old/<id:\d+>'=>'app/organization/set-old'
+                'organization/set-old/<id:\d+>' => 'app/organization/set-old'
                 //'api/object/<id:\d+>' => '/app/organization/get-object-by-id'
             ],
         ],

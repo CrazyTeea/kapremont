@@ -22,26 +22,8 @@ use yii\web\IdentityInterface;
  * @property string $position
  * @property string $fio
  */
-
 class User extends ActiveRecord implements IdentityInterface
 {
-
-    public function behaviors()
-    {
-        return [
-            TimestampBehavior::className(),
-        ];
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function rules()
-    {
-        return [
-            ['status', 'in', 'range' => [UserStatus::ACTIVE, UserStatus::INACTIVE]],
-        ];
-    }
 
     /**
      * @inheritdoc
@@ -102,8 +84,36 @@ class User extends ActiveRecord implements IdentityInterface
         }
         $expire = Yii::$app->params['user.passwordResetTokenExpire'];
         $parts = explode('_', $token);
-        $timestamp = (int) end($parts);
+        $timestamp = (int)end($parts);
         return $timestamp + $expire >= time();
+    }
+
+    public static function getRole($id)
+    {
+        $role = (new PhpManager())->getRolesByUser($id);
+        return key($role);
+    }
+
+    public static function getUsersByRole(string $role): array
+    {
+        return (new PhpManager())->getUserIdsByRole($role);
+    }
+
+    public function behaviors()
+    {
+        return [
+            TimestampBehavior::className(),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function rules()
+    {
+        return [
+            ['status', 'in', 'range' => [UserStatus::ACTIVE, UserStatus::INACTIVE]],
+        ];
     }
 
     /**
@@ -117,17 +127,17 @@ class User extends ActiveRecord implements IdentityInterface
     /**
      * @inheritdoc
      */
-    public function getAuthKey()
+    public function validateAuthKey($authKey)
     {
-        return $this->auth_key;
+        return $this->getAuthKey() === $authKey;
     }
 
     /**
      * @inheritdoc
      */
-    public function validateAuthKey($authKey)
+    public function getAuthKey()
     {
-        return $this->getAuthKey() === $authKey;
+        return $this->auth_key;
     }
 
     /**
@@ -180,22 +190,12 @@ class User extends ActiveRecord implements IdentityInterface
 
     public function getOrganization()
     {
-        return $this->hasOne(Organizations::className(),['id'=>'id_org']);
+        return $this->hasOne(Organizations::className(), ['id' => 'id_org']);
     }
+
     public function getProgram()
     {
-        return $this->hasOne(Program::className(),['id_org'=>'id_org']);
-    }
-
-    public static function getRole($id)
-    {
-        $role = (new PhpManager())->getRolesByUser($id);
-        return key($role);
-    }
-
-    public static function getUsersByRole(string $role): array
-    {
-        return (new PhpManager())->getUserIdsByRole($role);
+        return $this->hasOne(Program::className(), ['id_org' => 'id_org']);
     }
 
     public function getFaiv()

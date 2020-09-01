@@ -1,13 +1,15 @@
 <?php
+
 use app\models\ProgramObjects;
-/** @var $objs ProgramObjects[]  */
+
+/** @var $objs ProgramObjects[] */
 ?>
 
 
 <table>
     <thead>
     <tr>
-        <td colspan="9" >Статистика по бюджетам от <?=date('r')?></td>
+        <td colspan="9">Статистика по бюджетам от <?= date('r') ?></td>
     </tr>
     <tr>
         <th>№</th>
@@ -25,21 +27,21 @@ use app\models\ProgramObjects;
     </thead>
 
     <tbody>
-    <?php foreach ($objs as $i => $obj):?>
+    <?php foreach ($objs as $i => $obj): ?>
         <tr>
-            <td><?=$i+1?></td>
-            <td><?=$obj->id_org?></td>
-            <td><?=$obj->org->name?></td>
-            <td><?=$obj->id?></td>
-            <td><?=$obj->name?></td>
-            <td><?=$obj->assignment?></td>
-            <td><?=$obj->region->region?></td>
-            <td><?=$obj->city->city?></td>
-            <td><?=$obj->address?></td>
-            <td><?=$obj->id_priority?></td>
-            <td><?=$obj->program->finance_volume?></td>
+            <td><?= $i + 1 ?></td>
+            <td><?= $obj->id_org ?></td>
+            <td><?= $obj->org->name ?></td>
+            <td><?= $obj->id ?></td>
+            <td><?= $obj->name ?></td>
+            <td><?= $obj->assignment ?></td>
+            <td><?= $obj->region->region ?></td>
+            <td><?= $obj->city->city ?></td>
+            <td><?= $obj->address ?></td>
+            <td><?= $obj->id_priority ?></td>
+            <td><?= $obj->program->finance_volume ?></td>
         </tr>
-    <?php endforeach;?>
+    <?php endforeach; ?>
     </tbody>
 
 </table>

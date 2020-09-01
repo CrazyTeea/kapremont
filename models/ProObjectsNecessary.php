@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "pro_objects_necessary".
  *
@@ -34,7 +32,7 @@ class ProObjectsNecessary extends BaseMultiModel
     {
         return [
             [['id_object'], 'required'],
-            [['id_object', 'nalichie', 'kap_remont', 'system_status','element'], 'integer'],
+            [['id_object', 'nalichie', 'kap_remont', 'system_status', 'element'], 'integer'],
             [['material', 'srok_eks', 'obosnovanie'], 'string', 'max' => 255],
         ];
     }

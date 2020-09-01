@@ -13,7 +13,6 @@ use yii\db\ActiveRecord;
  * @property int $id
  * @property int $id_obj
  */
-
 class FileComment extends ActiveRecord
 {
     public static function tableName()

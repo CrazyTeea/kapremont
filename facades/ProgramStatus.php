@@ -21,12 +21,12 @@ class ProgramStatus
     public function calculateStatus() // вычисляет нужный статус
     {
 
-        if($this->isDraft()) {
+        if ($this->isDraft()) {
             $this->setStatus(Organizations::PROGRAM_STATUS_DRAFT);
-        } else if($this->isNotApproved()) {
+        } else if ($this->isNotApproved()) {
             $this->setStatus(Organizations::PROGRAM_STATUS_REJECTED);
-        } else if($this->isDep()) {
-            if($this->isDku()) {
+        } else if ($this->isDep()) {
+            if ($this->isDku()) {
                 $this->setStatus(Organizations::PROGRAM_STATUS_DKU_REVIEWED);
             } else {
                 $this->setStatus(Organizations::PROGRAM_STATUS_DEP_REVIEWED);
@@ -50,16 +50,16 @@ class ProgramStatus
         $na_dorabotku = false;
 
         $objs = ProgramObjects::find()->where(['id_org' => $this->id_org])->all();
-        foreach($objs as $obj) {
-            if($obj->astatus->id == ApproveStatus::STATUS_NOT_SEND) {
+        foreach ($objs as $obj) {
+            if ($obj->astatus->id == ApproveStatus::STATUS_NOT_SEND) {
                 $v_obr = false;
             }
-            if($obj->astatus->id == ApproveStatus::STATUS_TO_WORK) {
+            if ($obj->astatus->id == ApproveStatus::STATUS_TO_WORK) {
                 $na_dorabotku = true;
             }
         }
 
-        if($v_obr == true && $na_dorabotku == true) {
+        if ($v_obr == true && $na_dorabotku == true) {
             return true;
         }
 
@@ -69,7 +69,7 @@ class ProgramStatus
     public function isDep(): bool //согласовано дЭп (опирается на организации)
     {
         $org = Organizations::find()->where(['id' => $this->id_org])->one();
-        if($org->dep_status === 'approved') {
+        if ($org->dep_status === 'approved') {
             return true;
         }
 
@@ -79,7 +79,7 @@ class ProgramStatus
     public function isDku(): bool //согласовано дку(опирается на организации)
     {
         $org = Organizations::find()->where(['id' => $this->id_org])->one();
-        if($org->dku_status === 'approved') {
+        if ($org->dku_status === 'approved') {
             return true;
         }
 
@@ -88,7 +88,7 @@ class ProgramStatus
 
     public function isDepDku()
     {
-        if($this->isDep() && $this->isDku()) {
+        if ($this->isDep() && $this->isDku()) {
             return true;
         } else {
             return false;
@@ -100,8 +100,8 @@ class ProgramStatus
         $isNotApproved = false;
         $objs = ProgramObjects::find()->where(['id_org' => $this->id_org])->all();
 
-        foreach($objs as $obj) {
-            if(isset($obj->astatus) and $obj->astatus->id == ApproveStatus::STATUS_NOT_RECOMEND || $obj->dep_status == 'rejected') { // conditions to review
+        foreach ($objs as $obj) {
+            if (isset($obj->astatus) and $obj->astatus->id == ApproveStatus::STATUS_NOT_RECOMEND || $obj->dep_status == 'rejected') { // conditions to review
                 $isNotApproved = true;
                 break;
             }
@@ -114,7 +114,7 @@ class ProgramStatus
     {
         $query = Program::find()->where(['id_org' => $this->id_org, 'system_status' => 1])->one();
 
-        if($query->p_status == 0) {
+        if ($query->p_status == 0) {
             $isDraft = true;
         }
 

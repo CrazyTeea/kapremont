@@ -54,7 +54,7 @@ class DevelopmentProgrammeController extends AppController
 
             $program = Yii::$app->session->get('program');
             if (!$program)
-                $program = Program::findOne(['id_org'=>$id]);
+                $program = Program::findOne(['id_org' => $id]);
 
             $program->file_exist = 1;
             $program->save(false);
@@ -78,7 +78,7 @@ class DevelopmentProgrammeController extends AppController
         if (file_exists($path)) {
             $program = Yii::$app->session->get('program');
             if (!$program)
-                $program = Program::findOne(['id_org'=>$id]);
+                $program = Program::findOne(['id_org' => $id]);
 
             $program->file_exist = 0;
             $program->save(false);
@@ -106,7 +106,7 @@ class DevelopmentProgrammeController extends AppController
     public function actionDownloadDoc($id)
     {
         $path = Yii::getAlias('@webroot') . "/uploads/programDocs/$id.pdf";
-        if(file_exists($path)){
+        if (file_exists($path)) {
             return Yii::$app->response->sendFile($path)->send();
         }
 
@@ -118,24 +118,25 @@ class DevelopmentProgrammeController extends AppController
      * @throws InvalidConfigException
      * @throws MpdfException
      */
-    public function actionExport(){
+    public function actionExport()
+    {
 
         $user = Yii::$app->getSession()->get('user');
         $org = Organizations::findOne($user->id_org);
 
-        $pr_ob = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$user->id_org,'type'=>0])->orderBy(['created_at'=>SORT_ASC])->all();
-        $r_ob = ProgramObjects::find()->where(['system_status'=>1,'id_org'=>$user->id_org,'type'=>1])->orderBy(['created_at'=>SORT_ASC])->all();
-        $sq =[
-            's_k' => ProgramObjects::find()->select(['square'])->where(['system_status'=>1,'id_org'=>$org->id,])->sum('square'),
-            's_k_s' => ProgramObjects::find()->select(['square_kap'])->where(['system_status'=>1,'id_org'=>$org->id,])->sum('square_kap'),
-            's_av' => ProgramObjects::find()->select(['square_ar'])->where(['system_status'=>1,'id_org'=>$org->id,])->sum('square_av'),
-            's_atz' => ProgramObjects::find()->select(['square_ar'])->where(['system_status'=>1,'id_org'=>$org->id,])->sum('square_av'),
+        $pr_ob = ProgramObjects::find()->where(['system_status' => 1, 'id_org' => $user->id_org, 'type' => 0])->orderBy(['created_at' => SORT_ASC])->all();
+        $r_ob = ProgramObjects::find()->where(['system_status' => 1, 'id_org' => $user->id_org, 'type' => 1])->orderBy(['created_at' => SORT_ASC])->all();
+        $sq = [
+            's_k' => ProgramObjects::find()->select(['square'])->where(['system_status' => 1, 'id_org' => $org->id,])->sum('square'),
+            's_k_s' => ProgramObjects::find()->select(['square_kap'])->where(['system_status' => 1, 'id_org' => $org->id,])->sum('square_kap'),
+            's_av' => ProgramObjects::find()->select(['square_ar'])->where(['system_status' => 1, 'id_org' => $org->id,])->sum('square_av'),
+            's_atz' => ProgramObjects::find()->select(['square_ar'])->where(['system_status' => 1, 'id_org' => $org->id,])->sum('square_av'),
         ];
         $pr_cols = ProgramObjects::getTableSchema()->getColumnNames();
         $program = Yii::$app->getSession()->get('program');
         if (!$program)
             return $this->redirect(['/']);
-        $atz = Atz::findAll(['id_program'=>$program->id]);
+        $atz = Atz::findAll(['id_program' => $program->id]);
         $atzC = [];
         $bC = $vC = $bvC = 0;
         if ($atz) {
@@ -149,8 +150,7 @@ class DevelopmentProgrammeController extends AppController
                     'bvC' => $bvC
                 ];
             }
-        }
-        else{
+        } else {
             $atzC = [
                 'bC' => 0,
                 'vC' => 0,
@@ -159,25 +159,28 @@ class DevelopmentProgrammeController extends AppController
         }
 
 
-        $objects = ProgramObjects::find()->where(['system_status'=>1,'id_program'=>$program->id]);
+        $objects = ProgramObjects::find()->where(['system_status' => 1, 'id_program' => $program->id]);
 
         if ($org->id_founder !== 1)
-            $objects->andWhere(['type'=>0]);
+            $objects->andWhere(['type' => 0]);
 
-        $objects = $objects->orderBy(['created_at'=>SORT_ASC])->all();
-        $events = null;$nes = null;$wai = null;;$risks = null;
-        foreach ($objects as $index=>$item) {
-            for ($i = 0;$i<8;$i++){
-                $events[$index][$i]=ProgObjectsEvents::findOne(['id_object'=>$item->id,'step'=>$i]);
+        $objects = $objects->orderBy(['created_at' => SORT_ASC])->all();
+        $events = null;
+        $nes = null;
+        $wai = null;;
+        $risks = null;
+        foreach ($objects as $index => $item) {
+            for ($i = 0; $i < 8; $i++) {
+                $events[$index][$i] = ProgObjectsEvents::findOne(['id_object' => $item->id, 'step' => $i]);
             }
-            for ($i = 0;$i<34;$i++){
-                $nes[$index][$i]=ProObjectsNecessary::findOne(['id_object'=>$item->id,'element'=>$i]);
+            for ($i = 0; $i < 34; $i++) {
+                $nes[$index][$i] = ProObjectsNecessary::findOne(['id_object' => $item->id, 'element' => $i]);
             }
-            $wai[$index]=ProgObjectsWaites::findAll(['id_object'=>$item->id]);
-            $risks[$index]=ProgObjectsRiscs::findAll(['id_object'=>$item->id]);
+            $wai[$index] = ProgObjectsWaites::findAll(['id_object' => $item->id]);
+            $risks[$index] = ProgObjectsRiscs::findAll(['id_object' => $item->id]);
         }
 
-        $path = Yii::getAlias( '@webroot' ) . '/uploads/tempPdf/'.$org->id.'/';
+        $path = Yii::getAlias('@webroot') . '/uploads/tempPdf/' . $org->id . '/';
         if (!file_exists($path))
             FileHelper::createDirectory($path);
 
@@ -195,13 +198,13 @@ class DevelopmentProgrammeController extends AppController
         body{
         font-family: "Times New Roman", serif;
         }'
-            ,HTMLParserMode::HEADER_CSS);
-        $mpdf->WriteHTML($stylesheet,HTMLParserMode::HEADER_CSS);
-        $mpdf->WriteHTML($stylesheet2,HTMLParserMode::HEADER_CSS);
-        $mpdf->WriteHTML($this->renderPartial('_export',compact('objects','org','atz',
-            'pr_ob','r_ob','events','nes','wai','risks','sq','atzC')));
+            , HTMLParserMode::HEADER_CSS);
+        $mpdf->WriteHTML($stylesheet, HTMLParserMode::HEADER_CSS);
+        $mpdf->WriteHTML($stylesheet2, HTMLParserMode::HEADER_CSS);
+        $mpdf->WriteHTML($this->renderPartial('_export', compact('objects', 'org', 'atz',
+            'pr_ob', 'r_ob', 'events', 'nes', 'wai', 'risks', 'sq', 'atzC')));
 
-        $mpdf->Output($path.'vig.pdf',\Mpdf\Output\Destination::FILE);
+        $mpdf->Output($path . 'vig.pdf', \Mpdf\Output\Destination::FILE);
         return Yii::$app->response->sendFile("{$path}vig.pdf");
     }
 

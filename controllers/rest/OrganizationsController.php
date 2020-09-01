@@ -16,11 +16,11 @@ class OrganizationsController extends RestController
 
     public function actionByUsername()
     {
-        if ($data = Yii::$app->getRequest()->getRawBody()){
+        if ($data = Yii::$app->getRequest()->getRawBody()) {
             $data = (object)Json::decode($data);
-            $user = User::find()->where(['username'=>$data->login])->one();
+            $user = User::find()->where(['username' => $data->login])->one();
             return [
-                "org" =>$user->organization,
+                "org" => $user->organization,
             ];
         }
     }
@@ -29,19 +29,19 @@ class OrganizationsController extends RestController
     {
         $user = Yii::$app->getSession()->get('user');
         return [
-            "org" =>$user->organization,
+            "org" => $user->organization,
         ];
     }
 
     public function actionById()
     {
-        if ($data = Yii::$app->getRequest()->getRawBody()){
+        if ($data = Yii::$app->getRequest()->getRawBody()) {
             $data = (object)Json::decode($data);
             $org = Organizations::findOne($data->id);
             if ($org)
                 return [
-                    "org" =>$org,
-                    "region"=>$org->region
+                    "org" => $org,
+                    "region" => $org->region
                 ];
         }
     }

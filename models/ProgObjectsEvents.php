@@ -2,8 +2,6 @@
 
 namespace app\models;
 
-use Yii;
-
 /**
  * This is the model class for table "prog_objects_events".
  *
@@ -25,6 +23,7 @@ use Yii;
 class ProgObjectsEvents extends BaseMultiModel
 {
     public $file_name;
+
     /**
      * {@inheritdoc}
      */
@@ -33,12 +32,14 @@ class ProgObjectsEvents extends BaseMultiModel
         return 'prog_objects_events';
     }
 
-    public function getSvedenia2(){
-        return $this->hasMany(ProgramObjectsEvents2::class,['id_event'=>'id']);
+    public function getSvedenia2()
+    {
+        return $this->hasMany(ProgramObjectsEvents2::class, ['id_event' => 'id']);
     }
 
-    public function getFile(){
-        return $this->hasOne(EventsFiles::class,['id_event'=>'id']);
+    public function getFile()
+    {
+        return $this->hasOne(EventsFiles::class, ['id_event' => 'id']);
     }
 
     /**
@@ -48,13 +49,15 @@ class ProgObjectsEvents extends BaseMultiModel
     {
         return [
             [['is_nessesary', 'id_object'], 'integer'],
-            [[ 'comment', 'commentExpert','access_document','file_name'], 'string'],
-            [['date_event_start', 'date_event_end','done', 'doneExpert'], 'safe'],
+            [['comment', 'commentExpert', 'access_document', 'file_name'], 'string'],
+            [['date_event_start', 'date_event_end', 'done', 'doneExpert'], 'safe'],
             [['step', 'cost_real', 'sum_bud_fin', 'fin_vnebud_ist'], 'number'],
         ];
     }
-    public function getObject(){
-        return $this->hasOne(ProgramObjects::class,['id'=>'id_object']);
+
+    public function getObject()
+    {
+        return $this->hasOne(ProgramObjects::class, ['id' => 'id_object']);
     }
 
     /**

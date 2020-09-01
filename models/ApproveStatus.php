@@ -11,7 +11,6 @@ use yii\db\ActiveRecord;
  * @property string $status
  * @property string $label
  */
-
 class ApproveStatus extends ActiveRecord
 {
     const STATUS_NOT_SEND = 1;

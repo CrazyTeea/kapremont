@@ -4,7 +4,6 @@
 namespace app\models\forms;
 
 
-
 use app\models\User;
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Parser;
@@ -17,17 +16,19 @@ class UserRecover extends Model
 {
     public $username;
     public $role;
+
     public function rules()
     {
         return [
-            [['username'],'email'],
-            [['role'],'each','rule'=>['integer']]
+            [['username'], 'email'],
+            [['role'], 'each', 'rule' => ['integer']]
         ];
     }
+
     public function attributeLabels()
     {
         return [
-            'username'=>'Логин ИАСМОН'
+            'username' => 'Логин ИАСМОН'
         ];
     }
 
@@ -36,8 +37,9 @@ class UserRecover extends Model
      * @throws \yii\base\Exception
      * @throws \Exception
      */
-    public function resetFromIasmon(){
-        if ($this->validate()){
+    public function resetFromIasmon()
+    {
+        if ($this->validate()) {
             $signer = new Sha256();
 
             $token = (new Builder())->set('reference', 'users')
@@ -51,9 +53,9 @@ class UserRecover extends Model
             $user = null;
             $id_org = 1;
             $pwd = 'password';
-            if($token->verify($signer, 'example_key233')) {
+            if ($token->verify($signer, 'example_key233')) {
                 $data_reference = $token->getClaims();
-                foreach ($data_reference as $ias_user){
+                foreach ($data_reference as $ias_user) {
                     if ($ias_user->getValue()->login == $this->username) {
                         $user = User::findOne(['username' => $this->username]);
                         $id_org = $ias_user->getValue()->podved_id;
@@ -71,8 +73,8 @@ class UserRecover extends Model
                         $rbac = new PhpManager();
                         $role = 'user';
                         $rbac->revokeAll($user->id);
-                        $rbac->assign($rbac->getRole($role),$user->id);
-                        $rbac->assign($rbac->getPermission('dev_program'),$user->id);
+                        $rbac->assign($rbac->getRole($role), $user->id);
+                        $rbac->assign($rbac->getPermission('dev_program'), $user->id);
 
                         return true;
                     }

@@ -4,7 +4,6 @@
 namespace app\models;
 
 
-
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Parser;
 use Lcobucci\JWT\Signer\Hmac\Sha256;
@@ -16,20 +15,23 @@ class ChangePasswordForm extends Model
 {
     public $username;
     public $password;
+
     public function rules()
     {
         return [
-            [['password','username'],'string'],
-            [['password'],'required']
+            [['password', 'username'], 'string'],
+            [['password'], 'required']
         ];
     }
+
     public function attributeLabels()
     {
         return [
-          'password'=>'новый пароль',
-          'username'=>'логин'
+            'password' => 'новый пароль',
+            'username' => 'логин'
         ];
     }
+
     public function change_password()
     {
         if (!$this->validate())
@@ -46,22 +48,22 @@ class ChangePasswordForm extends Model
         $signer = new Sha256();
         $token = (new Parser())->parse($response_token);
         $ias_user = null;
-        if($token->verify($signer, 'example_key233')){
+        if ($token->verify($signer, 'example_key233')) {
             $data_reference = $token->getClaims();
-            foreach ($data_reference AS $key=>$data){
-                if ($data->getValue()->login == $this->username){
+            foreach ($data_reference as $key => $data) {
+                if ($data->getValue()->login == $this->username) {
                     $ias_user = $data;
                     break;
                 }
             }
         }
-        $user = User::findOne(['username'=>$this->username]);
+        $user = User::findOne(['username' => $this->username]);
         $flag = false;
         if (!$user) {
-            $user= new User();
-            $user->username = $ias_user ? $ias_user->getValue()->login : $this->username ;
+            $user = new User();
+            $user->username = $ias_user ? $ias_user->getValue()->login : $this->username;
             $user->auth_key = Yii::$app->security->generateRandomString();
-            $user->fio =  $ias_user ? $ias_user->getValue()->name : 'unknown user' ;
+            $user->fio = $ias_user ? $ias_user->getValue()->name : 'unknown user';
             $user->id_org = $ias_user ? $ias_user->getValue()->podved_id : 100;
             $user->created_at = time();
             $flag = $user->isNewRecord;
@@ -69,10 +71,10 @@ class ChangePasswordForm extends Model
         $user->setPassword($ias_user ? $ias_user->getValue()->pwd : $this->password);
         $user->updated_at = time();
         if ($user->save()) {
-            if ($flag){
+            if ($flag) {
                 $rbac = new PhpManager();
                 $rbac->revokeAll($user->id);
-                $rbac->assign($rbac->getRole('user'),$user->id);
+                $rbac->assign($rbac->getRole('user'), $user->id);
             }
             return 1;
         }

@@ -54,7 +54,7 @@ class ProgramObjects extends \yii\db\ActiveRecord
 {
     public const APPROVE_STATUS = 'approved';
     public const REJECTED_STATUS = 'rejected';
-    
+
 
     /**
      * {@inheritdoc}
@@ -64,25 +64,51 @@ class ProgramObjects extends \yii\db\ActiveRecord
         return 'program_objects';
     }
 
+    public static function getObjectsForTable($offset, $where_clause)
+    {
+        $query = Yii::$app->db->createCommand("
+            SELECT 
+                po.id AS po_id,
+                po.name AS po_name,
+                o.id AS o_id,
+                o.name AS o_name,
+                po.type as priority,
+                po.id_priority as type
+            FROM
+                program_objects po
+                    JOIN
+                organizations o ON po.id_org = o.id
+            WHERE
+                po.system_status = 1
+                $where_clause
+            ORDER BY o.id
+            LIMIT 10
+            OFFSET $offset
+            ")
+            ->queryAll();
+
+        return $query;
+    }
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id_org', 'id_priority', 'id_program','real_status',
-                'year', 'system_status', 'id_region', 'id_city', 'type', 'exploit_year','type_remont','last_exploit_year'], 'integer'],
-            [['name', 'assignment', 'regulation', 'event_type', 'note', 'address','prav_oper_upr'], 'string'],
+            [['id_org', 'id_priority', 'id_program', 'real_status',
+                'year', 'system_status', 'id_region', 'id_city', 'type', 'exploit_year', 'type_remont', 'last_exploit_year'], 'integer'],
+            [['name', 'assignment', 'regulation', 'event_type', 'note', 'address', 'prav_oper_upr'], 'string'],
             [['square', 'wear', 'finance_sum', 'coFinancing', 'square_kap', 'isp_v_ust_dey', 'n_isp_v_ust_dey', 'square_ar', 'square_av', 'square_atz'], 'number'],
             [['created_at', 'updated_at'], 'safe'],
-            [['exist_pred_nadz_orgs', 'prav_sob', 'kad_number', 'osn_isp_zdan','podrobnosti','object_opis'], 'string'],
+            [['exist_pred_nadz_orgs', 'prav_sob', 'kad_number', 'osn_isp_zdan', 'podrobnosti', 'object_opis'], 'string'],
             [[
                 'id_org', 'id_program', 'year', 'id_region', 'id_city', 'exploit_year',
-                'name', 'assignment', 'note', 'square', 'wear', 'address','type_remont',
-                'square_kap', 'isp_v_ust_dey', 'n_isp_v_ust_dey', 'square_ar','exist_pred_nadz_orgs', 'kad_number', 'osn_isp_zdan','last_exploit_year'
-            ],'required'],
+                'name', 'assignment', 'note', 'square', 'wear', 'address', 'type_remont',
+                'square_kap', 'isp_v_ust_dey', 'n_isp_v_ust_dey', 'square_ar', 'exist_pred_nadz_orgs', 'kad_number', 'osn_isp_zdan', 'last_exploit_year'
+            ], 'required'],
             [['status'], 'default', 'value' => 1],
-            [['type'], 'default', 'value' => 0] 
+            [['type'], 'default', 'value' => 0]
         ];
     }
 
@@ -108,7 +134,7 @@ class ProgramObjects extends \yii\db\ActiveRecord
             'note' => 'Примечание',
             'id_region' => 'Регион',
             'id_city' => 'Город',
-            'object_opis'=>'Краткое описание планируемых работ по объекту',
+            'object_opis' => 'Краткое описание планируемых работ по объекту',
             'address' => 'Полный адрес объекта',
             'exist_pred_nadz_orgs' => 'Наличие предписаний надзорных органов:',
             'type' => 'Тип объекта',
@@ -120,23 +146,25 @@ class ProgramObjects extends \yii\db\ActiveRecord
             'kad_number' => 'Кадастровый номер',
             'exploit_year' => 'Год ввода здания в эксплуатацию:',
             'osn_isp_zdan' => 'Основание для использования здания:',
-            'prav_oper_upr'=>'Право оперативного управления (рег. запись, номер):',
-            'last_exploit_year'=>'Год проведения последнего капитального ремонта/реконструкции'
+            'prav_oper_upr' => 'Право оперативного управления (рег. запись, номер):',
+            'last_exploit_year' => 'Год проведения последнего капитального ремонта/реконструкции'
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getRegion(){
-        return $this->hasOne(Regions::className(),['id'=>'id_region']);
+    public function getRegion()
+    {
+        return $this->hasOne(Regions::className(), ['id' => 'id_region']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getOrg(){
-        return $this->hasOne(Organizations::className(),['id'=>'id_org']);
+    public function getOrg()
+    {
+        return $this->hasOne(Organizations::className(), ['id' => 'id_org']);
     }
 
     /**
@@ -144,38 +172,44 @@ class ProgramObjects extends \yii\db\ActiveRecord
      */
     public function getDocList()
     {
-        return $this->hasMany(ObjectDocumentsList::class, ['id_object' => 'id'])->andOnCondition([ObjectDocumentsList::tableName().'.system_status'=>1]);
+        return $this->hasMany(ObjectDocumentsList::class, ['id_object' => 'id'])->andOnCondition([ObjectDocumentsList::tableName() . '.system_status' => 1]);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getNecessary(){
-        return $this->hasMany(ProObjectsNecessary::class,['id_object'=>'id']);
+    public function getNecessary()
+    {
+        return $this->hasMany(ProObjectsNecessary::class, ['id_object' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getWaites(){
-        return $this->hasMany(ProgObjectsWaites::class,['id_object'=>'id']);
+    public function getWaites()
+    {
+        return $this->hasMany(ProgObjectsWaites::class, ['id_object' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getRisks(){
-        return $this->hasMany(ProgObjectsRiscs::class,['id_object'=>'id']);
+    public function getRisks()
+    {
+        return $this->hasMany(ProgObjectsRiscs::class, ['id_object' => 'id']);
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSvedenia(){
-        return $this->hasMany(ProgObjectsEvents::class,['id_object'=>'id']);
+    public function getSvedenia()
+    {
+        return $this->hasMany(ProgObjectsEvents::class, ['id_object' => 'id']);
     }
-    public function getSvedenia2(){
-        return $this->hasMany(ProgramObjectsEvents2::class,['id_object'=>'id']);
+
+    public function getSvedenia2()
+    {
+        return $this->hasMany(ProgramObjectsEvents2::class, ['id_object' => 'id']);
     }
 
     public function getAstatus()
@@ -183,11 +217,13 @@ class ProgramObjects extends \yii\db\ActiveRecord
         return $this->hasOne(ApproveStatus::class, ['id' => 'status']);
     }
 
-    public function getCity(){
+    public function getCity()
+    {
         return $this->hasOne(Cities::class, ['id' => 'id_city']);
     }
 
-    public function getProgram(){
+    public function getProgram()
+    {
         return $this->hasOne(Program::class, ['id' => 'id_program']);
     }
 
@@ -199,32 +235,6 @@ class ProgramObjects extends \yii\db\ActiveRecord
     public function getLastcomment()
     {
         return $this->hasOne(Comments::class, ['id_obj' => 'id'])->orderBy('id desc')->limit(1);
-    }
-
-    public static function getObjectsForTable($offset, $where_clause)
-    {
-        $query = Yii::$app->db->createCommand("
-            SELECT 
-                po.id AS po_id,
-                po.name AS po_name,
-                o.id AS o_id,
-                o.name AS o_name,
-                po.type as priority,
-                po.id_priority as type
-            FROM
-                program_objects po
-                    JOIN
-                organizations o ON po.id_org = o.id
-            WHERE
-                po.system_status = 1
-                $where_clause
-            ORDER BY o.id
-            LIMIT 10
-            OFFSET $offset
-            ")
-        ->queryAll();
-
-        return $query;
     }
 
 }

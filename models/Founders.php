@@ -10,10 +10,10 @@ class Founders extends ActiveRecord
 {
     public function rules()
     {
-       return [
-           ['id','integer'],
-           ['name','string'],
-       ];
+        return [
+            ['id', 'integer'],
+            ['name', 'string'],
+        ];
     }
 
     public function getFaiv()

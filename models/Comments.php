@@ -2,7 +2,6 @@
 
 namespace app\models;
 
-use app\models\User;
 use yii\db\ActiveRecord;
 
 class Comments extends ActiveRecord
@@ -27,9 +26,13 @@ class Comments extends ActiveRecord
             'id_obj',
             'message',
             'id_user',
-            'username' => function($model) {return $model->user->username;},
+            'username' => function ($model) {
+                return $model->user->username;
+            },
             'created_at',
-            'user_role' => function($model){return User::getRole($model->id_user);}
+            'user_role' => function ($model) {
+                return User::getRole($model->id_user);
+            }
         ];
     }
 

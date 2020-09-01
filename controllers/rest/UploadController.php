@@ -16,7 +16,7 @@ class UploadController extends Controller
     {
         $upload = new UploadForm();
         $upload->file = UploadedFile::getInstanceByName('file');
-        if($file_id = $this->saveFileComment($upload, $id_obj, $id_comment)) {
+        if ($file_id = $this->saveFileComment($upload, $id_obj, $id_comment)) {
             $path = 'uploads/comments/' . $id_obj . '_' . $file_id;
             if (!file_exists($path))
                 FileHelper::createDirectory($path);
@@ -34,7 +34,7 @@ class UploadController extends Controller
         $fileComment->id_comment = $id_comment;
         $fileComment->file_name = $upload->file->basename;
         $fileComment->file_ext = $upload->file->extension;
-        if($fileComment->save()) {
+        if ($fileComment->save()) {
             return $fileComment->id;
         } else {
             return false;
@@ -44,7 +44,7 @@ class UploadController extends Controller
     public function actionDownload($name)
     {
         $fileName = Yii::$app->request->get('fileName');
-        $path= "uploads/comments/$name/$fileName";
+        $path = "uploads/comments/$name/$fileName";
         if (file_exists($path))
             return Yii::$app->response->sendFile($path)->send();
         return 'файла не существует';
@@ -65,14 +65,14 @@ class UploadController extends Controller
             $fileComment->id_comment = $id_comment;
             $fileComment->file_name = $upload->file->basename;
             $fileComment->file_ext = $upload->file->extension;
-            if($fileComment->save()) {
+            if ($fileComment->save()) {
                 return $fileComment->id;
             } else {
                 return false;
             }
         };
 
-        if($file_id = $saveFileComment()) {
+        if ($file_id = $saveFileComment()) {
             $path = 'uploads/comments/atz/' . $id_atz . '_' . $file_id;
             if (!file_exists($path))
                 FileHelper::createDirectory($path);

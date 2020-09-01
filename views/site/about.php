@@ -21,21 +21,21 @@ $this->params['breadcrumbs'][] = $this->title;
     <!--
     ..
     <h5>Инструкция</h5>
-    <?= Html::a('Инструкция',Yii::getAlias('@web').'/downloads/manual.pdf')?>
+    <?= Html::a('Инструкция', Yii::getAlias('@web') . '/downloads/manual.pdf') ?>
     <br>
-    <?= Html::a('Заявление на замену денежной компенсацией части отпуска',Yii::getAlias('@web').'/downloads/Заявление на замену денежной компенсацией части отпуска.docx')?>
+    <?= Html::a('Заявление на замену денежной компенсацией части отпуска', Yii::getAlias('@web') . '/downloads/Заявление на замену денежной компенсацией части отпуска.docx') ?>
     <br>
-    <?= Html::a('Заявление на командировку',Yii::getAlias('@web').'/downloads/Заявление на командировку.docx')?>
+    <?= Html::a('Заявление на командировку', Yii::getAlias('@web') . '/downloads/Заявление на командировку.docx') ?>
     <br>
-    <?= Html::a('Заявление на отпуск',Yii::getAlias('@web').'/downloads/Заявление на отпуск.docx')?>
+    <?= Html::a('Заявление на отпуск', Yii::getAlias('@web') . '/downloads/Заявление на отпуск.docx') ?>
     <br>
-    <?= Html::a('Уведомление о командировке (РФ)',Yii::getAlias('@web').'/downloads/Уведомление о командировке (РФ).docx')?>
-    <br>
-    <br>
-    <?= Html::a('Характеристика образец бланка',Yii::getAlias('@web').'/downloads/Харктеристика образец бланка.doc')?>
+    <?= Html::a('Уведомление о командировке (РФ)', Yii::getAlias('@web') . '/downloads/Уведомление о командировке (РФ).docx') ?>
     <br>
     <br>
-    <?= Html::a('Характеристика образец заполнения',Yii::getAlias('@web').'/downloads/Харктеристика образец заполнения.doc')?>
+    <?= Html::a('Характеристика образец бланка', Yii::getAlias('@web') . '/downloads/Харктеристика образец бланка.doc') ?>
+    <br>
+    <br>
+    <?= Html::a('Характеристика образец заполнения', Yii::getAlias('@web') . '/downloads/Харктеристика образец заполнения.doc') ?>
     <br>
     -->
 </div>

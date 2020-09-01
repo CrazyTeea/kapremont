@@ -4,6 +4,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Программа модерни�
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <script>
-    window.canChange = <?=\yii\helpers\Json::encode($canChange)?> ;
+    window.canChange = <?=\yii\helpers\Json::encode($canChange)?>;
 </script>
 <div id="app"></div>

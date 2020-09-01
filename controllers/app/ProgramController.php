@@ -21,65 +21,68 @@ use yii\helpers\Json;
 
 class ProgramController extends AppController
 {
-    public function actionIndex(){
+    public function actionIndex()
+    {
         $user = User::findOne(Yii::$app->user->id);
         if (Yii::$app->user->can('root') or
             Yii::$app->user->can('mgsu') or
             Yii::$app->user->can('orglist_view') or
             Yii::$app->user->can('faiv_admin') or
             Yii::$app->user->can('dep') or
-            Yii::$app->user->can('dku')){
+            Yii::$app->user->can('dku')) {
             return $this->redirect(['/organization/list']);
         }
         return $this->render('index');
     }
 
-    private function addRow(Table $table,$val) {
+    private function addRow(Table $table, $val)
+    {
         $table->addRow(25);
-        $table->addCell(25)->addText($val->step+1);
-        $table->addCell(25)->addText(htmlspecialchars($val->step_name ?? '') );
-        $table->addCell(25)->addText(htmlspecialchars($val->date_event_end ? Yii::$app->formatter->asDate($val->date_event_start,'php: d F Y') : null));
-        $table->addCell(25)->addText(htmlspecialchars($val->date_event_end ? Yii::$app->formatter->asDate($val->date_event_end,'php: d F Y'): null ));
+        $table->addCell(25)->addText($val->step + 1);
+        $table->addCell(25)->addText(htmlspecialchars($val->step_name ?? ''));
+        $table->addCell(25)->addText(htmlspecialchars($val->date_event_end ? Yii::$app->formatter->asDate($val->date_event_start, 'php: d F Y') : null));
+        $table->addCell(25)->addText(htmlspecialchars($val->date_event_end ? Yii::$app->formatter->asDate($val->date_event_end, 'php: d F Y') : null));
         $table->addCell(25)->addText(htmlspecialchars($val->cost_real));
         $table->addCell(25)->addText(htmlspecialchars($val->sum_bud_fin));
         $table->addCell(25)->addText(htmlspecialchars($val->fin_vnebud_ist));
         $table->addCell(25)->addText($val->done ? '+' : '-');
-        $table->addCell(25)->addText(htmlspecialchars($val->access_document ).' '.htmlspecialchars( $S= $val->file ? $val->file->file_name : null));
+        $table->addCell(25)->addText(htmlspecialchars($val->access_document) . ' ' . htmlspecialchars($S = $val->file ? $val->file->file_name : null));
         $table->addCell(25)->addText(htmlspecialchars($val->comment));
         $table->addCell(25)->addText($val->doneExpert ? '+' : '-');
         $table->addCell(25)->addText(htmlspecialchars($val->commentExpert));
     }
 
 
-    public function actionExportPlan(){
-        $get = array_filter(Yii::$app->request->get(),function ($val){
+    public function actionExportPlan()
+    {
+        $get = array_filter(Yii::$app->request->get(), function ($val) {
             if ($val !== 'null' or !$val)
                 return $val;
         });
-        $query = ProgramObjects::find()->joinWith(['region','org'])->where(['program_objects.system_status'=>1]);
-        if (ArrayHelper::keyExists('id',$get)){
-            $query->andWhere(['id'=>$get['id']]);
+        $query = ProgramObjects::find()->joinWith(['region', 'org'])->where(['program_objects.system_status' => 1]);
+        if (ArrayHelper::keyExists('id', $get)) {
+            $query->andWhere(['id' => $get['id']]);
         }
-        if (ArrayHelper::keyExists('region',$get)){
-            $query->andWhere(['like','regions.region',$get['region']]);
+        if (ArrayHelper::keyExists('region', $get)) {
+            $query->andWhere(['like', 'regions.region', $get['region']]);
         }
-        if (ArrayHelper::keyExists('name',$get)){
-            $query->andWhere(['like','organizations.name',$get['name']]);
+        if (ArrayHelper::keyExists('name', $get)) {
+            $query->andWhere(['like', 'organizations.name', $get['name']]);
         }
 
         $phpWord = new PhpWord();
         $phpWord->setDefaultFontName('Times New Roman');
         $phpWord->setDefaultFontSize(12);
-        $section = $phpWord->addSection(['orientation'=>'landscape']);
+        $section = $phpWord->addSection(['orientation' => 'landscape']);
 
 
         foreach ($query->all() as $object) {
-             $section->addText($object->name);
-            if ($object->svedenia){
+            $section->addText($object->name);
+            if ($object->svedenia) {
                 $kek = $section->addTable([
                     'borderSize' => 1,
                     'borderColor' => '999999',
-                    'cellMargin'=>50
+                    'cellMargin' => 50
                 ]);
                 $kek->addRow(25);
                 $kek->addCell(25)->addText('#');
@@ -95,14 +98,14 @@ class ProgramController extends AppController
                 $kek->addCell(25)->addText('Эксперт МОН +/-');
                 $kek->addCell(25)->addText('Комментарий эксперта МОН )');
                 foreach ($object->svedenia as $sv) {
-                    $this->addRow($kek,$sv);
+                    $this->addRow($kek, $sv);
                     foreach (ProgramObjectsEvents2::find()
-                                 ->where(['id_object'=>$object->id])
-                                 ->andWhere(['>','step',$sv->step])
-                                 ->andWhere(['<','step',$sv->step+1])
-                                ->orderBy('step ASC')
+                                 ->where(['id_object' => $object->id])
+                                 ->andWhere(['>', 'step', $sv->step])
+                                 ->andWhere(['<', 'step', $sv->step + 1])
+                                 ->orderBy('step ASC')
                                  ->all() as $sv2) {
-                        $this->addRow($kek,$sv2);
+                        $this->addRow($kek, $sv2);
                     }
 
                 }
@@ -111,7 +114,7 @@ class ProgramController extends AppController
         }
 
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
-        $path = Yii::getAlias('@webroot').'/uploads/helloWorld.docx';
+        $path = Yii::getAlias('@webroot') . '/uploads/helloWorld.docx';
         $objWriter->save($path);
         Yii::$app->response->sendFile($path)->send();
         unlink($path);
@@ -119,13 +122,13 @@ class ProgramController extends AppController
     }
 
 
-    public function actionIsApprove($id_org = 0){
+    public function actionIsApprove($id_org = 0)
+    {
 
-        $id = $id_org ? : Yii::$app->session->get('user')->id_org;
+        $id = $id_org ?: Yii::$app->session->get('user')->id_org;
 
 
-
-        $gg = Program::find()->where(['id_org'=>$id])->one();
+        $gg = Program::find()->where(['id_org' => $id])->one();
 
         // $gg = ArrayHelper::merge($gg,['organization'=>$gg->org->name]);
 
@@ -133,18 +136,19 @@ class ProgramController extends AppController
         return Json::encode($gg);
     }
 
-    public function actionExport($type){
-        $objs = Program::findAll(['system_status'=>1]);
+    public function actionExport($type)
+    {
+        $objs = Program::findAll(['system_status' => 1]);
         $param = 'export';
-        if ($type==2)
+        if ($type == 2)
             $param = 'export2';
 
-        $html = $this->renderPartial("_$param",compact('objs'));
+        $html = $this->renderPartial("_$param", compact('objs'));
         $reader = new HTML();
         $spreadsheet = $reader->loadFromString($html);
-        $writer = IOFactory::createWriter($spreadsheet,'Xls');
+        $writer = IOFactory::createWriter($spreadsheet, 'Xls');
 
-        $path = Yii::getAlias( '@webroot' ) . "/uploads/$param";
+        $path = Yii::getAlias('@webroot') . "/uploads/$param";
         if (!file_exists($path))
             FileHelper::createDirectory($path);
         $writer->save("$path/$param.xls");
@@ -153,8 +157,9 @@ class ProgramController extends AppController
             unlink("$path/$param.xls");
     }
 
-    public function actionDkuExport(){
-        $objects = ProgramObjects::find()->where(['system_status'=>1])->groupBy(['id_org'])->all();
+    public function actionDkuExport()
+    {
+        $objects = ProgramObjects::find()->where(['system_status' => 1])->groupBy(['id_org'])->all();
         $sum = 0;
         $export = [];
 
@@ -172,26 +177,26 @@ class ProgramController extends AppController
         ];
 
 
-        foreach ($objects as $object){
+        foreach ($objects as $object) {
             $export[] = [
-                'id_org'=>$object->id_org,
-                'region'=>$object->region->region,
-                'org'=>$object->org->name,
-                'sum'=>$object->program->finance_volume*1000,
+                'id_org' => $object->id_org,
+                'region' => $object->region->region,
+                'org' => $object->org->name,
+                'sum' => $object->program->finance_volume * 1000,
                 'dep_status' => $dep_status[$object->org->dep_status],
-                'atz_nb'=>$object->program->finance_events*1000,
-                'atz'=>0,
-                'atz_bud_fin'=>$object->program->dku_atz,
-                'dku_status'=> $dku_status[$object->org->dku_status]
+                'atz_nb' => $object->program->finance_events * 1000,
+                'atz' => 0,
+                'atz_bud_fin' => $object->program->dku_atz,
+                'dku_status' => $dku_status[$object->org->dku_status]
             ];
         }
 
-        $html = $this->renderPartial('_dkuExport',['export'=>$export]);
+        $html = $this->renderPartial('_dkuExport', ['export' => $export]);
         $reader = new HTML();
         $spreadsheet = $reader->loadFromString($html);
-        $writer = IOFactory::createWriter($spreadsheet,'Xls');
+        $writer = IOFactory::createWriter($spreadsheet, 'Xls');
 
-        $path = Yii::getAlias( '@webroot' ) . "/uploads/dkuExport";
+        $path = Yii::getAlias('@webroot') . "/uploads/dkuExport";
         if (!file_exists($path))
             FileHelper::createDirectory($path);
         $writer->save("$path/dkuExport.xls");
@@ -199,23 +204,28 @@ class ProgramController extends AppController
         if (file_exists("$path/dkuExport.xls"))
             unlink("$path/dkuExport.xls");
     }
-    public function actionDownloadEvent($id_event){
+
+    public function actionDownloadEvent($id_event)
+    {
         return EventsFiles::download($id_event);
     }
-    public function actionSetValue($id_org){
-        $model = Program::findOne(['id_org'=>$id_org]);
+
+    public function actionSetValue($id_org)
+    {
+        $model = Program::findOne(['id_org' => $id_org]);
         if (!$model)
             $model = new Program();
-        if ($model){
+        if ($model) {
             $model[Yii::$app->request->post('value')] = Yii::$app->request->post(Yii::$app->request->post('value'));
             return Json::encode([
-                'success'=>$model->save(),
-                'errors'=>$model->getErrors()
+                'success' => $model->save(),
+                'errors' => $model->getErrors()
             ]);
         }
     }
 
-    public function actionApprove(){
+    public function actionApprove()
+    {
         if (Yii::$app->request->isPost) {
             $program = Yii::$app->session->get('program');
             $errrMsg = 'Что то пошло не так, звоните фиксикам';
@@ -226,8 +236,8 @@ class ProgramController extends AppController
             if ($program->file_exist) {
                 Yii::$app->db->createCommand("UPDATE program set p_status = 1 where id_org = {$id_org} ")->execute();
                 $status = new ProgramStatus($program->id_org);
-                $objs=ProgramObjects::findAll(['id_org'=>$id_org]);
-                foreach ($objs as $item){
+                $objs = ProgramObjects::findAll(['id_org' => $id_org]);
+                foreach ($objs as $item) {
                     $item->status = 1;
                     $item->save(false);
                 }
@@ -235,7 +245,7 @@ class ProgramController extends AppController
                 $status = true;
             } else  $errrMsg = 'Файл должен быть загружен';
             $program = Program::findOne(['id_org' => Yii::$app->session->get('user')->id_org]);
-            return Json::encode(['programStatus'=>$program->p_status,'status' => $status, 'msg' => $errrMsg]);
+            return Json::encode(['programStatus' => $program->p_status, 'status' => $status, 'msg' => $errrMsg]);
         }
 
         /*$objects = ProgramObjects::findAll(['system_status'=>1,'id_org'=>$program->id_org]);

@@ -2,7 +2,7 @@
   <div class="main-wrapper-upload-files">
     <div class="table-wrapper">
       <div class="file-wrapper" v-for="(file, index) in files" :key="`file_input_atz_${index}`">
-        <file-input v-model="file.value" :index="index" />
+        <file-input v-model="file.value" :index="index"/>
       </div>
 
       <b-button variant="info" @click="addDockRow">Добавить</b-button>
@@ -11,7 +11,7 @@
       <b-button variant="success" @click="saveFile">Сохранить</b-button>
 
 
-<!--      <b-button @click="debug">debug</b-button>-->
+      <!--      <b-button @click="debug">debug</b-button>-->
     </div>
     <div class="arhivated-docs">
 
@@ -21,7 +21,7 @@
 
 <script>
 import Axios from 'axios';
-import { BButton } from "bootstrap-vue";
+import {BButton} from "bootstrap-vue";
 import FileInputComponent from "./FileInputComponent";
 
 export default {
@@ -45,7 +45,7 @@ export default {
       this.files.pop();
     },
     addDockRow() {
-      this.files.push({value:{}})
+      this.files.push({value: {}})
     },
     save() {
 

@@ -11,12 +11,13 @@ use yii\helpers\Json;
 
 class ProgramController extends RestController
 {
-    public function actionGetByIdOrg(){
-        if ($data = Yii::$app->getRequest()->getRawBody()){
+    public function actionGetByIdOrg()
+    {
+        if ($data = Yii::$app->getRequest()->getRawBody()) {
             $data = (object)Json::decode($data);
-            $program = Program::findOne(['system_status'=>1,'id_org'=>$data->id_org]);
+            $program = Program::findOne(['system_status' => 1, 'id_org' => $data->id_org]);
             return [
-                "program" =>$program,
+                "program" => $program,
             ];
         }
     }
