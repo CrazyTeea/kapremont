@@ -14,13 +14,16 @@
     <b-card no-body>
       <b-card-header header-tag="header" class="p-1" role="tab">
         <span> <b-icon icon="bookmark-fill" scale="1.5" class="mr-2 ml-1"></b-icon>Подробная информация</span>
+
       </b-card-header>
       <b-card-body>
         <b-table-simple bordered small>
           <b-thead>
             <b-tr>
               <b-th>{{ organization ? organization.id : '' }}</b-th>
-              <b-th>{{ organization ? organization.name : '' }}</b-th>
+              <b-th>{{ organization ? organization.name : '' }}
+                <b-button v-can:root @click="open" size="sm" variant="outline-success">Открыть редактирование</b-button>
+              </b-th>
               <b-th v-if="organization">
                 <a style="display: block" v-if="organization.file" :href="`/program/download-doc/${organization.id}`">
                   <b-icon size="lg" icon="file-earmark-arrow-down" variant="success"/>
@@ -281,6 +284,7 @@
 import Axios from "axios";
 import {
   BBreadcrumb,
+  BButton,
   BCard,
   BCardBody,
   BCardHeader,
@@ -301,6 +305,7 @@ export default {
     BCardHeader,
     BCardBody,
     BTableSimple,
+    BButton,
     BThead,
     BTr,
     BTh,
@@ -327,6 +332,7 @@ export default {
     };
   },
   async mounted() {
+    console.log(this.$route.params)
     this.org_id = this.$route.params.id;
     await this.getCurentOrg();
   },
@@ -339,6 +345,19 @@ export default {
     }
   },
   methods: {
+    async open() {
+      let data = new FormData();
+      data.append('value', 'p_status');
+      data.append('p_status', '0');
+      await Axios.post(`/program/set-value/${this.org_id}`, data, {
+        headers: {
+          "X-CSRF-Token": this.csrf
+        }
+      }).then(res => {
+        if (res.data.success)
+          this.getCurentOrg()
+      })
+    },
     checkFOIV() {
       return !(this.permission === 'faiv_admin' || this.permission === 'faiv_user');
     },

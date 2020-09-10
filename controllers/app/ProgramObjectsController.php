@@ -11,21 +11,20 @@ use app\models\ProgObjectsEvents;
 use app\models\ProgObjectsRiscs;
 use app\models\ProgObjectsWaites;
 use app\models\Program;
+use app\models\ProgramObjects;
 use app\models\ProgramObjectsEvents2;
 use app\models\ProObjectsNecessary;
 use app\models\User;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use PhpOffice\PhpSpreadsheet\Reader\Html;
 use Yii;
-use app\models\ProgramObjects;
+use yii\filters\VerbFilter;
 use yii\helpers\ArrayHelper;
 use yii\helpers\FileHelper;
 use yii\helpers\Json;
 use yii\web\NotFoundHttpException;
-use yii\filters\VerbFilter;
 use yii\web\UploadedFile;
 use ZipArchive;
-use function Matrix\trace;
 
 /**
  * ProgramObjectsController implements the CRUD actions for ProgramObjects model.
@@ -103,6 +102,9 @@ class ProgramObjectsController extends AppController
                 'errors' => $model->getErrors()
             ]);
         }
+        return Json::encode([
+            'success' => false,
+        ]);
     }
 
     /**

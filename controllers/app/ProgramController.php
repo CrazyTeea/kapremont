@@ -212,16 +212,14 @@ class ProgramController extends AppController
 
     public function actionSetValue($id_org)
     {
-        $model = Program::findOne(['id_org' => $id_org]);
-        if (!$model)
-            $model = new Program();
-        if ($model) {
-            $model[Yii::$app->request->post('value')] = Yii::$app->request->post(Yii::$app->request->post('value'));
-            return Json::encode([
-                'success' => $model->save(),
-                'errors' => $model->getErrors()
-            ]);
-        }
+        $model = Program::findOne(['id_org' => $id_org]) ?? new Program();
+
+        $model[Yii::$app->request->post('value')] = Yii::$app->request->post(Yii::$app->request->post('value'));
+        return Json::encode([
+            'success' => $model->save(),
+            'errors' => $model->getErrors()
+        ]);
+
     }
 
     public function actionApprove()
