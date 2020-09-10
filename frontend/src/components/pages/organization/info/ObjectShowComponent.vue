@@ -32,8 +32,14 @@
     <div>
       <a v-if="canChange" :href="`/program/object/update/${this.items.id}`" class="btn btn-primary">Редактировать </a>
       <b-button v-can:root @click="tableToExel()">Export</b-button>
-      <a v-if="this.real" :href="`/program/object/set-real/${this.items.id}`" class="btn btn-success">Приступить к
-        реализации </a>
+      <a
+          v-if="this.real"
+          :href="`/program/object/set-real/${this.items.id}`"
+          class="btn btn-success">
+        Приступить к реализации
+      </a>
+      <b-button v-can:root @click="open" variant="outline-success" >Поменять тип</b-button>
+
     </div>
 
     <div v-if="this.items.status == 5">
@@ -203,6 +209,14 @@
           </b-th>
           <b-th class="normal-font-weight-for-sell center-text-in-cell">
             <label>{{ this.items.name }}</label>
+          </b-th>
+        </b-tr>
+        <b-tr>
+          <b-th class="center-text-in-cell">
+            <label>Тип</label>
+          </b-th>
+          <b-th class="normal-font-weight-for-sell center-text-in-cell">
+            <label>{{ this.items.type ? 'Резервный' : 'Не резервный'}}</label>
           </b-th>
         </b-tr>
         <b-tr>
@@ -648,7 +662,9 @@
                   <b-td style="max-width: 50px" v-if="!(item.hasOwnProperty('button') && item.button)">
                     <!-- <label @click="debugItem(item, svedenia2[index], index)"> Debug item {{index}} </label> -->
                     <div class="text-center">
-                      {{ item.step > 7 ? 'Загрузить файл (не более 20 МБ) формата word, pdf, zip или rar c фотографиями выполненных работ.' : item.help }}
+                      {{
+                        item.step > 7 ? 'Загрузить файл (не более 20 МБ) формата word, pdf, zip или rar c фотографиями выполненных работ.' : item.help
+                      }}
                     </div>
                     <b-form-input
                         v-can:user,root,faiv_user
@@ -1617,6 +1633,19 @@ export default {
     this.canChange = window.Permission === 'root' | window.canChange || false;
   },
   methods: {
+    async open() {
+      let data = new FormData();
+      data.append('value', 'type');
+      data.append('type', this.items.type ? '0' : '1');
+      await Axios.post(`/program/object/set-value/${this.$route.params.id}`, data, {
+        headers: {
+          "X-CSRF-Token": this.csrf
+        }
+      }).then(res => {
+        if (res.data.success)
+          this.getObject()
+      })
+    },
     tableToExel() {
       var tableToExcel = (function () {
         var uri = 'data:application/vnd.ms-excel;base64,'
