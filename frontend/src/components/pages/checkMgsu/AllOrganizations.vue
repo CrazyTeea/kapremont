@@ -289,6 +289,7 @@ export default {
     return {
       bannerInfo: [],
       selected: null,
+      offset:0,
       filters: {
         state: null,
         id: null,
@@ -423,10 +424,10 @@ export default {
     isUserDku() {
       return window.Permission === "dku";
     },
-    getTable(offset = 0) {
+    getTable() {
       let form = new FormData();
       form.append("form", JSON.stringify(this.filters));
-      Axios.post(`/api/mgsu/main-table/${offset}`, form, {
+      Axios.post(`/api/mgsu/main-table/${this.offset}`, form, {
         headers: {
           "X-CSRF-Token": this.csrf
         }
@@ -439,11 +440,15 @@ export default {
         this.totalRows = res.data.count.quantity;
       });
     },
-    setDkuAtz(item) {
+    async setDkuAtz(item) {
+      let ask = confirm('Вы уверены?');
+      if (!ask)
+        await this.getTable();
+        return false;
       let form = new FormData();
-      item.dku_atz = Number(item.dku_atz).toLocaleString();
+     // item.dku_atz = Number(item.dku_atz).toLocaleString();
       form.append('dku_atz', item.dku_atz.replace(/\s/g, '').replace(',', '.'))
-      Axios.post(`/api/set-status/dku/${item.id}`, form, {
+      await Axios.post(`/api/set-status/dku/${item.id}`, form, {
         headers: {
           "X-CSRF-Token": this.csrf
         }
@@ -501,8 +506,8 @@ export default {
   },
   watch: {
     currentPage() {
-      let offset = (parseInt(this.currentPage) - 1) * 10;
-      this.getTable(offset);
+      this.offset = (parseInt(this.currentPage) - 1) * 10;
+      this.getTable();
     },
     filters: {
       handler() {
