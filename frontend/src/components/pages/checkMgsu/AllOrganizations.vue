@@ -91,6 +91,7 @@
               мероприятий по АТЗ (Рублей)
             </b-th>
             <b-th v-can:dku,dku_user>Дополнительная информация</b-th>
+            <b-th>Инн</b-th>
             <b-th v-can:dku,dku_user>Документ</b-th>
           </b-tr>
         </b-thead>
@@ -186,6 +187,9 @@
                   @change="setDkuComment(item)"
                   v-model="item.dku_comment"
               ></b-form-textarea>
+            </b-th>
+            <b-th>
+              {{item.inn}}
             </b-th>
             <b-th v-can:dku,dku_user class="normal-font-weight-for-sell center-text-in-cell">
               <div class="fileInput">

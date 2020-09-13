@@ -50,12 +50,12 @@ class Organizations extends \yii\db\ActiveRecord
         $query = Yii::$app->db
             ->createCommand("
                 SELECT 
-                    res.id, res.name,res.dku_comment, res.region,res.is_new,res.id_founder,
+                    res.id, res.name,res.dku_comment, res.region,res.is_new,res.id_founder,inn,
                      res.quantity, res.dep_status, res.dku_status, pr.file_exist, pr.p_status,pr.dku_atz,pr.status907,res.dku_doc
                 FROM
                     (SELECT 
                         org.id, org.name, COUNT(po.id_org) AS quantity, reg.region, org.dep_status, org.dku_status, 
-                        org.dku_comment,dd.file_name dku_doc, org.is_new,org.id_founder
+                        org.dku_comment,dd.file_name dku_doc, org.is_new,org.id_founder,inn
                     FROM
                         organizations AS org
                     JOIN regions AS reg ON org.id_region = reg.id
