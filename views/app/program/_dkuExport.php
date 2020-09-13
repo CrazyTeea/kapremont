@@ -13,6 +13,7 @@
         <th>объем на АТЗ не более</th>
         <th>АТЗ по программе</th>
         <th>Согласованный объем АТЗ</th>
+        <th>Инн</th>
         <th>Статус ДКУ</th>
     </tr>
     </thead>
@@ -27,6 +28,7 @@
             <td><?= $item['atz_nb'] ?></td>
             <td><?= $item['atz'] ?></td>
             <td><?= $item['atz_bud_fin'] ?></td>
+            <td><?= $item['inn'] ?></td>
             <td><?= $item['dku_status'] ?></td>
         </tr>
     <?php endforeach; ?>

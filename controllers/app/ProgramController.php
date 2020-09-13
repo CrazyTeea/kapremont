@@ -187,6 +187,7 @@ class ProgramController extends AppController
                 'atz_nb' => $object->program->finance_events * 1000,
                 'atz' => 0,
                 'atz_bud_fin' => $object->program->dku_atz,
+                'inn'=>$object->org->inn,
                 'dku_status' => $dku_status[$object->org->dku_status]
             ];
         }
