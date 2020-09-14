@@ -74,7 +74,7 @@
       </div>
     </div>
 
-    <div class="table-overflow-hidden mt-1">
+    <div class="table-overflow-hidden transform mt-1">
       <b-table-simple style="font-size: 12px" bordered hover>
         <b-thead>
           <b-tr>
@@ -543,6 +543,16 @@ export default {
 .table-overflow-hidden {
   overflow: hidden !important;
   overflow-x: scroll !important;
+}
+.transform{
+  transition: all 1s ease;
+  width: 100%;
+}
+.transform:hover {
+  transition: all 1s ease;
+  margin-left: -10% !important;
+  width: 120%;
+
 }
 
 .normal-font-weight-for-sell {
