@@ -98,7 +98,7 @@ class ProgramObjectsController extends AppController
             if (Yii::$app->request->post('value') == 'status')
                 new ProgramStatus($model->id_org);
             return Json::encode([
-                'success' => $model->save(),
+                'success' => $model->save(false),
                 'errors' => $model->getErrors()
             ]);
         }
