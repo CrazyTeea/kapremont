@@ -75,7 +75,7 @@
     </div>
 
     <div class="table-overflow-hidden transform mt-1">
-      <b-table-simple style="font-size: 12px" bordered hover>
+      <b-table-simple bordered hover>
         <b-thead>
           <b-tr>
             <b-th v-if="filters.id">№</b-th>
@@ -432,7 +432,6 @@ export default {
           "X-CSRF-Token": this.csrf
         }
       }).then(res => {
-        console.log(res.data.rows)
         this.items = res.data.rows;
         this.items.forEach(item => {
           item.dku_atz = item.dku_atz ? Number(item.dku_atz).toLocaleString() : null;
@@ -545,14 +544,12 @@ export default {
   overflow-x: scroll !important;
 }
 .transform{
-  transition: all 1s ease;
-  width: 100%;
+
+  transition: all 2s ease;
 }
 .transform:hover {
-  transition: all 1s ease;
-  margin-left: -10% !important;
-  width: 120%;
-
+  font-size: 8px !important;
+  transition: all 2s ease;
 }
 
 .normal-font-weight-for-sell {

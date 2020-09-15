@@ -151,6 +151,10 @@ class ProgramObjects extends \yii\db\ActiveRecord
         ];
     }
 
+    public function getDd(){
+        return $this->hasOne(DkuDocs::class,['id_org'=>'id_org']);
+    }
+
     /**
      * @return \yii\db\ActiveQuery
      */
