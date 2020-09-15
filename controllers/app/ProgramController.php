@@ -188,6 +188,7 @@ class ProgramController extends AppController
                 'atz' => 0,
                 'atz_bud_fin' => $object->program->dku_atz,
                 'inn'=>$object->org->inn,
+                'file_name'=>$object->dd ? $object->dd->file_name : '',
                 'dku_status' => $dku_status[$object->org->dku_status]
             ];
         }
