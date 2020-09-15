@@ -548,7 +548,7 @@ export default {
   transition: all 2s ease;
 }
 .transform:hover {
-  font-size: 8px !important;
+  font-size: .335vw !important;
   transition: all 2s ease;
 }
 
