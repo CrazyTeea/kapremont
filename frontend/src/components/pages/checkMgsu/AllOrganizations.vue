@@ -446,9 +446,11 @@
             },
             setDkuAtz: async function (item) {
                 let ask = confirm('Вы уверены?');
-                if (!ask)
-                    await this.getTable();
-                return false;
+                if (!ask) {
+                  await this.getTable();
+                  return false;
+                }
+
                 let form = new FormData();
                 // item.dku_atz = Number(item.dku_atz).toLocaleString();
                 form.append('dku_atz', item.dku_atz.replace(/\s/g, '').replace(',', '.'))
