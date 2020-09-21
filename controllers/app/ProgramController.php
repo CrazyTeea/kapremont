@@ -6,6 +6,7 @@ namespace app\controllers\app;
 
 use app\facades\ProgramStatus;
 use app\models\EventsFiles;
+use app\models\Founders;
 use app\models\Program;
 use app\models\ProgramObjects;
 use app\models\ProgramObjectsEvents2;
@@ -189,6 +190,8 @@ class ProgramController extends AppController
                 'atz_bud_fin' => $object->program->dku_atz,
                 'inn'=>$object->org->inn,
                 'file_name'=>$object->dd ? $object->dd->file_name : '',
+                'foiv'=>Founders::findOne($object->org->id)->name ?? '',
+                'type'=>$object->org->id_type,
                 'dku_status' => $dku_status[$object->org->dku_status]
             ];
         }
