@@ -4,6 +4,7 @@ namespace app\controllers;
 
 use app\models\ChangePasswordForm;
 use app\models\forms\UserRecover;
+use app\models\Founders;
 use app\models\Organizations;
 use app\models\Program;
 use app\models\ProgramObjects;
@@ -164,8 +165,38 @@ class SiteController extends Controller
         ]);
     }
 
+    public function Founders(){
+        echo "Выполняется синхронизация фаундеров\n";
+        $signer = new Sha256();
+        $key = new Key('example_key233');
+
+        $token = (new Builder())->withClaim('reference', 'organization_founder')
+            ->getToken($signer, $key);
+        $response_token = file_get_contents("http://api.xn--80apneeq.xn--p1ai/api.php?option=reference_api&action=get_reference&module=constructor&reference_token=$token");
+
+        $signer = new Sha256();
+        $token = (new Parser())->parse($response_token);
+        if ($token->verify($signer, 'example_key233')) {
+
+            $data_reference = $token->getClaims();
+
+            foreach ($data_reference as $key => $data) {
+                $founder = Founders::findOne($data->getValue()->id) ?? new Founders();
+                $founder->id = $data->getValue()->id;
+                $founder->name = $data->getValue()->name;
+                if (!$founder->save()) {
+                    print_r($founder->getErrors());
+                }
+            }
+        }
+
+    }
+
     public function actionP()
     {
+
+        $this->Founders();
+
         echo "Выполняется синхронизация организаций\n";
         $err = 0;
         $signer = new Sha256();
@@ -187,6 +218,7 @@ class SiteController extends Controller
                 $row_org->short_name = htmlspecialchars_decode($data->getValue()->shot_name);
                 $row_org->name = htmlspecialchars_decode($data->getValue()->name);
                 $row_org->inn = htmlspecialchars_decode($data->getValue()->inn);
+                $row_org->id_type = htmlspecialchars_decode($data->getValue()->type_org);
                 $row_org->id_region = ($data->getValue()->region_id != 0) ? $data->getValue()->region_id : 86;
                 $row_org->save(false);
 

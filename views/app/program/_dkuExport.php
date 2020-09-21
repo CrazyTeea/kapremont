@@ -1,4 +1,22 @@
 <?php
+
+    function idType($val) {
+        $ret = '';
+        switch ($val){
+            case 9: {
+                $ret = 'НУ: Научные учреждения';
+                break;
+            }
+            case 13: {
+                $ret = 'ВО: Высшее образование';
+                break;
+            }
+            default:{
+                $ret = $val;
+            }
+        }
+        return $ret;
+    }
 ?>
 
 
@@ -15,6 +33,8 @@
         <th>Согласованный объем АТЗ</th>
         <th>Инн</th>
         <th>Название документа</th>
+        <th>ФОИВ</th>
+        <th>тип организации</th>
         <th>Статус ДКУ</th>
     </tr>
     </thead>
@@ -31,6 +51,8 @@
             <td><?= $item['atz_bud_fin'] ?></td>
             <td><?= $item['inn'] ?></td>
             <td><?= $item['file_name'] ?></td>
+            <td><?= $item['foiv'] ?></td>
+            <td><?= idType($item['type']) ?></td>
             <td><?= $item['dku_status'] ?></td>
         </tr>
     <?php endforeach; ?>
