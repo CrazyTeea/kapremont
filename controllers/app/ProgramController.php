@@ -181,7 +181,7 @@ class ProgramController extends AppController
         foreach ($objects as $object) {
             $export[] = [
                 'id_org' => $object->id_org,
-                'region' => $object->region->region,
+                'region' => $object->region->region ?? '',
                 'org' => $object->org->name,
                 'sum' => $object->program->finance_volume * 1000,
                 'dep_status' => $dep_status[$object->org->dep_status],
