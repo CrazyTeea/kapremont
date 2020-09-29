@@ -249,6 +249,7 @@ return [
             '/api/file-main-page/get-file',
             '/api/file-main-page/save-file',
             '/api/file-main-page/*',
+            '/api/files-upload/*',
         ],
     ],
     '/admin/assignment/index' => [
@@ -759,6 +760,9 @@ return [
         'type' => 2,
     ],
     '/api/file-main-page/*' => [
+        'type' => 2,
+    ],
+    '/api/files-upload/*' => [
         'type' => 2,
     ],
 ];
