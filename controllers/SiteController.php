@@ -236,6 +236,20 @@ class SiteController extends Controller
         }*/
     }
 
+    public function actionKek(){
+        $path = Yii::getAlias('@webroot').'/kek.csv';
+        $csv = fopen($path, 'r');
+        while (($row = fgetcsv($csv, 32000, ';')) != false) {
+            $p = Program::findOne(['id_org'=>$row[0]]);
+            if ($p){
+                $p->finance_volume = str_replace(',','.',trim($row[2],' '));
+                $p->finance_events = str_replace(',','.',trim($row[3],' '));
+                $p->save(false);
+            }
+        }
+
+    }
+
     /**
      * Logout action.
      *
