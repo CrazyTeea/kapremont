@@ -203,6 +203,7 @@ return [
             '/app/atz/*',
             '/api/user-info/roles',
             '/api/user-info/users',
+            '/api/files-upload/get-info',
         ],
     ],
     '/api/com/*' => [
@@ -763,6 +764,9 @@ return [
         'type' => 2,
     ],
     '/api/files-upload/*' => [
+        'type' => 2,
+    ],
+    '/api/files-upload/get-info' => [
         'type' => 2,
     ],
 ];

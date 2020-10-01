@@ -47,15 +47,21 @@ class AtzController extends Controller
 
     public function actionMainAtz($id_org)
     {
-        if (!Yii::$app->user->can('dku'))
-            $id_org = $this->getCurrentOrgId();
+        $userIdOrg = User::find()->where(['id' => Yii::$app->user->id])->one()->id_org ?? null;
 
-        if (!empty($id_org)) {
+        if((int) $userIdOrg !== (int) $id_org && !empty($id_org)) {
+            if(Yii::$app->user->can('dku')) {
+                $organization = Organizations::find()->where(['id' => $id_org])->asArray()->one();
+                $region = Organizations::find()->where(['id' => $id_org])->one()->region->region;
+            } else {
+                return $this->redirect("/program/main-atz/$userIdOrg");
+            }
+        } else {
             $organization = Organizations::find()->where(['id' => $id_org])->asArray()->one();
             $region = Organizations::find()->where(['id' => $id_org])->one()->region->region;
         }
 
-        return $this->render('mainAtz', ['organization' => $organization ?? null, 'region' => $regio ?? null]);
+        return $this->render('mainAtz', ['organization' => $organization ?? null, 'region' => $region ?? null]);
     }
 
     public function getCurrentOrgId()

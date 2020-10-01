@@ -9,11 +9,11 @@
         <b-button class="ml-1" variant="danger" @click="deleteLastRow">Удалить последний</b-button>
         <b-button class="ml-1" variant="success" @click="saveFile">Сохранить</b-button>
       </div>
-      <div v-if="!oldFiles.length" v-can:dku>
+      <div v-if="!oldFiles || oldFiles.length === 0" v-can:dku>
         Файлов пока нет
       </div>
     </div>
-    <div v-if="showArchive" class="arhivated-docs mt-4">
+    <div v-if="showArchive && oldFiles.length !== 0" class="arhivated-docs mt-4">
       <h3>Архив документов</h3>
 
       <b-table-simple>
@@ -72,6 +72,7 @@ export default {
   },
   async mounted() {
     await this.getCurrentFiles();
+    console.log('oldFiles', this.oldFiles);
   },
   methods: {
     deleteLastRow() {

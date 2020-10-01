@@ -40,8 +40,6 @@ class FilesUploadController extends \yii\web\Controller
     public function actionGetInfo()
     {
         $post = Yii::$app->request->post();
-        $post['id_atz'] = 100;
-        $post['id_card'] = 1;
 
         $files_atz_table_five = FileSAtzTableFive::find()->where(['id_atz' => $post['id_atz'], 'id_card' => $post['id_card']])->asArray()->all();
 
@@ -57,7 +55,7 @@ class FilesUploadController extends \yii\web\Controller
         $path = "$file_atz_table_five->path/$file_atz_table_five->id";
 
         if(file_exists($path)) {
-            return Yii::$app->response->sendFile($path)->send();
+            return Yii::$app->response->sendFile($path, $file_atz_table_five->file_name)->send();
         }
 
         return 'Файла не существует';
