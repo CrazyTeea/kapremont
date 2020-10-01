@@ -19,7 +19,7 @@ class UploadController extends Controller
         if ($file_id = $this->saveFileComment($upload, $id_obj, $id_comment)) {
             $path = 'uploads/comments/' . $id_obj . '_' . $file_id;
             if (!file_exists($path))
-                FileHelper::createDirectory($path);
+                FileHelper::createDirectory($path);                             
             $upload->file->saveAs("$path/{$upload->file->name}");
             return true;
         }

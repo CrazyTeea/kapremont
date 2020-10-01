@@ -5,7 +5,7 @@
         <b-form-input
             class="col-lg-6"
             v-model="label"
-            placeholder="Название документа..."
+            placeholder="Описание документа..."
             type="text"
         ></b-form-input>
         <b-form-file
@@ -21,12 +21,11 @@
 </template>
 
 <script>
-import {BButton, BFormFile, BFormGroup, BFormInput, BInputGroup, BInputGroupAppend} from 'bootstrap-vue';
-
+import { BFormInput, BFormGroup, BInputGroupAppend, BInputGroup, BFormFile, BButton } from 'bootstrap-vue';
 export default {
   name: "FileInputComponent",
   components: {
-    BFormInput, BFormGroup, BInputGroupAppend, BInputGroup, BFormFile, BButton
+    BFormInput, BFormGroup, BInputGroupAppend , BInputGroup, BFormFile, BButton
   },
   props: {
     index: {
@@ -43,11 +42,10 @@ export default {
     }
   },
 
-  mounted() {
-  },
+  mounted() {},
   methods: {
     change(file) {
-      if (!this.label) {
+      if(!this.label) {
         this.message.show = true;
         this.$refs['formFile'].reset();
         return;
