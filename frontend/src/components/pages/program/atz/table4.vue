@@ -180,6 +180,7 @@ export default {
     };
   },
   async mounted() {
+    await this.id_org;
     await this.getTableFourInfo();
   },
   methods: {
@@ -249,8 +250,11 @@ export default {
 
     },
     getTableFourInfo() {
-      console.log(this.rows);
-      return Axios.post("/app/atz/get-table4", null, {
+      let data = new FormData();
+      data.append("id_org", this.id_org);
+
+
+      return Axios.post("/app/atz/get-table4", data, {
         headers: {
           "X-CSRF-Token": this.csrf,
         },
