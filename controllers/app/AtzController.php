@@ -270,7 +270,7 @@ class AtzController extends Controller
     public function actionGetTable4()
     {
         $arrayLastRowIndex = ['.1', '.24'];
-        $id_org = 100; //Yii::$app->request->post('id_org');
+        $id_org = Yii::$app->request->post('id_org');
         $card_number = 1; //Yii::$app->request->post('card_number');
 
         $atz_table_four = AtzTableFour::find()->where(['id_org' => $id_org, 'card_number' => $card_number])->asArray()->all();
