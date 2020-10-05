@@ -76,10 +76,11 @@
     </div>
     <div class="pre-table-wrapper" :style="preTableWrapperHeight">
       <div class="table-wrapper">
-        <div :class=" 'table-overflow-hidden mt-1 ' +  (isUserDku() ? ' transform ' : '')">
+        <div :class=" 'table-overflow-hidden mt-1 transform' +  (isUserDku() ? ' transform ' : '')">
           <b-pagination v-model="currentPage" :total-rows="totalRows" :per-page="perPage"></b-pagination>
 
           <b-table-simple
+              class="table-calculated"
               bordered hover>
             <b-thead>
               <b-tr>
@@ -112,24 +113,30 @@
                   <label>{{ item.region }}</label>
                 </b-th>
                 <b-th :id="`popover-window-${index}`"
-                      class="normal-font-weight-for-sell cursor-pointer center-text-in-cell"
+                      class="normal-font-weight-for-sell cursor-pointer center-text-in-cell popover-action"
                       @click="goToRefNotDku(item.id, '/organization/list/')">
-
-                  <b-popover
-                      v-if="isUserDku()"
-                      :target="`popover-window-${index}`"
-                      triggers="hover focus"
-                      placement="top"
-
-                  >
-                    <div class="d-flex popover-styling">
+                  <div class="custom-popover-wrapper">
+                    <div class="pop popover-styling">
                       <h6 class="atz" @click="goToRef(item.id, '/program/main-atz/')">АТЗ</h6>
-                      <h6 class="ml-2 dep" @click="goToRef(item.id, '/organization/list/')">ДЭП</h6>
+                      <h6 class="dep" @click="goToRef(item.id, '/organization/list/')">ДЭП</h6>
                     </div>
-                  </b-popover>
+                  </div>
+                  <!--                  <b-popover-->
+                  <!--                      v-if="isUserDku()"-->
+                  <!--                      :target="`popover-window-${index}`"-->
+                  <!--                      triggers="hover focus"-->
+                  <!--                      placement="top"-->
+                  <!--                  >-->
+                  <!--                    <div @mouseover="mousePopoverOver">-->
+                  <!--                      <div class="d-flex popover-styling">-->
+                  <!--                        <h6 class="atz" @click="goToRef(item.id, '/program/main-atz/')">АТЗ</h6>-->
+                  <!--                        <h6 class="ml-2 dep" @click="goToRef(item.id, '/organization/list/')">ДЭП</h6>-->
+                  <!--                      </div>-->
+                  <!--                    </div>-->
+                  <!--                  </b-popover>-->
 
 
-                  <label class="cursor-pointer">
+                  <label class="cursor-pointer label-item-name">
                     {{ item.name }}
                     <div v-can:mgsu,root v-if="item.id_founder !== '1' && item.is_new==='1'">
                       <b-badge variant="danger">новый пользователь</b-badge>
@@ -352,9 +359,16 @@ export default {
     this.filters.state = this.state;
     this.getTable();
 
-    window.addEventListener('resize', () => { this.$forceUpdate() });
+    window.addEventListener('resize', () => {
+      this.$forceUpdate()
+    });
+    // document.querySelector()
   },
   methods: {
+    mousePopoverOver() {
+      console.log("here is this shit");
+      // let element = document.querySelector()
+    },
     goToDev() {
       window.location = '/app/atz/in-dev';
     },
@@ -520,7 +534,7 @@ export default {
   },
   updated() {
     let elementHeight = parseInt(document.querySelector(".transform")?.offsetHeight) + 15;
-    this.preTableWrapperHeight = elementHeight ? `height: ${elementHeight}px;` : "";
+    this.preTableWrapperHeight = elementHeight ? `height: ${elementHeight}px;` : "height: 1500px";
   },
   watch: {
     currentPage() {
@@ -558,6 +572,35 @@ export default {
   text-decoration: none;
 }
 
+.custom-popover-wrapper {
+  position: relative;
+}
+.pop {
+  position: absolute;
+  top: -45px;
+  left: 26px;
+  padding: 8px;
+  background-color: #fff;
+  border: 1px solid rgba(0,0,0,.2);
+  border-radius: .3rem;
+  opacity: 10;
+  transition: opacity .3s ease;
+}
+
+.popover-action:hover .pop {
+  opacity: 100;
+  transition: opacity .3s ease;
+}
+.popover-action:hover .label-item-name {
+  opacity: 10%;
+  transition: all .3s ease;
+  transform: translateY(10px);
+}
+
+.pop > h6 {
+  margin-bottom: 0px !important;
+}
+
 .table-overflow-hidden {
   overflow: hidden !important;
   overflow-x: scroll !important;
@@ -567,14 +610,12 @@ export default {
   height: 1500px;
 }
 
-
-
 .table-wrapper {
   position: absolute;
   left: 0;
   padding: 20px;
   width: 100%;
-  height: 100%;
+  height: 80%;
 }
 
 .transform {
@@ -584,11 +625,12 @@ export default {
   transition: all .5s ease;
   margin: 0px auto;
 }
-.table {
+
+.table-calculated {
   width: calc(100vw - 55px);
 }
 
-.transform:hover {
+.transform:hover, .popover-styling:hover .transform {
   width: calc(100vw - 55px);
   transition: all .5s ease;
 }
