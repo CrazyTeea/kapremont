@@ -91,7 +91,7 @@
           Вид документа
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input v-model="row.method"></b-form-input>
+          <b-form-input v-model="row.type_document"></b-form-input>
           <!--          // from here lol-->
         </div>
       </div>
@@ -102,7 +102,7 @@
           Наименование объекта закупки (лота / договора/контракта)
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input v-model="row.method"></b-form-input>
+          <b-form-input v-model="row.name_object"></b-form-input>
         </div>
       </div>
 
@@ -111,7 +111,7 @@
           Общая стоимость (руб.)
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input v-model="row.method"></b-form-input>
+          <b-form-input v-model="row.cost_full"></b-form-input>
         </div>
       </div>
 
@@ -121,7 +121,7 @@
           Бюджетного финансирования (руб.)
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input v-model="row.method"></b-form-input>
+          <b-form-input v-model="row.cost_budjet"></b-form-input>
         </div>
       </div>
       <div class="row mt-3">
@@ -129,7 +129,7 @@
           Внебюджетного финансирования (руб.)
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input v-model="row.method"></b-form-input>
+          <b-form-input v-model="row.cost_vb"></b-form-input>
         </div>
       </div>
       <div class="row mt-3">
@@ -138,7 +138,7 @@
           публикации)
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input v-model="row.method"></b-form-input>
+          <b-form-input v-model="row.number_contract"></b-form-input>
         </div>
       </div>
       <div class="row mt-3">
@@ -146,7 +146,7 @@
           Дата заключения контракта/договора
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input v-model="row.method"></b-form-input>
+          <b-form-input v-model="row.date_doc"></b-form-input>
         </div>
       </div>
       <div class="row mt-3">
@@ -154,10 +154,77 @@
           Номер договора /контракта
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input v-model="row.method"></b-form-input>
+          <b-form-input v-model="row.number_deal"></b-form-input>
         </div>
       </div>
 
+
+
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Наименование поставщика по договору /контракту
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.name_deller_by_doc"></b-form-input>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col m-auto">
+          ИНН поставщика по договору /контракту
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.inn_deller_by_doc"></b-form-input>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Дата начала
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.date_start"></b-form-input>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Дата окончания
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.date_end"></b-form-input>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Подтверждающие документы
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.docs"></b-form-input>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Комментарий (текстовое поле Заполняет ВУЗ)
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.comment_vuz"></b-form-input>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col m-auto">
+          ЭкспертМОН +/-
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.mon_expert"></b-form-input>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Комментарий эксперта МОН
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.comment_mon"></b-form-input>
+        </div>
+      </div>
 
     </b-modal>
 
