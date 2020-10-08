@@ -13,53 +13,154 @@
             :key="`card-item-${indexBody}`"
         >
           <div class="row-stages-wrapper">
-            <div v-for="(row, index) in body.row_stages" class="info-card-passport">
-              {{ computedHeader(row.address) }}
-            </div>
+            <h3>{{ indexBody + 1 }} Карточка</h3>
           </div>
-
-          <b-icon
-              @click.prevent="deleteRow(indexBody)"
-              variant="danger"
-              icon="trash"
-              class="trash-icon mt-2 col-1"
-          ></b-icon>
-
         </div>
       </transition-group>
     </div>
     <c-button @addRow1="addRow1" @addRow2="addRow2"/>
 
 
-    <b-modal v-model="showModalDialog" size="xl">
+    <b-modal scrollable id="modalPassport" v-model="showModalDialog" size="xl">
       <template v-slot:modal-header="{ close }">
         <div>Карточка</div>
       </template>
 
       <template v-slot:modal-footer="{ close }">
-        <b-button variant="danger">Удалить</b-button>
-        <b-button variant="success">Сохранить</b-button>
+        <b-button variant="danger" @click="deleteStageRow">Удалить</b-button>
+        <b-button variant="success" @click="saveContent">Сохранить</b-button>
+        <b-button variant="info" @click="$bvModal.hide('modalPassport')">Отмена</b-button>
       </template>
 
-      <div v-for="(modalRow, index) in modalContent" :key="`modalContent${index}`">
-        <multiselect
-            class="mt-5"
-            v-model="modalRow.address"
-            label="passport_name"
-            track-by="id"
-            :multiple="true"
-            :taggable="true"
-            :options="passport"
-            placeholder="Выберите объект"
-            select-label="Добваить"
-            deselect-label="Удалить"
-            selectedLabel="Выбрано"
-            :close-on-select="false"
-        ></multiselect>
+      <div class="row">
+        <div class="col m-auto">
+          Адрес проведения мероприятия
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <multiselect
+              v-model="row.address"
+              label="passport_name"
+              track-by="id"
+              :multiple="true"
+              :taggable="true"
+              :options="passport"
+              placeholder="Выберите объект"
+              select-label="Добваить"
+              deselect-label="Удалить"
+              selectedLabel="Выбрано"
+              :close-on-select="false"
+          ></multiselect>
+        </div>
       </div>
 
-      <p class="my-4">Hello from modal!</p>
+      <div class="row">
+        <div class="col m-auto">
+          Вид статьи мероприятия по АТЗ
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <multiselect
+              class="mt-5"
+              v-model="row.type_event"
+              label="name"
+              track-by="value"
+              :multiple="true"
+              :taggable="true"
+              :options="ONinput(index)"
+              group-values="variants"
+              group-label="state"
+              placeholder="Выберите системы"
+              select-label="Добваить"
+              deselect-label="Удалить"
+              selectedLabel="Выбрано"
+              :close-on-select="false"
+          ></multiselect>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Способ определения поставщика (подрядчика, исполнителя)
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.method"></b-form-input>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Вид документа
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.method"></b-form-input>
+          <!--          // from here lol-->
+        </div>
+      </div>
+
+
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Наименование объекта закупки (лота / договора/контракта)
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.method"></b-form-input>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Общая стоимость (руб.)
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.method"></b-form-input>
+        </div>
+      </div>
+
+
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Бюджетного финансирования (руб.)
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.method"></b-form-input>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Внебюджетного финансирования (руб.)
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.method"></b-form-input>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Номер извещения /номер Номер реестровой записи договора/контракта на сайте https://zakupki.gov.ru/ (в случаи
+          публикации)
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.method"></b-form-input>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Дата заключения контракта/договора
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.method"></b-form-input>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Номер договора /контракта
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.method"></b-form-input>
+        </div>
+      </div>
+
+
     </b-modal>
+
   </div>
 </template>
 
@@ -67,10 +168,10 @@
 import Axios from "axios";
 import CButton from "./CustomButton";
 import Multiselect from "vue-multiselect";
-import {BButton} from "bootstrap-vue";
+import {BButton, BFormInput} from "bootstrap-vue";
 
 export default {
-  components: {Multiselect, BButton, CButton},
+  components: {Multiselect, BButton, CButton, BFormInput},
   props: ['passport', 'id_org'],
   name: "table4Remake",
   data() {
@@ -78,44 +179,122 @@ export default {
       csrf: document.getElementsByName("csrf-token")[0].content,
       showModalDialog: false,
       modalContent: {},
+      modalContentIndex: null,
       rows: [],
+      card: 1,
     }
   },
-  mounted() {
+  async mounted() {
+    await this.id_org;
     this.getTableFourInfo();
   },
   methods: {
+    saveContent() {
+      console.log(this.modalContent);
+      console.log(this.modalContentIndex);
+      console.log(this.rows[this.modalContentIndex]);
+      this.rows[this.modalContentIndex].row_stages = this.modalContent;
+      this.saveInfo();
+    },
+    saveInfo() {
+      let data = new FormData();
+      data.append("data", JSON.stringify(this.rows));
+      data.append("id_org", this.id_org);
+      data.append("card_number", this.card);
+
+      return Axios.post("/app/atz/save-table4", data, {
+        headers: {
+          "X-CSRF-Token": this.csrf,
+        },
+      }).then(res => {
+        this.getTableFourInfo();
+      });
+    },
+
+    deleteStageRow() {
+      if (this.rows[this.modalContentIndex].row_stages[0].id) {
+        let ids = this.rows[this.modalContentIndex].row_stages.map(el => {
+          return el.id;
+        });
+        this.deleteRowsFromServer(ids);
+      }
+
+      this.rows.splice(this.modalContentIndex, 1);
+      this.$bvModal.hide('modalPassport');
+    },
+    deleteRowsFromServer(ids) {
+      let data = new FormData();
+      data.append('ids', JSON.stringify(ids));
+      return Axios.post('/app/atz/destroy-atz-table-four-row', data, {
+        headers: {
+          "X-CSRF-Token": this.csrf,
+        },
+      }).then(res => {
+        this.getTableFourInfo();
+      })
+    },
+    ONinput(index2) {
+      let index1 = this.modalContentIndex;
+      if (!this.rows[index1]?.row_stages[index2].address || typeof this.rows[index1]?.row_stages[index2].address !== 'object') return [];
+      let options = [];
+      this.rows[index1].row_stages[index2].address.forEach(
+          (element, indexArray) => {
+            options.push({
+              state: element.passport_name,
+              variants: [
+                {
+                  name: "Система видеонаблюдения",
+                  value: `video_system-${indexArray}`,
+                },
+                {
+                  name: "Система оповещения и управления эвакуацией",
+                  value: `evacuation_system-${indexArray}`,
+                },
+                {
+                  name: "Система освещения",
+                  value: `light_system-${indexArray}`,
+                },
+                {
+                  name: "Средства охранной сигнализации",
+                  value: `predator_system-${indexArray}`,
+                },
+                {
+                  name: "Средства тревожной сигнализации",
+                  value: `alarm_warning_system-${indexArray}`,
+                },
+                {
+                  name: "Средства пожарной сигнализации",
+                  value: `alarm_fire_system-${indexArray}`,
+                },
+                {
+                  name: "Средства телефонной связи и радиосвязи",
+                  value: `phone_system-${indexArray}`,
+                },
+                {name: "Ограждения", value: `fence-${indexArray}`},
+                {name: "СКУД", value: `skud-${indexArray}`},
+              ],
+            });
+          }
+      );
+
+      return options;
+    },
     showModal(rowIndex) {
       this.modalContent = this.rows[rowIndex].row_stages;
-
-      console.log(rowIndex);
-      console.log(this.rows[rowIndex]);
+      this.modalContentIndex = rowIndex;
 
       this.showModalDialog = true;
     },
     getTableFourInfo() {
-      console.log(this.rows);
-      return Axios.post("/app/atz/get-table4", null, {
+      let data = new FormData();
+      data.append('id_org', this.id_org);
+      return Axios.post("/app/atz/get-table4", data, {
         headers: {
           "X-CSRF-Token": this.csrf,
         },
       }).then((res) => {
         this.rows = [...res.data];
-        console.log(this.rows);
       });
-    },
-    deleteRow(index) {
-      if (this.rows[index]) {
-        let ids = [];
-        this.rows[index].row_stages.forEach(element => {
-          ids.push(element.id);
-        });
-        console.log(ids);
-        // this.deleteRowFromServer(ids);
-        return;
-      }
-
-      this.rows.splice(index, 1);
     },
     addRow1() {
       this.rows.push({
@@ -272,7 +451,10 @@ export default {
   computed: {
     computedHeader() {
       return array => {
-        return array.map(el => el.passport_name).join(' ') ? array.map(el => el.passport_name).join(' ') : 'Пустой документ';
+        return array.map(element => {
+          element
+        }).filter(el => {
+        }).length > 0 ? 'Заполнить карточку' : 'Пустая карточка';
       }
     }
   }
@@ -280,19 +462,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.row-stages-wrapper {
-  height: 185px;
-  overflow-y: scroll;
-
-}
-
-::-webkit-scrollbar {
-  width: 0px;
-  background: rgba(255, 255, 255, 0.0);
-}
 
 .passport-card {
-  height: 255px;
+  height: 76px;
   border: 1px solid #dee2e6;
   padding: 20px;
   border-radius: 2px;
@@ -338,6 +510,7 @@ export default {
   transform: scale(1);
   transition: all 0.3s ease;
 }
+
 .trash-icon:hover {
   transform: scale(1.3);
   transition: all 0.3s ease;

@@ -72,7 +72,6 @@ export default {
   },
   async mounted() {
     await this.getCurrentFiles();
-    console.log('oldFiles', this.oldFiles);
   },
   methods: {
     deleteLastRow() {
@@ -83,9 +82,6 @@ export default {
     },
     save() {
 
-    },
-    debug() {
-      console.log(this.files)
     },
     async getCurrentFiles() {
       let data = new FormData();
