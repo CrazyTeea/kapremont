@@ -104,7 +104,6 @@
             </b-thead>
             <b-tbody>
               <b-tr v-for="(item, index) in items" :key="index">
-
                 <b-th v-if="filters.id">{{ index + perPage * (currentPage - 1) + 1 }}</b-th>
                 <b-th class="normal-font-weight-for-sell center-text-in-cell">
                   <label>{{ item.id }}</label>
@@ -112,30 +111,19 @@
                 <b-th class="normal-font-weight-for-sell center-text-in-cell">
                   <label>{{ item.region }}</label>
                 </b-th>
-                <b-th :id="`popover-window-${index}`"
+                <b-th
                       class="normal-font-weight-for-sell cursor-pointer center-text-in-cell popover-action"
                       @click="goToRefNotDku(item.id, '/organization/list/')">
+
+<!--                  popover-->
                   <div class="custom-popover-wrapper">
-                    <div class="pop popover-styling">
+                    <div class="popover-styling d-flex justify-content-center">
                       <h6 class="atz" @click="goToRef(item.id, '/program/main-atz/')">АТЗ</h6>
                       <h6 class="dep" @click="goToRef(item.id, '/organization/list/')">ДЭП</h6>
                     </div>
                   </div>
-                  <!--                  <b-popover-->
-                  <!--                      v-if="isUserDku()"-->
-                  <!--                      :target="`popover-window-${index}`"-->
-                  <!--                      triggers="hover focus"-->
-                  <!--                      placement="top"-->
-                  <!--                  >-->
-                  <!--                    <div @mouseover="mousePopoverOver">-->
-                  <!--                      <div class="d-flex popover-styling">-->
-                  <!--                        <h6 class="atz" @click="goToRef(item.id, '/program/main-atz/')">АТЗ</h6>-->
-                  <!--                        <h6 class="ml-2 dep" @click="goToRef(item.id, '/organization/list/')">ДЭП</h6>-->
-                  <!--                      </div>-->
-                  <!--                    </div>-->
-                  <!--                  </b-popover>-->
 
-
+<!--                  content-->
                   <label class="cursor-pointer label-item-name">
                     {{ item.name }}
                     <div v-can:mgsu,root v-if="item.id_founder !== '1' && item.is_new==='1'">
@@ -148,11 +136,8 @@
                   <label>{{ item.quantity }}</label>
                 </b-th>
                 <b-th class="normal-font-weight-for-sell center-text-in-cell">
-                  <a v-if="item.file_exist === '1'" :href="`/program/download-doc/${item.id}`"
-                     class="a-decorating"
-                  >
-                    <b-icon icon="file-earmark-arrow-down" scale="2" vriant="success"></b-icon
-                    >
+                  <a v-if="item.file_exist === '1'" :href="`/program/download-doc/${item.id}`" class="a-decorating">
+                    <b-icon icon="file-earmark-arrow-down" scale="2" vriant="success"></b-icon>
                   </a>
                   <b-icon v-else icon="alert-circle" scale="2"></b-icon>
                 </b-th>
@@ -262,7 +247,6 @@ import {
   BInputGroup,
   BInputGroupAppend,
   BPagination,
-  BPopover,
   BTableSimple,
   BTbody,
   BTh,
@@ -300,7 +284,6 @@ export default {
     BFormFile,
     BTbody,
     BPagination,
-    BPopover
   },
   data() {
     return {
@@ -554,10 +537,17 @@ export default {
 <style>
 .atz:hover {
   color: red;
+  transition: .2s ease;
 }
-
 .dep:hover {
   color: green;
+}
+.dep, .atz {
+  transition: .2s ease;
+}
+.dep {
+  margin-left: 8px;
+  transition: .2s ease;
 }
 
 .popover-styling > h6 {
@@ -571,25 +561,34 @@ export default {
 .popover-styling > h6 > a {
   text-decoration: none;
 }
-
-.custom-popover-wrapper {
+.popover-action {
   position: relative;
 }
-.pop {
+.custom-popover-wrapper {
   position: absolute;
-  top: -45px;
-  left: 26px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -10%);
+  z-index: 200;
+  opacity: 0;
+  transition: all .3s ease;
+}
+
+.pop {
   padding: 8px;
   background-color: #fff;
   border: 1px solid rgba(0,0,0,.2);
   border-radius: .3rem;
   opacity: 10;
-  transition: opacity .3s ease;
 }
-
-.popover-action:hover .pop {
-  opacity: 100;
-  transition: opacity .3s ease;
+.label-item-name {
+  transition: all .3s ease;
+}
+.popover-action:hover .custom-popover-wrapper {
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  transition-delay: .2s;
+  transition-property: all;
 }
 .popover-action:hover .label-item-name {
   opacity: 10%;
