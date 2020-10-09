@@ -1,191 +1,308 @@
 <template>
   <div>
-    <div class="table-overflow">
-      <b-table-simple hover bordered>
-        <b-thead>
-          <b-tr>
-            <b-th rowspan="2">Этап</b-th>
-            <b-th rowspan="2">Вид мероприятия</b-th>
-            <b-th rowspan="2">Адрес проведения мероприятия</b-th>
-            <b-th rowspan="2">Вид статьи мероприятия по АТЗ</b-th>
-
-            <b-th rowspan="2">Способ определения поставщика (подрядчика, исполнителя)</b-th>
-            <b-th rowspan="2">Вид документа</b-th>
-            <b-th rowspan="2">Наименование объекта закупки (лота / договора/контракта)</b-th>
-
-            <b-th colspan="3">Начальная (максимальная) цена закупки лота /договора, контракта, руб.</b-th>
-
-            <b-th
-                rowspan="2"
-            >Номер извещения /номер Номер реестровой записи договора/контракта на сайте https://zakupki.gov.ru/ (в
-              случаи публикации)
-            </b-th>
-            <b-th rowspan="2">Дата заключения контракта/договора</b-th>
-            <b-th rowspan="2">Номер договора /контракта</b-th>
-            <b-th rowspan="2">Наименование поставщика по договору /контракту</b-th>
-            <b-th rowspan="2">ИНН поставщика по договору /контракту</b-th>
-
-            <b-th colspan="2">Срок выполнений мероприятий по договору /контракту</b-th>
-
-            <b-th rowspan="2">Подтверждающие документы</b-th>
-            <b-th rowspan="2">Комментарий (текстовое поле Заполняет ВУЗ)</b-th>
-            <b-th rowspan="2">ЭкспертМОН +/-</b-th>
-            <b-th rowspan="2">Комментарий эксперта МОН )</b-th>
-          </b-tr>
-          <b-tr>
-            <b-th>Общая стоимость (руб.)</b-th>
-            <b-th>Бюджетного финансирования (руб.)</b-th>
-            <b-th>Внебюджетного финансирования (руб.)</b-th>
-            <b-th>Дата начала</b-th>
-            <b-th>Дата окончания</b-th>
-          </b-tr>
-        </b-thead>
-        <b-tbody v-for="(body, indexBody) in rows" :key="`b-body-${indexBody}`">
-          <b-tr v-for="(row, index) in body.row_stages" :key="`b-tr-${index}`">
-            <b-td>
-              {{ indexBody + 1 + row.stage_number }}
-              <b-icon
-                  v-if="!index"
-                  @click="deleteRow(indexBody, index)"
-                  variant="danger"
-                  icon="trash"
-                  class="trash-icon mt-2 col-1"
-              ></b-icon>
-            </b-td>
-            <b-td>{{ row.stage_name }}</b-td>
-            <b-td class="min-width-for-multiselect">
-              <multiselect
-                  class="mt-5"
-                  v-model="row.address"
-                  label="passport_name"
-                  track-by="id"
-                  :multiple="true"
-                  :taggable="true"
-                  :options="passport"
-                  placeholder="Выберите объект"
-                  select-label="Добваить"
-                  deselect-label="Удалить"
-                  selectedLabel="Выбрано"
-                  :close-on-select="false"
-              ></multiselect>
-            </b-td>
-            <b-td class="min-width-for-multiselect">
-              <multiselect
-                  class="mt-5"
-                  v-model="row.type_event"
-                  label="name"
-                  track-by="value"
-                  :multiple="true"
-                  :taggable="true"
-                  :options="ONinput(indexBody, index)"
-                  group-values="variants"
-                  group-label="state"
-                  placeholder="Выберите системы"
-                  select-label="Добваить"
-                  deselect-label="Удалить"
-                  selectedLabel="Выбрано"
-                  :close-on-select="false"
-              ></multiselect>
-            </b-td>
-
-            <b-td>
-              <b-form-input v-model="row.method"></b-form-input>
-            </b-td>
-            <b-td>
-              <b-form-input v-model="row.type_document"></b-form-input>
-            </b-td>
-            <b-td>
-              <b-form-input v-model="row.name_object"></b-form-input>
-            </b-td>
-            <b-td>
-              <b-form-input type="number" v-model="row.cost_full"></b-form-input>
-            </b-td>
-            <b-td>
-              <b-form-input type="number" v-model="row.cost_budjet"></b-form-input>
-            </b-td>
-            <b-td>
-              <b-form-input type="number" v-model="row.cost_vb"></b-form-input>
-            </b-td>
-            <b-td>
-              <b-form-input v-model="row.number_contract"></b-form-input>
-            </b-td>
-            <b-td>
-              <b-form-input v-model="row.date_doc"></b-form-input>
-            </b-td>
-            <b-td>
-              <b-form-input v-model="row.number_deal"></b-form-input>
-            </b-td>
-            <b-td>
-              <b-form-input v-model="row.name_deller_by_doc"></b-form-input>
-            </b-td>
-            <b-td>
-              <b-form-input v-model="row.inn_deller_by_doc"></b-form-input>
-            </b-td>
-            <b-td>
-              <b-form-input v-model="row.date_start"></b-form-input>
-            </b-td>
-            <b-td>
-              <b-form-input v-model="row.date_end"></b-form-input>
-            </b-td>
-            <b-td>
-              <b-form-input v-model="row.docs"></b-form-input>
-            </b-td>
-            <b-td>
-              <b-form-input v-model="row.comment_vuz"></b-form-input>
-            </b-td>
-            <b-td>
-              <b-form-input v-model="row.mon_expert"></b-form-input>
-            </b-td>
-            <b-td>
-              <b-form-input v-model="row.comment_mon"></b-form-input>
-            </b-td>
-          </b-tr>
-        </b-tbody>
-      </b-table-simple>
+    <div class="wrapper">
+      <transition-group
+          name="list-complete"
+          tag="div"
+          class="row justify-content-md-center justify-content-lg-start justify-content-xl-start"
+      >
+        <div
+            v-for="(body, indexBody) in rows"
+            class="passport-card mt-2 ml-xl-2 ml-lg-2 ml-md-2 col-xl-4 col-lg-6 col-12 list-complete-item"
+            @click="showModal(indexBody)"
+            :key="`card-item-${indexBody}`"
+        >
+          <div class="row-stages-wrapper">
+            <h3>{{ indexBody + 1 }} Карточка</h3>
+          </div>
+        </div>
+      </transition-group>
     </div>
-    <div class="d-flex justify-content-end mt-2">
+    <c-button @addRow1="addRow1" @addRow2="addRow2"/>
 
 
-      <b-button size="sm" @click="addRow1">Добавить закупку у единственного поставщика</b-button>
-      <b-button size="sm" class="ml-2" @click="addRow2">Добавить закупку конкурентным способом</b-button>
+    <b-modal scrollable id="modalPassport" v-model="showModalDialog" size="xl">
+      <template v-slot:modal-header="{ close }">
+        <div>Карточка</div>
+      </template>
 
-      <b-button @click="saveInfo" variant="success" size="sm" class="ml-2">Сохранить</b-button>
-    </div>
+      <template v-slot:modal-footer="{ close }">
+        <b-button variant="danger" @click="deleteStageRow">Удалить</b-button>
+        <b-button variant="success" @click="saveContent">Сохранить</b-button>
+        <b-button variant="info" @click="$bvModal.hide('modalPassport')">Отмена</b-button>
+      </template>
+
+      <div class="row">
+        <div class="col m-auto">
+          Адрес проведения мероприятия
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <multiselect
+              v-model="row.address"
+              label="passport_name"
+              track-by="id"
+              :multiple="true"
+              :taggable="true"
+              :options="passport"
+              placeholder="Выберите объект"
+              select-label="Добваить"
+              deselect-label="Удалить"
+              selectedLabel="Выбрано"
+              :close-on-select="false"
+          ></multiselect>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col m-auto">
+          Вид статьи мероприятия по АТЗ
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <multiselect
+              class="mt-5"
+              v-model="row.type_event"
+              label="name"
+              track-by="value"
+              :multiple="true"
+              :taggable="true"
+              :options="ONinput(index)"
+              group-values="variants"
+              group-label="state"
+              placeholder="Выберите системы"
+              select-label="Добваить"
+              deselect-label="Удалить"
+              selectedLabel="Выбрано"
+              :close-on-select="false"
+          ></multiselect>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Способ определения поставщика (подрядчика, исполнителя)
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.method"></b-form-input>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Вид документа
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.type_document"></b-form-input>
+          <!--          // from here lol-->
+        </div>
+      </div>
+
+
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Наименование объекта закупки (лота / договора/контракта)
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.name_object"></b-form-input>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Общая стоимость (руб.)
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.cost_full"></b-form-input>
+        </div>
+      </div>
+
+
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Бюджетного финансирования (руб.)
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.cost_budjet"></b-form-input>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Внебюджетного финансирования (руб.)
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.cost_vb"></b-form-input>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Номер извещения /номер Номер реестровой записи договора/контракта на сайте https://zakupki.gov.ru/ (в случаи
+          публикации)
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.number_contract"></b-form-input>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Дата заключения контракта/договора
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.date_doc"></b-form-input>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Номер договора /контракта
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.number_deal"></b-form-input>
+        </div>
+      </div>
+
+
+
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Наименование поставщика по договору /контракту
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.name_deller_by_doc"></b-form-input>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col m-auto">
+          ИНН поставщика по договору /контракту
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.inn_deller_by_doc"></b-form-input>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Дата начала
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.date_start"></b-form-input>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Дата окончания
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.date_end"></b-form-input>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Подтверждающие документы
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.docs"></b-form-input>
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Комментарий (текстовое поле Заполняет ВУЗ)
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.comment_vuz"></b-form-input>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col m-auto">
+          ЭкспертМОН +/-
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.mon_expert"></b-form-input>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Комментарий эксперта МОН
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input v-model="row.comment_mon"></b-form-input>
+        </div>
+      </div>
+
+    </b-modal>
+
   </div>
 </template>
 
 <script>
-import {BButton, BFormInput, BTableSimple, BTbody, BTd, BTh, BThead, BTr,} from "bootstrap-vue";
-import Multiselect from "vue-multiselect";
 import Axios from "axios";
+import CButton from "./CustomButton";
+import Multiselect from "vue-multiselect";
+import {BButton, BFormInput} from "bootstrap-vue";
 
 export default {
-  props: ["passport", "id_org"],
-  components: {
-    BButton,
-    BTableSimple,
-    BThead,
-    BTbody,
-    BTh,
-    BTd,
-    BTr,
-    BFormInput,
-    Multiselect,
-  },
+  components: {Multiselect, BButton, CButton, BFormInput},
+  props: ['passport', 'id_org'],
+  name: "table4Remake",
   data() {
     return {
-      rows: [],
       csrf: document.getElementsByName("csrf-token")[0].content,
+      showModalDialog: false,
+      modalContent: {},
+      modalContentIndex: null,
+      rows: [],
       card: 1,
-    };
+    }
   },
   async mounted() {
     await this.id_org;
-    await this.getTableFourInfo();
+    this.getTableFourInfo();
   },
   methods: {
-    ONinput(index1, index2) {
-      if (!this.rows[index1].row_stages[index2].address || typeof this.rows[index1].row_stages[index2].address !== 'object') return [];
+    saveContent() {
+      console.log(this.modalContent);
+      console.log(this.modalContentIndex);
+      console.log(this.rows[this.modalContentIndex]);
+      this.rows[this.modalContentIndex].row_stages = this.modalContent;
+      this.saveInfo();
+    },
+    saveInfo() {
+      let data = new FormData();
+      data.append("data", JSON.stringify(this.rows));
+      data.append("id_org", this.id_org);
+      data.append("card_number", this.card);
+
+      return Axios.post("/app/atz/save-table4", data, {
+        headers: {
+          "X-CSRF-Token": this.csrf,
+        },
+      }).then(res => {
+        this.getTableFourInfo();
+      });
+    },
+
+    deleteStageRow() {
+      if (this.rows[this.modalContentIndex].row_stages[0].id) {
+        let ids = this.rows[this.modalContentIndex].row_stages.map(el => {
+          return el.id;
+        });
+        this.deleteRowsFromServer(ids);
+      }
+
+      this.rows.splice(this.modalContentIndex, 1);
+      this.$bvModal.hide('modalPassport');
+    },
+    deleteRowsFromServer(ids) {
+      let data = new FormData();
+      data.append('ids', JSON.stringify(ids));
+      return Axios.post('/app/atz/destroy-atz-table-four-row', data, {
+        headers: {
+          "X-CSRF-Token": this.csrf,
+        },
+      }).then(res => {
+        this.getTableFourInfo();
+      })
+    },
+    ONinput(index2) {
+      let index1 = this.modalContentIndex;
+      if (!this.rows[index1]?.row_stages[index2].address || typeof this.rows[index1]?.row_stages[index2].address !== 'object') return [];
       let options = [];
       this.rows[index1].row_stages[index2].address.forEach(
           (element, indexArray) => {
@@ -229,31 +346,15 @@ export default {
 
       return options;
     },
-    saveInfo() {
-      let data = new FormData();
-      data.append("data", JSON.stringify(this.rows));
-      data.append("id_org", this.id_org);
-      data.append("card_number", this.card);
+    showModal(rowIndex) {
+      this.modalContent = this.rows[rowIndex].row_stages;
+      this.modalContentIndex = rowIndex;
 
-      return Axios.post("/app/atz/save-table4", data, {
-        headers: {
-          "X-CSRF-Token": this.csrf,
-        },
-      }).then(res => {
-        this.getTableFourInfo();
-      });
-    },
-    debugClient() {
-      console.log(this.rows);
-    },
-    debug() {
-
+      this.showModalDialog = true;
     },
     getTableFourInfo() {
       let data = new FormData();
-      data.append("id_org", this.id_org);
-
-
+      data.append('id_org', this.id_org);
       return Axios.post("/app/atz/get-table4", data, {
         headers: {
           "X-CSRF-Token": this.csrf,
@@ -261,31 +362,6 @@ export default {
       }).then((res) => {
         this.rows = [...res.data];
       });
-    },
-    deleteRow(index, row_stages_index) {
-      if (this.rows[index].row_stages[row_stages_index].id) {
-        let ids = [];
-        this.rows[index].row_stages.forEach(element => {
-          ids.push(element.id);
-        });
-        console.log(ids);
-        this.deleteRowFromServer(ids);
-        console.log(this.rows[index].row_stages[row_stages_index].id);
-        return;
-      }
-
-      this.rows.splice(index, 1);
-    },
-    deleteRowFromServer(ids) {
-      let data = new FormData();
-      data.append('ids', JSON.stringify(ids));
-      return Axios.post('/app/atz/destroy-atz-table-four-row', data, {
-        headers: {
-          "X-CSRF-Token": this.csrf,
-        },
-      }).then(res => {
-        this.getTableFourInfo();
-      })
     },
     addRow1() {
       this.rows.push({
@@ -437,21 +513,64 @@ export default {
           },
         ],
       });
-    },
+    }
   },
-};
+  computed: {
+    computedHeader() {
+      return array => {
+        return array.map(element => {
+          element
+        }).filter(el => {
+        }).length > 0 ? 'Заполнить карточку' : 'Пустая карточка';
+      }
+    }
+  }
+}
 </script>
 
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
+<style scoped lang="scss">
 
-<style scoped>
-.table-overflow {
-  overflow-x: scroll;
-  height: auto;
+.passport-card {
+  height: 76px;
+  border: 1px solid #dee2e6;
+  padding: 20px;
+  border-radius: 2px;
+  transition: box-shadow .2s ease;
+
+  &:hover {
+    transition: box-shadow .2s ease;
+    box-shadow: 0 3px 5px -1px rgba(0, 0, 0, 0.2), 0 6px 10px 0 rgba(0, 0, 0, 0.14), 0 1px 18px 0 rgba(0, 0, 0, 0.12);
+  }
 }
 
-.min-width-for-multiselect {
-  min-width: 450px;
+@media screen and (min-width: 992px) {
+  .passport-card {
+    max-width: 32.333333%;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 992px) {
+  .passport-card {
+    max-width: 49%;
+  }
+}
+
+.info-card-passport {
+}
+
+.list-complete-enter, .list-complete-leave-to
+  /* .list-complete-leave-active до версии 2.1.8 */
+{
+  opacity: 0;
+  transform: translateY(30px);
+}
+
+.list-complete-leave-active {
+  position: absolute;
+}
+
+.list-complete-item {
+  transition: all .3s;
 }
 
 .trash-icon {
