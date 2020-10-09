@@ -9414,6 +9414,6 @@ return [
         'faiv_admin',
     ],
     3118 => [
-        'user',
+        'dku',
     ],
 ];
