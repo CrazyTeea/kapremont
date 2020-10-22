@@ -8,17 +8,17 @@
       >
         <div
             v-for="(body, indexBody) in rows"
-            class="passport-card mt-2 ml-xl-2 ml-lg-2 ml-md-2 col-xl-4 col-lg-6 col-12 list-complete-item"
+            class="passport-card mt-2 col-12 list-complete-item"
             @click="showModal(indexBody)"
             :key="`card-item-${indexBody}`"
         >
           <div class="row-stages-wrapper">
-            <h3>{{ indexBody + 1 }} Карточка</h3>
+            <h5 v-for="header in computedHeader(body)">{{ header }}</h5>
           </div>
         </div>
       </transition-group>
     </div>
-    <c-button @addRow1="addRow1" @addRow2="addRow2"/>
+    <c-button v-if="check('user')" @addRow1="addRow1" @addRow2="addRow2"/>
 
 
     <b-modal scrollable id="modalPassport" v-model="showModalDialog" size="xl">
@@ -32,12 +32,27 @@
         <b-button variant="info" @click="$bvModal.hide('modalPassport')">Отмена</b-button>
       </template>
 
-      <div class="row">
+
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Вид документа
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-select :disabled="!check('user')" v-model="row.type_document" :options="[
+              {value: 'Договор', text: 'Договор'},
+              {value: 'Контракт', text: 'Контракт'}
+          ]"></b-form-select>
+        </div>
+      </div>
+
+
+      <div class="row mt-3">
         <div class="col m-auto">
           Адрес проведения мероприятия
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
           <multiselect
+              :disabled="!check('user')"
               v-model="row.address"
               label="passport_name"
               track-by="id"
@@ -53,13 +68,13 @@
         </div>
       </div>
 
-      <div class="row">
+      <div class="row mt-3">
         <div class="col m-auto">
           Вид статьи мероприятия по АТЗ
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
           <multiselect
-              class="mt-5"
+              :disabled="!check('user')"
               v-model="row.type_event"
               label="name"
               track-by="value"
@@ -82,17 +97,7 @@
           Способ определения поставщика (подрядчика, исполнителя)
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input v-model="row.method"></b-form-input>
-        </div>
-      </div>
-
-      <div class="row mt-3">
-        <div class="col m-auto">
-          Вид документа
-        </div>
-        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input v-model="row.type_document"></b-form-input>
-          <!--          // from here lol-->
+          <b-form-input :disabled="!check('user')" v-model="row.method"></b-form-input>
         </div>
       </div>
 
@@ -102,7 +107,7 @@
           Наименование объекта закупки (лота / договора/контракта)
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input v-model="row.name_object"></b-form-input>
+          <b-form-input :disabled="!check('user')" v-model="row.name_object"></b-form-input>
         </div>
       </div>
 
@@ -111,7 +116,7 @@
           Общая стоимость (руб.)
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input v-model="row.cost_full"></b-form-input>
+          <b-form-input :disabled="!check('user')" v-model="row.cost_full"></b-form-input>
         </div>
       </div>
 
@@ -121,7 +126,7 @@
           Бюджетного финансирования (руб.)
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input v-model="row.cost_budjet"></b-form-input>
+          <b-form-input :disabled="!check('user')" v-model="row.cost_budjet"></b-form-input>
         </div>
       </div>
       <div class="row mt-3">
@@ -129,7 +134,7 @@
           Внебюджетного финансирования (руб.)
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input v-model="row.cost_vb"></b-form-input>
+          <b-form-input :disabled="!check('user')" v-model="row.cost_vb"></b-form-input>
         </div>
       </div>
       <div class="row mt-3">
@@ -138,7 +143,7 @@
           публикации)
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input v-model="row.number_contract"></b-form-input>
+          <b-form-input :disabled="!check('user')" v-model="row.number_contract"></b-form-input>
         </div>
       </div>
       <div class="row mt-3">
@@ -146,7 +151,7 @@
           Дата заключения контракта/договора
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input v-model="row.date_doc"></b-form-input>
+          <b-form-input :disabled="!check('user')" v-model="row.date_doc"></b-form-input>
         </div>
       </div>
       <div class="row mt-3">
@@ -154,10 +159,9 @@
           Номер договора /контракта
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input v-model="row.number_deal"></b-form-input>
+          <b-form-input :disabled="!check('user')" v-model="row.number_deal"></b-form-input>
         </div>
       </div>
-
 
 
       <div class="row mt-3">
@@ -165,7 +169,7 @@
           Наименование поставщика по договору /контракту
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input v-model="row.name_deller_by_doc"></b-form-input>
+          <b-form-input :disabled="!check('user')" v-model="row.name_deller_by_doc"></b-form-input>
         </div>
       </div>
       <div class="row mt-3">
@@ -173,7 +177,7 @@
           ИНН поставщика по договору /контракту
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input v-model="row.inn_deller_by_doc"></b-form-input>
+          <b-form-input :disabled="!check('user')" v-model="row.inn_deller_by_doc"></b-form-input>
         </div>
       </div>
       <div class="row mt-3">
@@ -181,7 +185,7 @@
           Дата начала
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input v-model="row.date_start"></b-form-input>
+          <b-form-input :disabled="!check('user')" v-model="row.date_start"></b-form-input>
         </div>
       </div>
       <div class="row mt-3">
@@ -189,7 +193,7 @@
           Дата окончания
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input v-model="row.date_end"></b-form-input>
+          <b-form-input :disabled="!check('user')" v-model="row.date_end"></b-form-input>
         </div>
       </div>
       <div class="row mt-3">
@@ -197,7 +201,7 @@
           Подтверждающие документы
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input v-model="row.docs"></b-form-input>
+          <b-form-input :disabled="!check('user')" v-model="row.docs"></b-form-input>
         </div>
       </div>
 
@@ -206,15 +210,18 @@
           Комментарий (текстовое поле Заполняет ВУЗ)
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input v-model="row.comment_vuz"></b-form-input>
+          <b-form-input :disabled="!check('user')" v-model="row.comment_vuz"></b-form-input>
         </div>
       </div>
       <div class="row mt-3">
         <div class="col m-auto">
-          ЭкспертМОН +/-
+          ЭкспертМОН
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input v-model="row.mon_expert"></b-form-input>
+          <b-form-select :disabled="!check('dku')" v-model="row.mon_expert" :options="[
+              {value: 1, text: '+'},
+              {value: 2, text: '-'}
+          ]"></b-form-select>
         </div>
       </div>
       <div class="row mt-3">
@@ -222,7 +229,7 @@
           Комментарий эксперта МОН
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input v-model="row.comment_mon"></b-form-input>
+          <b-form-input :disabled="!check('dku')" v-model="row.comment_mon"></b-form-input>
         </div>
       </div>
 
@@ -235,10 +242,10 @@
 import Axios from "axios";
 import CButton from "./CustomButton";
 import Multiselect from "vue-multiselect";
-import {BButton, BFormInput} from "bootstrap-vue";
+import {BButton, BFormInput, BFormSelect} from "bootstrap-vue";
 
 export default {
-  components: {Multiselect, BButton, CButton, BFormInput},
+  components: {Multiselect, BButton, CButton, BFormInput, BFormSelect},
   props: ['passport', 'id_org'],
   name: "table4Remake",
   data() {
@@ -253,9 +260,13 @@ export default {
   },
   async mounted() {
     await this.id_org;
+    await window.Permission;
     this.getTableFourInfo();
   },
   methods: {
+    check(role) {
+      return window.Permission === role;
+    },
     saveContent() {
       console.log(this.modalContent);
       console.log(this.modalContentIndex);
@@ -516,13 +527,11 @@ export default {
     }
   },
   computed: {
+    disableDeleteButton() {
+      if (this.check('dku')) return false;
+    },
     computedHeader() {
-      return array => {
-        return array.map(element => {
-          element
-        }).filter(el => {
-        }).length > 0 ? 'Заполнить карточку' : 'Пустая карточка';
-      }
+      return array => array.row_stages.map(elem => `${elem.type_document || '--'} №${elem.number_deal || '--'} на выполнение работ ${elem.type_event.map(elements => elements.name) || '--'} на сумму ${Number(elem.cost_full) || '--'}`);
     }
   }
 }
@@ -531,7 +540,7 @@ export default {
 <style scoped lang="scss">
 
 .passport-card {
-  height: 76px;
+  height: auto;
   border: 1px solid #dee2e6;
   padding: 20px;
   border-radius: 2px;
@@ -545,7 +554,7 @@ export default {
 
 @media screen and (min-width: 992px) {
   .passport-card {
-    max-width: 32.333333%;
+    //max-width: 32.333333%;
   }
 }
 

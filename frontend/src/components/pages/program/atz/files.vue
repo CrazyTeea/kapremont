@@ -1,6 +1,6 @@
 <template>
   <div class="main-wrapper-upload-files">
-    <div class="table-wrapper">
+    <div>
       <div class="file-wrapper" v-for="(file, index) in files" :key="`file_input_atz_${index}`">
         <file-input v-model="file.value" :index="index"/>
       </div>

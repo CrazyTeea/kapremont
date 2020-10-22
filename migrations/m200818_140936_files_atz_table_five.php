@@ -27,7 +27,7 @@ class m200818_140936_files_atz_table_five extends Migration
      */
     public function safeDown()
     {
-//        $this->dropTable('files_atz_table_five');
+        $this->dropTable('files_atz_table_five');
     }
 
     /*
