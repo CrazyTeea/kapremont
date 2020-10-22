@@ -53,38 +53,41 @@
         <user-info-view :id_org="id_org"/>
       </div>
     </div>
+
+<!--    Тут таблица 2!!!!!!!!!!!!!!!!!!-->
     <div class="row">
-      <comments class="col-12"/>
+      <comments class="w-100"/>
     </div>
     <div class="row mt-5">
-      <b-card no-body class="mb-1 col-12">
+      <b-card no-body class="mb-1 w-100">
         <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.TABLE2>
           <span class="toggle_button">Раздел 2. Антитеррористическая защищенность объектов</span>
         </b-card-header>
         <b-collapse id="TABLE2" accordion="TABLE2" role="tabpanel">
-          <b-card-body>
-            <atz-table @getTable2AtzInfo="setTable2Atz"/>
-          </b-card-body>
-        </b-collapse>
-      </b-card>
-    </div>
-
-    <div class="row mt-5">
-      <b-card no-body class="mb-1 col-12">
-        <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.TABLE3>
-          <span class="toggle_button">Таблица 3</span>
-        </b-card-header>
-        <b-collapse id="TABLE3" accordion="TABLE3" role="tabpanel">
           <b-card-body>
             <table3 :passport="passport" :id_org="id_org"/>
           </b-card-body>
         </b-collapse>
       </b-card>
     </div>
+
+<!--    Тут таблица 3!!!!!!!!!!!!!!!!!-->
     <div class="row mt-5">
-      <b-card no-body class="mb-1 col-12">
+      <b-card no-body class="mb-1 w-100">
+        <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.TABLE3>
+          <span class="toggle_button">Таблица 3</span>
+        </b-card-header>
+        <b-collapse id="TABLE3" accordion="TABLE3" role="tabpanel" visible>
+          <b-card-body>
+            <atz-table @getTable2AtzInfo="setTable2Atz"/>
+          </b-card-body>
+        </b-collapse>
+      </b-card>
+    </div>
+    <div class="row mt-5">
+      <b-card no-body class="mb-1 w-100">
         <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.TABLE4>
-          <span class="toggle_button">Таблица 4</span>
+          <span class="toggle_button">Таблица 4 Реестр договоров заключенных в рамках программы модернизации инфраструктуры (АТЗ) </span>
         </b-card-header>
         <b-collapse id="TABLE4" accordion="TABLE4" role="tabpanel" visible>
           <b-card-body>
@@ -94,7 +97,7 @@
       </b-card>
     </div>
     <div class="row mt-5">
-      <b-card no-body class="mb-1 col-12">
+      <b-card no-body class="mb-1 w-100">
         <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.TABLEDoc>
           <span class="toggle_button">Документы</span>
         </b-card-header>

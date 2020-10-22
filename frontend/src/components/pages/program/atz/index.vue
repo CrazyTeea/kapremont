@@ -13,6 +13,20 @@
             <b-th class="vertical-align-for-table-cell">Сумма бюджетного финансирования (руб)</b-th>
             <b-th class="vertical-align-for-table-cell">Сумма внебюджетного финансирования (руб)</b-th>
             <b-th class="vertical-align-for-table-cell">Сумма общий объем финансирования (руб)</b-th>
+
+            <!--            Данные из карточки-->
+            <b-th class="vertical-align-for-table-cell">Сумма бюджетного финансирования (руб)</b-th>
+            <b-th class="vertical-align-for-table-cell">Сумма внебюджетного финансирования (руб)</b-th>
+            <!--            Данные из карточки-->
+            <b-th class="vertical-align-for-table-cell">Сумма бюджетного финансирования (руб)</b-th>
+            <b-th class="vertical-align-for-table-cell">Сумма внебюджетного финансирования (руб)</b-th>
+            <!--            Данные из карточки-->
+            <b-th class="vertical-align-for-table-cell">Сумма бюджетного финансирования (руб)</b-th>
+            <b-th class="vertical-align-for-table-cell">Сумма внебюджетного финансирования (руб)</b-th>
+            <!--            Остаток-->
+            <b-th class="vertical-align-for-table-cell">Сумма бюджетного финансирования (руб)</b-th>
+            <b-th class="vertical-align-for-table-cell">Сумма внебюджетного финансирования (руб)</b-th>0
+
           </b-tr>
         </b-thead>
         <b-tbody>
@@ -40,6 +54,52 @@
             </b-th>
             <b-th class="vertical-align-for-table-cell normal-font-weight-for-cell">
               <label>{{ cost_o(index) }}</label>
+            </b-th>
+            <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+              --
+            </b-th>
+            <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+              --
+            </b-th>
+            <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+              --
+            </b-th>
+            <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+              --
+            </b-th>
+            <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+              --
+            </b-th>
+
+
+          </b-tr>
+          <b-tr>
+            <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+              --
+            </b-th>
+            <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+              --
+            </b-th>
+            <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+              --
+            </b-th>
+            <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+              --
+            </b-th>
+            <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+              --
+            </b-th>
+            <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+              --
+            </b-th>
+            <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+              --
+            </b-th>
+            <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+              --
+            </b-th>
+            <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+              --
             </b-th>
           </b-tr>
         </b-tbody>
