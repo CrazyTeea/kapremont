@@ -7,17 +7,12 @@ namespace app\controllers\rest;
 use app\models\Atz;
 use app\models\Cities;
 use app\models\Organizations;
-use app\models\OrgInfo;
-use app\models\ProgObjectsEvents;
 use app\models\Program;
 use app\models\ProgramObjects;
 use app\models\Regions;
 use app\models\User;
 use Yii;
-use yii\bootstrap4\Html;
 use yii\helpers\ArrayHelper;
-use yii\helpers\Json;
-use yii\helpers\Url;
 
 /***
  * Class SystemController
@@ -46,58 +41,62 @@ class SystemController extends RestController
                         ['key' => 'label', 'label' => 'Показатель'],
                         ['key' => 'value', 'label' => 'Значение']
                     ];
-                    $id_org = Yii::$app->session->get('user')->id_org;
-                    $program = Program::findOne(['id_org' => $id_org]);
+                    $id_org = Yii::$app->session->get('user')->id_org ?? null;
 
-                    $org = Organizations::findOne($id_org);
-                    if (!$program and $org and $org->id_founder > 1) {
-                        $program = new Program();
-                        $program->id_org = $org->id;
-                        $program->save(false);
-                    }
+                    if ($id_org) {
+                        $program = Program::findOne(['id_org' => $id_org]);
+                        $org = Organizations::findOne($id_org);
 
-                    Yii::$app->getSession()->set('program', $program);
-                    if (!$program)
-                        return null;
-                    $ret['items'] = [
-                        ['id' => 1, 'label' =>
-                            "Объем финансового обеспечения (бюджетных средств) на реализацию мероприятий по модернизации инфраструктуры, 
+
+                        if (!$program and $org and $org->id_founder > 1) {
+                            $program = new Program();
+                            $program->id_org = $org->id;
+                            $program->save(false);
+                        }
+
+                        Yii::$app->getSession()->set('program', $program);
+                        if (!$program)
+                            return null;
+                        $ret['items'] = [
+                            ['id' => 1, 'label' =>
+                                "Объем финансового обеспечения (бюджетных средств) на реализацию мероприятий по модернизации инфраструктуры, 
                             включая капитальный ремонт объектов и проведение мероприятий по антитеррористической защищенности объектов,тыс. рублей",
-                            'value' => round($program->finance_volume, 2)
-                        ],
-                    ];
-                    if (!Yii::$app->getUser()->can('faiv_user')) {
-                        $ret['items'] = ArrayHelper::merge($ret['items'], [
+                                'value' => round($program->finance_volume, 2)
+                            ],
+                        ];
+                        if (!Yii::$app->getUser()->can('faiv_user')) {
+                            $ret['items'] = ArrayHelper::merge($ret['items'], [
+
+                                    ['id' => 2, 'label' =>
+                                        "Из них на реализацию мероприятий по антитеррористической защищенности, не более,тыс. рублей",
+                                        'value' => round($program->finance_events, 2)
+                                    ],
+                                    ['id' => 3, 'label' =>
+                                        "Предельная стоимость капитального ремонта 1 кв. м. площади, рублей",
+                                        'value' => round($program->cost, 2)
+                                    ],
+                                    ['id' => 4, 'label' =>
+                                        "Ожидаемая площадь капитального ремонта, кв.м.",
+                                        'value' => round(($program->finance_volume * 1000 - $program->finance_events * 1000) / $program->cost ?: 1, 2)
+                                    ]
+                                ]
+                            );
+                        } else $ret['items'] = ArrayHelper::merge($ret['items'], [
 
                                 ['id' => 2, 'label' =>
-                                    "Из них на реализацию мероприятий по антитеррористической защищенности, не более,тыс. рублей",
+                                    "Из них на реализацию мероприятий по антитеррористической защищенности",
                                     'value' => round($program->finance_events, 2)
                                 ],
                                 ['id' => 3, 'label' =>
-                                    "Предельная стоимость капитального ремонта 1 кв. м. площади, рублей",
+                                    "Из них на реализацию мероприятий по капитальному ремонту",
                                     'value' => round($program->cost, 2)
                                 ],
-                                ['id' => 4, 'label' =>
-                                    "Ожидаемая площадь капитального ремонта, кв.м.",
-                                    'value' => round(($program->finance_volume * 1000 - $program->finance_events * 1000) / $program->cost ?: 1, 2)
-                                ]
                             ]
                         );
-                    } else $ret['items'] = ArrayHelper::merge($ret['items'], [
+                    }
 
-                            ['id' => 2, 'label' =>
-                                "Из них на реализацию мероприятий по антитеррористической защищенности",
-                                'value' => round($program->finance_events, 2)
-                            ],
-                            ['id' => 3, 'label' =>
-                                "Из них на реализацию мероприятий по капитальному ремонту",
-                                'value' => round($program->cost, 2)
-                            ],
-                        ]
-                    );
 
                     return $ret;
-                    break;
                 }
                 case 'programView':
                 {
