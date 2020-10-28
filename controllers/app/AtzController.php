@@ -84,12 +84,13 @@ class AtzController extends AppController
 
 
 
+
         $id_org = Yii::$app->request->post('id_org');
 
         foreach ($dataArray as $data) {
-            if (empty($data['object'])) continue;
+            if (!count($data['object'])) continue;
 
-            $atz = AtzTableThree::findOne($data['id']) ?? new AtzTableThree();
+            $atz = AtzTableThree::findOne($data['id'] ?? null) ?? new AtzTableThree();
             $atz->id_object = $data['object']['id'];
             $atz->object = $data['object']['passport_name'];
             $atz->id_org = $id_org;
