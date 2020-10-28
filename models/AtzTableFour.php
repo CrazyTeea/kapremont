@@ -2,33 +2,84 @@
 
 namespace app\models;
 
-use yii\db\ActiveRecord;
-
-class AtzTableFour extends ActiveRecord
+/**
+ * This is the model class for table "atz_table_four".
+ *
+ * @property int $id
+ * @property int|null $id_org
+ * @property string|null $stage_name
+ * @property string|null $stage_number
+ * @property int|null $card_number
+ * @property string|null $method
+ * @property string|null $type_document
+ * @property string|null $name_object
+ * @property string|null $cost_full
+ * @property string|null $cost_budjet
+ * @property string|null $cost_vb
+ * @property string|null $number_contract
+ * @property string|null $date_doc
+ * @property string|null $number_deal
+ * @property string|null $name_deller_by_doc
+ * @property string|null $inn_deller_by_doc
+ * @property string|null $date_start
+ * @property string|null $date_end
+ * @property string|null $docs
+ * @property string|null $comment_vuz
+ * @property int|null $mon_expert
+ * @property string|null $comment_mon
+ */
+class AtzTableFour extends \yii\db\ActiveRecord
 {
-    // public $stage_number;
-    // public $stage_name;
-    // public $method;
-    // public $type_document;
-    // public $name_object;
-    // public $cost_full;
-    // public $cost_budjet;
-    // public $cost_vb;
-    // public $number_contract;
-    // public $date_doc;
-    // public $number_deal;
-    // public $name_deller_by_doc;
-    // public $inn_deller_by_doc;
-    // public $date_start;
-    // public $date_end;
-    // public $docs;
-    // public $comment_vuz;
-    // public $mon_expert;
-    // public $comment_mon;
-
+    /**
+     * {@inheritdoc}
+     */
     public static function tableName()
     {
         return 'atz_table_four';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function rules()
+    {
+        return [
+            [['id_org', 'card_number', 'mon_expert'], 'integer'],
+            [['date_doc', 'date_start', 'date_end'], 'safe'],
+            [['comment_vuz'], 'string'],
+            [['stage_name', 'stage_number', 'method', 'type_document', 'name_object', 'cost_full', 'cost_budjet', 'cost_vb', 'number_contract', 'number_deal', 'name_deller_by_doc', 'inn_deller_by_doc', 'docs', 'comment_mon'], 'string', 'max' => 255],
+        ];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function attributeLabels()
+    {
+        return [
+            'id' => 'ID',
+            'id_org' => 'Id Org',
+            'stage_name' => 'Stage Name',
+            'stage_number' => 'Stage Number',
+            'card_number' => 'Card Number',
+            'method' => 'Method',
+            'type_document' => 'Type Document',
+            'name_object' => 'Name Object',
+            'cost_full' => 'Cost Full',
+            'cost_budjet' => 'Cost Budjet',
+            'cost_vb' => 'Cost Vb',
+            'number_contract' => 'Number Contract',
+            'date_doc' => 'Date Doc',
+            'number_deal' => 'Number Deal',
+            'name_deller_by_doc' => 'Name Deller By Doc',
+            'inn_deller_by_doc' => 'Inn Deller By Doc',
+            'date_start' => 'Date Start',
+            'date_end' => 'Date End',
+            'docs' => 'Docs',
+            'comment_vuz' => 'Comment Vuz',
+            'mon_expert' => 'Mon Expert',
+            'comment_mon' => 'Comment Mon',
+        ];
     }
 
     public static function destroy($id)
