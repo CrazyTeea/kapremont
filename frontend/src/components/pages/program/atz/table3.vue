@@ -33,64 +33,112 @@
             <b-td class="mw-145">
               <b-form-input :disabled="isDku()" type="number" v-model="row.video_system.podved"></b-form-input>
               <div class="row">
-                <div class="col m-0 pr-0"><b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.video_system_bud.dku"></b-form-input></div>
-                <div class="col m-0 pl-0"><b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.video_system_nebud.dku"></b-form-input></div>
+                <div class="col m-0 pr-0">
+                  <b-form-input :disabled="!isDku()" type="number" class="mt-1"
+                                v-model="row.video_system_bud.dku"></b-form-input>
+                </div>
+                <div class="col m-0 pl-0">
+                  <b-form-input :disabled="!isDku()" type="number" class="mt-1"
+                                v-model="row.video_system_nebud.dku"></b-form-input>
+                </div>
               </div>
               <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
             </b-td>
             <b-td class="mw-145">
               <b-form-input :disabled="isDku()" type="number" v-model="row.evacuation_system.podved"></b-form-input>
               <div class="row">
-                <div class="col m-0 pr-0"><b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.evacuation_system_bud.dku"></b-form-input></div>
-                <div class="col m-0 pl-0"><b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.evacuation_system_nebud.dku"></b-form-input></div>
+                <div class="col m-0 pr-0">
+                  <b-form-input :disabled="!isDku()" type="number" class="mt-1"
+                                v-model="row.evacuation_system_bud.dku"></b-form-input>
+                </div>
+                <div class="col m-0 pl-0">
+                  <b-form-input :disabled="!isDku()" type="number" class="mt-1"
+                                v-model="row.evacuation_system_nebud.dku"></b-form-input>
+                </div>
               </div>
               <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
             </b-td>
             <b-td class="mw-145">
               <b-form-input :disabled="isDku()" type="number" v-model="row.light_system.podved"></b-form-input>
               <div class="row">
-                <div class="col m-0 pr-0"><b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.light_system_bud.dku"></b-form-input></div>
-                <div class="col m-0 pl-0"><b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.light_system_nebud.dku"></b-form-input></div>
+                <div class="col m-0 pr-0">
+                  <b-form-input :disabled="!isDku()" type="number" class="mt-1"
+                                v-model="row.light_system_bud.dku"></b-form-input>
+                </div>
+                <div class="col m-0 pl-0">
+                  <b-form-input :disabled="!isDku()" type="number" class="mt-1"
+                                v-model="row.light_system_nebud.dku"></b-form-input>
+                </div>
               </div>
               <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
             </b-td>
             <b-td class="mw-145">
               <b-form-input :disabled="isDku()" type="number" v-model="row.predator_system.podved"></b-form-input>
               <div class="row">
-                <div class="col m-0 pr-0"><b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.predator_system_bud.dku"></b-form-input></div>
-                <div class="col m-0 pl-0"><b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.predator_system_nebud.dku"></b-form-input></div>
+                <div class="col m-0 pr-0">
+                  <b-form-input :disabled="!isDku()" type="number" class="mt-1"
+                                v-model="row.predator_system_bud.dku"></b-form-input>
+                </div>
+                <div class="col m-0 pl-0">
+                  <b-form-input :disabled="!isDku()" type="number" class="mt-1"
+                                v-model="row.predator_system_nebud.dku"></b-form-input>
+                </div>
               </div>
               <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
             </b-td>
             <b-td class="mw-145">
               <b-form-input :disabled="isDku()" type="number" v-model="row.alarm_warning_system.podved"></b-form-input>
               <div class="row">
-                <div class="col m-0 pr-0"><b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.alarm_warning_system_bud.dku"></b-form-input></div>
-                <div class="col m-0 pl-0"><b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.alarm_warning_system_nebud.dku"></b-form-input></div>
+                <div class="col m-0 pr-0">
+                  <b-form-input :disabled="!isDku()" type="number" class="mt-1"
+                                v-model="row.alarm_warning_system_bud.dku"></b-form-input>
+                </div>
+                <div class="col m-0 pl-0">
+                  <b-form-input :disabled="!isDku()" type="number" class="mt-1"
+                                v-model="row.alarm_warning_system_nebud.dku"></b-form-input>
+                </div>
               </div>
               <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
             </b-td>
             <b-td class="mw-145">
               <b-form-input :disabled="isDku()" type="number" v-model="row.alarm_fire_system.podved"></b-form-input>
               <div class="row">
-                <div class="col m-0 pr-0"><b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.alarm_fire_system_bud.dku"></b-form-input></div>
-                <div class="col m-0 pl-0"><b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.alarm_fire_system_nebud.dku"></b-form-input></div>
+                <div class="col m-0 pr-0">
+                  <b-form-input :disabled="!isDku()" type="number" class="mt-1"
+                                v-model="row.alarm_fire_system_bud.dku"></b-form-input>
+                </div>
+                <div class="col m-0 pl-0">
+                  <b-form-input :disabled="!isDku()" type="number" class="mt-1"
+                                v-model="row.alarm_fire_system_nebud.dku"></b-form-input>
+                </div>
               </div>
               <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
             </b-td>
             <b-td class="mw-145">
               <b-form-input :disabled="isDku()" type="number" v-model="row.phone_system.podved"></b-form-input>
               <div class="row">
-                <div class="col m-0 pr-0"><b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.phone_system_bud.dku"></b-form-input></div>
-                <div class="col m-0 pl-0"><b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.phone_system_nebud.dku"></b-form-input></div>
+                <div class="col m-0 pr-0">
+                  <b-form-input :disabled="!isDku()" type="number" class="mt-1"
+                                v-model="row.phone_system_bud.dku"></b-form-input>
+                </div>
+                <div class="col m-0 pl-0">
+                  <b-form-input :disabled="!isDku()" type="number" class="mt-1"
+                                v-model="row.phone_system_nebud.dku"></b-form-input>
+                </div>
               </div>
               <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
             </b-td>
             <b-td class="mw-145">
               <b-form-input :disabled="isDku()" type="number" v-model="row.fence.podved"></b-form-input>
               <div class="row">
-                <div class="col m-0 pr-0"><b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.fence_bud.dku"></b-form-input></div>
-                <div class="col m-0 pl-0"><b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.fence_nebud.dku"></b-form-input></div>
+                <div class="col m-0 pr-0">
+                  <b-form-input :disabled="!isDku()" type="number" class="mt-1"
+                                v-model="row.fence_bud.dku"></b-form-input>
+                </div>
+                <div class="col m-0 pl-0">
+                  <b-form-input :disabled="!isDku()" type="number" class="mt-1"
+                                v-model="row.fence_nebud.dku"></b-form-input>
+                </div>
               </div>
 
               <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
@@ -98,8 +146,14 @@
             <b-td class="mw-145">
               <b-form-input :disabled="isDku()" type="number" v-model="row.skud.podved"></b-form-input>
               <div class="row">
-                <div class="col m-0 pr-0"><b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.skud_bud.dku"></b-form-input></div>
-                <div class="col m-0 pl-0"><b-form-input :disabled="!isDku()" type="number" class="mt-1" v-model="row.skud_nebud.dku"></b-form-input></div>
+                <div class="col m-0 pr-0">
+                  <b-form-input :disabled="!isDku()" type="number" class="mt-1"
+                                v-model="row.skud_bud.dku"></b-form-input>
+                </div>
+                <div class="col m-0 pl-0">
+                  <b-form-input :disabled="!isDku()" type="number" class="mt-1"
+                                v-model="row.skud_nebud.dku"></b-form-input>
+                </div>
               </div>
               <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input>
             </b-td>
@@ -152,7 +206,33 @@ import Multiselect from "vue-multiselect";
 import Axios from "axios";
 
 export default {
-  props: ["passport", "id_org"],
+  props: {
+    passport: null,
+    id_org: null,
+    sum: {
+      video_system_bud: 0,
+      evacuation_system_bud: 0,
+      light_system_bud: 0,
+      predator_system_bud: 0,
+      alarm_warning_system_bud: 0,
+      alarm_fire_system_bud: 0,
+      phone_system_bud: 0,
+      fence_bud: 0,
+      skud_bud: 0,
+
+
+      video_system_nebud: 0,
+      evacuation_system_nebud: 0,
+      light_system_nebud: 0,
+      predator_system_nebud: 0,
+      alarm_warning_system_nebud: 0,
+      alarm_fire_system_nebud: 0,
+      phone_system_nebud: 0,
+      fence_nebud: 0,
+      skud_nebud: 0
+
+    }
+  },
   components: {
     BButton,
     BTableSimple,
@@ -164,12 +244,80 @@ export default {
     BFormInput,
     Multiselect,
   },
+  watch: {
+    rows: {
+      handler() {
+
+        let toNum = (val) => typeof val === 'string' ? val.toNumber() : Number(val)
+
+        this.sum.video_system_bud = this.rows.reduce((a, b) => {
+          return a + toNum(b.video_system_bud.dku)
+        }, 0);
+        this.sum.evacuation_system_bud = this.rows.reduce((a, b) => {
+          return a + toNum(b.evacuation_system_bud.dku)
+        }, 0);
+        this.sum.light_system_bud = this.rows.reduce((a, b) => {
+          return a + toNum(b.light_system_bud.dku)
+        }, 0);
+        this.sum.predator_system_bud = this.rows.reduce((a, b) => {
+          return a + toNum(b.predator_system_bud.dku)
+        }, 0);
+        this.sum.alarm_warning_system_bud = this.rows.reduce((a, b) => {
+          return a + toNum(b.alarm_warning_system_bud.dku)
+        }, 0);
+        this.sum.alarm_fire_system_bud = this.rows.reduce((a, b) => {
+          return a + toNum(b.alarm_fire_system_bud.dku)
+        }, 0);
+        this.sum.phone_system_bud = this.rows.reduce((a, b) => {
+          return a + toNum(b.phone_system_bud.dku)
+        }, 0);
+        this.sum.fence_bud = this.rows.reduce((a, b) => {
+          return a + toNum(b.fence_bud.dku)
+        }, 0);
+        this.sum.skud_bud = this.rows.reduce((a, b) => {
+          return a + toNum(b.skud_bud.dku)
+        }, 0);
+
+
+        this.sum.video_system_nebud = this.rows.reduce((a, b) => {
+          return a + toNum(b.video_system_nebud.dku)
+        }, 0);
+        this.sum.evacuation_system_nebud = this.rows.reduce((a, b) => {
+          return a + toNum(b.evacuation_system_nebud.dku)
+        }, 0);
+        this.sum.light_system_nebud = this.rows.reduce((a, b) => {
+          return a + toNum(b.light_system_nebud.dku)
+        }, 0);
+        this.sum.predator_system_nebud = this.rows.reduce((a, b) => {
+          return a + toNum(b.predator_system_nebud.dku)
+        }, 0);
+        this.sum.alarm_warning_system_nebud = this.rows.reduce((a, b) => {
+          return a + toNum(b.alarm_warning_system_nebud.dku)
+        }, 0);
+        this.sum.alarm_fire_system_nebud = this.rows.reduce((a, b) => {
+          return a + toNum(b.alarm_fire_system_nebud.dku)
+        }, 0);
+        this.sum.phone_system_nebud = this.rows.reduce((a, b) => {
+          return a + toNum(b.phone_system_nebud.dku)
+        }, 0);
+        this.sum.fence_nebud = this.rows.reduce((a, b) => {
+          return a + toNum(b.fence_nebud.dku)
+        }, 0);
+        this.sum.skud_nebud = this.rows.reduce((a, b) => {
+          return a + toNum(b.skud_nebud.dku)
+        }, 0);
+
+      },
+      deep: true
+    }
+  },
   data() {
     return {
       csrf: document.getElementsByName("csrf-token")[0].content,
       rows: [],
       sel: null,
       sel2: null,
+
     };
   },
   async mounted() {
@@ -219,12 +367,6 @@ export default {
           "X-CSRF-Token": this.csrf,
         },
       })
-          .then((res) => {
-            console.log(res);
-          })
-          .catch(() => {
-            console.log("error!");
-          });
     },
     debug() {
       console.log(this.rows);
@@ -277,6 +419,100 @@ export default {
           dku: null,
           dku_choice: null,
         },
+
+        video_system_bud: {
+          podved: null,
+          dku: null,
+          dku_choice: null,
+        },
+        evacuation_system_bud: {
+          podved: null,
+          dku: null,
+          dku_choice: null,
+        },
+        light_system_bud: {
+          podved: null,
+          dku: null,
+          dku_choice: null,
+        },
+        predator_system_bud: {
+          podved: null,
+          dku: null,
+          dku_choice: null,
+        },
+        alarm_warning_system_bud: {
+          podved: null,
+          dku: null,
+          dku_choice: null,
+        },
+        alarm_fire_system_bud: {
+          podved: null,
+          dku: null,
+          dku_choice: null,
+        },
+        phone_system_bud: {
+          podved: null,
+          dku: null,
+          dku_choice: null,
+        },
+        fence_bud: {
+          podved: null,
+          dku: null,
+          dku_choice: null,
+        },
+        skud_bud: {
+          podved: null,
+          dku: null,
+          dku_choice: null,
+        },
+
+
+        video_system_nebud: {
+          podved: null,
+          dku: null,
+          dku_choice: null,
+        },
+        evacuation_system_nebud: {
+          podved: null,
+          dku: null,
+          dku_choice: null,
+        },
+        light_system_nebud: {
+          podved: null,
+          dku: null,
+          dku_choice: null,
+        },
+        predator_system_nebud: {
+          podved: null,
+          dku: null,
+          dku_choice: null,
+        },
+        alarm_warning_system_nebud: {
+          podved: null,
+          dku: null,
+          dku_choice: null,
+        },
+        alarm_fire_system_nebud: {
+          podved: null,
+          dku: null,
+          dku_choice: null,
+        },
+        phone_system_nebud: {
+          podved: null,
+          dku: null,
+          dku_choice: null,
+        },
+        fence_nebud: {
+          podved: null,
+          dku: null,
+          dku_choice: null,
+        },
+        skud_nebud: {
+          podved: null,
+          dku: null,
+          dku_choice: null,
+        },
+
       });
     },
   },
