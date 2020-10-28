@@ -4,15 +4,6 @@
       <b-table-simple hover bordered>
         <b-thead>
           <b-tr>
-            <b-td></b-td>
-            <b-td class="text-center" colspan="2">Согласовано</b-td>
-            <b-td class="text-center" colspan="2">Закантрактовано</b-td>
-            <b-td class="text-center" colspan="2">На исполнении</b-td>
-            <b-td class="text-center" colspan="2">Исполнено</b-td>
-            <b-td></b-td>
-            <b-td></b-td>
-          </b-tr>
-          <b-tr>
             <b-th>Объект / Адрес</b-th>
             <b-th>Система видеонаблюдения</b-th>
             <b-th>Система оповещения и управления эвакуацией</b-th>

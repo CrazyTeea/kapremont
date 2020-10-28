@@ -3,11 +3,21 @@
     <b-form id="atz_form" method="post">
       <input id="hidden" name="_csrf" v-model="csrf" type='hidden'/>
       <b-table-simple
+          responsive
           bordered
           hover
           style="font-size: 12px;"
       >
         <b-thead>
+          <b-tr>
+            <b-td></b-td>
+            <b-td class="text-center" colspan="3">Согласовано</b-td>
+            <b-td class="text-center" colspan="2">Законтрактовано</b-td>
+            <b-td class="text-center" colspan="2">На исполнении</b-td>
+            <b-td class="text-center" colspan="2">Исполнено</b-td>
+            <b-td class="text-center" colspan="2">Остаток</b-td>
+
+          </b-tr>
           <b-tr>
             <b-th class="vertical-align-for-table-cell">Направление расходов</b-th>
             <b-th class="vertical-align-for-table-cell">Сумма бюджетного финансирования (руб)</b-th>
@@ -25,7 +35,7 @@
             <b-th class="vertical-align-for-table-cell">Сумма внебюджетного финансирования (руб)</b-th>
             <!--            Остаток-->
             <b-th class="vertical-align-for-table-cell">Сумма бюджетного финансирования (руб)</b-th>
-            <b-th class="vertical-align-for-table-cell">Сумма внебюджетного финансирования (руб)</b-th>0
+            <b-th class="vertical-align-for-table-cell">Сумма внебюджетного финансирования (руб)</b-th>
 
           </b-tr>
         </b-thead>
@@ -72,6 +82,15 @@
             <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
               --
             </b-th>
+            <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+              --
+            </b-th>
+            <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+              --
+            </b-th>
+             <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+              --
+            </b-th>
 
 
           </b-tr>
@@ -101,6 +120,15 @@
               --
             </b-th>
             <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+              --
+            </b-th>
+            <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+              --
+            </b-th>
+            <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+              --
+            </b-th>
+             <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
               --
             </b-th>
           </b-tr>
@@ -132,7 +160,8 @@
 
 <script>
 import Axios from 'axios'
-import {BButton, BForm, BFormInput, BTableSimple, BTbody, BTfoot, BTh, BThead, BTr, VBToggle} from "bootstrap-vue";
+import {BButton, BForm, BFormInput, BTableSimple, BTd,
+  BTbody, BTfoot, BTh, BThead, BTr, VBToggle} from "bootstrap-vue";
 
 export default {
   directives: {
@@ -179,6 +208,7 @@ export default {
   },
 
   components: {
+    BTd,
     BButton,
     BForm,
     BFormInput,

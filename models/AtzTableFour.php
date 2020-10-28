@@ -27,6 +27,7 @@ namespace app\models;
  * @property string|null $comment_vuz
  * @property int|null $mon_expert
  * @property string|null $comment_mon
+ * @property string $zakant
  */
 class AtzTableFour extends \yii\db\ActiveRecord
 {
@@ -46,7 +47,7 @@ class AtzTableFour extends \yii\db\ActiveRecord
         return [
             [['id_org', 'card_number', 'mon_expert'], 'integer'],
             [['date_doc', 'date_start', 'date_end'], 'safe'],
-            [['comment_vuz'], 'string'],
+            [['comment_vuz',], 'string'],
             [['stage_name', 'stage_number', 'method', 'type_document', 'name_object', 'cost_full', 'cost_budjet', 'cost_vb', 'number_contract', 'number_deal', 'name_deller_by_doc', 'inn_deller_by_doc', 'docs', 'comment_mon'], 'string', 'max' => 255],
         ];
     }
