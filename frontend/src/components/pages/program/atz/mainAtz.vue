@@ -1,5 +1,5 @@
 <template>
-  <div class="main_wrapper">
+  <div v-if="ready" class="main_wrapper">
     <div class="row">
       <div class="col-6">
         <h6>{{ orgInfo.name }}</h6>
@@ -65,7 +65,7 @@
         </b-card-header>
         <b-collapse id="TABLE2" accordion="TABLE2" role="tabpanel">
           <b-card-body>
-            <table3 :passport="passport" :id_org="id_org"/>
+            <table3 :sum="sum" :passport="passport" :id_org="id_org"/>
           </b-card-body>
         </b-collapse>
       </b-card>
@@ -79,7 +79,7 @@
         </b-card-header>
         <b-collapse id="TABLE3" accordion="TABLE3" role="tabpanel" visible>
           <b-card-body>
-            <atz-table @getTable2AtzInfo="setTable2Atz"/>
+            <atz-table :data="sum" @getTable2AtzInfo="setTable2Atz"/>
           </b-card-body>
         </b-collapse>
       </b-card>
@@ -164,23 +164,59 @@ export default {
       orgInfo: {},
       id_org: null,
       table2Info: {},
+      sums3: {},
       passport: [],
       finanse_volume: null,
-      id_card: 1
+      id_card: 1,
+      sum: {
+        video_system_bud: 0,
+        evacuation_system_bud: 0,
+        light_system_bud: 0,
+        predator_system_bud: 0,
+        alarm_warning_system_bud: 0,
+        alarm_fire_system_bud: 0,
+        phone_system_bud: 0,
+        fence_bud: 0,
+        skud_bud: 0,
+
+
+        video_system_nebud: 0,
+        evacuation_system_nebud: 0,
+        light_system_nebud: 0,
+        predator_system_nebud: 0,
+        alarm_warning_system_nebud: 0,
+        alarm_fire_system_nebud: 0,
+        phone_system_nebud: 0,
+        fence_nebud: 0,
+        skud_nebud: 0
+
+      },
+      ready: false
     };
   },
   async mounted() {
     await this.init();
     await this.getPassportInfo();
     await this.getCurentOrg();
-    console.group('info');
+    this.ready = true
 
-    console.groupEnd()
+
+  },
+  computed: {},
+  watch: {
+    sum: {
+      handler(nw) {
+        //console.log(nw)
+      },
+      deep: true
+    }
+
   },
   methods: {
     setTable2Atz(event) {
       this.table2Info = event;
-    },
+    }
+    ,
     init() {
       if (window._Organization) this.orgInfo = window._Organization;
 
@@ -188,7 +224,7 @@ export default {
 
       if (this.$route.params.id) this.id_org = this.$route.params.id;
 
-      console.log(this.id_org);
+
     },
     async getPassportInfo() {
       let data = new FormData();
@@ -200,7 +236,8 @@ export default {
       }).then(res => {
         this.passport = res.data;
       });
-    },
+    }
+    ,
     async getCurentOrg() {
       return Axios.post(`/api/org-table/${this.$route.params.id}`, null, {
         headers: {
@@ -209,9 +246,12 @@ export default {
       }).then(res => {
         this.finanse_volume = res.data.programm.finance_volume;
       });
-    },
-  },
-};
+    }
+    ,
+  }
+  ,
+}
+;
 </script>
 
 <style></style>

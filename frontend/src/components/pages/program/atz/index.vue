@@ -41,6 +41,7 @@
                   placeholder="Цена"
                   min="0"
                   type="number"
+                  disabled
               ></b-form-input>
             </b-th>
             <b-th class="vertical-align-for-table-cell normal-font-weight-for-cell">
@@ -50,6 +51,7 @@
                   placeholder="Цена"
                   min="0"
                   type="number"
+                  disabled
               ></b-form-input>
             </b-th>
             <b-th class="vertical-align-for-table-cell normal-font-weight-for-cell">
@@ -136,6 +138,46 @@ export default {
   directives: {
     'b-toggle': VBToggle
   },
+  props:['data'],
+
+  watch:{
+    data:{
+      handler(){
+        this.items[0].cost_b = this.data.video_system_bud;
+        this.items[0].cost_v = this.data.video_system_nebud;
+
+
+        this.items[1].cost_b = this.data.evacuation_system_bud;
+        this.items[1].cost_v = this.data.evacuation_system_nebud;
+
+
+        this.items[2].cost_b = this.data.light_system_bud;
+        this.items[2].cost_v = this.data.light_system_nebud;
+
+
+        this.items[3].cost_b = this.data.predator_system_bud;
+        this.items[3].cost_v = this.data.predator_system_nebud;
+
+        this.items[4].cost_b = this.data.alarm_warning_system_bud;
+        this.items[4].cost_v = this.data.alarm_warning_system_nebud;
+
+        this.items[5].cost_b = this.data.alarm_fire_system_bud;
+        this.items[5].cost_v = this.data.alarm_fire_system_nebud;
+
+        this.items[6].cost_b = this.data.phone_system_bud;
+        this.items[6].cost_v = this.data.phone_system_nebud;
+
+        this.items[7].cost_b = this.data.fence_bud;
+        this.items[7].cost_v = this.data.fence_nebud;
+
+        this.items[8].cost_b = this.data.skud_bud;
+        this.items[8].cost_v = this.data.skud_nebud;
+
+      },
+      deep:true
+    }
+  },
+
   components: {
     BButton,
     BForm,
@@ -147,8 +189,10 @@ export default {
     BTbody,
     BTfoot,
   },
-  mounted() {
-    Axios.get('/rest/system/get-page', {
+
+  async mounted() {
+
+    /*Axios.get('/rest/system/get-page', {
       params: {
         pageName: 'atz',
         //id_org:document.getElementById('global_id_org').value
@@ -165,7 +209,7 @@ export default {
       });
     }).catch(err => {
       console.error(err);
-    });
+    });*/
   },
 
   data() {

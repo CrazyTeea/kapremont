@@ -67,6 +67,15 @@ async function getUser() {
 
 }
 
+String.prototype.toNumber = function () {
+    if (this.split(',').length - 1 > 1) {
+        return 0;
+    }
+    let n = this.replace(',', '.');
+    n = Number(n);
+    return isNaN(n) ? 0 : n;
+};
+
 /*router.beforeEach((to, from, next) => {
     if (to.path !== "/error/browser") {
         let access = false;
