@@ -21,7 +21,7 @@ $config = [
         'admin' => [
             'class' => 'mdm\admin\Module',
             'layout' => 'left-menu',
-            'mainLayout' => '@app/views/layouts/main.php',
+            'mainLayout' => '@app/views/layouts/admin.php',
             'controllerMap' => [
                 'assignment' => [
                     'class' => 'mdm\admin\controllers\AssignmentController',
@@ -170,6 +170,11 @@ $config = [
         ],
         'assetManager' => [
             'appendTimestamp' => true,
+            'bundles' => [
+                'yii\web\JqueryAsset' => false,
+                'yii\bootstrap4\BootstrapPluginAsset' => false,
+                'yii\bootstrap4\BootstrapAsset' => false,
+            ],
         ],
 
     ],
