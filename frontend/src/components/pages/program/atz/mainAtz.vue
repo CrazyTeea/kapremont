@@ -169,6 +169,7 @@ export default {
       passport: [],
       finanse_volume: null,
       id_card: 1,
+
       sum: {
         video_system_bud: 0,
         evacuation_system_bud: 0,
@@ -214,10 +215,10 @@ export default {
 
   },
   methods: {
+
     setTable2Atz(event) {
       this.table2Info = event;
-    }
-    ,
+    },
     init() {
       if (window._Organization) this.orgInfo = window._Organization;
 
