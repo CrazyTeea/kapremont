@@ -151,7 +151,7 @@
           Дата заключения контракта/договора
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input :disabled="!check('user')" v-model="row.date_doc"></b-form-input>
+          <b-form-input type="date" :disabled="!check('user')" v-model="row.date_doc"></b-form-input>
         </div>
       </div>
       <div class="row mt-3">
@@ -185,7 +185,7 @@
           Дата начала
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input :disabled="!check('user')" v-model="row.date_start"></b-form-input>
+          <b-form-input type="date" :disabled="!check('user')" v-model="row.date_start"></b-form-input>
         </div>
       </div>
       <div class="row mt-3">
@@ -193,7 +193,7 @@
           Дата окончания
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input :disabled="!check('user')" v-model="row.date_end"></b-form-input>
+          <b-form-input type="date" :disabled="!check('user')" v-model="row.date_end"></b-form-input>
         </div>
       </div>
       <div class="row mt-3">
