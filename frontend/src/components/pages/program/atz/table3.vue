@@ -170,9 +170,39 @@
         </b-tbody>
       </b-table-simple>
     </div>
-    <div class="d-flex justify-content-end mt-2">
-      <b-button size="sm" @click="addRow">Добавить строку</b-button>
-      <b-button size="sm" variant="success" class="ml-2" @click="saveChanges">Сохранить</b-button>
+    <div class=" mt-2">
+      <div class="row">
+        <div class="col">
+          <div class="row">
+            <div class="col pr-0">
+              <div v-if="files.file0S" class="row float-left">
+                <div class="col"><a @click="downloadFile(0)">{{ files.file0S }}</a></div>
+                <div class="text-danger"><b-icon @click="files.file0S = null" icon="trash-fill"></b-icon></div>
+
+              </div>
+
+              <b-form-file v-else v-model="files.file0" @input="saveFile(0)" v-can:user,faiv_user/>
+            </div>
+            <div class="col pr-0">
+              <div v-if="files.file1S" class="row float-left">
+                <div class="col"><a @click="downloadFile(0)">{{ files.file1S }}</a></div>
+                <div class="text-danger"><b-icon @click="files.file1S = null" icon="trash-fill"></b-icon></div>
+
+              </div>
+              <b-form-file v-else v-model="files.file1" @input="saveFile(1)" v-can:user,faiv_user/>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="float-right">
+            <b-button size="sm" @click="addRow">Добавить строку</b-button>
+            <b-button size="sm" variant="success" class="ml-2" @click="saveChanges">Сохранить</b-button>
+          </div>
+
+        </div>
+      </div>
+
+
     </div>
     <div class="mt-5">
       <!-- <multiselect
@@ -204,9 +234,13 @@
 </template>
 
 <script>
-import {BButton, BFormInput, BTableSimple, BTbody, BTd, BTh, BThead, BTr} from "bootstrap-vue";
+import {
+  BButton, BFormInput, BFormFile,
+  BTableSimple, BTbody, BTd, BTh, BThead, BTr
+} from "bootstrap-vue";
 import Multiselect from "vue-multiselect";
 import Axios from "axios";
+import files from "./files";
 
 export default {
   props: {
@@ -246,6 +280,7 @@ export default {
     BTr,
     BFormInput,
     Multiselect,
+    BFormFile
   },
   watch: {
     rows: {
@@ -320,14 +355,53 @@ export default {
       rows: [],
       sel: null,
       sel2: null,
-
+      files: {
+        file0: null,
+        file1: null,
+        file0S:null,
+        file1S:null
+      },
     };
   },
   async mounted() {
     await this.id_org;
     await this.getInfoTable3();
+    await this.getFiles()
   },
   methods: {
+    downloadFile(type){
+      window.open(`/app/atz/download-files?id_org=${this.id_org}&type=${type}`)
+    },
+    async getFiles() {
+      await Axios.get('/app/atz/get-files', {
+        params: {
+          id_org: this.id_org
+        }
+      }).then(res => {
+        if (res.data.length) {
+          res.data.forEach(item => {
+            if (item.type === 0)
+              this.files.file0S = item.file
+            if (item.type === 1)
+              this.files.file1S = item.file
+          })
+        }
+      })
+    },
+    async saveFile(type) {
+      let data = new FormData();
+      data.append('file', this.files[`file${type}`]);
+      data.append('id_org', this.id_org);
+      data.append('type', type);
+      await Axios.post('/app/atz/save-file', data, {
+        headers: {
+          "X-CSRF-Token": this.csrf
+        }
+      }).then(res => {
+        if (res.data.success)
+          this.getFiles();
+      })
+    },
     deleteRow(index) {
       if (this.rows[index].id) {
         this.deleteRowFromServer(this.rows[index].id);
@@ -525,6 +599,9 @@ export default {
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style scoped>
+a{
+  cursor: pointer;
+}
 .table-auto-overflow {
   height: 380px;
   overflow-x: scroll;

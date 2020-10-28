@@ -6,14 +6,18 @@ namespace app\controllers\app;
 use app\models\Antiterror;
 use app\models\Atz;
 use app\models\AtzAddress;
+use app\models\AtzFiles;
 use app\models\AtzTableFour;
 use app\models\AtzTableThree;
 use app\models\AtzTypeActivity;
 use app\models\Organizations;
 use app\models\Program;
 use app\models\User;
+use phpDocumentor\Reflection\Type;
 use Yii;
+use yii\helpers\FileHelper;
 use yii\helpers\Json;
+use yii\web\UploadedFile;
 
 class AtzController extends AppController
 {
@@ -83,8 +87,6 @@ class AtzController extends AppController
         $dataArray = Json::decode(Yii::$app->request->post('data'));
 
 
-
-
         $id_org = Yii::$app->request->post('id_org');
 
         foreach ($dataArray as $data) {
@@ -132,6 +134,66 @@ class AtzController extends AppController
         // echo "<pre>";
         // print_r($atz);
         // die;
+    }
+
+    public function actionGetFiles()
+    {
+        $id_org = Yii::$app->request->get('id_org');
+        $id_atz = Atz::findOne(['id_program' => Program::findOne(['id_org' => $id_org])->id ?? null])->id ?? null;
+
+
+        return Json::encode(AtzFiles::findAll(['id_org' => $id_org, 'id_atz' => $id_atz]));
+
+
+    }
+
+    public function actionDownloadFiles()
+    {
+        $id_org = Yii::$app->request->get('id_org');
+        $id_atz = Atz::findOne(['id_program' => Program::findOne(['id_org' => $id_org])->id ?? null])->id ?? null;
+        if (!$id_atz)
+            return 'error';
+        $type = Yii::$app->request->get('type');
+
+        $file = AtzFiles::findOne(['id_org' => $id_org, 'id_atz' => $id_atz, 'type' => $type]);
+
+        if (!$file)
+            return 'file_error';
+        $path = Yii::getAlias('@webroot') . "/uploads/atz_files/$id_org/";
+        $path .= $file->file;
+
+        return Yii::$app->response->sendFile($path);
+
+    }
+
+    public function actionSaveFile()
+    {
+        $id_org = Yii::$app->request->post('id_org');
+        $id_atz = Atz::findOne(['id_program' => Program::findOne(['id_org' => $id_org])->id ?? null])->id ?? null;
+        if (!$id_atz)
+            return Json::encode(['success' => false, 'message' => 'id_atz error']);
+        $type = Yii::$app->request->post('type');
+        $fileD = AtzFiles::findOne(['id_atz' => $id_atz, 'id_org' => $id_org, 'type' => $type]) ?? new AtzFiles();
+        $fileS = UploadedFile::getInstanceByName('file');
+        if (!$fileS)
+            return Json::encode(['success' => false, 'message' => 'file error']);
+
+        $path = Yii::getAlias('@webroot') . "/uploads/atz_files/$id_org/";
+
+        if (!file_exists($path))
+            FileHelper::createDirectory($path);
+        $file_name = "file{$type}.{$fileS->extension}";
+        $fileS->saveAs("{$path}{$file_name}");
+
+
+        if ($fileD->isNewRecord) {
+            $fileD->id_atz = $id_atz;
+            $fileD->id_org = $id_org;
+        }
+        $fileD->file = $file_name;
+        $fileD->type = $type;
+        return Json::encode(['success' => $fileD->save(), 'error' => $fileD->getErrors(), 'fileS' => $fileS]);
+
     }
 
     public function actionDeleteTable3()
@@ -199,8 +261,7 @@ class AtzController extends AppController
             for ($i = 0; $i < 3; $i++) {
                 $arr[$i] = $arr[$i] ?? 0;
             }
-        }
-        else $arr = [0,0,0];
+        } else $arr = [0, 0, 0];
 
         return array_combine($keys, $arr);
     }
