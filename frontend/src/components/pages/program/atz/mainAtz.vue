@@ -54,7 +54,7 @@
       </div>
     </div>
 
-<!--    Тут таблица 2!!!!!!!!!!!!!!!!!!-->
+    <!--    Тут таблица 2!!!!!!!!!!!!!!!!!!-->
     <div class="row">
       <comments class="w-100"/>
     </div>
@@ -71,7 +71,7 @@
       </b-card>
     </div>
 
-<!--    Тут таблица 3!!!!!!!!!!!!!!!!!-->
+    <!--    Тут таблица 3!!!!!!!!!!!!!!!!!-->
     <div class="row mt-5">
       <b-card no-body class="mb-1 w-100">
         <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.TABLE3>

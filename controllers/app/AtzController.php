@@ -2,7 +2,7 @@
 
 namespace app\controllers\app;
 
-use app\facades\ExceptionLogger;
+
 use app\models\Antiterror;
 use app\models\Atz;
 use app\models\AtzAddress;
@@ -12,12 +12,10 @@ use app\models\AtzTypeActivity;
 use app\models\Organizations;
 use app\models\Program;
 use app\models\User;
-use Mpdf\Tag\P;
 use Yii;
-use yii\db\Exception;
-use yii\web\Controller;
+use yii\helpers\Json;
 
-class AtzController extends Controller
+class AtzController extends AppController
 {
     public function actionIndex()
     {
@@ -49,8 +47,8 @@ class AtzController extends Controller
     {
         $userIdOrg = User::find()->where(['id' => Yii::$app->user->id])->one()->id_org ?? null;
 
-        if((int) $userIdOrg !== (int) $id_org && !empty($id_org)) {
-            if(Yii::$app->user->can('dku')) {
+        if ((int)$userIdOrg !== (int)$id_org && !empty($id_org)) {
+            if (Yii::$app->user->can('dku')) {
                 $organization = Organizations::find()->where(['id' => $id_org])->asArray()->one();
                 $region = Organizations::find()->where(['id' => $id_org])->one()->region->region;
             } else {
@@ -82,26 +80,49 @@ class AtzController extends Controller
 
     public function actionSaveTable3()
     {
-        $dataArray = json_decode(Yii::$app->request->post('data'));
+        $dataArray = Json::decode(Yii::$app->request->post('data'));
+
+
+
         $id_org = Yii::$app->request->post('id_org');
 
         foreach ($dataArray as $data) {
-            if (!empty($data->id)) continue;
-
-            $atz = new AtzTableThree();
-            $atz->id_object = $data->object->id;
-            $atz->object = $data->object->passport_name;
+            $atz = AtzTableThree::findOne($data['id']) ?? new AtzTableThree();
+            $atz->id_object = $data['object']['id'];
+            $atz->object = $data['object']['passport_name'];
             $atz->id_org = $id_org;
-            $atz->video_system = implode('/', (array)$data->video_system);
-            $atz->evacuation_system = implode('/', (array)$data->evacuation_system);
-            $atz->light_system = implode('/', (array)$data->light_system);
-            $atz->predator_system = implode('/', (array)$data->predator_system);
-            $atz->alarm_warning_system = implode('/', (array)$data->alarm_warning_system);
-            $atz->alarm_fire_system = implode('/', (array)$data->alarm_fire_system);
-            $atz->phone_system = implode('/', (array)$data->phone_system);
-            $atz->fence = implode('/', (array)$data->fence);
-            $atz->skud = implode('/', (array)$data->skud);
-            $atz->save();
+            $atz->video_system = implode('/', $data['video_system']);
+            $atz->evacuation_system = implode('/', $data['evacuation_system']);
+            $atz->light_system = implode('/', $data['light_system']);
+            $atz->predator_system = implode('/', $data['predator_system']);
+            $atz->alarm_warning_system = implode('/', $data['alarm_warning_system']);
+            $atz->alarm_fire_system = implode('/', $data['alarm_fire_system']);
+            $atz->phone_system = implode('/', $data['phone_system']);
+            $atz->fence = implode('/', $data['fence']);
+            $atz->skud = implode('/', $data['skud']);
+
+
+            $atz->video_system_bud = implode('/', $data['video_system_bud']);
+            $atz->evacuation_system_bud = implode('/', $data['evacuation_system_bud']);
+            $atz->light_system_bud = implode('/', $data['light_system_bud']);
+            $atz->predator_system_bud = implode('/', $data['predator_system_bud']);
+            $atz->alarm_warning_system_bud = implode('/', $data['alarm_warning_system_bud']);
+            $atz->alarm_fire_system_bud = implode('/', $data['alarm_fire_system_bud']);
+            $atz->phone_system_bud = implode('/', $data['phone_system_bud']);
+            $atz->fence_bud = implode('/', $data['fence_bud']);
+            $atz->skud_bud = implode('/', $data['skud_bud']);
+
+            $atz->video_system_nebud = implode('/', $data['video_system_nebud']);
+            $atz->evacuation_system_nebud = implode('/', $data['evacuation_system_nebud']);
+            $atz->light_system_nebud = implode('/', $data['light_system_nebud']);
+            $atz->predator_system_nebud = implode('/', $data['predator_system_nebud']);
+            $atz->alarm_warning_system_nebud = implode('/', $data['alarm_warning_system_nebud']);
+            $atz->alarm_fire_system_nebud = implode('/', $data['alarm_fire_system_nebud']);
+            $atz->phone_system_nebud = implode('/', $data['phone_system_nebud']);
+            $atz->fence_nebud = implode('/', $data['fence_nebud']);
+            $atz->skud_nebud = implode('/', $data['skud_nebud']);
+
+            $atz->save(false);
         }
 
         // return json_encode($new->save());
@@ -121,7 +142,8 @@ class AtzController extends Controller
     public function actionGetTable3()
     {
         $id_org = Yii::$app->request->post('id_org');
-        $atz = AtzTableThree::find()->where(['id_org' => $id_org])->all();
+        $atz = AtzTableThree::find()->where(['id_org' => 1])->all();
+
         foreach ($atz as $at) {
             $toClient[] = [
                 'object' => [
@@ -137,6 +159,27 @@ class AtzController extends Controller
                 'phone_system' => $this->arrayCompact($at->phone_system),
                 'fence' => $this->arrayCompact($at->fence),
                 'skud' => $this->arrayCompact($at->skud),
+
+                'video_system_bud' => $this->arrayCompact($at->video_system_bud),
+                'evacuation_system_bud' => $this->arrayCompact($at->evacuation_system_bud),
+                'light_system_bud' => $this->arrayCompact($at->light_system_bud),
+                'predator_system_bud' => $this->arrayCompact($at->predator_system_bud),
+                'alarm_warning_system_bud' => $this->arrayCompact($at->alarm_warning_system_bud),
+                'alarm_fire_system_bud' => $this->arrayCompact($at->alarm_fire_system_bud),
+                'phone_system_bud' => $this->arrayCompact($at->phone_system_bud),
+                'fence_bud' => $this->arrayCompact($at->fence_bud),
+                'skud_bud' => $this->arrayCompact($at->skud_bud),
+
+                'video_system_nebud' => $this->arrayCompact($at->video_system_nebud),
+                'evacuation_system_nebud' => $this->arrayCompact($at->evacuation_system_nebud),
+                'light_system_nebud' => $this->arrayCompact($at->light_system_nebud),
+                'predator_system_nebud' => $this->arrayCompact($at->predator_system_nebud),
+                'alarm_warning_system_nebud' => $this->arrayCompact($at->alarm_warning_system_nebud),
+                'alarm_fire_system_nebud' => $this->arrayCompact($at->alarm_fire_system_nebud),
+                'phone_system_nebud' => $this->arrayCompact($at->phone_system_nebud),
+                'fence_nebud' => $this->arrayCompact($at->fence_nebud),
+                'skud_nebud' => $this->arrayCompact($at->skud_nebud),
+
                 'id' => $at->id,
             ];
         }
@@ -148,6 +191,13 @@ class AtzController extends Controller
     {
         $keys = ['podved', 'dku', 'dku_choice'];
         $arr = explode('/', $element);
+
+        if (count($arr)) {
+            for ($i = 0; $i < 3; $i++) {
+                $arr[$i] = $arr[$i] ?? 0;
+            }
+        }
+        else $arr = [0,0,0];
 
         return array_combine($keys, $arr);
     }
