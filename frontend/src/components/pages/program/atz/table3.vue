@@ -177,7 +177,7 @@
             <div class="col pr-0">
               <div v-if="files.file0S" class="row float-left">
                 <div class="col"><a @click="downloadFile(0)">{{ files.file0S }}</a></div>
-                <div class="text-danger"><b-icon @click="files.file0S = null" icon="trash-fill"></b-icon></div>
+                <div v-can:user,faiv_user class="text-danger"><b-icon @click="files.file0S = null" icon="trash-fill"></b-icon></div>
 
               </div>
 
@@ -186,7 +186,7 @@
             <div class="col pr-0">
               <div v-if="files.file1S" class="row float-left">
                 <div class="col"><a @click="downloadFile(0)">{{ files.file1S }}</a></div>
-                <div class="text-danger"><b-icon @click="files.file1S = null" icon="trash-fill"></b-icon></div>
+                <div v-can:user,faiv_user class="text-danger"><b-icon @click="files.file1S = null" icon="trash-fill"></b-icon></div>
 
               </div>
               <b-form-file v-else v-model="files.file1" @input="saveFile(1)" v-can:user,faiv_user/>
