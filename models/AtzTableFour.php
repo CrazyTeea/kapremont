@@ -96,6 +96,11 @@ class AtzTableFour extends \yii\db\ActiveRecord
             $atz_table_four_one_address->delete();
         }
 
+        $sub_systems = Sub_systems_table4::find()->where(['id_card' => $id])->all();
+        foreach ($sub_systems as $sub_system) {
+            $sub_system->delete();
+        }
+
         return $atz_table_four->delete();
     }
 }

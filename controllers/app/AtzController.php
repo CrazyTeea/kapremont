@@ -12,6 +12,7 @@ use app\models\AtzTableThree;
 use app\models\AtzTypeActivity;
 use app\models\Organizations;
 use app\models\Program;
+use app\models\Sub_systems_table4;
 use app\models\User;
 use phpDocumentor\Reflection\Type;
 use Yii;
@@ -315,8 +316,9 @@ class AtzController extends AppController
 //        print_r($mainArray);
 //        die();
 
-//
         if (empty($mainArray)) return 'emptyData';
+
+
 
         $getOldIds = function () use ($mainArray) {
             foreach ($mainArray as $row) {
@@ -325,7 +327,6 @@ class AtzController extends AppController
             return $ids ?? [];
         };
 
-//        dd($getOldIds());
         $this->actionDestroyAtzTableFourRow($getOldIds());
 
         foreach ($mainArray as $mainData) {
@@ -338,8 +339,6 @@ class AtzController extends AppController
             $mainAtzFour->type_document = $mainData['attributes']['type_document'];
             $mainAtzFour->name_object = $mainData['attributes']['name_object'];
             $mainAtzFour->cost_full = $mainData['attributes']['cost_full'];
-            $mainAtzFour->cost_budjet = $mainData['attributes']['cost_budjet'];
-            $mainAtzFour->cost_vb = $mainData['attributes']['cost_vb'];
             $mainAtzFour->number_contract = $mainData['attributes']['number_contract'];
             $mainAtzFour->date_doc = $mainData['attributes']['date_doc'];
             $mainAtzFour->number_deal = $mainData['attributes']['number_deal'];
@@ -353,6 +352,7 @@ class AtzController extends AppController
             $mainAtzFour->comment_mon = $mainData['attributes']['comment_mon'];
 
             if ($mainAtzFour->save()) {
+
                 foreach ($mainData['address'] as $address) {
                     $atz_address = new AtzAddress();
                     $atz_address->id_atz_table_four = $mainAtzFour->id;
@@ -363,14 +363,56 @@ class AtzController extends AppController
                             $atz_type_activity->id_atz_table_for_address = $atz_address->id;
                             $atz_type_activity->name = $type_event->name;
                             $atz_type_activity->value = $type_event->value;
-                            $atz_type_activity->save();
+                            if($atz_type_activity->save()) {
+                                foreach ($mainData['attributes']['cost_budjet'] as $key_name_budjet => $budjet) {
+                                    if ($key_name_budjet == $atz_type_activity->value) {
+                                        $b_systems = new Sub_systems_table4();
+                                        $b_systems->id_card = $mainAtzFour->id;
+                                        $b_systems->cost_type = 'cost_budjet';
+                                        $b_systems->field_name = $key_name_budjet;
+                                        $b_systems->value = $budjet;
+                                        $b_systems->save();
+                                    }
+                                }
+
+                                foreach ($mainData['attributes']['cost_vb'] as $key_name_vne_budjet => $vne_budjet) {
+                                    if ($key_name_vne_budjet == $atz_type_activity->value) {
+                                        $b_systems = new Sub_systems_table4();
+                                        $b_systems->id_card = $mainAtzFour->id;
+                                        $b_systems->cost_type = 'cost_vb';
+                                        $b_systems->field_name = $key_name_vne_budjet;
+                                        $b_systems->value = $vne_budjet;
+                                        $b_systems->save();
+                                    }
+                                }
+                            }
                         }
                     }
                 }
+
+
+//                foreach ($mainData['attributes']['cost_budjet'] as $key_name_budjet => $budjet) {
+//                    $b_systems = new Sub_systems_table4();
+//                    $b_systems->id_card = $mainAtzFour->id;
+//                    $b_systems->cost_type = 'cost_budjet';
+//                    $b_systems->field_name = $key_name_budjet;
+//                    $b_systems->value = $budjet;
+//                    $b_systems->save();
+//                }
+//
+//                foreach ($mainData['attributes']['cost_vb'] as $key_name_vne_budjet => $vne_budjet) {
+//                    $b_systems = new Sub_systems_table4();
+//                    $b_systems->id_card = $mainAtzFour->id;
+//                    $b_systems->cost_type = 'cost_vb';
+//                    $b_systems->field_name = $key_name_vne_budjet;
+//                    $b_systems->value = $vne_budjet;
+//                    $b_systems->save();
+//                }
             }
+
         }
 
-        return 'saved';
+        return 'error';
     }
 
     public function actionDestroyAtzTableFourRow(array $ids = null)
@@ -393,8 +435,32 @@ class AtzController extends AppController
             return in_array($atz_table_four_one['stage_number'], $arrayLastRowIndex);
         };
 
-        foreach ($atz_table_four as $atz_table_four_one) {
+        $i = 0;
+
+        foreach ($atz_table_four as  $atz_table_four_one) {
             $addresses = AtzAddress::find()->where(['id_atz_table_four' => $atz_table_four_one['id']])->asArray()->all();
+
+            $cost_b_dbs = Sub_systems_table4::find()->where(['id_card' => $atz_table_four_one['id'], 'cost_type' => 'cost_budjet'])->asArray()->all();
+            $cost_vb_dbs = Sub_systems_table4::find()->where(['id_card' => $atz_table_four_one['id'], 'cost_type' => 'cost_vb'])->asArray()->all();
+
+
+            $cost_b = [];
+            $cost_vb = [];
+
+            foreach($cost_b_dbs as $cost_b_db) {
+                $cost_b[$cost_b_db['field_name']] = $cost_b_db['value'] ?? 0;
+            }
+
+            foreach($cost_vb_dbs as $cost_vb_db) {
+                $cost_vb[$cost_vb_db['field_name']] = $cost_vb_db['value'] ?? 0;
+            }
+
+            $atz_table_four_one['cost_budjet'] = $cost_b ?? (object) [];
+            $atz_table_four_one['cost_vb'] = $cost_vb ?? (object) [];
+
+//            if ($i == 1) dd($atz_table_four_one['cost_vb']);
+
+            $i++;
             $row_stages[] = array_merge($atz_table_four_one, ['address' => $addresses, 'type_event' => (function () use ($addresses) {
                 foreach ($addresses as $address) {
                     $type_event = array_merge($type_event ?? [], AtzTypeActivity::find()->select(['id', 'name', 'value'])->where(['id_atz_table_for_address' => $address['id']])->asArray()->all());
