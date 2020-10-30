@@ -272,7 +272,7 @@
         </div>
       </div>
 
-      <button @click="debug">Debug</button>
+      <!--<button @click="debug">Debug</button>-->
     </b-modal>
 
   </div>
