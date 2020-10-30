@@ -12,7 +12,7 @@ export default new Vuex.Store({
                     ctx.commit("updateUser", response.data);
                 })
                 .catch(error => {
-                    console.error(error);
+                    //console.error(error);
                 });
         },
         async requestCurrentOrg(ctx) {
@@ -21,7 +21,7 @@ export default new Vuex.Store({
                     ctx.commit("updateOrg", response.data);
                 })
                 .catch(error => {
-                    console.error(error);
+                    //console.error(error);
                 });
         },
         async requestOrg(ctx, {id}) {
@@ -32,7 +32,7 @@ export default new Vuex.Store({
                     ctx.commit("updateOrg", response.data);
                 })
                 .catch(error => {
-                    console.error(error);
+                    //console.error(error);
                 });
         },
         async requestPageData(ctx, {pageName}) {
@@ -46,7 +46,7 @@ export default new Vuex.Store({
                     ctx.commit("updatePageData", response.data);
                 })
                 .catch(err => {
-                    console.error(err);
+                    //console.error(err);
                 });
         },
         async requestCity(ctx, {id}) {
@@ -59,7 +59,7 @@ export default new Vuex.Store({
                     ctx.commit("updateCities", response.data);
                 })
                 .catch(err => {
-                    console.error(err);
+                    //console.error(err);
                 });
         }
     },

@@ -446,7 +446,7 @@ export default {
       })
     },
     debug() {
-      console.log(this.rows);
+      //console.log(this.rows);
     },
     addRow() {
       this.rows.push({

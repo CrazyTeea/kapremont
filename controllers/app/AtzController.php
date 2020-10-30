@@ -412,7 +412,7 @@ class AtzController extends AppController
 
         }
 
-        return 'error';
+        return 'max pidor';
     }
 
     public function actionDestroyAtzTableFourRow(array $ids = null)

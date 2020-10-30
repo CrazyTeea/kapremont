@@ -332,7 +332,7 @@ export default {
     };
   },
   async mounted() {
-    console.log(this.$route.params)
+    //console.log(this.$route.params)
     this.org_id = this.$route.params.id;
     await this.getCurentOrg();
   },

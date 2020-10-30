@@ -349,14 +349,14 @@ export default {
   },
   methods: {
     mousePopoverOver() {
-      console.log("here is this shit");
+      //console.log("here is this shit");
       // let element = document.querySelector()
     },
     goToDev() {
       window.location = '/app/atz/in-dev';
     },
     debug() {
-      console.log(this.isUserDku());
+      //console.log(this.isUserDku());
     },
     async init() {
       // if(window)

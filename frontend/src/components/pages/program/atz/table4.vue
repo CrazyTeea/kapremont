@@ -134,14 +134,14 @@
       <b-tabs class="mt-3" fill>
 
         <b-tab :key="`tab_${index}`" v-for="(typeEvent, index) in [...modalContent][0]['type_event']"
-               :title="typeEvent.name">
+               :title="typeEvent.name" :title-item-class="modalContent.reduce((a,b)=>a + toNum(b.cost_budjet[typeEvent.value]) + toNum(b.cost_vb[typeEvent.value]),0) ? 'text-success' : ''">
 
           <div class="row mt-3">
             <div class="col m-auto">
               Бюджетного финансирования (руб.)
             </div>
             <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-              <b-form-input :disabled="!check('user')" v-model="row.cost_budjet[typeEvent.value]"></b-form-input>
+              <b-form-input  :disabled="!check('user')" v-model="row.cost_budjet[typeEvent.value]"></b-form-input>
             </div>
           </div>
           <div class="row mt-3">
@@ -302,11 +302,12 @@ export default {
   async mounted() {
     await this.id_org;
     await window.Permission;
-    this.getTableFourInfo();
+    await this.getTableFourInfo();
   },
   methods: {
+    toNum: num => typeof num === 'string' ? num.toNumber() : (num || 0),
     debug() {
-      console.log(this.modalContent)
+      //console.log(this.modalContent)
     },
     check(role) {
       return window.Permission === role;
@@ -314,7 +315,7 @@ export default {
     saveContent() {
 
       let address = this.modalContent[0].address.slice();
-      console.log('address: ', address);
+      //console.log('address: ', address);
       let type_event = this.modalContent[0].type_event.slice();
 
 
@@ -322,17 +323,17 @@ export default {
       this.modalContent[1].type_event = type_event;
 
       this.rows[this.modalContentIndex].row_stages = this.modalContent;
-      console.log(this.modalContent);
+      //console.log(this.modalContent);
       this.saveInfo();
     },
-    saveInfo() {
+    async saveInfo() {
       this.$bvModal.hide('modalPassport');
       let data = new FormData();
       data.append("data", JSON.stringify(this.rows));
       data.append("id_org", this.id_org);
       data.append("card_number", this.card);
 
-      return Axios.post("/app/atz/save-table4", data, {
+      await Axios.post("/app/atz/save-table4", data, {
         headers: {
           "X-CSRF-Token": this.csrf,
         },
@@ -410,7 +411,7 @@ export default {
       return options;
     },
     showModal(rowIndex) {
-      console.log('showModal before: ', this.rows[rowIndex].row_stages[1]);
+      //console.log('showModal before: ', this.rows[rowIndex].row_stages[1]);
       this.modalContent = this.rows[rowIndex].row_stages;
 
 
@@ -419,22 +420,22 @@ export default {
         if (Array.isArray(elem.cost_vb)) elem.cost_vb = {};
       });
 
-      console.log('showModal after: ', this.modalContent);
+      // console.log('showModal after: ', this.modalContent);
 
       this.modalContentIndex = rowIndex;
 
       this.showModalDialog = true;
     },
-    getTableFourInfo() {
+    async getTableFourInfo() {
       let data = new FormData();
       data.append('id_org', this.id_org);
-      return Axios.post("/app/atz/get-table4", data, {
+      await Axios.post("/app/atz/get-table4", data, {
         headers: {
           "X-CSRF-Token": this.csrf,
         },
       }).then((res) => {
         this.rows = [...res.data];
-        console.log('coming from server: ', this.rows);
+        //console.log('coming from server: ', this.rows);
       });
     },
     addRow1() {

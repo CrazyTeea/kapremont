@@ -272,9 +272,9 @@ export default {
         }
       }).then(async (res) => {
         let id_comment = res.data;
-        console.group('file is here');
-        console.log(this.files);
-        console.groupEnd();
+        //console.group('file is here');
+       // console.log(this.files);
+        //console.groupEnd();
         if (this.files) {
           for (let file of this.files) {
             await this.sendFile(file, id_comment);

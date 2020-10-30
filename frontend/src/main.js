@@ -52,7 +52,7 @@ async function getUser() {
             user = response.data;
         })
         .catch(error => {
-            console.error(error);
+            //console.error(error);
         });
     let u = await a;
     let access = null;
