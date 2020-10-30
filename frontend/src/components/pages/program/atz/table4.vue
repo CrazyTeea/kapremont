@@ -32,13 +32,24 @@
         <b-button variant="info" @click="$bvModal.hide('modalPassport')">Отмена</b-button>
       </template>
 
-
       <div class="row mt-3">
         <div class="col m-auto">
+          Название
+        </div>
+        <div class="col m-auto">
+          Законтрактовано
+        </div>
+        <div class="col m-auto">
+          Исполнено
+        </div>
+      </div>
+
+      <div class="row mt-3">
+        <div class="col-4 m-auto">
           Вид документа
         </div>
-        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-select :disabled="!check('user')" v-model="row.type_document" :options="[
+        <div class="col-8 m-auto">
+          <b-form-select :disabled="!check('user')" v-model="typeDocument" :options="[
               {value: 'Договор', text: 'Договор'},
               {value: 'Контракт', text: 'Контракт'}
           ]"></b-form-select>
@@ -47,13 +58,13 @@
 
 
       <div class="row mt-3">
-        <div class="col m-auto">
+        <div class="col-4 m-auto">
           Адрес проведения мероприятия
         </div>
-        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+        <div class="col-8 m-auto">
           <multiselect
               :disabled="!check('user')"
-              v-model="row.address"
+              v-model="address"
               label="passport_name"
               track-by="id"
               :multiple="true"
@@ -69,18 +80,18 @@
       </div>
 
       <div class="row mt-3">
-        <div class="col m-auto">
+        <div class="col-4 m-auto">
           Вид статьи мероприятия по АТЗ
         </div>
-        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+        <div class="col-8 m-auto" >
           <multiselect
               :disabled="!check('user')"
-              v-model="row.type_event"
+              v-model="type_event"
               label="name"
               track-by="value"
               :multiple="true"
               :taggable="true"
-              :options="ONinput(index)"
+              :options="ONinput(0)"
               group-values="variants"
               group-label="state"
               placeholder="Выберите системы"
@@ -120,23 +131,51 @@
         </div>
       </div>
 
+      <b-tabs class="mt-3" fill>
 
-      <div class="row mt-3">
-        <div class="col m-auto">
-          Бюджетного финансирования (руб.)
-        </div>
-        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input :disabled="!check('user')" v-model="row.cost_budjet"></b-form-input>
-        </div>
-      </div>
-      <div class="row mt-3">
-        <div class="col m-auto">
-          Внебюджетного финансирования (руб.)
-        </div>
-        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input :disabled="!check('user')" v-model="row.cost_vb"></b-form-input>
-        </div>
-      </div>
+        <b-tab :key="`tab_${index}`" v-for="(typeEvent, index) in [...modalContent][0]['type_event']" :title="typeEvent.name">
+
+          <div class="row mt-3">
+            <div class="col m-auto">
+              Бюджетного финансирования (руб.)
+            </div>
+            <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+              <b-form-input :disabled="!check('user')" v-model="row.cost_budjet[typeEvent.value]"></b-form-input>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col m-auto">
+              Внебюджетного финансирования (руб.)
+            </div>
+            <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+              <b-form-input :disabled="!check('user')" v-model="row.cost_vb[typeEvent.value]"></b-form-input>
+            </div>
+          </div>
+
+        </b-tab>
+
+
+        <div class="w-100 mt-3 back-strip"></div>
+      </b-tabs>
+
+      <!--      <div class="row mt-3">-->
+      <!--        <div class="col m-auto">-->
+      <!--          Бюджетного финансирования (руб.)-->
+      <!--        </div>-->
+      <!--        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">-->
+      <!--          <b-form-input :disabled="!check('user')" v-model="row.cost_budjet"></b-form-input>-->
+      <!--        </div>-->
+      <!--      </div>-->
+      <!--      <div class="row mt-3">-->
+      <!--        <div class="col m-auto">-->
+      <!--          Внебюджетного финансирования (руб.)-->
+      <!--        </div>-->
+      <!--        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">-->
+      <!--          <b-form-input :disabled="!check('user')" v-model="row.cost_vb"></b-form-input>-->
+      <!--        </div>-->
+      <!--      </div>-->
+
+
       <div class="row mt-3">
         <div class="col m-auto">
           Номер извещения /номер Номер реестровой записи договора/контракта на сайте https://zakupki.gov.ru/ (в случаи
@@ -233,6 +272,7 @@
         </div>
       </div>
 
+      <!--<button @click="debug">Debug</button>-->
     </b-modal>
 
   </div>
@@ -242,10 +282,10 @@
 import Axios from "axios";
 import CButton from "./CustomButton";
 import Multiselect from "vue-multiselect";
-import {BButton, BFormInput, BFormSelect} from "bootstrap-vue";
+import {BButton, BFormInput, BFormSelect, BTabs, BTab} from "bootstrap-vue";
 
 export default {
-  components: {Multiselect, BButton, CButton, BFormInput, BFormSelect},
+  components: {Multiselect, BButton, CButton, BFormInput, BFormSelect, BTabs, BTab},
   props: ['passport', 'id_org'],
   name: "table4Remake",
   data() {
@@ -264,17 +304,28 @@ export default {
     this.getTableFourInfo();
   },
   methods: {
+    debug() {
+      console.log(this.modalContent)
+    },
     check(role) {
       return window.Permission === role;
     },
     saveContent() {
-      console.log(this.modalContent);
-      console.log(this.modalContentIndex);
-      console.log(this.rows[this.modalContentIndex]);
+
+      let address = this.modalContent[0].address.slice();
+      console.log('address: ', address);
+      let type_event = this.modalContent[0].type_event.slice();
+
+
+      this.modalContent[1].address = address;
+      this.modalContent[1].type_event = type_event;
+
       this.rows[this.modalContentIndex].row_stages = this.modalContent;
+      console.log(this.modalContent);
       this.saveInfo();
     },
     saveInfo() {
+      this.$bvModal.hide('modalPassport');
       let data = new FormData();
       data.append("data", JSON.stringify(this.rows));
       data.append("id_org", this.id_org);
@@ -358,7 +409,17 @@ export default {
       return options;
     },
     showModal(rowIndex) {
+      console.log('showModal before: ', this.rows[rowIndex].row_stages[1]);
       this.modalContent = this.rows[rowIndex].row_stages;
+
+
+      this.modalContent.forEach(elem => {
+        if (Array.isArray(elem.cost_budjet)) elem.cost_budjet = {};
+        if (Array.isArray(elem.cost_vb)) elem.cost_vb = {};
+      });
+
+      console.log('showModal after: ', this.modalContent);
+
       this.modalContentIndex = rowIndex;
 
       this.showModalDialog = true;
@@ -372,6 +433,7 @@ export default {
         },
       }).then((res) => {
         this.rows = [...res.data];
+        console.log('coming from server: ', this.rows);
       });
     },
     addRow1() {
@@ -387,8 +449,8 @@ export default {
             type_document: null,
             name_object: null,
             cost_full: null,
-            cost_budjet: null,
-            cost_vb: null,
+            cost_budjet: {},
+            cost_vb: {},
             number_contract: null,
             date_doc: null,
             number_deal: null,
@@ -410,8 +472,8 @@ export default {
             type_document: null,
             name_object: null,
             cost_full: null,
-            cost_budjet: null,
-            cost_vb: null,
+            cost_budjet: {},
+            cost_vb: {},
             number_contract: null,
             date_doc: null,
             number_deal: null,
@@ -439,8 +501,8 @@ export default {
             type_document: null,
             name_object: null,
             cost_full: null,
-            cost_budjet: null,
-            cost_vb: null,
+            cost_budjet: {},
+            cost_vb: {},
             number_contract: null,
             date_doc: null,
             number_deal: null,
@@ -462,8 +524,8 @@ export default {
             type_document: null,
             name_object: null,
             cost_full: null,
-            cost_budjet: null,
-            cost_vb: null,
+            cost_budjet: {},
+            cost_vb: {},
             number_contract: null,
             date_doc: null,
             number_deal: null,
@@ -485,8 +547,8 @@ export default {
             type_document: null,
             name_object: null,
             cost_full: null,
-            cost_budjet: null,
-            cost_vb: null,
+            cost_budjet: {},
+            cost_vb: {},
             number_contract: null,
             date_doc: null,
             number_deal: null,
@@ -508,8 +570,8 @@ export default {
             type_document: null,
             name_object: null,
             cost_full: null,
-            cost_budjet: null,
-            cost_vb: null,
+            cost_budjet: {},
+            cost_vb: {},
             number_contract: null,
             date_doc: null,
             number_deal: null,
@@ -530,6 +592,33 @@ export default {
     disableDeleteButton() {
       if (this.check('dku')) return false;
     },
+    address: {
+      get() {
+        return this.modalContent[0]?.address;
+      },
+      set(val) {
+        this.modalContent[0].address = val;
+        this.modalContent[1].address = val;
+      }
+    },
+    type_event: {
+      get() {
+        return this.modalContent[0]?.type_event;
+      },
+      set(val) {
+        this.modalContent[0].type_event = val;
+        this.modalContent[1].type_event = val;
+      }
+    },
+    typeDocument: {
+      get() {
+        return this.modalContent[0]?.type_document;
+      },
+      set(val) {
+        this.modalContent[0].type_document = val;
+        this.modalContent[1].type_document = val;
+      }
+    },
     computedHeader() {
       return array => array.row_stages.map(elem => `${elem.type_document || '--'} №${elem.number_deal || '--'} на выполнение работ ${elem.type_event.map(elements => elements.name) || '--'} на сумму ${Number(elem.cost_full) || '--'}`);
     }
@@ -538,6 +627,9 @@ export default {
 </script>
 
 <style scoped lang="scss">
+.back-strip {
+  border-bottom: 1px solid #dee2e6;
+}
 
 .passport-card {
   height: auto;

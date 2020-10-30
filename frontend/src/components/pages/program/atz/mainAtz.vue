@@ -77,7 +77,7 @@
         <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.TABLE3>
           <span class="toggle_button">Таблица 3</span>
         </b-card-header>
-        <b-collapse id="TABLE3" accordion="TABLE3" role="tabpanel" visible>
+        <b-collapse id="TABLE3" accordion="TABLE3" role="tabpanel">
           <b-card-body>
             <atz-table :data="sum" @getTable2AtzInfo="setTable2Atz"/>
           </b-card-body>
