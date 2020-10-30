@@ -83,7 +83,7 @@
         <div class="col-4 m-auto">
           Вид статьи мероприятия по АТЗ
         </div>
-        <div class="col-8 m-auto" >
+        <div class="col-8 m-auto">
           <multiselect
               :disabled="!check('user')"
               v-model="type_event"
@@ -133,7 +133,8 @@
 
       <b-tabs class="mt-3" fill>
 
-        <b-tab :key="`tab_${index}`" v-for="(typeEvent, index) in [...modalContent][0]['type_event']" :title="typeEvent.name">
+        <b-tab :key="`tab_${index}`" v-for="(typeEvent, index) in [...modalContent][0]['type_event']"
+               :title="typeEvent.name">
 
           <div class="row mt-3">
             <div class="col m-auto">
@@ -282,7 +283,7 @@
 import Axios from "axios";
 import CButton from "./CustomButton";
 import Multiselect from "vue-multiselect";
-import {BButton, BFormInput, BFormSelect, BTabs, BTab} from "bootstrap-vue";
+import {BButton, BFormInput, BFormSelect, BTab, BTabs} from "bootstrap-vue";
 
 export default {
   components: {Multiselect, BButton, CButton, BFormInput, BFormSelect, BTabs, BTab},
