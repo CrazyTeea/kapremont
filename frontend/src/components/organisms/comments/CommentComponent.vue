@@ -144,9 +144,19 @@
 <script>
 import Axios from "axios";
 import {
-  BAlert, BSpinner,
-  BFormFile, BButton, BCard, BCardBody,
-  BCardHeader, BCollapse, BListGroup, BListGroupItem, BFormGroup, BFormTextarea, VBToggle
+  BAlert,
+  BButton,
+  BCard,
+  BCardBody,
+  BCardHeader,
+  BCollapse,
+  BFormFile,
+  BFormGroup,
+  BFormTextarea,
+  BListGroup,
+  BListGroupItem,
+  BSpinner,
+  VBToggle
 } from "bootstrap-vue";
 
 export default {

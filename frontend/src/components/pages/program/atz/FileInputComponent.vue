@@ -21,11 +21,12 @@
 </template>
 
 <script>
-import { BFormInput, BFormGroup, BInputGroupAppend, BInputGroup, BFormFile, BButton } from 'bootstrap-vue';
+import {BButton, BFormFile, BFormGroup, BFormInput, BInputGroup, BInputGroupAppend} from 'bootstrap-vue';
+
 export default {
   name: "FileInputComponent",
   components: {
-    BFormInput, BFormGroup, BInputGroupAppend , BInputGroup, BFormFile, BButton
+    BFormInput, BFormGroup, BInputGroupAppend, BInputGroup, BFormFile, BButton
   },
   props: {
     index: {
@@ -42,10 +43,11 @@ export default {
     }
   },
 
-  mounted() {},
+  mounted() {
+  },
   methods: {
     change(file) {
-      if(!this.label) {
+      if (!this.label) {
         this.message.show = true;
         this.$refs['formFile'].reset();
         return;

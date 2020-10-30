@@ -174,6 +174,9 @@ $config = [
                 'yii\web\JqueryAsset' => false,
                 'yii\bootstrap4\BootstrapPluginAsset' => false,
                 'yii\bootstrap4\BootstrapAsset' => false,
+
+                //'yii\bootstrap\BootstrapPluginAsset' => false,
+                //'yii\bootstrap\BootstrapAsset' => false,
             ],
         ],
 

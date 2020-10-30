@@ -97,8 +97,21 @@
 
 <script>
 import {
-  BTable, BCard, BCardBody, BCardHeader, BInputGroupAppend, BInputGroup, BFormSelect, BButton,
-  BCollapse, VBToggle, BFormInput, BIcon, BTr, BTh, BSpinner
+  BButton,
+  BCard,
+  BCardBody,
+  BCardHeader,
+  BCollapse,
+  BFormInput,
+  BFormSelect,
+  BIcon,
+  BInputGroup,
+  BInputGroupAppend,
+  BSpinner,
+  BTable,
+  BTh,
+  BTr,
+  VBToggle
 } from "bootstrap-vue";
 import Axios from "axios";
 

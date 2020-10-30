@@ -177,7 +177,9 @@
             <div class="col pr-0">
               <div v-if="files.file0S" class="row float-left">
                 <div class="col"><a @click="downloadFile(0)">{{ files.file0S }}</a></div>
-                <div v-can:user,faiv_user class="text-danger"><b-icon @click="files.file0S = null" icon="trash-fill"></b-icon></div>
+                <div v-can:user,faiv_user class="text-danger">
+                  <b-icon @click="files.file0S = null" icon="trash-fill"></b-icon>
+                </div>
 
               </div>
 
@@ -186,7 +188,9 @@
             <div class="col pr-0">
               <div v-if="files.file1S" class="row float-left">
                 <div class="col"><a @click="downloadFile(0)">{{ files.file1S }}</a></div>
-                <div v-can:user,faiv_user class="text-danger"><b-icon @click="files.file1S = null" icon="trash-fill"></b-icon></div>
+                <div v-can:user,faiv_user class="text-danger">
+                  <b-icon @click="files.file1S = null" icon="trash-fill"></b-icon>
+                </div>
 
               </div>
               <b-form-file v-else v-model="files.file1" @input="saveFile(1)" v-can:user,faiv_user/>
@@ -234,13 +238,9 @@
 </template>
 
 <script>
-import {
-  BButton, BFormInput, BFormFile,
-  BTableSimple, BTbody, BTd, BTh, BThead, BTr
-} from "bootstrap-vue";
+import {BButton, BFormFile, BFormInput, BTableSimple, BTbody, BTd, BTh, BThead, BTr} from "bootstrap-vue";
 import Multiselect from "vue-multiselect";
 import Axios from "axios";
-import files from "./files";
 
 export default {
   props: {
@@ -358,8 +358,8 @@ export default {
       files: {
         file0: null,
         file1: null,
-        file0S:null,
-        file1S:null
+        file0S: null,
+        file1S: null
       },
     };
   },
@@ -369,7 +369,7 @@ export default {
     await this.getFiles()
   },
   methods: {
-    downloadFile(type){
+    downloadFile(type) {
       window.open(`/app/atz/download-files?id_org=${this.id_org}&type=${type}`)
     },
     async getFiles() {
@@ -599,9 +599,10 @@ export default {
 <style src="vue-multiselect/dist/vue-multiselect.min.css"></style>
 
 <style scoped>
-a{
+a {
   cursor: pointer;
 }
+
 .table-auto-overflow {
   height: 380px;
   overflow-x: scroll;

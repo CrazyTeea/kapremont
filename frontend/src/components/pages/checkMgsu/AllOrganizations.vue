@@ -112,10 +112,10 @@
                   <label>{{ item.region }}</label>
                 </b-th>
                 <b-th
-                      class="normal-font-weight-for-sell cursor-pointer center-text-in-cell popover-action"
-                      @click="goToRefNotDku(item.id, '/organization/list/')">
+                    class="normal-font-weight-for-sell cursor-pointer center-text-in-cell popover-action"
+                    @click="goToRefNotDku(item.id, '/organization/list/')">
 
-<!--                  popover-->
+                  <!--                  popover-->
                   <div class="custom-popover-wrapper">
                     <div class="popover-styling d-flex justify-content-center">
                       <h6 class="atz" @click="goToRef(item.id, '/program/main-atz/')">АТЗ</h6>
@@ -123,7 +123,7 @@
                     </div>
                   </div>
 
-<!--                  content-->
+                  <!--                  content-->
                   <label class="cursor-pointer label-item-name">
                     {{ item.name }}
                     <div v-can:mgsu,root v-if="item.id_founder !== '1' && item.is_new==='1'">
@@ -539,12 +539,15 @@ export default {
   color: red;
   transition: .2s ease;
 }
+
 .dep:hover {
   color: green;
 }
+
 .dep, .atz {
   transition: .2s ease;
 }
+
 .dep {
   margin-left: 8px;
   transition: .2s ease;
@@ -561,9 +564,11 @@ export default {
 .popover-styling > h6 > a {
   text-decoration: none;
 }
+
 .popover-action {
   position: relative;
 }
+
 .custom-popover-wrapper {
   position: absolute;
   top: 50%;
@@ -577,19 +582,22 @@ export default {
 .pop {
   padding: 8px;
   background-color: #fff;
-  border: 1px solid rgba(0,0,0,.2);
+  border: 1px solid rgba(0, 0, 0, .2);
   border-radius: .3rem;
   opacity: 10;
 }
+
 .label-item-name {
   transition: all .3s ease;
 }
+
 .popover-action:hover .custom-popover-wrapper {
   transform: translate(-50%, -50%);
   opacity: 1;
   transition-delay: .2s;
   transition-property: all;
 }
+
 .popover-action:hover .label-item-name {
   opacity: 10%;
   transition: all .3s ease;

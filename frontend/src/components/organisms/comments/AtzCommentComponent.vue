@@ -141,7 +141,6 @@
   </b-card>
 </template>
 <script>
-import Comments from './CommentComponent.vue';
 import {
   BAlert,
   BButton,
@@ -149,8 +148,11 @@ import {
   BCardBody,
   BCardHeader,
   BCollapse,
-  BFormFile, BFormGroup, BFormTextarea,
-  BListGroup, BListGroupItem,
+  BFormFile,
+  BFormGroup,
+  BFormTextarea,
+  BListGroup,
+  BListGroupItem,
   BSpinner,
   VBToggle
 } from "bootstrap-vue";

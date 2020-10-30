@@ -88,7 +88,7 @@
             <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
               --
             </b-th>
-             <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+            <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
               --
             </b-th>
 
@@ -128,7 +128,7 @@
             <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
               --
             </b-th>
-             <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
+            <b-th class="vertical-align-for-table-cell text-align-end-for-cell">
               --
             </b-th>
           </b-tr>
@@ -160,18 +160,17 @@
 
 <script>
 import Axios from 'axios'
-import {BButton, BForm, BFormInput, BTableSimple, BTd,
-  BTbody, BTfoot, BTh, BThead, BTr, VBToggle} from "bootstrap-vue";
+import {BButton, BForm, BFormInput, BTableSimple, BTbody, BTd, BTfoot, BTh, BThead, BTr, VBToggle} from "bootstrap-vue";
 
 export default {
   directives: {
     'b-toggle': VBToggle
   },
-  props:['data'],
+  props: ['data'],
 
-  watch:{
-    data:{
-      handler(){
+  watch: {
+    data: {
+      handler() {
         this.items[0].cost_b = this.data.video_system_bud;
         this.items[0].cost_v = this.data.video_system_nebud;
 
@@ -203,7 +202,7 @@ export default {
         this.items[8].cost_v = this.data.skud_nebud;
 
       },
-      deep:true
+      deep: true
     }
   },
 
