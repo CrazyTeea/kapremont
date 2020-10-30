@@ -79,7 +79,7 @@
         </b-card-header>
         <b-collapse id="TABLE3" accordion="TABLE3" role="tabpanel">
           <b-card-body>
-            <atz-table :data="sum" @getTable2AtzInfo="setTable2Atz"/>
+            <atz-table :id_org="id_org" :data="sum" @getTable2AtzInfo="setTable2Atz"/>
           </b-card-body>
         </b-collapse>
       </b-card>

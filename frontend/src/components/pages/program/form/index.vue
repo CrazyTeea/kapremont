@@ -618,7 +618,7 @@ export default {
             text: item.city
           })
         })
-        console.log(this.getCities);
+        //console.log(this.getCities);
       } else {
         this.getPageData.cityOptions.forEach(item => {
           this.cities.push({
@@ -719,7 +719,7 @@ export default {
       this.formData.square_ar = 0;
     },
     onChangeRegion(id) {
-      console.log(id)
+      //console.log(id)
       this.requestCity({id});
     }
   },
