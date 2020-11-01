@@ -385,7 +385,7 @@ export default {
         this.table4 = res.data[0].row_stages;
 
 
-        console.log('coming from server: ', this.table4);
+        //console.log('coming from server: ', this.table4);
       });
     },
 

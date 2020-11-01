@@ -127,21 +127,23 @@
           Общая стоимость (руб.)
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input :disabled="!check('user')" v-model="row.cost_full"></b-form-input>
+          <b-form-input disabled v-model="row.cost_full"></b-form-input>
         </div>
       </div>
 
       <b-tabs class="mt-3" fill>
 
         <b-tab :key="`tab_${index}`" v-for="(typeEvent, index) in [...modalContent][0]['type_event']"
-               :title="typeEvent.name" :title-item-class="modalContent.reduce((a,b)=>a + toNum(b.cost_budjet[typeEvent.value]) + toNum(b.cost_vb[typeEvent.value]),0) ? 'text-success' : ''">
+               :title="typeEvent.name"
+               :title-item-class="modalContent.reduce((a,b)=>a + toNum(b.cost_budjet[typeEvent.value]) + toNum(b.cost_vb[typeEvent.value]),0) ? 'text-success' : ''">
 
           <div class="row mt-3">
             <div class="col m-auto">
               Бюджетного финансирования (руб.)
             </div>
             <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-              <b-form-input  :disabled="!check('user')" v-model="row.cost_budjet[typeEvent.value]"></b-form-input>
+              <b-form-input @input="sumShit(row,row.cost_budjet)" :disabled="!check('user')"
+                            v-model="row.cost_budjet[typeEvent.value]"/>
             </div>
           </div>
           <div class="row mt-3">
@@ -149,7 +151,8 @@
               Внебюджетного финансирования (руб.)
             </div>
             <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-              <b-form-input :disabled="!check('user')" v-model="row.cost_vb[typeEvent.value]"></b-form-input>
+              <b-form-input @input="sumShit(row,row.cost_vb)" :disabled="!check('user')"
+                            v-model="row.cost_vb[typeEvent.value]"/>
             </div>
           </div>
 
@@ -409,6 +412,13 @@ export default {
       );
 
       return options;
+    },
+    sumShit(row, valArr) {
+
+      row.cost_full =
+          Object.keys(row.cost_budjet).reduce((a, b) => a + this.toNum(row.cost_budjet[b]), 0) +
+          Object.keys(row.cost_vb).reduce((a, b) => a + this.toNum(row.cost_vb[b]), 0);
+
     },
     showModal(rowIndex) {
       //console.log('showModal before: ', this.rows[rowIndex].row_stages[1]);

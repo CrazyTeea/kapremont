@@ -36,84 +36,84 @@
             <b-td class="mw-145">
 
 
-              <b-form-input :disabled="isDku()" type="number" class="mt-1"
+              <b-form-input placeholder="Бюджет..." :disabled="isDku()" type="number" class="mt-1"
                             v-model="row.video_system_bud.dku"/>
 
 
-              <b-form-input :disabled="isDku()" type="number" class="mt-1"
+              <b-form-input placeholder="Внебюджет..." :disabled="isDku()" type="number" class="mt-1"
                             v-model="row.video_system_nebud.dku"/>
 
 
             </b-td>
             <b-td class="mw-145">
 
-              <b-form-input :disabled="isDku()" type="number" class="mt-1"
+              <b-form-input placeholder="Бюджет..." :disabled="isDku()" type="number" class="mt-1"
                             v-model="row.evacuation_system_bud.dku"/>
 
-              <b-form-input :disabled="isDku()" type="number" class="mt-1"
+              <b-form-input placeholder="Внебюджет..." :disabled="isDku()" type="number" class="mt-1"
                             v-model="row.evacuation_system_nebud.dku"/>
 
             </b-td>
             <b-td class="mw-145">
 
-              <b-form-input :disabled="isDku()" type="number" class="mt-1"
+              <b-form-input placeholder="Бюджет..." :disabled="isDku()" type="number" class="mt-1"
                             v-model="row.light_system_bud.dku"/>
 
-              <b-form-input :disabled="isDku()" type="number" class="mt-1"
+              <b-form-input placeholder="Внебюджет..." :disabled="isDku()" type="number" class="mt-1"
                             v-model="row.light_system_nebud.dku"/>
 
             </b-td>
             <b-td class="mw-145">
 
-              <b-form-input :disabled="isDku()" type="number" class="mt-1"
+              <b-form-input placeholder="Бюджет..." :disabled="isDku()" type="number" class="mt-1"
                             v-model="row.predator_system_bud.dku"/>
 
-              <b-form-input :disabled="isDku()" type="number" class="mt-1"
+              <b-form-input placeholder="Внебюджет..." :disabled="isDku()" type="number" class="mt-1"
                             v-model="row.predator_system_nebud.dku"/>
 
             </b-td>
             <b-td class="mw-145">
 
-              <b-form-input :disabled="isDku()" type="number" class="mt-1"
+              <b-form-input placeholder="Бюджет..." :disabled="isDku()" type="number" class="mt-1"
                             v-model="row.alarm_warning_system_bud.dku"/>
 
-              <b-form-input :disabled="isDku()" type="number" class="mt-1"
+              <b-form-input placeholder="Внебюджет..." :disabled="isDku()" type="number" class="mt-1"
                             v-model="row.alarm_warning_system_nebud.dku"/>
 
             </b-td>
             <b-td class="mw-145">
 
-              <b-form-input :disabled="isDku()" type="number" class="mt-1"
+              <b-form-input placeholder="Бюджет..." :disabled="isDku()" type="number" class="mt-1"
                             v-model="row.alarm_fire_system_bud.dku"/>
 
-              <b-form-input :disabled="isDku()" type="number" class="mt-1"
+              <b-form-input placeholder="Внебюджет..." :disabled="isDku()" type="number" class="mt-1"
                             v-model="row.alarm_fire_system_nebud.dku"/>
 
             </b-td>
             <b-td class="mw-145">
 
-              <b-form-input :disabled="isDku()" type="number" class="mt-1"
+              <b-form-input placeholder="Бюджет..." :disabled="isDku()" type="number" class="mt-1"
                             v-model="row.phone_system_bud.dku"/>
 
-              <b-form-input :disabled="isDku()" type="number" class="mt-1"
+              <b-form-input placeholder="Внебюджет..." :disabled="isDku()" type="number" class="mt-1"
                             v-model="row.phone_system_nebud.dku"/>
 
             </b-td>
             <b-td class="mw-145">
 
-              <b-form-input :disabled="isDku()" type="number" class="mt-1"
+              <b-form-input placeholder="Бюджет..." :disabled="isDku()" type="number" class="mt-1"
                             v-model="row.fence_bud.dku"/>
 
-              <b-form-input :disabled="isDku()" type="number" class="mt-1"
+              <b-form-input placeholder="Внебюджет..." :disabled="isDku()" type="number" class="mt-1"
                             v-model="row.fence_nebud.dku"/>
 
             </b-td>
             <b-td class="mw-145">
 
-              <b-form-input :disabled="isDku()" type="number" class="mt-1"
+              <b-form-input placeholder="Бюджет..." :disabled="isDku()" type="number" class="mt-1"
                             v-model="row.skud_bud.dku"/>
 
-              <b-form-input :disabled="isDku()" type="number" class="mt-1"
+              <b-form-input placeholder="Внебюджет..." :disabled="isDku()" type="number" class="mt-1"
                             v-model="row.skud_nebud.dku"/>
 
 

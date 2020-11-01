@@ -201,8 +201,6 @@ export default {
     await this.getPassportInfo();
     await this.getCurentOrg();
     this.ready = true
-
-
   },
   computed: {},
   watch: {
@@ -238,8 +236,7 @@ export default {
       }).then(res => {
         this.passport = res.data;
       });
-    }
-    ,
+    },
     async getCurentOrg() {
       return Axios.post(`/api/org-table/${this.$route.params.id}`, null, {
         headers: {
@@ -248,12 +245,9 @@ export default {
       }).then(res => {
         this.finanse_volume = res.data.programm.finance_volume;
       });
-    }
-    ,
-  }
-  ,
-}
-;
+    },
+  },
+};
 </script>
 
 <style></style>
