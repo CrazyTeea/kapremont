@@ -48,12 +48,17 @@
         <div class="col-4 m-auto">
           Вид документа
         </div>
-        <div class="col-8 m-auto">
-          <b-form-select :disabled="!check('user')" v-model="typeDocument" :options="[
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-select :disabled="!check('user')" v-model="row.typeDocument" :options="[
               {value: 'Договор', text: 'Договор'},
               {value: 'Контракт', text: 'Контракт'}
           ]"></b-form-select>
+          <!--<b-form-input :disabled="!check('user')" v-model="row.method"></b-form-input>-->
         </div>
+
+        <!--<div class="col-8 m-auto">
+
+        </div>-->
       </div>
 
 
@@ -131,6 +136,24 @@
         </div>
       </div>
 
+
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Общая стоимость бюд (руб.)
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input disabled v-model="row.cost_full_b"></b-form-input>
+        </div>
+      </div>
+      <div class="row mt-3">
+        <div class="col m-auto">
+          Общая стоимость вне бюд (руб.)
+        </div>
+        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
+          <b-form-input disabled v-model="row.cost_full_vb"></b-form-input>
+        </div>
+      </div>
+
       <b-tabs class="mt-3" fill>
 
         <b-tab :key="`tab_${index}`" v-for="(typeEvent, index) in [...modalContent][0]['type_event']"
@@ -182,16 +205,15 @@
 
       <div class="row mt-3">
         <div class="col m-auto">
-          Номер извещения /номер Номер реестровой записи договора/контракта на сайте https://zakupki.gov.ru/ (в случаи
-          публикации)
+          Адрес ссылки https://zakupki.gov.ru/
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input :disabled="!check('user')" v-model="row.number_contract"></b-form-input>
+          <b-form-input :disabled="!check('user') || (index === 1)" v-model="row.number_contract"></b-form-input>
         </div>
       </div>
       <div class="row mt-3">
         <div class="col m-auto">
-          Дата заключения контракта/договора
+          Дата заключения
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
           <b-form-input type="date" :disabled="!check('user')" v-model="row.date_doc"></b-form-input>
@@ -199,7 +221,7 @@
       </div>
       <div class="row mt-3">
         <div class="col m-auto">
-          Номер договора /контракта
+          Номер
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
           <b-form-input :disabled="!check('user')" v-model="row.number_deal"></b-form-input>
@@ -209,23 +231,23 @@
 
       <div class="row mt-3">
         <div class="col m-auto">
-          Наименование поставщика по договору /контракту
+          Наименование поставщика
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input :disabled="!check('user')" v-model="row.name_deller_by_doc"></b-form-input>
+          <b-form-input :disabled="!check('user') || (index === 1)" v-model="row.name_deller_by_doc"></b-form-input>
         </div>
       </div>
       <div class="row mt-3">
         <div class="col m-auto">
-          ИНН поставщика по договору /контракту
+          ИНН поставщика
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input :disabled="!check('user')" v-model="row.inn_deller_by_doc"></b-form-input>
+          <b-form-input :disabled="!check('user') || (index === 1)" v-model="row.inn_deller_by_doc"></b-form-input>
         </div>
       </div>
       <div class="row mt-3">
         <div class="col m-auto">
-          Дата начала
+          Дата начала исполнения
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
           <b-form-input type="date" :disabled="!check('user')" v-model="row.date_start"></b-form-input>
@@ -233,7 +255,7 @@
       </div>
       <div class="row mt-3">
         <div class="col m-auto">
-          Дата окончания
+          Дата окончания исполнения
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
           <b-form-input type="date" :disabled="!check('user')" v-model="row.date_end"></b-form-input>
@@ -241,7 +263,7 @@
       </div>
       <div class="row mt-3">
         <div class="col m-auto">
-          Подтверждающие документы
+          Прикрепленный файлы(PDF)
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
           <b-form-input :disabled="!check('user')" v-model="row.docs"></b-form-input>
@@ -320,7 +342,6 @@ export default {
       let address = this.modalContent[0].address.slice();
       //console.log('address: ', address);
       let type_event = this.modalContent[0].type_event.slice();
-
 
       this.modalContent[1].address = address;
       this.modalContent[1].type_event = type_event;
@@ -414,10 +435,9 @@ export default {
       return options;
     },
     sumShit(row, valArr) {
-
-      row.cost_full =
-          Object.keys(row.cost_budjet).reduce((a, b) => a + this.toNum(row.cost_budjet[b]), 0) +
-          Object.keys(row.cost_vb).reduce((a, b) => a + this.toNum(row.cost_vb[b]), 0);
+      row.cost_full_b = Object.keys(row.cost_budjet).reduce((a, b) => a + this.toNum(row.cost_budjet[b]), 0);
+      row.cost_full_vb = Object.keys(row.cost_vb).reduce((a, b) => a + this.toNum(row.cost_vb[b]), 0);
+      row.cost_full = row.cost_full_b + row.cost_full_vb;
 
     },
     showModal(rowIndex) {
@@ -461,6 +481,8 @@ export default {
             type_document: null,
             name_object: null,
             cost_full: null,
+            cost_full_b: null,
+            cost_full_vb: null,
             cost_budjet: {},
             cost_vb: {},
             number_contract: null,
@@ -484,6 +506,8 @@ export default {
             type_document: null,
             name_object: null,
             cost_full: null,
+            cost_full_b: null,
+            cost_full_vb: null,
             cost_budjet: {},
             cost_vb: {},
             number_contract: null,
@@ -513,6 +537,8 @@ export default {
             type_document: null,
             name_object: null,
             cost_full: null,
+            cost_full_b: null,
+            cost_full_vb: null,
             cost_budjet: {},
             cost_vb: {},
             number_contract: null,
@@ -536,6 +562,8 @@ export default {
             type_document: null,
             name_object: null,
             cost_full: null,
+            cost_full_b: null,
+            cost_full_vb: null,
             cost_budjet: {},
             cost_vb: {},
             number_contract: null,
@@ -559,6 +587,8 @@ export default {
             type_document: null,
             name_object: null,
             cost_full: null,
+            cost_full_b: null,
+            cost_full_vb: null,
             cost_budjet: {},
             cost_vb: {},
             number_contract: null,
@@ -582,6 +612,8 @@ export default {
             type_document: null,
             name_object: null,
             cost_full: null,
+            cost_full_b: null,
+            cost_full_vb: null,
             cost_budjet: {},
             cost_vb: {},
             number_contract: null,
