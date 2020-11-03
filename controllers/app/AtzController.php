@@ -329,6 +329,8 @@ class AtzController extends AppController
 
         $this->actionDestroyAtzTableFourRow($getOldIds());
 
+        $errors = [];
+
         foreach ($mainArray as $mainData) {
             $mainAtzFour = new AtzTableFour();
             $mainAtzFour->id_org = $id_org;
@@ -353,7 +355,7 @@ class AtzController extends AppController
 
             if ($mainAtzFour->save()) {
 
-                foreach ($mainData['address'] as $address) {
+                foreach ($mainData['address'] as $index => $address) {
                     $atz_address = new AtzAddress();
                     $atz_address->id_atz_table_four = $mainAtzFour->id;
                     $atz_address->passport_name = $address['passport_name'];
@@ -388,6 +390,7 @@ class AtzController extends AppController
                             }
                         }
                     }
+                    $errors[] = ["atz_address_${index}"=>$atz_address->getErrors()];
                 }
 
 
@@ -410,9 +413,11 @@ class AtzController extends AppController
 //                }
             }
 
+            $errors[] = ['mainAtzFour'=>$mainAtzFour->getErrors()];
+
         }
 
-        return 'max pidor';
+        return Json::encode($errors);
     }
 
     public function actionDestroyAtzTableFourRow(array $ids = null)
