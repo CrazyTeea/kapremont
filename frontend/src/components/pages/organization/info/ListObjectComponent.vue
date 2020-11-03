@@ -44,6 +44,7 @@
                 Из них на реализацию мероприятий по антитеррористической защищенности, не более,тыс. рублей
               </b-th>
               <b-th>Предельная стоимость капитального ремонта 1 кв. м. площади, рублей</b-th>
+              <b-th>Предельная стоимость капитального ремонта</b-th>
               <b-th>Ожидаемая площадь капитального ремонта, кв.м.</b-th>
             </b-tr>
             <b-tr v-else>
@@ -68,6 +69,9 @@
               </b-th>
               <b-th class="normal-font-weight-for-sell cursor-pointer center-text-in-cell">
                 <label class="cursor-pointer">{{ programm.cost }}</label>
+              </b-th>
+              <b-th class="normal-font-weight-for-sell cursor-pointer center-text-in-cell">
+                <label class="cursor-pointer">{{ programm.cost2 }}</label>
               </b-th>
               <b-th class="normal-font-weight-for-sell center-text-in-cell cursor-pointer">
                 <label class="cursor-pointer">{{ waited_square }}</label>
