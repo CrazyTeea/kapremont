@@ -90,8 +90,10 @@ class AtzController extends AppController
 
         $id_org = Yii::$app->request->post('id_org');
 
+        $errors = [];
+
         foreach ($dataArray as $data) {
-            if (!count($data['object'])) continue;
+            if (!isset($data['object']) or (is_array($data['object']) and !count($data['object']))) continue;
 
             $atz = AtzTableThree::findOne($data['id'] ?? null) ?? new AtzTableThree();
             $atz->id_object = $data['object']['id'];
@@ -128,8 +130,11 @@ class AtzController extends AppController
             $atz->fence_nebud = implode('/', $data['fence_nebud']);
             $atz->skud_nebud = implode('/', $data['skud_nebud']);
 
-            $atz->save(false);
+            if (!$atz->save(false))
+                $errors[]=$atz->getErrors();
+
         }
+        return Json::encode($errors);
 
         // return json_encode($new->save());
         // echo "<pre>";
@@ -202,13 +207,13 @@ class AtzController extends AppController
         $id = Yii::$app->request->post('id');
         $atzRecord = AtzTableThree::findOne($id);
 
-        return json_encode($atzRecord->delete());
+        return Json::encode($atzRecord->delete());
     }
 
     public function actionGetTable3()
     {
         $id_org = Yii::$app->request->post('id_org');
-        $atz = AtzTableThree::find()->where(['id_org' => 1])->all();
+        $atz = AtzTableThree::find()->where(['id_org' => $id_org])->all();
 
         foreach ($atz as $at) {
             $toClient[] = [
@@ -250,7 +255,7 @@ class AtzController extends AppController
             ];
         }
 
-        return json_encode($toClient ?? null);
+        return Json::encode($toClient ?? null);
     }
 
     private function arrayCompact($element)
