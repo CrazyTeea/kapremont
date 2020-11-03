@@ -7,6 +7,7 @@ use app\models\Antiterror;
 use app\models\Atz;
 use app\models\AtzAddress;
 use app\models\AtzFiles;
+use app\models\AtzTable4Files;
 use app\models\AtzTableFour;
 use app\models\AtzTableThree;
 use app\models\AtzTypeActivity;
@@ -14,7 +15,6 @@ use app\models\Organizations;
 use app\models\Program;
 use app\models\Sub_systems_table4;
 use app\models\User;
-use phpDocumentor\Reflection\Type;
 use Yii;
 use yii\helpers\FileHelper;
 use yii\helpers\Json;
@@ -131,7 +131,7 @@ class AtzController extends AppController
             $atz->skud_nebud = implode('/', $data['skud_nebud']);
 
             if (!$atz->save(false))
-                $errors[]=$atz->getErrors();
+                $errors[] = $atz->getErrors();
 
         }
         return Json::encode($errors);
@@ -324,7 +324,6 @@ class AtzController extends AppController
         if (empty($mainArray)) return 'emptyData';
 
 
-
         $getOldIds = function () use ($mainArray) {
             foreach ($mainArray as $row) {
                 if (isset($row['attributes']['id'])) $ids = array_merge($ids ?? [], [$row['attributes']['id']]);
@@ -370,7 +369,7 @@ class AtzController extends AppController
                             $atz_type_activity->id_atz_table_for_address = $atz_address->id;
                             $atz_type_activity->name = $type_event->name;
                             $atz_type_activity->value = $type_event->value;
-                            if($atz_type_activity->save()) {
+                            if ($atz_type_activity->save()) {
                                 foreach ($mainData['attributes']['cost_budjet'] as $key_name_budjet => $budjet) {
                                     if ($key_name_budjet == $atz_type_activity->value) {
                                         $b_systems = new Sub_systems_table4();
@@ -395,7 +394,7 @@ class AtzController extends AppController
                             }
                         }
                     }
-                    $errors[] = ["atz_address_${index}"=>$atz_address->getErrors()];
+                    $errors[] = ["atz_address_${index}" => $atz_address->getErrors()];
                 }
 
 
@@ -418,7 +417,7 @@ class AtzController extends AppController
 //                }
             }
 
-            $errors[] = ['mainAtzFour'=>$mainAtzFour->getErrors()];
+            $errors[] = ['mainAtzFour' => $mainAtzFour->getErrors()];
 
         }
 
@@ -431,6 +430,52 @@ class AtzController extends AppController
         foreach ($ids as $id) {
             AtzTableFour::destroy($id);
         }
+    }
+
+    public function actionFile4($id_org, $id_tab4)
+    {
+        $path = Yii::getAlias('@webroot') . "/uploads/atz/table4/$id_org/$id_tab4/";
+
+        $file = AtzTable4Files::findOne(['id_tab4' => $id_tab4]);
+        if ($file)
+            Yii::$app->response->sendFile("{$path}{$file->file}");
+    }
+
+    public function actionSaveFile4($id_org)
+    {
+
+        $index = Yii::$app->request->post('file_index');
+
+        $fiel = UploadedFile::getInstanceByName('file');
+
+        $id = Yii::$app->request->post('id');
+
+        if ($fiel) {
+
+            $file = AtzTable4Files::findOne(['id_org' => $id_org, 'type' => $index, 'id_tab4' => $id]) ?? new AtzTable4Files();
+            $file->id_org = $id_org;
+            $file->id_tab4 = $id;
+            $file->type = $index;
+
+            $path = Yii::getAlias('@webroot') . "/uploads/atz/table4/$id_org/$id/";
+            if (!file_exists($path))
+                FileHelper::createDirectory($path);
+
+            if (!$file->isNewRecord and file_exists("{$path}{$file->file}"))
+                unlink("{$path}{$file->file}");
+
+            $fiel->saveAs("{$path}{$fiel->name}");
+
+
+            $file->file = $fiel->name;
+            if (!$file->save(false))
+                return Json::encode(['success' => false, 'errors' => $file->getErrors()]);
+
+            return Json::encode(['success' => true]);
+        }
+        return Json::encode(['success' => false]);
+
+
     }
 
     public function actionGetTable4()
@@ -447,7 +492,7 @@ class AtzController extends AppController
 
         $i = 0;
 
-        foreach ($atz_table_four as  $atz_table_four_one) {
+        foreach ($atz_table_four as $atz_table_four_one) {
             $addresses = AtzAddress::find()->where(['id_atz_table_four' => $atz_table_four_one['id']])->asArray()->all();
 
             $cost_b_dbs = Sub_systems_table4::find()->where(['id_card' => $atz_table_four_one['id'], 'cost_type' => 'cost_budjet'])->asArray()->all();
@@ -457,26 +502,31 @@ class AtzController extends AppController
             $cost_b = [];
             $cost_vb = [];
 
-            foreach($cost_b_dbs as $cost_b_db) {
+            foreach ($cost_b_dbs as $cost_b_db) {
                 $cost_b[$cost_b_db['field_name']] = $cost_b_db['value'] ?? 0;
             }
 
-            foreach($cost_vb_dbs as $cost_vb_db) {
+            foreach ($cost_vb_dbs as $cost_vb_db) {
                 $cost_vb[$cost_vb_db['field_name']] = $cost_vb_db['value'] ?? 0;
             }
 
-            $atz_table_four_one['cost_budjet'] = $cost_b ?? (object) [];
-            $atz_table_four_one['cost_vb'] = $cost_vb ?? (object) [];
+            $atz_table_four_one['cost_budjet'] = $cost_b ?? (object)[];
+            $atz_table_four_one['cost_vb'] = $cost_vb ?? (object)[];
+
+            $atz_table_four_one['file'] = AtzTable4Files::findOne(['id_tab4' => $atz_table_four_one['id']])->file ?? null;
 
 //            if ($i == 1) dd($atz_table_four_one['cost_vb']);
 
             $i++;
-            $row_stages[] = array_merge($atz_table_four_one, ['address' => $addresses, 'type_event' => (function () use ($addresses) {
-                foreach ($addresses as $address) {
-                    $type_event = array_merge($type_event ?? [], AtzTypeActivity::find()->select(['id', 'name', 'value'])->where(['id_atz_table_for_address' => $address['id']])->asArray()->all());
-                }
-                return $type_event ?? [];
-            })()]);
+            $row_stages[] = array_merge($atz_table_four_one,
+                ['address' => $addresses,
+                    'type_event' => (function () use ($addresses) {
+                        foreach ($addresses as $address) {
+                            $type_event = array_merge($type_event ?? [],
+                                AtzTypeActivity::find()->select(['id', 'name', 'value'])->where(['id_atz_table_for_address' => $address['id']])->asArray()->all());
+                        }
+                        return $type_event ?? [];
+                    })()]);
 
             if ($isLastRow($atz_table_four_one)) {
                 $toClient [] = ['row_stages' => $row_stages];
@@ -484,8 +534,9 @@ class AtzController extends AppController
             }
         }
 
-        return json_encode($toClient ?? []);
+        return Json::encode($toClient ?? []);
     }
+
 
     public function actionSecretMethod()
     {
