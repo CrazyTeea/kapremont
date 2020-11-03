@@ -40,7 +40,7 @@
           Законтрактовано (сведения о заключении договора/контракта)
         </div>
         <div class="col m-auto">
-          Исполнено  (сведения о заключении договора/контракта)
+          Исполнено (сведения о заключении договора/контракта)
         </div>
       </div>
 
@@ -205,7 +205,7 @@
 
       <div class="row mt-3">
         <div class="col m-auto">
-          Адрес ссылки https://zakupki.gov.ru/  (из реестра договоров/контрактов)
+          Адрес ссылки https://zakupki.gov.ru/ (из реестра договоров/контрактов)
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
           <b-form-input :disabled="!check('user') || (index === 1)" v-model="row.number_contract"></b-form-input>
@@ -266,10 +266,15 @@
           Прикрепленный файлы(PDF)
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-file
-              :placeholder="index ? 'soglasovano' : 'zakontraktovano'"
-              @input="saveFile(index,$event)"
-              :disabled="!check('user')"></b-form-file>
+          <b-form-file v-if="!row.file"
+                       :placeholder="index ? 'soglasovano' : 'zakontraktovano'"
+                       @input="saveFile(row,index,$event)"
+                       :disabled="!check('user')"/>
+          <div v-else>
+            <a :href="`/app/atz/file4?id_tab4=${row.id}&id_org=${row.id_org}`">{{ row.file }}</a>
+            <b-icon @click="row.file = null" style="cursor: pointer" class="text-danger" icon="trash"/>
+          </div>
+
         </div>
       </div>
 
@@ -311,12 +316,13 @@
 import Axios from "axios";
 import CButton from "./CustomButton";
 import Multiselect from "vue-multiselect";
-import {BButton, BFormInput,BFormFile,
-  BFormSelect, BTab, BTabs} from "bootstrap-vue";
+import {BButton, BFormFile, BFormInput, BFormSelect, BTab, BTabs} from "bootstrap-vue";
 
 export default {
-  components: {Multiselect, BButton, BFormFile,
-    CButton, BFormInput, BFormSelect, BTabs, BTab},
+  components: {
+    Multiselect, BButton, BFormFile,
+    CButton, BFormInput, BFormSelect, BTabs, BTab
+  },
   props: ['passport', 'id_org'],
   name: "table4Remake",
   data() {
@@ -473,8 +479,17 @@ export default {
         //console.log('coming from server: ', this.rows);
       });
     },
-    saveFile(index,event){
-      console.log(event);
+    async saveFile(row, index, event) {
+      let data = new FormData();
+      data.append('id_org', row.id_org);
+      data.append('file_index', index);
+      data.append('file', event)
+      data.append('id', row.id)
+      await Axios.post(`/app/atz/save-file4?id_org=${row.id_org}`, data, {
+        headers: {
+          "X-CSRF-Token": this.csrf,
+        }
+      }).then(res => console.log(res.data))
     },
     addRow1() {
       this.rows.push({

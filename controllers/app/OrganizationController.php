@@ -3,15 +3,12 @@
 namespace app\controllers\app;
 
 use app\facades\ProgramStatus;
-use app\models\ApproveStatus;
 use app\models\Comments;
 use app\models\DkuDocs;
 use app\models\Organizations;
 use app\models\OrgInfo;
-use app\models\ProgObjectsEvents;
 use app\models\Program;
 use app\models\ProgramObjects;
-use app\models\User;
 use app\models\UserInfo;
 use Yii;
 use yii\helpers\ArrayHelper;
@@ -256,13 +253,16 @@ class OrganizationController extends AppController
     {
         $query = ProgramObjects::findOne($obj_id);
 
-        return Json::encode([
-            'label' => $query->astatus ? $query->astatus->label : '',
-            'id' => $query->astatus ? $query->astatus->id : 0,
-            'dep_status' => $query->dep_status,
-            'dku_status' => $query->org->dku_status,
-            'real_status' => $query->real_status ?? 0,
-        ]);
+        if ($query) {
+            return Json::encode([
+                'label' => $query->astatus ? $query->astatus->label : '',
+                'id' => $query->astatus ? $query->astatus->id : 0,
+                'dep_status' => $query->dep_status,
+                'dku_status' => $query->org->dku_status,
+                'real_status' => $query->real_status ?? 0,
+            ]);
+        }
+
     }
 
 }

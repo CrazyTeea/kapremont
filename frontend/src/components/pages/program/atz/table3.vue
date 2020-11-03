@@ -140,8 +140,11 @@
                 </div>
 
               </div>
+              <label v-else>
+                Утвержденная программа модернизаци инфраструктуры
+                <b-form-file v-model="files.file0" @input="saveFile(0)" v-can:user,faiv_user/>
+              </label>
 
-              <b-form-file v-else v-model="files.file0" @input="saveFile(0)" v-can:user,faiv_user/>
             </div>
             <div class="col pr-0">
               <div v-if="files.file1S" class="row float-left">
@@ -151,7 +154,12 @@
                 </div>
 
               </div>
-              <b-form-file v-else v-model="files.file1" @input="saveFile(1)" v-can:user,faiv_user/>
+              <label v-else >
+                Письма из Минобрнауки "О мероприятиях по антитерроиристической зазщищенности"
+                объектов (Департамент управления имуществом)
+                <b-form-file v-model="files.file1" @input="saveFile(1)" v-can:user,faiv_user/>
+              </label>
+
             </div>
           </div>
         </div>

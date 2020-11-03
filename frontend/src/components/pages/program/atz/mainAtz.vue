@@ -61,7 +61,11 @@
     <div class="row mt-5">
       <b-card no-body class="mb-1 w-100">
         <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.TABLE2>
-          <span class="toggle_button">Раздел 2. Антитеррористическая защищенность объектов</span>
+          <span class="toggle_button">Сведения из утвержденной программы модернизации инфраструктуры
+            (Раздел 2. Антитеррористическая защищенность объектов) /
+            Письма из Минобрнауки "О мероприятиях по антитерроиристической зазщищенности"
+            объектов (Департамент управления имуществом)
+            <!----></span>
         </b-card-header>
         <b-collapse id="TABLE2" accordion="TABLE2" role="tabpanel">
           <b-card-body>
