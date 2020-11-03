@@ -37,10 +37,10 @@
           Название
         </div>
         <div class="col m-auto">
-          Законтрактовано
+          Законтрактовано (сведения о заключении договора/контракта)
         </div>
         <div class="col m-auto">
-          Исполнено
+          Исполнено  (сведения о заключении договора/контракта)
         </div>
       </div>
 
@@ -120,7 +120,7 @@
 
       <div class="row mt-3">
         <div class="col m-auto">
-          Наименование объекта закупки (лота / договора/контракта)
+          Наименование объекта закупки (договора/контракта)
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
           <b-form-input :disabled="!check('user')" v-model="row.name_object"></b-form-input>
@@ -205,7 +205,7 @@
 
       <div class="row mt-3">
         <div class="col m-auto">
-          Адрес ссылки https://zakupki.gov.ru/
+          Адрес ссылки https://zakupki.gov.ru/  (из реестра договоров/контрактов)
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
           <b-form-input :disabled="!check('user') || (index === 1)" v-model="row.number_contract"></b-form-input>
