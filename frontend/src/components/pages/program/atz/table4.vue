@@ -266,7 +266,10 @@
           Прикрепленный файлы(PDF)
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input :disabled="!check('user')" v-model="row.docs"></b-form-input>
+          <b-form-file
+              :placeholder="index ? 'soglasovano' : 'zakontraktovano'"
+              @input="saveFile(index,$event)"
+              :disabled="!check('user')"></b-form-file>
         </div>
       </div>
 
@@ -308,10 +311,12 @@
 import Axios from "axios";
 import CButton from "./CustomButton";
 import Multiselect from "vue-multiselect";
-import {BButton, BFormInput, BFormSelect, BTab, BTabs} from "bootstrap-vue";
+import {BButton, BFormInput,BFormFile,
+  BFormSelect, BTab, BTabs} from "bootstrap-vue";
 
 export default {
-  components: {Multiselect, BButton, CButton, BFormInput, BFormSelect, BTabs, BTab},
+  components: {Multiselect, BButton, BFormFile,
+    CButton, BFormInput, BFormSelect, BTabs, BTab},
   props: ['passport', 'id_org'],
   name: "table4Remake",
   data() {
@@ -467,6 +472,9 @@ export default {
         this.rows = [...res.data];
         //console.log('coming from server: ', this.rows);
       });
+    },
+    saveFile(index,event){
+      console.log(event);
     },
     addRow1() {
       this.rows.push({

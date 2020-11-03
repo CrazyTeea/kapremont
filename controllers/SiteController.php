@@ -244,7 +244,7 @@ class SiteController extends Controller
             if ($p){
                 $p->finance_volume = str_replace(',','.',str_replace(' ','',$row[2]));
                 $p->finance_events = str_replace(',','.',str_replace(' ','',$row[3]));
-                $p->cost = str_replace(',','.',str_replace(' ','',$row[4]));
+                $p->cost2 = str_replace(',','.',str_replace(' ','',$row[4]));
                 $p->save(false);
             }
         }

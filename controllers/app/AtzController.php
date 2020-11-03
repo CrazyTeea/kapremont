@@ -353,7 +353,7 @@ class AtzController extends AppController
             $mainAtzFour->inn_deller_by_doc = $mainData['attributes']['inn_deller_by_doc'];
             $mainAtzFour->date_start = $mainData['attributes']['date_start'];
             $mainAtzFour->date_end = $mainData['attributes']['date_end'];
-            $mainAtzFour->docs = $mainData['attributes']['docs'];
+
             $mainAtzFour->comment_vuz = $mainData['attributes']['comment_vuz'];
             $mainAtzFour->mon_expert = $mainData['attributes']['mon_expert'];
             $mainAtzFour->comment_mon = $mainData['attributes']['comment_mon'];
