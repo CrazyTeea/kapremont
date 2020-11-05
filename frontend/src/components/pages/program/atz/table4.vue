@@ -49,7 +49,10 @@
           Вид документа
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-select :disabled="!check('user')" v-model="row.typeDocument" :options="[
+          <b-form-select :disabled="!check('user')" v-model="row.type_document" :options="index === 1 ? [
+              {value: 'Договор', text: 'Акт выполненных работ'},
+              {value: 'Контракт', text: 'Товарная накладная'}
+          ] :[
               {value: 'Договор', text: 'Договор'},
               {value: 'Контракт', text: 'Контракт'}
           ]"></b-form-select>
