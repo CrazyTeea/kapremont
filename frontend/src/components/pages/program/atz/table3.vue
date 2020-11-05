@@ -130,7 +130,7 @@
       <div class="row">
         <div class="col">
           <div class="row">
-            <div class="col pr-0">
+            <div class="col">
               <div v-if="files.file0S" class="row float-left">
                 <div class="col"><a @click="downloadFile(0)">{{ files.file0S }}</a></div>
                 <div v-can:user,faiv_user class="text-danger">
@@ -144,18 +144,13 @@
               </label>
 
             </div>
-            <div class="col pr-0">
-              <div v-if="files.file1S" class="row float-left">
-                <div class="col"><a @click="downloadFile(0)">{{ files.file1S }}</a></div>
-                <div v-can:user,faiv_user class="text-danger">
-                  <b-icon @click="files.file1S = null" icon="trash-fill"></b-icon>
-                </div>
+            <div class="col">
+              <div v-if="dku_doc" class="row float-left">
 
-              </div>
-              <label v-else>
+              <label>
                 Письма из Минобрнауки "О мероприятиях по антитерроиристической зазщищенности"
                 объектов (Департамент управления имуществом)
-                <b-form-file v-model="files.file1" @input="saveFile(1)" v-can:user,faiv_user/>
+                <a :href="`/uploads/dku_docs/${id_org}/${dku_doc.file_name}`">{{ dku_doc.file_name }}</a>
               </label>
 
             </div>
@@ -170,33 +165,7 @@
         </div>
       </div>
 
-
     </div>
-    <div class="mt-5">
-      <!-- <multiselect
-          v-model="sel2"
-          label="passport_name"
-          track-by="id"
-          :options="passport"
-          placeholder="Выберите объект"
-          select-label="Добваить"
-          deselect-label="Удалить"
-          selectedLabel="Выбрано"
-      ></multiselect>
-
-      <multiselect
-          class="mt-5"
-          v-model="sel"
-          label="passport_name"
-          track-by="id"
-          :multiple="true"
-          :taggable="true"
-          :options="passport"
-          placeholder="Выберите объект"
-          select-label="Добваить"
-          deselect-label="Удалить"
-          selectedLabel="Выбрано"
-      ></multiselect> -->
     </div>
   </div>
 </template>
@@ -347,6 +316,7 @@ export default {
       rows: [],
       sel: null,
       sel2: null,
+      dku_doc:null,
       files: {
         file0: null,
         file1: null,
@@ -423,7 +393,10 @@ export default {
           "X-CSRF-Token": this.csrf,
         },
       }).then((res) => {
-        if (res.data) this.rows = res.data;
+        if (res.data) {
+          this.dku_doc = res.data.dku_doc;
+          this.rows = res.data.rows;
+        }
       });
     },
     saveChanges() {

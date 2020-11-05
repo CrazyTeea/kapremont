@@ -11,6 +11,7 @@ use app\models\AtzTable4Files;
 use app\models\AtzTableFour;
 use app\models\AtzTableThree;
 use app\models\AtzTypeActivity;
+use app\models\DkuDocs;
 use app\models\Organizations;
 use app\models\Program;
 use app\models\Sub_systems_table4;
@@ -215,8 +216,11 @@ class AtzController extends AppController
         $id_org = Yii::$app->request->post('id_org');
         $atz = AtzTableThree::find()->where(['id_org' => $id_org])->all();
 
+        $toClient['dku_doc'] = DkuDocs::findOne(['id_org' => $id_org]);
+
+
         foreach ($atz as $at) {
-            $toClient[] = [
+            $toClient['rows'][] = [
                 'object' => [
                     'id' => $at->id_object,
                     'passport_name' => $at->object
@@ -252,6 +256,8 @@ class AtzController extends AppController
                 'skud_nebud' => $this->arrayCompact($at->skud_nebud),
 
                 'id' => $at->id,
+
+
             ];
         }
 
@@ -334,6 +340,8 @@ class AtzController extends AppController
         $this->actionDestroyAtzTableFourRow($getOldIds());
 
         $errors = [];
+
+
 
         foreach ($mainArray as $mainData) {
             $mainAtzFour = new AtzTableFour();
