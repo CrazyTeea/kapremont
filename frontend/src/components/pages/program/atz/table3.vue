@@ -119,10 +119,8 @@
 
             </b-td>
             <b-td class="mw-145">
-              ---
-              <!--<b-form-input type="number" v-model="row.docs"></b-form-input>
-              <b-form-input type="number" class="mt-1" v-model="row.docs"></b-form-input>
-              <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input> -->
+              {{sum.row[index].b}} /
+              {{sum.row[index].vb}}
             </b-td>
           </b-tr>
         </b-tbody>
@@ -154,7 +152,7 @@
                 </div>
 
               </div>
-              <label v-else >
+              <label v-else>
                 Письма из Минобрнауки "О мероприятиях по антитерроиристической зазщищенности"
                 объектов (Департамент управления имуществом)
                 <b-form-file v-model="files.file1" @input="saveFile(1)" v-can:user,faiv_user/>
@@ -232,8 +230,12 @@ export default {
       alarm_fire_system_nebud: 0,
       phone_system_nebud: 0,
       fence_nebud: 0,
-      skud_nebud: 0
+      skud_nebud: 0,
 
+      b: 0,
+      vb: 0,
+
+      row: []
     }
   },
   components: {
@@ -311,6 +313,30 @@ export default {
           return a + toNum(b.skud_nebud.dku)
         }, 0);
 
+        this.sum.row = this.rows.map(item => {
+          return {
+            b:
+                toNum(item.video_system_bud.dku) +
+                toNum(item.evacuation_system_bud.dku) +
+                toNum(item.predator_system_bud.dku) +
+                toNum(item.alarm_warning_system_bud.dku) +
+                toNum(item.alarm_fire_system_bud.dku) +
+                toNum(item.phone_system_bud.dku) +
+                toNum(item.fence_bud.dku) +
+                toNum(item.skud_bud.dku),
+            vb:
+                toNum(item.video_system_nebud.dku) +
+                toNum(item.evacuation_system_nebud.dku) +
+                toNum(item.predator_system_nebud.dku) +
+                toNum(item.alarm_warning_system_nebud.dku) +
+                toNum(item.alarm_fire_system_nebud.dku) +
+                toNum(item.phone_system_nebud.dku) +
+                toNum(item.fence_nebud.dku) +
+                toNum(item.skud_nebud.dku),
+          }
+        })
+        this.sum.b = this.sum.row.reduce((a,b)=>a + toNum(b.b),0);
+        this.sum.vb = this.sum.row.reduce((a,b)=>a + toNum(b.vb),0);
       },
       deep: true
     }
