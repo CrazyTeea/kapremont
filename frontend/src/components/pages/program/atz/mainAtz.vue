@@ -33,15 +33,15 @@
               </b-td
               >
               <b-td>Сумма бюджетного финансирования (руб.)</b-td>
-              <b-td>{{ table2Info.cost_b_full }}</b-td>
+              <b-td>{{ sum.b }}</b-td>
             </b-tr>
             <b-tr>
               <b-td>Сумма внебюджетного финансирования (руб.)</b-td>
-              <b-td>{{ table2Info.cost_v_full }}</b-td>
+              <b-td>{{ sum.vb }}</b-td>
             </b-tr>
             <b-tr>
               <b-td>Общий объем финансирования (руб.)</b-td>
-              <b-td>{{ table2Info.cost_b_full + table2Info.cost_v_full }}</b-td>
+              <b-td>{{ sum.b + sum.vb }}</b-td>
             </b-tr>
           </b-tbody>
         </b-table-simple>
@@ -194,7 +194,12 @@ export default {
         alarm_fire_system_nebud: 0,
         phone_system_nebud: 0,
         fence_nebud: 0,
-        skud_nebud: 0
+        skud_nebud: 0,
+
+        b: 0,
+        vb: 0,
+
+        row: []
 
       },
       ready: false
