@@ -113,7 +113,7 @@
           Способ определения поставщика (подрядчика, исполнителя)
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input :disabled="!check('user')" v-model="row.method"></b-form-input>
+          <b-form-input :disabled="!check('user') || (index === 1)" v-model="row.method"></b-form-input>
         </div>
       </div>
 
@@ -123,7 +123,7 @@
           Наименование объекта закупки (договора/контракта)
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
-          <b-form-input :disabled="!check('user')" v-model="row.name_object"></b-form-input>
+          <b-form-input :disabled="!check('user') || (index === 1)" v-model="row.name_object"></b-form-input>
         </div>
       </div>
 
@@ -267,7 +267,7 @@
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
           <b-form-file v-if="!row.file"
-                       :placeholder="index ? 'soglasovano' : 'zakontraktovano'"
+                       :placeholder="index ? 'Исполнено' : 'Законтрактовано'"
                        @input="saveFile(row,index,$event)"
                        :disabled="!check('user')"/>
           <div v-else>
