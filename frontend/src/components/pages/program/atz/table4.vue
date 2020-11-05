@@ -43,15 +43,14 @@
           Исполнено (сведения о заключении договора/контракта)
         </div>
       </div>
-
       <div class="row mt-3">
         <div class="col-4 m-auto">
           Вид документа
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
           <b-form-select :disabled="!check('user')" v-model="row.type_document" :options="index === 1 ? [
-              {value: 'Договор', text: 'Акт выполненных работ'},
-              {value: 'Контракт', text: 'Товарная накладная'}
+              {value: 'Акт выполненных работ', text: 'Акт выполненных работ'},
+              {value: 'Товарная накладная', text: 'Товарная накладная'}
           ] :[
               {value: 'Договор', text: 'Договор'},
               {value: 'Контракт', text: 'Контракт'}
@@ -63,8 +62,6 @@
 
         </div>-->
       </div>
-
-
       <div class="row mt-3">
         <div class="col-4 m-auto">
           Адрес проведения мероприятия
@@ -86,7 +83,6 @@
           ></multiselect>
         </div>
       </div>
-
       <div class="row mt-3">
         <div class="col-4 m-auto">
           Вид статьи мероприятия по АТЗ
@@ -110,7 +106,6 @@
           ></multiselect>
         </div>
       </div>
-
       <div class="row mt-3">
         <div class="col m-auto">
           Способ определения поставщика (подрядчика, исполнителя)
@@ -119,8 +114,6 @@
           <b-form-input :disabled="!check('user') || (index === 1)" v-model="row.method"></b-form-input>
         </div>
       </div>
-
-
       <div class="row mt-3">
         <div class="col m-auto">
           Наименование объекта закупки (договора/контракта)
@@ -129,7 +122,6 @@
           <b-form-input :disabled="!check('user') || (index === 1)" v-model="row.name_object"></b-form-input>
         </div>
       </div>
-
       <div class="row mt-3">
         <div class="col m-auto">
           Общая стоимость (руб.)
@@ -138,8 +130,6 @@
           <b-form-input disabled v-model="row.cost_full"></b-form-input>
         </div>
       </div>
-
-
       <div class="row mt-3">
         <div class="col m-auto">
           Общая стоимость бюд (руб.)
@@ -156,7 +146,6 @@
           <b-form-input disabled v-model="row.cost_full_vb"></b-form-input>
         </div>
       </div>
-
       <b-tabs class="mt-3" fill>
 
         <b-tab :key="`tab_${index}`" v-for="(typeEvent, index) in [...modalContent][0]['type_event']"
@@ -187,25 +176,6 @@
 
         <div class="w-100 mt-3 back-strip"></div>
       </b-tabs>
-
-      <!--      <div class="row mt-3">-->
-      <!--        <div class="col m-auto">-->
-      <!--          Бюджетного финансирования (руб.)-->
-      <!--        </div>-->
-      <!--        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">-->
-      <!--          <b-form-input :disabled="!check('user')" v-model="row.cost_budjet"></b-form-input>-->
-      <!--        </div>-->
-      <!--      </div>-->
-      <!--      <div class="row mt-3">-->
-      <!--        <div class="col m-auto">-->
-      <!--          Внебюджетного финансирования (руб.)-->
-      <!--        </div>-->
-      <!--        <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">-->
-      <!--          <b-form-input :disabled="!check('user')" v-model="row.cost_vb"></b-form-input>-->
-      <!--        </div>-->
-      <!--      </div>-->
-
-
       <div class="row mt-3">
         <div class="col m-auto">
           Адрес ссылки https://zakupki.gov.ru/ (из реестра договоров/контрактов)
@@ -230,8 +200,6 @@
           <b-form-input :disabled="!check('user')" v-model="row.number_deal"></b-form-input>
         </div>
       </div>
-
-
       <div class="row mt-3">
         <div class="col m-auto">
           Наименование поставщика
@@ -280,7 +248,6 @@
 
         </div>
       </div>
-
       <div class="row mt-3">
         <div class="col m-auto">
           Комментарий (текстовое поле Заполняет ВУЗ)
@@ -309,7 +276,6 @@
         </div>
       </div>
 
-      <!--<button @click="debug">Debug</button>-->
     </b-modal>
 
   </div>
