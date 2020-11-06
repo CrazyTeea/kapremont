@@ -174,69 +174,81 @@ export default {
 
         await this.getTableFourInfo()
 
-        if (this.table4.length) {
-          this.items[0].cost_b = this.data.video_system_bud;
+        this.items.forEach(i=>{
+          Object.keys(i).forEach(key=>{
+            i[key]=0;
+          })
+        })
+
+
+        if (this.table4) {
+
+          this.table4.forEach(item=>{
+            this.items[0].cost_b = this.data.video_system_bud;
           this.items[0].cost_v = this.data.video_system_nebud;
-          this.items[0].zakontraktovano_bud = this.toNum(this.table4[0].cost_budjet['video_system-0'])
-          this.items[0].zakontraktovano_nebud = this.toNum(this.table4[0].cost_vb['video_system-0'])
-          this.items[0].soglasovano_bud = this.toNum(this.table4[1].cost_budjet['video_system-0'])
-          this.items[0].soglasovano_nebud = this.toNum(this.table4[1].cost_vb['video_system-0'])
+          this.items[0].zakontraktovano_bud += this.toNum(item.row_stages[0].cost_budjet['video_system-0']); //this.toNum(this.table4[0].cost_budjet['video_system-0'])
+          this.items[0].zakontraktovano_nebud += this.toNum(item.row_stages[0].cost_vb['video_system-0']);// this.toNum(this.table4[0].cost_vb['video_system-0'])
+          this.items[0].soglasovano_bud += this.toNum(item.row_stages[1].cost_budjet['video_system-0'])
+          this.items[0].soglasovano_nebud += this.toNum(item.row_stages[1].cost_vb['video_system-0'])
 
           this.items[1].cost_b = this.data.evacuation_system_bud;
           this.items[1].cost_v = this.data.evacuation_system_nebud;
-          this.items[1].zakontraktovano_bud = this.toNum(this.table4[0].cost_budjet['evacuation_system-0'])
-          this.items[1].zakontraktovano_nebud = this.toNum(this.table4[0].cost_vb['evacuation_system-0'])
-          this.items[1].soglasovano_bud = this.toNum(this.table4[1].cost_budjet['evacuation_system-0'])
-          this.items[1].soglasovano_nebud = this.toNum(this.table4[1].cost_vb['evacuation_system-0'])
+          this.items[1].zakontraktovano_bud += this.toNum(item.row_stages[0].cost_budjet['evacuation_system-0'])
+          this.items[1].zakontraktovano_nebud += this.toNum(item.row_stages[0].cost_vb['evacuation_system-0'])
+          this.items[1].soglasovano_bud += this.toNum(item.row_stages[1].cost_budjet['evacuation_system-0'])
+          this.items[1].soglasovano_nebud += this.toNum(item.row_stages[1].cost_vb['evacuation_system-0'])
 
           this.items[2].cost_b = this.data.light_system_bud;
           this.items[2].cost_v = this.data.light_system_nebud;
-          this.items[2].zakontraktovano_bud = this.toNum(this.table4[0].cost_budjet['light_system-0'])
-          this.items[2].zakontraktovano_nebud = this.toNum(this.table4[0].cost_vb['light_system-0'])
-          this.items[2].soglasovano_bud = this.toNum(this.table4[1].cost_budjet['light_system-0'])
-          this.items[2].soglasovano_nebud = this.toNum(this.table4[1].cost_vb['light_system-0'])
+          this.items[2].zakontraktovano_bud += this.toNum(item.row_stages[0].cost_budjet['light_system-0'])
+          this.items[2].zakontraktovano_nebud += this.toNum(item.row_stages[0].cost_vb['light_system-0'])
+          this.items[2].soglasovano_bud += this.toNum(item.row_stages[1].cost_budjet['light_system-0'])
+          this.items[2].soglasovano_nebud += this.toNum(item.row_stages[1].cost_vb['light_system-0'])
 
           this.items[3].cost_b = this.data.predator_system_bud;
           this.items[3].cost_v = this.data.predator_system_nebud;
-          this.items[3].zakontraktovano_bud = this.toNum(this.table4[0].cost_budjet['predator_system-0'])
-          this.items[3].zakontraktovano_nebud = this.toNum(this.table4[0].cost_vb['predator_system-0'])
-          this.items[3].soglasovano_bud = this.toNum(this.table4[1].cost_budjet['predator_system-0'])
-          this.items[3].soglasovano_nebud = this.toNum(this.table4[1].cost_vb['predator_system-0'])
+          this.items[3].zakontraktovano_bud += this.toNum(item.row_stages[0].cost_budjet['predator_system-0'])
+          this.items[3].zakontraktovano_nebud += this.toNum(item.row_stages[0].cost_vb['predator_system-0'])
+          this.items[3].soglasovano_bud += this.toNum(item.row_stages[1].cost_budjet['predator_system-0'])
+          this.items[3].soglasovano_nebud += this.toNum(item.row_stages[1].cost_vb['predator_system-0'])
 
           this.items[4].cost_b = this.data.alarm_warning_system_bud;
           this.items[4].cost_v = this.data.alarm_warning_system_nebud;
-          this.items[4].zakontraktovano_bud = this.toNum(this.table4[0].cost_budjet['alarm_warning_system-0'])
-          this.items[4].zakontraktovano_nebud = this.toNum(this.table4[0].cost_vb['alarm_warning_system-0'])
-          this.items[4].soglasovano_bud = this.toNum(this.table4[1].cost_budjet['alarm_warning_system-0'])
-          this.items[4].soglasovano_nebud = this.toNum(this.table4[1].cost_vb['alarm_warning_system-0'])
+          this.items[4].zakontraktovano_bud += this.toNum(item.row_stages[0].cost_budjet['alarm_warning_system-0'])
+          this.items[4].zakontraktovano_nebud += this.toNum(item.row_stages[0].cost_vb['alarm_warning_system-0'])
+          this.items[4].soglasovano_bud += this.toNum(item.row_stages[1].cost_budjet['alarm_warning_system-0'])
+          this.items[4].soglasovano_nebud += this.toNum(item.row_stages[1].cost_vb['alarm_warning_system-0'])
 
           this.items[5].cost_b = this.data.alarm_fire_system_bud;
           this.items[5].cost_v = this.data.alarm_fire_system_nebud;
-          this.items[5].zakontraktovano_bud = this.toNum(this.table4[0].cost_budjet['alarm_fire_system-0'])
-          this.items[5].zakontraktovano_nebud = this.toNum(this.table4[0].cost_vb['alarm_fire_system-0'])
-          this.items[5].soglasovano_bud = this.toNum(this.table4[1].cost_budjet['alarm_fire_system-0'])
-          this.items[5].soglasovano_nebud = this.toNum(this.table4[1].cost_vb['alarm_fire_system-0'])
+          this.items[5].zakontraktovano_bud += this.toNum(item.row_stages[0].cost_budjet['alarm_fire_system-0'])
+          this.items[5].zakontraktovano_nebud += this.toNum(item.row_stages[0].cost_vb['alarm_fire_system-0'])
+          this.items[5].soglasovano_bud += this.toNum(item.row_stages[1].cost_budjet['alarm_fire_system-0'])
+          this.items[5].soglasovano_nebud += this.toNum(item.row_stages[1].cost_vb['alarm_fire_system-0'])
 
           this.items[6].cost_b = this.data.phone_system_bud;
           this.items[6].cost_v = this.data.phone_system_nebud;
-          this.items[6].zakontraktovano_bud = this.toNum(this.table4[0].cost_budjet['phone_system-0'])
-          this.items[6].zakontraktovano_nebud = this.toNum(this.table4[0].cost_vb['phone_system-0'])
-          this.items[6].soglasovano_bud = this.toNum(this.table4[1].cost_budjet['phone_system-0'])
-          this.items[6].soglasovano_nebud = this.toNum(this.table4[1].cost_vb['phone_system-0'])
+          this.items[6].zakontraktovano_bud += this.toNum(item.row_stages[0].cost_budjet['phone_system-0'])
+          this.items[6].zakontraktovano_nebud += this.toNum(item.row_stages[0].cost_vb['phone_system-0'])
+          this.items[6].soglasovano_bud += this.toNum(item.row_stages[1].cost_budjet['phone_system-0'])
+          this.items[6].soglasovano_nebud += this.toNum(item.row_stages[1].cost_vb['phone_system-0'])
 
           this.items[7].cost_b = this.data.fence_bud;
           this.items[7].cost_v = this.data.fence_nebud;
-          this.items[7].zakontraktovano_bud = this.toNum(this.table4[0].cost_budjet['fence-0'])
-          this.items[7].zakontraktovano_nebud = this.toNum(this.table4[0].cost_vb['fence-0'])
-          this.items[7].soglasovano_bud = this.toNum(this.table4[1].cost_budjet['fence-0'])
-          this.items[7].soglasovano_nebud = this.toNum(this.table4[1].cost_vb['fence-0'])
+          this.items[7].zakontraktovano_bud += this.toNum(item.row_stages[0].cost_budjet['fence-0'])
+          this.items[7].zakontraktovano_nebud += this.toNum(item.row_stages[0].cost_vb['fence-0'])
+          this.items[7].soglasovano_bud += this.toNum(item.row_stages[1].cost_budjet['fence-0'])
+          this.items[7].soglasovano_nebud += this.toNum(item.row_stages[1].cost_vb['fence-0'])
 
           this.items[8].cost_b = this.data.skud_bud;
           this.items[8].cost_v = this.data.skud_nebud;
-          this.items[8].zakontraktovano_bud = this.toNum(this.table4[0].cost_budjet['skud-0'])
-          this.items[8].zakontraktovano_nebud = this.toNum(this.table4[0].cost_vb['skud-0'])
-          this.items[8].soglasovano_bud = this.toNum(this.table4[1].cost_budjet['skud-0'])
-          this.items[8].soglasovano_nebud = this.toNum(this.table4[1].cost_vb['skud-0'])
+          this.items[8].zakontraktovano_bud += this.toNum(item.row_stages[0].cost_budjet['skud-0'])
+          this.items[8].zakontraktovano_nebud += this.toNum(item.row_stages[0].cost_vb['skud-0'])
+          this.items[8].soglasovano_bud += this.toNum(item.row_stages[1].cost_budjet['skud-0'])
+          this.items[8].soglasovano_nebud += this.toNum(item.row_stages[1].cost_vb['skud-0'])
+          })
+
+
         }
 
 
@@ -385,7 +397,7 @@ export default {
         },
       }).then((res) => {
         if (res.data.length)
-          this.table4 = res.data[0].row_stages;
+          this.table4 = res.data || [];
 
 
         //console.log('coming from server: ', this.table4);

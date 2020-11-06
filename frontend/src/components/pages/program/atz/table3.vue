@@ -119,8 +119,8 @@
 
             </b-td>
             <b-td class="mw-145">
-              {{sum.row[index].b}} /
-              {{sum.row[index].vb}}
+              {{ sum.row[index].b }} /
+              {{ sum.row[index].vb }}
             </b-td>
           </b-tr>
         </b-tbody>
@@ -147,25 +147,25 @@
             <div class="col">
               <div v-if="dku_doc" class="row float-left">
 
-              <label>
-                Письма из Минобрнауки "О мероприятиях по антитерроиристической зазщищенности"
-                объектов (Департамент управления имуществом)
-                <a :href="`/uploads/dku_docs/${id_org}/${dku_doc.file_name}`">{{ dku_doc.file_name }}</a>
-              </label>
+                <label>
+                  Письма из Минобрнауки "О мероприятиях по антитерроиристической зазщищенности"
+                  объектов (Департамент управления имуществом)
+                  <a :href="`/uploads/dku_docs/${id_org}/${dku_doc.file_name}`">{{ dku_doc.file_name }}</a>
+                </label>
 
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col">
-          <div class="float-right">
-            <b-button size="sm" @click="addRow">Добавить строку</b-button>
-            <b-button size="sm" variant="success" class="ml-2" @click="saveChanges">Сохранить</b-button>
+          <div class="col">
+            <div class="float-right">
+              <b-button size="sm" @click="addRow">Добавить строку</b-button>
+              <b-button size="sm" variant="success" class="ml-2" @click="saveChanges">Сохранить</b-button>
+            </div>
+
           </div>
-
         </div>
-      </div>
 
-    </div>
+      </div>
     </div>
   </div>
 </template>
@@ -225,87 +225,91 @@ export default {
 
         let toNum = (val) => typeof val === 'string' ? val.toNumber() : Number(val)
 
-        this.sum.video_system_bud = this.rows.reduce((a, b) => {
-          return a + toNum(b.video_system_bud.dku)
-        }, 0);
-        this.sum.evacuation_system_bud = this.rows.reduce((a, b) => {
-          return a + toNum(b.evacuation_system_bud.dku)
-        }, 0);
-        this.sum.light_system_bud = this.rows.reduce((a, b) => {
-          return a + toNum(b.light_system_bud.dku)
-        }, 0);
-        this.sum.predator_system_bud = this.rows.reduce((a, b) => {
-          return a + toNum(b.predator_system_bud.dku)
-        }, 0);
-        this.sum.alarm_warning_system_bud = this.rows.reduce((a, b) => {
-          return a + toNum(b.alarm_warning_system_bud.dku)
-        }, 0);
-        this.sum.alarm_fire_system_bud = this.rows.reduce((a, b) => {
-          return a + toNum(b.alarm_fire_system_bud.dku)
-        }, 0);
-        this.sum.phone_system_bud = this.rows.reduce((a, b) => {
-          return a + toNum(b.phone_system_bud.dku)
-        }, 0);
-        this.sum.fence_bud = this.rows.reduce((a, b) => {
-          return a + toNum(b.fence_bud.dku)
-        }, 0);
-        this.sum.skud_bud = this.rows.reduce((a, b) => {
-          return a + toNum(b.skud_bud.dku)
-        }, 0);
+        if (this.rows ) {
+
+          this.sum.video_system_bud = this.rows.reduce((a, b) => {
+            return a + toNum(b.video_system_bud.dku)
+          }, 0);
+          this.sum.evacuation_system_bud = this.rows.reduce((a, b) => {
+            return a + toNum(b.evacuation_system_bud.dku)
+          }, 0);
+          this.sum.light_system_bud = this.rows.reduce((a, b) => {
+            return a + toNum(b.light_system_bud.dku)
+          }, 0);
+          this.sum.predator_system_bud = this.rows.reduce((a, b) => {
+            return a + toNum(b.predator_system_bud.dku)
+          }, 0);
+          this.sum.alarm_warning_system_bud = this.rows.reduce((a, b) => {
+            return a + toNum(b.alarm_warning_system_bud.dku)
+          }, 0);
+          this.sum.alarm_fire_system_bud = this.rows.reduce((a, b) => {
+            return a + toNum(b.alarm_fire_system_bud.dku)
+          }, 0);
+          this.sum.phone_system_bud = this.rows.reduce((a, b) => {
+            return a + toNum(b.phone_system_bud.dku)
+          }, 0);
+          this.sum.fence_bud = this.rows.reduce((a, b) => {
+            return a + toNum(b.fence_bud.dku)
+          }, 0);
+          this.sum.skud_bud = this.rows.reduce((a, b) => {
+            return a + toNum(b.skud_bud.dku)
+          }, 0);
 
 
-        this.sum.video_system_nebud = this.rows.reduce((a, b) => {
-          return a + toNum(b.video_system_nebud.dku)
-        }, 0);
-        this.sum.evacuation_system_nebud = this.rows.reduce((a, b) => {
-          return a + toNum(b.evacuation_system_nebud.dku)
-        }, 0);
-        this.sum.light_system_nebud = this.rows.reduce((a, b) => {
-          return a + toNum(b.light_system_nebud.dku)
-        }, 0);
-        this.sum.predator_system_nebud = this.rows.reduce((a, b) => {
-          return a + toNum(b.predator_system_nebud.dku)
-        }, 0);
-        this.sum.alarm_warning_system_nebud = this.rows.reduce((a, b) => {
-          return a + toNum(b.alarm_warning_system_nebud.dku)
-        }, 0);
-        this.sum.alarm_fire_system_nebud = this.rows.reduce((a, b) => {
-          return a + toNum(b.alarm_fire_system_nebud.dku)
-        }, 0);
-        this.sum.phone_system_nebud = this.rows.reduce((a, b) => {
-          return a + toNum(b.phone_system_nebud.dku)
-        }, 0);
-        this.sum.fence_nebud = this.rows.reduce((a, b) => {
-          return a + toNum(b.fence_nebud.dku)
-        }, 0);
-        this.sum.skud_nebud = this.rows.reduce((a, b) => {
-          return a + toNum(b.skud_nebud.dku)
-        }, 0);
+          this.sum.video_system_nebud = this.rows.reduce((a, b) => {
+            return a + toNum(b.video_system_nebud.dku)
+          }, 0);
+          this.sum.evacuation_system_nebud = this.rows.reduce((a, b) => {
+            return a + toNum(b.evacuation_system_nebud.dku)
+          }, 0);
+          this.sum.light_system_nebud = this.rows.reduce((a, b) => {
+            return a + toNum(b.light_system_nebud.dku)
+          }, 0);
+          this.sum.predator_system_nebud = this.rows.reduce((a, b) => {
+            return a + toNum(b.predator_system_nebud.dku)
+          }, 0);
+          this.sum.alarm_warning_system_nebud = this.rows.reduce((a, b) => {
+            return a + toNum(b.alarm_warning_system_nebud.dku)
+          }, 0);
+          this.sum.alarm_fire_system_nebud = this.rows.reduce((a, b) => {
+            return a + toNum(b.alarm_fire_system_nebud.dku)
+          }, 0);
+          this.sum.phone_system_nebud = this.rows.reduce((a, b) => {
+            return a + toNum(b.phone_system_nebud.dku)
+          }, 0);
+          this.sum.fence_nebud = this.rows.reduce((a, b) => {
+            return a + toNum(b.fence_nebud.dku)
+          }, 0);
+          this.sum.skud_nebud = this.rows.reduce((a, b) => {
+            return a + toNum(b.skud_nebud.dku)
+          }, 0);
 
-        this.sum.row = this.rows.map(item => {
-          return {
-            b:
-                toNum(item.video_system_bud.dku) +
-                toNum(item.evacuation_system_bud.dku) +
-                toNum(item.predator_system_bud.dku) +
-                toNum(item.alarm_warning_system_bud.dku) +
-                toNum(item.alarm_fire_system_bud.dku) +
-                toNum(item.phone_system_bud.dku) +
-                toNum(item.fence_bud.dku) +
-                toNum(item.skud_bud.dku),
-            vb:
-                toNum(item.video_system_nebud.dku) +
-                toNum(item.evacuation_system_nebud.dku) +
-                toNum(item.predator_system_nebud.dku) +
-                toNum(item.alarm_warning_system_nebud.dku) +
-                toNum(item.alarm_fire_system_nebud.dku) +
-                toNum(item.phone_system_nebud.dku) +
-                toNum(item.fence_nebud.dku) +
-                toNum(item.skud_nebud.dku),
-          }
-        })
-        this.sum.b = this.sum.row.reduce((a,b)=>a + toNum(b.b),0);
-        this.sum.vb = this.sum.row.reduce((a,b)=>a + toNum(b.vb),0);
+          this.sum.row = this.rows.map(item => {
+            return {
+              b:
+                  toNum(item.video_system_bud.dku) +
+                  toNum(item.evacuation_system_bud.dku) +
+                  toNum(item.predator_system_bud.dku) +
+                  toNum(item.alarm_warning_system_bud.dku) +
+                  toNum(item.alarm_fire_system_bud.dku) +
+                  toNum(item.phone_system_bud.dku) +
+                  toNum(item.fence_bud.dku) +
+                  toNum(item.skud_bud.dku),
+              vb:
+                  toNum(item.video_system_nebud.dku) +
+                  toNum(item.evacuation_system_nebud.dku) +
+                  toNum(item.predator_system_nebud.dku) +
+                  toNum(item.alarm_warning_system_nebud.dku) +
+                  toNum(item.alarm_fire_system_nebud.dku) +
+                  toNum(item.phone_system_nebud.dku) +
+                  toNum(item.fence_nebud.dku) +
+                  toNum(item.skud_nebud.dku),
+            }
+          })
+          this.sum.b = this.sum.row.reduce((a, b) => a + toNum(b.b), 0);
+          this.sum.vb = this.sum.row.reduce((a, b) => a + toNum(b.vb), 0);
+        }
+
       },
       deep: true
     }
@@ -316,7 +320,7 @@ export default {
       rows: [],
       sel: null,
       sel2: null,
-      dku_doc:null,
+      dku_doc: null,
       files: {
         file0: null,
         file1: null,
@@ -395,7 +399,7 @@ export default {
       }).then((res) => {
         if (res.data) {
           this.dku_doc = res.data.dku_doc;
-          this.rows = res.data.rows;
+          this.rows = res.data.rows || [];
         }
       });
     },
