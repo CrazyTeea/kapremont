@@ -238,6 +238,7 @@
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
           <b-form-file v-if="!row.file"
+                       browse-text="Файл"
                        :placeholder="index ? 'Исполнено' : 'Законтрактовано'"
                        @input="saveFile(row,index,$event)"
                        :disabled="!check('user')"/>
