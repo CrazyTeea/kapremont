@@ -40,7 +40,7 @@
           Законтрактовано (сведения о заключении договора/контракта)
         </div>
         <div class="col m-auto">
-          Исполнено (сведения о заключении договора/контракта)
+          Исполнено (сведения об исполнении)
         </div>
       </div>
       <div class="row mt-3">
@@ -49,7 +49,7 @@
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
           <b-form-select :disabled="!check('user')" v-model="row.type_document" :options="index === 1 ? [
-              {value: 'Акт выполненных работ', text: 'Акт выполненных работ'},
+              {value: 'Акт', text: 'Акт'},
               {value: 'Товарная накладная', text: 'Товарная накладная'}
           ] :[
               {value: 'Договор', text: 'Договор'},
@@ -238,6 +238,7 @@
         </div>
         <div class="col m-auto" v-for="(row, index) in modalContent" :key="`modalContent${index}`">
           <b-form-file v-if="!row.file"
+                       browse-text="Файл"
                        :placeholder="index ? 'Исполнено' : 'Законтрактовано'"
                        @input="saveFile(row,index,$event)"
                        :disabled="!check('user')"/>

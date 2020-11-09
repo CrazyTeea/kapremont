@@ -61,7 +61,7 @@
     <div class="row mt-5">
       <b-card no-body class="mb-1 w-100">
         <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.TABLE2>
-          <span class="toggle_button">Сведения из утвержденной программы модернизации инфраструктуры
+          <span class="toggle_button">Таблица 2. Сведения из утвержденной программы модернизации инфраструктуры
             (Раздел 2. Антитеррористическая защищенность объектов) /
             Письма из Минобрнауки "О мероприятиях по антитерроиристической зазщищенности"
             объектов (Департамент управления имуществом)
@@ -79,7 +79,7 @@
     <div class="row mt-5">
       <b-card no-body class="mb-1 w-100">
         <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.TABLE3>
-          <span class="toggle_button">Таблица 3</span>
+          <span class="toggle_button">Таблица 3. Процесс реализации программы</span>
         </b-card-header>
         <b-collapse id="TABLE3" accordion="TABLE3" role="tabpanel">
           <b-card-body>
@@ -92,7 +92,7 @@
     <div class="row mt-5">
       <b-card no-body class="mb-1 w-100">
         <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.TABLE4>
-          <span class="toggle_button">Таблица 4 Реестр договоров заключенных в рамках программы модернизации инфраструктуры (АТЗ) </span>
+          <span class="toggle_button">Таблица 4. Реестр договоров заключенных в рамках программы модернизации инфраструктуры (АТЗ) </span>
         </b-card-header>
         <b-collapse id="TABLE4" accordion="TABLE4" role="tabpanel" visible>
           <b-card-body>

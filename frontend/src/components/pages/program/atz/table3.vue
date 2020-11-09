@@ -140,7 +140,7 @@
               </div>
               <label v-else>
                 Утвержденная программа модернизаци инфраструктуры
-                <b-form-file v-model="files.file0" @input="saveFile(0)" v-can:user,faiv_user/>
+                <b-form-file placeholder="" browse-text="Файл" v-model="files.file0" @input="saveFile(0)" v-can:user,faiv_user/>
               </label>
 
             </div>
