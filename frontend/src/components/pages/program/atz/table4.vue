@@ -657,7 +657,7 @@ export default {
       }
     },
     computedHeader() {
-      return array => array.row_stages.map(elem => `${elem.type_document || '--'} №${elem.number_deal || '--'} на выполнение работ ${elem.type_event.map(elements => elements.name) || '--'} на сумму ${Number(elem.cost_full) || '--'}`);
+      return array => array.row_stages.map(elem => `${elem.type_document || '--'} №${elem.number_deal || '--'} на выполнение работ ${elem.name_object || '--'} на сумму ${Number(elem.cost_full) || '--'}`);
     }
   }
 }
