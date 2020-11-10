@@ -242,8 +242,9 @@ class SiteController extends Controller
         while (($row = fgetcsv($csv, 32000, ';')) != false) {
             $p = Program::findOne(['id_org'=>$row[0]]);
             if ($p){
-                $p->finance_volume = str_replace(',','.',trim($row[2],' '));
-                $p->finance_events = str_replace(',','.',trim($row[3],' '));
+                $p->finance_volume = str_replace(',','.',str_replace(' ','',$row[2]));
+                $p->finance_events = str_replace(',','.',str_replace(' ','',$row[3]));
+                $p->cost2 = str_replace(',','.',str_replace(' ','',$row[4]));
                 $p->save(false);
             }
         }

@@ -119,10 +119,8 @@
 
             </b-td>
             <b-td class="mw-145">
-              ---
-              <!--<b-form-input type="number" v-model="row.docs"></b-form-input>
-              <b-form-input type="number" class="mt-1" v-model="row.docs"></b-form-input>
-              <b-form-input disabled class="mt-1" v-model="row.docs"></b-form-input> -->
+              {{ sum.row[index].b }} /
+              {{ sum.row[index].vb }}
             </b-td>
           </b-tr>
         </b-tbody>
@@ -132,7 +130,7 @@
       <div class="row">
         <div class="col">
           <div class="row">
-            <div class="col pr-0">
+            <div class="col">
               <div v-if="files.file0S" class="row float-left">
                 <div class="col"><a @click="downloadFile(0)">{{ files.file0S }}</a></div>
                 <div v-can:user,faiv_user class="text-danger">
@@ -140,57 +138,34 @@
                 </div>
 
               </div>
+              <label v-else>
+                Утвержденная программа модернизаци инфраструктуры
+                <b-form-file placeholder="" browse-text="Файл" v-model="files.file0" @input="saveFile(0)" v-can:user,faiv_user/>
+              </label>
 
-              <b-form-file v-else v-model="files.file0" @input="saveFile(0)" v-can:user,faiv_user/>
             </div>
-            <div class="col pr-0">
-              <div v-if="files.file1S" class="row float-left">
-                <div class="col"><a @click="downloadFile(0)">{{ files.file1S }}</a></div>
-                <div v-can:user,faiv_user class="text-danger">
-                  <b-icon @click="files.file1S = null" icon="trash-fill"></b-icon>
-                </div>
+            <div class="col">
+              <div v-if="dku_doc" class="row float-left">
+
+                <label>
+                  Письма из Минобрнауки "О мероприятиях по антитерроиристической зазщищенности"
+                  объектов (Департамент управления имуществом)
+                  <a :href="`/uploads/dku_docs/${id_org}/${dku_doc.file_name}`">{{ dku_doc.file_name }}</a>
+                </label>
 
               </div>
-              <b-form-file v-else v-model="files.file1" @input="saveFile(1)" v-can:user,faiv_user/>
             </div>
           </div>
-        </div>
-        <div class="col">
-          <div class="float-right">
-            <b-button size="sm" @click="addRow">Добавить строку</b-button>
-            <b-button size="sm" variant="success" class="ml-2" @click="saveChanges">Сохранить</b-button>
+          <div class="col">
+            <div class="float-right">
+              <b-button size="sm" @click="addRow">Добавить строку</b-button>
+              <b-button size="sm" variant="success" class="ml-2" @click="saveChanges">Сохранить</b-button>
+            </div>
+
           </div>
-
         </div>
+
       </div>
-
-
-    </div>
-    <div class="mt-5">
-      <!-- <multiselect
-          v-model="sel2"
-          label="passport_name"
-          track-by="id"
-          :options="passport"
-          placeholder="Выберите объект"
-          select-label="Добваить"
-          deselect-label="Удалить"
-          selectedLabel="Выбрано"
-      ></multiselect>
-
-      <multiselect
-          class="mt-5"
-          v-model="sel"
-          label="passport_name"
-          track-by="id"
-          :multiple="true"
-          :taggable="true"
-          :options="passport"
-          placeholder="Выберите объект"
-          select-label="Добваить"
-          deselect-label="Удалить"
-          selectedLabel="Выбрано"
-      ></multiselect> -->
     </div>
   </div>
 </template>
@@ -224,8 +199,12 @@ export default {
       alarm_fire_system_nebud: 0,
       phone_system_nebud: 0,
       fence_nebud: 0,
-      skud_nebud: 0
+      skud_nebud: 0,
 
+      b: 0,
+      vb: 0,
+
+      row: []
     }
   },
   components: {
@@ -246,62 +225,90 @@ export default {
 
         let toNum = (val) => typeof val === 'string' ? val.toNumber() : Number(val)
 
-        this.sum.video_system_bud = this.rows.reduce((a, b) => {
-          return a + toNum(b.video_system_bud.dku)
-        }, 0);
-        this.sum.evacuation_system_bud = this.rows.reduce((a, b) => {
-          return a + toNum(b.evacuation_system_bud.dku)
-        }, 0);
-        this.sum.light_system_bud = this.rows.reduce((a, b) => {
-          return a + toNum(b.light_system_bud.dku)
-        }, 0);
-        this.sum.predator_system_bud = this.rows.reduce((a, b) => {
-          return a + toNum(b.predator_system_bud.dku)
-        }, 0);
-        this.sum.alarm_warning_system_bud = this.rows.reduce((a, b) => {
-          return a + toNum(b.alarm_warning_system_bud.dku)
-        }, 0);
-        this.sum.alarm_fire_system_bud = this.rows.reduce((a, b) => {
-          return a + toNum(b.alarm_fire_system_bud.dku)
-        }, 0);
-        this.sum.phone_system_bud = this.rows.reduce((a, b) => {
-          return a + toNum(b.phone_system_bud.dku)
-        }, 0);
-        this.sum.fence_bud = this.rows.reduce((a, b) => {
-          return a + toNum(b.fence_bud.dku)
-        }, 0);
-        this.sum.skud_bud = this.rows.reduce((a, b) => {
-          return a + toNum(b.skud_bud.dku)
-        }, 0);
+        if (this.rows ) {
+
+          this.sum.video_system_bud = this.rows.reduce((a, b) => {
+            return a + toNum(b.video_system_bud.dku)
+          }, 0);
+          this.sum.evacuation_system_bud = this.rows.reduce((a, b) => {
+            return a + toNum(b.evacuation_system_bud.dku)
+          }, 0);
+          this.sum.light_system_bud = this.rows.reduce((a, b) => {
+            return a + toNum(b.light_system_bud.dku)
+          }, 0);
+          this.sum.predator_system_bud = this.rows.reduce((a, b) => {
+            return a + toNum(b.predator_system_bud.dku)
+          }, 0);
+          this.sum.alarm_warning_system_bud = this.rows.reduce((a, b) => {
+            return a + toNum(b.alarm_warning_system_bud.dku)
+          }, 0);
+          this.sum.alarm_fire_system_bud = this.rows.reduce((a, b) => {
+            return a + toNum(b.alarm_fire_system_bud.dku)
+          }, 0);
+          this.sum.phone_system_bud = this.rows.reduce((a, b) => {
+            return a + toNum(b.phone_system_bud.dku)
+          }, 0);
+          this.sum.fence_bud = this.rows.reduce((a, b) => {
+            return a + toNum(b.fence_bud.dku)
+          }, 0);
+          this.sum.skud_bud = this.rows.reduce((a, b) => {
+            return a + toNum(b.skud_bud.dku)
+          }, 0);
 
 
-        this.sum.video_system_nebud = this.rows.reduce((a, b) => {
-          return a + toNum(b.video_system_nebud.dku)
-        }, 0);
-        this.sum.evacuation_system_nebud = this.rows.reduce((a, b) => {
-          return a + toNum(b.evacuation_system_nebud.dku)
-        }, 0);
-        this.sum.light_system_nebud = this.rows.reduce((a, b) => {
-          return a + toNum(b.light_system_nebud.dku)
-        }, 0);
-        this.sum.predator_system_nebud = this.rows.reduce((a, b) => {
-          return a + toNum(b.predator_system_nebud.dku)
-        }, 0);
-        this.sum.alarm_warning_system_nebud = this.rows.reduce((a, b) => {
-          return a + toNum(b.alarm_warning_system_nebud.dku)
-        }, 0);
-        this.sum.alarm_fire_system_nebud = this.rows.reduce((a, b) => {
-          return a + toNum(b.alarm_fire_system_nebud.dku)
-        }, 0);
-        this.sum.phone_system_nebud = this.rows.reduce((a, b) => {
-          return a + toNum(b.phone_system_nebud.dku)
-        }, 0);
-        this.sum.fence_nebud = this.rows.reduce((a, b) => {
-          return a + toNum(b.fence_nebud.dku)
-        }, 0);
-        this.sum.skud_nebud = this.rows.reduce((a, b) => {
-          return a + toNum(b.skud_nebud.dku)
-        }, 0);
+          this.sum.video_system_nebud = this.rows.reduce((a, b) => {
+            return a + toNum(b.video_system_nebud.dku)
+          }, 0);
+          this.sum.evacuation_system_nebud = this.rows.reduce((a, b) => {
+            return a + toNum(b.evacuation_system_nebud.dku)
+          }, 0);
+          this.sum.light_system_nebud = this.rows.reduce((a, b) => {
+            return a + toNum(b.light_system_nebud.dku)
+          }, 0);
+          this.sum.predator_system_nebud = this.rows.reduce((a, b) => {
+            return a + toNum(b.predator_system_nebud.dku)
+          }, 0);
+          this.sum.alarm_warning_system_nebud = this.rows.reduce((a, b) => {
+            return a + toNum(b.alarm_warning_system_nebud.dku)
+          }, 0);
+          this.sum.alarm_fire_system_nebud = this.rows.reduce((a, b) => {
+            return a + toNum(b.alarm_fire_system_nebud.dku)
+          }, 0);
+          this.sum.phone_system_nebud = this.rows.reduce((a, b) => {
+            return a + toNum(b.phone_system_nebud.dku)
+          }, 0);
+          this.sum.fence_nebud = this.rows.reduce((a, b) => {
+            return a + toNum(b.fence_nebud.dku)
+          }, 0);
+          this.sum.skud_nebud = this.rows.reduce((a, b) => {
+            return a + toNum(b.skud_nebud.dku)
+          }, 0);
+
+          this.sum.row = this.rows.map(item => {
+            return {
+              b:
+                  toNum(item.video_system_bud.dku) +
+                  toNum(item.evacuation_system_bud.dku) +
+                  toNum(item.predator_system_bud.dku) +
+                  toNum(item.alarm_warning_system_bud.dku) +
+                  toNum(item.alarm_fire_system_bud.dku) +
+                  toNum(item.phone_system_bud.dku) +
+                  toNum(item.fence_bud.dku) +
+                  toNum(item.skud_bud.dku),
+              vb:
+                  toNum(item.video_system_nebud.dku) +
+                  toNum(item.evacuation_system_nebud.dku) +
+                  toNum(item.predator_system_nebud.dku) +
+                  toNum(item.alarm_warning_system_nebud.dku) +
+                  toNum(item.alarm_fire_system_nebud.dku) +
+                  toNum(item.phone_system_nebud.dku) +
+                  toNum(item.fence_nebud.dku) +
+                  toNum(item.skud_nebud.dku),
+            }
+          })
+          this.sum.b = this.sum.row.reduce((a, b) => a + toNum(b.b), 0);
+          this.sum.vb = this.sum.row.reduce((a, b) => a + toNum(b.vb), 0);
+        }
 
       },
       deep: true
@@ -313,6 +320,7 @@ export default {
       rows: [],
       sel: null,
       sel2: null,
+      dku_doc: null,
       files: {
         file0: null,
         file1: null,
@@ -389,7 +397,10 @@ export default {
           "X-CSRF-Token": this.csrf,
         },
       }).then((res) => {
-        if (res.data) this.rows = res.data;
+        if (res.data) {
+          this.dku_doc = res.data.dku_doc;
+          this.rows = res.data.rows || [];
+        }
       });
     },
     saveChanges() {

@@ -185,8 +185,8 @@ class DevelopmentProgrammeController extends AppController
             FileHelper::createDirectory($path);
 
         $mpdf = new Mpdf(['tempDir' => $path]);
-        $stylesheet = file_get_contents('bootstrap/css/bootstrap.css');
-        $stylesheet2 = file_get_contents('bootstrap/css/bootstrap-grid.css');
+        $stylesheet = file_get_contents('https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css');
+       // $stylesheet2 = file_get_contents('bootstrap/css/bootstrap-grid.css');
         ini_set("pcre.backtrack_limit", "5000000");
         $mpdf->WriteHTML('
        @page page-landscape { size: landscape; }
@@ -200,7 +200,7 @@ class DevelopmentProgrammeController extends AppController
         }'
             , HTMLParserMode::HEADER_CSS);
         $mpdf->WriteHTML($stylesheet, HTMLParserMode::HEADER_CSS);
-        $mpdf->WriteHTML($stylesheet2, HTMLParserMode::HEADER_CSS);
+      //  $mpdf->WriteHTML($stylesheet2, HTMLParserMode::HEADER_CSS);
         $mpdf->WriteHTML($this->renderPartial('_export', compact('objects', 'org', 'atz',
             'pr_ob', 'r_ob', 'events', 'nes', 'wai', 'risks', 'sq', 'atzC')));
 
