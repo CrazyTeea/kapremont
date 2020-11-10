@@ -278,7 +278,6 @@
 
       <!--<button @click="debug">Debug</button>-->
     </b-modal>
-
   </div>
 </template>
 
