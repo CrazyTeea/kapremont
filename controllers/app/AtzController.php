@@ -49,6 +49,13 @@ class AtzController extends AppController
         return $this->render('index');
     }
 
+    public function actionGetIasFiles($id_org){
+        $url = "https://api.xn--80apneeq.xn--p1ai/api.php?option=free_api&action=get_files_report&token=Mirea@2020&id_report=768&id_org=$id_org";
+        $output = file_get_contents($url);
+        $output = Json::decode($output,false);
+        return Json::encode($output->files);
+    }
+
     public function actionMainAtz($id_org)
     {
         $userIdOrg = User::find()->where(['id' => Yii::$app->user->id])->one()->id_org ?? null;
