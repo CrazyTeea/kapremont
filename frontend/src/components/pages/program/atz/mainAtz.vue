@@ -102,10 +102,23 @@
       </b-card>
     </div>
 
+
+    <div class="row mt-5">
+      <b-card no-body class="mb-1 w-100">
+        <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.TABLEDoc>
+          <span class="toggle_button">Таблица 5. Информация по планированию закупок {{ curYear }} в рамках программы модернизации инфраструктуры (АТЗ)</span>
+        </b-card-header>
+        <b-collapse id="TABLEDoc" accordion="TABLEDoc" role="tabpanel">
+          <b-card-body>
+            <upload-file-atchive :id_card="id_card"/>
+          </b-card-body>
+        </b-collapse>
+      </b-card>
+    </div>
     <div class="row mt-5">
       <b-card no-body class="mb-1 w-100">
         <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.TABLE5>
-          <span class="toggle_button">Таблица 5. Информация по планированию закупок {{curYear}} в рамках программы модернизации инфраструктуры (АТЗ)</span>
+          <span class="toggle_button">Документы</span>
         </b-card-header>
         <b-collapse id="TABLE5" accordion="TABLE5" role="tabpanel">
           <b-card-body>
@@ -115,19 +128,6 @@
             <div v-else>
               файлов пока нет
             </div>
-          </b-card-body>
-        </b-collapse>
-      </b-card>
-    </div>
-
-    <div class="row mt-5">
-      <b-card no-body class="mb-1 w-100">
-        <b-card-header header-tag="header" class="p-1" role="tab" v-b-toggle.TABLEDoc>
-          <span class="toggle_button">Документы</span>
-        </b-card-header>
-        <b-collapse id="TABLEDoc" accordion="TABLEDoc" role="tabpanel">
-          <b-card-body>
-            <upload-file-atchive :id_card="id_card"/>
           </b-card-body>
         </b-collapse>
       </b-card>
@@ -233,7 +233,7 @@ export default {
     this.ready = true
   },
   computed: {
-    curYear(){
+    curYear() {
       return new Date().getFullYear();
     },
     fileName() {
