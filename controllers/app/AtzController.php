@@ -302,7 +302,7 @@ class AtzController extends AppController
 
     public function actionSaveTable4()
     {
-        $data = json_decode(Yii::$app->request->post('data'));
+        $data = Json::decode(Yii::$app->request->post('data'),false);
         $id_org = Yii::$app->request->post('id_org');
         $card_number = Yii::$app->request->post('card_number');
 
