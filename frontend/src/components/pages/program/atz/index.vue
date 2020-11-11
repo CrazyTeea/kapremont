@@ -413,7 +413,7 @@ export default {
           this.table4 = res.data || [];
 
 
-        //console.log('coming from server: ', this.table4);
+        console.log('coming from server: ', this.table4);
       });
     },
 
