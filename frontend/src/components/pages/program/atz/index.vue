@@ -409,10 +409,7 @@ export default {
           "X-CSRF-Token": this.csrf,
         },
       }).then((res) => {
-        if (res.data.length)
-          this.table4 = res.data || [];
-
-
+        this.table4 = res.data;
         console.log('coming from server: ', this.table4);
       });
     },
