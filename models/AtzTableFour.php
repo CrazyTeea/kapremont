@@ -45,8 +45,8 @@ class AtzTableFour extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_org', 'card_number', 'mon_expert','cost_full'], 'integer'],
-            [['date_doc', 'date_start', 'date_end'], 'safe'],
+            [['id_org'], 'integer'],
+            [['date_doc', 'date_start', 'date_end', 'card_number', 'mon_expert','cost_full'], 'safe'],
             [['comment_vuz',], 'string'],
             [['stage_name', 'stage_number', 'method', 'type_document', 'name_object', 'cost_budjet', 'cost_vb', 'number_contract', 'number_deal', 'name_deller_by_doc', 'inn_deller_by_doc', 'docs', 'comment_mon'], 'string', 'max' => 255],
         ];
