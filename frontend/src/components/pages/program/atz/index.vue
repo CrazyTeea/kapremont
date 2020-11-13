@@ -10,6 +10,7 @@
       >
         <b-thead>
           <b-tr>
+
             <b-td></b-td>
             <b-td class="text-center" colspan="3">Согласовано</b-td>
             <b-td class="text-center" colspan="2">Законтрактовано</b-td>
@@ -19,6 +20,7 @@
 
           </b-tr>
           <b-tr>
+
             <b-th class="vertical-align-for-table-cell">Направление расходов</b-th>
             <b-th class="vertical-align-for-table-cell">Сумма бюджетного финансирования (руб)</b-th>
             <b-th class="vertical-align-for-table-cell">Сумма внебюджетного финансирования (руб)</b-th>
@@ -42,7 +44,7 @@
         <b-tbody>
           <b-tr v-for="(item, index) in items" :key="index">
             <b-th class="vertical-align-for-table-cell normal-font-weight-for-cell">
-              <label>{{ item.label }}</label>
+              {{ item.label }}
             </b-th>
             <b-th class="vertical-align-for-table-cell normal-font-weight-for-cell">
               <b-form-input
@@ -163,7 +165,8 @@ export default {
 
         this.items.forEach(i => {
           Object.keys(i).forEach(key => {
-            i[key] = 0;
+            if (key !== 'label')
+              i[key] = 0;
           })
         })
         this.items[0].cost_b = this.data.video_system_bud;
