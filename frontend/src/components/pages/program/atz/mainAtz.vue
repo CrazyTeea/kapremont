@@ -1,5 +1,8 @@
 <template>
   <div v-if="ready" class="main_wrapper">
+    <b-alert shown>
+      Модуль находится в разработке, по всем вопросам +7 903 778 85 00
+    </b-alert>
     <div class="row">
       <div class="col-6">
         <h6>{{ orgInfo.name }}</h6>
@@ -145,7 +148,7 @@ import Table4 from "./table4";
 import {
   BButton,
   BCard,
-  BCardBody,
+  BCardBody,BAlert,
   BCardHeader,
   BCollapse,
   BTableSimple,
@@ -175,7 +178,7 @@ export default {
     BThead,
     BTbody,
     BTh,
-    BTd,
+    BTd,BAlert,
     BTr,
     BCollapse,
     BCard,
