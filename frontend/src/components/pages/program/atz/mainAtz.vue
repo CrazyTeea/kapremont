@@ -1,6 +1,6 @@
 <template>
   <div v-if="ready" class="main_wrapper">
-    <b-alert shown>
+    <b-alert show>
       Модуль находится в разработке, по всем вопросам +7 903 778 85 00
     </b-alert>
     <div class="row">
