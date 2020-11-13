@@ -29,12 +29,11 @@
             </b-tr>
             <b-tr>
               <b-td rowspan="3">2</b-td>
-              <b-td rowspan="4"
-              >Утвержденная программа модернизации инфраструктуры, включая капитальный ремонт объектов и проведение
+              <b-td rowspan="4">
+                Утвержденная программа модернизации инфраструктуры, включая капитальный ремонт объектов и проведение
                 мероприятий по антитеррористической защищенности объектов (Раздел 2. Антитеррористическая защищенность
                 объектов)
-              </b-td
-              >
+              </b-td>
               <b-td>Сумма бюджетного финансирования (руб.)</b-td>
               <b-td>{{ sum.b }}</b-td>
             </b-tr>
@@ -146,9 +145,10 @@ import AtzTable from "./index";
 import Table3 from "./table3";
 import Table4 from "./table4";
 import {
+  BAlert,
   BButton,
   BCard,
-  BCardBody,BAlert,
+  BCardBody,
   BCardHeader,
   BCollapse,
   BTableSimple,
@@ -178,7 +178,7 @@ export default {
     BThead,
     BTbody,
     BTh,
-    BTd,BAlert,
+    BTd, BAlert,
     BTr,
     BCollapse,
     BCard,
