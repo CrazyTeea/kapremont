@@ -148,7 +148,7 @@ import Table4 from "./table4";
 import {
   BButton,
   BCard,
-  BCardBody,
+  BCardBody,BAlert,
   BCardHeader,
   BCollapse,
   BTableSimple,
@@ -178,7 +178,7 @@ export default {
     BThead,
     BTbody,
     BTh,
-    BTd,
+    BTd,BAlert,
     BTr,
     BCollapse,
     BCard,
