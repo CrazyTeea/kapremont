@@ -311,6 +311,7 @@ class AtzController extends AppController
                 foreach ($rowData->address as $i => $address) {
                     if (empty($address)) continue;
                     $arrayToSave[] = [
+                        'id'=>$address->id,
                         'passport_name' => $address->passport_name,
                         'attributes' => array_filter($rowData->type_event, function ($elem) use ($i) {
                             $value = $elem->value;
@@ -337,21 +338,21 @@ class AtzController extends AppController
         if (empty($mainArray)) return 'emptyData';
 
 
-        $getOldIds = function () use ($mainArray) {
+     /*   $getOldIds = function () use ($mainArray) {
             foreach ($mainArray as $row) {
                 if (isset($row['attributes']['id'])) $ids = array_merge($ids ?? [], [$row['attributes']['id']]);
             }
             return $ids ?? [];
-        };
+        };*/
 
-        $this->actionDestroyAtzTableFourRow($getOldIds());
+      //  $this->actionDestroyAtzTableFourRow($getOldIds());
 
         $errors = [];
 
 
 
         foreach ($mainArray as $mainData) {
-            $mainAtzFour = new AtzTableFour();
+            $mainAtzFour = AtzTableFour::findOne($mainData['attributes']['id']) ?? new AtzTableFour();
             $mainAtzFour->id_org = $id_org;
             $mainAtzFour->card_number = $card_number;
             $mainAtzFour->stage_number = $mainData['attributes']['stage_number'];
@@ -375,19 +376,19 @@ class AtzController extends AppController
             if ($mainAtzFour->save()) {
 
                 foreach ($mainData['address'] as $index => $address) {
-                    $atz_address = new AtzAddress();
+                    $atz_address = AtzAddress::findOne($address['id']) ?? new AtzAddress();
                     $atz_address->id_atz_table_four = $mainAtzFour->id;
                     $atz_address->passport_name = $address['passport_name'];
                     if ($atz_address->save()) {
                         foreach ($address['attributes'] as $type_event) {
-                            $atz_type_activity = new AtzTypeActivity();
+                            $atz_type_activity = AtzTypeActivity::findOne(['id_atz_table_for_address'=>$atz_address->id]) ?? new AtzTypeActivity();
                             $atz_type_activity->id_atz_table_for_address = $atz_address->id;
                             $atz_type_activity->name = $type_event->name;
                             $atz_type_activity->value = $type_event->value;
                             if ($atz_type_activity->save()) {
                                 foreach ($mainData['attributes']['cost_budjet'] as $key_name_budjet => $budjet) {
                                     if ($key_name_budjet == $atz_type_activity->value) {
-                                        $b_systems = new Sub_systems_table4();
+                                        $b_systems= Sub_systems_table4::findOne(['cost_type'=>'cost_budjet','id_card'=>$mainAtzFour->id]) ?? new Sub_systems_table4();
                                         $b_systems->id_card = $mainAtzFour->id;
                                         $b_systems->cost_type = 'cost_budjet';
                                         $b_systems->field_name = $key_name_budjet;
@@ -398,7 +399,7 @@ class AtzController extends AppController
 
                                 foreach ($mainData['attributes']['cost_vb'] as $key_name_vne_budjet => $vne_budjet) {
                                     if ($key_name_vne_budjet == $atz_type_activity->value) {
-                                        $b_systems = new Sub_systems_table4();
+                                        $b_systems = Sub_systems_table4::findOne(['cost_type'=>'cost_vb','id_card'=>$mainAtzFour->id]) ??  new Sub_systems_table4();
                                         $b_systems->id_card = $mainAtzFour->id;
                                         $b_systems->cost_type = 'cost_vb';
                                         $b_systems->field_name = $key_name_vne_budjet;
