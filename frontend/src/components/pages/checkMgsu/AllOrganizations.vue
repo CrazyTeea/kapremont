@@ -112,8 +112,7 @@
                   <label>{{ item.region }}</label>
                 </b-th>
                 <b-th
-                    class="normal-font-weight-for-sell cursor-pointer center-text-in-cell popover-action"
-                    @click="goToRefNotDku(item.id, '/organization/list/')">
+                    class="normal-font-weight-for-sell cursor-pointer center-text-in-cell popover-action">
 
                   <!--                  popover-->
                   <div class="custom-popover-wrapper">
@@ -391,6 +390,7 @@ export default {
           "X-CSRF-Token": this.csrf
         }
       }).finally(() => {
+      //  alert(`${url}${id}`)
         window.location = `${url}${id}`;
       })
 

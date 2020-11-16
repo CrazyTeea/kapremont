@@ -49,28 +49,38 @@ class AtzController extends AppController
         return $this->render('index');
     }
 
-    public function actionGetIasFiles($id_org){
+    public function actionGetIasFiles($id_org)
+    {
         $url = "https://api.xn--80apneeq.xn--p1ai/api.php?option=free_api&action=get_files_report&token=Mirea@2020&id_report=768&id_org=$id_org";
         $output = file_get_contents($url);
-        $output = Json::decode($output,false);
+        $output = Json::decode($output, false);
         return Json::encode($output->files);
     }
 
     public function actionMainAtz($id_org)
     {
-        $userIdOrg = User::find()->where(['id' => Yii::$app->user->id])->one()->id_org ?? null;
 
-        if ((int)$userIdOrg !== (int)$id_org && !empty($id_org)) {
+        $userIdOrg =
+            Yii::$app->user->can('user') || Yii::$app->user->can('faiv_user') ?
+                User::findOne(Yii::$app->user->id)->id_org : $id_org;
+
+        if ($userIdOrg != $id_org)
+            return $this->redirect("/program/main-atz/$userIdOrg");
+
+        $organization = Organizations::findOne($userIdOrg);
+        $region = $organization->region->region;
+
+
+        /*if ($userIdOrg != $id_org && $id_org) {
             if (Yii::$app->user->can('dku')) {
                 $organization = Organizations::find()->where(['id' => $id_org])->asArray()->one();
                 $region = Organizations::find()->where(['id' => $id_org])->one()->region->region;
             } else {
-                return $this->redirect("/program/main-atz/$userIdOrg");
+
             }
         } else {
-            $organization = Organizations::find()->where(['id' => $id_org])->asArray()->one();
-            $region = Organizations::find()->where(['id' => $id_org])->one()->region->region;
-        }
+
+        }*/
 
         return $this->render('mainAtz', ['organization' => $organization ?? null, 'region' => $region ?? null]);
     }
@@ -302,7 +312,7 @@ class AtzController extends AppController
 
     public function actionSaveTable4()
     {
-        $data = Json::decode(Yii::$app->request->post('data'),false);
+        $data = Json::decode(Yii::$app->request->post('data'), false);
         $id_org = Yii::$app->request->post('id_org');
         $card_number = Yii::$app->request->post('card_number');
 
@@ -311,7 +321,7 @@ class AtzController extends AppController
                 foreach ($rowData->address as $i => $address) {
                     if (empty($address)) continue;
                     $arrayToSave[] = [
-                        'id'=>$address->id,
+                        'id' => $address->id,
                         'passport_name' => $address->passport_name,
                         'attributes' => array_filter($rowData->type_event, function ($elem) use ($i) {
                             $value = $elem->value;
@@ -338,17 +348,16 @@ class AtzController extends AppController
         if (empty($mainArray)) return 'emptyData';
 
 
-     /*   $getOldIds = function () use ($mainArray) {
-            foreach ($mainArray as $row) {
-                if (isset($row['attributes']['id'])) $ids = array_merge($ids ?? [], [$row['attributes']['id']]);
-            }
-            return $ids ?? [];
-        };*/
+        /*   $getOldIds = function () use ($mainArray) {
+               foreach ($mainArray as $row) {
+                   if (isset($row['attributes']['id'])) $ids = array_merge($ids ?? [], [$row['attributes']['id']]);
+               }
+               return $ids ?? [];
+           };*/
 
-      //  $this->actionDestroyAtzTableFourRow($getOldIds());
+        //  $this->actionDestroyAtzTableFourRow($getOldIds());
 
         $errors = [];
-
 
 
         foreach ($mainArray as $mainData) {
@@ -381,14 +390,14 @@ class AtzController extends AppController
                     $atz_address->passport_name = $address['passport_name'];
                     if ($atz_address->save()) {
                         foreach ($address['attributes'] as $type_event) {
-                            $atz_type_activity = AtzTypeActivity::findOne(['id_atz_table_for_address'=>$atz_address->id]) ?? new AtzTypeActivity();
+                            $atz_type_activity = AtzTypeActivity::findOne(['id_atz_table_for_address' => $atz_address->id]) ?? new AtzTypeActivity();
                             $atz_type_activity->id_atz_table_for_address = $atz_address->id;
                             $atz_type_activity->name = $type_event->name;
                             $atz_type_activity->value = $type_event->value;
                             if ($atz_type_activity->save()) {
                                 foreach ($mainData['attributes']['cost_budjet'] as $key_name_budjet => $budjet) {
                                     if ($key_name_budjet == $atz_type_activity->value) {
-                                        $b_systems= Sub_systems_table4::findOne(['cost_type'=>'cost_budjet','id_card'=>$mainAtzFour->id]) ?? new Sub_systems_table4();
+                                        $b_systems = Sub_systems_table4::findOne(['cost_type' => 'cost_budjet', 'id_card' => $mainAtzFour->id]) ?? new Sub_systems_table4();
                                         $b_systems->id_card = $mainAtzFour->id;
                                         $b_systems->cost_type = 'cost_budjet';
                                         $b_systems->field_name = $key_name_budjet;
@@ -399,7 +408,7 @@ class AtzController extends AppController
 
                                 foreach ($mainData['attributes']['cost_vb'] as $key_name_vne_budjet => $vne_budjet) {
                                     if ($key_name_vne_budjet == $atz_type_activity->value) {
-                                        $b_systems = Sub_systems_table4::findOne(['cost_type'=>'cost_vb','id_card'=>$mainAtzFour->id]) ??  new Sub_systems_table4();
+                                        $b_systems = Sub_systems_table4::findOne(['cost_type' => 'cost_vb', 'id_card' => $mainAtzFour->id]) ?? new Sub_systems_table4();
                                         $b_systems->id_card = $mainAtzFour->id;
                                         $b_systems->cost_type = 'cost_vb';
                                         $b_systems->field_name = $key_name_vne_budjet;
@@ -437,7 +446,7 @@ class AtzController extends AppController
 
         }
 
-        return Json::encode(['success'=>$flag ?? false,$errors]);
+        return Json::encode(['success' => $flag ?? false, $errors]);
     }
 
     public function actionDestroyAtzTableFourRow(array $ids = null)
