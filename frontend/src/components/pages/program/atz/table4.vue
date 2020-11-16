@@ -342,7 +342,10 @@ export default {
           "X-CSRF-Token": this.csrf,
         },
       }).then(res => {
-        this.getTableFourInfo();
+        if (res.data.success) {
+          location.reload();
+          this.getTableFourInfo();
+        }
       });
     },
 
