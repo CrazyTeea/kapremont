@@ -373,7 +373,7 @@ class AtzController extends AppController
             $mainAtzFour->mon_expert = $mainData['attributes']['mon_expert'];
             $mainAtzFour->comment_mon = $mainData['attributes']['comment_mon'];
 
-            if ($mainAtzFour->save()) {
+            if ($flag = $mainAtzFour->save()) {
 
                 foreach ($mainData['address'] as $index => $address) {
                     $atz_address = AtzAddress::findOne($address['id']) ?? new AtzAddress();
@@ -437,7 +437,7 @@ class AtzController extends AppController
 
         }
 
-        return Json::encode($errors);
+        return Json::encode(['success'=>$flag ?? false,$errors]);
     }
 
     public function actionDestroyAtzTableFourRow(array $ids = null)
