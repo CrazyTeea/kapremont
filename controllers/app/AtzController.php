@@ -359,9 +359,11 @@ class AtzController extends AppController
 
         $errors = [];
 
+        //dd($mainArray[0]);
+
 
         foreach ($mainArray as $mainData) {
-            $mainAtzFour = AtzTableFour::findOne($mainData['attributes']['id']) ?? new AtzTableFour();
+            $mainAtzFour = AtzTableFour::findOne($mainData['attributes']['id'] ?? null) ?? new AtzTableFour();
             $mainAtzFour->id_org = $id_org;
             $mainAtzFour->card_number = $card_number;
             $mainAtzFour->stage_number = $mainData['attributes']['stage_number'];

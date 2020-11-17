@@ -331,7 +331,7 @@ export default {
       this.saveInfo();
     },
     async saveInfo() {
-      this.$bvModal.hide('modalPassport');
+
       let data = new FormData();
       data.append("data", JSON.stringify(this.rows));
       data.append("id_org", this.id_org);
@@ -346,6 +346,8 @@ export default {
           location.reload();
           this.getTableFourInfo();
         }
+      }).finally(()=>{
+        this.$bvModal.hide('modalPassport');
       });
     },
 
