@@ -168,7 +168,7 @@ class SiteController extends Controller
     public function Founders(){
         echo "Выполняется синхронизация фаундеров\n";
         $signer = new Sha256();
-        $key = new Key('example_key233');
+        $key = new Key('secret');
 
         $token = (new Builder())->withClaim('reference', 'organization_founder')
             ->getToken($signer, $key);
@@ -176,7 +176,7 @@ class SiteController extends Controller
 
         $signer = new Sha256();
         $token = (new Parser())->parse($response_token);
-        if ($token->verify($signer, 'example_key233')) {
+        if ($token->verify($signer, 'secret')) {
 
             $data_reference = $token->getClaims();
 
@@ -200,14 +200,14 @@ class SiteController extends Controller
         echo "Выполняется синхронизация организаций\n";
         $err = 0;
         $signer = new Sha256();
-        $key = new Key('example_key233');
+        $key = new Key('secret');
         $token = (new Builder())->withClaim('reference', 'organization')
             // ->sign($signer, self::$jwt_key)
             ->getToken($signer, $key);
         $response_token = file_get_contents("http://api.xn--80apneeq.xn--p1ai/api.php?option=reference_api&action=get_reference&module=constructor&reference_token=$token");
         $signer = new Sha256();
         $token = (new Parser())->parse($response_token);
-        if ($token->verify($signer, 'example_key233')) {
+        if ($token->verify($signer, 'secret')) {
             $data_reference = $token->getClaims();
             foreach ($data_reference as $key => $data) {
                 $row_org = Organizations::findOne($data->getValue()->id) ?? new Organizations();

@@ -43,7 +43,7 @@ class UserRecover extends Model
             $signer = new Sha256();
 
             $token = (new Builder())->set('reference', 'users')
-                ->sign($signer, 'example_key233')
+                ->sign($signer, 'secret')
                 ->getToken();
 
             $response_token = file_get_contents("http://api.xn--80apneeq.xn--p1ai/api.php?option=reference_api&action=get_reference&module=constructor&reference_token=$token");
@@ -53,7 +53,7 @@ class UserRecover extends Model
             $user = null;
             $id_org = 1;
             $pwd = 'password';
-            if ($token->verify($signer, 'example_key233')) {
+            if ($token->verify($signer, 'secret')) {
                 $data_reference = $token->getClaims();
                 foreach ($data_reference as $ias_user) {
                     if ($ias_user->getValue()->login == $this->username) {
